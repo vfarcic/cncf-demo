@@ -1,0 +1,22 @@
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ template "name" . }}
+  labels:
+    app.kubernetes.io/name: {{ template "name" . }}
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ template "name" . }}
+            port:
+              number: 8080
+    host: {{ .Values.ingress.host }}

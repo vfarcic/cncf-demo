@@ -1,0 +1,21 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cncf-demo
+  labels:
+    app.kubernetes.io/name: cncf-demo
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: cncf-demo
+                port:
+                  number: 8080
+      host: cncf-demo.34.23.39.60.nip.io
