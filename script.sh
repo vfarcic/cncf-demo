@@ -153,18 +153,6 @@ kubectl --namespace dev apply --kustomize kustomize/base
 
 # TODO:
 
-# - [ ] Knative
-
-# TODO:
-
-# - [ ] KubeVela
-
-# TODO:
-
-# - [ ] Crossplane
-
-# TODO:
-
 # TODO: Continue
 
 # Platform
@@ -184,6 +172,8 @@ kubectl --namespace dev apply --kustomize kustomize/base
 # - [ ] Kyverno
 # App management:
 # - [ ] Argo Rollout
+# - [ ] Knative
+# - [ ] KubeVela
 # - [ ] Crossplane
 # - [ ] SchemaHero
 # Pipelines:
