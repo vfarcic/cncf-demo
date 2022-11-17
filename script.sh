@@ -84,18 +84,6 @@ kubectl create namespace production
 
 # Make sure that Docker is running
 
-#######################################
-# Store Container Image To A Registry #
-#######################################
-
-# - [-] Docker Hub
-
-# - [ ] Harbor
-
-# TODO:
-
-# - [-] AWS Elastic Container Registry (ECR)
-
 #########################
 # Build Container Image #
 #########################
@@ -111,6 +99,18 @@ pack build $REGISTRY/cncf-demo:v0.0.1
 docker image ls
 
 docker image push $REGISTRY/cncf-demo:v0.0.1
+
+#######################################
+# Store Container Image To A Registry #
+#######################################
+
+# - [-] Docker Hub
+
+# - [ ] Harbor
+
+# TODO:
+
+# - [-] AWS Elastic Container Registry (ECR)
 
 ####################################
 # Define And Deploy The App To Dev #
@@ -145,11 +145,25 @@ cd ../../
 
 kubectl --namespace dev apply --kustomize kustomize/base
 
-# - [ ] CDK For Kubernetes (cdk8s)
+curl "http://cncf-demo.$INGRESS_HOST.nip.io"
+
+# - [ ] Carvel
 
 # TODO:
 
-# - [ ] Carvel
+#############
+# Use HTTPS #
+#############
+
+# - [-] HashiCorp Vault
+
+# TODO:
+
+# - [-] Venafi
+
+# TODO:
+
+# - [-] cert-manager
 
 # TODO:
 
@@ -167,7 +181,6 @@ kubectl --namespace dev apply --kustomize kustomize/base
 # - [ ] Istio
 # Policies, security:
 # - [ ] Open Policy Agent (OPA)
-# - [ ] CertManager
 # - [ ] Falco
 # - [ ] Kyverno
 # App management:
@@ -176,6 +189,7 @@ kubectl --namespace dev apply --kustomize kustomize/base
 # - [ ] KubeVela
 # - [ ] Crossplane
 # - [ ] SchemaHero
+# - [ ] CDK For Kubernetes (cdk8s)
 # Pipelines:
 # - [ ] Argo Workflows
 # - [ ] Keptn
