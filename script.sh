@@ -163,7 +163,7 @@ curl "http://cncf-demo.$INGRESS_HOST.nip.io"
 
 # TODO:
 
-# - [-] cert-manager
+# - [X] cert-manager
 
 # TODO:
 
