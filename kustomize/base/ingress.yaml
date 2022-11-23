@@ -5,8 +5,6 @@ metadata:
   name: cncf-demo
   labels:
     app.kubernetes.io/name: cncf-demo
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
     - http:
@@ -18,4 +16,4 @@ spec:
                 name: cncf-demo
                 port:
                   number: 8080
-      host: cncf-demo.34.23.39.60.nip.io
+      host: dev.cncf-demo.sillydemo.com

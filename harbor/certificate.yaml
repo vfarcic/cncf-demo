@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: harbor
+spec:
+  secretName: harbor
+  issuerRef:
+    kind: ClusterIssuer
+    name: production
+  commonName: harbor.sillydemo.com
+  dnsNames:
+    - harbor.sillydemo.com

@@ -1,10 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- deployment.yaml
-- ingress.yaml
-- service.yaml
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml
 images:
-- name: docker.io/vfarcic/cncf-demo
-  newName: docker.io/vfarcic/cncf-demo
-  newTag: v0.0.1
+  - name: harbor.sillydemo.com/library/cncf-demo
+    newName: harbor.sillydemo.com/library/cncf-demo
+    newTag: v0.0.1

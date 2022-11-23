@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: main
-          image: "docker.io/vfarcic/cncf-demo:latest"
+          image: "harbor.sillydemo.com/library/cncf-demo"
           ports:
             - containerPort: 8080
           resources:

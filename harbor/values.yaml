@@ -1,0 +1,13 @@
+expose:
+  tls:
+    certSource: secret
+    secret:
+      secretName: harbor
+  ingress:
+    hosts:
+      core: harbor.sillydemo.com
+      notary: notary.sillydemo.com
+    annotations:
+      cert-manager.io/cluster-issuer: production
+    className: traefik
+externalURL: https://harbor.sillydemo.com

@@ -6,8 +6,9 @@ metadata:
   name: {{ template "name" . }}
   labels:
     app.kubernetes.io/name: {{ template "name" . }}
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+    {{- if .Values.tls.enabled }}
+    cert-manager.io/cluster-issuer: production
+    {{- end }}
 spec:
   rules:
   - http:
@@ -20,3 +21,9 @@ spec:
             port:
               number: 8080
     host: {{ .Values.ingress.host }}
+  {{- if .Values.tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
+      secretName: {{ template "name" . }}
+  {{- end }}

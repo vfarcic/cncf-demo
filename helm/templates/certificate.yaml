@@ -1,0 +1,16 @@
+{{- if .Values.tls.enabled }}
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ template "name" . }}
+spec:
+  secretName: {{ template "name" . }}
+  issuerRef:
+    kind: ClusterIssuer
+    name: production
+  commonName: {{ .Values.ingress.host }}
+  dnsNames:
+  - {{ .Values.ingress.host }}
+{{- end }}

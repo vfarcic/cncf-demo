@@ -1,5 +1,7 @@
 image:
-  repository: docker.io/vfarcic/cncf-demo
+  repository: harbor.sillydemo.com/library/cncf-demo
   tag: v0.0.1
 ingress:
-  host: cncf-demo.34.23.39.60.nip.io
+  host: dev.cncf-demo.sillydemo.com
+tls:
+  enabled: false
