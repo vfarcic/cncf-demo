@@ -4,45 +4,45 @@
 flowchart TD;
 
     setup-->bci
-    click setup "manuscript/setup.md"
+    click setup "vfarcic/cncf-demo/blob/main/manuscript/setup.md"
 
     bci{{Build Container Image}}
-    click bci "manuscript/build-container-image/story.md"
+    click bci "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md"
     style bci fill:blue
     bci1(Docker)
-    click bci1 "manuscript/build-container-image/docker.md"
+    click bci1 "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/docker.md"
     bci2(Kaniko)
-    click bci2 "manuscript/build-container-image/kaniko.md"
+    click bci2 "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kaniko.md"
     bci3(Cloud Native Buildpacks / CNB)
-    click bci3 "manuscript/build-container-image/buildpacks.md"
+    click bci3 "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
 
     bci-->bci1;
     bci-->bci2;
     bci-->bci3-->registry;
 
     registry{{Store Container Image In A Registry}}
-    click registry "manuscript/registry/story.md"
+    click registry "vfarcic/cncf-demo/blob/main/manuscript/registry/story.md"
     style registry fill:blue
     registry1(Docker Hub)
-    click registry1 "manuscript/registry/docker-hub.md"
+    click registry1 "vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
     registry2(Harbor)
-    click registry2 "manuscript/registry/harbor.md"
+    click registry2 "vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
     registry3(AWS Elastic Container Registry / ECR)
-    click registry3 "manuscript/registry/ecr.md"
+    click registry3 "vfarcic/cncf-demo/blob/main/manuscript/registry/ecr.md"
 
     registry-->registry1;
     registry-->registry2-->ddd;
     registry-->registry3;
 
     ddd{{Define And Deploy The App To Dev}}
-    click ddd "manuscript/define-deploy-dev/story.md"
+    click ddd "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md"
     style ddd fill:blue
     ddd1(Helm)
-    click ddd1 "manuscript/define-deploy-dev/helm.md"
+    click ddd1 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md"
     ddd2(Kustomize)
-    click ddd2 "manuscript/define-deploy-dev/kustomize.md"
+    click ddd2 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
     ddd3(Carvel)
-    click ddd3 "manuscript/define-deploy-dev/carvel.md"
+    click ddd3 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel.md"
     style ddd3 fill:red
 
     ddd-->ddd1-->https;
@@ -50,18 +50,18 @@ flowchart TD;
     ddd-->ddd3-->https;
 
     https{{Use HTTPS}}
-    click https "manuscript/https/story.md"
+    click https "vfarcic/cncf-demo/blob/main/manuscript/https/story.md"
     style https fill:blue
     https1(HashiCorp Vault)
-    click https1 "manuscript/https/vault.md"
+    click https1 "vfarcic/cncf-demo/blob/main/manuscript/https/vault.md"
     https2(Venafi)
-    click https2 "manuscript/https/venafi.md"
+    click https2 "vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md"
     https3(cert-manager)
-    click https3 "manuscript/https/cert-manager.md"
+    click https3 "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md"
     https3-helm(Helm)
-    click https3-helm "manuscript/https/cert-manager-helm.md"
+    click https3-helm "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md"
     https3-kustomize(Kustomize)
-    click https3-kustomize "manuscript/https/cert-manager-kustomize.md"
+    click https3-kustomize "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md"
     https3-carvel(Carvel)
     style https3-carvel fill:red
 

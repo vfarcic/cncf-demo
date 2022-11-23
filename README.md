@@ -13,5 +13,5 @@ TODO: Intro
 
 ## The Adventure
 
-* [Setup](manuscript/setup-all.md)
+* [Setup](manuscript/setup.md)
 * [Build Container Image](manuscript/build-container-image/story.md)
