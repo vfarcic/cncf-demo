@@ -3,10 +3,10 @@
 ```mermaid
 flowchart TD;
 
-    xxx-->setup
+    xxx--->setup
 
     setup(Setup);
-    click setup-reqs "vfarcic/cncf-demo/blob/main/manuscript/setup.md"
+    click setup "vfarcic/cncf-demo/blob/main/manuscript/setup.md"
 
     setup-->bci
 
@@ -46,7 +46,6 @@ flowchart TD;
     ddd2(Kustomize)
     click ddd2 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
     ddd3(Carvel)
-    click ddd3 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel.md"
     style ddd3 fill:red
 
     ddd-->ddd1-->https;
