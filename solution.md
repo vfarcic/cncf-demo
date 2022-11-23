@@ -3,7 +3,13 @@
 ```mermaid
 flowchart TD;
 
-    start((Start The Adventure))
+    red(Not yet implemented)
+    style red fill:red
+    blue(Make a choice)
+    style blue fill:blue
+    transparent(Walk)
+
+    start((Start))
 
     start--->setup
 
