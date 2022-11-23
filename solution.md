@@ -3,7 +3,9 @@
 ```mermaid
 flowchart TD;
 
-    xxx--->setup
+    start((Start The Adventure))
+
+    start--->setup
 
     setup(Setup);
     click setup "vfarcic/cncf-demo/blob/main/manuscript/setup.md"
