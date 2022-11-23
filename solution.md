@@ -3,8 +3,10 @@
 ```mermaid
 flowchart TD;
 
-    setup-->bci
-    click setup "vfarcic/cncf-demo/blob/main/manuscript/setup.md"
+    setup-reqs(Setup Requirements);
+    click setup-reqs "vfarcic/cncf-demo/blob/main/manuscript/setup.md"
+
+    setup-reqs-->bci
 
     bci{{Build Container Image}}
     click bci "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md"
