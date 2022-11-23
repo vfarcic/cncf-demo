@@ -50,6 +50,4 @@ export DOMAIN=[...]
 # Install `yq` CLI from https://github.com/mikefarah/yq
 
 kubectl create namespace dev
-
-kubectl create namespace production
 ```

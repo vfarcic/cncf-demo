@@ -41,4 +41,4 @@ helm upgrade --install cncf-demo helm --namespace dev --wait
 
 ## Continue The Adventure
 
-[TODO:](TODO:)
+[Setup PostgreSQL DB](../db/story.md)

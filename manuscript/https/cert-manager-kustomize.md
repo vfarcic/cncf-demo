@@ -92,4 +92,4 @@ kubectl --namespace dev apply --kustomize kustomize/base
 
 ## Continue The Adventure
 
-[TODO:](TODO:)
+[Setup PostgreSQL DB](../db/story.md)
