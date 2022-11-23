@@ -5,7 +5,7 @@ flowchart TD;
 
     red(Not yet implemented)
     style red fill:red
-    blue(Make a choice)
+    blue{{Make a choice}}
     style blue fill:blue
     transparent(Walk)
 
