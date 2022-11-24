@@ -18,33 +18,37 @@ flowchart TD;
 
     setup-->bci
 
-    bci{{Build Container Image}}
+    bci{{Build Container Image In Dev}}
     click bci "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md" _blank
     style bci fill:blue
-    bci1(Docker)
-    click bci1 "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/docker.md" _blank
-    bci2(Kaniko)
-    click bci2 "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kaniko.md" _blank
-    bci3(Cloud Native Buildpacks / CNB)
-    click bci3 "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md" _blank
+    bci-kbld(Carvel kbld)
+    click bci-kbld "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md" _blank
+    style bci-kbld fill:red
+    bci-lima(Lima)
+    click bci-lima "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kaniko.md" _blank
+    style bci-lima fill:red
+    bci-buildpacks(Cloud Native Buildpacks / CNB)
+    click bci-buildpacks "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md" _blank
 
-    bci-->bci1;
-    bci-->bci2;
-    bci-->bci3-->registry;
+    bci-->bci-kbld-->registry;
+    bci-->bci-lima-->registry;
+    bci-->bci-buildpacks-->registry;
 
     registry{{Store Container Image In A Registry}}
     click registry "vfarcic/cncf-demo/blob/main/manuscript/registry/story.md" _blank
     style registry fill:blue
-    registry1(Docker Hub)
-    click registry1 "vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md" _blank
-    registry2(Harbor)
-    click registry2 "vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md" _blank
-    registry3(AWS Elastic Container Registry / ECR)
-    click registry3 "vfarcic/cncf-demo/blob/main/manuscript/registry/ecr.md" _blank
+    registry-distribution(Distribution)
+    click registry-distribution "vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md" _blank
+    style registry-distribution fill:red
+    registry-harbor(Harbor)
+    click registry-harbor "vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md" _blank
+    registry-dragonfly(Dragonfly)
+    click registry-dragonfly "vfarcic/cncf-demo/blob/main/manuscript/registry/ecr.md" _blank
+    style registry-dragonfly fill:red
 
-    registry-->registry1;
-    registry-->registry2-->ddd;
-    registry-->registry3;
+    registry-->registry-distribution-->ddd;
+    registry-->registry-harbor-->ddd;
+    registry-->registry-dragonfly-->ddd;
 
     ddd{{Define And Deploy The App To Dev}}
     click ddd "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md" _blank
@@ -83,7 +87,7 @@ flowchart TD;
     https3-->https3-kustomize-->db;
     https3-->https3-carvel-->db;
 
-    db{{Setup PostgreSQL DB}}
+    db{{Setup PostgreSQL DB In Dev}}
     click db "vfarcic/cncf-demo/blob/main/manuscript/db/story.md" _blank
     style db fill:blue
     db-helm(Helm Chart)
@@ -209,7 +213,6 @@ flowchart TD;
 * Devfile
 * DevStream
 * Dex
-* Distribution
 * external-secrets
 * Fluid
 * Fonio
@@ -231,7 +234,6 @@ flowchart TD;
 * KUDO
 * Kuma
 * Kured
-* Lima
 * Meshery
 * Metal3-io
 * Network Service Mesh
