@@ -7,4 +7,11 @@ tls:
   enabled: false
 db:
   enabled: false
-  name: my-db
+postgresql:
+  global:
+    persistence:
+      enabled: false
+  auth:
+    postgresPassword: postgres
+schemahero:
+  enabled: false

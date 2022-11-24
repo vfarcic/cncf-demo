@@ -69,11 +69,11 @@ flowchart TD;
     click https2 "vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md" _blank
     https3(cert-manager)
     click https3 "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md" _blank
-    https3-helm(Helm)
+    https3-helm(App As Helm)
     click https3-helm "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md" _blank
-    https3-kustomize(Kustomize)
+    https3-kustomize(App As Kustomize)
     click https3-kustomize "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md" _blank
-    https3-carvel(Carvel)
+    https3-carvel(App As Carvel)
     style https3-carvel fill:red
 
     https-->https1;
@@ -88,7 +88,14 @@ flowchart TD;
     style db fill:blue
     db-helm(Helm Chart)
     click db-helm "vfarcic/cncf-demo/blob/main/manuscript/db/helm.md" _blank
-    style db-helm fill:red
+    db-helm-helm(App As Helm)
+    click db-helm-helm "vfarcic/cncf-demo/blob/main/manuscript/db/helm-helm.md" _blank
+    db-helm-kustomize(App As Kustomize)
+    click db-helm-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md" _blank
+    style db-helm-kustomize fill:red
+    db-helm-carvel(App As Carvel)
+    click db-helm-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md" _blank
+    style db-helm-carvel fill:red
     db-crossplane-local(Crossplane Composition In Kubernetes)
     click db-crossplane-local "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md" _blank
     style db-crossplane-local fill:red
@@ -99,11 +106,38 @@ flowchart TD;
     db-->db-helm;
     db-->db-crossplane-local;
     db-->db-crossplane-google;
+    db-helm-->db-helm-helm-->db-schema;
+    db-helm-->db-helm-kustomize-->db-schema;
+    db-helm-->db-helm-carvel-->db-schema;
+
+    db-schema{{Manage DB Schema}}
+    click db-schema "vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md" _blank
+    style db-schema fill:blue
+    db-schema-schemahero(SchemaHero)
+    click db-schema-schemahero "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md" _blank
+    db-schema-liquibase(Liquibase)
+    click db-schema-liquibase "vfarcic/cncf-demo/blob/main/manuscript/db-schema/liquibase.md" _blank
+    db-schema-flyway(Flyway)
+    click db-schema-flyway "vfarcic/cncf-demo/blob/main/manuscript/db-schema/flyway.md" _blank
+    db-schema-schemahero-helm(App As Helm)
+    click db-schema-schemahero-helm "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md" _blank
+    db-schema-schemahero-kustomize(App As Kustomize)
+    click db-schema-schemahero-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md" _blank
+    style db-schema-schemahero-kustomize fill:red
+    db-schema-schemahero-carvel(App As Carvel)
+    click db-schema-schemahero-carvel "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md" _blank
+    style db-schema-schemahero-carvel fill:red
+
+    db-schema-->db-schema-flyway;
+    db-schema-->db-schema-liquibase;
+    db-schema-->db-schema-schemahero;
+    db-schema-schemahero-->db-schema-schemahero-helm;
+    db-schema-schemahero-->db-schema-schemahero-kustomize;
+    db-schema-schemahero-->db-schema-schemahero-carvel;
 ```
 
 ## TODO:
 
-* Crossplane
 * KEDA
 * KubeVirt
 * k3s
@@ -116,8 +150,6 @@ flowchart TD;
 * Argo Rollout
 * Knative
 * KubeVela
-* Crossplane
-* SchemaHero
 * CDK For Kubernetes (cdk8s)
 * Argo Workflows
 * Keptn

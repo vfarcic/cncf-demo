@@ -38,7 +38,7 @@ spec:
         {{- if .Values.db.enabled }}
         env: 
         - name: DB_ENDPOINT
-          value: cncf-demo-db-postgresql
+          value: {{ template "name" . }}-postgresql
         - name: DB_PORT
           value: "5432"
         - name: DB_USER
@@ -46,8 +46,8 @@ spec:
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.db.name }}-postgresql
+              name: {{ template "name" . }}-postgresql
               key: postgres-password
         - name: DB_NAME
-          value: {{ .Values.db.name }}
+          value: {{ template "name" . }}
         {{- end }}

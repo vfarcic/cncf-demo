@@ -1,0 +1,48 @@
+{{- if .Values.schemahero.enabled }}
+---
+
+apiVersion: databases.schemahero.io/v1alpha4
+kind: Database
+metadata:
+  name: {{ template "name" . }}
+spec:
+  immediateDeploy: true
+  connection:
+    postgres:
+      host:
+        value: {{ template "name" . }}-postgresql
+      user:
+        value: postgres
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: {{ template "name" . }}-postgresql
+            key: postgres-password
+      port:
+        value: "5432"
+      dbname:
+        value: {{ template "name" . }}
+
+---
+
+apiVersion: schemas.schemahero.io/v1alpha4
+kind: Table
+metadata:
+  name: {{ template "name" . }}-videos
+spec:
+  database: {{ template "name" . }}
+  name: videos
+  schema:
+    postgres:
+      primaryKey:
+      - id
+      columns:
+      - name: id
+        type: text
+        constraints:
+          notNull: true
+      - name: title
+        type: text
+        constraints:
+          notNull: true
+{{- end }}

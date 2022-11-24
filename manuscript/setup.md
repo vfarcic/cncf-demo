@@ -46,8 +46,6 @@ export DOMAIN=[...]
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
 
-# Install `yq` CLI from https://github.com/mikefarah/yq
-
 kubectl create namespace dev
 
 helm repo add jetstack https://charts.jetstack.io
@@ -61,9 +59,20 @@ helm upgrade --install cert-manager jetstack/cert-manager \
 # Replace `[...]` with your email
 export EMAIL=[...]
 
+# Install `yq` CLI from https://github.com/mikefarah/yq
+# Install `jq` CLI from https://stedolan.github.io/jq/download
+
 yq --inplace \
     ".spec.acme.email = \"$EMAIL\"" \
     cert-manager/issuer.yaml
 
 kubectl apply --filename cert-manager/issuer.yaml
+
+ping $DOMAIN
+
+# Confirm that the domain is responding from the specified IP
 ```
+
+## Start The Adventure
+
+* [Build Container Image](build-container-image/story.md)

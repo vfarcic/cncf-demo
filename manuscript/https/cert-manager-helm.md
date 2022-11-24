@@ -15,13 +15,16 @@ yq --inplace ".tls.enabled = true" helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
-kubectl --namespace dev \
-    get issuers,certificaterequests,certificates,orders,secrets
+kubectl --namespace dev get certificates
 
 echo "https://dev.cncf-demo.$DOMAIN"
 
 # Open it in a browser
 ```
+
+## Continue The Adventure
+
+[Setup PostgreSQL DB](../db/story.md)
 
 ## Undo The Changes
 
@@ -32,7 +35,3 @@ yq --inplace ".tls.enabled = false" helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm --namespace dev --wait
 ```
-
-## Continue The Adventure
-
-[Setup PostgreSQL DB](../db/story.md)

@@ -66,6 +66,10 @@ echo "https://dev.cncf-demo.$DOMAIN"
 # Open it in a browser
 ```
 
+## Continue The Adventure
+
+[Setup PostgreSQL DB](../db/story.md)
+
 ## Undo The Changes
 
 Execute the commands that follow **ONLY** if you want to change your mind and go back.
@@ -89,7 +93,3 @@ kubectl --namespace dev delete certificate cncf-demo
 
 kubectl --namespace dev apply --kustomize kustomize/base
 ```
-
-## Continue The Adventure
-
-[Setup PostgreSQL DB](../db/story.md)

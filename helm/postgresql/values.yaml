@@ -1,5 +1,0 @@
-global:
-  persistence:
-    enabled: false
-auth:
-  postgresPassword: postgres

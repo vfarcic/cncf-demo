@@ -14,6 +14,10 @@ TODO:
 TODO:
 ```
 
+## Continue The Adventure
+
+[TODO:](TODO:)
+
 ## Undo The Changes
 
 Execute the commands that follow **ONLY** if you want to change your mind and go back.
@@ -21,7 +25,3 @@ Execute the commands that follow **ONLY** if you want to change your mind and go
 ```bash
 TODO:
 ```
-
-## Continue The Adventure
-
-[TODO:](TODO:)

@@ -25,18 +25,19 @@ yq --inplace \
     ".externalURL = \"https://harbor.$DOMAIN\"" \
     harbor/values.yaml
 
-kubectl create namespace harbor
-
-kubectl --namespace harbor apply \
-    --filename harbor/certificate.yaml
-
 helm repo add harbor https://helm.goharbor.io
 
 helm repo update
 
 helm upgrade --install harbor harbor/harbor \
-    --namespace harbor \
+    --namespace harbor --create-namespace \
     --values harbor/values.yaml
+
+kubectl --namespace harbor apply \
+    --filename harbor/certificate.yaml
+
+# Wait for a while for all the Pods (except jobservice) to be
+#   ready.
 
 export REGISTRY=harbor.$DOMAIN
 

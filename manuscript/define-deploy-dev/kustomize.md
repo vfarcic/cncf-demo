@@ -48,6 +48,10 @@ echo "http://dev.cncf-demo.$DOMAIN"
 # Open it in a browser
 ```
 
+## Continue The Adventure
+
+[Use HTTPS](../https/story.md)
+
 ## Undo The Changes
 
 Execute the commands that follow **ONLY** if you want to change your mind and go back.
@@ -55,7 +59,3 @@ Execute the commands that follow **ONLY** if you want to change your mind and go
 ```bash
 kubectl --namespace dev delete --kustomize kustomize/base
 ```
-
-## Continue The Adventure
-
-[Use HTTPS](../https/story.md)
