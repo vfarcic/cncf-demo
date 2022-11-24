@@ -22,6 +22,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [Docker Hub](docker-hub.md)
+* [Distribution](distribution.md)
 * [Harbor](harbor.md)
-* [AWS Elastic Container Registry (ECR)](ecr.md)
+* [Dragonfly](dragonfly.md)

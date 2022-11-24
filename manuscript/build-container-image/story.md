@@ -27,6 +27,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [Docker](docker.md)
-* [Kaniko](kaniko.md)
+* [Lima](lima.md)
+* [kbld](kbld.md)
 * [Cloud Native Buildpacks (CNB)](buildpacks.md)
