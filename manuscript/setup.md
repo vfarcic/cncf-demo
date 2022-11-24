@@ -9,8 +9,7 @@ cd cncf-demo
 * Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).
 
 ```bash
-helm repo add traefik \
-    https://helm.traefik.io/traefik
+helm repo add traefik https://helm.traefik.io/traefik
 
 helm repo update
 
@@ -50,4 +49,21 @@ export DOMAIN=[...]
 # Install `yq` CLI from https://github.com/mikefarah/yq
 
 kubectl create namespace dev
+
+helm repo add jetstack https://charts.jetstack.io
+
+helm repo update
+
+helm upgrade --install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace \
+    --set installCRDs=true --wait
+
+# Replace `[...]` with your email
+export EMAIL=[...]
+
+yq --inplace \
+    ".spec.acme.email = \"$EMAIL\"" \
+    cert-manager/issuer.yaml
+
+kubectl apply --filename cert-manager/issuer.yaml
 ```

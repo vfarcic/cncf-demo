@@ -1,4 +1,4 @@
-# Setup PostgreSQL DB
+# Setup PostgreSQL DB In The Dev Environment
 
 TODO: Intro
 

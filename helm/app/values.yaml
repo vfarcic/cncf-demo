@@ -1,7 +1,10 @@
 image:
   repository: harbor.sillydemo.com/library/cncf-demo
-  tag: v0.0.1
+  tag: latest
 ingress:
   host: dev.cncf-demo.sillydemo.com
 tls:
   enabled: false
+db:
+  enabled: false
+  name: my-db

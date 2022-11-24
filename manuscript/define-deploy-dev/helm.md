@@ -4,34 +4,32 @@ TODO: Intro
 
 ## Setup
 
-* [Install the `helm` CLI)[https://helm.sh/docs/intro/install]
+* [Install the `helm` CLI](https://helm.sh/docs/intro/install)
 
 ```bash
 yq --inplace ".ingress.host = \"dev.cncf-demo.$DOMAIN\"" \
-    helm/values.yaml
+    helm/app/values.yaml
 
 yq --inplace ".image.repository = \"$IMAGE\"" \
-    helm/values.yaml
-
-yq --inplace ".image.tag = \"latest\"" helm/values.yaml
+    helm/app/values.yaml
 ```
 
 ## Do
 
 ```bash
-ls -1 helm/templates
+ls -1 helm/app/templates
 
-cat helm/templates/deployment.yaml
+cat helm/app/templates/deployment.yaml
 
-cat helm/templates/service.yaml
+cat helm/app/templates/service.yaml
 
-cat helm/templates/ingress.yaml
+cat helm/app/templates/ingress.yaml
 
-cat helm/values.yaml
+cat helm/app/values.yaml
 
-yq --inplace ".image.tag = \"v0.0.1\"" helm/values.yaml
+yq --inplace ".image.tag = \"v0.0.1\"" helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm --namespace dev --wait
+helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
 echo "http://dev.cncf-demo.$DOMAIN"
 
@@ -44,6 +42,8 @@ Execute the commands that follow **ONLY** if you want to change your mind and go
 
 ```bash
 helm delete cncf-demo --namespace dev
+
+yq --inplace ".image.tag = \"latest\"" helm/app/values.yaml
 ```
 
 ## Continue The Adventure

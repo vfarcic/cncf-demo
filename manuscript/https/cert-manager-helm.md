@@ -2,24 +2,18 @@
 
 TODO: Intro
 
-## Setup
-
-```bash
-TODO:
-```
-
 ## Do
 
 ```bash
-cat helm/values.yaml
+cat helm/app/templates/ingress.yaml
 
-cat helm/templates/ingress.yaml
+cat helm/app/templates/certificate.yaml
 
-cat helm/templates/certificate.yaml
+cat helm/app/values.yaml
 
-yq --inplace ".tls.enabled = true" helm/values.yaml
+yq --inplace ".tls.enabled = true" helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm --namespace dev --wait
+helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
 kubectl --namespace dev \
     get issuers,certificaterequests,certificates,orders,secrets
@@ -34,7 +28,7 @@ echo "https://dev.cncf-demo.$DOMAIN"
 Execute the commands that follow **ONLY** if you want to change your mind and go back.
 
 ```bash
-yq --inplace ".tls.enabled = false" helm/values.yaml
+yq --inplace ".tls.enabled = false" helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm --namespace dev --wait
 ```
