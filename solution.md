@@ -25,8 +25,7 @@ flowchart TD;
     click bci-kbld "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md" _blank
     style bci-kbld fill:red
     bci-lima(Lima)
-    click bci-lima "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kaniko.md" _blank
-    style bci-lima fill:red
+    click bci-lima "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md" _blank
     bci-buildpacks(Cloud Native Buildpacks / CNB)
     click bci-buildpacks "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md" _blank
 
@@ -38,12 +37,12 @@ flowchart TD;
     click registry "vfarcic/cncf-demo/blob/main/manuscript/registry/story.md" _blank
     style registry fill:blue
     registry-distribution(Distribution)
-    click registry-distribution "vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md" _blank
+    click registry-distribution "vfarcic/cncf-demo/blob/main/manuscript/registry/distribution.md" _blank
     style registry-distribution fill:red
     registry-harbor(Harbor)
     click registry-harbor "vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md" _blank
     registry-dragonfly(Dragonfly)
-    click registry-dragonfly "vfarcic/cncf-demo/blob/main/manuscript/registry/ecr.md" _blank
+    click registry-dragonfly "vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md" _blank
     style registry-dragonfly fill:red
 
     registry-->registry-distribution-->ddd;
