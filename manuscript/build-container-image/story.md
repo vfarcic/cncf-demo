@@ -2,21 +2,20 @@
 
 TODO: Intro
 
-## Choice 1: Docker
+## Choice 1: Carvel kbld
 
 TODO: Explanation
 
-* [Using Docker Multi-Stage Builds](https://youtu.be/zpkqNPwEzac)
-* [Official site](https://www.docker.com)
+* [Official site](https://carvel.dev/kbld)
 
-## Choice 2: Kaniko
+## Choice 2: Lima
 
 TODO: Explanation
 
 ## More info
 
-* [Kaniko - Building Container Images In Kubernetes Without Docker](https://youtu.be/EgwVQN6GNJg)
-* [Official site](https://github.com/GoogleContainerTools/kaniko)
+* [How To Replace Docker With nerdctl And Rancher Desktop](https://youtu.be/evWPib0iNgY)
+* [Official site](https://github.com/lima-vm/lima)
 
 ## Choice 3: Cloud Native Buildpacks (CNB)
 
