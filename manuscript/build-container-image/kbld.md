@@ -4,6 +4,8 @@ TODO: Intro
 
 ## Setup
 
+* [Install `kbld` CLI](https://carvel.dev/kbld/docs/v0.36.0/install)
+
 ```bash
 TODO:
 ```
@@ -11,17 +13,18 @@ TODO:
 ## Do
 
 ```bash
-TODO:
+cat Dockerfile
+
+cat kbld/deployment.yaml
+
+kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
+
+# Replace `[...]` with the image tag from the output
+export TAG=[...]
 ```
+
+* `kbld` can also push images to a registry. Whether we'll do that or not depends on later choices.
 
 ## Continue The Adventure
 
 [Store Container Image In A Registry](../registry/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-TODO:
-```

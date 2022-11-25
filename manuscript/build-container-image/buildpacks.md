@@ -10,7 +10,9 @@ TODO: Intro
 ## Do
 
 ```bash
-pack build cncf-demo:v0.0.1
+export TAG=v0.0.1
+
+pack build cncf-demo:$TAG
 
 docker image ls
 ```

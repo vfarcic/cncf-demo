@@ -55,9 +55,9 @@ docker login --username admin $REGISTRY
 ```bash
 echo $IMAGE
 
-docker image tag cncf-demo:v0.0.1 $IMAGE:v0.0.1
+docker image tag cncf-demo:$TAG $IMAGE:$TAG
 
-docker image push $IMAGE:v0.0.1
+docker image push $IMAGE:$TAG
 
 echo "https://harbor.$DOMAIN"
 
@@ -66,6 +66,8 @@ echo "https://harbor.$DOMAIN"
 # User: admin
 # Password: Harbor12345
 ```
+
+* `kbld` could have pushed images to the registry. Whether we'll do that or not depends on later choices.
 
 ## Continue The Adventure
 

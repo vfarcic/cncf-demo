@@ -23,7 +23,6 @@ flowchart TD;
     style bci fill:blue
     bci-kbld(Carvel kbld)
     click bci-kbld "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md" _blank
-    style bci-kbld fill:red
     bci-lima(Lima)
     click bci-lima "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md" _blank
     bci-buildpacks(Cloud Native Buildpacks / CNB)

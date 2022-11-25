@@ -7,4 +7,4 @@ resources:
 images:
   - name: harbor.sillydemo.com/library/cncf-demo
     newName: harbor.sillydemo.com/library/cncf-demo
-    newTag: v0.0.1
+    newTag: latest

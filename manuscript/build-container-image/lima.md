@@ -14,7 +14,9 @@ alias docker=$(which nerdctl)
 
 cat Dockerfile
 
-docker image build --tag cncf-demo:v0.0.1 .
+export TAG=v0.0.1
+
+docker image build --tag cncf-demo:$TAG .
 
 docker image ls
 ```
