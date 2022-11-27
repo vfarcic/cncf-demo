@@ -49,5 +49,5 @@ spec:
               name: {{ template "name" . }}-postgresql
               key: postgres-password
         - name: DB_NAME
-          value: {{ template "name" . }}
+          value: cncf-demo
         {{- end }}
