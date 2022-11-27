@@ -13,5 +13,8 @@ postgresql:
       enabled: false
   auth:
     postgresPassword: postgres
+  initdbScripts:
+    my_init_script.sh: |
+      CREATE DATABASE "silly-demo";
 schemahero:
   enabled: false
