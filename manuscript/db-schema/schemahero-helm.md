@@ -19,12 +19,6 @@ kubectl --namespace dev exec --stdin --tty \
     cncf-demo-postgresql-0 -- psql --dbname postgres \
     --username postgres
 
-# Password: postgres
-
-CREATE DATABASE "cncf-demo";
-
-exit
-
 cat helm/app/templates/postgresql.yaml
 
 cat helm/app/values.yaml
