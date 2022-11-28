@@ -3,11 +3,15 @@
 ```mermaid
 flowchart TD;
 
-    red(Not yet implemented)
-    style red fill:red
-    blue{{Make a choice}}
-    style blue fill:blue
-    transparent(Walk)
+    subgraph "Legend"
+        red(Not yet implemented)
+        style red fill:red
+        blue{{Make a choice}}
+        style blue fill:blue
+        transparent(Walk)
+    end
+
+    Legend---Development
 
     subgraph Development
         setup-dev((Setup));
@@ -34,7 +38,6 @@ flowchart TD;
         style registry fill:blue
         registry-distribution(Distribution)
         click registry-distribution "vfarcic/cncf-demo/blob/main/manuscript/registry/distribution.md" _blank
-        style registry-distribution fill:red
         registry-harbor(Harbor)
         click registry-harbor "vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md" _blank
         registry-dragonfly(Dragonfly)
@@ -91,7 +94,6 @@ flowchart TD;
         click db-helm-helm "vfarcic/cncf-demo/blob/main/manuscript/db/helm-helm.md" _blank
         db-helm-kustomize(App as Kustomize)
         click db-helm-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md" _blank
-        style db-helm-kustomize fill:red
         db-helm-carvel(App as Carvel)
         click db-helm-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md" _blank
         style db-helm-carvel fill:red
@@ -122,7 +124,6 @@ flowchart TD;
         click db-schema-schemahero-helm "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md" _blank
         db-schema-schemahero-kustomize(App as Kustomize)
         click db-schema-schemahero-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md" _blank
-        style db-schema-schemahero-kustomize fill:red
         db-schema-schemahero-carvel(App as Carvel)
         click db-schema-schemahero-carvel "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md" _blank
         style db-schema-schemahero-carvel fill:red
@@ -146,6 +147,8 @@ flowchart TD;
     Previews-->Production
 
     subgraph Production
+        cluster(Create a cluster)
+        style cluster fill:red
     end
 ```
 

@@ -6,36 +6,22 @@ TODO: Intro
 
 ```bash
 yq --inplace \
-    ".spec.rules[0].host = \"dev.cncf-demo.$DOMAIN\"" \
-    kustomize/overlays/cert-manager/ingress.yaml
-
-yq --inplace \
-    ".spec.tls[0].hosts[0] = \"dev.cncf-demo.$DOMAIN\"" \
-    kustomize/overlays/cert-manager/ingress.yaml
-
-yq --inplace \
-    ".spec.commonName = \"dev.cncf-demo.$DOMAIN\"" \
-    kustomize/overlays/cert-manager/certificate.yaml
-
-yq --inplace \
-    ".spec.dnsNames[0] = \"dev.cncf-demo.$DOMAIN\"" \
-    kustomize/overlays/cert-manager/certificate.yaml
+    ".[].value = \"dev.cncf-demo.$DOMAIN\"" \
+    kustomize/overlays/dev/ingress.yaml
 ```
 
 ## Do
 
 ```bash
+cat kustomize/base/ingress.yaml
+
 yq --inplace \
     ".metadata.labels.\"cert-manager.io/cluster-issuer\" = \"production\"" \
     kustomize/base/ingress.yaml
 
-yq --inplace \
-    ".spec.tls[0].hosts[0] = \"dev.cncf-demo.$DOMAIN\"" \
-    kustomize/base/ingress.yaml
+cat kustomize/overlays/dev/kustomization.yaml
 
-yq --inplace \
-    ".spec.tls[0].secretName = \"cncf-demo\"" \
-    kustomize/base/ingress.yaml
+cat kustomize/overlays/dev/ingress.yaml
 
 echo "---
 apiVersion: cert-manager.io/v1
@@ -47,16 +33,16 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: production
-  commonName: dev.cncf-demo.sillydemo.com
+  commonName: dev.cncf-demo.$DOMAIN
   dnsNames:
-    - dev.cncf-demo.sillydemo.com
-" | tee kustomize/base/certificate.yaml
+    - dev.cncf-demo.$DOMAIN
+" | tee kustomize/overlays/dev/certificate.yaml
 
 yq --inplace \
     ".resources += \"certificate.yaml\"" \
-    kustomize/base/kustomization.yaml
+    kustomize/overlays/dev/kustomization.yaml
 
-kubectl --namespace dev apply --kustomize kustomize/base
+kubectl apply --kustomize kustomize/overlays/dev
 
 kubectl --namespace dev \
     get issuers,certificaterequests,certificates,orders,secrets
@@ -79,17 +65,13 @@ yq --inplace \
     "del(.metadata.labels.\"cert-manager.io/cluster-issuer\")" \
     kustomize/base/ingress.yaml
 
-yq --inplace \
-    "del(.spec.tls)" \
-    kustomize/base/ingress.yaml
-
-rm kustomize/base/certificate.yaml
+rm kustomize/overlays/dev/certificate.yaml
 
 yq --inplace \
     "del(.resources[] | select(. == \"certificate.yaml\"))" \
-    kustomize/base/kustomization.yaml
+    kustomize/overlays/dev/kustomization.yaml
 
 kubectl --namespace dev delete certificate cncf-demo    
 
-kubectl --namespace dev apply --kustomize kustomize/base
+kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 ```

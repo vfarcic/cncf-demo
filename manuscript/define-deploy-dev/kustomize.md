@@ -25,23 +25,27 @@ yq --inplace \
 ## Do
 
 ```bash
-cd kustomize/base
+ls -1 kustomize/base
 
-ls -1
+cat kustomize/base/deployment.yaml
 
-cat deployment.yaml
+cat kustomize/base/service.yaml
 
-cat service.yaml
+cat kustomize/base/ingress.yaml
 
-cat ingress.yaml
+cat kustomize/base/kustomization.yaml
+
+cd kustomize/overlays/dev
 
 cat kustomization.yaml
 
 kustomize edit set image $IMAGE=$IMAGE:$TAG
 
-cd ../../
+cat kustomization.yaml
 
-kubectl --namespace dev apply --kustomize kustomize/base
+cd ../../../
+
+kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 
 echo "http://dev.cncf-demo.$DOMAIN"
 
@@ -61,6 +65,6 @@ Execute the commands that follow **ONLY** if you want to change your mind and go
 ```bash
 kubectl --namespace dev delete --kustomize kustomize/base
 
-yq --inplace ".images[0].newTag = \"latest\"" \
-    kustomize/base/kustomization.yaml
+yq --inplace "del(.images)" \
+    kustomize/overlays/dev/kustomization.yaml
 ```

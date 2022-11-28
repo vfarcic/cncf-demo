@@ -4,11 +4,31 @@
 git clone https://github.com/vfarcic/cncf-demo
 
 cd cncf-demo
+
+# TODO: Create branches for different providers
 ```
 
 * Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).
 
 ```bash
+export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
+# If using GKE
+export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+
+# If using GKE
+gcloud projects create $PROJECT_ID
+
+# If using GKE
+echo https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID
+
+# If using GKE
+# Open the URL from the output and enable the Kubernetes API
+
+# If using GKE
+gcloud container clusters create dot --project $PROJECT_ID \
+    --region us-east1 --machine-type n1-standard-2 --num-nodes 1
+
 helm repo add traefik https://helm.traefik.io/traefik
 
 helm repo update

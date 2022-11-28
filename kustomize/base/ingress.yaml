@@ -16,4 +16,8 @@ spec:
                 name: cncf-demo
                 port:
                   number: 8080
-      host: dev.cncf-demo.sillydemo.com
+      host: cncf-demo.sillydemo.com
+  tls:
+    - hosts:
+        - cncf-demo.sillydemo.com
+      secretName: cncf-demo

@@ -15,11 +15,7 @@ kubectl schemahero install
 ## Do
 
 ```bash
-kubectl --namespace dev exec --stdin --tty \
-    cncf-demo-postgresql-0 -- psql --dbname postgres \
-    --username postgres
-
-cat helm/app/templates/postgresql.yaml
+cat kustomize/base/postgresql.yaml
 
 cat helm/app/values.yaml
 

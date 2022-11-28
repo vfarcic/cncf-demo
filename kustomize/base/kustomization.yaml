@@ -4,7 +4,4 @@ resources:
   - deployment.yaml
   - ingress.yaml
   - service.yaml
-images:
-  - name: harbor.sillydemo.com/library/cncf-demo
-    newName: harbor.sillydemo.com/library/cncf-demo
-    newTag: latest
+  - postgresql.yaml

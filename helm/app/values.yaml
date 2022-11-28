@@ -7,6 +7,7 @@ tls:
   enabled: false
 db:
   enabled: false
+  name: my-db
 postgresql:
   global:
     persistence:

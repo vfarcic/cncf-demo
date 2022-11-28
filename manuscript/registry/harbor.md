@@ -2,6 +2,8 @@
 
 TODO: Intro
 
+TODO: Invite https://www.linkedin.com/in/vadim-bauer to the talk.
+
 ## Setup
 
 ```bash

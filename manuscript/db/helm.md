@@ -5,5 +5,5 @@ TODO: Intro
 ## How Did You Define Your App?
 
 * [Helm](helm-helm.md)
-* [Kustomize](TODO:)
+* [Kustomize](helm-kustomize.md)
 * [Carvel](TODO:)
