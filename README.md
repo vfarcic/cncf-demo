@@ -6,6 +6,9 @@ It is up to us, the audience, to guide our hero; and to help them grow from sour
 
 Join us if you dare!  This is not for the faint of heart!
 
+## Pitch
+
+It is up to us, the audience, to guide our hero; and to help them grow from source code to container image, to their final form as a running application in production. In this ‘Choose Your Own Adventure’-style journey, Whitney and Viktor will present a linear view of all of the choices that an anthropomorphized application must make as they try to find their way to the fabled land of production.
 
 ## Rules
 
