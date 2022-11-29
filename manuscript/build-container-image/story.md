@@ -1,6 +1,6 @@
 # Build Container Image In Dev Environments
 
-Our hero begins as humble source code, and to even begin to find production they need to learn to walk–to be portable and lightweight. Let’s get Hero out of the git repository and moving towards bigger and better things!
+Our hero begins as humble source code, and to even begin to find production they need to learn to walk–that is, they need to be portable and lightweight. Let’s get Hero out of the git repository and moving towards bigger and better things!
 
 ## Choice 1: Carvel kbld
 
