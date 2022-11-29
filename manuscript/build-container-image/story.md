@@ -10,7 +10,7 @@ kbld is a CLI tool that is part of the Carvel suite, and it works with your exis
 
 ## Choice 2: Lima
 
-TODO: Explanation
+Lima is a Linux virtual machine that is optimized to run [containerd](https://containerd.io/) on Mac. The goal of Lima is to promote containerd including nerdctl (contaiNERD ctl) to Mac users. containerd is an container runtime that manages the complete container lifecycle, from image transfer and storage to container execution and supervision to low-level storage to network attachments and beyond. Wait, did we say *whole* lifecycle? That's not quite right. You cannot use containerd to build images. You'll still need the old-fashioned Docker + Dockerfile for that.
 
 ## More info
 
