@@ -23,3 +23,13 @@ It is up to us, the audience, to guide our hero; and to help them grow from sour
 
 * [Setup](manuscript/setup.md)
 * [Build Container Image](manuscript/build-container-image/story.md)
+
+## The Format
+
+* Recap of the decisions made before (<=5 min.)
+* Implement the decision made before (<=5 min.)
+* Live stream
+* Each case presented in <= 5 min.
+* Audience questions
+* Call for voting
+* Closing case presentations (20 sec.)
