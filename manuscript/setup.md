@@ -5,7 +5,7 @@ git clone https://github.com/vfarcic/cncf-demo
 
 cd cncf-demo
 
-# TODO: Create branches for different providers
+# TODO: Create patch for different providers
 ```
 
 * Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).

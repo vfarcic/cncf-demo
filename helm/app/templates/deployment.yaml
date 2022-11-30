@@ -35,7 +35,7 @@ spec:
           httpGet:
             path: /
             port: 8080
-        {{- if .Values.db.enabled }}
+        {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplaneLocal) }}
         env: 
         - name: DB_ENDPOINT
           value: {{ template "name" . }}-postgresql

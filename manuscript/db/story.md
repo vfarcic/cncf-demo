@@ -29,3 +29,5 @@ TODO: Explanation
 * [Helm Chart](helm.md)
 * [Crossplane Composition In Kubernetes](crossplane-local.md)
 * [Crossplane Composition In Google Cloud](crossplane-google.md)
+* [Crossplane Composition In AWS](crossplane-aws.md)
+* [Crossplane Composition In AZure](crossplane-azure.md)

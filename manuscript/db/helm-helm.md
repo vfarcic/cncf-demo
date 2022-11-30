@@ -2,14 +2,6 @@
 
 TODO: Intro
 
-## Setup
-
-```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
-
-helm repo update
-```
-
 ## Do
 
 ```bash
@@ -29,7 +21,7 @@ cat helm/app/templates/deployment.yaml
 
 cat helm/app/values.yaml
 
-yq --inplace ".db.enabled = true" helm/app/values.yaml
+yq --inplace ".db.enabled.helm = true" helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
@@ -45,9 +37,7 @@ curl "https://dev.cncf-demo.$DOMAIN/videos"
 Execute the commands that follow **ONLY** if you want to change your mind and go back.
 
 ```bash
-yq --inplace ".db.enabled = false" helm/app/values.yaml
-
-yq --inplace ".db.name = \"my-db\"" helm/app/values.yaml
+yq --inplace ".db.enabled.helm = false" helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 ```

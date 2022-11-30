@@ -1,0 +1,8 @@
+---
+
+apiVersion: pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: crossplane-sql
+spec:
+  package: xpkg.upbound.io/devops-toolkit/dot-sql:v0.4.13

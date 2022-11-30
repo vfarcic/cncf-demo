@@ -1,0 +1,20 @@
+{{- if .Values.db.enabled.crossplaneLocal }}
+---
+
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: SQLClaim
+metadata:
+  name: {{ template "name" . }}
+spec:
+  id: {{ template "name" . }}
+  compositionSelector:
+    matchLabels:
+      provider: local-k8s
+      db: postgresql
+  parameters:
+    version: "13.4"
+    size: small
+    namespace: dev
+  writeConnectionSecretToRef:
+    name: {{ template "name" . }}-postgresql
+{{- end }}
