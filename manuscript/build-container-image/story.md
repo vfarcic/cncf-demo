@@ -10,7 +10,11 @@ kbld is a CLI tool that is part of the Carvel suite, and it probably works with 
 
 ## Choice 2: Lima
 
-Lima is a Linux virtual machine that is optimized to run [containerd](https://containerd.io/) on Mac. The goal of Lima is to promote containerd including nerdctl (contaiNERD ctl) to Mac users. containerd is a container runtime that manages the complete container lifecycle--from image transfer and storage, to container execution and supervision, to low-level storage to network attachments. Wait, did we say *whole* lifecycle? That's not quite right. You cannot use containerd to build images. You'll still need the old-fashioned Docker + Dockerfile for that.
+Lima is a Linux virtual machine that is optimized to run [containerd](https://containerd.io/) on Mac. The goal of Lima is to promote containerd including nerdctl (contaiNERD ctl) to Mac users. containerd is a container runtime that manages the complete container lifecycle--from image transfer and storage, to container execution and supervision, to low-level storage to network attachments. 
+
+Rancher Desktop (with Lima, containerd, and nerdctl) is an excellent, CNCF-friendly, free alternative to Docker Desktop.
+
+Since we are talking about building images here, it is worth noting that with this solution, nerdctl is building the image using [BuildKit](https://docs.docker.com/build/buildkit/), which is a Docker project. BuildKit is an improved build solution to replace Docker's legacy builder.
 
 ## More info
 
