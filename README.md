@@ -19,7 +19,7 @@ It is up to us, the audience, to guide our hero; and to help them grow from sour
 * [Graduated & incubating](https://cncf.io/projects)
 * [Sandox](https://cncf.io/sandbox-projects)
 
-## The Adventure
+## The Adventure!
 
 * [Setup](manuscript/setup.md)
 * [Build Container Image](manuscript/build-container-image/story.md)
