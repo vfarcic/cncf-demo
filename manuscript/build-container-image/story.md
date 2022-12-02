@@ -4,7 +4,7 @@ Our hero begins as humble source code, and to even begin to find production they
 
 ## Choice 1: Carvel kbld
 
-kbld is a CLI tool that is part of the Carvel suite, and it probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s). Whenever a relevant new resource is created, kbld builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), kbld pushes the resulting image to your registry of choice, and finally kbld resolves it to an image digest reference. kbld automatically finds image references within your configuration, and you can choose whether kbld updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used.  
+`kbld` is a CLI that automates image building, image pushing, and deployment configuration updates. `kbld` is part of the Carvel suite of tools. Whenever a relevant new resource is created, `kbld` builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), `kbld` pushes the resulting image to your registry of choice, and finally `kbld` resolves it to an image digest reference. `kbld` automatically finds image references within your configuration, and you can choose whether `kbld` updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used. `kbld` probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s).
 
 * [Official site](https://carvel.dev/kbld)
 
