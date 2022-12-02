@@ -26,9 +26,10 @@ It is up to us, the audience, to guide our hero; and to help them grow from sour
 
 ## The Format
 
-* Recap of the decisions made before (<=5 min.)
-* Implement the decision made before (<=5 min.)
-* Live stream
+* Recap of the decisions made in the app's journey so far (<=5 min.)
+* Recap of the technology that was chosen from last week's episode (<=5 min.)
+* Implement said technology (<=5 min.)
+* Live stream!
 * Each case presented in <= 5 min.
 * Audience questions
 * Call for voting
