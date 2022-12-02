@@ -21,6 +21,7 @@ Join us if you dare!  This is not for the faint of heart!
 
 * [Setup](manuscript/setup.md)
 * [Build Container Image](manuscript/build-container-image/story.md)
+* [Store Container Image in a Registry](manuscript/registry/story.md)
 
 ## The Format
 

@@ -1,4 +1,4 @@
-# Store Container Image In A Registry
+# Store Container Image in a Registry
 
 TODO: Intro
 
