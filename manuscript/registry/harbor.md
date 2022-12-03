@@ -1,6 +1,12 @@
-# Store Container Image In A Registry With Harbor
+# Store Container Image in a Registry with Harbor
 
-TODO: Intro
+Harbor is a CNCF-Graduated, open source container image registry. It has three main features:
+
+1. secures artificts with policies and role-based access control
+2. ensures that container images are scanned and free from vulnerablities
+3. signs images as trusted
+
+Harbor can be installed in any Kubernetes environment or on a system with Docker support.
 
 TODO: Invite https://www.linkedin.com/in/vadim-bauer to the talk.
 
