@@ -42,3 +42,6 @@ kind: Config
 sources:
 - image: cncf-demo
   path: .
+  pack:
+    build:
+      builder: cloudfoundry/cnb:bionic

@@ -14,6 +14,8 @@ Fun fact: `kbld` can work with multiple changing applications simultaneously, wh
 ## Setup
 
 * [Install `kbld` CLI](https://carvel.dev/kbld/docs/v0.36.0/install)
+* [Install the `pack` CLI](https://buildpacks.io/docs/tools/pack/#pack-cli)
+* Make sure that Docker is up and running
 
 ```bash
 TODO:
@@ -22,9 +24,6 @@ TODO:
 ## Do
 
 ```bash
-
-# should we use docker or CNBs?
-cat Dockerfile
 
 cat kbld/deployment.yaml
 
