@@ -10,7 +10,7 @@ Docker Hub is a service provided by Docker for finding and sharing container ima
 
 ## Choice 2: Harbor
 
-Harbor is a CNCF-Graduated, open source container image registry. It has three main features: Harbor secures artificts with policies and role-based access control, ensures that container images are scanned and free from vulnerablities, and signs images as trusted. 
+Harbor is a CNCF-Graduated, open source container image registry. Harbor has three main features: it secures artificts with policies and role-based access control, ensures that container images are scanned and free from vulnerablities, and signs images as trusted. 
 
 * [Manage Container (Docker) Images, Helm, CNAB, and Other Artifacts With Harbor](https://youtu.be/f931M4-my1k)
 * [Official site](https://goharbor.io)
