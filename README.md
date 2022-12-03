@@ -15,7 +15,7 @@ Join us if you dare!  This is not for the faint of heart!
 # CNCF Projects
 
 * [Graduated & incubating](https://cncf.io/projects)
-* [Sandox](https://cncf.io/sandbox-projects)
+* [Sandbox](https://cncf.io/sandbox-projects)
 
 ## The Adventure!
 
