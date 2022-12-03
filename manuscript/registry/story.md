@@ -1,6 +1,8 @@
 # Store Container Image in a Registry
 
-TODO: Intro
+Our hero application's form has leveled up! They are now a container image! Hero is bursting with pride, but it is too soon to celebrate. Right now they still only exist locally, and they need their own place out in the world. A place where they can live and evolve, and from where they can teleport to wherever they are needed. Let's choose a container image registry for Hero! ♪  
+
+
 
 ## Choice 1: Docker Hub
 
