@@ -15,11 +15,11 @@ TODO: Explanation
 * [Manage Container (Docker) Images, Helm, CNAB, and Other Artifacts With Harbor](https://youtu.be/f931M4-my1k)
 * [Official site](https://goharbor.io)
 
-## Choice 3: AWS Elastic Container Registry (ECR)
+## Choice 3: DragonFly
 
 TODO: Explanation
 
-* [Official site](https://aws.amazon.com/ecr)
+* [Official site](https://d7y.io)
 
 ## What Is Your Choice?
 
