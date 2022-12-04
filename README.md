@@ -27,7 +27,8 @@ Join us if you dare!  This is not for the faint of heart!
 * Recap of the decisions made in the app's journey so far (<=5 min.)
 * Recap of the technology that was chosen from last week's episode (<=5 min.)
 * Implement said technology (<=5 min.)
-* Live stream!
+* Intro current episode: why is this step necessary? (<=5 min.)
+* Introduce guests
 * Each case presented in <= 5 min.
 * Audience questions
 * Call for voting
