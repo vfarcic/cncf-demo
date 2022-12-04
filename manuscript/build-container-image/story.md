@@ -2,6 +2,8 @@
 
 Our hero begins as humble source code, and to even begin to find production they need to learn to walk. They need to be portable, and to carry their dependencies and lightweight OS with them as they go. Let’s get Hero out of the git repository and moving towards bigger and better things!
 
+TODO: intro to container images that is generic and applies no matter the tool we choose
+
 ## Choice 1: Carvel kbld
 
 `kbld` is a CLI that automates image building, image pushing, and deployment configuration updates. `kbld` is part of the Carvel suite of tools. Whenever a relevant new resource is created, `kbld` builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), `kbld` pushes the resulting image to your registry of choice, and finally `kbld` resolves it to an image digest reference. `kbld` automatically finds image references within your configuration, and you can choose whether `kbld` updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used. `kbld` probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s).
