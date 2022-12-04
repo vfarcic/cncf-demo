@@ -40,8 +40,8 @@ spec:
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 sources:
-- image: cncf-demo
-  path: .
-  pack:
-    build:
-      builder: cloudfoundry/cnb:bionic
+  - image: cncf-demo
+    path: .
+    pack:
+      build:
+        builder: paketobuildpacks/builder:base

@@ -17,10 +17,6 @@ Fun fact: `kbld` can work with multiple changing applications simultaneously, wh
 * [Install the `pack` CLI](https://buildpacks.io/docs/tools/pack/#pack-cli)
 * Make sure that Docker is up and running
 
-```bash
-TODO:
-```
-
 ## Do
 
 ```bash
@@ -31,6 +27,8 @@ kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
 
 # Replace `[...]` with the image tag from the output
 export TAG=[...]
+
+docker image tag kbld:$TAG cncf-demo:$TAG
 ```
 
 * `kbld` can also push images to a registry. Whether we'll do that or not depends on later choices.

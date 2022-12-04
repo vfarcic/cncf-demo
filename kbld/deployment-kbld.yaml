@@ -10,8 +10,8 @@ metadata:
         - git:
             dirty: true
             remoteURL: https://github.com/vfarcic/cncf-demo
-            sha: 165843b048faadf49f91139399bb0978ae06fbf6
-        url: kbld:cncf-demo-sha256-27fa99d8fddaf9ea47ea9aecb256906501ed12bf63517f3fb9f32786072b9f7f
+            sha: 880687a0815a64134c035aec1d70416e290c68fc
+        url: kbld:cncf-demo-sha256-bd01e22dd034a9710c287835b88223fc85f63bc38db35d297cab6da8d8f3552e
   labels:
     app.kubernetes.io/name: cncf-demo
   name: cncf-demo
@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/name: cncf-demo
     spec:
       containers:
-      - image: kbld:cncf-demo-sha256-27fa99d8fddaf9ea47ea9aecb256906501ed12bf63517f3fb9f32786072b9f7f
+      - image: kbld:cncf-demo-sha256-bd01e22dd034a9710c287835b88223fc85f63bc38db35d297cab6da8d8f3552e
         livenessProbe:
           httpGet:
             path: /
