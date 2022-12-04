@@ -33,8 +33,6 @@ cat helm/app/templates/postgresql-crossplane-local.yaml
 
 cat helm/app/templates/deployment.yaml
 
-# TODO: Rewrite
-
 cat helm/app/values.yaml
 
 yq --inplace ".db.enabled.crossplaneLocal = true" helm/app/values.yaml
@@ -58,7 +56,8 @@ curl "https://dev.cncf-demo.$DOMAIN/videos"
 Execute the commands that follow **ONLY** if you want to change your mind and go back.
 
 ```bash
-yq --inplace ".db.enabled.crossplaneLocal = false" helm/app/values.yaml
+yq --inplace ".db.enabled.crossplaneLocal = false" \
+    helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 ```

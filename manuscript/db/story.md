@@ -16,7 +16,7 @@ TODO: Explanation
 * [How To Shift Left Infrastructure Management Using Crossplane Compositions](https://youtu.be/AtbS1u2j7po)
 * [Official site](https://crossplane.io)
 
-## Choice 3: Crossplane Composition In Google Cloud
+## Choice 3: Crossplane Composition In Cloud
 
 TODO: Explanation
 
@@ -28,6 +28,4 @@ TODO: Explanation
 
 * [Helm Chart](helm.md)
 * [Crossplane Composition In Kubernetes](crossplane-local.md)
-* [Crossplane Composition In Google Cloud](crossplane-google.md)
-* [Crossplane Composition In AWS](crossplane-aws.md)
-* [Crossplane Composition In AZure](crossplane-azure.md)
+* [Crossplane Composition In Cloud](crossplane-cloud.md)

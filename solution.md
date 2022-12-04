@@ -101,20 +101,21 @@ flowchart TD;
         click db-crossplane-local "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md" _blank
         db-crossplane-local-helm(App as Helm)
         click db-crossplane-local-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-helm.md" _blank
-        style db-crossplane-local-helm fill:red
         db-crossplane-local-kustomize(App as Kustomize)
         click db-crossplane-local-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-kustomize.md" _blank
         style db-crossplane-local-kustomize fill:red
         db-crossplane-local-carvel(App as Carvel)
         click db-crossplane-local-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-carvel.md" _blank
         style db-crossplane-local-carvel fill:red
-        db-crossplane-google(Crossplane Composition In Google Cloud)
+        db-crossplane-cloud(Crossplane Composition In Cloud)
+        click db-crossplane-cloud "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cloud.md" _blank
+        db-crossplane-google(Google Cloud)
         click db-crossplane-google "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google.md" _blank
         style db-crossplane-google fill:red
-        db-crossplane-aws(Crossplane Composition In AWS)
+        db-crossplane-aws(AWS)
         click db-crossplane-aws "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md" _blank
         style db-crossplane-aws fill:red
-        db-crossplane-azure(Crossplane Composition In Azure)
+        db-crossplane-azure(Azure)
         click db-crossplane-azure "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
         style db-crossplane-azure fill:red
 
@@ -126,9 +127,10 @@ flowchart TD;
         db-crossplane-local-->db-crossplane-local-helm-->db-schema;
         db-crossplane-local-->db-crossplane-local-kustomize-->db-schema;
         db-crossplane-local-->db-crossplane-local-carvel-->db-schema;
-        db-->db-crossplane-google;
-        db-->db-crossplane-aws;
-        db-->db-crossplane-azure;
+        db-->db-crossplane-cloud;
+        db-crossplane-cloud-->db-crossplane-google-->db-schema;
+        db-crossplane-cloud-->db-crossplane-aws-->db-schema;
+        db-crossplane-cloud-->db-crossplane-azure-->db-schema;
 
         db-schema{{Manage DB Schema}}
         click db-schema "vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md" _blank
