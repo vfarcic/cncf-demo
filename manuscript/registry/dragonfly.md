@@ -1,4 +1,4 @@
-# Store Container Image In A Registry With Dragonfly
+# Store Container Image in a Registry with Dragonfly
 
 TODO: Intro
 

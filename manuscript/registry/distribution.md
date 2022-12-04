@@ -1,4 +1,4 @@
-# Store Container Image In A Registry With Distribution
+# Store Container Image in a Registry with Distribution
 
 TODO: Intro
 

@@ -2,15 +2,21 @@
 
 Our hero begins as humble source code, and to even begin to find production they need to learn to walk. They need to be portable, and to carry their dependencies and lightweight OS with them as they go. Let’s get Hero out of the git repository and moving towards bigger and better things!
 
+TODO: intro to container images that is generic and applies no matter the tool we choose
+
 ## Choice 1: Carvel kbld
 
-kbld is a CLI tool that is part of the Carvel suite, and it probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s). Whenever a relevant new resource is created, kbld builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), kbld pushes the resulting image to your registry of choice, and finally kbld resolves it to an image digest reference. kbld automatically finds image references within your configuration, and you can choose whether kbld updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used.  
+`kbld` is a CLI that automates image building, image pushing, and deployment configuration updates. `kbld` is part of the Carvel suite of tools. Whenever a relevant new resource is created, `kbld` builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), `kbld` pushes the resulting image to your registry of choice, and finally `kbld` resolves it to an image digest reference. `kbld` automatically finds image references within your configuration, and you can choose whether `kbld` updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used. `kbld` probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s).
 
 * [Official site](https://carvel.dev/kbld)
 
 ## Choice 2: Lima
 
-Lima is a Linux virtual machine that is optimized to run [containerd](https://containerd.io/) on Mac. The goal of Lima is to promote containerd including nerdctl (contaiNERD ctl) to Mac users. containerd is a container runtime that manages the complete container lifecycle--from image transfer and storage, to container execution and supervision, to low-level storage to network attachments. Wait, did we say *whole* lifecycle? That's not quite right. You cannot use containerd to build images. You'll still need the old-fashioned Docker + Dockerfile for that.
+Lima is a Linux virtual machine that is optimized to run [containerd](https://containerd.io/) on Mac. The goal of Lima is to promote containerd including `nerdctl` (contaiNERD ctl) to Mac users. containerd is a container runtime that manages the complete container lifecycle--from image transfer and storage, to container execution and supervision, to low-level storage to network attachments. 
+
+If this solution is chosen, we will implement Lima using [Rancher Desktop](https://docs.rancherdesktop.io/). Rancher Desktop (with Lima, containerd, and `nerdctl`) is a CNCF-friendly, free alternative to Docker Desktop.
+
+Since we are talking about building images here, it is worth noting that with this strategy, `nerdctl` is building the image using [BuildKit](https://docs.docker.com/build/buildkit/), which is a Docker project. BuildKit is an improved build solution to replace Docker's legacy builder.
 
 ## More info
 
