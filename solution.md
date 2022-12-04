@@ -175,7 +175,6 @@ flowchart TD;
 
 ## TODO:
 
-* KEDA
 * KubeVirt
 * k3s
 * LinkerD
@@ -217,7 +216,6 @@ flowchart TD;
 * CRI-O
 * CubeFS
 * Emissary Ingress
-* Falco
 * gRPC
 * in-toto
 * KubeEdge
@@ -300,3 +298,4 @@ flowchart TD;
 * Virtual Kubelet
 * wasmCloud
 * WasmEdge Runtime
+* KEDA (after Prometheus)

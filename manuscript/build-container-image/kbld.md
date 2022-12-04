@@ -20,7 +20,6 @@ Fun fact: `kbld` can work with multiple changing applications simultaneously, wh
 ## Do
 
 ```bash
-
 cat kbld/deployment.yaml
 
 kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
