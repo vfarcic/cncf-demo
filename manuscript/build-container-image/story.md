@@ -2,7 +2,7 @@
 
 Our hero begins as humble source code, and to even begin to find production they need to learn to walk. They need to be portable, and to carry their dependencies and lightweight OS with them as they go. Let’s get Hero out of the git repository and moving towards bigger and better things!
 
-TODO: intro to container images that is generic and applies no matter the tool we choose
+At its core, a container image is simply a tarball of an entire filesystem. With containers, application code is packaged up with the operating system and necessary dependencies. That way the application has everything that it needs to run in a consistent and repeatable way, no matter what hardware platform and operating system it is running on. Containers are lightweight and portable because they only contain as much of the operating system as what is needed to run the application. When an application is run in containers it can easily scale, simply by making more instances of the containerized application as traffic increases.
 
 ## Choice 1: Carvel kbld
 
