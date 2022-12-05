@@ -2,7 +2,7 @@
 
 Our hero application's form has leveled up! They are now a container image! Hero is bursting with pride, but it is too soon to celebrate. Right now they still only exist locally, and they need their own place out in the world. A place where they can live and evolve, and from where they can teleport to wherever they are needed. Let's choose a container image registry for Hero! ♪  
 
-TODO: intro to container registry that is generic and applies no matter the tool we choose
+A container image registry is a server that stores and serves images. It enables container images to be easily shared between systems. Uploading an image to a registry is usually called "pushing" and downloading a container image is called "pulling". A container image registry can either be public or private. For example, you may pull the latest official public image of Ubuntu from thier public registry. In contrast, a private registry might be used to share the latest version of a propietary application between teams within the same company.
 
 ## Choice 1: Docker Hub
 
