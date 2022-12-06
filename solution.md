@@ -175,24 +175,7 @@ flowchart TD;
 
 ## TODO:
 
-* KubeVirt
-* k3s
-* LinkerD
-* Dapr
-* Istio
-* Open Policy Agent (OPA)
-* Falco
-* Kyverno
-* Argo Rollout
-* Knative
-* KubeVela
-* CDK For Kubernetes (cdk8s)
-* Argo Workflows
-* Keptn
-* Argo CD
-* Flux
-* Argo Workflows
-* FluentD (logging)
+* OpenTelemetry
 * Jaeger (tracing)
 * Prometheus (monitoring)
 * containerd
@@ -224,7 +207,6 @@ flowchart TD;
 * NATS
 * Notary
 * OpenMetrics
-* OpenTelemetry
 * OperatorFramework
 * Thanos
 * Volcano
@@ -299,3 +281,21 @@ flowchart TD;
 * wasmCloud
 * WasmEdge Runtime
 * KEDA (after Prometheus)
+* KubeVirt
+* k3s
+* LinkerD
+* Dapr
+* Istio
+* Open Policy Agent (OPA)
+* Falco
+* Kyverno
+* Argo Rollout
+* Knative
+* KubeVela
+* CDK For Kubernetes (cdk8s)
+* Argo Workflows
+* Keptn
+* Argo CD
+* Flux
+* Argo Workflows
+* FluentD (logging)
