@@ -19,9 +19,9 @@ Harbor is a CNCF-Graduated, open source container image registry. Harbor has thr
 
 ## Choice 3: DragonFly
 
-Dragonfly is not a registry per se, it is a file distribution system based on peer-to-peer (P2P) networking. Dragonfly is useful in distributing container images that need to be made available to all of the nodes of a Kubernetes cluster. For example, Dragonfly can be used to improve the download speeds of container images stored in a local registry in an air-gapped environment. It is also useful to improve cold start times in a use case where an application needs to scale up from zero.
+Dragonfly is not a registry per se, it is a file distribution system based on peer-to-peer (P2P) networking. In contrast to conventional client-server network systems, with P2P networking all of the computers are connected through a single server computer, and every device serves the purpose of both the server and the client. Each device (called a "peer") plays an independent role, and has access to save the entire set of shared data in its own database. This enables the speedy transfer of files to and from anywhere in the system.
 
-<!-- It is also useful to improve cold start times in a use case where an application needs to scale up from zero. <- I'm not sure whether this is true, it just seems like it would be. Thoughts? -->
+Dragonfly is useful in distributing container images that need to be made available to all of the nodes of a Kubernetes cluster. For example, Dragonfly can be used to improve the download speeds of container images stored in a local registry in an air-gapped environment. It is also useful to improve cold start times in a use case where an application needs to scale up from zero.
 
 * [Official site](https://d7y.io)
 
