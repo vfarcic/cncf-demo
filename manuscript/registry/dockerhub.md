@@ -1,4 +1,4 @@
-# Store Container Image in a Registry with Distribution
+# Store Container Image in a Registry with Docker Hub
 
 TODO: Intro
 
