@@ -175,6 +175,8 @@ flowchart TD;
 
 ## TODO:
 
+* Telepresence
+* DevSpace (https://thenewstack.io/?p=22695066)
 * OpenTelemetry
 * Jaeger (tracing)
 * Prometheus (monitoring)
@@ -271,7 +273,6 @@ flowchart TD;
 * Strimzi
 * Submariner
 * SuperEdge
-* Telepresence
 * Teller
 * Tinkerbell
 * Tremor
