@@ -15,7 +15,7 @@ kubectl schemahero install
 ## Do
 
 ```bash
-cat helm/app/templates/postgresql-schema.yaml
+cat kustomize/base/postgresql-schema.yaml
 
 yq --inplace ".resources += \"postgresql-schema.yaml\"" \
     kustomize/base/kustomization.yaml
