@@ -203,7 +203,6 @@ flowchart TD;
 
 ## TODO:
 
-* DevSpace (https://thenewstack.io/?p=22695066)
 * OpenTelemetry
 * Jaeger (tracing)
 * Prometheus (monitoring)
