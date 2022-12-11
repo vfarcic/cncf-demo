@@ -166,7 +166,6 @@ flowchart TD;
         style devspace fill:red
         okteto(Okteto)
         click okteto "vfarcic/cncf-demo/blob/main/manuscript/develop/okteto.md" _blank
-        style okteto fill:red
 
         develop-->telepresence
         develop-->devspace
