@@ -1,4 +1,4 @@
-# Setup PostgreSQL DB In The Dev Kubernetes With Crossplane
+# TODO: With TODO:
 
 TODO: Intro
 
@@ -29,20 +29,25 @@ kubectl apply \
 ## Do
 
 ```bash
-cat helm/app/templates/postgresql-crossplane-local.yaml
+cat kustomize/overlays/dev/postgresql-crossplane-local.yaml
 
-cat helm/app/templates/deployment.yaml
+yq --inplace ".resources += \"postgresql-crossplane-local.yaml\"" \
+    kustomize/overlays/dev/kustomization.yaml
 
-cat helm/app/values.yaml
+cat kustomize/overlays/dev/deployment-crossplane-postgresql.yaml
 
-yq --inplace ".db.enabled.crossplaneLocal = true" helm/app/values.yaml
+yq --inplace ".patchesStrategicMerge = []" \
+    kustomize/overlays/dev/kustomization.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
+yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql.yaml\"" \
+    kustomize/overlays/dev/kustomization.yaml
+
+cat kustomize/overlays/dev/kustomization.yaml
+
+kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 
 # TODO: Fix the status
 kubectl --namespace dev get sqlclaims
-
-helm --namespace dev ls
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 ```

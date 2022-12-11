@@ -103,7 +103,6 @@ flowchart TD;
         click db-crossplane-local-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-helm.md" _blank
         db-crossplane-local-kustomize(App as Kustomize)
         click db-crossplane-local-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-kustomize.md" _blank
-        style db-crossplane-local-kustomize fill:red
         db-crossplane-local-carvel(App as Carvel)
         click db-crossplane-local-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-carvel.md" _blank
         style db-crossplane-local-carvel fill:red
@@ -155,21 +154,38 @@ flowchart TD;
         db-schema-schemahero-->db-schema-schemahero-helm;
         db-schema-schemahero-->db-schema-schemahero-kustomize;
         db-schema-schemahero-->db-schema-schemahero-carvel;
+
+        develop{{Develop}}
+        click develop "vfarcic/cncf-demo/blob/main/manuscript/develop/story.md" _blank
+        style develop fill:blue
     end
 
-    Development-->Previews
-    
-    subgraph Previews
-        git-pr(Create a PR)
-        click git-pr "vfarcic/cncf-demo/blob/main/manuscript/git-pr/story.md" _blank
-        style git-pr fill:red
-    end
-
-    Previews-->Production
+    Development-->Production
 
     subgraph Production
-        cluster(Create a cluster)
-        style cluster fill:red
+        production-todo(TODO)
+        style production-todo fill:red
+    end
+
+    Production-->Previews
+
+    subgraph Previews
+        previews-todo(TODO)
+        style previews-todo fill:red
+    end
+
+    Previews-->Observability
+
+    subgraph Observability
+        observability-todo(TODO)
+        style observability-todo fill:red
+    end
+
+    Observability-->Automation
+
+    subgraph Automation
+        automation-todo(TODO)
+        style automation-todo fill:red
     end
 ```
 

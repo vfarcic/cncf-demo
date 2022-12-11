@@ -1,0 +1,25 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cncf-demo
+spec:
+  template:
+    spec:
+      containers:
+        - name: main
+          env: 
+          - name: DB_ENDPOINT
+            value: cncf-demo-postgresql
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USER
+            value: postgres
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: cncf-demo-postgresql
+                key: postgres-password
+          - name: DB_NAME
+            value: cncf-demo

@@ -29,6 +29,9 @@ yq --inplace ".helmCharts[0].valuesFile = \"postgresql-values.yaml\"" \
 
 cat kustomize/overlays/dev/deployment-postgresql.yaml
 
+yq --inplace ".patchesStrategicMerge = []" \
+    kustomize/overlays/dev/kustomization.yaml
+
 yq --inplace ".patchesStrategicMerge += \"deployment-postgresql.yaml\"" \
     kustomize/overlays/dev/kustomization.yaml
 
@@ -43,22 +46,3 @@ curl "https://dev.cncf-demo.$DOMAIN/videos"
 ## Continue The Adventure
 
 [Manage DB Schema](../db-schema/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-yq --inplace \
-    "del(.patchesStrategicMerge[] | select(. == \"deployment-postgresql.yaml\"))" \
-    kustomize/overlays/dev/kustomization.yaml
-
-yq --inplace \
-    "del(.helmCharts[] | select(.name == \"postgresql\"))" \
-    kustomize/overlays/dev/kustomization.yaml
-
-kubectl kustomize --namespace dev --enable-helm kustomize/overlays/dev \
-    | kubectl apply --filename -
-
-# TODO: Delete DB resources
-```

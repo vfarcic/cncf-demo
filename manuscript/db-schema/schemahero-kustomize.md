@@ -15,9 +15,15 @@ kubectl schemahero install
 ## Do
 
 ```bash
-cat kustomize/base/postgresql-schema.yaml
+# Execute only if the DB was created with Crossplane
+export SCHEMA_FILE=postgresql-crossplane-schema.yaml
 
-yq --inplace ".resources += \"postgresql-schema.yaml\"" \
+# Execute only if the DB was NOT created with Crossplane
+export SCHEMA_FILE=postgresql-schema.yaml
+
+cat kustomize/base/$SCHEMA_FILE
+
+yq --inplace ".resources += \"$SCHEMA_FILE\"" \
     kustomize/base/kustomization.yaml
 
 cat kustomize/base/kustomization.yaml
@@ -37,27 +43,3 @@ curl "https://dev.cncf-demo.$DOMAIN/videos" | jq .
 ## Continue The Adventure
 
 [TODO:](TODO:)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-yq --inplace \
-    "del(.resources[] | select(. == \"postgresql-schema.yaml\"))" \
-    kustomize/base/kustomization.yaml
-
-kubectl --namespace dev delete database cncf-demo
-
-kubectl --namespace dev delete table cncf-demo-videos
-
-kubectl --namespace dev exec --stdin --tty \
-    postgresql-0 -- psql --dbname postgres \
-    --username postgres
-
-# Password: postgres
-
-DROP DATABASE "cncf-demo";
-
-exit
-```
