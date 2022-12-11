@@ -35,23 +35,3 @@ curl "https://dev.cncf-demo.$DOMAIN/videos" | jq .
 ## Continue The Adventure
 
 [TODO:](TODO:)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-yq --inplace ".schemahero.enabled = false" helm/app/values.yaml
-
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
-
-kubectl --namespace dev exec --stdin --tty \
-    cncf-demo-postgresql-0 -- psql --dbname postgres \
-    --username postgres
-
-# Password: postgres
-
-DROP DATABASE "cncf-demo";
-
-exit
-```

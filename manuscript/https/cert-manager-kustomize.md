@@ -55,23 +55,3 @@ echo "https://dev.cncf-demo.$DOMAIN"
 ## Continue The Adventure
 
 [Setup PostgreSQL DB](../db/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-yq --inplace \
-    "del(.metadata.labels.\"cert-manager.io/cluster-issuer\")" \
-    kustomize/base/ingress.yaml
-
-rm kustomize/overlays/dev/certificate.yaml
-
-yq --inplace \
-    "del(.resources[] | select(. == \"certificate.yaml\"))" \
-    kustomize/overlays/dev/kustomization.yaml
-
-kubectl --namespace dev delete certificate cncf-demo    
-
-kubectl --namespace dev apply --kustomize kustomize/overlays/dev
-```

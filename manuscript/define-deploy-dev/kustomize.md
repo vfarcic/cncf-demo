@@ -57,14 +57,3 @@ echo "http://dev.cncf-demo.$DOMAIN"
 ## Continue The Adventure
 
 [Use HTTPS](../https/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-kubectl --namespace dev delete --kustomize kustomize/base
-
-yq --inplace "del(.images)" \
-    kustomize/overlays/dev/kustomization.yaml
-```

@@ -31,13 +31,3 @@ curl "https://dev.cncf-demo.$DOMAIN/videos"
 ## Continue The Adventure
 
 [Manage DB Schema](../db-schema/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-yq --inplace ".db.enabled.helm = false" helm/app/values.yaml
-
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
-```

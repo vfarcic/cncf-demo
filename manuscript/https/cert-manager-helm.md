@@ -25,13 +25,3 @@ echo "https://dev.cncf-demo.$DOMAIN"
 ## Continue The Adventure
 
 [Setup PostgreSQL DB](../db/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-yq --inplace ".tls.enabled = false" helm/app/values.yaml
-
-helm upgrade --install cncf-demo helm --namespace dev --wait
-```

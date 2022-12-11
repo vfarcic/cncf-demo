@@ -41,13 +41,3 @@ echo "http://dev.cncf-demo.$DOMAIN"
 ## Continue The Adventure
 
 [Use HTTPS](../https/story.md)
-
-## Undo The Changes
-
-Execute the commands that follow **ONLY** if you want to change your mind and go back.
-
-```bash
-helm delete cncf-demo --namespace dev
-
-yq --inplace ".image.tag = \"latest\"" helm/app/values.yaml
-```

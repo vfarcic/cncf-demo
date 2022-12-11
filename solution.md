@@ -151,13 +151,26 @@ flowchart TD;
         db-schema-->db-schema-flyway;
         db-schema-->db-schema-liquibase;
         db-schema-->db-schema-schemahero;
-        db-schema-schemahero-->db-schema-schemahero-helm;
-        db-schema-schemahero-->db-schema-schemahero-kustomize;
-        db-schema-schemahero-->db-schema-schemahero-carvel;
+        db-schema-schemahero-->db-schema-schemahero-helm-->develop;
+        db-schema-schemahero-->db-schema-schemahero-kustomize-->develop;
+        db-schema-schemahero-->db-schema-schemahero-carvel-->develop;
 
         develop{{Develop}}
         click develop "vfarcic/cncf-demo/blob/main/manuscript/develop/story.md" _blank
         style develop fill:blue
+        telepresence(Telepresence)
+        click telepresence "vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md" _blank
+        style telepresence fill:red
+        devspace(DevSpace)
+        click devspace "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md" _blank
+        style devspace fill:red
+        okteto(Okteto)
+        click okteto "vfarcic/cncf-demo/blob/main/manuscript/develop/okteto.md" _blank
+        style okteto fill:red
+
+        develop-->telepresence
+        develop-->devspace
+        develop-->okteto
     end
 
     Development-->Production
@@ -167,21 +180,21 @@ flowchart TD;
         style production-todo fill:red
     end
 
-    Production-->Previews
-
-    subgraph Previews
-        previews-todo(TODO)
-        style previews-todo fill:red
-    end
-
-    Previews-->Observability
+    Production-->Observability
 
     subgraph Observability
         observability-todo(TODO)
         style observability-todo fill:red
     end
 
-    Observability-->Automation
+    Observability-->Previews
+
+    subgraph Previews
+        previews-todo(TODO)
+        style previews-todo fill:red
+    end
+
+    Previews-->Automation
 
     subgraph Automation
         automation-todo(TODO)
@@ -191,7 +204,6 @@ flowchart TD;
 
 ## TODO:
 
-* Telepresence
 * DevSpace (https://thenewstack.io/?p=22695066)
 * OpenTelemetry
 * Jaeger (tracing)
