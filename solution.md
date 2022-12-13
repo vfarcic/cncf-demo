@@ -99,37 +99,45 @@ flowchart TD;
         style db-helm-carvel fill:red
         db-crossplane-local(Crossplane Composition In Kubernetes)
         click db-crossplane-local "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md" _blank
-        db-crossplane-local-helm(App as Helm)
-        click db-crossplane-local-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-helm.md" _blank
-        db-crossplane-local-kustomize(App as Kustomize)
-        click db-crossplane-local-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-kustomize.md" _blank
-        db-crossplane-local-carvel(App as Carvel)
-        click db-crossplane-local-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local-carvel.md" _blank
-        style db-crossplane-local-carvel fill:red
         db-crossplane-cloud(Crossplane Composition In Cloud)
         click db-crossplane-cloud "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cloud.md" _blank
         db-crossplane-google(Google Cloud)
         click db-crossplane-google "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google.md" _blank
-        style db-crossplane-google fill:red
         db-crossplane-aws(AWS)
         click db-crossplane-aws "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md" _blank
         style db-crossplane-aws fill:red
         db-crossplane-azure(Azure)
         click db-crossplane-azure "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
         style db-crossplane-azure fill:red
+        db-crossplane-google-kustomize(App as Kustomize)
+        click db-crossplane-google-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
+        style db-crossplane-google-kustomize fill:red
+        db-crossplane-helm(App as Helm)
+        click db-crossplane-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md" _blank
+        db-crossplane-carvel(App as Carvel)
+        db-crossplane-kustomize(App as Kustomize)
+        click db-crossplane-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md" _blank
+        click db-crossplane-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md" _blank
+        style db-crossplane-carvel fill:red
 
         db-->db-helm;
         db-helm-->db-helm-helm-->db-schema;
         db-helm-->db-helm-kustomize-->db-schema;
         db-helm-->db-helm-carvel-->db-schema;
         db-->db-crossplane-local;
-        db-crossplane-local-->db-crossplane-local-helm-->db-schema;
-        db-crossplane-local-->db-crossplane-local-kustomize-->db-schema;
-        db-crossplane-local-->db-crossplane-local-carvel-->db-schema;
+        db-crossplane-local-->db-crossplane-helm;
+        db-crossplane-local-->db-crossplane-kustomize;
+        db-crossplane-local-->db-crossplane-carvel;
         db-->db-crossplane-cloud;
-        db-crossplane-cloud-->db-crossplane-google-->db-schema;
+        db-crossplane-cloud-->db-crossplane-google;
+        db-crossplane-google-->db-crossplane-helm;
+        db-crossplane-google-->db-crossplane-google-kustomize-->db-schema;
+        db-crossplane-google-->db-crossplane-carvel;
         db-crossplane-cloud-->db-crossplane-aws-->db-schema;
         db-crossplane-cloud-->db-crossplane-azure-->db-schema;
+        db-crossplane-helm-->db-schema;
+        db-crossplane-kustomize-->db-schema;
+        db-crossplane-carvel-->db-schema;
 
         db-schema{{Manage DB Schema}}
         click db-schema "vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md" _blank

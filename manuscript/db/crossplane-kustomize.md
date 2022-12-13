@@ -2,30 +2,6 @@
 
 TODO: Intro
 
-## Setup
-
-```bash
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
-
-helm repo update
-
-helm upgrade --install \
-    crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system \
-    --create-namespace \
-    --wait
-
-kubectl apply \
-    --filename https://raw.githubusercontent.com/vfarcic/devops-toolkit-crossplane/master/crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply \
-    --filename https://raw.githubusercontent.com/vfarcic/devops-toolkit-crossplane/master/crossplane-config/provider-helm-incluster.yaml
-
-kubectl apply \
-    --filename https://raw.githubusercontent.com/vfarcic/devops-toolkit-crossplane/master/crossplane-config/config-sql.yaml
-```
-
 ## Do
 
 ```bash

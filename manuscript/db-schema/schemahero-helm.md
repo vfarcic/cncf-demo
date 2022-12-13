@@ -15,7 +15,7 @@ kubectl schemahero install
 ## Do
 
 ```bash
-cat kustomize/base/postgresql.yaml
+cat kustomize/base/schemahero.yaml
 
 cat helm/app/values.yaml
 

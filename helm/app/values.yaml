@@ -8,7 +8,9 @@ tls:
 db:
   enabled:
     helm: false
-    crossplaneLocal: false
+    crossplane:
+      local: false
+      google: false
 postgresql:
   global:
     persistence:

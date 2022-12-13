@@ -6,4 +6,4 @@ TODO: Intro
 
 * [Google Cloud](crossplane-google.md)
 * [AWS](crossplane-aws.md)
-* [AZure](crossplane-azure.md)
+* [Azure](crossplane-azure.md)

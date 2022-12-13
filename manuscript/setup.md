@@ -14,6 +14,9 @@ cd cncf-demo
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 
 # If using GKE
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+# If using GKE
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 # If using GKE
@@ -28,6 +31,10 @@ echo https://console.cloud.google.com/marketplace/product/google/container.googl
 # If using GKE
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type n1-standard-2 --num-nodes 1
+
+# If using GKE
+gcloud container clusters get-credentials dot \
+    --project $PROJECT_ID --region us-east1
 
 helm repo add traefik https://helm.traefik.io/traefik
 

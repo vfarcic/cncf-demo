@@ -1,0 +1,35 @@
+{{- if or (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+---
+
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: SQLClaim
+metadata:
+  name: {{ template "name" . }}
+spec:
+  id: {{ template "name" . }}
+  compositionSelector:
+    matchLabels:
+      {{- if .Values.db.enabled.crossplane.local }}
+      provider: local-k8s
+      {{- end }}
+      {{- if .Values.db.enabled.crossplane.google }}
+      provider: google-official
+      {{- end }}
+      db: postgresql
+  parameters:
+    version: "13"
+    size: small
+  writeConnectionSecretToRef:
+    name: {{ template "name" . }}
+
+{{- end }}
+{{- if .Values.db.enabled.crossplane.google }}
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ template "name" . }}-password
+data:
+  password: cG9zdGdyZXM=
+{{- end }}
