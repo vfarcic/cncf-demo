@@ -8,6 +8,14 @@ TODO: Intro
 yq --inplace \
     ".[].value = \"dev.cncf-demo.$DOMAIN\"" \
     kustomize/overlays/dev/ingress.yaml
+
+yq --inplace \
+    ".spec.commonName = \"dev.cncf-demo.$DOMAIN\"" \
+    kustomize/overlays/dev/certificate.yaml
+
+yq --inplace \
+    ".spec.dnsNames[0] = \"dev.cncf-demo.$DOMAIN\"" \
+    kustomize/overlays/dev/certificate.yaml
 ```
 
 ## Do
@@ -19,28 +27,19 @@ yq --inplace \
     ".metadata.labels.\"cert-manager.io/cluster-issuer\" = \"production\"" \
     kustomize/base/ingress.yaml
 
-cat kustomize/overlays/dev/kustomization.yaml
+cat kustomize/base/ingress.yaml
 
 cat kustomize/overlays/dev/ingress.yaml
 
-echo "---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: cncf-demo
-spec:
-  secretName: cncf-demo
-  issuerRef:
-    kind: ClusterIssuer
-    name: production
-  commonName: dev.cncf-demo.$DOMAIN
-  dnsNames:
-    - dev.cncf-demo.$DOMAIN
-" | tee kustomize/overlays/dev/certificate.yaml
+cat kustomize/overlays/dev/certificate.yaml
+
+cat kustomize/overlays/dev/kustomization.yaml
 
 yq --inplace \
     ".resources += \"certificate.yaml\"" \
     kustomize/overlays/dev/kustomization.yaml
+
+cat kustomize/overlays/dev/kustomization.yaml
 
 kubectl apply --kustomize kustomize/overlays/dev
 

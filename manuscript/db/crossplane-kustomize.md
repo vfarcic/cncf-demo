@@ -5,24 +5,22 @@ TODO: Intro
 ## Do
 
 ```bash
-cat kustomize/overlays/dev/postgresql-crossplane-local.yaml
+cat kustomize/overlays/dev/postgresql-crossplane-$XP_DESTINATION.yaml
 
-yq --inplace ".resources += \"postgresql-crossplane-local.yaml\"" \
+yq --inplace ".resources += \"postgresql-crossplane-$XP_DESTINATION.yaml\"" \
     kustomize/overlays/dev/kustomization.yaml
 
-cat kustomize/overlays/dev/deployment-crossplane-postgresql.yaml
+cat kustomize/overlays/dev/deployment-crossplane-postgresql-$XP_DESTINATION.yaml
 
-yq --inplace ".patchesStrategicMerge = []" \
-    kustomize/overlays/dev/kustomization.yaml
-
-yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql.yaml\"" \
+yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$XP_DESTINATION.yaml\"" \
     kustomize/overlays/dev/kustomization.yaml
 
 cat kustomize/overlays/dev/kustomization.yaml
 
 kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 
-# TODO: Fix the status
+kubectl get managed
+
 kubectl --namespace dev get sqlclaims
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"

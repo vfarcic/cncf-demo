@@ -16,7 +16,7 @@ kubectl schemahero install
 
 ```bash
 # Execute only if the DB was created with Crossplane
-export SCHEMA_FILE=postgresql-crossplane-schema.yaml
+export SCHEMA_FILE=postgresql-crossplane-schema-$XP_DESTINATION.yaml
 
 # Execute only if the DB was NOT created with Crossplane
 export SCHEMA_FILE=postgresql-schema.yaml
