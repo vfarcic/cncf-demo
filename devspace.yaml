@@ -37,8 +37,10 @@ deployments:
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:
   app:
+    labelSelector:
+      app.kubernetes.io/name: cncf-demo
     # Search for the container that runs this image
-    imageSelector: index.docker.io/vfarcic/cncf-demo:v0.0.1
+    # imageSelector: index.docker.io/vfarcic/cncf-demo
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
     devImage: ghcr.io/loft-sh/devspace-containers/go:1.18-alpine
     # Sync files between the local filesystem and the development container
