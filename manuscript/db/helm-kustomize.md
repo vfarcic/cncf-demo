@@ -37,8 +37,8 @@ yq --inplace ".patchesStrategicMerge += \"deployment-postgresql.yaml\"" \
 
 cat kustomize/overlays/dev/kustomization.yaml
 
-kubectl kustomize --enable-helm kustomize/overlays/dev \
-    | kubectl apply --filename -
+kubectl --namespace dev kustomize --enable-helm \
+    kustomize/overlays/dev | kubectl apply --filename -
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 ```

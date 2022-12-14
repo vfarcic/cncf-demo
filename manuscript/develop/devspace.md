@@ -15,7 +15,20 @@ TODO:
 ## Do
 
 ```bash
-TODO:
+# TODO: Rewrite devspace.yaml
+
+# TODO: Kustomize
+# TODO: Helm
+# TODO: kubectl
+# TODO: Dockerfile
+# TODO: buildpacks
+# TODO: kbld
+
+cat devspace.yaml
+
+devspace use namespace dev
+
+devspace dev
 ```
 
 ## Continue The Adventure

@@ -28,8 +28,8 @@ yq --inplace ".resources += \"$SCHEMA_FILE\"" \
 
 cat kustomize/base/kustomization.yaml
 
-kubectl kustomize --enable-helm kustomize/overlays/dev \
-    | kubectl apply --filename -
+kubectl --namespace dev kustomize --enable-helm \
+    kustomize/overlays/dev | kubectl apply --filename -
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 
