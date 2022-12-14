@@ -30,6 +30,6 @@ export XP_DESTINATION=local
 
 ## How Did You Define Your App?
 
-* [Helm](crossplane-local-helm.md)
-* [Kustomize](crossplane-local-kustomize.md)
-* [Carvel](crossplane-local-carvel.md)
+* [Helm](crossplane-helm.md)
+* [Kustomize](crossplane-kustomize.md)
+* [Carvel](crossplane-carvel.md)

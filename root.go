@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func rootHandler(c *gin.Context) {
-	if len(c.Query("fail")) > 0 {
-		c.String(http.StatusBadRequest, "Something terrible happened")
+func rootHandler(ctx *gin.Context) {
+	if len(ctx.Query("fail")) > 0 {
+		ctx.String(http.StatusBadRequest, "Something terrible happened")
 		return
 	}
 	version := os.Getenv("VERSION")
@@ -21,9 +21,9 @@ func rootHandler(c *gin.Context) {
 	if len(version) > 0 {
 		output = fmt.Sprintf("%s version %s", output, version)
 	}
-	if len(c.Query("html")) > 0 {
+	if len(ctx.Query("html")) > 0 {
 		output = fmt.Sprintf("<h1>%s</h1>", output)
 	}
 	output = fmt.Sprintf("%s\n", output)
-	c.String(http.StatusOK, output)
+	ctx.String(http.StatusOK, output)
 }

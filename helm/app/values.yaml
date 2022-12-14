@@ -11,6 +11,7 @@ db:
     crossplane:
       local: false
       google: false
+      aws: false
 postgresql:
   global:
     persistence:

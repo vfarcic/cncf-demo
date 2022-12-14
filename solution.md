@@ -85,9 +85,14 @@ flowchart TD;
         https3-->https3-kustomize-->db;
         https3-->https3-carvel-->db;
 
+        %% --------
+        %% -- DB --
+        %% --------
         db{{Setup PostgreSQL DB In Dev}}
         click db "vfarcic/cncf-demo/blob/main/manuscript/db/story.md" _blank
         style db fill:blue
+
+        %% -- DB Helm --
         db-helm(Helm Chart)
         click db-helm "vfarcic/cncf-demo/blob/main/manuscript/db/helm.md" _blank
         db-helm-helm(App as Helm)
@@ -97,21 +102,38 @@ flowchart TD;
         db-helm-carvel(App as Carvel)
         click db-helm-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md" _blank
         style db-helm-carvel fill:red
+
+        %% -- DB Crossplane Local --
         db-crossplane-local(Crossplane Composition In Kubernetes)
         click db-crossplane-local "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md" _blank
+
+        %% -- DB Crossplane Cloud --
         db-crossplane-cloud(Crossplane Composition In Cloud)
         click db-crossplane-cloud "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cloud.md" _blank
         db-crossplane-google(Google Cloud)
         click db-crossplane-google "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google.md" _blank
         db-crossplane-aws(AWS)
         click db-crossplane-aws "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md" _blank
-        style db-crossplane-aws fill:red
         db-crossplane-azure(Azure)
         click db-crossplane-azure "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
         style db-crossplane-azure fill:red
+
+        %% -- DB Crossplane Apps --
+        db-crossplane-google-helm(App as Helm)
+        click db-crossplane-google-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-helm.md" _blank
+        style db-crossplane-google-helm fill:red
         db-crossplane-google-kustomize(App as Kustomize)
         click db-crossplane-google-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
         style db-crossplane-google-kustomize fill:red
+        db-crossplane-aws-kustomize(App as Kustomize)
+        click db-crossplane-aws-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws-kustomize.md" _blank
+        style db-crossplane-aws-kustomize fill:red
+        db-crossplane-azure-helm(App as Helm)
+        click db-crossplane-azure-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure-helm.md" _blank
+        style db-crossplane-azure-helm fill:red
+        db-crossplane-azure-kustomize(App as Kustomize)
+        click db-crossplane-azure-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure-kustomize.md" _blank
+        style db-crossplane-azure-kustomize fill:red
         db-crossplane-helm(App as Helm)
         click db-crossplane-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md" _blank
         db-crossplane-carvel(App as Carvel)
@@ -130,11 +152,17 @@ flowchart TD;
         db-crossplane-local-->db-crossplane-carvel;
         db-->db-crossplane-cloud;
         db-crossplane-cloud-->db-crossplane-google;
-        db-crossplane-google-->db-crossplane-helm;
+        db-crossplane-google-->db-crossplane-google-helm-->db-schema;
         db-crossplane-google-->db-crossplane-google-kustomize-->db-schema;
         db-crossplane-google-->db-crossplane-carvel;
-        db-crossplane-cloud-->db-crossplane-aws-->db-schema;
-        db-crossplane-cloud-->db-crossplane-azure-->db-schema;
+        db-crossplane-cloud-->db-crossplane-aws;
+        db-crossplane-aws-->db-crossplane-helm;
+        db-crossplane-aws-->db-crossplane-carvel;
+        db-crossplane-aws-->db-crossplane-aws-kustomize-->db-schema;
+        db-crossplane-cloud-->db-crossplane-azure;
+        db-crossplane-azure-->db-crossplane-azure-helm-->db-schema;
+        db-crossplane-azure-->db-crossplane-azure-kustomize-->db-schema;
+        db-crossplane-azure-->db-crossplane-carvel;
         db-crossplane-helm-->db-schema;
         db-crossplane-kustomize-->db-schema;
         db-crossplane-carvel-->db-schema;

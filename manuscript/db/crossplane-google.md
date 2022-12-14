@@ -45,8 +45,7 @@ kubectl apply \
 kubectl apply \
     --filename crossplane-config/provider-gcp-official.yaml
 
-kubectl apply \
-    --filename crossplane-config/config-sql.yaml
+kubectl apply --filename crossplane-config/config-sql.yaml
 
 kubectl get pkgrev
 
@@ -71,6 +70,6 @@ export XP_DESTINATION=google
 
 ## How Did You Define Your App?
 
-* [Helm](crossplane-google-helm.md)
-* [Kustomize](crossplane-google-kustomize.md)
-* [Carvel](crossplane-google-carvel.md)
+* [Helm](crossplane-helm.md)
+* [Kustomize](crossplane-kustomize.md)
+* [Carvel](crossplane-carvel.md)

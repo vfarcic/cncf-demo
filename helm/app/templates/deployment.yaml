@@ -35,24 +35,53 @@ spec:
           httpGet:
             path: /
             port: 8080
-        {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+        {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) }}
         env: 
         - name: DB_ENDPOINT
+          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
           value: {{ template "name" . }}-postgresql
+          {{- end }}
+          {{- if .Values.db.enabled.crossplane.aws }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}
+              key: endpoint
+          {{- end }}
         - name: DB_PORT
+          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
           value: "5432"
+          {{- end }}
+          {{- if .Values.db.enabled.crossplane.aws }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}
+              key: port
+          {{- end }}
         - name: DB_USER
+          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
           value: postgres
+          {{- end }}
+          {{- if .Values.db.enabled.crossplane.aws }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}
+              key: username
+          {{- end }}
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              {{- if .Values.db.enabled.crossplane.google }}
+              {{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) }}
               name: {{ template "name" . }}
               {{- end }}
               {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
               name: {{ template "name" . }}-postgresql
               {{- end }}
+              {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
               key: postgres-password
+              {{- end }}
+              {{- if .Values.db.enabled.crossplane.aws }}
+              key: password
+              {{- end }}
         - name: DB_NAME
           value: cncf-demo
         {{- end }}

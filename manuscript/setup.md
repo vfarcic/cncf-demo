@@ -5,13 +5,25 @@ git clone https://github.com/vfarcic/cncf-demo
 
 cd cncf-demo
 
-# TODO: Create patch for different providers
+export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 ```
 
 * Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).
 
 ```bash
-export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+# If using EKS
+# Replace `[...]` with your access key ID`
+export AWS_ACCESS_KEY_ID=[...]
+
+# If using EKS
+# Replace `[...]` with your secret access key
+export AWS_SECRET_ACCESS_KEY=[...]
+
+# If using EKS
+eksctl create cluster --name dot --region us-east-1 \
+    --version 1.24 --nodegroup-name primary \
+    --node-type t3.medium --nodes-min 3 --nodes-max 6 \
+    --managed --asg-access
 
 # If using GKE
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -47,18 +59,22 @@ helm upgrade --install \
     --wait
 
 # If NOT EKS
-export INGRESS_HOST=$(kubectl \
-    --namespace traefik \
+export INGRESS_HOST=$(kubectl --namespace traefik \
     get svc traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
 # If EKS
-export INGRESS_HOST=$(kubectl \
-    --namespace traefik \
+export INGRESS_HOST=$(kubectl --namespace traefik \
     get svc traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
 echo $INGRESS_HOST
+
+# Repeat the `export` commands if the output is empty
+
+# If the output contains more than one IP, wait for a while longer, and repeat the `export` commands.
+
+# If the output continues having more than one IP, choose one of them and execute `export INGRESS_HOST=[...]` with `[...]` being the selected IP.
 
 # Use the output to configure DNS domain
 

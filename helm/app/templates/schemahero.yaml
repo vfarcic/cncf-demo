@@ -10,14 +10,33 @@ spec:
   connection:
     postgres:
       host:
+        {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
         value: {{ template "name" . }}-postgresql
+        {{- end }}
+        {{- if .Values.db.enabled.crossplane.aws }}
+        valueFrom:
+          secretKeyRef:
+            name: {{ template "name" . }}
+            key: endpoint
+        {{- end }}
       user:
+        {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
         value: postgres
+        {{- end }}
+        {{- if .Values.db.enabled.crossplane.aws }}
+        value: masteruser
+        {{- end }}
       password:
         valueFrom:
           secretKeyRef:
+            {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
             name: {{ template "name" . }}-postgresql
             key: postgres-password
+            {{- end }}
+            {{- if .Values.db.enabled.crossplane.aws }}
+            name: {{ template "name" . }}
+            key: password
+            {{- end }}
       port:
         value: "5432"
       dbname:

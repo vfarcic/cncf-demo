@@ -14,12 +14,13 @@ cat helm/app/values.yaml
 yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
     helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
-
-# TODO: Fix the status
-kubectl --namespace dev get sqlclaims
+helm upgrade --install cncf-demo helm/app --namespace dev
 
 kubectl get managed
+
+kubectl --namespace dev get sqlclaims
+
+# Wait until it is `READY`
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 ```

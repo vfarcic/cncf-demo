@@ -1,4 +1,4 @@
-{{- if or (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+{{- if or (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) }}
 ---
 
 apiVersion: devopstoolkitseries.com/v1alpha1
@@ -14,6 +14,9 @@ spec:
       {{- end }}
       {{- if .Values.db.enabled.crossplane.google }}
       provider: google-official
+      {{- end }}
+      {{- if .Values.db.enabled.crossplane.aws }}
+      provider: aws
       {{- end }}
       db: postgresql
   parameters:

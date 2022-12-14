@@ -15,13 +15,13 @@ kubectl schemahero install
 ## Do
 
 ```bash
-cat kustomize/base/schemahero.yaml
+cat helm/app/templates/schemahero.yaml
 
 cat helm/app/values.yaml
 
 yq --inplace ".schemahero.enabled = true" helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
+helm upgrade --install cncf-demo helm/app --namespace dev
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 
