@@ -6,6 +6,8 @@ At the time of this writing (December 2022), DevSpace is not a CNCF project. How
 
 ## Setup
 
+* Install [`devspace` CLI](https://www.devspace.sh/docs/getting-started/installation).
+
 ```bash
 TODO:
 ```
