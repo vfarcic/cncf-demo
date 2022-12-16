@@ -25,6 +25,20 @@ eksctl create cluster --name dot --region us-east-1 \
     --node-type t3.medium --nodes-min 3 --nodes-max 6 \
     --managed --asg-access
 
+# If using AKS
+export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
+
+# If using AKS
+az group create --location eastus --name $RESOURCE_GROUP
+
+# If using AKS
+az aks create --name dot --resource-group $RESOURCE_GROUP \
+    --node-count 3 --node-vm-size Standard_D2_v2
+
+# If using AKS
+az aks get-credentials --name dot \
+    --resource-group $RESOURCE_GROUP --file $KUBECONFIG
+
 # If using GKE
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
