@@ -12,6 +12,7 @@ db:
       local: false
       google: false
       aws: false
+      azure: false
 postgresql:
   global:
     persistence:

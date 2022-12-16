@@ -6,6 +6,8 @@ git clone https://github.com/vfarcic/cncf-demo
 cd cncf-demo
 
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
+rm -f $KUBECONFIG
 ```
 
 * Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).
@@ -33,7 +35,8 @@ az group create --location eastus --name $RESOURCE_GROUP
 
 # If using AKS
 az aks create --name dot --resource-group $RESOURCE_GROUP \
-    --node-count 3 --node-vm-size Standard_D2_v2
+    --node-count 3 --node-vm-size Standard_D2_v2 \
+    --kubernetes-version 1.25.2
 
 # If using AKS
 az aks get-credentials --name dot \
@@ -66,11 +69,8 @@ helm repo add traefik https://helm.traefik.io/traefik
 
 helm repo update
 
-helm upgrade --install \
-    traefik traefik/traefik \
-    --namespace traefik \
-    --create-namespace \
-    --wait
+helm upgrade --install traefik traefik/traefik \
+    --namespace traefik --create-namespace --wait
 
 # If NOT EKS
 export INGRESS_HOST=$(kubectl --namespace traefik \
