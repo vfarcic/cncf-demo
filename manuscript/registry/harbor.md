@@ -65,7 +65,11 @@ echo $IMAGE
 
 docker image tag cncf-demo:$TAG $IMAGE:$TAG
 
+docker image tag cncf-demo:$TAG $IMAGE:latest
+
 docker image push $IMAGE:$TAG
+
+docker image push $IMAGE:latest
 
 echo "https://harbor.$DOMAIN"
 

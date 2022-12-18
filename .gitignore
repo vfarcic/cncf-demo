@@ -2,7 +2,7 @@
 /kubeconfig-dev.yaml
 /aws-creds.conf
 /traces.json
-
+/azure-creds.json
 
 # Ignore DevSpace cache and log folder
 .devspace/

@@ -123,8 +123,7 @@ export EMAIL=[...]
 # Install `yq` CLI from https://github.com/mikefarah/yq
 # Install `jq` CLI from https://stedolan.github.io/jq/download
 
-yq --inplace \
-    ".spec.acme.email = \"$EMAIL\"" \
+yq --inplace ".spec.acme.email = \"$EMAIL\"" \
     cert-manager/issuer.yaml
 
 kubectl apply --filename cert-manager/issuer.yaml

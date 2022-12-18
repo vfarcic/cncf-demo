@@ -125,9 +125,6 @@ flowchart TD;
         db-crossplane-google-kustomize(App as Kustomize)
         click db-crossplane-google-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
         style db-crossplane-google-kustomize fill:red
-        db-crossplane-azure-kustomize(App as Kustomize)
-        click db-crossplane-azure-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure-kustomize.md" _blank
-        style db-crossplane-azure-kustomize fill:red
         db-crossplane-helm(App as Helm)
         click db-crossplane-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md" _blank
         db-crossplane-carvel(App as Carvel)
@@ -155,7 +152,7 @@ flowchart TD;
         db-crossplane-aws-->db-crossplane-kustomize;
         db-crossplane-cloud-->db-crossplane-azure;
         db-crossplane-azure-->db-crossplane-helm;
-        db-crossplane-azure-->db-crossplane-azure-kustomize-->db-schema;
+        db-crossplane-azure-->db-crossplane-kustomize-->db-schema;
         db-crossplane-azure-->db-crossplane-carvel;
         db-crossplane-helm-->db-schema;
         db-crossplane-kustomize-->db-schema;

@@ -8,7 +8,7 @@ gcloud projects delete $PROJECT_ID
 gcloud projects delete $XP_PROJECT_ID
 
 # If using Crossplane with Azure
-az group delete --name $RESOURCE_GROUP
+az group delete --name $RESOURCE_GROUP --yes
 
 # If using Crossplane with AWS
 kubectl --namespace dev delete sqlclaim cncf-demo

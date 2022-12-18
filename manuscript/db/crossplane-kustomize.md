@@ -12,6 +12,9 @@ yq --inplace ".resources += \"postgresql-crossplane-$XP_DESTINATION.yaml\"" \
 
 cat kustomize/overlays/dev/deployment-crossplane-postgresql-$XP_DESTINATION.yaml
 
+yq --inplace ".patchesStrategicMerge = []" \
+    kustomize/overlays/dev/kustomization.yaml
+
 yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$XP_DESTINATION.yaml\"" \
     kustomize/overlays/dev/kustomization.yaml
 
