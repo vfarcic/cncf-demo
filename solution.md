@@ -116,7 +116,6 @@ flowchart TD;
         click db-crossplane-aws "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md" _blank
         db-crossplane-azure(Azure)
         click db-crossplane-azure "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
-        style db-crossplane-azure fill:red
 
         %% -- DB Crossplane Apps --
         db-crossplane-google-helm(App as Helm)
@@ -133,6 +132,7 @@ flowchart TD;
         click db-crossplane-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md" _blank
         style db-crossplane-carvel fill:red
 
+        %% -- DB Connections --
         db-->db-helm;
         db-helm-->db-helm-helm-->db-schema;
         db-helm-->db-helm-kustomize-->db-schema;
@@ -182,6 +182,9 @@ flowchart TD;
         db-schema-schemahero-->db-schema-schemahero-kustomize-->develop;
         db-schema-schemahero-->db-schema-schemahero-carvel-->develop;
 
+        %% -------------
+        %% -- Develop --
+        %% -------------
         develop{{Develop}}
         click develop "vfarcic/cncf-demo/blob/main/manuscript/develop/story.md" _blank
         style develop fill:blue
@@ -190,13 +193,26 @@ flowchart TD;
         style telepresence fill:red
         devspace(DevSpace)
         click devspace "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md" _blank
-        style devspace fill:red
         okteto(Okteto)
         click okteto "vfarcic/cncf-demo/blob/main/manuscript/develop/okteto.md" _blank
 
+        %% -- Develop DevSpace --
+        devspace-kustomize(App as Kustomize)
+        click devspace-kustomize "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md" _blank
+        devspace-helm(App as Helm)
+        click devspace-helm "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md" _blank
+        style devspace-helm fill:red
+        devspace-carvel(App as Carvel)
+        click devspace-carvel "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md" _blank
+        style devspace-carvel fill:red
+
+        %% -- Develop Connections --
         develop-->telepresence
         develop-->devspace
         develop-->okteto
+        devspace-->devspace-kustomize
+        devspace-->devspace-helm
+        devspace-->devspace-carvel
     end
 
     Development-->Production
