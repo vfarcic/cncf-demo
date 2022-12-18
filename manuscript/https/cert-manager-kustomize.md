@@ -41,7 +41,7 @@ yq --inplace \
 
 cat kustomize/overlays/dev/kustomization.yaml
 
-kubectl apply --kustomize kustomize/overlays/dev
+kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 
 kubectl --namespace dev \
     get issuers,certificaterequests,certificates,orders,secrets

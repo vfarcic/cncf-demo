@@ -17,18 +17,39 @@ TODO:
 ```bash
 # TODO: Rewrite devspace.yaml
 
-# TODO: Kustomize
-# TODO: Helm
-# TODO: kubectl
+# TODO: Kustomize
+# TODO: Helm
+# TODO: kubectl
 # TODO: Dockerfile
 # TODO: buildpacks
 # TODO: kbld
 
 cat devspace.yaml
 
-devspace use namespace dev
+devspace dev --namespace dev
 
-devspace dev
+# TODO: Move to devspace.yaml
+go get github.com/codegangsta/gin
+
+gin --appPort 8080 --port 8080
+# go run .
+
+# Open a second terminal and navigate to the project root
+
+# In the second terminal
+# Open `root.go` and modify the output
+
+# In the first terminal
+# `ctrl+c`
+
+# In the first terminal
+go run .
+
+
+
+
+
+devspace purge --namespace dev
 ```
 
 ## Continue The Adventure

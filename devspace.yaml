@@ -42,10 +42,12 @@ dev:
     # Search for the container that runs this image
     # imageSelector: index.docker.io/vfarcic/cncf-demo
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
-    devImage: ghcr.io/loft-sh/devspace-containers/go:1.18-alpine
+    # devImage: ghcr.io/loft-sh/devspace-containers/go:1.18-alpine
+    devImage: golang
     # Sync files between the local filesystem and the development container
     sync:
-      - path: ./
+      # - path: ./
+      - path: ./:/app
     # Open a terminal and use the following command to start it
     terminal:
       command: ./devspace_start.sh

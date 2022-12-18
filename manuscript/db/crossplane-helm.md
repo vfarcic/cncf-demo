@@ -18,11 +18,11 @@ cat helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev
 
-kubectl --namespace dev get sqlclaims
-
 kubectl get managed
 
-# Wait until it is `READY`
+kubectl --namespace dev get sqlclaims
+
+#¬†Wait until it is `READY`
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 ```

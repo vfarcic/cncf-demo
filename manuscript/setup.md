@@ -34,9 +34,13 @@ export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 az group create --location eastus --name $RESOURCE_GROUP
 
 # If using AKS
+# Change `1.25.2` to the Kubernetes version you want to use
+export K8S_VERSION=1.25.2
+
+# If using AKS
 az aks create --name dot --resource-group $RESOURCE_GROUP \
     --node-count 3 --node-vm-size Standard_D2_v2 \
-    --kubernetes-version 1.25.2
+    --kubernetes-version $K8S_VERSION
 
 # If using AKS
 az aks get-credentials --name dot \
@@ -92,13 +96,13 @@ echo $INGRESS_HOST
 
 # Use the output to configure DNS domain
 
-# Replace `[...]` with the domain (e.g., sillydemo.com)
+# Replace `[...]` with the domain (e.g., sillydemo.com)
 export DOMAIN=[...]
 
 # Configure DNS for the following subdomains:
 # - harbor
-# - notary
-# - dev.cncf-demo
+# - notary
+# - dev.cncf-demo
 
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
@@ -124,10 +128,6 @@ yq --inplace \
     cert-manager/issuer.yaml
 
 kubectl apply --filename cert-manager/issuer.yaml
-
-ping $DOMAIN
-
-# Confirm that the domain is responding from the specified IP
 ```
 
 ## Start The Adventure

@@ -14,7 +14,7 @@ yq --inplace \
     kustomize/base/kustomization.yaml
 
 yq --inplace \
-    ".spec.rules[0].host = \"dev.cncf-demo.$DOMAIN\"" \
+    ".spec.rules[0].host = \"cncf-demo.$DOMAIN\"" \
     kustomize/base/ingress.yaml
 
 yq --inplace \
