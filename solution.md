@@ -118,9 +118,6 @@ flowchart TD;
         click db-crossplane-azure "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
 
         %% -- DB Crossplane Apps --
-        db-crossplane-google-helm(App as Helm)
-        click db-crossplane-google-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-helm.md" _blank
-        style db-crossplane-google-helm fill:red
         db-crossplane-google-kustomize(App as Kustomize)
         click db-crossplane-google-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
         style db-crossplane-google-kustomize fill:red
@@ -143,7 +140,7 @@ flowchart TD;
         db-crossplane-local-->db-crossplane-carvel;
         db-->db-crossplane-cloud;
         db-crossplane-cloud-->db-crossplane-google;
-        db-crossplane-google-->db-crossplane-google-helm-->db-schema;
+        db-crossplane-google-->db-crossplane-helm;
         db-crossplane-google-->db-crossplane-google-kustomize-->db-schema;
         db-crossplane-google-->db-crossplane-carvel;
         db-crossplane-cloud-->db-crossplane-aws;
@@ -201,7 +198,6 @@ flowchart TD;
         click devspace-kustomize "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md" _blank
         devspace-helm(App as Helm)
         click devspace-helm "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md" _blank
-        style devspace-helm fill:red
         devspace-carvel(App as Carvel)
         click devspace-carvel "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md" _blank
         style devspace-carvel fill:red

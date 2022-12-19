@@ -6,8 +6,6 @@ git clone https://github.com/vfarcic/cncf-demo
 cd cncf-demo
 
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
-
-rm -f $KUBECONFIG
 ```
 
 * Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).
@@ -62,8 +60,16 @@ echo https://console.cloud.google.com/marketplace/product/google/container.googl
 # Open the URL from the output and enable the Kubernetes API
 
 # If using GKE
+gcloud container get-server-config --region us-east1
+
+# Replace `[...]` with a valid master version from the previous output.
+export K8S_VERSION=[...]
+
+# If using GKE
 gcloud container clusters create dot --project $PROJECT_ID \
-    --region us-east1 --machine-type n1-standard-2 --num-nodes 1
+    --region us-east1 --machine-type n1-standard-4 \
+    --num-nodes 1 --cluster-version $K8S_VERSION \
+    --node-version $K8S_VERSION
 
 # If using GKE
 gcloud container clusters get-credentials dot \

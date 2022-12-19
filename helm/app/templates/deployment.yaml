@@ -38,30 +38,30 @@ spec:
         {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
         env: 
         - name: DB_ENDPOINT
-          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
           value: {{ template "name" . }}-postgresql
           {{- end }}
-          {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
+          {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
           valueFrom:
             secretKeyRef:
               name: {{ template "name" . }}
               key: endpoint
           {{- end }}
         - name: DB_PORT
-          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
           value: "5432"
           {{- end }}
-          {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
+          {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
           valueFrom:
             secretKeyRef:
               name: {{ template "name" . }}
               key: port
           {{- end }}
         - name: DB_USER
-          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
           value: postgres
           {{- end }}
-          {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
+          {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
           valueFrom:
             secretKeyRef:
               name: {{ template "name" . }}
@@ -76,10 +76,10 @@ spec:
               {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
               name: {{ template "name" . }}-postgresql
               {{- end }}
-              {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) }}
+              {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
               key: postgres-password
               {{- end }}
-              {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
+              {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
               key: password
               {{- end }}
         - name: DB_NAME

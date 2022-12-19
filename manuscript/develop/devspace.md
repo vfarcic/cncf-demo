@@ -12,6 +12,6 @@ yq --inplace ".images.app.image = \"$IMAGE\"" devspace.yaml
 
 ## How Did You Define Your App?
 
-* [Helm](TODO:)
+* [Helm](devspace-helm.md)
 * [Kustomize](devspace-kustomize.md)
 * [Carvel](TODO:)

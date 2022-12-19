@@ -22,7 +22,7 @@ kubectl get managed
 
 kubectl --namespace dev get sqlclaims
 
-#¬†Wait until it is `READY`
+# Wait until it is `READY`
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"
 ```

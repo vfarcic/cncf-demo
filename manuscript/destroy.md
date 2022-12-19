@@ -2,10 +2,10 @@
 
 ```bash
 # If using Crossplane with Google Cloud
-gcloud projects delete $PROJECT_ID
+gcloud projects delete $PROJECT_ID --quiet
 
 # If using Crossplane with Google Cloud
-gcloud projects delete $XP_PROJECT_ID
+gcloud projects delete $XP_PROJECT_ID --quiet
 
 # If using Crossplane with Azure
 az group delete --name $RESOURCE_GROUP --yes
