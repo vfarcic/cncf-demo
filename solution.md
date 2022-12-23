@@ -20,28 +20,28 @@ flowchart TD;
         setup-dev-->bci
 
         bci{{Build Container Image In Dev}}
-        click bci "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md" _blank
+        click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md" _blank
         style bci fill:blue
         bci-kbld(Carvel kbld)
-        click bci-kbld "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md" _blank
+        click bci-kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md" _blank
         bci-lima(Lima)
-        click bci-lima "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md" _blank
+        click bci-lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md" _blank
         bci-buildpacks(Cloud Native Buildpacks / CNB)
-        click bci-buildpacks "vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md" _blank
+        click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md" _blank
 
         bci-->bci-kbld-->registry;
         bci-->bci-lima-->registry;
         bci-->bci-buildpacks-->registry;
 
         registry{{Store Container Image In A Registry}}
-        click registry "vfarcic/cncf-demo/blob/main/manuscript/registry/story.md" _blank
+        click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/story.md" _blank
         style registry fill:blue
         registry-distribution(Distribution)
-        click registry-distribution "vfarcic/cncf-demo/blob/main/manuscript/registry/distribution.md" _blank
+        click registry-distribution "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/distribution.md" _blank
         registry-harbor(Harbor)
-        click registry-harbor "vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md" _blank
+        click registry-harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md" _blank
         registry-dragonfly(Dragonfly)
-        click registry-dragonfly "vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md" _blank
+        click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md" _blank
         style registry-dragonfly fill:red
 
         registry-->registry-distribution-->ddd;
@@ -49,12 +49,12 @@ flowchart TD;
         registry-->registry-dragonfly-->ddd;
 
         ddd{{Define And Deploy The App To Dev}}
-        click ddd "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md" _blank
+        click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md" _blank
         style ddd fill:blue
         ddd1(Helm)
-        click ddd1 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md" _blank
+        click ddd1 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md" _blank
         ddd2(Kustomize)
-        click ddd2 "vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md" _blank
+        click ddd2 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md" _blank
         ddd3(Carvel)
         style ddd3 fill:red
 
@@ -63,18 +63,18 @@ flowchart TD;
         ddd-->ddd3-->https;
 
         https{{Use HTTPS}}
-        click https "vfarcic/cncf-demo/blob/main/manuscript/https/story.md" _blank
+        click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/story.md" _blank
         style https fill:blue
         https1(HashiCorp Vault)
-        click https1 "vfarcic/cncf-demo/blob/main/manuscript/https/vault.md" _blank
+        click https1 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/vault.md" _blank
         https2(Venafi)
-        click https2 "vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md" _blank
+        click https2 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md" _blank
         https3(cert-manager)
-        click https3 "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md" _blank
+        click https3 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md" _blank
         https3-helm(App as Helm)
-        click https3-helm "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md" _blank
+        click https3-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md" _blank
         https3-kustomize(App as Kustomize)
-        click https3-kustomize "vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md" _blank
+        click https3-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md" _blank
         https3-carvel(App as Carvel)
         style https3-carvel fill:red
 
@@ -89,44 +89,44 @@ flowchart TD;
         %% -- DB --
         %% --------
         db{{Setup PostgreSQL DB In Dev}}
-        click db "vfarcic/cncf-demo/blob/main/manuscript/db/story.md" _blank
+        click db "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/story.md" _blank
         style db fill:blue
 
         %% -- DB Helm --
         db-helm(Helm Chart)
-        click db-helm "vfarcic/cncf-demo/blob/main/manuscript/db/helm.md" _blank
+        click db-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm.md" _blank
         db-helm-helm(App as Helm)
-        click db-helm-helm "vfarcic/cncf-demo/blob/main/manuscript/db/helm-helm.md" _blank
+        click db-helm-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-helm.md" _blank
         db-helm-kustomize(App as Kustomize)
-        click db-helm-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md" _blank
+        click db-helm-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md" _blank
         db-helm-carvel(App as Carvel)
-        click db-helm-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md" _blank
+        click db-helm-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md" _blank
         style db-helm-carvel fill:red
 
         %% -- DB Crossplane Local --
         db-crossplane-local(Crossplane Composition In Kubernetes)
-        click db-crossplane-local "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md" _blank
+        click db-crossplane-local "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md" _blank
 
         %% -- DB Crossplane Cloud --
         db-crossplane-cloud(Crossplane Composition In Cloud)
-        click db-crossplane-cloud "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cloud.md" _blank
+        click db-crossplane-cloud "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cloud.md" _blank
         db-crossplane-google(Google Cloud)
-        click db-crossplane-google "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google.md" _blank
+        click db-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google.md" _blank
         db-crossplane-aws(AWS)
-        click db-crossplane-aws "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md" _blank
+        click db-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md" _blank
         db-crossplane-azure(Azure)
-        click db-crossplane-azure "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
+        click db-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
 
         %% -- DB Crossplane Apps --
         db-crossplane-google-kustomize(App as Kustomize)
-        click db-crossplane-google-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
+        click db-crossplane-google-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
         style db-crossplane-google-kustomize fill:red
         db-crossplane-helm(App as Helm)
-        click db-crossplane-helm "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md" _blank
+        click db-crossplane-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md" _blank
         db-crossplane-carvel(App as Carvel)
         db-crossplane-kustomize(App as Kustomize)
-        click db-crossplane-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md" _blank
-        click db-crossplane-carvel "vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md" _blank
+        click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md" _blank
+        click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md" _blank
         style db-crossplane-carvel fill:red
 
         %% -- DB Connections --
@@ -156,20 +156,20 @@ flowchart TD;
         db-crossplane-carvel-->db-schema;
 
         db-schema{{Manage DB Schema}}
-        click db-schema "vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md" _blank
+        click db-schema "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md" _blank
         style db-schema fill:blue
         db-schema-schemahero(SchemaHero)
-        click db-schema-schemahero "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md" _blank
+        click db-schema-schemahero "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md" _blank
         db-schema-liquibase(Liquibase)
-        click db-schema-liquibase "vfarcic/cncf-demo/blob/main/manuscript/db-schema/liquibase.md" _blank
+        click db-schema-liquibase "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/liquibase.md" _blank
         db-schema-flyway(Flyway)
-        click db-schema-flyway "vfarcic/cncf-demo/blob/main/manuscript/db-schema/flyway.md" _blank
+        click db-schema-flyway "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/flyway.md" _blank
         db-schema-schemahero-helm(App as Helm)
-        click db-schema-schemahero-helm "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md" _blank
+        click db-schema-schemahero-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md" _blank
         db-schema-schemahero-kustomize(App as Kustomize)
-        click db-schema-schemahero-kustomize "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md" _blank
+        click db-schema-schemahero-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md" _blank
         db-schema-schemahero-carvel(App as Carvel)
-        click db-schema-schemahero-carvel "vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md" _blank
+        click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md" _blank
         style db-schema-schemahero-carvel fill:red
 
         db-schema-->db-schema-flyway;
@@ -183,23 +183,23 @@ flowchart TD;
         %% -- Develop --
         %% -------------
         develop{{Develop}}
-        click develop "vfarcic/cncf-demo/blob/main/manuscript/develop/story.md" _blank
+        click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/story.md" _blank
         style develop fill:blue
         telepresence(Telepresence)
-        click telepresence "vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md" _blank
+        click telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md" _blank
         style telepresence fill:red
         devspace(DevSpace)
-        click devspace "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md" _blank
+        click devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md" _blank
         okteto(Okteto)
-        click okteto "vfarcic/cncf-demo/blob/main/manuscript/develop/okteto.md" _blank
+        click okteto "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/okteto.md" _blank
 
         %% -- Develop DevSpace --
         devspace-kustomize(App as Kustomize)
-        click devspace-kustomize "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md" _blank
+        click devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md" _blank
         devspace-helm(App as Helm)
-        click devspace-helm "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md" _blank
+        click devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md" _blank
         devspace-carvel(App as Carvel)
-        click devspace-carvel "vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md" _blank
+        click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md" _blank
         style devspace-carvel fill:red
 
         %% -- Develop Connections --
