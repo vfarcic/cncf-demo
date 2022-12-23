@@ -8,73 +8,83 @@ cd cncf-demo
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 ```
 
-* Create a management Kubernetes cluster (e.g., GKE, EKS, AKS, etc.).
+## Create a management Kubernetes cluster
+
+### AWS EKS
+
+Follow this section ONLY if you're planning to use AWS EKS
 
 ```bash
-# If using EKS
 # Replace `[...]` with your access key ID`
 export AWS_ACCESS_KEY_ID=[...]
 
-# If using EKS
 # Replace `[...]` with your secret access key
 export AWS_SECRET_ACCESS_KEY=[...]
 
-# If using EKS
 eksctl create cluster --name dot --region us-east-1 \
     --version 1.24 --nodegroup-name primary \
     --node-type t3.medium --nodes-min 3 --nodes-max 6 \
     --managed --asg-access
+```
 
-# If using AKS
+### Azure AKS
+
+Follow this section ONLY if you're planning to use Azure AKS
+
+```bash
 export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 
-# If using AKS
 az group create --location eastus --name $RESOURCE_GROUP
 
-# If using AKS
 # Change `1.25.2` to the Kubernetes version you want to use
 export K8S_VERSION=1.25.2
 
-# If using AKS
 az aks create --name dot --resource-group $RESOURCE_GROUP \
     --node-count 3 --node-vm-size Standard_D2_v2 \
     --kubernetes-version $K8S_VERSION
 
-# If using AKS
 az aks get-credentials --name dot \
     --resource-group $RESOURCE_GROUP --file $KUBECONFIG
+```
 
-# If using GKE
+### Google Cloud GKE
+
+Follow this section ONLY if you're planning to use Google Cloud GKE
+
+```bash
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-# If using GKE
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
-# If using GKE
 gcloud projects create $PROJECT_ID
 
-# If using GKE
 echo https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID
 
-# If using GKE
 # Open the URL from the output and enable the Kubernetes API
 
-# If using GKE
 gcloud container get-server-config --region us-east1
 
 # Replace `[...]` with a valid master version from the previous output.
 export K8S_VERSION=[...]
 
-# If using GKE
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type n1-standard-4 \
     --num-nodes 1 --cluster-version $K8S_VERSION \
     --node-version $K8S_VERSION
 
-# If using GKE
 gcloud container clusters get-credentials dot \
     --project $PROJECT_ID --region us-east1
+```
 
+### Cluster With Any Other Provider
+
+Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
+
+* Create a Kubernetes cluster any way you like, as long as it is not a local cluster (e.g., Docker Desktop, Minikube, etc.)
+
+### The Rest Of The Setup
+
+```bash
 helm repo add traefik https://helm.traefik.io/traefik
 
 helm repo update

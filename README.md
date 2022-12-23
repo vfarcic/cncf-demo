@@ -19,8 +19,7 @@ Join us if you dare!  This is not for the faint of heart!
 
 ## The Adventure!
 
-* [Setup](manuscript/setup.md)
-* [Build Container Image](manuscript/build-container-image/story.md)
+* [Setup](manuscript/setup/dev.md)
 
 ## The Format
 

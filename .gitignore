@@ -3,6 +3,7 @@
 /aws-creds.conf
 /traces.json
 /azure-creds.json
+/gke_gcloud_auth_plugin_cache
 
 # Ignore DevSpace cache and log folder
 .devspace/

@@ -14,12 +14,19 @@ flowchart TD;
     Legend---Development
 
     subgraph Development
+        %% -----------
+        %% -- Setup --
+        %% -----------
         setup-dev((Setup));
-        click setup-dev "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup.md" _blank
+        click setup-dev "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/dev.md" _blank
 
+        %% -- Setup Connections --
         setup-dev-->bci
 
-        bci{{Build Container Image In Dev}}
+        %% ---------------------------
+        %% -- Build Container Image --
+        %% ---------------------------
+        bci{{Build Container Image}}
         click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md" _blank
         style bci fill:blue
         bci-kbld(Carvel kbld)
@@ -29,6 +36,7 @@ flowchart TD;
         bci-buildpacks(Cloud Native Buildpacks / CNB)
         click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md" _blank
 
+        %% -- Build Container Image Connections --
         bci-->bci-kbld-->registry;
         bci-->bci-lima-->registry;
         bci-->bci-buildpacks-->registry;
@@ -118,9 +126,6 @@ flowchart TD;
         click db-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md" _blank
 
         %% -- DB Crossplane Apps --
-        db-crossplane-google-kustomize(App as Kustomize)
-        click db-crossplane-google-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google-kustomize.md" _blank
-        style db-crossplane-google-kustomize fill:red
         db-crossplane-helm(App as Helm)
         click db-crossplane-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md" _blank
         db-crossplane-carvel(App as Carvel)
@@ -141,7 +146,7 @@ flowchart TD;
         db-->db-crossplane-cloud;
         db-crossplane-cloud-->db-crossplane-google;
         db-crossplane-google-->db-crossplane-helm;
-        db-crossplane-google-->db-crossplane-google-kustomize-->db-schema;
+        db-crossplane-google-->db-crossplane-kustomize;
         db-crossplane-google-->db-crossplane-carvel;
         db-crossplane-cloud-->db-crossplane-aws;
         db-crossplane-aws-->db-crossplane-helm;
@@ -182,12 +187,11 @@ flowchart TD;
         %% -------------
         %% -- Develop --
         %% -------------
-        develop{{Develop}}
+        develop{{Develop The App}}
         click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/story.md" _blank
         style develop fill:blue
         telepresence(Telepresence)
         click telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md" _blank
-        style telepresence fill:red
         devspace(DevSpace)
         click devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md" _blank
         okteto(Okteto)
@@ -201,6 +205,15 @@ flowchart TD;
         devspace-carvel(App as Carvel)
         click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md" _blank
         style devspace-carvel fill:red
+        telepresence-kustomize(App as Kustomize);
+        click telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md" _blank
+        style telepresence-kustomize fill:red
+        telepresence-helm(App as Helm);
+        click telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md" _blank
+        style telepresence-helm fill:red
+        telepresence-carvel(App as Carvel);
+        click telepresence-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-carvel.md" _blank
+        style telepresence-carvel fill:red
 
         %% -- Develop Connections --
         develop-->telepresence
@@ -209,13 +222,42 @@ flowchart TD;
         devspace-->devspace-kustomize
         devspace-->devspace-helm
         devspace-->devspace-carvel
+        telepresence-->telepresence-kustomize
+        telepresence-->telepresence-helm
+        telepresence-->telepresence-carvel
     end
 
     Development-->Production
 
     subgraph Production
-        production-todo(TODO)
-        style production-todo fill:red
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-prod((Setup));
+        click setup-prod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/prod.md" _blank
+
+        %% -- Setup Connections --
+        setup-prod-->cluster;
+
+        %% -------------
+        %% -- Cluster --
+        %% -------------
+        cluster{{Create a Cluster}}
+        click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/story.md" _blank
+        style cluster fill:blue
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md" _blank
+        style cluster-cluster-api fill:red
+        cluster-crossplane(Crossplane)
+        click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md" _blank
+        style cluster-crossplane fill:red
+        clusters-terraform(Terraform)
+        click cluster-todo-1 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/terraform.md" _blank
+
+        %% -- Cluster Connections --
+        cluster-->cluster-cluster-api;
+        cluster-->cluster-crossplane;
+        cluster-->clusters-terraform;
     end
 
     Production-->Observability
@@ -238,16 +280,18 @@ flowchart TD;
         automation-todo(TODO)
         style automation-todo fill:red
     end
+
+    Automation-->IDP
+
+    subgraph IDP
+        idp-todo(TODO)
+        style idp-todo fill:red
+    end
 ```
 
 ## TODO:
 
-* OpenTelemetry
-* Jaeger (tracing)
-* Prometheus (monitoring)
-* containerd
-* CoreDNS
-* Envoy
+* Cluster API
 * etcd
 * Rook
 * Spiffe
@@ -364,4 +408,16 @@ flowchart TD;
 * Argo CD
 * Flux
 * Argo Workflows
-* FluentD (logging)
+* FluentD
+* OpenTelemetry
+* Jaeger
+* Prometheus
+* CoreDNS
+* Envoy
+
+* Check whether there are new projects to be added to the "story".
+* Add Kubernetes SIG projects to the "story".
+
+## Cannot be demoed
+
+* containerd

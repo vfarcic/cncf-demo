@@ -4,16 +4,14 @@ TODO: Intro
 
 ## Setup
 
-```bash
-TODO:
-```
-
-## Do
+* Install [`telepresence` CLI](https://www.getambassador.io/docs/telepresence/latest/install).
 
 ```bash
-TODO:
+telepresence helm install
 ```
 
-## Continue The Adventure
+## How Did You Define Your App?
 
-[TODO:](TODO:)
+* [Helm](telepresence-helm.md)
+* [Kustomize](telepresence-kustomize.md)
+* [Carvel](TODO:)
