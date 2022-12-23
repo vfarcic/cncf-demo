@@ -15,7 +15,7 @@ flowchart TD;
 
     subgraph Development
         setup-dev((Setup));
-        click setup-dev "vfarcic/cncf-demo/blob/main/manuscript/setup.md" _blank
+        click setup-dev "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup.md" _blank
 
         setup-dev-->bci
 
