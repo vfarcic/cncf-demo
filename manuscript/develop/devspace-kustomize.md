@@ -52,4 +52,4 @@ devspace purge --namespace dev
 
 ## Continue The Adventure
 
-[TODO:](TODO:)
+[Create And Manage Production Kubernetes Cluster](../cluster/story.md)

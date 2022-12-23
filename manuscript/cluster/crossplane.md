@@ -1,4 +1,4 @@
-# Setup PostgreSQL DB In Cloud With Crossplane
+# Create a Cluster With Crossplane
 
 TODO: Intro
 
@@ -16,7 +16,7 @@ helm upgrade --install crossplane crossplane-stable/crossplane \
 kubectl apply \
     --filename crossplane-config/provider-kubernetes-incluster.yaml
 
-kubectl apply --filename crossplane-config/config-sql.yaml
+kubectl apply --filename crossplane-config/config-k8s.yaml
 ```
 
 ## Which Cloud Provider Do You Use?

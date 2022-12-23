@@ -25,6 +25,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [Choice 1](cluster-api.md)
-* [Choice 2](crossplane.md)
-* [Choice 3](terraform.md)
+* [Cluster API](cluster-api.md)
+* [Crossplane](crossplane.md)
+* [Terraform](terraform.md)

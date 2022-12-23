@@ -27,25 +27,12 @@ gcloud projects add-iam-policy-binding --role $ROLE $XP_PROJECT_ID \
 gcloud iam service-accounts keys create gcp-creds.json \
     --project $XP_PROJECT_ID --iam-account $SA
 
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
-
-helm repo update
-
-helm upgrade --install crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system --create-namespace --wait
-
 kubectl --namespace crossplane-system \
     create secret generic gcp-creds \
     --from-file creds=./gcp-creds.json
 
 kubectl apply \
-    --filename crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply \
     --filename crossplane-config/provider-gcp-official.yaml
-
-kubectl apply --filename crossplane-config/config-sql.yaml
 
 kubectl get pkgrev
 

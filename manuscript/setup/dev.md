@@ -147,4 +147,4 @@ kubectl apply --filename cert-manager/issuer.yaml
 
 ## Start The Adventure
 
-* [Build Container Image](build-container-image/story.md)
+* [Build Container Image](../build-container-image/story.md)
