@@ -1,5 +1,5 @@
 /gcp-creds.json
-/kubeconfig-dev.yaml
+/kubeconfig-*.yaml
 /aws-creds.conf
 /traces.json
 /azure-creds.json

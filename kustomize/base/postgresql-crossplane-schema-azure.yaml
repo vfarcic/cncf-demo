@@ -11,25 +11,25 @@ spec:
       host:
         valueFrom:
           secretKeyRef:
-            name: cncf-demo
+            name: cncf-demo-db-dev
             key: endpoint
       user:
         valueFrom:
           secretKeyRef:
-            name: cncf-demo
+            name: cncf-demo-db-dev
             key: username
       password:
         valueFrom:
           secretKeyRef:
-            name: cncf-demo
+            name: cncf-demo-db-dev
             key: password
       port:
         valueFrom:
           secretKeyRef:
-            name: cncf-demo
+            name: cncf-demo-db-dev
             key: port
       dbname:
-        value: cncf-demo
+        value: cncf-demo-db-dev
 
 ---
 

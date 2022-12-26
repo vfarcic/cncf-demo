@@ -44,7 +44,7 @@ spec:
           {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
           valueFrom:
             secretKeyRef:
-              name: {{ template "name" . }}
+              name: {{ .Values.db.id }}
               key: endpoint
           {{- end }}
         - name: DB_PORT
@@ -54,7 +54,7 @@ spec:
           {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
           valueFrom:
             secretKeyRef:
-              name: {{ template "name" . }}
+              name: {{ .Values.db.id }}
               key: port
           {{- end }}
         - name: DB_USER
@@ -64,14 +64,14 @@ spec:
           {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
           valueFrom:
             secretKeyRef:
-              name: {{ template "name" . }}
+              name: {{ .Values.db.id }}
               key: username
           {{- end }}
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
               {{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
-              name: {{ template "name" . }}
+              name: {{ .Values.db.id }}
               {{- end }}
               {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
               name: {{ template "name" . }}-postgresql
@@ -83,5 +83,5 @@ spec:
               key: password
               {{- end }}
         - name: DB_NAME
-          value: cncf-demo
+          value: {{ .Values.db.id }}
         {{- end }}

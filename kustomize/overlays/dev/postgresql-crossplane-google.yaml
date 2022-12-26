@@ -5,7 +5,7 @@ kind: SQLClaim
 metadata:
   name: cncf-demo
 spec:
-  id: cncf-demo
+  id: cncf-demo-db-dev
   compositionSelector:
     matchLabels:
       provider: google-official
@@ -14,8 +14,6 @@ spec:
     version: "13"
     size: small
     namespace: dev
-  writeConnectionSecretToRef:
-    name: cncf-demo
 
 ---
 

@@ -1,7 +1,7 @@
 ## The Whole Story
 
 ```mermaid
-flowchart TD;
+flowchart TD
 
     subgraph "Legend"
         red(Not yet implemented)
@@ -17,7 +17,7 @@ flowchart TD;
         %% -----------
         %% -- Setup --
         %% -----------
-        setup-dev((Setup));
+        setup-dev((Setup))
         click setup-dev "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/dev.md"
 
         %% -- Setup Connections --
@@ -37,9 +37,9 @@ flowchart TD;
         click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
 
         %% -- Build Container Image Connections --
-        bci-->bci-kbld-->registry;
-        bci-->bci-lima-->registry;
-        bci-->bci-buildpacks-->registry;
+        bci-->bci-kbld-->registry
+        bci-->bci-lima-->registry
+        bci-->bci-buildpacks-->registry
 
         registry{{Store Container Image In A Registry}}
         click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/story.md"
@@ -52,9 +52,9 @@ flowchart TD;
         click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
         style registry-dragonfly fill:red
 
-        registry-->registry-distribution-->ddd;
-        registry-->registry-harbor-->ddd;
-        registry-->registry-dragonfly-->ddd;
+        registry-->registry-distribution-->ddd
+        registry-->registry-harbor-->ddd
+        registry-->registry-dragonfly-->ddd
 
         ddd{{Define And Deploy The App To Dev}}
         click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md"
@@ -66,9 +66,9 @@ flowchart TD;
         ddd3(Carvel)
         style ddd3 fill:red
 
-        ddd-->ddd1-->https;
-        ddd-->ddd2-->https;
-        ddd-->ddd3-->https;
+        ddd-->ddd1-->https
+        ddd-->ddd2-->https
+        ddd-->ddd3-->https
 
         https{{Use HTTPS}}
         click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/story.md"
@@ -86,12 +86,12 @@ flowchart TD;
         https3-carvel(App as Carvel)
         style https3-carvel fill:red
 
-        https-->https1;
-        https-->https2;
-        https-->https3;
-        https3-->https3-helm-->db;
-        https3-->https3-kustomize-->db;
-        https3-->https3-carvel-->db;
+        https-->https1
+        https-->https2
+        https-->https3
+        https3-->https3-helm-->db
+        https3-->https3-kustomize-->db
+        https3-->https3-carvel-->db
 
         %% --------
         %% -- DB --
@@ -135,30 +135,30 @@ flowchart TD;
         style db-crossplane-carvel fill:red
 
         %% -- DB Connections --
-        db-->db-helm;
-        db-helm-->db-helm-helm-->db-schema;
-        db-helm-->db-helm-kustomize-->db-schema;
-        db-helm-->db-helm-carvel-->db-schema;
-        db-->db-crossplane-local;
-        db-crossplane-local-->db-crossplane-helm;
-        db-crossplane-local-->db-crossplane-kustomize;
-        db-crossplane-local-->db-crossplane-carvel;
-        db-->db-crossplane-cloud;
-        db-crossplane-cloud-->db-crossplane-google;
-        db-crossplane-google-->db-crossplane-helm;
-        db-crossplane-google-->db-crossplane-kustomize;
-        db-crossplane-google-->db-crossplane-carvel;
-        db-crossplane-cloud-->db-crossplane-aws;
-        db-crossplane-aws-->db-crossplane-helm;
-        db-crossplane-aws-->db-crossplane-carvel;
-        db-crossplane-aws-->db-crossplane-kustomize;
-        db-crossplane-cloud-->db-crossplane-azure;
-        db-crossplane-azure-->db-crossplane-helm;
-        db-crossplane-azure-->db-crossplane-kustomize-->db-schema;
-        db-crossplane-azure-->db-crossplane-carvel;
-        db-crossplane-helm-->db-schema;
-        db-crossplane-kustomize-->db-schema;
-        db-crossplane-carvel-->db-schema;
+        db-->db-helm
+        db-helm-->db-helm-helm-->db-schema
+        db-helm-->db-helm-kustomize-->db-schema
+        db-helm-->db-helm-carvel-->db-schema
+        db-->db-crossplane-local
+        db-crossplane-local-->db-crossplane-helm
+        db-crossplane-local-->db-crossplane-kustomize
+        db-crossplane-local-->db-crossplane-carvel
+        db-->db-crossplane-cloud
+        db-crossplane-cloud-->db-crossplane-google
+        db-crossplane-google-->db-crossplane-helm
+        db-crossplane-google-->db-crossplane-kustomize
+        db-crossplane-google-->db-crossplane-carvel
+        db-crossplane-cloud-->db-crossplane-aws
+        db-crossplane-aws-->db-crossplane-helm
+        db-crossplane-aws-->db-crossplane-carvel
+        db-crossplane-aws-->db-crossplane-kustomize
+        db-crossplane-cloud-->db-crossplane-azure
+        db-crossplane-azure-->db-crossplane-helm
+        db-crossplane-azure-->db-crossplane-kustomize-->db-schema
+        db-crossplane-azure-->db-crossplane-carvel
+        db-crossplane-helm-->db-schema
+        db-crossplane-kustomize-->db-schema
+        db-crossplane-carvel-->db-schema
 
         db-schema{{Manage DB Schema}}
         click db-schema "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md"
@@ -177,12 +177,12 @@ flowchart TD;
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
         style db-schema-schemahero-carvel fill:red
 
-        db-schema-->db-schema-flyway;
-        db-schema-->db-schema-liquibase;
-        db-schema-->db-schema-schemahero;
-        db-schema-schemahero-->db-schema-schemahero-helm-->develop;
-        db-schema-schemahero-->db-schema-schemahero-kustomize-->develop;
-        db-schema-schemahero-->db-schema-schemahero-carvel-->develop;
+        db-schema-->db-schema-flyway
+        db-schema-->db-schema-liquibase
+        db-schema-->db-schema-schemahero
+        db-schema-schemahero-->db-schema-schemahero-helm-->develop
+        db-schema-schemahero-->db-schema-schemahero-kustomize-->develop
+        db-schema-schemahero-->db-schema-schemahero-carvel-->develop
 
         %% -------------
         %% -- Develop --
@@ -205,13 +205,13 @@ flowchart TD;
         devspace-carvel(App as Carvel)
         click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
         style devspace-carvel fill:red
-        telepresence-kustomize(App as Kustomize);
+        telepresence-kustomize(App as Kustomize)
         click telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md"
         style telepresence-kustomize fill:red
-        telepresence-helm(App as Helm);
+        telepresence-helm(App as Helm)
         click telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md"
         style telepresence-helm fill:red
-        telepresence-carvel(App as Carvel);
+        telepresence-carvel(App as Carvel)
         click telepresence-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-carvel.md"
         style telepresence-carvel fill:red
 
@@ -233,11 +233,11 @@ flowchart TD;
         %% -----------
         %% -- Setup --
         %% -----------
-        setup-prod((Setup));
+        setup-prod((Setup))
         click setup-prod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/prod.md"
 
         %% -- Setup Connections --
-        setup-prod-->cluster;
+        setup-prod-->cluster
 
         %% -------------
         %% -- Cluster --
@@ -269,21 +269,101 @@ flowchart TD;
         style cluster-crossplane-google fill:red
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
-        style cluster-crossplane-aws fill:red
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
         style cluster-crossplane-azure fill:red
 
         %% -- Cluster Connections --
-        cluster-->cluster-cluster-api;
-        cluster-->cluster-crossplane;
-        cluster-->cluster-terraform;
-        cluster-cluster-api-->cluster-cluster-api-google;
-        cluster-cluster-api-->cluster-cluster-api-aws;
-        cluster-cluster-api-->cluster-cluster-api-azure;
-        cluster-crossplane-->cluster-crossplane-google;
-        cluster-crossplane-->cluster-crossplane-aws;
-        cluster-crossplane-->cluster-crossplane-azure;
+        cluster-->cluster-cluster-api
+        cluster-->cluster-crossplane
+        cluster-->cluster-terraform
+        cluster-cluster-api-->cluster-cluster-api-google-->gitops
+        cluster-cluster-api-->cluster-cluster-api-aws-->gitops
+        cluster-cluster-api-->cluster-cluster-api-azure-->gitops
+        cluster-crossplane-->cluster-crossplane-google-->gitops
+        cluster-crossplane-->cluster-crossplane-aws-->gitops
+        cluster-crossplane-->cluster-crossplane-azure-->gitops
+
+        %% ------------
+        %% -- GitOps --
+        %% ------------
+        gitops{{GitOps}}
+        click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/story.md"
+        gitops-flux(Flux)
+        click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
+        style gitops-flux fill:red
+        gitops-argocd(Argo CD)
+        click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
+        gitops-rancher-fleet(Rancher Fleet)
+        click gitops-rancher-fleet "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/rancher-fleet.md"
+        style gitops-rancher-fleet fill:red
+
+        %% -- GitOps Connections --
+        gitops-->gitops-flux-->ingress
+        gitops-->gitops-argocd-->ingress
+        gitops-->gitops-rancher-fleet
+
+        %% -------------
+        %% -- Ingress --
+        %% -------------
+        ingress{{Ingress}}
+        click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/story.md"
+        style ingress fill:red
+        ingress-contour(Contour)
+        click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
+        style ingress-contour fill:red
+        ingress-todo1(???)
+        style ingress-todo1 fill:red
+        ingress-todo2(???)
+        style ingress-todo2 fill:red
+
+        %% -- Ingress Connections --
+        ingress-->ingress-contour-->app
+        ingress-->ingress-todo1-->app
+        ingress-->ingress-todo2-->app
+
+        %% ---------
+        %% -- App --
+        %% ---------
+        app{{App}}
+        click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/story.md"
+        style app fill:red
+        app-helm(App as Helm)
+        click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
+        style app-helm fill:red
+        app-kustomize(App as Kustomize)
+        click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
+        style app-kustomize fill:red
+        app-carvel(App as Carvel)
+        click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
+        style app-carvel fill:red
+
+        %% -- App Connections --
+        app-->app-helm-->db-production
+        app-->app-kustomize-->db-production
+        app-->app-carvel-->db-production
+
+        %% --------------
+        %% -- Database --
+        %% --------------
+        db-production{{Database}}
+        click db-production "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/story.md"
+        style db-production fill:red
+        db-production-crossplane-google(Google Cloud with Crossplane)
+        click db-production-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-google.md"
+        style db-production-crossplane-google fill:red
+        db-production-crossplane-aws(AWS with Crossplane)
+        click db-production-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-aws.md"
+        style db-production-crossplane-aws fill:red
+        db-production-crossplane-azure(Azure with Crossplane)
+        click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
+        style db-production-crossplane-azure fill:red
+
+        %% -- Database Connections --
+        db-production-->db-production-crossplane-google
+        db-production-->db-production-crossplane-aws
+        db-production-->db-production-crossplane-azure
+
     end
 
     Production-->Observability
@@ -300,7 +380,41 @@ flowchart TD;
         style previews-todo fill:red
     end
 
-    Previews-->Automation
+    Previews-->Security
+
+    subgraph Security
+        spiffe(Spiffe)
+        style spiffe fill:red
+
+        spire(Spire)
+        style spire fill:red
+
+        tuf("The Update Framework (TUF)")
+        style tuf fill:red
+
+        %% --------------
+        %% -- Policies --
+        %% --------------
+        policies{{Policies}}
+        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/story.md"
+        style policies fill:blue
+        policies-kyverno(Kyverno)
+        click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
+        style policies-kyverno fill:red
+        policies-opa("Open Policy Agent (OPA)")
+        click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/opa.md"
+        style policies-opa fill:red
+        policies-cloud-custodian(Cloud Custodian)
+        click policies-cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
+        style policies-cloud-custodian fill:red
+
+        %% -- Policies Connections --
+        policies-->policies-kyverno
+        policies-->policies-opa
+        policies-->policies-cloud-custodian
+    end
+
+    Security-->Automation
 
     subgraph Automation
         automation-todo(TODO)
@@ -310,26 +424,13 @@ flowchart TD;
     Automation-->IDP
 
     subgraph IDP
-        idp-todo(TODO)
-        style idp-todo fill:red
+        backstage(Backstage)
+        style backstage fill:red
     end
 ```
 
 ## TODO:
 
-* etcd
-* Rook
-* Spiffe
-* Spire
-* The Update Framework (TUF)
-* TiKV
-* Vitess
-* Backstage
-* Chaos Mesh
-* Cilium
-* Cloud Custodian
-* CloudEvents
-* Container Network Interface (CNI)
 * Contour
 * Cortex
 * CRI-O
@@ -421,9 +522,7 @@ flowchart TD;
 * LinkerD
 * Dapr
 * Istio
-* Open Policy Agent (OPA)
 * Falco
-* Kyverno
 * Argo Rollout
 * Knative
 * KubeVela
@@ -439,10 +538,18 @@ flowchart TD;
 * Prometheus
 * CoreDNS
 * Envoy
+* TiKV
+* Vitess
+* Chaos Mesh
+* Cilium
+* CloudEvents
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
 
-## Cannot be demoed
+## Cannot Be Demoed
 
 * containerd
+* etcd
+* Rook
+* Container Network Interface (CNI)

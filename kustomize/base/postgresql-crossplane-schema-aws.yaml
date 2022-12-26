@@ -11,14 +11,14 @@ spec:
       host:
         valueFrom:
           secretKeyRef:
-            name: cncf-demo
+            name: cncf-demo-db-dev
             key: endpoint
       user:
         value: masteruser
       password:
         valueFrom:
           secretKeyRef:
-            name: cncf-demo
+            name: cncf-demo-db-dev
             key: password
       port:
         value: "5432"

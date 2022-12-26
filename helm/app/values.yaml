@@ -6,6 +6,7 @@ ingress:
 tls:
   enabled: false
 db:
+  id: cncf-demo-db-dev
   enabled:
     helm: false
     crossplane:
@@ -13,7 +14,6 @@ db:
       google: false
       aws: false
       azure: false
-  id: ""
 postgresql:
   global:
     persistence:

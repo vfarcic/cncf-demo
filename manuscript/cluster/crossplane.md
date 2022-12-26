@@ -5,6 +5,8 @@ TODO: Intro
 ## Setup
 
 ```bash
+kubectl create namespace production
+
 helm repo add crossplane-stable \
     https://charts.crossplane.io/stable
 

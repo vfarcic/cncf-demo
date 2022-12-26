@@ -1,7 +1,9 @@
 # Setup Prerequisites
 
 ```bash
-git clone https://github.com/vfarcic/cncf-demo
+# Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar with GitHub CLI
+gh repo fork vfarcic/cncf-demo \
+    --clone
 
 cd cncf-demo
 
@@ -85,7 +87,11 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 ### The Rest Of The Setup
 
 ```bash
+kubectl create namespace dev
+
 helm repo add traefik https://helm.traefik.io/traefik
+
+helm repo add jetstack https://charts.jetstack.io
 
 helm repo update
 
@@ -122,12 +128,6 @@ export DOMAIN=[...]
 
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
-
-kubectl create namespace dev
-
-helm repo add jetstack https://charts.jetstack.io
-
-helm repo update
 
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \

@@ -14,7 +14,7 @@ kind: SQLClaim
 metadata:
   name: cncf-demo
 spec:
-  id: cncf-demo
+  id: cncf-demo-db-dev
   compositionSelector:
     matchLabels:
       provider: azure-official
@@ -23,5 +23,3 @@ spec:
     version: "11"
     size: small
     namespace: dev
-  writeConnectionSecretToRef:
-    name: cncf-demo

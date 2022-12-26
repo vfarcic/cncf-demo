@@ -6,7 +6,7 @@ kind: SQLClaim
 metadata:
   name: {{ template "name" . }}
 spec:
-  id: {{ template "name" . }}
+  id: {{ .Values.db.id }}
   compositionSelector:
     matchLabels:
       {{- if .Values.db.enabled.crossplane.local }}
@@ -25,8 +25,6 @@ spec:
   parameters:
     version: "11"
     size: small
-  writeConnectionSecretToRef:
-    name: {{ template "name" . }}
 
 {{- end }}
 {{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.azure) }}

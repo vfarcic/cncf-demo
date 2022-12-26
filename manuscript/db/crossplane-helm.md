@@ -18,6 +18,10 @@ cat helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev
 
+# TODO: Remove
+# If AWS
+# kubectl get subnet.ec2.aws.crossplane.io,internetgateway.ec2.aws.crossplane.io,routetable.ec2.aws.crossplane.io,vpc.ec2.aws.crossplane.io,securitygroup.ec2.aws.crossplane.io,database.postgresql.sql.crossplane.io,rdsinstance.database.aws.crossplane.io,dbsubnetgroup.database.aws.crossplane.io
+
 kubectl get managed
 
 kubectl --namespace dev get sqlclaims

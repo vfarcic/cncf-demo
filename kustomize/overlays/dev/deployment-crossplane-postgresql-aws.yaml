@@ -13,22 +13,22 @@ spec:
           - name: DB_ENDPOINT
             valueFrom:
               secretKeyRef:
-                name: cncf-demo
+                name: cncf-demo-db-dev
                 key: endpoint
           - name: DB_PORT
             valueFrom:
               secretKeyRef:
-                name: cncf-demo
+                name: cncf-demo-db-dev
                 key: port
           - name: DB_USER
             valueFrom:
               secretKeyRef:
-                name: cncf-demo
+                name: cncf-demo-db-dev
                 key: username
           - name: DB_PASS
             valueFrom:
               secretKeyRef:
-                name: cncf-demo
+                name: cncf-demo-db-dev
                 key: password
           - name: DB_NAME
-            value: cncf-demo
+            value: cncf-demo-db-dev

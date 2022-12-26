@@ -16,7 +16,7 @@ spec:
         {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
         valueFrom:
           secretKeyRef:
-            name: {{ template "name" . }}
+            name: {{ .Values.db.id }}
             key: endpoint
         {{- end }}
       user:
@@ -29,7 +29,7 @@ spec:
         {{- if or (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
         valueFrom:
           secretKeyRef:
-            name: {{ template "name" . }}
+            name: {{ .Values.db.id }}
             key: username
         {{- end }}
       password:
@@ -40,13 +40,13 @@ spec:
             key: postgres-password
             {{- end }}
             {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.azure) }}
-            name: {{ template "name" . }}
+            name: {{ .Values.db.id }}
             key: password
             {{- end }}
       port:
         value: "5432"
       dbname:
-        value: {{ template "name" . }}
+        value: {{ .Values.db.id }}
 
 ---
 
