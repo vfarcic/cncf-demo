@@ -31,29 +31,20 @@ kubectl apply --filename argocd/apps.yaml
 
 kubectl --namespace argocd get ingresses
 
+# TODO: Install if the cluster was not created with Crossplane
+kubectl --namespace schemahero-system get all
+
 cat argocd/cert-manager.yaml
 
 cp argocd/cert-manager.yaml infra/.
 
+git add .
 
-helm upgrade --install cert-manager jetstack/cert-manager \
-    --namespace cert-manager --create-namespace \
-    --set installCRDs=true --wait
+git commit -m "Infra"
 
-# Replace `[...]` with your email
-export EMAIL=[...]
+git push
 
-# Install `yq` CLI from https://github.com/mikefarah/yq
-# Install `jq` CLI from https://stedolan.github.io/jq/download
 
-yq --inplace ".spec.acme.email = \"$EMAIL\"" \
-    cert-manager/issuer.yaml
-
-kubectl apply --filename cert-manager/issuer.yaml
-
-kubectl krew install schemahero
-
-kubectl schemahero install
 ```
 
 ## Continue The Adventure
