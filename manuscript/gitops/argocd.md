@@ -44,7 +44,7 @@ git commit -m "Infra"
 
 git push
 
-
+kubectl --namespace cert-manager get all
 ```
 
 ## Continue The Adventure
