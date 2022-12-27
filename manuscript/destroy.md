@@ -3,31 +3,34 @@
 ```bash
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 
-# If using Crossplane with Google Cloud
+# If Google Cloud
 gcloud projects delete $PROJECT_ID --quiet
 
-# If using Crossplane with Google Cloud
+# If Google Cloud
 gcloud projects delete $XP_PROJECT_ID --quiet
 
-# If using Crossplane with Azure
+# If Azure
 az group delete --name $RESOURCE_GROUP --yes
 
-# If using Crossplane with AWS
+# If Azure
+az group delete --name $XP_RESOURCE_GROUP --yes
+
+# If Crossplane with AWS
 kubectl --namespace dev delete sqlclaim cncf-demo
 
-# If using Crossplane with AWS
+# If Crossplane with AWS
 kubectl --namespace production delete clusterclaim production
 
-# If using Crossplane with AWS
+# If AWS
 kubectl get managed
 
-# If using Crossplane with AWS
+# If Crossplane with AWS
 # Wait until all the resources are removed
 #   (ignore `database.postgresql.sql.crossplane.io`)
 
-# If using Crossplane with AWS
+# If AWS
 kubectl --namespace traefik delete service traefik
 
-# If using Crossplane with AWS
+# If AWS
 eksctl delete cluster --name dot --region us-east-1
 ```
