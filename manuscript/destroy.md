@@ -1,6 +1,8 @@
 # Destroy
 
 ```bash
+export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
 # If using Crossplane with Google Cloud
 gcloud projects delete $PROJECT_ID --quiet
 
@@ -12,6 +14,9 @@ az group delete --name $RESOURCE_GROUP --yes
 
 # If using Crossplane with AWS
 kubectl --namespace dev delete sqlclaim cncf-demo
+
+# If using Crossplane with AWS
+kubectl --namespace production delete clusterclaim production
 
 # If using Crossplane with AWS
 kubectl get managed
