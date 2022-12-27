@@ -1,0 +1,28 @@
+#@ load("@ytt:data", "data")
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: #@ data.values.name
+  labels:
+    app.kubernetes.io/name: #@ data.values.name
+    #@ if/end data.values.tls.enabled:
+    cert-manager.io/cluster-issuer: production
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: #@ data.values.name
+            port:
+              number: 8080
+    host: #@ data.values.ingress.host
+  #@ if data.values.tls.enabled:
+  tls:
+    - hosts:
+        - #@ data.values.ingress.host
+      secretName: #@ data.values.name
+  #@ end

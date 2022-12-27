@@ -23,6 +23,8 @@ cat helm/app/values.yaml
 
 yq --inplace ".db.enabled.helm = true" helm/app/values.yaml
 
+cat helm/app/values.yaml
+
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
 curl "https://dev.cncf-demo.$DOMAIN/videos"

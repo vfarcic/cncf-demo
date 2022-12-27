@@ -1,0 +1,33 @@
+#@data/values-schema
+---
+name: "cncf-demo"
+image:
+  repository: index.docker.io/vfarcic/cncf-demo
+  tag: latest
+ingress:
+  host: dev.cncf-demo.sillydemo.com
+tls:
+  enabled: false
+db:
+  id: cncf-demo-db-dev
+  enabled:
+    helm: false
+    crossplane:
+      local: false
+      google: false
+      aws: false
+      azure: false
+postgresql:
+  global:
+    persistence:
+      enabled: false
+  auth:
+    postgresPassword: postgres
+  primary:
+    initdb:
+      scripts:
+        00_init_script.sh: |
+          export PGPASSWORD=$POSTGRES_PASSWORD
+          psql -U postgres -c 'CREATE DATABASE "cncf-demo";'
+schemahero:
+  enabled: false

@@ -1,37 +1,43 @@
-# Define And Deploy The App To Dev With Helm
+# Define And Deploy The App To Dev With Carvel ytt
 
 TODO: Intro
 
 ## Setup
 
-* [Install the `helm` CLI](https://helm.sh/docs/intro/install)
+* [Install the `ytt` CLI](https://carvel.dev/ytt/docs/v0.44.0/install)
 
 ```bash
 yq --inplace ".ingress.host = \"dev.cncf-demo.$DOMAIN\"" \
-    helm/app/values.yaml
+    ytt/schema.yaml
 
 yq --inplace ".image.repository = \"$IMAGE\"" \
-    helm/app/values.yaml
+    ytt/schema.yaml
 ```
 
 ## Do
 
 ```bash
-ls -1 helm/app/templates
+ls -1 ytt/resources
 
-cat helm/app/templates/deployment.yaml
+cat ytt/resources/deployment.yaml
 
-cat helm/app/templates/service.yaml
+cat ytt/resources/service.yaml
 
-cat helm/app/templates/ingress.yaml
+cat ytt/resources/ingress.yaml
 
-cat helm/app/values.yaml
+cat ytt/schema.yaml
 
-yq --inplace ".image.tag = \"$TAG\"" helm/app/values.yaml
+cat ytt/values-dev.yaml
 
-cat helm/app/values.yaml
+yq --inplace ".image.tag = \"$TAG\"" ytt/values-dev.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
+cat ytt/values-dev.yaml
+
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-dev.yaml \
+    | tee yaml/dev/app.yaml
+
+kubectl --namespace dev apply --filename yaml/dev
 
 echo "http://dev.cncf-demo.$DOMAIN"
 

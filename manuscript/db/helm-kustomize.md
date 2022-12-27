@@ -1,4 +1,4 @@
-# Setup PostgreSQL DB In The Dev Environment With Helm
+# Setup PostgreSQL DB In The Dev Environment With Helm And Kustomize
 
 TODO: Intro
 

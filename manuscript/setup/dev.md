@@ -2,8 +2,7 @@
 
 ```bash
 # Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar with GitHub CLI
-gh repo fork vfarcic/cncf-demo \
-    --clone
+gh repo fork vfarcic/cncf-demo --clone
 
 cd cncf-demo
 

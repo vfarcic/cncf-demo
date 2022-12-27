@@ -1,0 +1,78 @@
+#@ load("@ytt:data", "data")
+
+#@ if data.values.schemahero.enabled:
+apiVersion: databases.schemahero.io/v1alpha4
+kind: Database
+metadata:
+  name: #@ data.values.name
+spec:
+  immediateDeploy: true
+  connection:
+    postgres:
+      host:
+        #@ if data.values.db.enabled.helm:
+        value: postgresql
+        #@ elif data.values.db.enabled.crossplane.local:
+        value: #@ data.values.name + "-postgresql"
+        #@ else:
+        valueFrom:
+          secretKeyRef:
+            name: #@ data.values.db.id
+            key: endpoint
+        #@ end
+      user:
+        #@ if data.values.db.enabled.helm or data.values.db.enabled.crossplane.local:
+        value: postgres
+        #@ elif data.values.db.enabled.crossplane.aws:
+        value: masteruser
+        #@ else:
+        valueFrom:
+          secretKeyRef:
+            name: #@ data.values.db.id
+            key: username
+        #@ end
+      password:
+        valueFrom:
+          secretKeyRef:
+            #@ if data.values.db.enabled.helm:
+            name: postgresql
+            key: postgres-password
+            #@ elif data.values.db.enabled.crossplane.local:
+            name: #@ data.values.name + "-postgresql"
+            key: postgres-password
+            #@ else:
+            name: #@ data.values.db.id
+            key: password
+            #@ end
+      port:
+        value: "5432"
+      dbname:
+        #@ if data.values.db.enabled.helm:
+        value: #@ data.values.name
+        #@ else:
+        value: #@ data.values.db.id
+        #@ end
+
+---
+
+apiVersion: schemas.schemahero.io/v1alpha4
+kind: Table
+metadata:
+  name: #@ data.values.name + "-videos"
+spec:
+  database: #@ data.values.name
+  name: videos
+  schema:
+    postgres:
+      primaryKey:
+      - id
+      columns:
+      - name: id
+        type: text
+        constraints:
+          notNull: true
+      - name: title
+        type: text
+        constraints:
+          notNull: true
+#@ end

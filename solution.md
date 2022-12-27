@@ -14,6 +14,7 @@ flowchart TD
     Legend---Development
 
     subgraph Development
+
         %% -----------
         %% -- Setup --
         %% -----------
@@ -59,39 +60,38 @@ flowchart TD
         ddd{{Define And Deploy The App To Dev}}
         click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md"
         style ddd fill:blue
-        ddd1(Helm)
-        click ddd1 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md"
-        ddd2(Kustomize)
-        click ddd2 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
-        ddd3(Carvel)
-        style ddd3 fill:red
+        ddd-helm(Helm)
+        click ddd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md"
+        ddd-kustomize(Kustomize)
+        click ddd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
+        ddd-carvel(Carvel ytt)
+        click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
 
-        ddd-->ddd1-->https
-        ddd-->ddd2-->https
-        ddd-->ddd3-->https
+        ddd-->ddd-helm-->https
+        ddd-->ddd-kustomize-->https
+        ddd-->ddd-carvel-->https
 
         https{{Use HTTPS}}
         click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/story.md"
         style https fill:blue
-        https1(HashiCorp Vault)
-        click https1 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/vault.md"
-        https2(Venafi)
-        click https2 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md"
-        https3(cert-manager)
-        click https3 "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md"
-        https3-helm(App as Helm)
-        click https3-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md"
-        https3-kustomize(App as Kustomize)
-        click https3-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md"
-        https3-carvel(App as Carvel)
-        style https3-carvel fill:red
+        https-vault(HashiCorp Vault)
+        click https-vault "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/vault.md"
+        https-venafi(Venafi)
+        click https-venafi "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md"
+        https-cert-manager(cert-manager)
+        click https-cert-manager "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md"
+        https-cert-manager-helm(App as Helm)
+        click https-cert-manager-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md"
+        https-cert-manager-kustomize(App as Kustomize)
+        click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md"
+        https-cert-manager-carvel(App as Carvel ytt)
 
-        https-->https1
-        https-->https2
-        https-->https3
-        https3-->https3-helm-->db
-        https3-->https3-kustomize-->db
-        https3-->https3-carvel-->db
+        https-->https-vault
+        https-->https-venafi
+        https-->https-cert-manager
+        https-cert-manager-->https-cert-manager-helm-->db
+        https-cert-manager-->https-cert-manager-kustomize-->db
+        https-cert-manager-->https-cert-manager-carvel-->db
 
         %% --------
         %% -- DB --
@@ -107,9 +107,8 @@ flowchart TD
         click db-helm-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-helm.md"
         db-helm-kustomize(App as Kustomize)
         click db-helm-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md"
-        db-helm-carvel(App as Carvel)
+        db-helm-carvel(App as Carvel ytt)
         click db-helm-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md"
-        style db-helm-carvel fill:red
 
         %% -- DB Crossplane Local --
         db-crossplane-local(Crossplane Composition In Kubernetes)
@@ -128,7 +127,7 @@ flowchart TD
         %% -- DB Crossplane Apps --
         db-crossplane-helm(App as Helm)
         click db-crossplane-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md"
-        db-crossplane-carvel(App as Carvel)
+        db-crossplane-carvel(App as Carvel ytt)
         db-crossplane-kustomize(App as Kustomize)
         click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md"
         click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md"
@@ -173,9 +172,8 @@ flowchart TD
         click db-schema-schemahero-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md"
         db-schema-schemahero-kustomize(App as Kustomize)
         click db-schema-schemahero-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md"
-        db-schema-schemahero-carvel(App as Carvel)
+        db-schema-schemahero-carvel(App as Carvel ytt)
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
-        style db-schema-schemahero-carvel fill:red
 
         db-schema-->db-schema-flyway
         db-schema-->db-schema-liquibase
@@ -202,7 +200,7 @@ flowchart TD
         click devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
         devspace-helm(App as Helm)
         click devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
-        devspace-carvel(App as Carvel)
+        devspace-carvel(App as Carvel ytt)
         click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
         style devspace-carvel fill:red
         telepresence-kustomize(App as Kustomize)
@@ -211,7 +209,7 @@ flowchart TD
         telepresence-helm(App as Helm)
         click telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md"
         style telepresence-helm fill:red
-        telepresence-carvel(App as Carvel)
+        telepresence-carvel(App as Carvel ytt)
         click telepresence-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-carvel.md"
         style telepresence-carvel fill:red
 
@@ -334,7 +332,7 @@ flowchart TD
         app-kustomize(App as Kustomize)
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
         style app-kustomize fill:red
-        app-carvel(App as Carvel)
+        app-carvel(App as Carvel ytt)
         click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
         style app-carvel fill:red
 
@@ -432,7 +430,7 @@ flowchart TD
 ## TODO:
 
 * nginx Ingress
-* Contour
+* Envoy with Contour
 * Cortex
 * CRI-O
 * CubeFS
@@ -538,7 +536,6 @@ flowchart TD
 * Jaeger
 * Prometheus
 * CoreDNS
-* Envoy
 * TiKV
 * Vitess
 * Chaos Mesh

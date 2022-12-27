@@ -1,0 +1,31 @@
+# Use HTTPS With cert-manager And Carvel ytt
+
+TODO: Intro
+
+## Do
+
+```bash
+cat ytt/resources/ingress.yaml
+
+cat ytt/resources/certificate.yaml
+
+cat ytt/schema.yaml
+
+yq --inplace ".tls.enabled = true" ytt/schema.yaml
+
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-dev.yaml \
+    | tee yaml/dev/app.yaml
+
+kubectl --namespace dev apply --filename yaml/dev
+
+kubectl --namespace dev get certificates
+
+echo "https://dev.cncf-demo.$DOMAIN"
+
+# Open it in a browser
+```
+
+## Continue The Adventure
+
+[Setup PostgreSQL DB](../db/story.md)

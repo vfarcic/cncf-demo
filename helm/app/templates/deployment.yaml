@@ -72,15 +72,11 @@ spec:
             secretKeyRef:
               {{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
               name: {{ .Values.db.id }}
+              key: password
               {{- end }}
               {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
               name: {{ template "name" . }}-postgresql
-              {{- end }}
-              {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
               key: postgres-password
-              {{- end }}
-              {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
-              key: password
               {{- end }}
         - name: DB_NAME
           value: {{ .Values.db.id }}

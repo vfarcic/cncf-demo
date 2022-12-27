@@ -8,6 +8,12 @@ TODO: Intro
 helm repo add argo https://argoproj.github.io/argo-helm
 
 helm repo update
+
+export REPO_URL=$(git config --get remote.origin.url)
+
+yq --inplace \
+    ".spec.source.repoURL = \"$REPO_URL\"" \
+    argocd/apps.yaml
 ```
 
 ## Do

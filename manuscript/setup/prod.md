@@ -3,7 +3,8 @@
 *Go through this document ONLY if you did NOT follow the story from the start (if you jumped straight into this chapter).*
 
 ```bash
-git clone https://github.com/vfarcic/cncf-demo
+# Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar with GitHub CLI
+gh repo fork vfarcic/cncf-demo --clone
 
 cd cncf-demo
 
