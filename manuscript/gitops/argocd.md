@@ -35,10 +35,11 @@ cat argocd/apps.yaml
 
 kubectl apply --filename argocd/apps.yaml
 
-kubectl --namespace argocd get ingresses
+ls -1 schema-hero
 
-# TODO: Install if the cluster was not created with Crossplane
-kubectl --namespace schemahero-system get all
+cat argocd/schema-hero.yaml
+
+cp argocd/schema-hero.yaml infra/.
 
 cat argocd/cert-manager.yaml
 

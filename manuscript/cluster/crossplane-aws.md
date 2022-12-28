@@ -1,4 +1,4 @@
-# Create an AWS EKS Cluster With Crossplane
+# Create And Manage Production AWS EKS Cluster With Crossplane
 
 TODO: Intro
 
@@ -46,9 +46,9 @@ kubectl get managed
 
 kubectl --namespace production get clusterclaims
 
-cat crossplane/get-kubeconfig-aws.sh
+cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
 
-./crossplane/get-kubeconfig-aws.sh
+./crossplane/get-kubeconfig-$XP_DESTINATION.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 

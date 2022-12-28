@@ -269,7 +269,6 @@ flowchart TD
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
-        style cluster-crossplane-azure fill:red
 
         %% -- Cluster Connections --
         cluster-->cluster-cluster-api
@@ -307,17 +306,18 @@ flowchart TD
         ingress{{Ingress}}
         click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/story.md"
         style ingress fill:red
-        ingress-contour(Contour)
+        ingress-contour(Envoy with Contour)
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         style ingress-contour fill:red
-        ingress-todo1(???)
-        style ingress-todo1 fill:red
+        ingress-nginx(NGINX)
+        click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
+        style ingress-nginx fill:red
         ingress-todo2(???)
         style ingress-todo2 fill:red
 
         %% -- Ingress Connections --
         ingress-->ingress-contour-->app
-        ingress-->ingress-todo1-->app
+        ingress-->ingress-nginx-->app
         ingress-->ingress-todo2-->app
 
         %% ---------
@@ -429,9 +429,6 @@ flowchart TD
 
 ## TODO:
 
-* nginx Ingress
-* Envoy with Contour
-* Cortex
 * CRI-O
 * CubeFS
 * Emissary Ingress
@@ -541,6 +538,7 @@ flowchart TD
 * Chaos Mesh
 * Cilium
 * CloudEvents
+* Cortex
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".

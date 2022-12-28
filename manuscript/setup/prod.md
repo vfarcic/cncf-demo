@@ -4,9 +4,13 @@
 
 ```bash
 # Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar with GitHub CLI
-gh repo fork vfarcic/cncf-demo --clone
+gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
+
+gh repo set-default
+
+# Select the fork as the default repository
 
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 ```
