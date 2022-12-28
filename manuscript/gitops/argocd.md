@@ -45,11 +45,28 @@ cat argocd/cert-manager.yaml
 
 cp argocd/cert-manager.yaml infra/.
 
+# Replace `[...]` with your email
+export EMAIL=[...]
+
+# Install `yq` CLI from https://github.com/mikefarah/yq
+
+cat cert-manager/issuer.yaml
+
+cp cert-manager/issuer.yaml infra/.
+
+yq --inplace ".spec.acme.email = \"$EMAIL\"" infra/issuer.yaml
+
+yq --inplace \
+    ".spec.acme.solvers[0].http01.ingress.class = \"$INGRESS_CLASS_NAME\"" \
+    infra/issuer.yaml
+
 git add .
 
 git commit -m "Infra"
 
 git push
+
+kubectl --namespace schemahero-system get all
 
 kubectl --namespace cert-manager get all
 ```

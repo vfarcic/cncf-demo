@@ -2,19 +2,19 @@
 
 TODO: Intro
 
-## Choice 1: TODO: Choice
+## Choice 1: NGINX
 
 TODO: Explanation
 
-* [Official site](TODO: link)
+* [Official site](https://kubernetes.github.io/ingress-nginx)
 
-## Choice 2: TODO: Choice
+## Choice 2: Envoy with Contour
 
 TODO: Explanation
 
-* [Official site](TODO: link)
+* [Official site](https://projectcontour.io)
 
-## Choice 3: TODO: Choice
+## Choice 3: TODO:
 
 TODO: Explanation
 
@@ -22,6 +22,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [TODO: Choice 1](TODO:.md)
-* [TODO: Choice 2](TODO:.md)
-* [TODO: Choice 3](TODO:.md)
+* [NGINX](nginx.md)
+* [Envoy with Contour](contour.md)
+* [TODO:](TODO:.md)

@@ -286,6 +286,7 @@ flowchart TD
         %% ------------
         gitops{{GitOps}}
         click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/story.md"
+        style gitops fill:blue
         gitops-flux(Flux)
         click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
         style gitops-flux fill:red
@@ -305,20 +306,32 @@ flowchart TD
         %% -------------
         ingress{{Ingress}}
         click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/story.md"
-        style ingress fill:red
+        style ingress fill:blue
         ingress-contour(Envoy with Contour)
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
-        style ingress-contour fill:red
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
         style ingress-nginx fill:red
-        ingress-todo2(???)
-        style ingress-todo2 fill:red
+        ingress-todo1(???)
+        style ingress-todo1 fill:red
+        ingress-argocd(GitOps With Argo CD)
+        click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
+        ingress-else(GitOps With Something Else)
+        click ingress-else "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-else.md"
+        style ingress-else fill:red
 
         %% -- Ingress Connections --
-        ingress-->ingress-contour-->app
-        ingress-->ingress-nginx-->app
-        ingress-->ingress-todo2-->app
+        ingress-->ingress-contour
+        ingress-->ingress-nginx
+        ingress-->ingress-todo1
+        ingress-contour-->ingress-argocd
+        ingress-contour-->ingress-else
+        ingress-nginx-->ingress-argocd
+        ingress-nginx-->ingress-else
+        ingress-todo1-->ingress-argocd
+        ingress-todo1-->ingress-else
+        ingress-argocd-->app
+        ingress-else-->app
 
         %% ---------
         %% -- App --
@@ -429,9 +442,7 @@ flowchart TD
 
 ## TODO:
 
-* CRI-O
-* CubeFS
-* Emissary Ingress
+* Cilium
 * gRPC
 * in-toto
 * KubeEdge
@@ -536,9 +547,10 @@ flowchart TD
 * TiKV
 * Vitess
 * Chaos Mesh
-* Cilium
 * CloudEvents
 * Cortex
+* CubeFS
+* Emissary-ingress
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
@@ -549,3 +561,4 @@ flowchart TD
 * etcd
 * Rook
 * Container Network Interface (CNI)
+* CRI-O
