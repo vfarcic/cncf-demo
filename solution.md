@@ -264,7 +264,6 @@ flowchart TD
         %% -- Cluster Crossplane --
         cluster-crossplane-google(Google Cloud)
         click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
-        style cluster-crossplane-google fill:red
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-crossplane-azure(Azure)
