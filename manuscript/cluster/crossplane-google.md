@@ -5,14 +5,6 @@ TODO: Intro
 ## Setup
 
 ```bash
-echo $XP_PROJECT_ID
-
-# Execute the command that follows ONLY if `$XP_PROJECT_ID` is empty
-export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
-
-# Execute the command that follows ONLY if `$XP_PROJECT_ID` is empty
-gcloud projects create $XP_PROJECT_ID
-
 echo https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$XP_PROJECT_ID
 
 # Open the URL and *ENABLE* the API
@@ -46,9 +38,26 @@ spec:
 ## Do
 
 ```bash
-TODO:
+export XP_DESTINATION=google
+
+cat crossplane/google-gke.yaml
+
+kubectl --namespace production apply \
+    --filename crossplane/google-gke.yaml
+
+kubectl get managed
+
+kubectl --namespace production get clusterclaims
+
+cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
+
+./crossplane/get-kubeconfig-$XP_DESTINATION.sh
+
+export KUBECONFIG=$PWD/kubeconfig-prod.yaml
+
+kubectl get nodes
 ```
 
 ## Continue The Adventure
 
-[TODO:](TODO:)
+[GitOps](../gitops/story.md)

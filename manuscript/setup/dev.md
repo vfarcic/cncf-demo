@@ -121,13 +121,24 @@ echo $INGRESS_HOST
 
 # Use the output to configure DNS domain
 
-# Replace `[...]` with the domain (e.g., sillydemo.com)
+# Replace `[...]` with the domain (e.g., sillydemo.com).
+# If you do not have a domain, replace `[...]` with
+#   `$INGRESS_HOST.nip.io`.
+# If you do choose to use `nip.io` instead of a "real" domain,
+#   beware that:
+#   - when opening an application in a browser, you will have to
+#     allow insecure connections.
+#   - when executing `curl` commands, you will have to add the
+#     `--insecure` flag.
+#   - you will NOT be able to choose Harbor as container image
+#     registry.
 export DOMAIN=[...]
 
-# Configure DNS for the following subdomains:
+# Configure DNS for the following subdomains (skip this step if
+#   you chose to use `nip.io` instead of a "real" domain):
 # - harbor
 # - notary
-# - dev.cncf-demo
+# - cncf-demo-dev
 
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.

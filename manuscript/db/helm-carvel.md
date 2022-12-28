@@ -30,7 +30,7 @@ ytt --file ytt/schema.yaml --file ytt/resources \
 
 kubectl --namespace dev apply --filename yaml/dev
 
-curl "https://dev.cncf-demo.$DOMAIN/videos"
+curl "https://cncf-demo-dev.$DOMAIN/videos"
 ```
 
 ## Continue The Adventure

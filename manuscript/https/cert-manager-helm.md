@@ -15,9 +15,10 @@ yq --inplace ".tls.enabled = true" helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
-kubectl --namespace dev get certificates
+kubectl --namespace dev \
+    get issuers,certificaterequests,certificates,orders,secrets
 
-echo "https://dev.cncf-demo.$DOMAIN"
+echo "https://cncf-demo-dev.$DOMAIN"
 
 # Open it in a browser
 ```

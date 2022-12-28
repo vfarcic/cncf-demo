@@ -12,13 +12,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Test:
-// $ docker container run --name my-db -e POSTGRES_PASSWORD=postgres -d --publish 5432:5432 postgres
-// $ DB_ENDPOINT=127.0.0.1 DB_PORT=5432 DB_USER=postgres DB_PASS=postgres DB_NAME=postgres go run .
-// $ curl -X POST "http://localhost:8080/video?id=wNBG1-PSYmE&title=Kubernetes%20Policies%20And%20Governance%20-%20Ask%20Me%20Anything%20With%20Jim%20Bugwadia"
-// $ curl -X POST "http://localhost:8080/video?id=VlBiLFaSi7Y&title=Scaleway%20-%20Everything%20We%20Expect%20From%20A%20Cloud%20Computing%20Service%3F"
-// $ curl "http://localhost:8080/videos" | jq .
-
 var dbSession *pg.DB = nil
 
 type Video struct {

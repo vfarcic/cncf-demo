@@ -5,13 +5,29 @@ TODO: Intro
 ## Do
 
 ```bash
-# Replace `[...]` with the domain (e.g., sillydemo.com)
+# Replace `[...]` with the domain (e.g., sillydemo.com).
+# If you do not have a domain, replace `[...]` with
+#   `$INGRESS_HOST.nip.io`.
+# If you do choose to use `nip.io` instead of a "real" domain,
+#   beware that:
+#   - when opening an application in a browser, you will have to
+#     allow insecure connections.
+#   - when executing `curl` commands, you will have to add the
+#     `--insecure` flag.
+#   - you will NOT be able to choose Harbor as container image
+#     registry.
 export DOMAIN=[...]
 
 echo $INGRESS_HOST
 
-# Configure DNS for the following subdomains:
+# Configure DNS for the following subdomains (skip this step if
+#   you chose to use `nip.io` instead of a "real" domain):
 # - argocd
+
+dig +short argocd.$DOMAIN
+
+# Repeat the previous command if the output is NOT the IP address
+#   of the Ingress controller.
 
 cat argocd/helm-values.yaml
 
@@ -65,7 +81,7 @@ echo "https://argocd.$DOMAIN"
 # - Password: admin123
 ```
 
-## Which GitOps Tool Did You Choose?
+## Continue The Adventure
 
-[Argo CD](gitops-argocd.md)
-[Something Else](gitops-else.md)
+[Deploy The App](../app/story.md)
+

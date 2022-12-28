@@ -47,7 +47,7 @@ cd ../../../
 
 kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 
-echo "http://dev.cncf-demo.$DOMAIN"
+echo "http://cncf-demo-dev.$DOMAIN"
 
 # Open it in a browser
 ```

@@ -19,9 +19,10 @@ ytt --file ytt/schema.yaml --file ytt/resources \
 
 kubectl --namespace dev apply --filename yaml/dev
 
-kubectl --namespace dev get certificates
+kubectl --namespace dev \
+    get issuers,certificaterequests,certificates,orders,secrets
 
-echo "https://dev.cncf-demo.$DOMAIN"
+echo "https://cncf-demo-dev.$DOMAIN"
 
 # Open it in a browser
 ```

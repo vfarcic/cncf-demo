@@ -40,7 +40,7 @@ cat kustomize/overlays/dev/kustomization.yaml
 kubectl --namespace dev kustomize --enable-helm \
     kustomize/overlays/dev | kubectl apply --filename -
 
-curl "https://dev.cncf-demo.$DOMAIN/videos"
+curl "https://cncf-demo-dev.$DOMAIN/videos"
 ```
 
 ## Continue The Adventure

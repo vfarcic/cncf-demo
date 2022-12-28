@@ -294,7 +294,6 @@ flowchart TD
         click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
         gitops-rancher-fleet(Rancher Fleet)
         click gitops-rancher-fleet "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/rancher-fleet.md"
-        style gitops-rancher-fleet fill:red
 
         %% -- GitOps Connections --
         gitops-->gitops-flux-->ingress
@@ -311,7 +310,6 @@ flowchart TD
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
-        style ingress-nginx fill:red
         ingress-todo1(???)
         style ingress-todo1 fill:red
         ingress-argocd(GitOps With Argo CD)
@@ -336,23 +334,44 @@ flowchart TD
         %% ---------
         %% -- App --
         %% ---------
-        app{{App}}
+        app{{Deploy The App To Production}}
         click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/story.md"
-        style app fill:red
-        app-helm(App as Helm)
-        click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
-        style app-helm fill:red
-        app-kustomize(App as Kustomize)
-        click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
-        style app-kustomize fill:red
-        app-carvel(App as Carvel ytt)
-        click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
-        style app-carvel fill:red
+        style app fill:blue
+        app-argo-cd(Argo CD)
+        click app-argo-cd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd.md"
+        app-flux(Flux)
+        click app-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux.md"
+
+        %% -- App Argo CD --
+        app-argo-cd-helm(App As Helm)
+        click app-argo-cd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-helm.md"
+        app-argo-cd-kustomize(App As Kustomize)
+        click app-argo-cd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-kustomize.md"
+        style app-argo-cd-kustomize fill:red
+        app-argo-cd-carvel(App As Carvel ytt)
+        click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-carvel.md"
+        style app-argo-cd-carvel fill:red
+
+        %% -- App Flux --
+        app-flux-helm(App As Helm)
+        click app-flux-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux-helm.md"
+        style app-flux-helm fill:red
+        app-flux-kustomize(App As Kustomize)
+        click app-flux-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux-kustomize.md"
+        style app-flux-kustomize fill:red
+        app-flux-carvel(App As Carvel ytt)
+        click app-flux-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux-carvel.md"
+        style app-flux-carvel fill:red
 
         %% -- App Connections --
-        app-->app-helm-->db-production
-        app-->app-kustomize-->db-production
-        app-->app-carvel-->db-production
+        app-->app-argo-cd
+        app-->app-flux-->db-production
+        app-argo-cd-->app-argo-cd-helm-->db-production
+        app-argo-cd-->app-argo-cd-kustomize-->db-production
+        app-argo-cd-->app-argo-cd-carvel-->db-production
+        app-flux-->app-flux-helm-->db-production
+        app-flux-->app-flux-kustomize-->db-production
+        app-flux-->app-flux-carvel-->db-production
 
         %% --------------
         %% -- Database --
@@ -443,9 +462,6 @@ flowchart TD
 ## TODO:
 
 * Cilium
-* gRPC
-* in-toto
-* KubeEdge
 * Litmus
 * Longhorn
 * NATS
@@ -551,6 +567,9 @@ flowchart TD
 * Cortex
 * CubeFS
 * Emissary-ingress
+* gRPC
+* in-toto
+* KubeEdge
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".

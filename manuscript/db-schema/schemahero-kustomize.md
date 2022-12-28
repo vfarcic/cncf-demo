@@ -32,13 +32,13 @@ kubectl --namespace dev kustomize --enable-helm \
     kustomize/overlays/dev \
     | kubectl --namespace dev apply --filename -
 
-curl "https://dev.cncf-demo.$DOMAIN/videos"
+curl "https://cncf-demo-dev.$DOMAIN/videos"
 
-curl -X POST "https://dev.cncf-demo.$DOMAIN/video?id=wNBG1-PSYmE&title=Kubernetes%20Policies%20And%20Governance%20-%20Ask%20Me%20Anything%20With%20Jim%20Bugwadia"
+curl -X POST "https://cncf-demo-dev.$DOMAIN/video?id=wNBG1-PSYmE&title=Kubernetes%20Policies%20And%20Governance%20-%20Ask%20Me%20Anything%20With%20Jim%20Bugwadia"
 
-curl -X POST "https://dev.cncf-demo.$DOMAIN/video?id=VlBiLFaSi7Y&title=Scaleway%20-%20Everything%20We%20Expect%20From%20A%20Cloud%20Computing%20Service%3F"
+curl -X POST "https://cncf-demo-dev.$DOMAIN/video?id=VlBiLFaSi7Y&title=Scaleway%20-%20Everything%20We%20Expect%20From%20A%20Cloud%20Computing%20Service%3F"
 
-curl "https://dev.cncf-demo.$DOMAIN/videos" | jq .
+curl "https://cncf-demo-dev.$DOMAIN/videos" | jq .
 ```
 
 ## Continue The Adventure

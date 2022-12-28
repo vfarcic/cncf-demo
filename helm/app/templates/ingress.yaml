@@ -10,6 +10,7 @@ metadata:
     cert-manager.io/cluster-issuer: production
     {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
   - http:
       paths:

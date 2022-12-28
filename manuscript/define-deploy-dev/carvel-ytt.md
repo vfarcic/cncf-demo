@@ -7,7 +7,7 @@ TODO: Intro
 * [Install the `ytt` CLI](https://carvel.dev/ytt/docs/v0.44.0/install)
 
 ```bash
-yq --inplace ".ingress.host = \"dev.cncf-demo.$DOMAIN\"" \
+yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
     ytt/schema.yaml
 
 yq --inplace ".image.repository = \"$IMAGE\"" \
@@ -39,7 +39,7 @@ ytt --file ytt/schema.yaml --file ytt/resources \
 
 kubectl --namespace dev apply --filename yaml/dev
 
-echo "http://dev.cncf-demo.$DOMAIN"
+echo "http://cncf-demo-dev.$DOMAIN"
 
 # Open it in a browser
 ```

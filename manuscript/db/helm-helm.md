@@ -27,7 +27,7 @@ cat helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
-curl "https://dev.cncf-demo.$DOMAIN/videos"
+curl "https://cncf-demo-dev.$DOMAIN/videos"
 ```
 
 ## Continue The Adventure

@@ -2,7 +2,8 @@ image:
   repository: index.docker.io/vfarcic/cncf-demo
   tag: latest
 ingress:
-  host: dev.cncf-demo.sillydemo.com
+  host: cncf-demo-dev.sillydemo.com
+  className: nginx
 tls:
   enabled: false
 db:

@@ -7,7 +7,7 @@ TODO: Intro
 * [Install the `helm` CLI](https://helm.sh/docs/intro/install)
 
 ```bash
-yq --inplace ".ingress.host = \"dev.cncf-demo.$DOMAIN\"" \
+yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
     helm/app/values.yaml
 
 yq --inplace ".image.repository = \"$IMAGE\"" \
@@ -33,7 +33,7 @@ cat helm/app/values.yaml
 
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
-echo "http://dev.cncf-demo.$DOMAIN"
+echo "http://cncf-demo-dev.$DOMAIN"
 
 # Open it in a browser
 ```

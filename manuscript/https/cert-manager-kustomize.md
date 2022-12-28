@@ -6,15 +6,15 @@ TODO: Intro
 
 ```bash
 yq --inplace \
-    ".[].value = \"dev.cncf-demo.$DOMAIN\"" \
+    ".[].value = \"cncf-demo-dev.$DOMAIN\"" \
     kustomize/overlays/dev/ingress.yaml
 
 yq --inplace \
-    ".spec.commonName = \"dev.cncf-demo.$DOMAIN\"" \
+    ".spec.commonName = \"cncf-demo-dev.$DOMAIN\"" \
     kustomize/overlays/dev/certificate.yaml
 
 yq --inplace \
-    ".spec.dnsNames[0] = \"dev.cncf-demo.$DOMAIN\"" \
+    ".spec.dnsNames[0] = \"cncf-demo-dev.$DOMAIN\"" \
     kustomize/overlays/dev/certificate.yaml
 ```
 
@@ -46,7 +46,7 @@ kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 kubectl --namespace dev \
     get issuers,certificaterequests,certificates,orders,secrets
 
-echo "https://dev.cncf-demo.$DOMAIN"
+echo "https://cncf-demo-dev.$DOMAIN"
 
 # Open it in a browser
 ```

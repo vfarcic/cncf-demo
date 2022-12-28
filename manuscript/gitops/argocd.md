@@ -19,8 +19,6 @@ yq --inplace \
 ## Do
 
 ```bash
-./crossplane/get-kubeconfig-$XP_DESTINATION.sh
-
 cat argocd/helm-values.yaml
 
 helm upgrade --install argocd argo/argo-cd \
@@ -45,6 +43,20 @@ cat argocd/cert-manager.yaml
 
 cp argocd/cert-manager.yaml infra/.
 
+git add .
+
+git commit -m "Infra"
+
+git push
+
+kubectl --namespace schemahero-system get all
+
+# Wait until the resources appear in the Namespace
+
+kubectl --namespace cert-manager get all
+
+# Wait until the resources appear in the Namespace
+
 # Replace `[...]` with your email
 export EMAIL=[...]
 
@@ -65,10 +77,6 @@ git add .
 git commit -m "Infra"
 
 git push
-
-kubectl --namespace schemahero-system get all
-
-kubectl --namespace cert-manager get all
 ```
 
 ## Continue The Adventure
