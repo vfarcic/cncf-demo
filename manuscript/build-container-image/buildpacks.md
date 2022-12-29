@@ -14,6 +14,8 @@ There are many ways to implement Cloud Native Buildpacks. Here we will use the `
 ```bash
 export TAG=v0.0.1
 
+pack config default-builder paketobuildpacks/builder:tiny
+
 pack build cncf-demo:$TAG
 
 docker image ls

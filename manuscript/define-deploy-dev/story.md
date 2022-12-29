@@ -15,7 +15,7 @@ TODO: Explanation
 * [Kustomize - How to Simplify Kubernetes Configuration Management](https://youtu.be/Twtbg6LFnAg)
 * [Official site](https://kustomize.io)
 
-## Choice 3: Carvel
+## Choice 3: Carvel ytt
 
 TODO: Explanation
 

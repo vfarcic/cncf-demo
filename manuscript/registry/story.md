@@ -27,6 +27,8 @@ Dragonfly is useful in distributing container images that need to be made availa
 
 ## What Is Your Choice?
 
+**If, during the setup phase, you chose to use `nip.io` instead of a "real" domain, you cannot choose Harbor (without modifying the commands and the manifests).**
+
 * [Docker Hub](dockerhub.md)
 * [Harbor](harbor.md)
 * [Dragonfly](dragonfly.md)

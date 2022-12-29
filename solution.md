@@ -131,7 +131,6 @@ flowchart TD
         db-crossplane-kustomize(App as Kustomize)
         click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md"
         click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md"
-        style db-crossplane-carvel fill:red
 
         %% -- DB Connections --
         db-->db-helm
@@ -202,7 +201,8 @@ flowchart TD
         click devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
         devspace-carvel(App as Carvel ytt)
         click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
-        style devspace-carvel fill:red
+
+        %% -- Develop Telepresence --
         telepresence-kustomize(App as Kustomize)
         click telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md"
         style telepresence-kustomize fill:red
@@ -398,8 +398,34 @@ flowchart TD
     Production-->Observability
 
     subgraph Observability
-        observability-todo(TODO)
-        style observability-todo fill:red
+        %% -------------
+        %% -- Metrics --
+        %% -------------
+        metrics{{Metrics}}
+        style metrics fill:red
+        metrics-prometheus(Prometheus)
+        style metrics-prometheus fill:red
+        metrics-thanos(Thanos)
+        style metrics-thanos fill:red
+
+        %% -- Metrics Connections --
+        metrics-->metrics-prometheus-->instrumentation
+        metrics-->metrics-thanos-->instrumentation
+
+        %% ---------------------
+        %% -- Instrumentation --
+        %% ---------------------
+        instrumentation{{Instrumentation}}
+        style instrumentation fill:red
+        instrumentation-open-telemetry(OpenTelemetry)
+        style instrumentation-open-telemetry fill:red
+        instrumentation-open-metrics(OpenMetrics)
+        style instrumentation-open-metrics fill:red
+
+        %% -- Instrumentation Connections --
+        instrumentation-->instrumentation-open-telemetry
+        instrumentation-->instrumentation-open-metrics
+
     end
 
     Observability-->Previews
@@ -412,14 +438,6 @@ flowchart TD
     Previews-->Security
 
     subgraph Security
-        spiffe(Spiffe)
-        style spiffe fill:red
-
-        spire(Spire)
-        style spire fill:red
-
-        tuf("The Update Framework (TUF)")
-        style tuf fill:red
 
         %% --------------
         %% -- Policies --
@@ -441,6 +459,19 @@ flowchart TD
         policies-->policies-kyverno
         policies-->policies-opa
         policies-->policies-cloud-custodian
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
+        spiffe(Spiffe)
+        style spiffe fill:red
+        spire(Spire)
+        style spire fill:red
+        tuf("The Update Framework (TUF)")
+        style tuf fill:red
+        notary(Notary)
+        style notary fill:red
+
     end
 
     Security-->Automation
@@ -460,15 +491,6 @@ flowchart TD
 
 ## TODO:
 
-* Cilium
-* Litmus
-* Longhorn
-* NATS
-* Notary
-* OpenMetrics
-* OperatorFramework
-* Thanos
-* Volcano
 * Aeraki Mesh
 * Akri
 * Antrea
@@ -555,9 +577,7 @@ flowchart TD
 * Flux
 * Argo Workflows
 * FluentD
-* OpenTelemetry
 * Jaeger
-* Prometheus
 * CoreDNS
 * TiKV
 * Vitess
@@ -569,6 +589,12 @@ flowchart TD
 * gRPC
 * in-toto
 * KubeEdge
+* Cilium
+* Litmus
+* Longhorn
+* NATS
+* OperatorFramework
+* Volcano
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".

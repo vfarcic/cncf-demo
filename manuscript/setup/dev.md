@@ -63,7 +63,7 @@ export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 gcloud projects create $PROJECT_ID
 
-echo https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID
+echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID"
 
 # Open the URL from the output and enable the Kubernetes API
 
@@ -115,9 +115,12 @@ echo $INGRESS_HOST
 
 # Repeat the `export` commands if the output is empty
 
-# If the output contains more than one IP, wait for a while longer, and repeat the `export` commands.
+# If the output contains more than one IP, wait for a while 
+#   longer, and repeat the `export` commands.
 
-# If the output continues having more than one IP, choose one of them and execute `export INGRESS_HOST=[...]` with `[...]` being the selected IP.
+# If the output continues having more than one IP, choose one of
+#   them and execute `export INGRESS_HOST=[...]` with `[...]`
+#   being the selected IP.
 
 # Use the output to configure DNS domain
 
@@ -129,33 +132,48 @@ echo $INGRESS_HOST
 #   - when opening an application in a browser, you will have to
 #     allow insecure connections.
 #   - when executing `curl` commands, you will have to add the
-#     `--insecure` flag.
+#     `--insecure` flag. There is a command below that will
+#      create an `alias` for `curl` that will add the
+#     `--insecure` argument.
 #   - you will NOT be able to choose Harbor as container image
 #     registry.
+#   - you will have to skip the **Use HTTPS** section coming
+#     later on in the story.
 export DOMAIN=[...]
+
+# Execute this step ONLY if you chose to use `nip.io` instead of
+#   a "real" domain
+alias curl="curl --insecure"
 
 # Configure DNS for the following subdomains (skip this step if
 #   you chose to use `nip.io` instead of a "real" domain):
 # - harbor
 # - notary
 # - cncf-demo-dev
-
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
 
 # Replace `[...]` with your email
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 export EMAIL=[...]
 
 # Install `yq` CLI from https://github.com/mikefarah/yq
 # Install `jq` CLI from https://stedolan.github.io/jq/download
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 yq --inplace ".spec.acme.email = \"$EMAIL\"" \
     cert-manager/issuer.yaml
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 kubectl apply --filename cert-manager/issuer.yaml
 ```
 

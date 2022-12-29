@@ -1,4 +1,4 @@
-# Develop With DevSpace And Kustomize
+# Develop With DevSpace And Carvel ytt
 
 TODO: Intro
 
@@ -6,13 +6,19 @@ At the time of this writing (December 2022), DevSpace is not a CNCF project. How
 
 ## Setup
 
+* Install the [`devspace` CLI](https://devspace.sh/docs/getting-started/installation)
+
 ```bash
 yq --inplace \
-    ".deployments.app.kubectl.manifests[0] = \"kustomize/overlays/dev\"" \
+    ".deployments.app.kubectl.manifests[0] = \"yaml/dev\"" \
     devspace.yaml
 
+export RUN_COMMANDS="ytt --file ytt/schema.yaml --file ytt/resources --data-values-file ytt/values-dev.yaml | tee yaml/dev/app.yaml
+create_deployments --all
+start_dev app"
+
 yq --inplace \
-    ".deployments.app.kubectl.kustomize = true" \
+    ".pipelines.dev.run = \"$RUN_COMMANDS\"" \
     devspace.yaml
 ```
 

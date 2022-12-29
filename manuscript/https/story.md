@@ -2,6 +2,8 @@
 
 TODO: Intro
 
+**If you chose to use `nip.io` instead of a "real" domain name, you should skip this chapter by jumping directly to [Setup PostgreSQL DB](../db/story.md).**
+
 ## Choice 1: HashiCorp Vault
 
 TODO: Explanation

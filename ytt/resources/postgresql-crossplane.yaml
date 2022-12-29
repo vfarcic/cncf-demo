@@ -1,0 +1,34 @@
+#@ load("@ytt:data", "data")
+
+#@ if data.values.db.enabled.crossplane.local or data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws or data.values.db.enabled.crossplane.azure:
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: SQLClaim
+metadata:
+  name: #@ data.values.name
+spec:
+  id: #@ data.values.db.id
+  compositionSelector:
+    matchLabels:
+      #@ if/end data.values.db.enabled.crossplane.local:
+      provider: local-k8s
+      #@ if/end data.values.db.enabled.crossplane.google:
+      provider: google-official
+      #@ if/end data.values.db.enabled.crossplane.azure:
+      provider: azure-official
+      #@ if/end data.values.db.enabled.crossplane.aws:
+      provider: aws
+      db: postgresql
+  parameters:
+    version: "11"
+    size: small
+#@ end
+
+#@ if data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws:
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: #@ data.values.db.id + "-password"
+data:
+  password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
+#@ end
