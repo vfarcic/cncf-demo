@@ -1,11 +1,11 @@
-# Create And Manage Production Google GKE Cluster With Crossplane
+# Create And Manage Production Google Cloud GKE Cluster With Crossplane
 
 TODO: Intro
 
 ## Setup
 
 ```bash
-echo https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$XP_PROJECT_ID
+echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$XP_PROJECT_ID"
 
 # Open the URL and *ENABLE* the API
 

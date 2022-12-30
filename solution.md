@@ -491,6 +491,9 @@ flowchart TD
 
 ## TODO:
 
+* LinkerD
+* Istio
+* Open Service Mesh
 * Aeraki Mesh
 * Akri
 * Antrea
@@ -533,7 +536,6 @@ flowchart TD
 * Network Service Mesh
 * Nocalhost
 * Open Cluster Management
-* Open Service Mesh
 * OpenGitOps
 * OpenKruise
 * OpenYurt
@@ -563,9 +565,7 @@ flowchart TD
 * KEDA (after Prometheus)
 * KubeVirt
 * k3s
-* LinkerD
 * Dapr
-* Istio
 * Falco
 * Argo Rollout
 * Knative

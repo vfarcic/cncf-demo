@@ -1,0 +1,123 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: production
+  namespace: production
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+      - 192.168.0.0/16
+  controlPlaneRef:
+    apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+    kind: KubeadmControlPlane
+    name: production-control-plane
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+    kind: GCPCluster
+    name: production
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: GCPCluster
+metadata:
+  name: production
+  namespace: production
+spec:
+  network:
+    name: default
+  project: dot-20221230013816
+  region: us-east1
+---
+apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+kind: KubeadmControlPlane
+metadata:
+  name: production-control-plane
+  namespace: production
+spec:
+  kubeadmConfigSpec:
+    clusterConfiguration:
+      apiServer:
+        extraArgs:
+          cloud-provider: gce
+        timeoutForControlPlane: 20m
+      controllerManager:
+        extraArgs:
+          allocate-node-cidrs: "false"
+          cloud-provider: gce
+    initConfiguration:
+      nodeRegistration:
+        kubeletExtraArgs:
+          cloud-provider: gce
+        name: '{{ ds.meta_data.local_hostname.split(".")[0] }}'
+    joinConfiguration:
+      nodeRegistration:
+        kubeletExtraArgs:
+          cloud-provider: gce
+        name: '{{ ds.meta_data.local_hostname.split(".")[0] }}'
+  machineTemplate:
+    infrastructureRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+      kind: GCPMachineTemplate
+      name: production-control-plane
+  replicas: 3
+  version: v1.23.10
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: GCPMachineTemplate
+metadata:
+  name: production-control-plane
+  namespace: production
+spec:
+  template:
+    spec:
+      image: projects/dot-20221230013816/global/images/cluster-api-ubuntu-2004-v1-23-10-1672366141
+      instanceType: n1-standard-2
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachineDeployment
+metadata:
+  name: production-md-0
+  namespace: production
+spec:
+  clusterName: production
+  replicas: 3
+  selector:
+    matchLabels: null
+  template:
+    spec:
+      bootstrap:
+        configRef:
+          apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+          kind: KubeadmConfigTemplate
+          name: production-md-0
+      clusterName: production
+      infrastructureRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+        kind: GCPMachineTemplate
+        name: production-md-0
+      version: v1.23.10
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: GCPMachineTemplate
+metadata:
+  name: production-md-0
+  namespace: production
+spec:
+  template:
+    spec:
+      image: projects/dot-20221230013816/global/images/cluster-api-ubuntu-2004-v1-23-10-1672366141
+      instanceType: n1-standard-2
+---
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+kind: KubeadmConfigTemplate
+metadata:
+  name: production-md-0
+  namespace: production
+spec:
+  template:
+    spec:
+      joinConfiguration:
+        nodeRegistration:
+          kubeletExtraArgs:
+            cloud-provider: gce
+          name: '{{ ds.meta_data.local_hostname.split(".")[0] }}'

@@ -17,9 +17,9 @@ export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 
 ## Create a management Kubernetes cluster
 
-### AWS EKS
+### AWS
 
-Follow this section ONLY if you're planning to use AWS EKS
+Follow this section ONLY if you're planning to use AWS
 
 ```bash
 # Replace `[...]` with your access key ID`
@@ -34,9 +34,9 @@ eksctl create cluster --name dot --region us-east-1 \
     --managed --asg-access
 ```
 
-### Azure AKS
+### Azure
 
-Follow this section ONLY if you're planning to use Azure AKS
+Follow this section ONLY if you're planning to use Azure
 
 ```bash
 export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
@@ -54,9 +54,9 @@ az aks get-credentials --name dot \
     --resource-group $RESOURCE_GROUP --file $KUBECONFIG
 ```
 
-### Google Cloud GKE
+### Google Cloud
 
-Follow this section ONLY if you're planning to use Google Cloud GKE
+Follow this section ONLY if you're planning to use Google Cloud
 
 ```bash
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -65,7 +65,7 @@ export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 gcloud projects create $PROJECT_ID
 
-echo https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID
+echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID"
 
 # Open the URL from the output and enable the Kubernetes API
 
@@ -92,7 +92,7 @@ export SA="${SA_NAME}@${XP_PROJECT_ID}.iam.gserviceaccount.com"
 
 gcloud iam service-accounts create $SA_NAME --project $XP_PROJECT_ID
 
-export ROLE=roles/admin
+export ROLE=roles/owner
 
 gcloud projects add-iam-policy-binding --role $ROLE $XP_PROJECT_ID \
     --member serviceAccount:$SA

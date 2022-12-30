@@ -6,10 +6,6 @@ TODO: Intro
 
 * Install the [`clusterctl` CLI](https://cluster-api.sigs.k8s.io/user/quick-start.html#install-clusterctl)
 
-```bash
-clusterctl init
-```
-
 ## Which Cloud Provider Do You Use?
 
 * [Google Cloud](cluster-api-google.md)
