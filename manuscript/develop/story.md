@@ -2,11 +2,11 @@
 
 TODO: Intro
 
-## Choice 1: Telepresence
+## Choice 1: GitPod
 
 TODO: Explanation
 
-* [Official site](https://telepresence.io)
+* [Official site](https://gitpod.io)
 
 ## Choice 2: DevSpace
 
@@ -26,6 +26,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [Telepresence](telepresence.md)
+* [GitPod](gitpod.md)
 * [DevSpace](devspace.md)
 * [okteto.md](okteto.md)

@@ -187,8 +187,8 @@ flowchart TD
         develop{{Develop The App}}
         click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/story.md"
         style develop fill:blue
-        telepresence(Telepresence)
-        click telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
+        gitpod(GitPod)
+        click gitpod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/gitpod.md"
         devspace(DevSpace)
         click devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
         okteto(Okteto)
@@ -202,27 +202,13 @@ flowchart TD
         devspace-carvel(App as Carvel ytt)
         click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
 
-        %% -- Develop Telepresence --
-        telepresence-kustomize(App as Kustomize)
-        click telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md"
-        style telepresence-kustomize fill:red
-        telepresence-helm(App as Helm)
-        click telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md"
-        style telepresence-helm fill:red
-        telepresence-carvel(App as Carvel ytt)
-        click telepresence-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-carvel.md"
-        style telepresence-carvel fill:red
-
         %% -- Develop Connections --
-        develop-->telepresence
+        develop-->gitpod
         develop-->devspace
         develop-->okteto
         devspace-->devspace-kustomize
         devspace-->devspace-helm
         devspace-->devspace-carvel
-        telepresence-->telepresence-kustomize
-        telepresence-->telepresence-helm
-        telepresence-->telepresence-carvel
     end
 
     Development-->Production
@@ -503,6 +489,7 @@ flowchart TD
 * Chaosblade
 * Clusterpedia
 * CNI-Genie
+* Nocalhost
 * Confidential Containers
 * ContainerSSH
 * Curiefense
@@ -534,7 +521,6 @@ flowchart TD
 * Meshery
 * Metal3-io
 * Network Service Mesh
-* Nocalhost
 * Open Cluster Management
 * OpenGitOps
 * OpenKruise
@@ -595,6 +581,7 @@ flowchart TD
 * NATS
 * OperatorFramework
 * Volcano
+* Telepresence
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
