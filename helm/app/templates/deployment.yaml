@@ -38,7 +38,10 @@ spec:
         {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) }}
         env: 
         - name: DB_ENDPOINT
-          {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
+          {{- if (.Values.db.enabled.crossplane.local) }}
+          value: {{ .Values.db.id }}-postgresql
+          {{- end }}
+          {{- if (.Values.db.enabled.helm) }}
           value: {{ template "name" . }}-postgresql
           {{- end }}
           {{- if or (.Values.db.enabled.crossplane.aws) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
@@ -74,8 +77,12 @@ spec:
               name: {{ .Values.db.id }}
               key: password
               {{- end }}
-              {{- if or (.Values.db.enabled.helm) (.Values.db.enabled.crossplane.local) }}
+              {{- if .Values.db.enabled.helm }}
               name: {{ template "name" . }}-postgresql
+              key: postgres-password
+              {{- end }}
+              {{- if .Values.db.enabled.crossplane.local }}
+              name: {{ .Values.db.id }}-postgresql
               key: postgres-password
               {{- end }}
         - name: DB_NAME

@@ -187,28 +187,58 @@ flowchart TD
         develop{{Develop The App}}
         click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/story.md"
         style develop fill:blue
-        gitpod(GitPod)
-        click gitpod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/gitpod.md"
-        devspace(DevSpace)
-        click devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
-        okteto(Okteto)
-        click okteto "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/okteto.md"
+        develop-telepresence(Telepresence)
+        click develop-telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
+        style develop-telepresence fill:red
+        develop-devspace(DevSpace)
+        click develop-devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
+        develop-nocalhost(Nocalhost)
+        click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
+        style develop-nocalhost fill:red
+
+        %% -- Develop Telepresence --
+        develop-telepresence-kustomize(App as Kustomize)
+        click develop-telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md"
+        style develop-telepresence-kustomize fill:red
+        develop-telepresence-helm(App as Helm)
+        click develop-telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md"
+        style develop-telepresence-helm fill:red
+        develop-telepresence-carvel(App as Carvel ytt)
+        click develop-telepresence-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-carvel.md"
+        style develop-telepresence-carvel fill:red
 
         %% -- Develop DevSpace --
-        devspace-kustomize(App as Kustomize)
-        click devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
-        devspace-helm(App as Helm)
-        click devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
-        devspace-carvel(App as Carvel ytt)
-        click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
+        develop-devspace-kustomize(App as Kustomize)
+        click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
+        develop-devspace-helm(App as Helm)
+        click develop-devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
+        develop-devspace-carvel(App as Carvel ytt)
+        click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
+
+        %% -- Develop Nocalhost --
+        develop-nocalhost-kustomize(App as Kustomize)
+        click develop-nocalhost-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost-kustomize.md"
+        style develop-nocalhost-kustomize fill:red
+        develop-nocalhost-helm(App as Helm)
+        click develop-nocalhost-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost-helm.md"
+        style develop-nocalhost-helm fill:red
+        develop-nocalhost-carvel(App as Carvel ytt)
+        click develop-nocalhost-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost-carvel.md"
+        style develop-nocalhost-carvel fill:red
 
         %% -- Develop Connections --
-        develop-->gitpod
-        develop-->devspace
-        develop-->okteto
-        devspace-->devspace-kustomize
-        devspace-->devspace-helm
-        devspace-->devspace-carvel
+        develop-->develop-telepresence
+        develop-->develop-devspace
+        develop-->develop-nocalhost
+        develop-telepresence-->develop-telepresence-kustomize
+        develop-telepresence-->develop-telepresence-helm
+        develop-telepresence-->develop-telepresence-carvel
+        develop-devspace-->develop-devspace-kustomize
+        develop-devspace-->develop-devspace-helm
+        develop-devspace-->develop-devspace-carvel
+        develop-nocalhost-->develop-nocalhost-kustomize
+        develop-nocalhost-->develop-nocalhost-helm
+        develop-nocalhost-->develop-nocalhost-carvel
     end
 
     Development-->Production
@@ -489,7 +519,6 @@ flowchart TD
 * Chaosblade
 * Clusterpedia
 * CNI-Genie
-* Nocalhost
 * Confidential Containers
 * ContainerSSH
 * Curiefense
@@ -581,7 +610,6 @@ flowchart TD
 * NATS
 * OperatorFramework
 * Volcano
-* Telepresence
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".

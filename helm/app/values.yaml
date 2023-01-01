@@ -3,7 +3,7 @@ image:
   tag: latest
 ingress:
   host: cncf-demo-dev.sillydemo.com
-  className: nginx
+  className: traefik
 tls:
   enabled: false
 db:
