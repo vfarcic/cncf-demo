@@ -20,7 +20,7 @@ postgresql:
     persistence:
       enabled: false
   auth:
-    postgresPassword: postgres
+    postgresPassword: postgresxxx
   primary:
     initdb:
       scripts:
@@ -29,5 +29,3 @@ postgresql:
           psql -U postgres -c 'CREATE DATABASE "cncf-demo";'
 schemahero:
   enabled: false
-
-
