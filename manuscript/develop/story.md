@@ -2,11 +2,11 @@
 
 TODO: Intro
 
-## Choice 1: GitPod
+## Choice 1: Telepresence
 
 TODO: Explanation
 
-* [Official site](https://gitpod.io)
+* [Official site](https://www.telepresence.io)
 
 ## Choice 2: DevSpace
 
@@ -16,16 +16,14 @@ TODO: Explanation
 * [Full App Lifecycle In Kubernetes With Argo CD, DevSpace, vCluster, k3d, and GitHub Actions](https://youtu.be/uU-EAQ8Vbvk)
 * [Official site](https://devspace.sh)
 
-## Choice 3: Okteto
+## Choice 3: Nocalhost
 
 TODO: Explanation
 
-* [Okteto - How To Create Instant Development Environments In Kubernetes](https://youtu.be/yjgHHUT-5-s)
-* [Do NOT Use Docker Compose! Develop In Kubernetes (With Okteto)](https://youtu.be/RTo9Pvo_yiY)
-* [Official site](https://okteto.com)
+* [Official site](https://nocalhost.dev)
 
 ## What Is Your Choice?
 
-* [GitPod](gitpod.md)
+* [Telepresence](telepresence.md)
 * [DevSpace](devspace.md)
-* [okteto.md](okteto.md)
+* [Nocalhost.md](nocalhost.md)

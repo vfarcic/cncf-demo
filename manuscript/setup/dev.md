@@ -41,8 +41,10 @@ export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 
 az group create --location eastus --name $RESOURCE_GROUP
 
-# Change `1.25.2` to the Kubernetes version you want to use
-export K8S_VERSION=1.25.2
+az aks get-versions --location eastus --output table
+
+# Replace `[...]` with a valid Kubernetes version from the previous output.
+export K8S_VERSION=[...]
 
 az aks create --name dot --resource-group $RESOURCE_GROUP \
     --node-count 3 --node-vm-size Standard_D2_v2 \
@@ -92,13 +94,8 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 ```bash
 kubectl create namespace dev
 
-helm repo add traefik https://helm.traefik.io/traefik
-
-helm repo add jetstack https://charts.jetstack.io
-
-helm repo update
-
-helm upgrade --install traefik traefik/traefik \
+helm upgrade --install traefik traefik \
+    --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
 
 # If NOT EKS
@@ -107,9 +104,12 @@ export INGRESS_HOST=$(kubectl --namespace traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
 # If EKS
-export INGRESS_HOST=$(kubectl --namespace traefik \
+export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
     get svc traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+
+# If EKS
+export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
 echo $INGRESS_HOST
 
@@ -155,7 +155,8 @@ alias curl="curl --insecure"
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-helm upgrade --install cert-manager jetstack/cert-manager \
+helm upgrade --install cert-manager cert-manager \
+    --repo https://charts.jetstack.io \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
 

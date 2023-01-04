@@ -13,6 +13,5 @@ spec:
   parameters:
     version: "13.4"
     size: small
-    namespace: dev
   writeConnectionSecretToRef:
     name: cncf-demo-postgresql

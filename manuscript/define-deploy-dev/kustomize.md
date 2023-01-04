@@ -5,17 +5,14 @@ TODO: Intro
 ## Setup
 
 ```bash
-yq --inplace \
-    ".images[0].name = \"$IMAGE\"" \
+yq --inplace ".images[0].name = \"$IMAGE\"" \
     kustomize/base/kustomization.yaml
 
-yq --inplace \
-    ".images[0].newName = \"$IMAGE\"" \
+yq --inplace ".images[0].newName = \"$IMAGE\"" \
     kustomize/base/kustomization.yaml
 
-yq --inplace \
-    ".spec.rules[0].host = \"cncf-demo.$DOMAIN\"" \
-    kustomize/base/ingress.yaml
+yq --inplace ".[].value = \"cncf-demo-dev.$DOMAIN\"" \
+    kustomize/overlays/dev/ingress.yaml
 
 yq --inplace \
     ".spec.template.spec.containers[0].image = \"$IMAGE\"" \
@@ -34,6 +31,8 @@ cat kustomize/base/service.yaml
 cat kustomize/base/ingress.yaml
 
 cat kustomize/base/kustomization.yaml
+
+cat kustomize/overlays/dev/ingress.yaml
 
 cd kustomize/overlays/dev
 

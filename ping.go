@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
@@ -20,11 +21,18 @@ func pingHandler(ctx *gin.Context) {
 	otel.GetTextMapPropagator().Inject(otelCtx, propagation.HeaderCarrier(req.Header))
 	url := ctx.Query("url")
 	if len(url) == 0 {
-		httpErrorBadRequest(errors.New("url is empty"), span, ctx)
-		return
+		url = os.Getenv("PING_URL")
+		if len(url) == 0 {
+			httpErrorBadRequest(errors.New("url is empty"), span, ctx)
+			return
+		}
 	}
 	log.Printf("Sending a ping to %s", url)
-	resp, _ := req.Get(url)
+	resp, err := req.Get(url)
+	if err != nil {
+		httpErrorBadRequest(err, span, ctx)
+		return
+	}
 	log.Println(resp.String())
 	ctx.String(http.StatusOK, resp.String())
 }

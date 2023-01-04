@@ -189,7 +189,6 @@ flowchart TD
         style develop fill:blue
         develop-telepresence(Telepresence)
         click develop-telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
-        style develop-telepresence fill:red
         develop-devspace(DevSpace)
         click develop-devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
         develop-nocalhost(Nocalhost)
@@ -199,7 +198,6 @@ flowchart TD
         %% -- Develop Telepresence --
         develop-telepresence-kustomize(App as Kustomize)
         click develop-telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md"
-        style develop-telepresence-kustomize fill:red
         develop-telepresence-helm(App as Helm)
         click develop-telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md"
         style develop-telepresence-helm fill:red

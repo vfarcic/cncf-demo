@@ -5,8 +5,7 @@ TODO: Intro
 ## Setup
 
 ```bash
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
+helm repo add crossplane-stable 
 
 helm repo update
 

@@ -21,6 +21,9 @@ Execute the commands in this section only if you used Google Cloud
 ```bash
 az group delete --name $RESOURCE_GROUP --yes
 
+# If using Crossplane
+az group delete --name cncf-demo-db-dev --yes
+
 az group delete --name production --yes
 ```
 
@@ -29,13 +32,13 @@ az group delete --name production --yes
 Execute the commands in this section only if you used AWS
 
 ```bash
-# If Crossplane with AWS
+# If using Crossplane
 kubectl --namespace dev delete sqlclaim cncf-demo
 
-# If Crossplane with AWS
+# If using Crossplane
 kubectl --namespace production delete clusterclaim production
 
-# If Crossplane with AWS
+# If using Crossplane
 kubectl get managed
 
 # If Crossplane with AWS

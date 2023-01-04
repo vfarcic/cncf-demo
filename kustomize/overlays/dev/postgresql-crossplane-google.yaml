@@ -13,7 +13,6 @@ spec:
   parameters:
     version: "13"
     size: small
-    namespace: dev
 
 ---
 
