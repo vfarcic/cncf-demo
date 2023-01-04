@@ -20,7 +20,7 @@ postgresql:
     persistence:
       enabled: false
   auth:
-    postgresPassword: postgresxxx
+    postgresPassword: postgres
   primary:
     initdb:
       scripts:
