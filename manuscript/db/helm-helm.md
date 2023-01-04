@@ -28,6 +28,9 @@ cat helm/app/values.yaml
 helm upgrade --install cncf-demo helm/app --namespace dev --wait
 
 curl "https://cncf-demo-dev.$DOMAIN/videos"
+
+# Proceed further ONLY if the output contains
+#   `relation "videos" does not exist`.
 ```
 
 ## Continue The Adventure

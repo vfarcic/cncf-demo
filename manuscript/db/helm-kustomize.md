@@ -41,6 +41,9 @@ kubectl --namespace dev kustomize --enable-helm \
     kustomize/overlays/dev | kubectl apply --filename -
 
 curl "https://cncf-demo-dev.$DOMAIN/videos"
+
+# Proceed further ONLY if the output contains
+#   `relation "videos" does not exist`.
 ```
 
 ## Continue The Adventure

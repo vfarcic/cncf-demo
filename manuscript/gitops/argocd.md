@@ -5,14 +5,9 @@ TODO: Intro
 ## Setup
 
 ```bash
-helm repo add argo https://argoproj.github.io/argo-helm
-
-helm repo update
-
 export REPO_URL=$(git config --get remote.origin.url)
 
-yq --inplace \
-    ".spec.source.repoURL = \"$REPO_URL\"" \
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     argocd/apps.yaml
 ```
 
@@ -21,7 +16,8 @@ yq --inplace \
 ```bash
 cat argocd/helm-values.yaml
 
-helm upgrade --install argocd argo/argo-cd \
+helm upgrade --install argocd argo-cd \
+    --repo https://argoproj.github.io/argo-helm \
     --namespace argocd --create-namespace \
     --values argocd/helm-values.yaml --wait
 
@@ -58,16 +54,26 @@ kubectl --namespace cert-manager get all
 # Wait until the resources appear in the Namespace
 
 # Replace `[...]` with your email
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 export EMAIL=[...]
 
 # Install `yq` CLI from https://github.com/mikefarah/yq
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 cat cert-manager/issuer.yaml
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 cp cert-manager/issuer.yaml infra/.
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 yq --inplace ".spec.acme.email = \"$EMAIL\"" infra/issuer.yaml
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 yq --inplace \
     ".spec.acme.solvers[0].http01.ingress.class = \"$INGRESS_CLASS_NAME\"" \
     infra/issuer.yaml

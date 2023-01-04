@@ -31,6 +31,9 @@ ytt --file ytt/schema.yaml --file ytt/resources \
 kubectl --namespace dev apply --filename yaml/dev
 
 curl "https://cncf-demo-dev.$DOMAIN/videos"
+
+# Proceed further ONLY if the output contains
+#   `relation "videos" does not exist`.
 ```
 
 ## Continue The Adventure

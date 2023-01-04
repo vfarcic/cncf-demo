@@ -11,8 +11,41 @@ TODO: Intro
 telepresence helm install
 ```
 
-## How Did You Define Your App?
+## Do
 
-* [Helm](telepresence-helm.md)
-* [Kustomize](telepresence-kustomize.md)
-* [Carvel](telepresence-carvel.md)
+```bash
+cat ping.go
+
+go run .
+
+# In a separate terminal
+curl "http://localhost:8080/ping?url=http://cncf-demo:8080"
+
+# `ctrl+c`
+
+kubectl --namespace dev get services
+
+telepresence connect
+
+telepresence list --namespace dev
+
+telepresence intercept cncf-demo --namespace dev \
+     --port 8080:http --env-file silly-demo.env
+
+curl "http://cncf-demo:8080"
+
+go run .
+
+# In a separate terminal
+curl "http://localhost:8080/ping?url=http://cncf-demo:8080"
+
+# `ctrl+c`
+
+telepresence leave cncf-demo-dev
+
+telepresence quit
+```
+
+## Continue The Adventure
+
+[Create And Manage Production Kubernetes Cluster](../cluster/story.md)

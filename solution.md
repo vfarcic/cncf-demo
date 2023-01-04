@@ -195,16 +195,6 @@ flowchart TD
         click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
         style develop-nocalhost fill:red
 
-        %% -- Develop Telepresence --
-        develop-telepresence-kustomize(App as Kustomize)
-        click develop-telepresence-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-kustomize.md"
-        develop-telepresence-helm(App as Helm)
-        click develop-telepresence-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-helm.md"
-        style develop-telepresence-helm fill:red
-        develop-telepresence-carvel(App as Carvel ytt)
-        click develop-telepresence-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence-carvel.md"
-        style develop-telepresence-carvel fill:red
-
         %% -- Develop DevSpace --
         develop-devspace-kustomize(App as Kustomize)
         click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
@@ -225,18 +215,17 @@ flowchart TD
         style develop-nocalhost-carvel fill:red
 
         %% -- Develop Connections --
-        develop-->develop-telepresence
+        develop-->develop-telepresence-->dev-done
         develop-->develop-devspace
         develop-->develop-nocalhost
-        develop-telepresence-->develop-telepresence-kustomize
-        develop-telepresence-->develop-telepresence-helm
-        develop-telepresence-->develop-telepresence-carvel
-        develop-devspace-->develop-devspace-kustomize
-        develop-devspace-->develop-devspace-helm
-        develop-devspace-->develop-devspace-carvel
-        develop-nocalhost-->develop-nocalhost-kustomize
-        develop-nocalhost-->develop-nocalhost-helm
-        develop-nocalhost-->develop-nocalhost-carvel
+        develop-devspace-->develop-devspace-kustomize-->dev-done
+        develop-devspace-->develop-devspace-helm-->dev-done
+        develop-devspace-->develop-devspace-carvel-->dev-done
+        develop-nocalhost-->develop-nocalhost-kustomize-->dev-done
+        develop-nocalhost-->develop-nocalhost-helm-->dev-done
+        develop-nocalhost-->develop-nocalhost-carvel-->dev-done
+
+        dev-done((Chapter End))
     end
 
     Development-->Production
@@ -339,8 +328,6 @@ flowchart TD
         ingress-contour-->ingress-else
         ingress-nginx-->ingress-argocd
         ingress-nginx-->ingress-else
-        ingress-todo1-->ingress-argocd
-        ingress-todo1-->ingress-else
         ingress-argocd-->app
         ingress-else-->app
 
@@ -363,7 +350,6 @@ flowchart TD
         style app-argo-cd-kustomize fill:red
         app-argo-cd-carvel(App As Carvel ytt)
         click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-carvel.md"
-        style app-argo-cd-carvel fill:red
 
         %% -- App Flux --
         app-flux-helm(App As Helm)
@@ -391,22 +377,32 @@ flowchart TD
         %% --------------
         db-production{{Database}}
         click db-production "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/story.md"
-        style db-production fill:red
-        db-production-crossplane-google(Google Cloud with Crossplane)
+        db-production-crossplane(Crossplane)
+        click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
+        style db-production-crossplane fill:blue
+        db-production-todo1(???)
+        style db-production-todo1 fill:red
+        db-production-todo2(???)
+        style db-production-todo2 fill:red
+        db-production-crossplane-google(Google Cloud)
         click db-production-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-google.md"
         style db-production-crossplane-google fill:red
-        db-production-crossplane-aws(AWS with Crossplane)
+        db-production-crossplane-aws(AWS)
         click db-production-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-aws.md"
         style db-production-crossplane-aws fill:red
-        db-production-crossplane-azure(Azure with Crossplane)
+        db-production-crossplane-azure(Azure)
         click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
         style db-production-crossplane-azure fill:red
 
         %% -- Database Connections --
-        db-production-->db-production-crossplane-google
-        db-production-->db-production-crossplane-aws
-        db-production-->db-production-crossplane-azure
+        db-production-->db-production-crossplane
+        db-production-->db-production-todo1
+        db-production-->db-production-todo2
+        db-production-crossplane-->db-production-crossplane-google-->prod-done
+        db-production-crossplane-->db-production-crossplane-aws-->prod-done
+        db-production-crossplane-->db-production-crossplane-azure-->prod-done
 
+        prod-done((Chapter End))
     end
 
     Production-->Observability

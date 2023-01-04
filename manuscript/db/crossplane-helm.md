@@ -29,6 +29,9 @@ kubectl --namespace dev get sqlclaims
 # Wait until it is `READY`
 
 curl "https://cncf-demo-dev.$DOMAIN/videos"
+
+# Proceed further ONLY if the output contains
+#   `relation "videos" does not exist`.
 ```
 
 ## Continue The Adventure

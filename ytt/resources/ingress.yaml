@@ -9,6 +9,7 @@ metadata:
     #@ if/end data.values.tls.enabled:
     cert-manager.io/cluster-issuer: production
 spec:
+  ingressClassName: #@ data.values.ingress.className
   rules:
   - http:
       paths:

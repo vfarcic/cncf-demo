@@ -1,4 +1,4 @@
-# Deploy The App Defined As Helm Chart To Production With Argo CD
+# Deploy The App Defined As CArvel ytt To Production With Argo CD
 
 TODO: Intro
 
@@ -6,7 +6,7 @@ TODO: Intro
 
 ```bash
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/cncf-demo-helm.yaml
+    argocd/cncf-demo-ytt.yaml
 
 # Execute command that follows only if you jumped directly into
 #   this chapter (if you did not go through the steps that built
@@ -23,24 +23,24 @@ echo $INGRESS_HOST
 ## Do
 
 ```bash
-cat argocd/cncf-demo-helm.yaml
+cat argocd/cncf-demo-ytt.yaml
 
-cp argocd/cncf-demo-helm.yaml apps/cncf-demo.yaml
+cp argocd/cncf-demo-ytt.yaml apps/cncf-demo.yaml
 
-export VALUES=$(\
-    yq ".spec.source.helm.values" apps/cncf-demo.yaml \
-    | yq ".image.tag = \"$TAG\"" \
-    | yq ".ingress.host = \"cncf-demo.$DOMAIN\"" \
-    | yq ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
-    | yq ".schemahero.enabled = false"
-)
+yq --inplace ".image.tag = \"$TAG\"" ytt/values-prod.yaml
 
-echo $VALUES
+yq --inplace ".ingress.host = \"cncf-demo.$DOMAIN\"" \
+    ytt/values-prod.yaml
 
-yq --inplace ".spec.source.helm.values = \"$VALUES\"" \
-    apps/cncf-demo.yaml
+yq --inplace ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
+    ytt/values-prod.yaml
 
-cat apps/cncf-demo.yaml
+yq --inplace ".schemahero.enabled = false" \
+    ytt/values-prod.yaml
+
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
