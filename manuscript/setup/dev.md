@@ -92,6 +92,9 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 ### The Rest Of The Setup
 
 ```bash
+# Install `yq` CLI from https://github.com/mikefarah/yq
+# Install `jq` CLI from https://stedolan.github.io/jq/download
+
 kubectl create namespace dev
 
 helm upgrade --install traefik traefik \
@@ -155,8 +158,15 @@ alias curl="curl --insecure"
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-helm upgrade --install cert-manager cert-manager \
-    --repo https://charts.jetstack.io \
+helm repo add jetstack https://charts.jetstack.io
+
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
+helm repo update
+
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
+helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
 
@@ -164,9 +174,6 @@ helm upgrade --install cert-manager cert-manager \
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
 export EMAIL=[...]
-
-# Install `yq` CLI from https://github.com/mikefarah/yq
-# Install `jq` CLI from https://stedolan.github.io/jq/download
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
