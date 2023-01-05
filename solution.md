@@ -4,11 +4,13 @@
 flowchart TD
 
     subgraph "Legend"
+
         red(Not yet implemented)
         style red fill:red
         blue{{Make a choice}}
         style blue fill:blue
         transparent(Walk)
+
     end
 
     Legend---Development
@@ -226,11 +228,13 @@ flowchart TD
         develop-nocalhost-->develop-nocalhost-carvel-->dev-done
 
         dev-done((Chapter End))
+
     end
 
     Development-->Production
 
     subgraph Production
+
         %% -----------
         %% -- Setup --
         %% -----------
@@ -377,9 +381,9 @@ flowchart TD
         %% --------------
         db-production{{Database}}
         click db-production "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/story.md"
+        style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
-        style db-production-crossplane fill:blue
         db-production-todo1(???)
         style db-production-todo1 fill:red
         db-production-todo2(???)
@@ -403,11 +407,15 @@ flowchart TD
         db-production-crossplane-->db-production-crossplane-azure-->prod-done
 
         prod-done((Chapter End))
-    end
 
-    Production-->Observability
+    end
+```
+
+```mermaid
+flowchart TD
 
     subgraph Observability
+
         %% -------------
         %% -- Metrics --
         %% -------------
@@ -438,14 +446,12 @@ flowchart TD
 
     end
 
-    Observability-->Previews
-
     subgraph Previews
+
         previews-todo(TODO)
         style previews-todo fill:red
-    end
 
-    Previews-->Security
+    end
 
     subgraph Security
 
@@ -484,18 +490,45 @@ flowchart TD
 
     end
 
-    Security-->Automation
-
     subgraph Automation
+
         automation-todo(TODO)
         style automation-todo fill:red
+
     end
 
-    Automation-->IDP
-
     subgraph IDP
+
         backstage(Backstage)
         style backstage fill:red
+        idp-crossplane(Crossplane)
+        style idp-crossplane fill:red
+
+    end
+
+    subgraph Edge
+
+        akri(Akri)
+        style akri fill:red
+
+    end
+
+    subgraph Misc
+
+        %% ----------------
+        %% -- Networking --
+        %% ----------------
+        networking{{Networking}}
+        style networking fill:red
+        networking-antrea(Antrea)
+        style networking-antrea fill:red
+        networking-cilium(Cilium)
+        style networking-cilium fill:red
+
+        %% -- Networking Connections --
+        networking-->networking-antrea
+        networking-->networking-cilium
+
     end
 ```
 
@@ -505,9 +538,6 @@ flowchart TD
 * Istio
 * Open Service Mesh
 * Aeraki Mesh
-* Akri
-* Antrea
-* Artifact Hub
 * Athenz
 * BFE
 * Chaosblade
@@ -598,20 +628,17 @@ flowchart TD
 * gRPC
 * in-toto
 * KubeEdge
-* Cilium
 * Litmus
 * Longhorn
 * NATS
 * OperatorFramework
 * Volcano
-
-* Check whether there are new projects to be added to the "story".
-* Add Kubernetes SIG projects to the "story".
-
-## Cannot Be Demoed
-
+* Artifact Hub
 * containerd
 * etcd
 * Rook
 * Container Network Interface (CNI)
 * CRI-O
+
+* Check whether there are new projects to be added to the "story".
+* Add Kubernetes SIG projects to the "story".
