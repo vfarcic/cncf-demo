@@ -47,15 +47,15 @@ flowchart TD
         registry{{Store Container Image In A Registry}}
         click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/story.md"
         style registry fill:blue
-        registry-distribution(Distribution)
-        click registry-distribution "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/distribution.md"
+        registry-docker-hub(Docker Hub)
+        click registry-docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
         registry-harbor(Harbor)
         click registry-harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
         registry-dragonfly(Dragonfly)
         click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
         style registry-dragonfly fill:red
 
-        registry-->registry-distribution-->ddd
+        registry-->registry-docker-hub-->ddd
         registry-->registry-harbor-->ddd
         registry-->registry-dragonfly-->ddd
 
