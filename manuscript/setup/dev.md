@@ -182,6 +182,7 @@ helm repo update
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
+# deploy cert-manager to automate the process of issuing and renewing TLS certificates
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
@@ -198,6 +199,7 @@ yq --inplace ".spec.acme.email = \"$EMAIL\"" \
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
+# Create a ClusterIssuer resource that can issue TLS certificates
 kubectl apply --filename cert-manager/issuer.yaml
 ```
 
