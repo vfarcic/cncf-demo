@@ -18,8 +18,6 @@ If this solution is chosen, we will implement Lima using [Rancher Desktop](https
 
 Since we are talking about building images here, it is worth noting that with this strategy, `nerdctl` is building the image using [BuildKit](https://docs.docker.com/build/buildkit/), which is a Docker project. BuildKit is an improved build solution to replace Docker's legacy builder.
 
-## More info
-
 * [How To Replace Docker With nerdctl And Rancher Desktop](https://youtu.be/evWPib0iNgY)
 * [Official site](https://github.com/lima-vm/lima)
 
@@ -33,6 +31,6 @@ The Cloud Native Buildpacks project takes source code as input and then outputs 
 
 ## What Is Your Choice?
 
-* [Lima](lima.md)
 * [kbld](kbld.md)
+* [Lima](lima.md)
 * [Cloud Native Buildpacks (CNB)](buildpacks.md)
