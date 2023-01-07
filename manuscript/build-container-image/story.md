@@ -31,6 +31,6 @@ The Cloud Native Buildpacks project takes source code as input and then outputs 
 
 ## What Is Your Choice?
 
-* [Lima](lima.md)
 * [kbld](kbld.md)
+* [Lima](lima.md)
 * [Cloud Native Buildpacks (CNB)](buildpacks.md)
