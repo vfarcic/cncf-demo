@@ -173,6 +173,7 @@ alias curl="curl --insecure"
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
+# VIKTOR - why do we have to do a 'helm repo add' command for jetstack but not traefik?
 helm repo add jetstack https://charts.jetstack.io
 
 # Skip this step if you chose to use `nip.io` instead of a
