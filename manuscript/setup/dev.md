@@ -101,6 +101,9 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 
 kubectl create namespace dev
 
+# Helm is a package manager for Kubernetes applications
+# Traefik is a reverse proxy server and load balancer that handles
+#   traffic that is first entering your Kubernetes cluster
 helm upgrade --install traefik traefik \
     --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
@@ -118,6 +121,7 @@ export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
 # If EKS
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
+# This is the IP address by which you can access your cluster!
 echo $INGRESS_HOST
 
 # Repeat the `export` commands if the output is empty
@@ -129,7 +133,9 @@ echo $INGRESS_HOST
 #   them and execute `export INGRESS_HOST=[...]` with `[...]`
 #   being the selected IP.
 
-# Use the output to configure DNS domain
+# Use the output to configure DNS domain. Do this by going to
+#   your registrar and creating a DNS record of type 'A' with the
+#   value set to the IP address of your output.
 
 # Replace `[...]` with the domain (e.g., sillydemo.com).
 # If you do not have a domain, replace `[...]` with
@@ -159,6 +165,11 @@ alias curl="curl --insecure"
 # - cncf-demo-dev
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
+# Configure these subdomains by going to your registrar and creating
+#   three more DNS records of type 'A', each with the name set to the
+#   subdomain (one record for 'harbor', one for 'notary', one for
+#   'cncf-demo-dev'), and the value of each record set to that same IP
+#   address of your output.
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
