@@ -6,10 +6,10 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
+# Select the fork as the default repository
 gh repo set-default
 
-# Select the fork as the default repository
-
+# This kubeconfig file will get created later, and added to .gitignore
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 ```
 
