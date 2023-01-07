@@ -74,7 +74,6 @@ gcloud container get-server-config --region us-east1
 # Replace `[...]` with a valid master version from the previous output.
 export K8S_VERSION=[...]
 
-# VIKTOR - for me this makes a 3-node cluster... but I see that '--num-nodes 1' flag
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type n1-standard-4 \
     --num-nodes 1 --cluster-version $K8S_VERSION \
@@ -97,13 +96,13 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 # 'yq' is a lightweight and portable command-line YAML processor
 
 # Install `jq` CLI from https://stedolan.github.io/jq/download
-# 'jp' is a lightweight and portable command-line JSON processor
+# 'jq' is a lightweight and portable command-line JSON processor
 
 kubectl create namespace dev
 
 # Helm is a package manager for Kubernetes applications
 # Traefik is a reverse proxy server and load balancer that handles
-#   traffic that is first entering your Kubernetes cluster
+#   traffic that enters from outside of your Kubernetes cluster
 helm upgrade --install traefik traefik \
     --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
@@ -173,7 +172,6 @@ alias curl="curl --insecure"
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-# VIKTOR - why do we have to do a 'helm repo add' command for jetstack but not traefik?
 helm repo add jetstack https://charts.jetstack.io
 
 # Skip this step if you chose to use `nip.io` instead of a
