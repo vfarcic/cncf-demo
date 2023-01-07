@@ -74,6 +74,7 @@ gcloud container get-server-config --region us-east1
 # Replace `[...]` with a valid master version from the previous output.
 export K8S_VERSION=[...]
 
+# VIKTOR - for me this makes a 3-node cluster... but I see that '--num-nodes 1' flag
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type n1-standard-4 \
     --num-nodes 1 --cluster-version $K8S_VERSION \
