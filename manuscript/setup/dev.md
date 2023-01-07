@@ -94,7 +94,10 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 
 ```bash
 # Install `yq` CLI from https://github.com/mikefarah/yq
+# 'yq' is a lightweight and portable command-line YAML processor
+
 # Install `jq` CLI from https://stedolan.github.io/jq/download
+# 'jp' is a lightweight and portable command-line JSON processor
 
 kubectl create namespace dev
 
