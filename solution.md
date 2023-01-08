@@ -2,9 +2,9 @@
 
 *This is a temporary work-in-progress file. **Do NOT use it.** Go to the [README.md](README) file instead.
 
-Almost all items in the graphs contain link if you prefer to jump straight into a specific part of the aadventure.
-If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Produciton, etc.).
-For reasons I cannot explain, the links do not work if they are not opened in a separate tab.
+Almost all items in the graphs contain a link if you prefer to jump straight into a specific part of the aadventure. If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Produciton, etc.).
+
+*For reasons I cannot explain, the links do not work if they are not opened in a separate tab.*
 
 ```mermaid
 flowchart TD
