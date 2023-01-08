@@ -23,4 +23,4 @@ docker image ls
 
 ## Continue The Adventure
 
-[Store Container Image In A Registry](../registry/story.md)
+The Adventure will continue soon...

@@ -1,5 +1,11 @@
 ## The Whole Story
 
+*This is a temporary work-in-progress file. **Do NOT use it.** Go to the [README.md](README) file instead.
+
+Almost all items in the graphs contain link if you prefer to jump straight into a specific part of the aadventure.
+If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Produciton, etc.).
+For reasons I cannot explain, the links do not work if they are not opened in a separate tab.
+
 ```mermaid
 flowchart TD
 
@@ -12,8 +18,10 @@ flowchart TD
         transparent(Walk)
 
     end
+```
 
-    Legend---Development
+```mermaid
+flowchart TD
 
     subgraph Development
 
@@ -195,7 +203,6 @@ flowchart TD
         click develop-devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
         develop-nocalhost(Nocalhost)
         click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
-        style develop-nocalhost fill:red
 
         %% -- Develop DevSpace --
         develop-devspace-kustomize(App as Kustomize)
@@ -205,33 +212,20 @@ flowchart TD
         develop-devspace-carvel(App as Carvel ytt)
         click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
 
-        %% -- Develop Nocalhost --
-        develop-nocalhost-kustomize(App as Kustomize)
-        click develop-nocalhost-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost-kustomize.md"
-        style develop-nocalhost-kustomize fill:red
-        develop-nocalhost-helm(App as Helm)
-        click develop-nocalhost-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost-helm.md"
-        style develop-nocalhost-helm fill:red
-        develop-nocalhost-carvel(App as Carvel ytt)
-        click develop-nocalhost-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost-carvel.md"
-        style develop-nocalhost-carvel fill:red
-
         %% -- Develop Connections --
         develop-->develop-telepresence-->dev-done
         develop-->develop-devspace
-        develop-->develop-nocalhost
+        develop-->develop-nocalhost-->dev-done
         develop-devspace-->develop-devspace-kustomize-->dev-done
         develop-devspace-->develop-devspace-helm-->dev-done
         develop-devspace-->develop-devspace-carvel-->dev-done
-        develop-nocalhost-->develop-nocalhost-kustomize-->dev-done
-        develop-nocalhost-->develop-nocalhost-helm-->dev-done
-        develop-nocalhost-->develop-nocalhost-carvel-->dev-done
 
         dev-done((Chapter End))
 
     end
 
     Development-->Production
+    Development-->Destroy
 
     subgraph Production
 
@@ -402,11 +396,20 @@ flowchart TD
         db-production-->db-production-crossplane
         db-production-->db-production-todo1
         db-production-->db-production-todo2
-        db-production-crossplane-->db-production-crossplane-google-->prod-done
-        db-production-crossplane-->db-production-crossplane-aws-->prod-done
-        db-production-crossplane-->db-production-crossplane-azure-->prod-done
+        db-production-crossplane-->db-production-crossplane-google-->continue
+        db-production-crossplane-->db-production-crossplane-aws-->continue
+        db-production-crossplane-->db-production-crossplane-azure-->continue
 
-        prod-done((Chapter End))
+        continue((The be continued...))
+
+    end
+
+    Production-->Destroy
+
+    subgraph Destroy
+
+        destroy((Destroy Everything))
+        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy.md"
 
     end
 ```

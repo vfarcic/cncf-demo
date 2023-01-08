@@ -22,8 +22,6 @@ Fun fact: `kbld` can work with multiple changing applications simultaneously, wh
 ```bash
 cat kbld/deployment.yaml
 
-pack config default-builder paketobuildpacks/builder:tiny
-
 kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
 
 # Replace `[...]` with the image tag from the output
@@ -37,4 +35,4 @@ docker image tag kbld:$TAG cncf-demo:$TAG
 
 ## Continue The Adventure
 
-[Store Container Image In A Registry](../registry/story.md)
+The Adventure will continue soon...

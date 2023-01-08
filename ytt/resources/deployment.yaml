@@ -39,7 +39,7 @@ spec:
         env:
           - name: DB_ENDPOINT
             #@ if data.values.db.enabled.crossplane.local:
-            value: #@ data.values.name + "-postgresql"
+            value: #@ data.values.db.id + "-postgresql"
             #@ elif data.values.db.enabled.helm:
             value: postgresql
             #@ else:
@@ -76,11 +76,11 @@ spec:
                 name: postgresql
                 key: postgres-password
                 #@ else:
-                name: #@ data.values.name
+                name: #@ data.values.db.id + "-postgresql"
                 key: postgres-password
                 #@ end
           - name: DB_NAME
-            #@ if data.values.db.enabled.helm:
+            #@ if data.values.db.enabled.helm or data.values.db.enabled.crossplane.local:
             value: #@ data.values.name
             #@ else:
             value: #@ data.values.db.id
