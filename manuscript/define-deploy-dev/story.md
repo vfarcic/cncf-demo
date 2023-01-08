@@ -6,6 +6,7 @@ TODO: Intro
 
 TODO: Explanation
 
+* [You're at the Helm](https://via.vmw.com/Helm)
 * [Official site](https://helm.sh)
 
 ## Choice 2: Kustomize
@@ -19,6 +20,7 @@ TODO: Explanation
 
 TODO: Explanation
 
+* [Carvel: Clean Tools for Cloud Native Problems](https://via.vmw.com/carvel)
 * [Official site](https://carvel.dev)
 
 ## What Is Your Choice?
