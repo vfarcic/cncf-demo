@@ -10,6 +10,8 @@ TODO: Intro
 
 # TODO: Install NGINX Ingress if the cluster was created with Cluster API
 
+kubectl --namespace ingress-nginx get all
+
 export INGRESS_CLASS_NAME=nginx
 
 # If NOT EKS

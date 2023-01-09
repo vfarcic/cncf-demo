@@ -310,6 +310,7 @@ flowchart TD
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
+        style ingress-nginx fill:red
         ingress-todo1(???)
         style ingress-todo1 fill:red
         ingress-argocd(GitOps With Argo CD)
