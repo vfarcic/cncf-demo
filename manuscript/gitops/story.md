@@ -7,6 +7,7 @@ TODO: Intro
 TODO: Explanation
 
 * [Flux CD v2 With GitOps Toolkit - Kubernetes Deployment And Sync Mechanism](https://youtu.be/R6OeIgb7lUI)
+* [What the Flux?! GitOps at Your Fingertips](https://via.vmw.com/Flux)
 * [Official site](https://fluxcd.io)
 
 ## Choice 2: Argo CD
@@ -14,6 +15,7 @@ TODO: Explanation
 TODO: Explanation
 
 * [Argo CD - Applying GitOps Principles To Manage A Production Environment In Kubernetes](https://youtu.be/vpWQeoaiRM4)
+* [What is Argo CD?](https://via.vmw.com/ArgoCD)
 * [Official site](https://argoproj.github.io/cd)
 
 ## Choice 3: Rancher Fleet

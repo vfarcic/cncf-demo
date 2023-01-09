@@ -12,14 +12,78 @@ Join us if you dare!  This is not for the faint of heart!
 
 * Non-CNCF projects lead to a dead end ☠
 
-# CNCF Projects
+## CNCF Projects
 
 * [Graduated & incubating](https://cncf.io/projects)
 * [Sandbox](https://cncf.io/sandbox-projects)
 
 ## The Adventure!
 
-* [Setup](manuscript/setup/dev.md)
+*This is a temporary work-in-progress file. **Do NOT use it.** Go to the [README.md](README) file instead.
+
+Almost all items in the graphs contain a link if you prefer to jump straight into a specific part of the aadventure. If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Produciton, etc.).
+
+*For reasons I cannot explain, the links do not work if they are not opened in a separate tab.*
+
+```mermaid
+flowchart TD
+
+    subgraph "Legend"
+
+        red(Not yet implemented)
+        style red fill:red
+        blue{{Make a choice}}
+        style blue fill:blue
+        transparent(Walk)
+
+    end
+```
+
+```mermaid
+flowchart TD
+
+    subgraph Development
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-dev((Setup))
+        click setup-dev "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/dev.md"
+
+        %% -- Setup Connections --
+        setup-dev-->bci
+
+        %% ---------------------------
+        %% -- Build Container Image --
+        %% ---------------------------
+        bci{{Build Container Image}}
+        click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md"
+        style bci fill:blue
+        bci-kbld(Carvel kbld)
+        click bci-kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md"
+        bci-lima(Lima)
+        click bci-lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
+        bci-buildpacks(Cloud Native Buildpacks / CNB)
+        click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
+
+        %% -- Build Container Image Connections --
+        bci-->bci-kbld-->continue
+        bci-->bci-lima-->continue
+        bci-->bci-buildpacks-->continue
+
+        continue((The be continued...))
+
+    end
+
+    Development-->Destroy
+
+    subgraph Destroy
+
+        destroy((Destroy Everything))
+        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy.md"
+
+    end
+```
 
 ## The Format
 

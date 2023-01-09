@@ -13,7 +13,7 @@ spec:
         #@ if data.values.db.enabled.helm:
         value: postgresql
         #@ elif data.values.db.enabled.crossplane.local:
-        value: #@ data.values.name + "-postgresql"
+        value: #@ data.values.db.id + "-postgresql"
         #@ else:
         valueFrom:
           secretKeyRef:
@@ -38,7 +38,7 @@ spec:
             name: postgresql
             key: postgres-password
             #@ elif data.values.db.enabled.crossplane.local:
-            name: #@ data.values.name + "-postgresql"
+            name: #@ data.values.db.id + "-postgresql"
             key: postgres-password
             #@ else:
             name: #@ data.values.db.id
@@ -47,7 +47,7 @@ spec:
       port:
         value: "5432"
       dbname:
-        #@ if data.values.db.enabled.helm:
+        #@ if data.values.db.enabled.helm or data.values.db.enabled.crossplane.local:
         value: #@ data.values.name
         #@ else:
         value: #@ data.values.db.id

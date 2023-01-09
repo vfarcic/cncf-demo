@@ -6,10 +6,10 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
+# Select the fork as the default repository
 gh repo set-default
 
-# Select the fork as the default repository
-
+# This kubeconfig file will get created later, and added to .gitignore
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 ```
 
@@ -93,10 +93,16 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 
 ```bash
 # Install `yq` CLI from https://github.com/mikefarah/yq
+# 'yq' is a lightweight and portable command-line YAML processor
+
 # Install `jq` CLI from https://stedolan.github.io/jq/download
+# 'jq' is a lightweight and portable command-line JSON processor
 
 kubectl create namespace dev
 
+# Helm is a package manager for Kubernetes applications
+# Traefik is a reverse proxy server and load balancer that handles
+#   traffic that enters from outside of your Kubernetes cluster
 helm upgrade --install traefik traefik \
     --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
@@ -114,6 +120,7 @@ export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
 # If EKS
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
+# This is the IP address by which you can access your cluster!
 echo $INGRESS_HOST
 
 # Repeat the `export` commands if the output is empty
@@ -125,7 +132,9 @@ echo $INGRESS_HOST
 #   them and execute `export INGRESS_HOST=[...]` with `[...]`
 #   being the selected IP.
 
-# Use the output to configure DNS domain
+# Use the output to configure DNS domain. Do this by going to
+#   your registrar and creating a DNS record of type 'A' with the
+#   value set to the IP address of your output.
 
 # Replace `[...]` with the domain (e.g., sillydemo.com).
 # If you do not have a domain, replace `[...]` with
@@ -155,6 +164,11 @@ alias curl="curl --insecure"
 # - cncf-demo-dev
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
+# Configure these subdomains by going to your registrar and creating
+#   three more DNS records of type 'A', each with the name set to the
+#   subdomain (one record for 'harbor', one for 'notary', one for
+#   'cncf-demo-dev'), and the value of each record set to that same IP
+#   address of your output.
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
@@ -166,6 +180,7 @@ helm repo update
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
+# deploy cert-manager to automate the process of issuing and renewing TLS certificates
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
@@ -182,6 +197,7 @@ yq --inplace ".spec.acme.email = \"$EMAIL\"" \
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
+# Create a ClusterIssuer resource that can issue TLS certificates
 kubectl apply --filename cert-manager/issuer.yaml
 ```
 
