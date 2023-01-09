@@ -441,8 +441,19 @@ flowchart TD
         style instrumentation-open-metrics fill:red
 
         %% -- Instrumentation Connections --
-        instrumentation-->instrumentation-open-telemetry
-        instrumentation-->instrumentation-open-metrics
+        instrumentation-->instrumentation-open-telemetry-->tracing
+        instrumentation-->instrumentation-open-metrics-->tracing
+
+        %% -------------
+        %% -- Tracing --
+        %% -------------
+        tracing{{Tracing}}
+        style tracing fill:red
+        tracing-jaeger(Jaeger)
+        style tracing-jaeger fill:red
+
+        %% -- Tracing Connections --
+        tracing-->tracing-jaeger
 
     end
 
@@ -616,7 +627,6 @@ flowchart TD
 * Flux
 * Argo Workflows
 * FluentD
-* Jaeger
 * CoreDNS
 * TiKV
 * Vitess
