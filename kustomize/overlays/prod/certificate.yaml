@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cncf-demo
+spec:
+  secretName: cncf-demo
+  issuerRef:
+    kind: ClusterIssuer
+    name: production
+  commonName: cncf-demo-dev.sillydemo.com
+  dnsNames:
+    - cncf-demo-dev.sillydemo.com

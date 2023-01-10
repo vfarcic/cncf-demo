@@ -1,0 +1,24 @@
+---
+
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: SQLClaim
+metadata:
+  name: cncf-demo
+spec:
+  id: cncf-demo-db-dev
+  compositionSelector:
+    matchLabels:
+      provider: google-official
+      db: postgresql
+  parameters:
+    version: "13"
+    size: small
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cncf-demo-password
+data:
+  password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=

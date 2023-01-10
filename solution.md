@@ -310,7 +310,6 @@ flowchart TD
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
-        style ingress-nginx fill:red
         ingress-todo1(???)
         style ingress-todo1 fill:red
         ingress-argocd(GitOps With Argo CD)
@@ -346,7 +345,6 @@ flowchart TD
         click app-argo-cd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-helm.md"
         app-argo-cd-kustomize(App As Kustomize)
         click app-argo-cd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-kustomize.md"
-        style app-argo-cd-kustomize fill:red
         app-argo-cd-carvel(App As Carvel ytt)
         click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-carvel.md"
 

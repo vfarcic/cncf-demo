@@ -1,0 +1,17 @@
+---
+
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: SQLClaim
+metadata:
+  name: cncf-demo
+spec:
+  id: cncf-demo-db-dev
+  compositionSelector:
+    matchLabels:
+      provider: local-k8s
+      db: postgresql
+  parameters:
+    version: "13.4"
+    size: small
+  writeConnectionSecretToRef:
+    name: cncf-demo-postgresql

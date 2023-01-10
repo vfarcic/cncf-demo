@@ -1,4 +1,4 @@
-# Deploy The App Defined As CArvel ytt To Production With Argo CD
+# Deploy The App Defined As Carvel ytt To Production With Argo CD
 
 TODO: Intro
 
@@ -33,9 +33,6 @@ yq --inplace ".ingress.host = \"cncf-demo.$DOMAIN\"" \
     ytt/values-prod.yaml
 
 yq --inplace ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
-    ytt/values-prod.yaml
-
-yq --inplace ".schemahero.enabled = false" \
     ytt/values-prod.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \

@@ -31,8 +31,7 @@ export VALUES=$(\
     yq ".spec.source.helm.values" apps/cncf-demo.yaml \
     | yq ".image.tag = \"$TAG\"" \
     | yq ".ingress.host = \"cncf-demo.$DOMAIN\"" \
-    | yq ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
-    | yq ".schemahero.enabled = false"
+    | yq ".ingress.className = \"$INGRESS_CLASS_NAME\""
 )
 
 echo $VALUES

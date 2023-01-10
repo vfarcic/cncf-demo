@@ -4,6 +4,8 @@ TODO: Intro
 
 ## Setup
 
+**You can skip the steps in this section if you created the production cluster using Crossplane since it already comes with Crossplane installed and configured inside that cluster.**
+
 ```bash
 helm repo add crossplane-stable 
 

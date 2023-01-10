@@ -25,10 +25,6 @@ cat argocd/project.yaml
 
 kubectl apply --filename argocd/project.yaml
 
-cat argocd/apps.yaml
-
-kubectl apply --filename argocd/apps.yaml
-
 ls -1 schema-hero
 
 cat argocd/schema-hero.yaml
@@ -44,6 +40,10 @@ git add .
 git commit -m "Infra"
 
 git push
+
+cat argocd/apps.yaml
+
+kubectl apply --filename argocd/apps.yaml
 
 kubectl --namespace schemahero-system get all
 

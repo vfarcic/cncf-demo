@@ -1,0 +1,9 @@
+- op: replace
+  path: /spec/rules/0/host
+  value: cncf-demo.sillydemo.com
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: cncf-demo.sillydemo.com
+- op: replace
+  path: /spec/ingressClassName
+  value: cncf-demo.sillydemo.com

@@ -56,6 +56,8 @@ helm upgrade --install argocd argo/argo-cd \
     --namespace argocd --create-namespace \
     --values argocd/helm-values.yaml --wait
 
+# Skip this step if you chose to use `nip.io` instead of a
+#   "real" domain
 cat argocd/certificate.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
