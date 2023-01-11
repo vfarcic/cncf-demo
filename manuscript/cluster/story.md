@@ -26,6 +26,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [Cluster API](cluster-api.md)
+* [Pulumi](pulumi.md)
 * [Crossplane](crossplane.md)
 * [Terraform](terraform.md)

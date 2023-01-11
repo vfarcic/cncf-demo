@@ -42,13 +42,15 @@ cat crossplane/aws-eks.yaml
 kubectl --namespace production apply \
     --filename crossplane/aws-eks.yaml
 
+# TODO: Remove
+# kubectl get cluster.eks.aws.crossplane.io,nodegroup.eks.aws.crossplane.io,subnet.ec2.aws.crossplane.io,vpc.ec2.aws.crossplane.io,routetable.ec2.aws.crossplane.io,securitygroup.ec2.aws.crossplane.io,internetgateway.ec2.aws.crossplane.io,rolepolicyattachment.iam.aws.crossplane.io,role.iam.aws.crossplane.io,release.helm.crossplane.io,object.kubernetes.crossplane.io
+
 kubectl get managed
 
 kubectl --namespace production get clusterclaims
 
-cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
-
-./crossplane/get-kubeconfig-$XP_DESTINATION.sh
+aws eks update-kubeconfig --region us-east-1 \
+    --name production --kubeconfig $PWD/kubeconfig-prod.yaml
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 

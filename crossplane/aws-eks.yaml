@@ -8,6 +8,7 @@ spec:
     matchLabels:
       provider: aws
       cluster: eks
+      version: 1.24
   parameters:
     nodeSize: medium
     minNodeCount: 3

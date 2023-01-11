@@ -32,20 +32,23 @@ az group delete --name production --yes
 Execute the commands in this section only if you used AWS
 
 ```bash
-# If using Crossplane
-kubectl --namespace dev delete sqlclaim cncf-demo
+kubectl --kubeconfig $PWD/kubeconfig-dev.yaml \
+    --namespace traefik delete service traefik
 
 # If using Crossplane
-kubectl --namespace production delete clusterclaim production
+kubectl --kubeconfig $PWD/kubeconfig-dev.yaml \
+    --namespace dev delete sqlclaim cncf-demo
 
 # If using Crossplane
-kubectl get managed
+kubectl --kubeconfig $PWD/kubeconfig-dev.yaml \
+    --namespace production delete clusterclaim production
+
+# If using Crossplane
+kubectl --kubeconfig $PWD/kubeconfig-dev.yaml get managed
 
 # If Crossplane with AWS
 # Wait until all the resources are removed
 #   (ignore `database.postgresql.sql.crossplane.io`)
-
-kubectl --namespace traefik delete service traefik
 
 eksctl delete cluster --name dot --region us-east-1
 ```
