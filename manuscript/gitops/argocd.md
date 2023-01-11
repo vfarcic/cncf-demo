@@ -45,6 +45,8 @@ cat argocd/apps.yaml
 
 kubectl apply --filename argocd/apps.yaml
 
+kubectl --namespace argocd get applications
+
 kubectl --namespace schemahero-system get all
 
 # Wait until the resources appear in the Namespace

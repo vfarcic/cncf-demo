@@ -49,8 +49,9 @@ kubectl get managed
 
 kubectl --namespace production get clusterclaims
 
-aws eks update-kubeconfig --region us-east-1 \
-    --name production --kubeconfig $PWD/kubeconfig-prod.yaml
+cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
+
+./crossplane/get-kubeconfig-$XP_DESTINATION.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 

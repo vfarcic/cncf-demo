@@ -275,7 +275,6 @@ flowchart TD
         style gitops fill:blue
         gitops-flux(Flux)
         click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
-        style gitops-flux fill:red
         gitops-argocd(Argo CD)
         click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
         gitops-rancher-fleet(Rancher Fleet)
@@ -300,20 +299,20 @@ flowchart TD
         style ingress-todo1 fill:red
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
-        ingress-else(GitOps With Something Else)
-        click ingress-else "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-else.md"
-        style ingress-else fill:red
+        ingress-flux(GitOps Flux)
+        click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
+        style ingress-flux fill:red
 
         %% -- Ingress Connections --
         ingress-->ingress-contour
         ingress-->ingress-nginx
         ingress-->ingress-todo1
         ingress-contour-->ingress-argocd
-        ingress-contour-->ingress-else
+        ingress-contour-->ingress-flux
         ingress-nginx-->ingress-argocd
-        ingress-nginx-->ingress-else
+        ingress-nginx-->ingress-flux
         ingress-argocd-->app
-        ingress-else-->app
+        ingress-flux-->app
 
         %% ---------
         %% -- App --

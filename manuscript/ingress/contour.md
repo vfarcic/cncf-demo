@@ -45,4 +45,4 @@ export INGRESS_CLASS_NAME=contour
 ## Which GitOps Tool Did You Choose?
 
 [Argo CD](gitops-argocd.md)
-[Something Else](gitops-else.md)
+[Flux](gitops-flux.md)

@@ -17,8 +17,6 @@ export GITHUB_USER=[...]
 
 # Replace `[...]` with the GitHub organization where the repo is located
 export GITHUB_ORG=[...]
-
-./crossplane/get-kubeconfig-$XP_DESTINATION.sh
 ```
 
 ## Do
@@ -31,10 +29,10 @@ flux bootstrap github --owner $GITHUB_ORG \
 git pull
 
 flux create source git infra --url $REPO_URL --branch main \
-    --interval 30s --export | tee ./flux/infra.yaml
+    --interval 30s --export | tee ./flux-system/infra-repo.yaml
 
 flux create source git apps --url $REPO_URL --branch main \
-    --interval 30s --export | tee ./flux/apps.yaml
+    --interval 30s --export | tee ./flux-system/apps-repo.yaml
 
 git add .
 
@@ -42,20 +40,23 @@ git commit -m "Flux"
 
 git push
 
+kubectl --namespace flux-system get gitrepositories
+
+# Wait until all three repositories are ready
+
 ls -1 schema-hero
 
 cat flux/schema-hero.yaml
 
 cp flux/schema-hero.yaml infra/.
 
-# TODO: Continue
+cat flux/cert-manager.yaml
 
+cp flux/cert-manager.yaml infra/.
 
+cat flux/apps.yaml
 
-
-cat argocd/cert-manager.yaml
-
-cp argocd/cert-manager.yaml infra/.
+cp flux/apps.yaml flux-system/apps.yaml
 
 git add .
 
@@ -63,9 +64,10 @@ git commit -m "Infra"
 
 git push
 
-cat argocd/apps.yaml
+kubectl --namespace flux-system get kustomizations
 
-kubectl apply --filename argocd/apps.yaml
+kubectl --namespace production \
+    get kustomizations,helmrepositories,helmreleases
 
 kubectl --namespace schemahero-system get all
 

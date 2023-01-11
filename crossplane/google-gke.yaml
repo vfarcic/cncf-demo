@@ -8,7 +8,7 @@ spec:
     matchLabels:
       provider: google-official
       cluster: gke
-      version: 1.25.5-gke.1500
   parameters:
     nodeSize: medium
     minNodeCount: 1
+    version: 1.25.5-gke.1500

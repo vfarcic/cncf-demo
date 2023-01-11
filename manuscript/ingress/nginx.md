@@ -5,7 +5,7 @@ TODO: Intro
 ## Do
 
 ```bash
-cat argocd/nginx.yaml
+cat flux/nginx.yaml
 
 cp argocd/nginx.yaml infra/.
 
@@ -45,4 +45,4 @@ export INGRESS_CLASS_NAME=nginx
 ## Which GitOps Tool Did You Choose?
 
 [Argo CD](gitops-argocd.md)
-[Something Else](gitops-else.md)
+[Flux](gitops-flux.md)
