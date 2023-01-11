@@ -244,23 +244,12 @@ flowchart TD
         cluster{{Create a Cluster}}
         click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/story.md"
         style cluster fill:blue
-        cluster-cluster-api(Cluster API)
-        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        cluster-pulumi(Pulumi)
+        click cluster-pulumi "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/pulumi.md"
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
         cluster-terraform(Terraform)
         click cluster-terraform "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/terraform.md"
-
-        %% -- Cluster Cluster API --
-        cluster-cluster-api-google(Google Cloud)
-        click cluster-cluster-api-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api-google.md"
-        style cluster-cluster-api-google fill:red
-        cluster-cluster-api-aws(AWS)
-        click cluster-cluster-api-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api-aws.md"
-        style cluster-cluster-api-aws fill:red
-        cluster-cluster-api-azure(Azure)
-        click cluster-cluster-api-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api-azure.md"
-        style cluster-cluster-api-azure fill:red
 
         %% -- Cluster Crossplane --
         cluster-crossplane-google(Google Cloud)
@@ -271,12 +260,9 @@ flowchart TD
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
 
         %% -- Cluster Connections --
-        cluster-->cluster-cluster-api
+        cluster-->cluster-pulumi
         cluster-->cluster-crossplane
         cluster-->cluster-terraform
-        cluster-cluster-api-->cluster-cluster-api-google-->gitops
-        cluster-cluster-api-->cluster-cluster-api-aws-->gitops
-        cluster-cluster-api-->cluster-cluster-api-azure-->gitops
         cluster-crossplane-->cluster-crossplane-google-->gitops
         cluster-crossplane-->cluster-crossplane-aws-->gitops
         cluster-crossplane-->cluster-crossplane-azure-->gitops
@@ -551,15 +537,6 @@ flowchart TD
 * Istio
 * Open Service Mesh
 * Aeraki Mesh
-* Athenz
-* BFE
-* Chaosblade
-* Clusterpedia
-* CNI-Genie
-* Confidential Containers
-* ContainerSSH
-* Curiefense
-* Curve
 * Devfile
 * DevStream
 * Dex
@@ -651,6 +628,15 @@ flowchart TD
 * Rook
 * Container Network Interface (CNI)
 * CRI-O
+* Athenz
+* BFE
+* Chaosblade
+* Clusterpedia
+* CNI-Genie
+* Confidential Containers
+* ContainerSSH
+* Curiefense
+* Curve
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
