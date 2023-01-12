@@ -10,19 +10,5 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: apps
-  targetNamespace: production
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: production-infra
-  namespace: flux-system
-spec:
-  interval: 5m
-  path: ./infra
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: infra
+    name: flux-system
   targetNamespace: production

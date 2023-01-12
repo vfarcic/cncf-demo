@@ -23,4 +23,5 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
+  releaseName: contour
   targetNamespace: projectcontour

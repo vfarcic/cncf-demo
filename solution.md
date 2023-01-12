@@ -52,6 +52,9 @@ flowchart TD
         bci-->bci-lima-->registry
         bci-->bci-buildpacks-->registry
 
+        %% -----------------------------------------
+        %% -- Store Container Image in a Registry --
+        %% -----------------------------------------
         registry{{Store Container Image In A Registry}}
         click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/story.md"
         style registry fill:blue
@@ -67,6 +70,9 @@ flowchart TD
         registry-->registry-harbor-->ddd
         registry-->registry-dragonfly-->ddd
 
+        %% --------------------------------------
+        %% -- Define And Deploy The App To Dev --
+        %% --------------------------------------
         ddd{{Define And Deploy The App To Dev}}
         click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md"
         style ddd fill:blue
@@ -81,6 +87,9 @@ flowchart TD
         ddd-->ddd-kustomize-->https
         ddd-->ddd-carvel-->https
 
+        %% ---------------
+        %% -- Use HTTPS --
+        %% ---------------
         https{{Use HTTPS}}
         click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/story.md"
         style https fill:blue
@@ -103,9 +112,9 @@ flowchart TD
         https-cert-manager-->https-cert-manager-kustomize-->db
         https-cert-manager-->https-cert-manager-carvel-->db
 
-        %% --------
-        %% -- DB --
-        %% --------
+        %% --------------------------------
+        %% -- Setup PostgreSQL DB In Dev --
+        %% --------------------------------
         db{{Setup PostgreSQL DB In Dev}}
         click db "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/story.md"
         style db fill:blue
@@ -168,6 +177,9 @@ flowchart TD
         db-crossplane-kustomize-->db-schema
         db-crossplane-carvel-->db-schema
 
+        %% ----------------------
+        %% -- Manage DB Schema --
+        %% ----------------------
         db-schema{{Manage DB Schema}}
         click db-schema "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md"
         style db-schema fill:blue
@@ -191,9 +203,9 @@ flowchart TD
         db-schema-schemahero-->db-schema-schemahero-kustomize-->develop
         db-schema-schemahero-->db-schema-schemahero-carvel-->develop
 
-        %% -------------
-        %% -- Develop --
-        %% -------------
+        %% ---------------------
+        %% -- Develop The App --
+        %% ---------------------
         develop{{Develop The App}}
         click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/story.md"
         style develop fill:blue
@@ -485,6 +497,8 @@ flowchart TD
         style tuf fill:red
         notary(Notary)
         style notary fill:red
+        kubescape(Kubescape)
+        style kubescape fill:red
 
     end
 

@@ -54,6 +54,8 @@ kubectl --namespace production get clusterclaims
 
 cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
 
+chmod +x crossplane/get-kubeconfig-$XP_DESTINATION.sh
+
 ./crossplane/get-kubeconfig-$XP_DESTINATION.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml

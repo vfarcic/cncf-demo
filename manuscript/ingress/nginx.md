@@ -5,13 +5,13 @@ TODO: Intro
 ## Do
 
 ```bash
-cat flux/nginx.yaml
+cat $GITOPS_APP/nginx.yaml
 
-cp argocd/nginx.yaml infra/.
+cp $GITOPS_APP/nginx.yaml infra/.
 
 git add . 
 
-git commit -m "Contour"
+git commit -m "NGINX"
 
 git push
 

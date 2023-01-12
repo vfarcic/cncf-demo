@@ -85,6 +85,8 @@ git add .
 git commit -m "Infra"
 
 git push
+
+export GITOPS_APP=argocd
 ```
 
 ## Continue The Adventure

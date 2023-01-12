@@ -1,9 +1,5 @@
 # Destroy
 
-```bash
-export KUBECONFIG=$PWD/kubeconfig-dev.yaml
-```
-
 ## Google Cloud
 
 Execute the commands in this section only if you used Google Cloud

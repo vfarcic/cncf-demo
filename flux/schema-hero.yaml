@@ -10,6 +10,6 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: infra
+    name: flux-system
     namespace: flux-system
   targetNamespace: schemahero-system

@@ -23,22 +23,10 @@ export GITHUB_ORG=[...]
 
 ```bash
 flux bootstrap github --owner $GITHUB_ORG \
-    --repository cncf-demo --branch main --path ./flux-system \
+    --repository cncf-demo --branch main --path ./infra \
     --personal
 
 git pull
-
-flux create source git infra --url $REPO_URL --branch main \
-    --interval 30s --export | tee ./flux-system/infra-repo.yaml
-
-flux create source git apps --url $REPO_URL --branch main \
-    --interval 30s --export | tee ./flux-system/apps-repo.yaml
-
-git add .
-
-git commit -m "Flux"
-
-git push
 
 kubectl --namespace flux-system get gitrepositories
 
@@ -56,7 +44,7 @@ cp flux/cert-manager.yaml infra/.
 
 cat flux/apps.yaml
 
-cp flux/apps.yaml flux-system/apps.yaml
+cp flux/apps.yaml infra/apps.yaml
 
 git add .
 
@@ -64,9 +52,7 @@ git commit -m "Infra"
 
 git push
 
-kubectl --namespace flux-system get kustomizations
-
-kubectl --namespace production \
+kubectl --namespace flux-system \
     get kustomizations,helmrepositories,helmreleases
 
 kubectl --namespace schemahero-system get all
@@ -107,6 +93,8 @@ git add .
 git commit -m "Infra"
 
 git push
+
+export GITOPS_APP=flux
 ```
 
 ## Continue The Adventure
