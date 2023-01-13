@@ -1,14 +1,11 @@
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
   name: cncf-demo-db-dev-password
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
-
 ---
-
 apiVersion: devopstoolkitseries.com/v1alpha1
 kind: SQLClaim
 metadata:

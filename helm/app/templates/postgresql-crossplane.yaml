@@ -27,7 +27,7 @@ spec:
     size: small
 
 {{- end }}
-{{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.azure) }}
+{{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.aws) }}
 ---
 
 apiVersion: v1
