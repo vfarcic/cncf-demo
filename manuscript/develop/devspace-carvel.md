@@ -36,7 +36,7 @@ go run .
 # Open a second terminal and navigate to the project root
 
 # In the second terminal
-# Open `root.go` and modify the output
+# Open `root.go` and modify the output however you like
 
 # In the first terminal
 # `ctrl+c`
