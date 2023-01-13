@@ -85,6 +85,20 @@ flowchart TD
     end
 ```
 
+## Episodes
+
+### Development
+
+| Name | Guests | Date | Link |
+| --- | --- | --- | --- |
+| Build Container Image | TODO: | TODO: | [story](manuscript/build-container-image/story.md) |
+| Store Container Image in a Registry | TODO: | TODO: | [story](manuscript/registry/story.md) |
+| Define And Deploy The App To Dev | TODO: | TODO: | [story](manuscript/define-deploy-dev/story.md) |
+| Use HTTPS | TODO: | TODO: | [story](manuscript/https/story.md) |
+| Setup PostgreSQL DB In Dev | TODO: | TODO: | [story](manuscript/db/story.md) |
+| Manage DB Schema | TODO: | TODO: | [story](manuscript/db-schema/story.md) |
+| Develop The App | TODO: | TODO: | [story](manuscript/develop/story.md) |
+
 ## The Format
 
 * Recap of the decisions made in the app's journey so far (<=5 min.)
