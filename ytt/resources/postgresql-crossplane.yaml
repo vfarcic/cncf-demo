@@ -16,7 +16,7 @@ spec:
       #@ if/end data.values.db.enabled.crossplane.azure:
       provider: azure-official
       #@ if/end data.values.db.enabled.crossplane.aws:
-      provider: aws
+      provider: aws-official
       db: postgresql
   parameters:
     version: "11"

@@ -19,7 +19,7 @@ spec:
       provider: azure-official
       {{- end }}
       {{- if .Values.db.enabled.crossplane.aws }}
-      provider: aws
+      provider: aws-official
       {{- end }}
       db: postgresql
   parameters:

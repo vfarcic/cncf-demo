@@ -6,7 +6,7 @@ spec:
   id: production
   compositionSelector:
     matchLabels:
-      provider: aws
+      provider: aws-official
       cluster: eks
   parameters:
     nodeSize: medium
