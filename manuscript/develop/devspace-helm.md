@@ -25,7 +25,7 @@ devspace dev --namespace dev
 
 go run .
 
-# Open localhost:8080 in a browser
+# Check the newly opened browser tab
 
 # Open a second terminal and navigate to the project root
 
@@ -46,7 +46,8 @@ go run .
 # In the first terminal
 exit
 
-# Close the second terminal
+# In the second terminal
+exit
 
 devspace purge --namespace dev
 ```

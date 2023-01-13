@@ -46,7 +46,8 @@ go run .
 # In the first terminal
 exit
 
-# Close the second terminal
+# In the second terminal
+exit
 
 devspace purge --namespace dev
 ```
