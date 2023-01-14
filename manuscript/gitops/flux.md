@@ -53,7 +53,7 @@ git commit -m "Infra"
 git push
 
 kubectl --namespace flux-system \
-    get kustomizations,helmrepositories,helmreleases
+    get gitrepositories,kustomizations,helmrepositories,helmreleases
 
 kubectl --namespace schemahero-system get all
 

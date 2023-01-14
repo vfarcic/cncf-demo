@@ -313,7 +313,6 @@ flowchart TD
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
-        style ingress-flux fill:red
 
         %% -- Ingress Connections --
         ingress-->ingress-contour
@@ -326,45 +325,23 @@ flowchart TD
         ingress-argocd-->app
         ingress-flux-->app
 
-        %% ---------
-        %% -- App --
-        %% ---------
+        %% ----------------------------------
+        %% -- Deploy The App To Production --
+        %% ----------------------------------
         app{{Deploy The App To Production}}
         click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/story.md"
         style app fill:blue
-        app-argo-cd(Argo CD)
-        click app-argo-cd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd.md"
-        app-flux(Flux)
-        click app-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux.md"
-
-        %% -- App Argo CD --
-        app-argo-cd-helm(App As Helm)
-        click app-argo-cd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-helm.md"
-        app-argo-cd-kustomize(App As Kustomize)
-        click app-argo-cd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-kustomize.md"
-        app-argo-cd-carvel(App As Carvel ytt)
-        click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/argo-cd-carvel.md"
-
-        %% -- App Flux --
-        app-flux-helm(App As Helm)
-        click app-flux-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux-helm.md"
-        style app-flux-helm fill:red
-        app-flux-kustomize(App As Kustomize)
-        click app-flux-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux-kustomize.md"
-        style app-flux-kustomize fill:red
-        app-flux-carvel(App As Carvel ytt)
-        click app-flux-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/flux-carvel.md"
-        style app-flux-carvel fill:red
+        app-helm(App As Helm)
+        click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
+        app-kustomize(App As Kustomize)
+        click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
+        app-carvel(App As Carvel ytt)
+        click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
 
         %% -- App Connections --
-        app-->app-argo-cd
-        app-->app-flux-->db-production
-        app-argo-cd-->app-argo-cd-helm-->db-production
-        app-argo-cd-->app-argo-cd-kustomize-->db-production
-        app-argo-cd-->app-argo-cd-carvel-->db-production
-        app-flux-->app-flux-helm-->db-production
-        app-flux-->app-flux-kustomize-->db-production
-        app-flux-->app-flux-carvel-->db-production
+        app-->app-helm-->db-production
+        app-->app-kustomize-->db-production
+        app-->app-carvel-->db-production
 
         %% --------------
         %% -- Database --
@@ -404,8 +381,8 @@ flowchart TD
 
     subgraph Destroy
 
-        destroy((Destroy Everything))
-        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy.md"
+        destroy-all((Destroy Everything))
+        click destroy-all "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy-all.md"
 
     end
 ```

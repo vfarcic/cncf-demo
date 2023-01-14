@@ -5,8 +5,9 @@ TODO: Intro
 ## Setup
 
 ```bash
+# Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/cncf-demo-helm.yaml
+    $GITOPS_APP/cncf-demo-helm.yaml
 
 # Execute command that follows only if you jumped directly into
 #   this chapter (if you did not go through the steps that built
@@ -23,20 +24,34 @@ echo $INGRESS_HOST
 ## Do
 
 ```bash
-cat argocd/cncf-demo-helm.yaml
+cat $GITOPS_APP/cncf-demo-helm.yaml
 
-cp argocd/cncf-demo-helm.yaml apps/cncf-demo.yaml
+cp $GITOPS_APP/cncf-demo-helm.yaml apps/cncf-demo.yaml
 
+# Execute the command that follows only if you are using Argo CD
 export VALUES=$(\
     yq ".spec.source.helm.values" apps/cncf-demo.yaml \
-    | yq ".image.tag = \"$TAG\"" \
-    | yq ".ingress.host = \"cncf-demo.$DOMAIN\"" \
-    | yq ".ingress.className = \"$INGRESS_CLASS_NAME\""
+    | yq ".spec.values.image.tag = \"$TAG\"" \
+    | yq ".spec.values.ingress.host = \"cncf-demo.$DOMAIN\"" \
+    | yq ".spec.values.ingress.className = \"$INGRESS_CLASS_NAME\""
 )
 
-echo $VALUES
-
+# Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.helm.values = \"$VALUES\"" \
+    apps/cncf-demo.yaml
+
+# Execute the command that follows only if you are using Flux
+yq --inplace ".spec.values.image.tag = \"$TAG\"" \
+    apps/cncf-demo.yaml
+
+# Execute the command that follows only if you are using Flux
+yq --inplace \
+    ".spec.values.ingress.host = \"cncf-demo.$DOMAIN\"" \
+    apps/cncf-demo.yaml
+
+# Execute the command that follows only if you are using Flux
+yq --inplace \
+    ".spec.values.ingress.className = \"$INGRESS_CLASS_NAME\"" \
     apps/cncf-demo.yaml
 
 cat apps/cncf-demo.yaml

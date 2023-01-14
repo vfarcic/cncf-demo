@@ -1,0 +1,5 @@
+dependencies:
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.1.2
+  condition: db.enabled.helm

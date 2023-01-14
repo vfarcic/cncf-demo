@@ -5,8 +5,9 @@ TODO: Intro
 ## Setup
 
 ```bash
+# Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/cncf-demo-kustomize.yaml
+    $GITOPS_APP/cncf-demo-kustomize.yaml
 
 # Execute the command that follows only if you jumped directly
 #    into this chapter (if you did not go through the steps that
@@ -28,9 +29,9 @@ echo $INGRESS_HOST
 ## Do
 
 ```bash
-cat argocd/cncf-demo-kustomize.yaml
+cat $GITOPS_APP/cncf-demo-kustomize.yaml
 
-cp argocd/cncf-demo-kustomize.yaml apps/cncf-demo.yaml
+cp $GITOPS_APP/cncf-demo-kustomize.yaml apps/cncf-demo.yaml
 
 cd kustomize/overlays/prod
 

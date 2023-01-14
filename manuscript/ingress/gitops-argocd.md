@@ -22,9 +22,9 @@ echo $INGRESS_HOST
 
 # Configure DNS for the following subdomains (skip this step if
 #   you chose to use `nip.io` instead of a "real" domain):
-# - argocd
+# - gitops
 
-dig +short argocd.$DOMAIN
+dig +short gitops.$DOMAIN
 
 # Repeat the previous command if the output is NOT the IP address
 #   of the Ingress controller.
@@ -37,12 +37,12 @@ yq --inplace ".server.ingress.enabled = true" \
 yq --inplace ".server.ingress.ingressClassName = \"$INGRESS_CLASS_NAME\"" \
     argocd/helm-values.yaml
 
-yq --inplace ".server.ingress.hosts[0] = \"argocd.$DOMAIN\"" \
+yq --inplace ".server.ingress.hosts[0] = \"gitops.$DOMAIN\"" \
     argocd/helm-values.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-yq --inplace ".server.ingress.tls[0].hosts[0] = \"argocd.$DOMAIN\"" \
+yq --inplace ".server.ingress.tls[0].hosts[0] = \"gitops.$DOMAIN\"" \
     argocd/helm-values.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
@@ -62,12 +62,12 @@ cat argocd/certificate.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-yq --inplace ".spec.commonName = \"argocd.$DOMAIN\"" \
+yq --inplace ".spec.commonName = \"gitops.$DOMAIN\"" \
     argocd/certificate.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-yq --inplace ".spec.dnsNames[0] = \"argocd.$DOMAIN\"" \
+yq --inplace ".spec.dnsNames[0] = \"gitops.$DOMAIN\"" \
     argocd/certificate.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
@@ -86,7 +86,7 @@ git push
 
 # Change `https` to `http` if you chose to use `nip.io` instead
 #   of a "real" domain
-echo "https://argocd.$DOMAIN"
+echo "https://gitops.$DOMAIN"
 
 # Open it in a browser
 

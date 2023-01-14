@@ -5,9 +5,9 @@ TODO: Intro
 ## Do
 
 ```bash
-cat argocd/contour.yaml
+cat $GITOPS_APP/contour.yaml
 
-cp argocd/contour.yaml infra/.
+cp $GITOPS_APP/contour.yaml infra/.
 
 git add . 
 

@@ -5,8 +5,9 @@ TODO: Intro
 ## Setup
 
 ```bash
+# Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/cncf-demo-ytt.yaml
+    $GITOPS_APP/cncf-demo-ytt.yaml
 
 # Execute command that follows only if you jumped directly into
 #   this chapter (if you did not go through the steps that built
@@ -23,9 +24,9 @@ echo $INGRESS_HOST
 ## Do
 
 ```bash
-cat argocd/cncf-demo-ytt.yaml
+cat $GITOPS_APP/cncf-demo-ytt.yaml
 
-cp argocd/cncf-demo-ytt.yaml apps/cncf-demo.yaml
+cp $GITOPS_APP/cncf-demo-ytt.yaml apps/cncf-demo.yaml
 
 yq --inplace ".image.tag = \"$TAG\"" ytt/values-prod.yaml
 

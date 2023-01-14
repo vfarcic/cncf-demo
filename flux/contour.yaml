@@ -25,3 +25,5 @@ spec:
         namespace: flux-system
   releaseName: contour
   targetNamespace: projectcontour
+  install:
+    createNamespace: true

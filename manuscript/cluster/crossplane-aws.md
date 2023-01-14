@@ -22,7 +22,8 @@ kubectl --namespace crossplane-system \
     create secret generic aws-creds \
     --from-file creds=./aws-creds.conf
 
-kubectl apply --filename crossplane-config/provider-aws-official.yaml
+kubectl apply \
+    --filename crossplane-config/provider-aws-official.yaml
 
 kubectl get pkgrev
 
@@ -43,7 +44,7 @@ kubectl --namespace production apply \
     --filename crossplane/aws-eks.yaml
 
 # TODO: Remove
-# kubectl get cluster.eks.aws.crossplane.io,nodegroup.eks.aws.crossplane.io,subnet.ec2.aws.crossplane.io,vpc.ec2.aws.crossplane.io,routetable.ec2.aws.crossplane.io,securitygroup.ec2.aws.crossplane.io,internetgateway.ec2.aws.crossplane.io,rolepolicyattachment.iam.aws.crossplane.io,role.iam.aws.crossplane.io,release.helm.crossplane.io,object.kubernetes.crossplane.io
+# kubectl get clusters.eks.aws.upbound.io,clusterauths.eks.aws.upbound.io,nodegroups.eks.aws.upbound.io,roles.iam.aws.upbound.io,rolepolicyattachments.iam.aws.upbound.io,vpcs.ec2.aws.upbound.io,securitygroups.ec2.aws.upbound.io,securitygrouprules.ec2.aws.upbound.io,subnets.ec2.aws.upbound.io,internetgateways.ec2.aws.upbound.io,routetables.ec2.aws.upbound.io,routes.ec2.aws.upbound.io,mainroutetableassociations.ec2.aws.upbound.io,routetableassociations.ec2.aws.upbound.io,releases.helm.crossplane.io,objects.kubernetes.crossplane.io
 
 kubectl get managed
 

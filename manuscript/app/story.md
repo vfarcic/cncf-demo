@@ -2,7 +2,8 @@
 
 TODO: Intro
 
-## Which Tool Do you Use For GitOps
+## How Did You Define Your App?
 
-* [Argo CD](argo-cd.md)
-* [Flux](flux.md)
+* [Helm](helm.md)
+* [Kustomize](kustomize.md)
+* [Carvel](carvel.md)
