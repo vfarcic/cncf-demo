@@ -527,7 +527,6 @@ flowchart TD
 * Istio
 * Open Service Mesh
 * Aeraki Mesh
-* Devfile
 * DevStream
 * Dex
 * external-secrets
@@ -627,6 +626,7 @@ flowchart TD
 * ContainerSSH
 * Curiefense
 * Curve
+* Devfile
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
