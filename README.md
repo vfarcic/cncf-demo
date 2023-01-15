@@ -67,9 +67,7 @@ flowchart TD
         click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
 
         %% -- Build Container Image Connections --
-        bci-->bci-kbld-->continue
-        bci-->bci-lima-->continue
-        bci-->bci-buildpacks-->continue
+        bci --> bci-kbld & bci-lima & bci-buildpacks --> continue
 
         continue((The be continued...))
 

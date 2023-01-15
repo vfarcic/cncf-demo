@@ -46,11 +46,7 @@ flowchart TD
         click bci-lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
         bci-buildpacks(Cloud Native Buildpacks / CNB)
         click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
-
-        %% -- Build Container Image Connections --
-        bci-->bci-kbld-->registry
-        bci-->bci-lima-->registry
-        bci-->bci-buildpacks-->registry
+        bci --> bci-kbld & bci-lima & bci-buildpacks --> registry
 
         %% -----------------------------------------
         %% -- Store Container Image in a Registry --
@@ -65,10 +61,7 @@ flowchart TD
         registry-dragonfly(Dragonfly)
         click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
         style registry-dragonfly fill:red
-
-        registry-->registry-docker-hub-->ddd
-        registry-->registry-harbor-->ddd
-        registry-->registry-dragonfly-->ddd
+        registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> ddd
 
         %% --------------------------------------
         %% -- Define And Deploy The App To Dev --
@@ -82,10 +75,7 @@ flowchart TD
         click ddd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
         ddd-carvel(Carvel ytt)
         click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
-
-        ddd-->ddd-helm-->https
-        ddd-->ddd-kustomize-->https
-        ddd-->ddd-carvel-->https
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel --> https
 
         %% ---------------
         %% -- Use HTTPS --
@@ -104,13 +94,8 @@ flowchart TD
         https-cert-manager-kustomize(App as Kustomize)
         click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md"
         https-cert-manager-carvel(App as Carvel ytt)
-
-        https-->https-vault
-        https-->https-venafi
-        https-->https-cert-manager
-        https-cert-manager-->https-cert-manager-helm-->db
-        https-cert-manager-->https-cert-manager-kustomize-->db
-        https-cert-manager-->https-cert-manager-carvel-->db
+        https--> https-vault & https-venafi & https-cert-manager
+        https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel --> db
 
         %% --------------------------------
         %% -- Setup PostgreSQL DB In Dev --
@@ -128,12 +113,8 @@ flowchart TD
         click db-helm-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md"
         db-helm-carvel(App as Carvel ytt)
         click db-helm-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md"
-
-        %% -- DB Crossplane Local --
         db-crossplane-local(Crossplane Composition In Kubernetes)
         click db-crossplane-local "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-local.md"
-
-        %% -- DB Crossplane Cloud --
         db-crossplane-cloud(Crossplane Composition In Cloud)
         click db-crossplane-cloud "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cloud.md"
         db-crossplane-google(Google Cloud)
@@ -142,40 +123,16 @@ flowchart TD
         click db-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md"
         db-crossplane-azure(Azure)
         click db-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md"
-
-        %% -- DB Crossplane Apps --
         db-crossplane-helm(App as Helm)
         click db-crossplane-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md"
         db-crossplane-carvel(App as Carvel ytt)
+        click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md"
         db-crossplane-kustomize(App as Kustomize)
         click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md"
-        click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md"
-
-        %% -- DB Connections --
-        db-->db-helm
-        db-helm-->db-helm-helm-->db-schema
-        db-helm-->db-helm-kustomize-->db-schema
-        db-helm-->db-helm-carvel-->db-schema
-        db-->db-crossplane-local
-        db-crossplane-local-->db-crossplane-helm
-        db-crossplane-local-->db-crossplane-kustomize
-        db-crossplane-local-->db-crossplane-carvel
-        db-->db-crossplane-cloud
-        db-crossplane-cloud-->db-crossplane-google
-        db-crossplane-google-->db-crossplane-helm
-        db-crossplane-google-->db-crossplane-kustomize
-        db-crossplane-google-->db-crossplane-carvel
-        db-crossplane-cloud-->db-crossplane-aws
-        db-crossplane-aws-->db-crossplane-helm
-        db-crossplane-aws-->db-crossplane-carvel
-        db-crossplane-aws-->db-crossplane-kustomize
-        db-crossplane-cloud-->db-crossplane-azure
-        db-crossplane-azure-->db-crossplane-helm
-        db-crossplane-azure-->db-crossplane-kustomize-->db-schema
-        db-crossplane-azure-->db-crossplane-carvel
-        db-crossplane-helm-->db-schema
-        db-crossplane-kustomize-->db-schema
-        db-crossplane-carvel-->db-schema
+        db --> db-helm & db-crossplane-local & db-crossplane-cloud
+        db-helm --> db-helm-helm & db-helm-kustomize & db-helm-carvel --> db-schema
+        db-crossplane-local --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-carvel
+        db-crossplane-cloud --> db-crossplane-google & db-crossplane-aws & db-crossplane-azure --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-carvel --> db-schema
 
         %% ----------------------
         %% -- Manage DB Schema --
@@ -195,13 +152,8 @@ flowchart TD
         click db-schema-schemahero-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md"
         db-schema-schemahero-carvel(App as Carvel ytt)
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
-
-        db-schema-->db-schema-flyway
-        db-schema-->db-schema-liquibase
-        db-schema-->db-schema-schemahero
-        db-schema-schemahero-->db-schema-schemahero-helm-->develop
-        db-schema-schemahero-->db-schema-schemahero-kustomize-->develop
-        db-schema-schemahero-->db-schema-schemahero-carvel-->develop
+        db-schema --> db-schema-flyway & db-schema-liquibase & db-schema-schemahero
+        db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-carvel --> develop
 
         %% ---------------------
         %% -- Develop The App --
@@ -215,22 +167,15 @@ flowchart TD
         click develop-devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
         develop-nocalhost(Nocalhost)
         click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
-
-        %% -- Develop DevSpace --
         develop-devspace-kustomize(App as Kustomize)
         click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
         develop-devspace-helm(App as Helm)
         click develop-devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
         develop-devspace-carvel(App as Carvel ytt)
         click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
-
-        %% -- Develop Connections --
-        develop-->develop-telepresence-->dev-done
-        develop-->develop-devspace
-        develop-->develop-nocalhost-->dev-done
-        develop-devspace-->develop-devspace-kustomize-->dev-done
-        develop-devspace-->develop-devspace-helm-->dev-done
-        develop-devspace-->develop-devspace-carvel-->dev-done
+        develop --> develop-telepresence & develop-devspace & develop-nocalhost
+        develop-telepresence & develop-nocalhost --> dev-done
+        develop-devspace --> develop-devspace-kustomize & develop-devspace-helm & develop-devspace-carvel --> dev-done
 
         dev-done((Chapter End))
 
@@ -262,22 +207,14 @@ flowchart TD
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
         cluster-terraform(Terraform)
         click cluster-terraform "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/terraform.md"
-
-        %% -- Cluster Crossplane --
         cluster-crossplane-google(Google Cloud)
         click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
-
-        %% -- Cluster Connections --
-        cluster-->cluster-pulumi
-        cluster-->cluster-crossplane
-        cluster-->cluster-terraform
-        cluster-crossplane-->cluster-crossplane-google-->gitops
-        cluster-crossplane-->cluster-crossplane-aws-->gitops
-        cluster-crossplane-->cluster-crossplane-azure-->gitops
+        cluster --> cluster-pulumi & cluster-crossplane & cluster-terraform
+        cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
 
         %% ------------
         %% -- GitOps --
@@ -291,11 +228,8 @@ flowchart TD
         click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
         gitops-rancher-fleet(Rancher Fleet)
         click gitops-rancher-fleet "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/rancher-fleet.md"
-
-        %% -- GitOps Connections --
-        gitops-->gitops-flux-->ingress
-        gitops-->gitops-argocd-->ingress
-        gitops-->gitops-rancher-fleet
+        gitops --> gitops-flux & gitops-argocd & gitops-rancher-fleet
+        gitops-flux & gitops-argocd --> ingress
 
         %% -------------
         %% -- Ingress --
@@ -313,17 +247,8 @@ flowchart TD
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
-
-        %% -- Ingress Connections --
-        ingress-->ingress-contour
-        ingress-->ingress-nginx
-        ingress-->ingress-todo1
-        ingress-contour-->ingress-argocd
-        ingress-contour-->ingress-flux
-        ingress-nginx-->ingress-argocd
-        ingress-nginx-->ingress-flux
-        ingress-argocd-->app
-        ingress-flux-->app
+        ingress-->ingress-contour & ingress-nginx & ingress-todo1
+        ingress-contour & ingress-nginx --> ingress-argocd & ingress-flux --> app
 
         %% ----------------------------------
         %% -- Deploy The App To Production --
@@ -337,11 +262,7 @@ flowchart TD
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
         app-carvel(App As Carvel ytt)
         click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
-
-        %% -- App Connections --
-        app-->app-helm-->db-production
-        app-->app-kustomize-->db-production
-        app-->app-carvel-->db-production
+        app --> app-helm & app-kustomize & app-carvel --> db-production
 
         %% --------------
         %% -- Database --
@@ -364,14 +285,8 @@ flowchart TD
         db-production-crossplane-azure(Azure)
         click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
         style db-production-crossplane-azure fill:red
-
-        %% -- Database Connections --
-        db-production-->db-production-crossplane
-        db-production-->db-production-todo1
-        db-production-->db-production-todo2
-        db-production-crossplane-->db-production-crossplane-google-->continue
-        db-production-crossplane-->db-production-crossplane-aws-->continue
-        db-production-crossplane-->db-production-crossplane-azure-->continue
+        db-production --> db-production-crossplane & db-production-todo1 & db-production-todo2
+        db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> continue
 
         continue((The be continued...))
 
@@ -389,6 +304,83 @@ flowchart TD
 
 ```mermaid
 flowchart TD
+
+    subgraph Security
+
+        %% --------------
+        %% -- Policies --
+        %% --------------
+        policies{{Policies}}
+        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/story.md"
+        style policies fill:red
+        policies-kyverno(Kyverno)
+        click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
+        style policies-kyverno fill:red
+        policies-opa("Open Policy Agent (OPA)")
+        click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/opa.md"
+        style policies-opa fill:red
+        policies-cloud-custodian(Cloud Custodian)
+        click policies-cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
+        style policies-cloud-custodian fill:red
+
+        %% -- Policies Connections --
+        policies-->policies-kyverno
+        policies-->policies-opa
+        policies-->policies-cloud-custodian
+
+        %% ------------------------
+        %% -- Secrets Management --
+        %% ------------------------
+        secrets{{Secrets Management}}
+        click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/story.md"
+        style secrets fill:red
+        external-secrets(External Secrets Operator)
+        click external-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/external-secrets.md"
+        style external-secrets fill:red
+
+        %% -- Secrets Management Connections --
+        secrets-->external-secrets
+
+        %% ------------------
+        %% -- Service Mesh --
+        %% ------------------
+        service-mesh{{Service Mesh}}
+        click service-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/story.md"
+        style service-mesh fill:red
+        service-mesh-istio(Istio)
+        click service-mesh-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio.md"
+        style service-mesh-istio fill:red
+        service-mesh-linkerd(LinkerD)
+        click service-mesh-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/linkerd.md"
+        style service-mesh-linkerd fill:red
+        service-mesh-open-service-mesh(Open Service Mesh)
+        click service-mesh-open-service-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/open-service-mesh.md"
+        style service-mesh-open-service-mesh fill:red
+        service-mesh-aeraki-mesh(Aeraki Mesh)
+        click service-mesh-aeraki-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/aeraki-mesh.md"
+        style service-mesh-aeraki-mesh fill:red
+        service-mesh-cilium(Cilium)
+        click service-mesh-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/cilium.md"
+        style service-mesh-cilium fill:red
+        service-mesh --> service-mesh-istio & service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-aeraki-mesh & service-mesh-cilium
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
+        spiffe(Spiffe)
+        style spiffe fill:red
+        spire(Spire)
+        style spire fill:red
+        tuf("The Update Framework (TUF)")
+        style tuf fill:red
+        notary(Notary)
+        style notary fill:red
+        kubescape(Kubescape)
+        style kubescape fill:red
+
+    end
+
+    Security-->Observability
 
     subgraph Observability
 
@@ -431,53 +423,17 @@ flowchart TD
         %% -- Tracing Connections --
         tracing-->tracing-jaeger
 
-    end
-
-    subgraph Previews
-
-        previews-todo(TODO)
-        style previews-todo fill:red
-
-    end
-
-    subgraph Security
-
-        %% --------------
-        %% -- Policies --
-        %% --------------
-        policies{{Policies}}
-        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/story.md"
-        style policies fill:blue
-        policies-kyverno(Kyverno)
-        click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
-        style policies-kyverno fill:red
-        policies-opa("Open Policy Agent (OPA)")
-        click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/opa.md"
-        style policies-opa fill:red
-        policies-cloud-custodian(Cloud Custodian)
-        click policies-cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
-        style policies-cloud-custodian fill:red
-
-        %% -- Policies Connections --
-        policies-->policies-kyverno
-        policies-->policies-opa
-        policies-->policies-cloud-custodian
-
-        %% -----------
-        %% -- TODO: --
-        %% -----------
-        spiffe(Spiffe)
-        style spiffe fill:red
-        spire(Spire)
-        style spire fill:red
-        tuf("The Update Framework (TUF)")
-        style tuf fill:red
-        notary(Notary)
-        style notary fill:red
-        kubescape(Kubescape)
-        style kubescape fill:red
+        %% -------------
+        %% -- Logging --
+        %% -------------
+        logging{{Logging}}
+        style logging fill:red
 
     end
+```
+
+```mermaid
+flowchart TD
 
     subgraph Automation
 
@@ -485,6 +441,10 @@ flowchart TD
         style automation-todo fill:red
 
     end
+```
+
+```mermaid
+flowchart TD
 
     subgraph IDP
 
@@ -492,15 +452,27 @@ flowchart TD
         style backstage fill:red
         idp-crossplane(Crossplane)
         style idp-crossplane fill:red
+        dev-stream(DevStream)
+        style dev-stream fill:red
 
     end
+```
+
+```mermaid
+flowchart TD
 
     subgraph Edge
 
         akri(Akri)
         style akri fill:red
+        keylime(Keylime)
+        style keylime fill:red
 
     end
+```
+
+```mermaid
+flowchart TD
 
     subgraph Misc
 
@@ -513,31 +485,49 @@ flowchart TD
         style networking-antrea fill:red
         networking-cilium(Cilium)
         style networking-cilium fill:red
+        networking --> networking-antrea & networking-cilium
 
-        %% -- Networking Connections --
-        networking-->networking-antrea
-        networking-->networking-cilium
+        %% ------------
+        %% -- Backup --
+        %% ------------
+        backup{{Backup}}
+        style backup fill:red
+        backup-k8up(K8up)
+        style backup-k8up fill:red
+        backup --> backup-k8up
 
     end
 ```
 
+```mermaid
+flowchart TD
+
+    subgraph Multi-Cluster
+
+        %% ----------------
+        %% -- Deployment --
+        %% ----------------
+        deployment-mc{{Deployment}}
+        style deployment-mc fill:red
+        deployment-mc-karmada(Karmada)
+        style deployment-mc-karmada fill:red
+        deployment-mc --> deployment-mc-karmada --> lb-mc
+
+        %% --------------------
+        %% -- Load Balancing --
+        %% --------------------
+        lb-mc{{Load Balancing}}
+        style lb-mc fill:red
+        lb-mc-k8gb(k8gb)
+        style lb-mc-k8gb fill:red
+        lb-mc --> lb-mc-k8gb
+
+    end
+```
+
+
 ## TODO:
 
-* LinkerD
-* Istio
-* Open Service Mesh
-* Aeraki Mesh
-* DevStream
-* Dex
-* external-secrets
-* Fluid
-* Fonio
-* Hexa
-* Inclavare Containers
-* k8gb
-* K8up
-* Karmada
-* Keylime
 * Konveyor
 * Krator
 * Krustlet
@@ -627,6 +617,11 @@ flowchart TD
 * Curiefense
 * Curve
 * Devfile
+* Dex
+* Fluid
+* Fonio
+* Hexa
+* Inclavare Containers
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
