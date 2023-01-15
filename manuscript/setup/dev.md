@@ -1,7 +1,8 @@
 # Setup Prerequisites
 
 ```bash
-# Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar with GitHub CLI
+# Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar
+#   with GitHub CLI.
 gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
@@ -9,7 +10,8 @@ cd cncf-demo
 # Select the fork as the default repository
 gh repo set-default
 
-# This kubeconfig file will get created later, and added to .gitignore
+# This kubeconfig file will get created later, and added to
+#   `.gitignore`.
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 ```
 
@@ -26,6 +28,8 @@ export AWS_ACCESS_KEY_ID=[...]
 # Replace `[...]` with your secret access key
 export AWS_SECRET_ACCESS_KEY=[...]
 
+# Watch https://youtu.be/pNECqaxyewQ if you are not familiar
+#   with `eksctl`
 eksctl create cluster --name dot --region us-east-1 \
     --version 1.24 --nodegroup-name primary \
     --node-type t3.medium --nodes-min 3 --nodes-max 6 \
@@ -43,7 +47,8 @@ az group create --location eastus --name $RESOURCE_GROUP
 
 az aks get-versions --location eastus --output table
 
-# Replace `[...]` with a valid Kubernetes version from the previous output.
+# Replace `[...]` with a valid Kubernetes version from the
+#   previous output.
 export K8S_VERSION=[...]
 
 az aks create --name dot --resource-group $RESOURCE_GROUP \
@@ -71,7 +76,8 @@ echo "https://console.cloud.google.com/marketplace/product/google/container.goog
 
 gcloud container get-server-config --region us-east1
 
-# Replace `[...]` with a valid master version from the previous output.
+# Replace `[...]` with a valid master version from the previous
+#   output.
 export K8S_VERSION=[...]
 
 gcloud container clusters create dot --project $PROJECT_ID \
@@ -101,8 +107,9 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 kubectl create namespace dev
 
 # Helm is a package manager for Kubernetes applications
-# Traefik is a reverse proxy server and load balancer that handles
-#   traffic that enters from outside of your Kubernetes cluster
+# Traefik is a reverse proxy server and load balancer that
+#   handles traffic that enters from outside of your Kubernetes
+#   cluster
 helm upgrade --install traefik traefik \
     --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
@@ -120,10 +127,11 @@ export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
 # If EKS
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
-# This is the IP address by which you can access your cluster!
+# This is the IP address by which you can access applications
+#   running in your cluster!
 echo $INGRESS_HOST
 
-# Repeat the `export` commands if the output is empty
+# Repeat the `export` commands if the output is empty.
 
 # If the output contains more than one IP, wait for a while 
 #   longer, and repeat the `export` commands.
@@ -164,40 +172,42 @@ alias curl="curl --insecure"
 # - cncf-demo-dev
 # Do not use a wildcard for those subdomains since, later on,
 #   we'll add more pointing to a different cluster.
-# Configure these subdomains by going to your registrar and creating
-#   three more DNS records of type 'A', each with the name set to the
-#   subdomain (one record for 'harbor', one for 'notary', one for
-#   'cncf-demo-dev'), and the value of each record set to that same IP
-#   address of your output.
+# Configure these subdomains by going to your registrar and
+#   creating three more DNS records of type 'A', each with the
+#   name set to the subdomain (one record for 'harbor', one for
+#   'notary', one for 'cncf-demo-dev'), and the value of each
+#   record set to that same IP address of your output.
 
 # Skip this step if you chose to use `nip.io` instead of a
-#   "real" domain
+#   "real" domain.
 helm repo add jetstack https://charts.jetstack.io
 
 # Skip this step if you chose to use `nip.io` instead of a
-#   "real" domain
+#   "real" domain.
 helm repo update
 
 # Skip this step if you chose to use `nip.io` instead of a
-#   "real" domain
-# deploy cert-manager to automate the process of issuing and renewing TLS certificates
+#   "real" domain.
+# Deploy cert-manager to automate the process of issuing and
+#   renewing TLS certificates.
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
 
-# Replace `[...]` with your email
+# Replace `[...]` with your email.
 # Skip this step if you chose to use `nip.io` instead of a
-#   "real" domain
+#   "real" domain.
 export EMAIL=[...]
 
 # Skip this step if you chose to use `nip.io` instead of a
-#   "real" domain
+#   "real" domain.
 yq --inplace ".spec.acme.email = \"$EMAIL\"" \
     cert-manager/issuer.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
-#   "real" domain
-# Create a ClusterIssuer resource that can issue TLS certificates
+#   "real" domain.
+# Create a ClusterIssuer resource that can issue TLS
+#   certificates.
 kubectl apply --filename cert-manager/issuer.yaml
 ```
 
