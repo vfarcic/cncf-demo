@@ -322,11 +322,13 @@ flowchart TD
         policies-cloud-custodian(Cloud Custodian)
         click policies-cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
         style policies-cloud-custodian fill:red
-
-        %% -- Policies Connections --
-        policies-->policies-kyverno
-        policies-->policies-opa
-        policies-->policies-cloud-custodian
+        kube-armor(KubeArmor)
+        click kube-armor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kube-armor.md"
+        style kube-armor fill:red
+        kubewarden(Kubewarden)
+        click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
+        style kubewarden fill:red
+        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden
 
         %% ------------------------
         %% -- Secrets Management --
@@ -362,7 +364,10 @@ flowchart TD
         service-mesh-cilium(Cilium)
         click service-mesh-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/cilium.md"
         style service-mesh-cilium fill:red
-        service-mesh --> service-mesh-istio & service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-aeraki-mesh & service-mesh-cilium
+        service-mesh-kuma(Kuma)
+        click service-mesh-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/kuma.md"
+        style service-mesh-kuma fill:red
+        service-mesh --> service-mesh-istio & service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-aeraki-mesh & service-mesh-cilium & service-mesh-kuma
 
         %% -----------
         %% -- TODO: --
@@ -428,6 +433,12 @@ flowchart TD
         %% -------------
         logging{{Logging}}
         style logging fill:red
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
+        kuberhealthy((kuberhealthy))
+        style kuberhealthy fill:red
 
     end
 ```
@@ -496,6 +507,33 @@ flowchart TD
         style backup-k8up fill:red
         backup --> backup-k8up
 
+        %% --------------------------------------
+        %% -- CRDs, Controllers, and Operators --
+        %% --------------------------------------
+        crd-controller-operator{{CRDs, Controllers, and Operators}}
+        style crd-controller-operator fill:red
+        kubebuilder(Kubebuilder)
+        style kubebuilder fill:red
+        kube-rs(kube-rs)
+        style kube-rs fill:red
+        kudo(KUDO)
+        style kudo fill:red
+        crd-controller-operator --> kubebuilder & kube-rs & kudo
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
+        konveyor(Konveyor)
+        style konveyor fill:red
+        krator(Krator)
+        style krator fill:red
+        kube-ovn(Kube-OVN)
+        style kube-ovn fill:red
+        kube-dl(KubeDL)
+        style kube-dl fill:red
+        kured(Kured)
+        style kured fill:red
+
     end
 ```
 
@@ -525,21 +563,23 @@ flowchart TD
     end
 ```
 
+```mermaid
+flowchart TD
+
+    subgraph WebAssembly
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
+        krustlet(Krustlet)
+        style krustlet fill:red
+    
+    end
+```
+
 
 ## TODO:
 
-* Konveyor
-* Krator
-* Krustlet
-* Kube-OVN
-* kube-rs
-* KubeArmor
-* KubeDL
-* Kuberhealthy
-* Kubewarden
-* KUDO
-* Kuma
-* Kured
 * Meshery
 * Metal3-io
 * Network Service Mesh
@@ -576,14 +616,12 @@ flowchart TD
 * Dapr
 * Falco
 * Argo Rollout
+* Flagger
 * Knative
 * KubeVela
 * CDK For Kubernetes (cdk8s)
 * Argo Workflows
 * Keptn
-* Argo CD
-* Flux
-* Argo Workflows
 * FluentD
 * CoreDNS
 * TiKV
