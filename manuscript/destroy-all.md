@@ -28,6 +28,8 @@ az group delete --name production --yes
 Execute the commands in this section only if you used AWS
 
 ```bash
+# TODO: Remove Ingress service from the prod cluster
+
 kubectl --kubeconfig $PWD/kubeconfig-dev.yaml \
     --namespace traefik delete service traefik
 

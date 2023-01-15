@@ -2,6 +2,8 @@
 
 TODO: Intro
 
+TODO: https://opengitops.dev
+
 ## Choice 1: Flux
 
 TODO: Explanation

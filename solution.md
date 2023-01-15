@@ -75,7 +75,10 @@ flowchart TD
         click ddd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
         ddd-carvel(Carvel ytt)
         click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
-        ddd --> ddd-helm & ddd-kustomize & ddd-carvel --> https
+        ddd-cdk8s("CDK For Kubernetes (cdk8s)")
+        click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
+        style ddd-cdk8s fill:red
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> https
 
         %% ---------------
         %% -- Use HTTPS --
@@ -94,8 +97,12 @@ flowchart TD
         https-cert-manager-kustomize(App as Kustomize)
         click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md"
         https-cert-manager-carvel(App as Carvel ytt)
+        click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-carvel.md"
+        https-cert-manager-cdk8s(App as cdk8s)
+        click https-cert-manager-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-cdk8s.md"
+        style https-cert-manager-cdk8s fill:red
         https--> https-vault & https-venafi & https-cert-manager
-        https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel --> db
+        https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel & https-cert-manager-cdk8s --> db
 
         %% --------------------------------
         %% -- Setup PostgreSQL DB In Dev --
@@ -111,6 +118,9 @@ flowchart TD
         click db-helm-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-helm.md"
         db-helm-kustomize(App as Kustomize)
         click db-helm-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md"
+        db-helm-cdk8s(App as cdk8s)
+        click db-helm-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-cdk8s.md"
+        style db-helm-cdk8s fill:red
         db-helm-carvel(App as Carvel ytt)
         click db-helm-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md"
         db-crossplane-local(Crossplane Composition In Kubernetes)
@@ -129,10 +139,13 @@ flowchart TD
         click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md"
         db-crossplane-kustomize(App as Kustomize)
         click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md"
+        db-crossplane-cdk8s(App as cdk8s)
+        click db-crossplane-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cdk8s.md"
+        style db-crossplane-cdk8s fill:red
         db --> db-helm & db-crossplane-local & db-crossplane-cloud
-        db-helm --> db-helm-helm & db-helm-kustomize & db-helm-carvel --> db-schema
-        db-crossplane-local --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-carvel
-        db-crossplane-cloud --> db-crossplane-google & db-crossplane-aws & db-crossplane-azure --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-carvel --> db-schema
+        db-helm --> db-helm-helm & db-helm-kustomize & db-helm-cdk8s & db-helm-carvel --> db-schema
+        db-crossplane-local --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-cdk8s & db-crossplane-carvel
+        db-crossplane-cloud --> db-crossplane-google & db-crossplane-aws & db-crossplane-azure --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-cdk8s & db-crossplane-carvel --> db-schema
 
         %% ----------------------
         %% -- Manage DB Schema --
@@ -150,10 +163,13 @@ flowchart TD
         click db-schema-schemahero-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md"
         db-schema-schemahero-kustomize(App as Kustomize)
         click db-schema-schemahero-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md"
+        db-schema-schemahero-cdk8s(App as cdk8s)
+        click db-schema-schemahero-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-cdk8s.md"
+        style db-schema-schemahero-cdk8s fill:red
         db-schema-schemahero-carvel(App as Carvel ytt)
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
         db-schema --> db-schema-flyway & db-schema-liquibase & db-schema-schemahero
-        db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-carvel --> develop
+        db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-cdk8s & db-schema-schemahero-carvel --> develop
 
         %% ---------------------
         %% -- Develop The App --
@@ -169,13 +185,19 @@ flowchart TD
         click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
         develop-devspace-kustomize(App as Kustomize)
         click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
+        develop-devspace-cdk8s(App as cdk8s)
+        click develop-devspace-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-cdk8s.md"
+        style develop-devspace-cdk8s fill:red
         develop-devspace-helm(App as Helm)
         click develop-devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
         develop-devspace-carvel(App as Carvel ytt)
         click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
-        develop --> develop-telepresence & develop-devspace & develop-nocalhost
+        develop-devfile(Devfile)
+        click develop-devfile "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
+        style develop-devfile fill:red
+        develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
         develop-telepresence & develop-nocalhost --> dev-done
-        develop-devspace --> develop-devspace-kustomize & develop-devspace-helm & develop-devspace-carvel --> dev-done
+        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> dev-done
 
         dev-done((Chapter End))
 
@@ -241,13 +263,13 @@ flowchart TD
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
-        ingress-todo1(???)
-        style ingress-todo1 fill:red
+        emissary-ingress(Emissary-ingress)
+        style emissary-ingress fill:red
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
-        ingress-->ingress-contour & ingress-nginx & ingress-todo1
+        ingress-->ingress-contour & ingress-nginx & emissary-ingress
         ingress-contour & ingress-nginx --> ingress-argocd & ingress-flux --> app
 
         %% ----------------------------------
@@ -260,9 +282,12 @@ flowchart TD
         click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
         app-kustomize(App As Kustomize)
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
+        app-cdk8s(App As cdk8s)
+        click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
+        style app-cdk8s fill:red
         app-carvel(App As Carvel ytt)
         click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
-        app --> app-helm & app-kustomize & app-carvel --> db-production
+        app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> db-production
 
         %% --------------
         %% -- Database --
@@ -272,10 +297,6 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
-        db-production-todo1(???)
-        style db-production-todo1 fill:red
-        db-production-todo2(???)
-        style db-production-todo2 fill:red
         db-production-crossplane-google(Google Cloud)
         click db-production-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-google.md"
         style db-production-crossplane-google fill:red
@@ -285,7 +306,11 @@ flowchart TD
         db-production-crossplane-azure(Azure)
         click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
         style db-production-crossplane-azure fill:red
-        db-production --> db-production-crossplane & db-production-todo1 & db-production-todo2
+        db-production-vitess(Vitess)
+        style db-production-vitess fill:red
+        db-production-tikv(TiKV)
+        style db-production-tikv fill:red
+        db-production --> db-production-crossplane & db-production-vitess & db-production-tikv
         db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> continue
 
         continue((The be continued...))
@@ -307,26 +332,33 @@ flowchart TD
 
     subgraph Security
 
+        %% --------------------
+        %% -- Access Control --
+        %% --------------------
+        access-control{{Access Control}}
+        style access-control fill:red
+        access-control-hexa(Hexa)
+        style access-control-hexa fill:red
+        dex(Dex)
+        style dex fill:red
+        athenz(Athenz)
+        style athenz fill:red
+        access-control --> access-control-hexa & dex & athenz
+
         %% --------------
         %% -- Policies --
         %% --------------
         policies{{Policies}}
-        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/story.md"
         style policies fill:red
         policies-kyverno(Kyverno)
-        click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
         style policies-kyverno fill:red
         policies-opa("Open Policy Agent (OPA)")
-        click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/opa.md"
         style policies-opa fill:red
         policies-cloud-custodian(Cloud Custodian)
-        click policies-cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
         style policies-cloud-custodian fill:red
         kube-armor(KubeArmor)
-        click kube-armor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kube-armor.md"
         style kube-armor fill:red
         kubewarden(Kubewarden)
-        click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
         style kubewarden fill:red
         policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden
 
@@ -334,40 +366,40 @@ flowchart TD
         %% -- Secrets Management --
         %% ------------------------
         secrets{{Secrets Management}}
-        click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/story.md"
         style secrets fill:red
-        external-secrets(External Secrets Operator)
-        click external-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/external-secrets.md"
-        style external-secrets fill:red
-
-        %% -- Secrets Management Connections --
-        secrets-->external-secrets
+        secrets-external-secrets(External Secrets Operator)
+        style secrets-external-secrets fill:red
+        secrets-teller(Teller)
+        style secrets-teller fill:red
+        secrets --> secrets-external-secrets & secrets-teller
 
         %% ------------------
         %% -- Service Mesh --
         %% ------------------
         service-mesh{{Service Mesh}}
-        click service-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/story.md"
         style service-mesh fill:red
         service-mesh-istio(Istio)
-        click service-mesh-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio.md"
         style service-mesh-istio fill:red
+        service-mesh-smi("Service Mesh Interface (SMI)")
+        style service-mesh-smi fill:red
         service-mesh-linkerd(LinkerD)
-        click service-mesh-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/linkerd.md"
         style service-mesh-linkerd fill:red
         service-mesh-open-service-mesh(Open Service Mesh)
-        click service-mesh-open-service-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/open-service-mesh.md"
         style service-mesh-open-service-mesh fill:red
         service-mesh-aeraki-mesh(Aeraki Mesh)
-        click service-mesh-aeraki-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/aeraki-mesh.md"
         style service-mesh-aeraki-mesh fill:red
         service-mesh-cilium(Cilium)
-        click service-mesh-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/cilium.md"
         style service-mesh-cilium fill:red
         service-mesh-kuma(Kuma)
-        click service-mesh-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/kuma.md"
         style service-mesh-kuma fill:red
-        service-mesh --> service-mesh-istio & service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-aeraki-mesh & service-mesh-cilium & service-mesh-kuma
+        service-mesh-network-service-mesh(Network Service Mesh)
+        style service-mesh-network-service-mesh fill:red
+        service-mesh-meshery(Meshery)
+        style service-mesh-meshery fill:red
+        service-mesh-performance(Service Mesh Performance)
+        style service-mesh-performance fill:red
+        service-mesh --> service-mesh-istio & service-mesh-smi & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery & service-mesh-performance
+        service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery & service-mesh-performance
 
         %% -----------
         %% -- TODO: --
@@ -382,12 +414,37 @@ flowchart TD
         style notary fill:red
         kubescape(Kubescape)
         style kubescape fill:red
+        parsec(Parsec)
+        style parsec fill:red
+        inclavare-containers(Inclavare Containers)
+        style inclavare-containers fill:red
+        fonio(Fonio)
+        style fonio fill:red
+        curiefense(Curiefense)
+        style curiefense fill:red
+        container-ssh(ContainerSSH)
+        style container-ssh fill:red
+        confidential-containers(Confidential Containers)
+        style confidential-containers fill:red
+        falco(Falco)
+        style falco fill:red
 
     end
 
     Security-->Observability
 
     subgraph Observability
+
+        %% ----------------
+        %% -- Dashboards --
+        %% ----------------
+        dashboards{{Dashboards}}
+        style dashboards fill:red
+        dashboards-skooner(Skooner)
+        style dashboards-skooner fill:red
+        dashboards-kubernetes(Kubernetes Dashboard)
+        style dashboards-kubernetes fill:red
+        dashboards --> dashboards-skooner & dashboards-kubernetes --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -398,10 +455,11 @@ flowchart TD
         style metrics-prometheus fill:red
         metrics-thanos(Thanos)
         style metrics-thanos fill:red
-
-        %% -- Metrics Connections --
-        metrics-->metrics-prometheus-->instrumentation
-        metrics-->metrics-thanos-->instrumentation
+        pixie(Pixie)
+        style pixie fill:red
+        cortex(Cortex)
+        style cortex fill:red
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> instrumentation
 
         %% ---------------------
         %% -- Instrumentation --
@@ -426,19 +484,76 @@ flowchart TD
         style tracing-jaeger fill:red
 
         %% -- Tracing Connections --
-        tracing-->tracing-jaeger
+        tracing --> tracing-jaeger --> logging
 
         %% -------------
         %% -- Logging --
         %% -------------
         logging{{Logging}}
         style logging fill:red
+        logging-fluentd(FluentD)
+        style logging-fluentd fill:red
+        logging --> logging-fluentd --> progressive-delivery
+
+        %% --------------------------
+        %% -- Progressive Delivery --
+        %% --------------------------
+        progressive-delivery{{Progressive Delivery}}
+        style progressive-delivery fill:red
+        progressive-delivery-argo-rollouts(Argo Rollouts)
+        style progressive-delivery-argo-rollouts fill:red
+        progressive-delivery-flagger(Flagger)
+        style progressive-delivery-flagger fill:red
+        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger
 
         %% -----------
         %% -- TODO: --
         %% -----------
-        kuberhealthy((kuberhealthy))
+        kuberhealthy(kuberhealthy)
         style kuberhealthy fill:red
+
+    end
+
+    Observability-->Scale
+
+    subgraph Scale
+
+        %% -------------
+        %% -- Scaling --
+        %% -------------
+        scaling{{Scaling}}
+        style scaling fill:red
+        keda(KEDA)
+        style keda fill:red
+        scaling --> keda --> deployment-mc
+
+        %% ------------------------------
+        %% -- Multi-Cluster Deployment --
+        %% ------------------------------
+        deployment-mc{{Deployment}}
+        style deployment-mc fill:red
+        deployment-mc-karmada(Karmada)
+        style deployment-mc-karmada fill:red
+        deployment-mc --> deployment-mc-karmada --> lb-mc
+
+        %% ---------------------------------
+        %% -- Load Balancing & Networking --
+        %% ---------------------------------
+        lb-mc{{Load Balancing & Networking}}
+        style lb-mc fill:red
+        lb-mc-k8gb(k8gb)
+        style lb-mc-k8gb fill:red
+        lb-mc-submariner(Submariner)
+        style lb-mc-submariner fill:red
+        lb-mc --> lb-mc-k8gb & lb-mc-submariner
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
+        open-cluster-management(Open Cluster Management)
+        style open-cluster-management fill:red
+        clusterpedia(Clusterpedia)
+        style clusterpedia fill:red
 
     end
 ```
@@ -448,8 +563,27 @@ flowchart TD
 
     subgraph Automation
 
-        automation-todo(TODO)
-        style automation-todo fill:red
+        %% ---------------
+        %% -- Pipelines --
+        %% ---------------
+        pipelines{{Pipelines}}
+        style pipelines fill:red
+        pipelines-argo-workflows(Argo Workflows)
+        style pipelines-argo-workflows fill:red
+        pipelines-keptn(Keptn)
+        style pipelines-keptn fill:red
+        pipelines-serverless-workflow(Serverless Workflow)
+        style pipelines-serverless-workflow fill:red
+        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow --> supply-chain
+
+        %% ------------------
+        %% -- Supply Chain --
+        %% ------------------
+        supply-chain{{Supply Chain}}
+        style supply-chain fill:red
+        supply-chain-in-toto(in-toto)
+        style supply-chain-in-toto fill:red
+        supply-chain --> supply-chain-in-toto
 
     end
 ```
@@ -459,12 +593,48 @@ flowchart TD
 
     subgraph IDP
 
-        backstage(Backstage)
-        style backstage fill:red
-        idp-crossplane(Crossplane)
-        style idp-crossplane fill:red
+        %% ------------------------------------
+        %% -- Graphical User Interface (GUI) --
+        %% ------------------------------------
+        gui{{"Graphical User Interface (GUI)"}}
+        style gui fill:red
+        gui-backstage(Backstage)
+        style gui-backstage fill:red
+        gui --> gui-backstage --> app-definitions
+
+        %% -----------------------------
+        %% -- Application Definitions --
+        %% -----------------------------
+        app-definitions{{Application Definitions}}
+        style app-definitions fill:red
+        app-definitions-crossplane(Crossplane)
+        style app-definitions-crossplane fill:red
+        app-definitions-kube-vela(KubeVela)
+        style app-definitions-kube-vela fill:red
+        app-definitions --> app-definitions-crossplane & app-definitions-kube-vela --> crd
+
+        %% --------------------------------------
+        %% -- CRDs, Controllers, and Operators --
+        %% --------------------------------------
+        crd{{CRDs, Controllers, and Operators}}
+        style crd fill:red
+        crd-kubebuilder(Kubebuilder)
+        style crd-kubebuilder fill:red
+        crd-kube-rs(kube-rs)
+        style crd-kube-rs fill:red
+        crd-kudo(KUDO)
+        style crd-kudo fill:red
+        crd-operator-framework(Operator Framework)
+        style crd-operator-framework fill:red
+        crd --> crd-kubebuilder & crd-kube-rs & crd-kudo & crd-operator-framework
+
+        %% -----------
+        %% -- TODO: --
+        %% -----------
         dev-stream(DevStream)
         style dev-stream fill:red
+        dapr("Distributed Application Runtime (Dapr)")
+        style dapr fill:red
 
     end
 ```
@@ -478,6 +648,12 @@ flowchart TD
         style akri fill:red
         keylime(Keylime)
         style keylime fill:red
+        open-yurt(OpenYurt)
+        style open-yurt fill:red
+        kube-edge(KubeEdge)
+        style kube-edge fill:red
+        super-edge(SuperEdge)
+        style super-edge fill:red
 
     end
 ```
@@ -492,11 +668,36 @@ flowchart TD
         %% ----------------
         networking{{Networking}}
         style networking fill:red
+        networking-cni("Container Network Interface (CNI)")
+        style networking-cni fill:red
         networking-antrea(Antrea)
         style networking-antrea fill:red
         networking-cilium(Cilium)
         style networking-cilium fill:red
-        networking --> networking-antrea & networking-cilium
+        bfe(BFE)
+        style bfe fill:red
+        cni-genie(CNI-Genie)
+        style cni-genie fill:red
+        networking --> networking-cni --> networking-antrea & networking-cilium & bfe --> cni-genie
+
+        %% -------------
+        %% -- Storage --
+        %% -------------
+        storage{{Storage}}
+        style storage fill:red
+        storage-piraeus-datastore(Piraeus Datastore)
+        style storage-piraeus-datastore fill:red
+        storage-curve(Curve)
+        style storage-curve fill:red
+        storage-rook(Rook)
+        style storage-rook fill:red
+        storage-longhorn(Longhorn)
+        style storage-longhorn fill:red
+        storage-cube-fs(CubeFS)
+        style storage-cube-fs fill:red
+        storage-pravega(Pravega)
+        style storage-pravega fill:red
+        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega --> backup
 
         %% ------------
         %% -- Backup --
@@ -507,18 +708,49 @@ flowchart TD
         style backup-k8up fill:red
         backup --> backup-k8up
 
-        %% --------------------------------------
-        %% -- CRDs, Controllers, and Operators --
-        %% --------------------------------------
-        crd-controller-operator{{CRDs, Controllers, and Operators}}
-        style crd-controller-operator fill:red
-        kubebuilder(Kubebuilder)
-        style kubebuilder fill:red
-        kube-rs(kube-rs)
-        style kube-rs fill:red
-        kudo(KUDO)
-        style kudo fill:red
-        crd-controller-operator --> kubebuilder & kube-rs & kudo
+        %% -----------------------
+        %% -- Chaos Engineering --
+        %% -----------------------
+        chaos-engineering{{Chaos Engineering}}
+        style chaos-engineering fill:red
+        chaos-engineering-chaosblade(Chaosblade)
+        style chaos-engineering-chaosblade fill:red
+        chaos-engineering-litmus(Litmus)
+        style chaos-engineering-litmus fill:red
+        chaos-engineering-chaos-mesh(Chaos Mesh)
+        style chaos-engineering-chaos-mesh fill:red
+        chaos-engineering --> chaos-engineering-chaosblade & chaos-engineering-litmus & chaos-engineering-chaos-mesh
+
+        %% --------------------
+        %% -- Events Storage --
+        %% --------------------
+        events-storage{{Events Storage}}
+        style events-storage fill:red
+        events-storage-nats(NATS)
+        style events-storage-nats fill:red
+        events-storage-strimzi(Strimzi)
+        style events-storage-strimzi fill:red
+        events-storage --> events-storage-nats & events-storage-strimzi --> events
+        
+        %% ------------
+        %% -- Events --
+        %% ------------
+        events{{Events}}
+        style events fill:red
+        events-cloud-events(CloudEvents)
+        style events-cloud-events fill:red
+        events --> events-cloud-events
+
+        %% ----------------
+        %% -- Serverless --
+        %% ----------------
+        serverless{{Serverless}}
+        style serverless fill:red
+        serverless-knative(Knative)
+        style serverless-knative fill:red
+        serverless-devs(Serverless Devs)
+        style serverless-devs fill:red
+        serverless --> serverless-knative & serverless-devs
 
         %% -----------
         %% -- TODO: --
@@ -533,6 +765,44 @@ flowchart TD
         style kube-dl fill:red
         kured(Kured)
         style kured fill:red
+        metal3-io(Metal3.io)
+        style metal3-io fill:red
+        open-kruise(OpenKruise)
+        style open-kruise fill:red
+        oras(ORAS)
+        style oras fill:red
+        porter(Porter)
+        style porter fill:red
+        fluid(Fluid)
+        style fluid fill:red
+        cri-o(CRI-O)
+        style cri-o fill:red
+        containerd(containerd)
+        style containerd fill:red
+        etcd(etcd)
+        style etcd fill:red
+        artifact-hub(Artifact Hub)
+        style artifact-hub fill:red
+        volcano(Volcano)
+        style volcano fill:red        
+        grpc(gRPC)
+        style grpc fill:red
+        core-dns(CoreDNS)
+        style core-dns fill:red
+        k8s(K8s)
+        style k8s fill:red
+        virtual-kubelet(Virtual Kubelet)
+        style virtual-kubelet fill:red
+        vineyard(Vineyard)
+        style vineyard fill:red
+        trickster(Trickster)
+        style trickster fill:red
+        tremor(Tremor)
+        style tremor fill:red
+        tinkerbell(Tinkerbell)
+        style tinkerbell fill:red
+        sealer(Sealer)
+        style sealer fill:red
 
     end
 ```
@@ -540,126 +810,37 @@ flowchart TD
 ```mermaid
 flowchart TD
 
-    subgraph Multi-Cluster
+    subgraph no-containers[Not Containers]
 
-        %% ----------------
-        %% -- Deployment --
-        %% ----------------
-        deployment-mc{{Deployment}}
-        style deployment-mc fill:red
-        deployment-mc-karmada(Karmada)
-        style deployment-mc-karmada fill:red
-        deployment-mc --> deployment-mc-karmada --> lb-mc
-
-        %% --------------------
-        %% -- Load Balancing --
-        %% --------------------
-        lb-mc{{Load Balancing}}
-        style lb-mc fill:red
-        lb-mc-k8gb(k8gb)
-        style lb-mc-k8gb fill:red
-        lb-mc --> lb-mc-k8gb
-
-    end
-```
-
-```mermaid
-flowchart TD
-
-    subgraph WebAssembly
-
-        %% -----------
-        %% -- TODO: --
-        %% -----------
-        krustlet(Krustlet)
-        style krustlet fill:red
+        %% ------------------------
+        %% -- WebAssembly (Wasm) --
+        %% ------------------------
+        wasm{{"WebAssembly (Wasm)"}}
+        style wasm fill:red
+        wasm-krustlet(Krustlet)
+        style wasm-krustlet fill:red
+        wasm-cloud(wasmCloud)
+        style wasm-cloud fill:red
+        wasm-edge(WasmEdge)
+        style wasm-edge fill:red
+        wasm --> wasm-krustlet & wasm-cloud & wasm-edge
+        
+        %% ----------------------
+        %% -- Virtual Machines --
+        %% ----------------------
+        vm{{Virtual Machines}}
+        style vm fill:red
+        vm-kube-virt(KubeVirt)
+        style vm-kube-virt fill:red
+        vm-crossplane(Crossplane)
+        style vm-crossplane fill:red
+        vm --> vm-kube-virt & vm-crossplane
     
     end
 ```
 
 
 ## TODO:
-
-* Meshery
-* Metal3-io
-* Network Service Mesh
-* Open Cluster Management
-* OpenGitOps
-* OpenKruise
-* OpenYurt
-* ORAS
-* Parsec
-* Piraeus Datastore
-* Pixie
-* Porter
-* Pravega
-* sealer
-* Serverless Devs
-* Serverless Workflow
-* Service Mesh Interface (SMI)
-* Service Mesh Performance
-* Skooner
-* Strimzi
-* Submariner
-* SuperEdge
-* Teller
-* Tinkerbell
-* Tremor
-* Trickster
-* Vineyard
-* Virtual Kubelet
-* wasmCloud
-* WasmEdge Runtime
-* KEDA (after Prometheus)
-* KubeVirt
-* k3s
-* Dapr
-* Falco
-* Argo Rollout
-* Flagger
-* Knative
-* KubeVela
-* CDK For Kubernetes (cdk8s)
-* Argo Workflows
-* Keptn
-* FluentD
-* CoreDNS
-* TiKV
-* Vitess
-* Chaos Mesh
-* CloudEvents
-* Cortex
-* CubeFS
-* Emissary-ingress
-* gRPC
-* in-toto
-* KubeEdge
-* Litmus
-* Longhorn
-* NATS
-* OperatorFramework
-* Volcano
-* Artifact Hub
-* containerd
-* etcd
-* Rook
-* Container Network Interface (CNI)
-* CRI-O
-* Athenz
-* BFE
-* Chaosblade
-* Clusterpedia
-* CNI-Genie
-* Confidential Containers
-* ContainerSSH
-* Curiefense
-* Curve
-* Devfile
-* Dex
-* Fluid
-* Fonio
-* Hexa
-* Inclavare Containers
 
 * Check whether there are new projects to be added to the "story".
 * Add Kubernetes SIG projects to the "story".
