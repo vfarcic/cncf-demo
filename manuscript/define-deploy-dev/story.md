@@ -20,11 +20,20 @@ TODO: Explanation
 
 TODO: Explanation
 
+* [Carvel ytt Instead Of Helm? A Better Way To Manage Kubernetes Resources?](https://youtu.be/DLnXkH2keNg)
 * [Carvel: Clean Tools for Cloud Native Problems](https://via.vmw.com/carvel)
 * [Official site](https://carvel.dev)
+
+## Choice 4: CDK For Kubernetes (cdk8s)
+
+TODO: Explanation
+
+* [cdk8s - Kubernetes Manifests With GoLang, TypeScript, Python And Java](https://youtu.be/F2DKtax0NLU)
+* [Official site](https://cdk8s.io)
 
 ## What Is Your Choice?
 
 * [Helm](helm.md)
 * [Kustomize](kustomize.md)
 * [Carvel ytt](carvel-ytt.md)
+* [CDK For Kubernetes (cdk8s)](cdk8s.md)

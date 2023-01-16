@@ -77,7 +77,6 @@ flowchart TD
         click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
         ddd-cdk8s("CDK For Kubernetes (cdk8s)")
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
-        style ddd-cdk8s fill:red
         ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> https
 
         %% ---------------

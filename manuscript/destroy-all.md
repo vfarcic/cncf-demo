@@ -30,9 +30,6 @@ Execute the commands in this section only if you used AWS
 ```bash
 # TODO: Remove Ingress service from the prod cluster
 
-kubectl --kubeconfig $PWD/kubeconfig-dev.yaml \
-    --namespace traefik delete service traefik
-
 # If using Crossplane
 kubectl --kubeconfig $PWD/kubeconfig-dev.yaml \
     --namespace dev delete sqlclaim cncf-demo
