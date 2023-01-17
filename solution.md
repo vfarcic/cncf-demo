@@ -99,7 +99,6 @@ flowchart TD
         click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-carvel.md"
         https-cert-manager-cdk8s(App as cdk8s)
         click https-cert-manager-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-cdk8s.md"
-        style https-cert-manager-cdk8s fill:red
         https--> https-vault & https-venafi & https-cert-manager
         https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel & https-cert-manager-cdk8s --> db
 
@@ -109,8 +108,6 @@ flowchart TD
         db{{Setup PostgreSQL DB In Dev}}
         click db "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/story.md"
         style db fill:blue
-
-        %% -- DB Helm --
         db-helm(Helm Chart)
         click db-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm.md"
         db-helm-helm(App as Helm)
@@ -119,7 +116,6 @@ flowchart TD
         click db-helm-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-kustomize.md"
         db-helm-cdk8s(App as cdk8s)
         click db-helm-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-cdk8s.md"
-        style db-helm-cdk8s fill:red
         db-helm-carvel(App as Carvel ytt)
         click db-helm-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm-carvel.md"
         db-crossplane-local(Crossplane Composition In Kubernetes)

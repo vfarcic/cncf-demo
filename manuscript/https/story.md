@@ -20,6 +20,7 @@ TODO: Explanation
 
 TODO: Explanation
 
+* [What Is HTTPS? How Does It Work? Automate With cert-manager And Let's Encrypt](https://youtu.be/D7ijCjE31GA)
 * [Official site](https://cert-manager.io/)
 
 ## What Is Your Choice?

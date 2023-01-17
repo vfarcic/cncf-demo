@@ -8,6 +8,14 @@ TODO: Intro
 * We'll define the manifests in Go (even though other languages are supported) so please install and configure [Go](https://go.dev/doc/install).
 
 ```bash
+yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
+    cdk8s/app.yaml
+
+yq --inplace ".image.repository = \"$IMAGE\"" cdk8s/app.yaml
+```
+
+```bash
+# TODO: Remove
 export FULL_DOMAIN=cncf-demo-dev.$DOMAIN
 ```
 

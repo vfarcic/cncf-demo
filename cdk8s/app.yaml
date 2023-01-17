@@ -1,0 +1,20 @@
+name: "cncf-demo"
+image:
+  repository: index.docker.io/vfarcic/cncf-demo
+  tag: latest
+ingress:
+  host: cncf-demo-dev.sillydemo.com
+  className: traefik
+tls:
+  enabled: false
+db:
+  id: cncf-demo-db-dev
+  enabled:
+    helm: false
+    crossplane:
+      local: false
+      google: false
+      aws: false
+      azure: false
+schemahero:
+  enabled: false
