@@ -14,11 +14,6 @@ yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
 yq --inplace ".image.repository = \"$IMAGE\"" cdk8s/app.yaml
 ```
 
-```bash
-# TODO: Remove
-export FULL_DOMAIN=cncf-demo-dev.$DOMAIN
-```
-
 ## Do
 
 ```bash

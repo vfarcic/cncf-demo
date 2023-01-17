@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
-
 	"example.com/cdk8s/imports/certmanagerio"
+	shdb "example.com/cdk8s/imports/databasesschemaheroio"
+	dot "example.com/cdk8s/imports/devopstoolkitseriescom"
 	"example.com/cdk8s/imports/k8s"
+	sht "example.com/cdk8s/imports/schemasschemaheroio"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
 	"github.com/cdk8s-team/cdk8s-core-go/cdk8s/v2"
@@ -59,6 +60,10 @@ func NewApp(scope constructs.Construct, id *string, appProps *AppProps) construc
 	labels := map[string]*string{
 		"app.kubernetes.io/name": constructs.Node_Of(construct).Id(),
 	}
+	apiMetadata := &cdk8s.ApiObjectMetadata{
+		Name:   id,
+		Labels: &labels,
+	}
 	metadata := &k8s.ObjectMeta{
 		Name:   id,
 		Labels: &labels,
@@ -67,10 +72,19 @@ func NewApp(scope constructs.Construct, id *string, appProps *AppProps) construc
 	k8s.NewKubeService(construct, jsii.String("service"), getServiceProps(metadata))
 	k8s.NewKubeIngress(construct, jsii.String("ingress"), getIngressProps(appProps, metadata))
 	if appProps.Tls.Enabled {
-		certmanagerio.NewCertificate(construct, jsii.String("certificate"), getCertificate(appProps, metadata))
+		certmanagerio.NewCertificate(construct, jsii.String("certificate"), getCertificate(appProps, apiMetadata))
 	}
 	if appProps.Db.Enabled.Helm {
 		cdk8s.NewHelm(construct, jsii.String("postgresql"), getPostgresqlHelm(appProps))
+	} else if appProps.Db.Enabled.Crossplane.Local || appProps.Db.Enabled.Crossplane.Google || appProps.Db.Enabled.Crossplane.AWS || appProps.Db.Enabled.Crossplane.Azure {
+		dot.NewSqlClaim(construct, jsii.String("sqlClaim"), getPostgresqlCrossplane(appProps, apiMetadata))
+		if !appProps.Db.Enabled.Crossplane.Local {
+			k8s.NewKubeSecret(construct, jsii.String("secret"), getPostgresqlSecret(appProps, metadata))
+		}
+	}
+	if appProps.SchemaHero.Enabled {
+		shdb.NewDatabase(construct, jsii.String("database"), getPostgresqlDatabase(appProps, apiMetadata))
+		sht.NewTable(construct, jsii.String("table"), getPostgresqlTable(appProps, apiMetadata))
 	}
 	return construct
 }
@@ -103,7 +117,7 @@ func getDeploymentProps(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeD
 			},
 		},
 	}
-	setEnv(appProps, &container)
+	setDbEnv(appProps, &container)
 	return &k8s.KubeDeploymentProps{
 		Metadata: metadata,
 		Spec: &k8s.DeploymentSpec{
@@ -174,12 +188,9 @@ func getIngressProps(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeIngr
 	return &kubeIngressProps
 }
 
-func getCertificate(appProps *AppProps, metadata *k8s.ObjectMeta) *certmanagerio.CertificateProps {
+func getCertificate(appProps *AppProps, metadata *cdk8s.ApiObjectMetadata) *certmanagerio.CertificateProps {
 	return &certmanagerio.CertificateProps{
-		Metadata: &cdk8s.ApiObjectMetadata{
-			Name:   metadata.Name,
-			Labels: metadata.Labels,
-		},
+		Metadata: metadata,
 		Spec: &certmanagerio.CertificateSpec{
 			SecretName: jsii.String(*metadata.Name),
 			IssuerRef: &certmanagerio.CertificateSpecIssuerRef{
@@ -189,106 +200,5 @@ func getCertificate(appProps *AppProps, metadata *k8s.ObjectMeta) *certmanagerio
 			CommonName: jsii.String(appProps.Ingress.Host),
 			DnsNames:   &[]*string{jsii.String(appProps.Ingress.Host)},
 		},
-	}
-}
-
-func getPostgresqlHelm(appProps *AppProps) *cdk8s.HelmProps {
-	return &cdk8s.HelmProps{
-		Chart:       jsii.String("bitnami/postgresql"),
-		ReleaseName: jsii.String(fmt.Sprintf("%s-postgresql", appProps.Name)),
-		Version:     jsii.String("12.1.2"),
-		Namespace:   jsii.String("dev"),
-		Values: &map[string]interface{}{
-			"global": &map[string]interface{}{
-				"persistence": &map[string]interface{}{
-					"enabled": false,
-				},
-			},
-			"auth": &map[string]interface{}{
-				"postgresPassword": "postgres",
-			},
-			"primary": &map[string]interface{}{
-				"initdb": &map[string]interface{}{
-					"scripts": &map[string]interface{}{
-						"00_init_script.sh": "export PGPASSWORD=$POSTGRES_PASSWORD\npsql -U postgres -c 'CREATE DATABASE \"cncf-demo\";'",
-					},
-				},
-			},
-		},
-	}
-}
-
-func setEnv(appProps *AppProps, container *k8s.Container) {
-	if appProps.Db.Enabled.Helm || appProps.Db.Enabled.Crossplane.Local || appProps.Db.Enabled.Crossplane.Google || appProps.Db.Enabled.Crossplane.AWS || appProps.Db.Enabled.Crossplane.Azure {
-		endPointEnv := k8s.EnvVar{
-			Name: jsii.String("DB_ENDPOINT"),
-		}
-		portEnv := k8s.EnvVar{
-			Name: jsii.String("DB_PORT"),
-		}
-		userEnv := k8s.EnvVar{
-			Name: jsii.String("DB_USER"),
-		}
-		passEnv := k8s.EnvVar{
-			Name: jsii.String("DB_PASS"),
-		}
-		nameEnv := k8s.EnvVar{
-			Name:  jsii.String("DB_NAME"),
-			Value: &appProps.Name,
-		}
-		if appProps.Db.Enabled.Crossplane.Local {
-			endPointEnv.Value = jsii.String(appProps.Db.Id + "-postgresql")
-			portEnv.Value = jsii.String("5432")
-			userEnv.Value = jsii.String("postgres")
-			passEnv.ValueFrom = &k8s.EnvVarSource{
-				SecretKeyRef: &k8s.SecretKeySelector{
-					Name: jsii.String(appProps.Db.Id + "-postgresql"),
-					Key:  jsii.String("postgres-password"),
-				},
-			}
-		} else if appProps.Db.Enabled.Helm {
-			endPointEnv.Value = jsii.String(appProps.Name + "-postgresql")
-			portEnv.Value = jsii.String("5432")
-			userEnv.Value = jsii.String("postgres")
-			passEnv.ValueFrom = &k8s.EnvVarSource{
-				SecretKeyRef: &k8s.SecretKeySelector{
-					Name: jsii.String(fmt.Sprintf("%s-postgresql", appProps.Name)),
-					Key:  jsii.String("postgres-password"),
-				},
-			}
-		} else {
-			endPointEnv.ValueFrom = &k8s.EnvVarSource{
-				SecretKeyRef: &k8s.SecretKeySelector{
-					Name: &appProps.Db.Id,
-					Key:  jsii.String("endpoint"),
-				},
-			}
-			portEnv.ValueFrom = &k8s.EnvVarSource{
-				SecretKeyRef: &k8s.SecretKeySelector{
-					Name: &appProps.Db.Id,
-					Key:  jsii.String("port"),
-				},
-			}
-			userEnv.ValueFrom = &k8s.EnvVarSource{
-				SecretKeyRef: &k8s.SecretKeySelector{
-					Name: &appProps.Db.Id,
-					Key:  jsii.String("username"),
-				},
-			}
-			passEnv.ValueFrom = &k8s.EnvVarSource{
-				SecretKeyRef: &k8s.SecretKeySelector{
-					Name: &appProps.Db.Id,
-					Key:  jsii.String("password"),
-				},
-			}
-			nameEnv.Value = &appProps.Db.Id
-		}
-		container.Env = &[]*k8s.EnvVar{
-			&endPointEnv,
-			&portEnv,
-			&userEnv,
-			&passEnv,
-			&nameEnv,
-		}
 	}
 }

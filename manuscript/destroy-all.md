@@ -1,5 +1,7 @@
 # Destroy
 
+Depending on the paths you took, some resources might not exist and, as a result, the commands that follow might through an error. Feel free to ignore them.
+
 ## Google Cloud
 
 Execute the commands in this section only if you used Google Cloud

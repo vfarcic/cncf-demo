@@ -1,31 +1,23 @@
-# Manage DB Schema With SchemaHero With Carvel ytt
+# Manage DB Schema With SchemaHero With cdk8s
 
 TODO: Intro
-
-## Setup
-
-* Install `krew` from https://krew.sigs.k8s.io/docs/user-guide/setup/install
-
-```bash
-kubectl krew install schemahero
-
-kubectl schemahero install
-```
 
 ## Do
 
 ```bash
-cat ytt/resources/schemahero.yaml
+cd cdk8s
 
-cat ytt/schema.yaml
+cat db.go
 
-yq --inplace ".schemahero.enabled = true" ytt/schema.yaml
+cat app.go
 
-cat ytt/schema.yaml
+yq --inplace ".schemahero.enabled = true" app.yaml
 
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-dev.yaml \
-    | tee yaml/dev/app.yaml
+cdk8s synth --output ../yaml/dev --validate 
+
+cd ..
+
+cat yaml/dev/cncf-demo.k8s.yaml
 
 kubectl --namespace dev apply --filename yaml/dev
 

@@ -26,4 +26,5 @@ TODO: Explanation
 
 * [Telepresence](telepresence.md)
 * [DevSpace](devspace.md)
-* [Nocalhost.md](nocalhost.md)
+* [Nocalhost](nocalhost.md)
+* [Devfile](devfile.md)

@@ -10,13 +10,13 @@ TODO: Intro
 export REGISTRY=index.docker.io
 
 # Replace `[...]` with your Docker Hub username
-export DH_USER=[...]
+export DOCKERHUB_USERNAME=[...]
 
-export IMAGE=$REGISTRY/$DH_USER/cncf-demo
+export IMAGE=$REGISTRY/$DOCKERHUB_USERNAME/cncf-demo
 
 # Make sure that Docker is running
 
-docker login --username $DH_USER $REGISTRY
+docker login --username $DOCKERHUB_USERNAME $REGISTRY
 ```
 
 ## Do
@@ -32,7 +32,7 @@ docker image push $IMAGE:$TAG
 
 docker image push ${IMAGE}:latest
 
-echo "https://hub.docker.com/r/$DH_USER/cncf-demo"
+echo "https://hub.docker.com/r/$DOCKERHUB_USERNAME/cncf-demo"
 
 # Open it in a browser
 ```

@@ -2,18 +2,6 @@
 
 TODO: Intro
 
-## Setup
-
-* Install `krew` from https://krew.sigs.k8s.io/docs/user-guide/setup/install
-
-```bash
-kubectl krew install schemahero
-
-export PATH="${PATH}:${HOME}/.krew/bin"
-
-kubectl schemahero install
-```
-
 ## Do
 
 ```bash

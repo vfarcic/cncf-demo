@@ -31,8 +31,6 @@ devspace dev --namespace dev
 
 go run .
 
-# Open localhost:8080 in a browser
-
 # Open a second terminal and navigate to the project root
 
 # In the second terminal

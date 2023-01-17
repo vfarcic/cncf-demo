@@ -10,11 +10,8 @@ helm repo add crossplane-stable \
 
 helm repo update
 
-helm upgrade --install \
-    crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system \
-    --create-namespace \
-    --wait
+helm upgrade --install crossplane crossplane-stable/crossplane \
+    --namespace crossplane-system --create-namespace --wait
 
 kubectl apply \
     --filename crossplane-config/provider-kubernetes-incluster.yaml
@@ -22,8 +19,7 @@ kubectl apply \
 kubectl apply \
     --filename crossplane-config/provider-helm-incluster.yaml
 
-kubectl apply \
-    --filename crossplane-config/config-sql.yaml
+kubectl apply --filename crossplane-config/config-sql.yaml
 
 export XP_DESTINATION=local
 ```
@@ -33,3 +29,4 @@ export XP_DESTINATION=local
 * [Helm](crossplane-helm.md)
 * [Kustomize](crossplane-kustomize.md)
 * [Carvel](crossplane-carvel.md)
+* [cdk8s](crossplane-cdk8s.md)

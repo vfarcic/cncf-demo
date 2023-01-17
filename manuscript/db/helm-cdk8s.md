@@ -15,6 +15,8 @@ helm repo update
 ```bash
 cd cdk8s
 
+cat db.go
+
 cat app.go
 
 cat main.go

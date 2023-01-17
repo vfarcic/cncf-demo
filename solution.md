@@ -136,7 +136,6 @@ flowchart TD
         click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md"
         db-crossplane-cdk8s(App as cdk8s)
         click db-crossplane-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cdk8s.md"
-        style db-crossplane-cdk8s fill:red
         db --> db-helm & db-crossplane-local & db-crossplane-cloud
         db-helm --> db-helm-helm & db-helm-kustomize & db-helm-cdk8s & db-helm-carvel --> db-schema
         db-crossplane-local --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-cdk8s & db-crossplane-carvel
@@ -160,7 +159,6 @@ flowchart TD
         click db-schema-schemahero-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md"
         db-schema-schemahero-cdk8s(App as cdk8s)
         click db-schema-schemahero-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-cdk8s.md"
-        style db-schema-schemahero-cdk8s fill:red
         db-schema-schemahero-carvel(App as Carvel ytt)
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
         db-schema --> db-schema-flyway & db-schema-liquibase & db-schema-schemahero
@@ -182,7 +180,6 @@ flowchart TD
         click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
         develop-devspace-cdk8s(App as cdk8s)
         click develop-devspace-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-cdk8s.md"
-        style develop-devspace-cdk8s fill:red
         develop-devspace-helm(App as Helm)
         click develop-devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
         develop-devspace-carvel(App as Carvel ytt)
