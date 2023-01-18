@@ -9,5 +9,5 @@ spec:
       provider: azure-official
       cluster: aks
   parameters:
-    nodeSize: medium
+    nodeSize: large
     minNodeCount: 3

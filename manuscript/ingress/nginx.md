@@ -17,12 +17,12 @@ git push
 
 # If NOT EKS
 export INGRESS_HOST=$(kubectl --namespace ingress-nginx \
-    get svc ingress-nginx-controller \
+    get service ingress-nginx-controller \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
 # If EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace ingress-nginx \
-    get svc ingress-nginx-controller \
+    get service ingress-nginx-controller \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
 # If EKS

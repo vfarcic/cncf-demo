@@ -1,0 +1,42 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: datawire
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  url: https://app.getambassador.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: emissary-ingress
+  namespace: flux-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: emissary-ingress
+      version: 8.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: datawire
+        namespace: flux-system
+  releaseName: emissary-ingress
+  targetNamespace: emissary
+  install:
+    createNamespace: true
+---
+kind: Listener
+metadata:
+  name: emissary-ingress-listener-8080
+  namespace: emissary
+spec:
+  port: 8080
+  protocol: HTTP
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL
+

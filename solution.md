@@ -256,13 +256,12 @@ flowchart TD
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
         emissary-ingress(Emissary-ingress)
-        style emissary-ingress fill:red
+        click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
-        ingress-->ingress-contour & ingress-nginx & emissary-ingress
-        ingress-contour & ingress-nginx --> ingress-argocd & ingress-flux --> app
+        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux --> app
 
         %% ----------------------------------
         %% -- Deploy The App To Production --

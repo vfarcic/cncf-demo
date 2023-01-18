@@ -9,6 +9,6 @@ spec:
       provider: aws-official
       cluster: eks
   parameters:
-    nodeSize: medium
+    nodeSize: large
     minNodeCount: 3
     version: "1.24"

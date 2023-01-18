@@ -9,6 +9,6 @@ spec:
       provider: google-official
       cluster: gke
   parameters:
-    nodeSize: medium
+    nodeSize: large
     minNodeCount: 1
     version: 1.25.5-gke.1500

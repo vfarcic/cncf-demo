@@ -5,9 +5,14 @@ TODO: Intro
 ## Do
 
 ```bash
-cat $GITOPS_APP/contour.yaml
+kubectl apply \
+    --filename https://app.getambassador.io/yaml/emissary/3.4.0/emissary-crds.yaml
 
-cp $GITOPS_APP/contour.yaml infra/.
+cat $GITOPS_APP/emissary-ingress.yaml
+
+# TODO: Add to Argo CD
+
+cp $GITOPS_APP/emissary-ingress.yaml infra/.
 
 git add . 
 
@@ -16,13 +21,13 @@ git commit -m "Contour"
 git push
 
 # If NOT EKS
-export INGRESS_HOST=$(kubectl --namespace projectcontour \
-    get service contour-envoy \
+export INGRESS_HOST=$(kubectl --namespace emissary \
+    get service emissary-ingress \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
 # If EKS
-export INGRESS_HOSTNAME=$(kubectl --namespace projectcontour \
-    get service contour-envoy \
+export INGRESS_HOSTNAME=$(kubectl --namespace emissary \
+    get service emissary-ingress \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
 # If EKS
@@ -39,7 +44,7 @@ echo $INGRESS_HOST
 #   them and execute `export INGRESS_HOST=[...]` with `[...]`
 #   being the selected IP.
 
-export INGRESS_CLASS_NAME=contour
+export INGRESS_CLASS_NAME=ambassador
 ```
 
 ## Which GitOps Tool Did You Choose?

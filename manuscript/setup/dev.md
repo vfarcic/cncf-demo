@@ -116,12 +116,12 @@ helm upgrade --install traefik traefik \
 
 # If NOT EKS
 export INGRESS_HOST=$(kubectl --namespace traefik \
-    get svc traefik \
+    get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
 # If EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
-    get svc traefik \
+    get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
 # If EKS

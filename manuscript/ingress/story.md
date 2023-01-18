@@ -18,10 +18,10 @@ TODO: Explanation
 
 TODO: Explanation
 
-* [Official site](TODO: link)
+* [Official site](https://www.getambassador.io/products/api-gateway)
 
 ## What Is Your Choice?
 
 * [NGINX](nginx.md)
 * [Envoy with Contour](contour.md)
-* [TODO:](TODO:.md)
+* [Emissary-Ingress](emissary-ingress.md)
