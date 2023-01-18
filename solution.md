@@ -297,12 +297,7 @@ flowchart TD
         db-production-crossplane-azure(Azure)
         click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
         style db-production-crossplane-azure fill:red
-        db-production-vitess(Vitess)
-        style db-production-vitess fill:red
-        db-production-tikv(TiKV)
-        style db-production-tikv fill:red
-        db-production --> db-production-crossplane & db-production-vitess & db-production-tikv
-        db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> continue
+        db-production --> db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> continue
 
         continue((The be continued...))
 
@@ -794,6 +789,11 @@ flowchart TD
         style tinkerbell fill:red
         sealer(Sealer)
         style sealer fill:red
+        vitess(Vitess)
+        style vitess fill:red
+        tikv(TiKV)
+        style tikv fill:red
+
 
     end
 ```

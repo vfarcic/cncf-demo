@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "kubernetes": {
+    "fileMatch": [
+      "argocd/",
+      "cert-manager/",
+      "crossplane/",
+      "crossplane-config/",
+      "flux/",
+      "harbor/",
+      "helm/",
+      "kbld/",
+      "kustomize/",
+      "schema-hero/",
+      "ytt/"
+    ]
+  }
+}
