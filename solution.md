@@ -275,7 +275,6 @@ flowchart TD
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
         app-cdk8s(App As cdk8s)
         click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
-        style app-cdk8s fill:red
         app-carvel(App As Carvel ytt)
         click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
         app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> db-production

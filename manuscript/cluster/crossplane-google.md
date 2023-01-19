@@ -38,7 +38,7 @@ spec:
 ## Do
 
 ```bash
-export XP_DESTINATION=google
+yq --inplace ".crossplane.destination = \"google\"" settings.yaml
 
 cat crossplane/google-gke.yaml
 
@@ -50,13 +50,13 @@ kubectl --namespace production apply \
 
 kubectl get managed
 
-kubectl --namespace production get clusterclaims
+kubectl --namespace production get claim
 
-cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
+cat crossplane/get-kubeconfig-google.sh
 
-chmod +x crossplane/get-kubeconfig-$XP_DESTINATION.sh
+chmod +x crossplane/get-kubeconfig-google.sh
 
-./crossplane/get-kubeconfig-$XP_DESTINATION.sh
+./crossplane/get-kubeconfig-google.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 

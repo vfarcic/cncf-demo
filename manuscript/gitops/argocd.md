@@ -86,7 +86,7 @@ git commit -m "Infra"
 
 git push
 
-export GITOPS_APP=argocd
+yq --inplace ".gitOps.app = \"argocd\"" settings.yaml
 ```
 
 ## Continue The Adventure

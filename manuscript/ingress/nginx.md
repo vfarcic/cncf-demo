@@ -5,6 +5,8 @@ TODO: Intro
 ## Do
 
 ```bash
+export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+
 cat $GITOPS_APP/nginx.yaml
 
 cp $GITOPS_APP/nginx.yaml infra/.
@@ -16,7 +18,7 @@ git commit -m "NGINX"
 git push
 
 # If NOT EKS
-export INGRESS_HOST=$(kubectl --namespace ingress-nginx \
+export INGRESS_IP=$(kubectl --namespace ingress-nginx \
     get service ingress-nginx-controller \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
@@ -26,9 +28,9 @@ export INGRESS_HOSTNAME=$(kubectl --namespace ingress-nginx \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
 # If EKS
-export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
+export INGRESS_IP=$(dig +short $INGRESS_HOSTNAME) 
 
-echo $INGRESS_HOST
+echo $INGRESS_IP
 
 # Repeat the `export` commands if the output is empty
 
@@ -36,10 +38,14 @@ echo $INGRESS_HOST
 #   longer, and repeat the `export` commands.
 
 # If the output continues having more than one IP, choose one of
-#   them and execute `export INGRESS_HOST=[...]` with `[...]`
+#   them and execute `export INGRESS_IP=[...]` with `[...]`
 #   being the selected IP.
 
-export INGRESS_CLASS_NAME=nginx
+yq --inplace ".production.ingress.ip = \"$INGRESS_IP\"" \
+    settings.yaml
+
+yq --inplace ".production.ingress.className = \"nginx\"" \
+    settings.yaml
 ```
 
 ## Which GitOps Tool Did You Choose?

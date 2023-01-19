@@ -17,6 +17,8 @@ gcloud projects delete $XP_PROJECT_ID --quiet
 Execute the commands in this section only if you used Google Cloud
 
 ```bash
+export RESOURCE_GROUP=$(yq ".azure.resourceGroup" settings.yaml)
+
 az group delete --name $RESOURCE_GROUP --yes
 
 # If using Crossplane

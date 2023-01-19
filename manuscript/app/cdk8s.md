@@ -1,4 +1,4 @@
-# Deploy The App Defined As Carvel ytt To Production With GitOps
+# Deploy The App Defined As cdk8s To Production With GitOps
 
 TODO: Intro
 
@@ -9,9 +9,14 @@ export REPO_URL=$(git config --get remote.origin.url)
 
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
+export DOMAIN=$(yq ".production.domain" settings.yaml)
+
+export INGRESS_CLASS_NAME=$(\
+    yq ".production.ingress.className" settings.yaml)
+
 # Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    $GITOPS_APP/cncf-demo-ytt.yaml
+    $GITOPS_APP/cncf-demo-cdk8s.yaml
 
 # Execute command that follows only if you jumped directly into
 #   this chapter (if you did not go through the steps that built
@@ -20,7 +25,7 @@ export TAG=v0.0.1
 
 export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
 
-echo $INGRESS_HOST
+echo $INGRESS_IP
 
 # Configure DNS for the following subdomains (skip this step if
 #   you chose to use `nip.io` instead of a "real" domain):
@@ -30,21 +35,27 @@ echo $INGRESS_HOST
 ## Do
 
 ```bash
-cat $GITOPS_APP/cncf-demo-ytt.yaml
+cat $GITOPS_APP/cncf-demo-cdk8s.yaml
 
-cp $GITOPS_APP/cncf-demo-ytt.yaml apps/cncf-demo.yaml
+cp $GITOPS_APP/cncf-demo-cdk8s.yaml apps/cncf-demo.yaml
 
-yq --inplace ".image.tag = \"$TAG\"" ytt/values-prod.yaml
+cd cdk8s
+
+export ENVIRONMENT=prod
+
+yq --inplace ".image.tag = \"$TAG\"" app-prod.yaml
 
 yq --inplace ".ingress.host = \"cncf-demo.$DOMAIN\"" \
-    ytt/values-prod.yaml
+    app-prod.yaml
 
 yq --inplace ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
-    ytt/values-prod.yaml
+    app-prod.yaml
 
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml
+cdk8s synth --output ../yaml/prod --validate 
+
+cd ..
+
+cat yaml/prod/cncf-demo.k8s.yaml
 
 git add .
 
@@ -54,8 +65,6 @@ git push
 
 kubectl --namespace production get all,ingresses
 
-# If you chose to use `nip.io` instead of a "real" domain,
-#   replace `https` with `http`.
 echo "https://cncf-demo.$DOMAIN"
 
 # Open it in a browser.

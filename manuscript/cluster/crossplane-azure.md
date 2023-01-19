@@ -31,7 +31,7 @@ kubectl apply \
 ## Do
 
 ```bash
-export XP_DESTINATION=azure
+yq --inplace ".crossplane.destination = \"azure\"" settings.yaml
 
 cat crossplane/azure-aks.yaml
 
@@ -43,15 +43,18 @@ kubectl --namespace production apply \
 
 kubectl get managed
 
-kubectl --namespace production get clusterclaims
+kubectl --namespace production get claim
 
-cat crossplane/get-kubeconfig-$XP_DESTINATION.sh
+cat crossplane/get-kubeconfig-azure.sh
 
-chmod +x crossplane/get-kubeconfig-$XP_DESTINATION.sh
+chmod +x crossplane/get-kubeconfig-azure.sh
 
-./crossplane/get-kubeconfig-$XP_DESTINATION.sh
+./crossplane/get-kubeconfig-azure.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
+
+yq --inplace ".kubeConfig = \"$PWD/kubeconfig-prod.yaml\"" \
+    settings.yaml
 
 kubectl get nodes
 ```

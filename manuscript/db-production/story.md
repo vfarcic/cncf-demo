@@ -25,5 +25,3 @@ TODO: Explanation
 ## What Is Your Choice?
 
 * [Crossplane](crossplane.md)
-* [TODO:](TODO:.md)
-* [TODO:](TODO:.md)

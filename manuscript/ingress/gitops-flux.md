@@ -9,9 +9,11 @@ TODO: Intro
 ## Do
 
 ```bash
+export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
+
 # Replace `[...]` with the domain (e.g., sillydemo.com).
 # If you do not have a domain, replace `[...]` with
-#   `$INGRESS_HOST.nip.io`.
+#   `$INGRESS_IP.nip.io`.
 # If you do choose to use `nip.io` instead of a "real" domain,
 #   beware that:
 #   - when opening an application in a browser, you will have to
@@ -22,7 +24,7 @@ TODO: Intro
 #     registry.
 export DOMAIN=[...]
 
-echo $INGRESS_HOST
+yq --inplace ".production.domain = \"$DOMAIN\"" settings.yaml
 
 # Configure DNS for the following subdomains (skip this step if
 #   you chose to use `nip.io` instead of a "real" domain):
@@ -38,16 +40,18 @@ gitops create dashboard gitops --password=admin --export \
 
 cat infra/weave-gitops-dashboard.yaml
 
+export INGRESS_CLASS_NAME=$(\
+  yq ".production.ingress.className" settings.yaml)
+
 echo "
     ingress:
       className: $INGRESS_CLASS_NAME
       enabled: true
       hosts:
-        - host: gitops.$INGRESS_HOST.nip.io
+        - host: gitops.$DOMAIN
           paths:
             - path: /
-              pathType: ImplementationSpecific
-"
+              pathType: ImplementationSpecific"
 
 # Open `infra/weave-gitops-dashboard.yaml` in an editor and
 #   add the output from the previous command to the
@@ -61,7 +65,7 @@ git push
 
 kubectl --namespace flux-system get helmrelease gitops
 
-echo "http://gitops.$INGRESS_HOST.nip.io"
+echo "http://gitops.$DOMAIN"
 
 # Open it in a browser
 

@@ -94,7 +94,7 @@ git commit -m "Infra"
 
 git push
 
-export GITOPS_APP=flux
+yq --inplace ".gitOps.app = \"flux\"" settings.yaml
 ```
 
 ## Continue The Adventure

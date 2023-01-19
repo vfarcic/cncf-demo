@@ -1,10 +1,14 @@
-# Deploy The App Defined As Helm Chart To Production With Argo CD
+# Deploy The App Defined As Helm Chart To Production With GitOps
 
 TODO: Intro
 
 ## Setup
 
 ```bash
+export REPO_URL=$(git config --get remote.origin.url)
+
+export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+
 # Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     $GITOPS_APP/cncf-demo-helm.yaml
@@ -13,6 +17,8 @@ yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
 #   this chapter (if you did not go through the steps that built
 #   and pushed the image to a registry).
 export TAG=v0.0.1
+
+export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
 
 echo $INGRESS_HOST
 

@@ -13,6 +13,11 @@ gh repo set-default
 # Select the fork as the default repository
 
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
+# Install `yq` CLI from https://github.com/mikefarah/yq
+# 'yq' is a lightweight and portable command-line YAML processor
+yq --inplace ".kubeConfig = \"$PWD/kubeconfig-dev.yaml\"" \
+    settings.yaml
 ```
 
 ## Create a management Kubernetes cluster
@@ -41,10 +46,13 @@ Follow this section ONLY if you're planning to use Azure
 ```bash
 export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 
+yq --inplace ".azure.resourceGroup = \"$RESOURCE_GROUP\"" \
+    settings.yaml
+
 az group create --location eastus --name $RESOURCE_GROUP
 
-# Change `1.25.2` to the Kubernetes version you want to use
-export K8S_VERSION=1.25.2
+# Change `1.25.4` to the Kubernetes version you want to use
+export K8S_VERSION=1.25.4
 
 az aks create --name dot --resource-group $RESOURCE_GROUP \
     --node-count 3 --node-vm-size Standard_D2_v2 \
@@ -62,6 +70,9 @@ Follow this section ONLY if you're planning to use Google Cloud
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+
+yq --inplace ".google.projectId = \"$PROJECT_ID\"" \
+    settings.yaml
 
 gcloud projects create $PROJECT_ID
 
@@ -83,6 +94,10 @@ gcloud container clusters get-credentials dot \
     --project $PROJECT_ID --region us-east1
 
 export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+
+yq --inplace \
+    ".google.crossplane.projectId = \"$XP_PROJECT_ID\"" \
+    settings.yaml
 
 gcloud projects create $XP_PROJECT_ID
 
