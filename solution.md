@@ -296,9 +296,9 @@ flowchart TD
         db-production-crossplane-azure(Azure)
         click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
         style db-production-crossplane-azure fill:red
-        db-production --> db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> continue
+        db-production --> db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> prod-done
 
-        continue((The be continued...))
+        prod-done((Chapter End))
 
     end
 
