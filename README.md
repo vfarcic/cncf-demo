@@ -90,8 +90,8 @@ flowchart TD
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
 | Build Container Image | TODO: | Wednesday, February 8, 2023 | [story](manuscript/build-container-image/story.md) |
-| Store Container Image in a Registry | TODO: | Tuesday, February 14 | [story](manuscript/registry/story.md) |
-| Define And Deploy The App To Dev | TODO: | Tuesday, February 21 | [story](manuscript/define-deploy-dev/story.md) |
+| Store Container Image in a Registry | TODO: | Tuesday, February 14, 2023 | [story](manuscript/registry/story.md) |
+| Define And Deploy The App To Dev | TODO: | Tuesday, February 21, 2023 | [story](manuscript/define-deploy-dev/story.md) |
 | Use HTTPS | Ashley Davis - cert-manager | TODO: | [story](manuscript/https/story.md) |
 | Setup PostgreSQL DB In Dev | TODO: | TODO: | [story](manuscript/db/story.md) |
 | Manage DB Schema | Marc Campbell - SchemaHero | TODO: | [story](manuscript/db-schema/story.md) |
