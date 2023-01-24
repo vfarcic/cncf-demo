@@ -7,14 +7,19 @@ Depending on the paths you took, some resources might not exist and, as a result
 Execute the commands in this section only if you used Google Cloud
 
 ```bash
+export PROJECT_ID=$(yq ".google.projectId" settings.yaml)
+
 gcloud projects delete $PROJECT_ID --quiet
 
-gcloud projects delete $XP_PROJECT_ID --quiet
+export PROJECT_ID=$(\
+    yq ".google.crossplane.projectId" settings.yaml)
+
+gcloud projects delete $PROJECT_ID --quiet
 ```
 
 ## Azure
 
-Execute the commands in this section only if you used Google Cloud
+Execute the commands in this section only if you used Azure
 
 ```bash
 export RESOURCE_GROUP=$(yq ".azure.resourceGroup" settings.yaml)

@@ -60,8 +60,6 @@ kubectl --namespace cert-manager get all
 #   "real" domain
 export EMAIL=[...]
 
-# Install `yq` CLI from https://github.com/mikefarah/yq
-
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
 cat cert-manager/issuer.yaml
