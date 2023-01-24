@@ -188,7 +188,7 @@ flowchart TD
         click develop-devfile "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
         style develop-devfile fill:red
         develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
-        develop-telepresence & develop-nocalhost --> dev-done
+        develop-telepresence & develop-nocalhost & develop-devfile --> dev-done
         develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> dev-done
 
         dev-done((Chapter End))
@@ -519,7 +519,9 @@ flowchart TD
         style deployment-mc fill:red
         deployment-mc-karmada(Karmada)
         style deployment-mc-karmada fill:red
-        deployment-mc --> deployment-mc-karmada --> lb-mc
+        open-kruise(OpenKruise)
+        style open-kruise fill:red
+        deployment-mc --> deployment-mc-karmada & open-kruise --> lb-mc
 
         %% ---------------------------------
         %% -- Load Balancing & Networking --
@@ -627,8 +629,11 @@ flowchart TD
 ```mermaid
 flowchart TD
 
-    subgraph Edge
+    subgraph edge["Edge & Baremetal"]
 
+        %% ----------
+        %% -- Edge --
+        %% ----------
         akri(Akri)
         style akri fill:red
         keylime(Keylime)
@@ -640,6 +645,46 @@ flowchart TD
         super-edge(SuperEdge)
         style super-edge fill:red
 
+        %% ---------------
+        %% -- Baremetal --
+        %% ---------------
+        metal3-io(Metal3.io)
+        style metal3-io fill:red
+        tinkerbell(Tinkerbell)
+        style tinkerbell fill:red
+
+    end
+```
+
+```mermaid
+flowchart TD
+
+    subgraph no-containers[Not Containers]
+
+        %% ------------------------
+        %% -- WebAssembly (Wasm) --
+        %% ------------------------
+        wasm{{"WebAssembly (Wasm)"}}
+        style wasm fill:red
+        wasm-krustlet(Krustlet)
+        style wasm-krustlet fill:red
+        wasm-cloud(wasmCloud)
+        style wasm-cloud fill:red
+        wasm-edge(WasmEdge)
+        style wasm-edge fill:red
+        wasm --> wasm-krustlet & wasm-cloud & wasm-edge
+        
+        %% ----------------------
+        %% -- Virtual Machines --
+        %% ----------------------
+        vm{{Virtual Machines}}
+        style vm fill:red
+        vm-kube-virt(KubeVirt)
+        style vm-kube-virt fill:red
+        vm-crossplane(Crossplane)
+        style vm-crossplane fill:red
+        vm --> vm-kube-virt & vm-crossplane
+    
     end
 ```
 
@@ -661,9 +706,11 @@ flowchart TD
         style networking-cilium fill:red
         bfe(BFE)
         style bfe fill:red
+        kube-ovn(Kube-OVN)
+        style kube-ovn fill:red
         cni-genie(CNI-Genie)
         style cni-genie fill:red
-        networking --> networking-cni --> networking-antrea & networking-cilium & bfe --> cni-genie
+        networking --> networking-cni --> networking-antrea & networking-cilium & bfe & kube-ovn --> cni-genie
 
         %% -------------
         %% -- Storage --
@@ -737,6 +784,14 @@ flowchart TD
         style serverless-devs fill:red
         serverless --> serverless-knative & serverless-devs
 
+        %% ---------------------------------
+        %% -- Machine Learning & Big Data --
+        %% ---------------------------------
+        kube-dl(KubeDL)
+        style kube-dl fill:red
+        fluid(Fluid)
+        style fluid fill:red
+
         %% -----------
         %% -- TODO: --
         %% -----------
@@ -744,22 +799,12 @@ flowchart TD
         style konveyor fill:red
         krator(Krator)
         style krator fill:red
-        kube-ovn(Kube-OVN)
-        style kube-ovn fill:red
-        kube-dl(KubeDL)
-        style kube-dl fill:red
         kured(Kured)
         style kured fill:red
-        metal3-io(Metal3.io)
-        style metal3-io fill:red
-        open-kruise(OpenKruise)
-        style open-kruise fill:red
         oras(ORAS)
         style oras fill:red
         porter(Porter)
         style porter fill:red
-        fluid(Fluid)
-        style fluid fill:red
         cri-o(CRI-O)
         style cri-o fill:red
         containerd(containerd)
@@ -774,8 +819,6 @@ flowchart TD
         style grpc fill:red
         core-dns(CoreDNS)
         style core-dns fill:red
-        k8s(K8s)
-        style k8s fill:red
         virtual-kubelet(Virtual Kubelet)
         style virtual-kubelet fill:red
         vineyard(Vineyard)
@@ -784,8 +827,6 @@ flowchart TD
         style trickster fill:red
         tremor(Tremor)
         style tremor fill:red
-        tinkerbell(Tinkerbell)
-        style tinkerbell fill:red
         sealer(Sealer)
         style sealer fill:red
         vitess(Vitess)
@@ -793,39 +834,6 @@ flowchart TD
         tikv(TiKV)
         style tikv fill:red
 
-
-    end
-```
-
-```mermaid
-flowchart TD
-
-    subgraph no-containers[Not Containers]
-
-        %% ------------------------
-        %% -- WebAssembly (Wasm) --
-        %% ------------------------
-        wasm{{"WebAssembly (Wasm)"}}
-        style wasm fill:red
-        wasm-krustlet(Krustlet)
-        style wasm-krustlet fill:red
-        wasm-cloud(wasmCloud)
-        style wasm-cloud fill:red
-        wasm-edge(WasmEdge)
-        style wasm-edge fill:red
-        wasm --> wasm-krustlet & wasm-cloud & wasm-edge
-        
-        %% ----------------------
-        %% -- Virtual Machines --
-        %% ----------------------
-        vm{{Virtual Machines}}
-        style vm fill:red
-        vm-kube-virt(KubeVirt)
-        style vm-kube-virt fill:red
-        vm-crossplane(Crossplane)
-        style vm-crossplane fill:red
-        vm --> vm-kube-virt & vm-crossplane
-    
     end
 ```
 

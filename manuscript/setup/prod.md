@@ -51,6 +51,8 @@ yq --inplace ".azure.resourceGroup = \"$RESOURCE_GROUP\"" \
 
 az group create --location eastus --name $RESOURCE_GROUP
 
+az aks get-versions --location eastus --output table
+
 # Change `1.25.4` to the Kubernetes version you want to use
 export K8S_VERSION=1.25.4
 

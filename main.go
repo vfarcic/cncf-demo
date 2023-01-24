@@ -43,7 +43,6 @@ func main() {
 	router := gin.New()
 	router.Use(otelgin.Middleware(serviceName))
 	router.GET("/fibonacci", fibonacciHandler)
-	router.POST("/slack", slackHandler)
 	router.POST("/video", videoPostHandler)
 	router.GET("/videos", videosGetHandler)
 	router.GET("/ping", pingHandler)
