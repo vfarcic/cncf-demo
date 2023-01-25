@@ -53,7 +53,7 @@ az group create --location eastus --name $RESOURCE_GROUP
 
 az aks get-versions --location eastus --output table
 
-# Change `1.25.4` to the Kubernetes version you want to use
+# Change `1.25.4` to the latest available Kubernetes version
 export K8S_VERSION=1.25.4
 
 az aks create --name dot --resource-group $RESOURCE_GROUP \

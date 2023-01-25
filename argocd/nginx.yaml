@@ -20,7 +20,9 @@ spec:
             service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
             service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
             service.beta.kubernetes.io/aws-load-balancer-type: nlb
-            service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+          service:
+            annotations:
+              service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx

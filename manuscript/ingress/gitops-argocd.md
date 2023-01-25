@@ -39,7 +39,8 @@ yq --inplace ".server.ingress.enabled = true" \
 export INGRESS_CLASS_NAME=$(\
   yq ".production.ingress.className" settings.yaml)
 
-yq --inplace ".server.ingress.ingressClassName = \"$INGRESS_CLASS_NAME\"" \
+yq --inplace \
+    ".server.ingress.ingressClassName = \"$INGRESS_CLASS_NAME\"" \
     argocd/helm-values.yaml
 
 yq --inplace ".server.ingress.hosts[0] = \"gitops.$DOMAIN\"" \
@@ -47,7 +48,8 @@ yq --inplace ".server.ingress.hosts[0] = \"gitops.$DOMAIN\"" \
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain
-yq --inplace ".server.ingress.tls[0].hosts[0] = \"gitops.$DOMAIN\"" \
+yq --inplace \
+    ".server.ingress.tls[0].hosts[0] = \"gitops.$DOMAIN\"" \
     argocd/helm-values.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
