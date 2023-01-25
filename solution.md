@@ -276,7 +276,7 @@ flowchart TD
         app-cdk8s(App As cdk8s)
         click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
         app-carvel(App As Carvel ytt)
-        click app-argo-cd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
+        click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
         app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> db-production
 
         %% --------------
@@ -287,16 +287,19 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
-        db-production-crossplane-google(Google Cloud)
-        click db-production-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-google.md"
-        style db-production-crossplane-google fill:red
-        db-production-crossplane-aws(AWS)
-        click db-production-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-aws.md"
-        style db-production-crossplane-aws fill:red
-        db-production-crossplane-azure(Azure)
-        click db-production-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane-azure.md"
-        style db-production-crossplane-azure fill:red
-        db-production --> db-production-crossplane --> db-production-crossplane-google & db-production-crossplane-aws & db-production-crossplane-azure --> prod-done
+        db-production-helm(App As Helm)
+        click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
+        style db-production-helm fill:red
+        db-production-kustomize(App As Kustomize)
+        click db-production-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/kustomize.md"
+        style db-production-kustomize fill:red
+        db-production-cdk8s(App As cdk8s)
+        click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
+        style db-production-cdk8s fill:red
+        db-production-carvel(App As Carvel ytt)
+        click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
+        style db-production-carvel fill:red
+        db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
         prod-done((Chapter End))
 

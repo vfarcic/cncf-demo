@@ -7,15 +7,15 @@ spec:
   id: cncf-demo-db
   compositionSelector:
     matchLabels:
-      provider: google-official
+      provider: azure-official
       db: postgresql
   parameters:
-    version: "13"
+    version: "11"
     size: small
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: cncf-demo-password
+  name: cncf-demo-db-password
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=

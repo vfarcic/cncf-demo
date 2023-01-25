@@ -5,6 +5,8 @@ configs:
   secret:
     argocdServerAdminPassword: "$2a$10$m3eTlEdRen0nS86c5Zph5u/bDFQMcWZYdG3NVdiyaACCqoxLJaz16"
     argocdServerAdminPasswordMtime: "2021-11-08T15:04:05Z"
+  cm:
+    application.resourceTrackingMethod: annotation
 server:
   extraArgs:
   - --insecure

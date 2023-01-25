@@ -10,18 +10,6 @@ TODO: Explanation
 * [How To Shift Left Infrastructure Management Using Crossplane Compositions](https://youtu.be/AtbS1u2j7po)
 * [Official site](https://crossplane.io)
 
-## Choice 2: TODO: Choice
-
-TODO: Explanation
-
-* [Official site](TODO: link)
-
-## Choice 3: TODO: Choice
-
-TODO: Explanation
-
-* [Official site](TODO: link)
-
 ## What Is Your Choice?
 
 * [Crossplane](crossplane.md)

@@ -4,24 +4,51 @@ TODO: Intro
 
 ## Setup
 
-**You can skip the steps in this section if you created the production cluster using Crossplane since it already comes with Crossplane installed and configured inside that cluster.**
-
 ```bash
-helm repo add crossplane-stable 
+export XP_DESTINATION=$(\
+    yq ".crossplane.destination" settings.yaml)
 
-helm repo update
+cat crossplane/create-secret-$XP_DESTINATION.sh
 
-helm upgrade --install crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system --create-namespace --wait
+chmod +x crossplane/create-secret-$XP_DESTINATION.sh
 
-kubectl apply \
-    --filename crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply --filename crossplane-config/config-sql.yaml
+./crossplane/create-secret-$XP_DESTINATION.sh
 ```
 
-## Which Cloud Provider Do You Use?
+## How Did You Define Your App?
 
-* [Google Cloud](crossplane-google.md)
-* [AWS](crossplane-aws.md)
-* [Azure](crossplane-azure.md)
+* [Helm](helm.md)
+* [Kustomize](kustomize.md)
+* [Carvel](carvel.md)
+* [cdk8s](cdk8s.md)
+
+
+```bash
+# TODO: Move to apps
+
+cat crossplane/cncf-demo-db-$XP_DESTINATION.yaml
+
+cp crossplane/cncf-demo-db-$XP_DESTINATION.yaml \
+    apps/cncf-demo-db.yaml
+
+git add .
+
+git commit -m "App DB"
+
+git push
+
+# TODO: Remove
+# kubectl get resourcegroup.azure.upbound.io,database.postgresql.sql.crossplane.io,firewallrule.dbforpostgresql.azure.upbound.io,server.dbforpostgresql.azure.upbound.io
+
+kubectl get managed
+
+kubectl --namespace production get claim
+
+# Wait until it is `READY`
+
+export DOMAIN=$(yq ".production.domain" settings.yaml)
+
+curl "https://cncf-demo.$DOMAIN/videos"
+
+# TODO: Add SchemaHero
+```
