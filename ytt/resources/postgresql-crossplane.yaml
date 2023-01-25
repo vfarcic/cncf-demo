@@ -23,7 +23,7 @@ spec:
     size: small
 #@ end
 
-#@ if data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws data.values.db.enabled.crossplane.azure:
+#@ if data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws or data.values.db.enabled.crossplane.azure:
 ---
 apiVersion: v1
 kind: Secret

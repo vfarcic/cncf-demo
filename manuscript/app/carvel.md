@@ -20,7 +20,7 @@ export TAG=v0.0.1
 
 export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
 
-echo $INGRESS_HOST
+echo $INGRESS_IP
 
 # Configure DNS for the following subdomains (skip this step if
 #   you chose to use `nip.io` instead of a "real" domain):
