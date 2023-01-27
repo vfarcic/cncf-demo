@@ -18,6 +18,8 @@ cat Dockerfile
 
 export TAG=v0.0.1
 
+yq --inplace ".tag = \"$TAG\"" settings.yaml
+
 docker image build --tag cncf-demo:$TAG .
 
 docker image ls

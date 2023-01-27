@@ -2,7 +2,7 @@
 
 TODO: Intro
 
-## Do
+## Setup
 
 ```bash
 export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
@@ -31,13 +31,17 @@ dig +short gitops.$DOMAIN
 # Repeat the previous command if the output is NOT the IP address
 #   of the Ingress controller.
 
+export INGRESS_CLASS_NAME=$(\
+    yq ".production.ingress.className" settings.yaml)
+```
+
+## Do
+
+```bash
 cat argocd/helm-values.yaml
 
 yq --inplace ".server.ingress.enabled = true" \
     argocd/helm-values.yaml
-
-export INGRESS_CLASS_NAME=$(\
-  yq ".production.ingress.className" settings.yaml)
 
 yq --inplace \
     ".server.ingress.ingressClassName = \"$INGRESS_CLASS_NAME\"" \

@@ -33,13 +33,13 @@ spec:
       name: gcp-creds
       key: creds" \
     | kubectl apply --filename -
+
+yq --inplace ".crossplane.destination = \"google\"" settings.yaml
 ```
 
 ## Do
 
 ```bash
-yq --inplace ".crossplane.destination = \"google\"" settings.yaml
-
 cat crossplane/google-gke.yaml
 
 kubectl --namespace production apply \
@@ -59,6 +59,10 @@ chmod +x crossplane/get-kubeconfig-google.sh
 ./crossplane/get-kubeconfig-google.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
+
+yq --inplace \
+  ".production.kubeConfig = \"$PWD/kubeconfig-prod.yaml\"" \
+    settings.yaml
 
 kubectl get nodes
 ```

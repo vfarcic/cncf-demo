@@ -8,6 +8,6 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: production
-  commonName: cncf-demo-dev.sillydemo.com
+  commonName: cncf-demo.sillydemo.com
   dnsNames:
-    - cncf-demo-dev.sillydemo.com
+    - cncf-demo.sillydemo.com

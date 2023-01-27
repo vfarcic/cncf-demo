@@ -13,19 +13,17 @@ export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     $GITOPS_APP/cncf-demo-kustomize.yaml
 
-# Execute the command that follows only if you jumped directly
-#    into this chapter (if you did not go through the steps that
-#    built and pushed the image to a registry).
-export IMAGE=index.docker.io/vfarcic/cncf-demo
+export IMAGE=$(yq ".image" settings.yaml)
 
-# Execute the command that follows only if you jumped directly
-#    into this chapter (if you did not go through the steps that
-#    built and pushed the image to a registry).
-export TAG=v0.0.1
+export TAG=$(yq ".tag" settings.yaml)
+
+yq --inplace \
+    ".spec.template.spec.containers[0].image = \"$IMAGE\"" \
+    kustomize/base/deployment.yaml
 
 export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
 
-echo $INGRESS_HOST
+echo $INGRESS_IP
 
 # Configure DNS for the following subdomains (skip this step if
 #   you chose to use `nip.io` instead of a "real" domain):

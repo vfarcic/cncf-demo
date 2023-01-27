@@ -18,10 +18,7 @@ export INGRESS_CLASS_NAME=$(\
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     $GITOPS_APP/cncf-demo-cdk8s.yaml
 
-# Execute command that follows only if you jumped directly into
-#   this chapter (if you did not go through the steps that built
-#   and pushed the image to a registry).
-export TAG=v0.0.1
+export TAG=$(yq ".tag" settings.yaml)
 
 export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
 

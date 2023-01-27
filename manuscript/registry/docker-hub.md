@@ -14,6 +14,8 @@ export DOCKERHUB_USERNAME=[...]
 
 export IMAGE=$REGISTRY/$DOCKERHUB_USERNAME/cncf-demo
 
+yq --inplace ".image = \"$IMAGE\"" settings.yaml
+
 # Make sure that Docker is running
 
 docker login --username $DOCKERHUB_USERNAME $REGISTRY

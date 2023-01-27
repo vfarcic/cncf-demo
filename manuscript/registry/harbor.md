@@ -51,6 +51,8 @@ export REGISTRY=harbor.$DOMAIN
 
 export IMAGE=$REGISTRY/library/cncf-demo
 
+yq --inplace ".image = \"$IMAGE\"" settings.yaml
+
 # Make sure that Docker is running
 
 docker login --username admin $REGISTRY

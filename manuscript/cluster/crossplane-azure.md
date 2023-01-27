@@ -4,7 +4,7 @@ TODO: Intro
 
 ## Setup
 
-* You can skip the steps in this section if you already used Crossplane with AWS in one of the previous chapters.
+* You can skip the steps in this section if you already used Crossplane with Azure in one of the previous chapters.
 
 ```bash
 export SUBSCRIPTION_ID=$(az account show --query id -o tsv)
@@ -26,13 +26,13 @@ kubectl get pkgrev
 
 kubectl apply \
     --filename crossplane-config/provider-config-azure-official.yaml
+
+yq --inplace ".crossplane.destination = \"azure\"" settings.yaml
 ```
 
 ## Do
 
 ```bash
-yq --inplace ".crossplane.destination = \"azure\"" settings.yaml
-
 cat crossplane/azure-aks.yaml
 
 kubectl --namespace production apply \
@@ -53,7 +53,8 @@ chmod +x crossplane/get-kubeconfig-azure.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 
-yq --inplace ".kubeConfig = \"$PWD/kubeconfig-prod.yaml\"" \
+yq --inplace \
+    ".production.kubeConfig = \"$PWD/kubeconfig-prod.yaml\"" \
     settings.yaml
 
 kubectl get nodes

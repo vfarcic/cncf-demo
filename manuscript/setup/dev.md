@@ -13,6 +13,9 @@ gh repo set-default
 # This kubeconfig file will get created later, and added to
 #   `.gitignore`.
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
+yq --inplace ".kubeConfig = \"$PWD/kubeconfig-dev.yaml\"" \
+    settings.yaml
 ```
 
 ## Create a management Kubernetes cluster

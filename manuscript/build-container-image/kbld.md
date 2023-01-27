@@ -32,6 +32,8 @@ kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
 #  (everything after 'kbld:')
 export TAG=[...]
 
+yq --inplace ".tag = \"$TAG\"" settings.yaml
+
 docker image tag kbld:$TAG cncf-demo:$TAG
 ```
 

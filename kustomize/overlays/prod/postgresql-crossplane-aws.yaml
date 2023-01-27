@@ -5,7 +5,7 @@ kind: SQLClaim
 metadata:
   name: cncf-demo
 spec:
-  id: cncf-demo-db-dev
+  id: cncf-demo-db
   compositionSelector:
     matchLabels:
       provider: aws

@@ -31,13 +31,13 @@ kubectl get pkgrev
 
 kubectl apply \
     --filename crossplane-config/provider-config-aws-official.yaml
+
+yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
 ```
 
 ## Do
 
 ```bash
-yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
-
 cat crossplane/aws-eks.yaml
 
 kubectl --namespace production apply \
@@ -57,6 +57,10 @@ chmod +x crossplane/get-kubeconfig-aws.sh
 ./crossplane/get-kubeconfig-aws.sh
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
+
+yq --inplace \
+    ".production.kubeConfig = \"$PWD/kubeconfig-prod.yaml\"" \
+    settings.yaml
 
 kubectl get nodes
 ```

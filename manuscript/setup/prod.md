@@ -18,6 +18,15 @@ export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 # 'yq' is a lightweight and portable command-line YAML processor
 yq --inplace ".kubeConfig = \"$PWD/kubeconfig-dev.yaml\"" \
     settings.yaml
+
+yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" \
+    settings.yaml
+
+yq --inplace ".tag = \"v0.0.1\"" settings.yaml
+
+# Execute this step ONLY if you chose to use `nip.io` instead of
+#   a "real" domain
+alias curl="curl --insecure"
 ```
 
 ## Create a management Kubernetes cluster

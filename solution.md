@@ -292,7 +292,6 @@ flowchart TD
         style db-production-helm fill:red
         db-production-kustomize(App As Kustomize)
         click db-production-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/kustomize.md"
-        style db-production-kustomize fill:red
         db-production-cdk8s(App As cdk8s)
         click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
         style db-production-cdk8s fill:red
