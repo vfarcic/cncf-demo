@@ -319,19 +319,6 @@ flowchart TD
 
     subgraph Security
 
-        %% --------------------
-        %% -- Access Control --
-        %% --------------------
-        access-control{{Access Control}}
-        style access-control fill:red
-        access-control-hexa(Hexa)
-        style access-control-hexa fill:red
-        dex(Dex)
-        style dex fill:red
-        athenz(Athenz)
-        style athenz fill:red
-        access-control --> access-control-hexa & dex & athenz
-
         %% --------------
         %% -- Policies --
         %% --------------
@@ -347,7 +334,9 @@ flowchart TD
         style kube-armor fill:red
         kubewarden(Kubewarden)
         style kubewarden fill:red
-        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden
+        vac(Kubernetes Validating Admission Policy)
+        style vac fill:red
+        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac
 
         %% ------------------------
         %% -- Secrets Management --
@@ -415,6 +404,19 @@ flowchart TD
         style confidential-containers fill:red
         falco(Falco)
         style falco fill:red
+
+        %% --------------------
+        %% -- Access Control --
+        %% --------------------
+        access-control{{Access Control}}
+        style access-control fill:red
+        access-control-hexa(Hexa)
+        style access-control-hexa fill:red
+        dex(Dex)
+        style dex fill:red
+        athenz(Athenz)
+        style athenz fill:red
+        access-control --> access-control-hexa & dex & athenz
 
     end
 
