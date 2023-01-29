@@ -69,4 +69,4 @@ echo "https://cncf-demo.$DOMAIN"
 
 ## Continue The Adventure
 
-[Setup PostgreSQL DB In The Production Environment](../db-production/story.md)
+[Setup PostgreSQL DB In The Production Environment](../db-production/README.md)

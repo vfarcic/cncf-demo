@@ -97,4 +97,4 @@ yq --inplace ".gitOps.app = \"flux\"" settings.yaml
 
 ## Continue The Adventure
 
-[Ingress](../ingress/story.md)
+[Ingress](../ingress/README.md)

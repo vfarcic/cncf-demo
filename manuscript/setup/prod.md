@@ -135,4 +135,4 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 
 ## Start The Chapter
 
-* [Create And Manage Production Kubernetes Cluster](../cluster/story.md)
+* [Create And Manage Production Kubernetes Cluster](../cluster/README.md)

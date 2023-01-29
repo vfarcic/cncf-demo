@@ -2,4 +2,4 @@
 
 Okteto is not a CNCF project.
 
-Go back to [Develop](story.md) and try again.
+Go back to [Develop](README.md) and try again.

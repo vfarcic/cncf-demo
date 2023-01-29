@@ -2,4 +2,4 @@
 
 Flyway is not a CNCF project.
 
-Go back to [Manage DB Schema](story.md) and try again.
+Go back to [Manage DB Schema](README.md) and try again.

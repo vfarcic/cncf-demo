@@ -31,4 +31,4 @@ echo "https://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Setup PostgreSQL DB](../db/story.md)
+[Setup PostgreSQL DB](../db/README.md)

@@ -2,4 +2,4 @@
 
 Pulumi is not a CNCF project.
 
-Go back to [Create And Manage Production Kubernetes Cluster](story.md) and try again.
+Go back to [Create And Manage Production Kubernetes Cluster](README.md) and try again.

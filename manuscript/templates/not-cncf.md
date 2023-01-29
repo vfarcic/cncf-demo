@@ -2,4 +2,4 @@
 
 TODO: is not a CNCF project.
 
-Go back to [TODO:](story.md) and try again.
+Go back to [TODO:](README.md) and try again.

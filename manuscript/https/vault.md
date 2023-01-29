@@ -2,4 +2,4 @@
 
 HashiCorp Vault is not a CNCF project.
 
-Go back to [Use HTTPS](story.md) and try again.
+Go back to [Use HTTPS](README.md) and try again.

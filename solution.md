@@ -1,4 +1,4 @@
-## The Whole Story
+## The Whole README.md
 
 *This is a temporary work-in-progress file. **Do NOT use it.** Go to the [README.md](README) file instead.
 
@@ -38,7 +38,7 @@ flowchart TD
         %% -- Build Container Image --
         %% ---------------------------
         bci{{Build Container Image}}
-        click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/story.md"
+        click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/README.md.md"
         style bci fill:blue
         bci-kbld(Carvel kbld)
         click bci-kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md"
@@ -52,7 +52,7 @@ flowchart TD
         %% -- Store Container Image in a Registry --
         %% -----------------------------------------
         registry{{Store Container Image In A Registry}}
-        click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/story.md"
+        click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/README.md.md"
         style registry fill:blue
         registry-docker-hub(Docker Hub)
         click registry-docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
@@ -67,7 +67,7 @@ flowchart TD
         %% -- Define And Deploy The App To Dev --
         %% --------------------------------------
         ddd{{Define And Deploy The App To Dev}}
-        click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/story.md"
+        click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/README.md.md"
         style ddd fill:blue
         ddd-helm(Helm)
         click ddd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md"
@@ -83,7 +83,7 @@ flowchart TD
         %% -- Use HTTPS --
         %% ---------------
         https{{Use HTTPS}}
-        click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/story.md"
+        click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/README.md.md"
         style https fill:blue
         https-vault(HashiCorp Vault)
         click https-vault "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/vault.md"
@@ -106,7 +106,7 @@ flowchart TD
         %% -- Setup PostgreSQL DB In Dev --
         %% --------------------------------
         db{{Setup PostgreSQL DB In Dev}}
-        click db "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/story.md"
+        click db "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/README.md.md"
         style db fill:blue
         db-helm(Helm Chart)
         click db-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/helm.md"
@@ -145,7 +145,7 @@ flowchart TD
         %% -- Manage DB Schema --
         %% ----------------------
         db-schema{{Manage DB Schema}}
-        click db-schema "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/story.md"
+        click db-schema "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/README.md.md"
         style db-schema fill:blue
         db-schema-schemahero(SchemaHero)
         click db-schema-schemahero "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md"
@@ -168,7 +168,7 @@ flowchart TD
         %% -- Develop The App --
         %% ---------------------
         develop{{Develop The App}}
-        click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/story.md"
+        click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/README.md.md"
         style develop fill:blue
         develop-telepresence(Telepresence)
         click develop-telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
@@ -213,7 +213,7 @@ flowchart TD
         %% -- Cluster --
         %% -------------
         cluster{{Create a Cluster}}
-        click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/story.md"
+        click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md.md"
         style cluster fill:blue
         cluster-pulumi(Pulumi)
         click cluster-pulumi "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/pulumi.md"
@@ -234,7 +234,7 @@ flowchart TD
         %% -- GitOps --
         %% ------------
         gitops{{GitOps}}
-        click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/story.md"
+        click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/README.md.md"
         style gitops fill:blue
         gitops-flux(Flux)
         click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
@@ -249,7 +249,7 @@ flowchart TD
         %% -- Ingress --
         %% -------------
         ingress{{Ingress}}
-        click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/story.md"
+        click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/README.md.md"
         style ingress fill:blue
         ingress-contour(Envoy with Contour)
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
@@ -267,7 +267,7 @@ flowchart TD
         %% -- Deploy The App To Production --
         %% ----------------------------------
         app{{Deploy The App To Production}}
-        click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/story.md"
+        click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/README.md.md"
         style app fill:blue
         app-helm(App As Helm)
         click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
@@ -283,7 +283,7 @@ flowchart TD
         %% -- Database --
         %% --------------
         db-production{{Database}}
-        click db-production "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/story.md"
+        click db-production "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/README.md.md"
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
@@ -845,5 +845,5 @@ flowchart TD
 
 ## TODO:
 
-* Check whether there are new projects to be added to the "story".
-* Add Kubernetes SIG projects to the "story".
+* Check whether there are new projects to be added to the "README.md".
+* Add Kubernetes SIG projects to the "README.md".
