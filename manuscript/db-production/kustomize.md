@@ -60,3 +60,8 @@ curl -X POST "https://cncf-demo.$DOMAIN/video?id=VlBiLFaSi7Y&title=Scaleway%20-%
 
 curl "https://cncf-demo.$DOMAIN/videos" | jq .
 ```
+
+## Continue The Adventure
+
+[Policies](../policies/README.md)
+[Destroy Everything](../destroy-all.md)

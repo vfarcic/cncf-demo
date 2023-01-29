@@ -196,7 +196,6 @@ flowchart TD
     end
 
     Development-->Production
-    Development-->Destroy
 
     subgraph Production
 
@@ -297,27 +296,24 @@ flowchart TD
         style db-production-cdk8s fill:red
         db-production-carvel(App As Carvel ytt)
         click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
-        style db-production-carvel fill:red
         db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
         prod-done((Chapter End))
 
     end
 
-    Production-->Destroy
-
-    subgraph Destroy
-
-        destroy-all((Destroy Everything))
-        click destroy-all "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy-all.md"
-
-    end
-```
-
-```mermaid
-flowchart TD
+    Production-->Security
 
     subgraph Security
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-policies((Setup))
+        click setup-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/policies.md"
+
+        %% -- Setup Connections --
+        setup-policies-->policies
 
         %% --------------
         %% -- Policies --
@@ -337,7 +333,7 @@ flowchart TD
         %% Wait with VAC until Kubernetes v1.26 is available in GKE, EKS, and AKS
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
-        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac
+        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac --> secrets
 
         %% ------------------------
         %% -- Secrets Management --
@@ -348,7 +344,7 @@ flowchart TD
         style secrets-external-secrets fill:red
         secrets-teller(Teller)
         style secrets-teller fill:red
-        secrets --> secrets-external-secrets & secrets-teller
+        secrets --> secrets-external-secrets & secrets-teller --> service-mesh
 
         %% ------------------
         %% -- Service Mesh --
@@ -375,36 +371,30 @@ flowchart TD
         style service-mesh-meshery fill:red
         service-mesh-performance(Service Mesh Performance)
         style service-mesh-performance fill:red
-        service-mesh --> service-mesh-istio & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery & service-mesh-performance
-        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery & service-mesh-performance
+        service-mesh --> service-mesh-istio & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery
+        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery --> service-mesh-performance --> scaning-signing
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
-        spiffe(Spiffe)
-        style spiffe fill:red
-        spire(Spire)
-        style spire fill:red
-        tuf("The Update Framework (TUF)")
-        style tuf fill:red
-        notary(Notary)
-        style notary fill:red
+        %% -------------
+        %% -- Scaning --
+        %% -------------
+        scaning-signing{{Scaning And Signing}}
+        style scaning-signing fill:red
         kubescape(Kubescape)
         style kubescape fill:red
-        parsec(Parsec)
-        style parsec fill:red
-        inclavare-containers(Inclavare Containers)
-        style inclavare-containers fill:red
         fonio(Fonio)
         style fonio fill:red
-        curiefense(Curiefense)
-        style curiefense fill:red
-        container-ssh(ContainerSSH)
-        style container-ssh fill:red
-        confidential-containers(Confidential Containers)
-        style confidential-containers fill:red
         falco(Falco)
         style falco fill:red
+        scaning-signing --> kubescape & fonio & falco --> signing
+
+        %% -------------
+        %% -- Signing --
+        %% -------------
+        signing{{Signing}}
+        style signing fill:red
+        notary(Notary)
+        style notary fill:red
+        signing --> notary --> access-control
 
         %% --------------------
         %% -- Access Control --
@@ -417,7 +407,20 @@ flowchart TD
         style dex fill:red
         athenz(Athenz)
         style athenz fill:red
-        access-control --> access-control-hexa & dex & athenz
+        container-ssh(ContainerSSH)
+        style container-ssh fill:red
+        access-control --> access-control-hexa & dex & athenz --> container-ssh --> misc
+
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        misc{{Misc}}
+        style misc fill:red
+        curiefense(Curiefense) %% API defence
+        style curiefense fill:red
+        confidential-containers(Confidential Containers)
+        style confidential-containers fill:red
+        misc --> curiefense & confidential-containers
 
     end
 
@@ -546,6 +549,15 @@ flowchart TD
         style open-cluster-management fill:red
         clusterpedia(Clusterpedia)
         style clusterpedia fill:red
+
+    end
+
+    Scale-->Destroy
+
+    subgraph Destroy
+
+        destroy-all((Destroy Everything))
+        click destroy-all "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy-all.md"
 
     end
 ```
@@ -838,6 +850,16 @@ flowchart TD
         style vitess fill:red
         tikv(TiKV)
         style tikv fill:red
+        spiffe(Spiffe)
+        style spiffe fill:red
+        spire(Spire)
+        style spire fill:red
+        tuf("The Update Framework (TUF)")
+        style tuf fill:red
+        parsec(Parsec)
+        style parsec fill:red
+        inclavare-containers(Inclavare Containers)
+        style inclavare-containers fill:red
 
     end
 ```

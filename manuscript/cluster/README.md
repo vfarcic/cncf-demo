@@ -2,12 +2,11 @@
 
 TODO: Intro
 
-## Choice 1: Cluster API
+## Choice 1: Pulumi
 
 TODO: Explanation
 
-[![How To Create, Provision, And Operate Kubernetes With Cluster API (CAPI)](https://img.youtube.com/vi/8yUDUhZ6ako/0.jpg)](https://youtu.be/8yUDUhZ6ako)
-* [Official site](https://cluster-api.sigs.k8s.io/)
+* [Official site](https://pulumi.com)
 
 ## Choice 2: Crossplane
 

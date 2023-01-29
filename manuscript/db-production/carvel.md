@@ -1,0 +1,65 @@
+# Setup PostgreSQL DB In The Production Environment With Crossplane And Carvel ytt
+
+TODO: Intro
+
+## Setup
+
+```bash
+export DOMAIN=$(yq ".production.domain" settings.yaml)
+```
+
+## Do
+
+```bash
+cat ytt/resources/postgresql-crossplane.yaml
+
+cat ytt/resources/deployment.yaml
+
+cat ytt/values-prod.yaml
+
+yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
+    ytt/values-prod.yaml
+
+yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
+
+cat ytt/values-prod.yaml
+
+cat ytt/resources/schemahero.yaml
+
+yq --inplace ".schemahero.enabled = true" ytt/schema.yaml
+
+cat ytt/schema.yaml
+
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
+
+git add .
+
+git commit -m "App DB"
+
+git push
+
+# TODO: Remove
+# If Azure
+# kubectl get resourcegroup.azure.upbound.io,database.postgresql.sql.crossplane.io,firewallrule.dbforpostgresql.azure.upbound.io,server.dbforpostgresql.azure.upbound.io
+
+kubectl get managed
+
+kubectl --namespace production get claim
+
+# Wait until it is `READY`
+
+curl "https://cncf-demo.$DOMAIN/videos"
+
+curl -X POST "https://cncf-demo.$DOMAIN/video?id=wNBG1-PSYmE&title=Kubernetes%20Policies%20And%20Governance%20-%20Ask%20Me%20Anything%20With%20Jim%20Bugwadia"
+
+curl -X POST "https://cncf-demo.$DOMAIN/video?id=VlBiLFaSi7Y&title=Scaleway%20-%20Everything%20We%20Expect%20From%20A%20Cloud%20Computing%20Service%3F"
+
+curl "https://cncf-demo.$DOMAIN/videos" | jq .
+```
+
+## Continue The Adventure
+
+[Policies](../policies/README.md)
+[Destroy Everything](../destroy-all.md)
