@@ -323,7 +323,7 @@ flowchart TD
         %% -- Policies --
         %% --------------
         policies{{Policies}}
-        style policies fill:red
+        style policies fill:blue
         policies-kyverno(Kyverno)
         style policies-kyverno fill:red
         policies-opa("Open Policy Agent (OPA)")
@@ -334,6 +334,7 @@ flowchart TD
         style kube-armor fill:red
         kubewarden(Kubewarden)
         style kubewarden fill:red
+        %% Wait with VAC until Kubernetes v1.26 is available in GKE, EKS, and AKS
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
         policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac
@@ -374,8 +375,8 @@ flowchart TD
         style service-mesh-meshery fill:red
         service-mesh-performance(Service Mesh Performance)
         style service-mesh-performance fill:red
-        service-mesh --> service-mesh-istio & service-mesh-smi & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery & service-mesh-performance
-        service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery & service-mesh-performance
+        service-mesh --> service-mesh-istio & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery & service-mesh-performance
+        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery & service-mesh-performance
 
         %% -----------
         %% -- TODO: --
