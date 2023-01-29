@@ -13,14 +13,14 @@ TODO: Explanation
 
 TODO: Explanation
 
-* [Kustomize - How to Simplify Kubernetes Configuration Management](https://youtu.be/Twtbg6LFnAg)
+[![Kustomize - How to Simplify Kubernetes Configuration Management](https://img.youtube.com/vi/Twtbg6LFnAg/0.jpg)](https://youtu.be/Twtbg6LFnAg)
 * [Official site](https://kustomize.io)
 
 ## Choice 3: Carvel ytt
 
 TODO: Explanation
 
-* [Carvel ytt Instead Of Helm? A Better Way To Manage Kubernetes Resources?](https://youtu.be/DLnXkH2keNg)
+[![Carvel ytt Instead Of Helm? A Better Way To Manage Kubernetes Resources?](https://img.youtube.com/vi/DLnXkH2keNg/0.jpg)](https://youtu.be/DLnXkH2keNg)
 * [Carvel: Clean Tools for Cloud Native Problems](https://via.vmw.com/carvel)
 * [Official site](https://carvel.dev)
 
@@ -28,7 +28,7 @@ TODO: Explanation
 
 TODO: Explanation
 
-* [cdk8s - Kubernetes Manifests With GoLang, TypeScript, Python And Java](https://youtu.be/F2DKtax0NLU)
+[![cdk8s - Kubernetes Manifests With GoLang, TypeScript, Python And Java](https://img.youtube.com/vi/F2DKtax0NLU/0.jpg)](https://youtu.be/F2DKtax0NLU)
 * [Official site](https://cdk8s.io)
 
 ## What Is Your Choice?

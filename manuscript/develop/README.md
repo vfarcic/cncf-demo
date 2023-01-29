@@ -12,8 +12,8 @@ TODO: Explanation
 
 TODO: Explanation
 
-* [DevSpace - Development Environments in Kubernetes](https://youtu.be/nQly_CEjJc4)
-* [Full App Lifecycle In Kubernetes With Argo CD, DevSpace, vCluster, k3d, and GitHub Actions](https://youtu.be/uU-EAQ8Vbvk)
+[![DevSpace - Development Environments in Kubernetes](https://img.youtube.com/vi/nQly_CEjJc4/0.jpg)](https://youtu.be/nQly_CEjJc4)
+[![Full App Lifecycle In Kubernetes With Argo CD, DevSpace, vCluster, k3d, and GitHub Actions](https://img.youtube.com/vi/uU-EAQ8Vbvk/0.jpg)](https://youtu.be/uU-EAQ8Vbvk)
 * [Official site](https://devspace.sh)
 
 ## Choice 3: Nocalhost

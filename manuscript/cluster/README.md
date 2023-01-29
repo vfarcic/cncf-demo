@@ -6,15 +6,15 @@ TODO: Intro
 
 TODO: Explanation
 
-* [How To Create, Provision, And Operate Kubernetes With Cluster API (CAPI)](https://youtu.be/8yUDUhZ6ako)
+[![How To Create, Provision, And Operate Kubernetes With Cluster API (CAPI)](https://img.youtube.com/vi/8yUDUhZ6ako/0.jpg)](https://youtu.be/8yUDUhZ6ako)
 * [Official site](https://cluster-api.sigs.k8s.io/)
 
 ## Choice 2: Crossplane
 
 TODO: Explanation
 
-* [Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://youtu.be/n8KjVmuHm7A)
-* [How To Shift Left Infrastructure Management Using Crossplane Compositions](https://youtu.be/AtbS1u2j7po)
+[![Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://img.youtube.com/vi/n8KjVmuHm7A/0.jpg)](https://youtu.be/n8KjVmuHm7A)
+[![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
 * [Crossplane: Control Plane of Control Planes](https://via.vmw.com/Crossplane)
 * [Official site](https://crossplane.io)
 

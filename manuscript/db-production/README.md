@@ -6,8 +6,8 @@ TODO: Intro
 
 TODO: Explanation
 
-* [Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://youtu.be/n8KjVmuHm7A)
-* [How To Shift Left Infrastructure Management Using Crossplane Compositions](https://youtu.be/AtbS1u2j7po)
+[![Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://img.youtube.com/vi/n8KjVmuHm7A/0.jpg)](https://youtu.be/n8KjVmuHm7A)
+[![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
 * [Official site](https://crossplane.io)
 
 ## What Is Your Choice?

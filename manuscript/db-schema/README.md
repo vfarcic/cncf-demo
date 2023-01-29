@@ -6,7 +6,7 @@ TODO: Intro
 
 TODO: Explanation
 
-* [SchemaHero - Database Schema Migrations Inside Kubernetes](https://youtu.be/SofQxb4CDQQ)
+[![SchemaHero - Database Schema Migrations Inside Kubernetes](https://img.youtube.com/vi/SofQxb4CDQQ/0.jpg)](https://youtu.be/SofQxb4CDQQ)
 * [Official site](https://schemahero.io)
 
 ## Choice 2: Liquibase
