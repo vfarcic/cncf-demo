@@ -2,11 +2,15 @@
 
 TODO: Intro
 
-## Do
+## Setup
 
 ```bash
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+```
 
+## Do
+
+```bash
 cat $GITOPS_APP/contour.yaml
 
 cp $GITOPS_APP/contour.yaml infra/.

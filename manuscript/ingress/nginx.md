@@ -2,11 +2,15 @@
 
 TODO: Intro
 
-## Do
+## Setup
 
 ```bash
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+```
 
+## Do
+
+```bash
 cat $GITOPS_APP/nginx.yaml
 
 cp $GITOPS_APP/nginx.yaml infra/.
