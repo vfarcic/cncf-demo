@@ -27,7 +27,7 @@ Since we are talking about building images here, it is worth noting that with th
 The Cloud Native Buildpacks project takes source code as input and then outputs an [Open Container Initiative](https://opencontainers.org/) (OCI)-compliant container image. CNBs provide a sweet, sweet developer experience while giving platform teams more control over how images are built. Cloud Native Buildpacks additionally provide a software bill of materials (SBOM) - no mystery meat in production!  CNB-built images are reproducible and efficient (only changed layers are rebuilt), and they can be rebased easily since the operating system (OS) layer can be patched without requiring an image rebuild. There are many implementations of Cloud Native Buildpacks such as the [pack](https://buildpacks.io/docs/tools/pack/) CLI tool, [kpack](https://buildpacks.io/docs/tools/kpack/), Google [Cloud Run](https://cloud.google.com/run/), or the [Tekton 'Buildpacks' task](https://hub.tekton.dev/tekton/task/buildpacks), to name a few.
 
 * [![Container (Docker) Images Without Dockerfile With Buildpacks and kpack](https://img.youtube.com/vi/fbSoKu8NGSU/0.jpg)](https://youtu.be/fbSoKu8NGSU)
-* [What Are Cloud Native Buildpacks and How Do They Work?](https://via.vmw.com/Buildpacks)
+* [!What Are Cloud Native Buildpacks and How Do They Work?(https://img.youtube.com/vi/-n9H8KnYjVI/0.jpg)](https://via.vmw.com/Buildpacks)
 * [Official site](https://buildpacks.io)
 
 ## What Is Your Choice?
