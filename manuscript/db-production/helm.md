@@ -1,4 +1,4 @@
-# Setup PostgreSQL DB In The Production Environment With Crossplane And Carvel ytt
+# Setup PostgreSQL DB In The Production Environment With Crossplane And Helm
 
 TODO: Intro
 
@@ -6,33 +6,43 @@ TODO: Intro
 
 ```bash
 export DOMAIN=$(yq ".production.domain" settings.yaml)
+
+export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 ```
 
 ## Do
 
 ```bash
-cat ytt/resources/postgresql-crossplane.yaml
+cat helm/app/templates/postgresql-crossplane.yaml
 
-cat ytt/resources/deployment.yaml
+cat helm/app/templates/deployment.yaml
 
-cat ytt/values-prod.yaml
+cat helm/app/templates/schemahero.yaml
 
-yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
-    ytt/values-prod.yaml
+# Execute the command that follows only if you are using Argo CD
+export VALUES=$(\
+    yq ".spec.source.helm.values" apps/cncf-demo.yaml \
+    | yq ".db.enabled.crossplane.$XP_DESTINATION = true" \
+    | yq ".db.id = \"cncf-demo-db\"" \
+    | yq ".schemahero.enabled = true")
 
-yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
+# Execute the command that follows only if you are using Argo CD
+yq --inplace ".spec.source.helm.values = \"$VALUES\"" \
+    apps/cncf-demo.yaml
 
-cat ytt/values-prod.yaml
+# Execute the command that follows only if you are using Flux
+yq --inplace ".spec.values.db.enabled.crossplane.$XP_DESTINATION = true" \
+    apps/cncf-demo.yaml
 
-cat ytt/resources/schemahero.yaml
+# Execute the command that follows only if you are using Flux
+yq --inplace \
+    ".spec.values.db.id = \"cncf-demo-db\"" \
+    apps/cncf-demo.yaml
 
-yq --inplace ".schemahero.enabled = true" ytt/schema.yaml
-
-cat ytt/schema.yaml
-
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml
+# Execute the command that follows only if you are using Flux
+yq --inplace \
+    ".spec.values.schemahero.enabled = true" \
+    apps/cncf-demo.yaml
 
 git add .
 

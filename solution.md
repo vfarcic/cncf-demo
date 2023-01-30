@@ -867,5 +867,5 @@ flowchart TD
 
 ## TODO:
 
-* Check whether there are new projects to be added to the "README.md".
-* Add Kubernetes SIG projects to the "README.md".
+* Check whether there are new projects to be added
+* Add Kubernetes SIG projects

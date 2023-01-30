@@ -2,6 +2,9 @@
 
 Depending on the paths you took, some resources might not exist and, as a result, the commands that follow might through an error. Feel free to ignore those.
 
+If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy the cluster** first. Otherwise, the commands that follow might be undone by Crossplane discovering drifs and recreating deleted resources.
+
+
 ## Google Cloud
 
 Execute the commands in this section only if you used Google Cloud

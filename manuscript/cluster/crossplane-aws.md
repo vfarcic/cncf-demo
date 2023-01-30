@@ -4,7 +4,7 @@ TODO: Intro
 
 ## Setup
 
-* You can skip the steps in this section if you already used Crossplane with AWS in one of the previous chapters.
+* You can skip the steps in this section (the Setup) if you already used Crossplane with AWS in one of the previous chapters.
 
 ```bash
 # Replace `[...]` with your access key ID`

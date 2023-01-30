@@ -4,7 +4,7 @@ TODO: Intro
 
 ## Setup
 
-* You can skip the steps in this section if you already used Crossplane with Azure in one of the previous chapters.
+* You can skip the steps in this section (the Setup) if you already used Crossplane with Azure in one of the previous chapters.
 
 ```bash
 export SUBSCRIPTION_ID=$(az account show --query id -o tsv)

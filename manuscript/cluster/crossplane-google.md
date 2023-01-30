@@ -4,6 +4,8 @@ TODO: Intro
 
 ## Setup
 
+* You can skip the steps in this section (the Setup) if you already used Crossplane with Google in one of the previous chapters.
+
 ```bash
 echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$XP_PROJECT_ID"
 

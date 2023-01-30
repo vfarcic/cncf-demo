@@ -52,12 +52,20 @@ kubectl --namespace production get claim
 
 # Wait until it is `READY`
 
+# If you chose to use `nip.io` instead of a "real" domain,
+#   replace `https` with `http`.
 curl "https://cncf-demo.$DOMAIN/videos"
 
+# If you chose to use `nip.io` instead of a "real" domain,
+#   replace `https` with `http`.
 curl -X POST "https://cncf-demo.$DOMAIN/video?id=wNBG1-PSYmE&title=Kubernetes%20Policies%20And%20Governance%20-%20Ask%20Me%20Anything%20With%20Jim%20Bugwadia"
 
+# If you chose to use `nip.io` instead of a "real" domain,
+#   replace `https` with `http`.
 curl -X POST "https://cncf-demo.$DOMAIN/video?id=VlBiLFaSi7Y&title=Scaleway%20-%20Everything%20We%20Expect%20From%20A%20Cloud%20Computing%20Service%3F"
 
+# If you chose to use `nip.io` instead of a "real" domain,
+#   replace `https` with `http`.
 curl "https://cncf-demo.$DOMAIN/videos" | jq .
 ```
 

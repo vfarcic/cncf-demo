@@ -12,16 +12,11 @@ Join us if you dare!  This is not for the faint of heart!
 
 * Non-CNCF projects lead to a dead end ☠
 
-## CNCF Projects
-
-* [Graduated & incubating](https://cncf.io/projects)
-* [Sandbox](https://cncf.io/sandbox-projects)
-
 ## The Adventure!
 
-*This is a temporary work-in-progress file. **Do NOT use it.** Go to the [README.md](README) file instead.
+The best place to start the adventure is the beginning. Perform the [setup](manuscript/setup/dev.md) steps and, from there, start the first chapter by to [Build Container Image In Dev Environments](manuscript/build-container-image/README.md). As an alternative, you can use graph below to navigate the adventure.
 
-Almost all items in the graphs contain a link if you prefer to jump straight into a specific part of the aadventure. If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Produciton, etc.).
+Almost all items in the graphs contain a link if you prefer to jump straight into a specific part of the aadventure. If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Production, etc.).
 
 *For reasons I cannot explain, the links do not work if they are not opened in a separate tab.*
 

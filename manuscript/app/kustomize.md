@@ -5,9 +5,15 @@ TODO: Intro
 ## Setup
 
 ```bash
-export REPO_URL=$(git config --get remote.origin.url)
-
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+
+export DOMAIN=$(yq ".production.domain" settings.yaml)
+
+export INGRESS_CLASS_NAME=$(\
+    yq ".production.ingress.className" settings.yaml)
+
+# Execute the command that follows only if you are using Argo CD
+export REPO_URL=$(git config --get remote.origin.url)
 
 # Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \

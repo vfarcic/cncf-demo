@@ -1,5 +1,7 @@
 # Setup Prerequisites
 
+Think of the instructions in this section as adventure prerequisites. You need to prepare for the adventure. You need to get the right equipment. This is not the adventure itself (that comes soon) but ensurance that you are ready for it.
+
 ```bash
 # Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar
 #   with GitHub CLI.
