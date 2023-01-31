@@ -288,7 +288,6 @@ flowchart TD
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
         db-production-helm(App As Helm)
         click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
-        style db-production-helm fill:red
         db-production-kustomize(App As Kustomize)
         click db-production-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/kustomize.md"
         db-production-cdk8s(App As cdk8s)
