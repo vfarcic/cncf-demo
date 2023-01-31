@@ -25,7 +25,7 @@ kubectl --namespace kyverno get all
 
 cat policies/kyverno.yaml
 
-cp policies/kyverno.yaml infra/.
+cp policies/kyverno.yaml infra/policies.yaml
 
 git add . 
 
@@ -42,6 +42,9 @@ kubectl get clusterpolicies
 # TODO: Generate
 ```
 
-## Continue The Adventure
+## How Did You Define Your App?
 
-[TODO:](TODO:)
+* [Helm](helm.md)
+* [Kustomize](kustomize.md)
+* [Carvel](carvel.md)
+* [cdk8s](cdk8s.md)
