@@ -51,11 +51,8 @@ echo "
         - host: gitops.$DOMAIN
           paths:
             - path: /
-              pathType: ImplementationSpecific"
-
-# Open `infra/weave-gitops-dashboard.yaml` in an editor and
-#   add the output from the previous command to the
-#   `HelmRelease` manifest.
+              pathType: ImplementationSpecific" \
+    | tee -a infra/weave-gitops-dashboard.yaml
 
 git add .
 

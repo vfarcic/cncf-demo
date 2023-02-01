@@ -63,6 +63,8 @@ git push
 
 kubectl --namespace production get all,ingresses
 
+# If you chose to use `nip.io` instead of a "real" domain,
+#   replace `https` with `http`.
 echo "https://cncf-demo.$DOMAIN"
 
 # Open it in a browser.

@@ -79,7 +79,7 @@ func NewApp(scope constructs.Construct, id *string, appProps *AppProps) construc
 	} else if appProps.Db.Enabled.Crossplane.Local || appProps.Db.Enabled.Crossplane.Google || appProps.Db.Enabled.Crossplane.AWS || appProps.Db.Enabled.Crossplane.Azure {
 		dot.NewSqlClaim(construct, jsii.String("sqlClaim"), getPostgresqlCrossplane(appProps, apiMetadata))
 		if !appProps.Db.Enabled.Crossplane.Local {
-			k8s.NewKubeSecret(construct, jsii.String("secret"), getPostgresqlSecret(appProps, metadata))
+			k8s.NewKubeSecret(construct, jsii.String("secret"), getPostgresqlSecret(appProps))
 		}
 	}
 	if appProps.SchemaHero.Enabled {

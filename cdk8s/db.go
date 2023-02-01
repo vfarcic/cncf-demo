@@ -64,7 +64,13 @@ func getPostgresqlCrossplane(appProps *AppProps, metadata *cdk8s.ApiObjectMetada
 	}
 }
 
-func getPostgresqlSecret(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeSecretProps {
+func getPostgresqlSecret(appProps *AppProps) *k8s.KubeSecretProps {
+	metadata := &k8s.ObjectMeta{
+		Name: jsii.String(fmt.Sprintf("%s-password", appProps.Db.Id)),
+		Labels: &map[string]*string{
+			"app.kubernetes.io/name": jsii.String(appProps.Name),
+		},
+	}
 	return &k8s.KubeSecretProps{
 		Metadata: metadata,
 		Data: &map[string]*string{
@@ -101,11 +107,11 @@ func getPostgresqlDatabase(appProps *AppProps, metadata *cdk8s.ApiObjectMetadata
 		host.ValueFrom = &shdb.DatabaseSpecConnectionPostgresHostValueFrom{
 			SecretKeyRef: &shdb.DatabaseSpecConnectionPostgresHostValueFromSecretKeyRef{
 				Key:  jsii.String("endpoint"),
-				Name: jsii.String(appProps.Db.Id),
+				Name: jsii.String(fmt.Sprintf("%s-password", appProps.Db.Id)),
 			},
 		}
 		user.Value = jsii.String("masteruser")
-		pass.ValueFrom.SecretKeyRef.Name = jsii.String(appProps.Db.Id)
+		pass.ValueFrom.SecretKeyRef.Name = jsii.String(fmt.Sprintf("%s-password", appProps.Db.Id))
 		pass.ValueFrom.SecretKeyRef.Key = jsii.String("password")
 		dbName.Value = jsii.String(appProps.Db.Id)
 	} else {
