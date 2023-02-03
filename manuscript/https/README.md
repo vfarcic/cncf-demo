@@ -21,6 +21,7 @@ TODO: Explanation
 TODO: Explanation
 
 [![What Is HTTPS? How Does It Work? Automate With cert-manager And Let's Encrypt](https://img.youtube.com/vi/D7ijCjE31GA/0.jpg)](https://youtu.be/D7ijCjE31GA)
+[![De-stress Certificates with cert-manager!](https://img.youtube.com/vi/DthwYI46DYo/0.jpg)](https://via.vmw.com/cert-manager)
 * [Official site](https://cert-manager.io/)
 
 ## What Is Your Choice?
