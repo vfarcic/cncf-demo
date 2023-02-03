@@ -27,7 +27,7 @@ TODO: Explanation
 
 ## Choice 4: CDK For Kubernetes (cdk8s)
 
-CDK for Kubernetes (cdk8s) is an open source software development framework for defining Kubernetes applications using familiar programming languages. cdk8s enables organizations to improve developer experience where devs can write Kubernetes application configuration in a language they're comfortable with, without having to have a deep understanding of Kubernetes. Organizations are able to additionally use cdk8s to incorporate guardrails, best practices, and policy enforcement into developer workflows. 
+Cloud Development Kit (CDK) for Kubernetes (cdk8s) is an open source software development framework for defining Kubernetes applications using familiar programming languages. cdk8s enables organizations to improve developer experience where devs can write Kubernetes application configuration in a language they're comfortable with, and without having to have a deep understanding of Kubernetes. Organizations are able to additionally use cdk8s to incorporate guardrails, best practices, and policy enforcement into developer workflows. 
 
 cdk8s runs locally in your development environment, and it produces plain Kubernetes yaml that can be applied to any cluster.  
 
