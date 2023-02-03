@@ -10,9 +10,9 @@ cdk8s reduces cognitive load for developers in three ways:
 cdk8s helps organizations in three ways:
 * cdk8s code synthesises into plain Kubernetes yaml manifests that can be applied to any distribution of Kubernetes
 * With cdk8s, you can define best practices and organization-wide defaults and distribute them as cdk8s libraries
-* Orgs can incorporate policy enforcement in the `synth` step (when the cdk8s code gets reconciled into yaml)
+* Orgs can additionally incorporate policy enforcement in the `synth` step (when the cdk8s code gets reconciled into yaml)
 
-The bottom line here is that organizations can give freedom to developers to write their own Kubernetes configuration in an efficient way while also providing guardrails and best practices.
+The bottom line here is that organizations can give freedom to developers to write their own Kubernetes configuration in a pleasant and efficient way while also providing guardrails and best practices.
 
 
 ## Setup
