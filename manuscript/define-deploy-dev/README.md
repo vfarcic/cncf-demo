@@ -27,7 +27,11 @@ TODO: Explanation
 
 ## Choice 4: CDK For Kubernetes (cdk8s)
 
-TODO: Explanation
+Cloud Development Kit (CDK) for Kubernetes (cdk8s) is an open source software development framework for defining Kubernetes applications using familiar programming languages. cdk8s enables organizations to improve developer experience where devs can write Kubernetes application configuration in a language they're comfortable with, and without having to have a deep understanding of Kubernetes. Organizations are able to additionally use cdk8s to incorporate guardrails, best practices, and policy enforcement into developer workflows. 
+
+cdk8s runs locally in your development environment, and it produces plain Kubernetes yaml that can be applied to any cluster.  
+
+cdk8s currently supports Typescript, JavaScript, Java, Python, and Go. Support for more languages is coming soon. 
 
 [![cdk8s - Kubernetes Manifests With GoLang, TypeScript, Python And Java](https://img.youtube.com/vi/F2DKtax0NLU/0.jpg)](https://youtu.be/F2DKtax0NLU)
 [![What is cdk8s?](https://img.youtube.com/vi/GCZgLmksJW8/0.jpg)](https://via.vmw.com/cdk8s)

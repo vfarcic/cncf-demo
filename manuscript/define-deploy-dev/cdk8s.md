@@ -1,6 +1,19 @@
 # Define And Deploy The App To Dev With CDK For Kubernetes (cdk8s)
 
-TODO: Intro
+**Cloud Development Kit (CDK) for Kubernetes (cdk8s)** is an open source software development framework for defining Kubernetes applications using familiar programming languages. 
+
+cdk8s reduces cognitive load for developers in three ways:
+* Developers can use the programming languages that they're already familiar with - and they can do all of the code things (conditionals, loops, inheritance, completion, testing, etc)
+* Developers interact with cdk8s' simplified API instead of the Kubernetes API - therefore they don't have to understand as much about Kubernetes
+* cdk8s can incorporate organization-wide guardrails and best practices so developers don't have to worry about it
+
+cdk8s helps organizations in three ways:
+* cdk8s code synthesises into plain Kubernetes yaml manifests that can be applied to any distribution of Kubernetes
+* With cdk8s, you can define best practices and organization-wide defaults and distribute them as cdk8s libraries
+* Orgs can additionally incorporate policy enforcement in the `synth` step (when the cdk8s code gets reconciled into yaml)
+
+The bottom line here is that organizations can give freedom to developers to write their own Kubernetes configuration in a pleasant and efficient way while also providing guardrails and best practices.
+
 
 ## Setup
 
