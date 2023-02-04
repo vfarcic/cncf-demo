@@ -28,7 +28,7 @@ With `ytt`, you can:
 
 * **make YAML files into reusable templates**
 
-* **flexibly expresses configuration without restricting what modifications can be made later on** - for example, you can use a small number of base configurations for many environments, where the variations for each environment are stored in purposeful files or directories containing only the necessary differences.
+* **flexibly expresses configuration without restricting what modifications can be made later** - for example, you can use a small number of base configurations for many environments, where the variations for each environment are stored in purposeful files or directories containing only the necessary differences.
 
 [![Carvel ytt Instead Of Helm? A Better Way To Manage Kubernetes Resources?](https://img.youtube.com/vi/DLnXkH2keNg/0.jpg)](https://youtu.be/DLnXkH2keNg)
 [![Carvel: Clean Tools for Cloud Native Problems](https://img.youtube.com/vi/gsyGOv_Nwb0/0.jpg)](https://via.vmw.com/carvel)
