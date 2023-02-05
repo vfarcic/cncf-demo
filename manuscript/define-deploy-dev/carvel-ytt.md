@@ -1,6 +1,10 @@
 # Define And Deploy The App To Dev With Carvel ytt
 
-TODO: Intro
+`ytt` templates are plain YAML documents made from nodes - for example, maps and arrays. `ytt` allows you to set values and use programming logic (such as if statements and for loops) on those nodes. This eliminates text insertion concerns like manual escaping and allows for easy structure reuse.
+
+To get a feel for how `ytt` works, you can play with it in the [interactive playground](https://carvel.dev/ytt/#playground). There are examples there (organized by topic) so that you can familiarize yourself with `ytt`'s key features.
+
+Finally, `ytt` guarantees that templates produce identical output with the same inputs. This works because the `ytt` execution environment is airtight and protected from outside influences, with no access to the filesystem, network, time, randomness, or operating system interfaces.
 
 ## Setup
 
