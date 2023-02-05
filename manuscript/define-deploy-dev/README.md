@@ -19,7 +19,16 @@ TODO: Explanation
 
 ## Choice 3: Carvel ytt
 
-TODO: Explanation
+`ytt` is a tool for YAML shaping that is part of the open source [Carvel](https://carvel.dev/) suite. With `ytt` you can template and overlay Kubernetes configuration via YAML structures, not text documents. This is because `ytt` understands YAML on a structural level which eliminates the need to count spaces, or for manual escaping.
+
+With `ytt`, you can:
+* **add programming logic to your YAML** - for example, you can externalize values to variables, extract repeated snippets to functions, and make whole sections conditional. `ytt` does this using a Python-like language called Starlark. 
+
+* **patch YAML files** - this means you can use ‘overlay’ YAML files to modify base YAML files. With patching, you can do things like matching, inserting, replacing, or removing items.
+
+* **make YAML files into reusable templates**
+
+* **flexibly expresses configuration without restricting what modifications can be made later** - for example, you can use a small number of base configurations for many environments, where the variations for each environment are stored in purposeful files or directories containing only the necessary differences.
 
 [![Carvel ytt Instead Of Helm? A Better Way To Manage Kubernetes Resources?](https://img.youtube.com/vi/DLnXkH2keNg/0.jpg)](https://youtu.be/DLnXkH2keNg)
 [![Carvel: Clean Tools for Cloud Native Problems](https://img.youtube.com/vi/gsyGOv_Nwb0/0.jpg)](https://via.vmw.com/carvel)
