@@ -1,4 +1,4 @@
-# Build Container Image In Dev Environments
+# Build Container Image in Dev Environments
 
 Our hero begins as humble source code, and to even begin to find production they need to learn to walk. They need to be portable, and to carry their dependencies and lightweight OS with them as they go. Let’s get Hero out of the git repository and moving towards bigger and better things!
 

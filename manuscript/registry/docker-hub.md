@@ -1,6 +1,10 @@
-# Store Container Image in a Registry with Docker Hub
+# Store Container Image in a Registry with Docker Hub (Docker Distribution)
 
-TODO: Intro
+Wait, is Docker Hub a CNCF project?
+
+Technically no, but [Distribution](https://github.com/distribution) is. Distribution is the open source code that is the basis of the container registry that is part of Docker Hub. 
+
+Distribution is a core library for many other registries too, including GitHub Container Registry, GitLab Container Registry, DigitalOcean Container Registry, and You Choose competitor [Harbor](../registry/harbor.md). 
 
 ## Setup
 
