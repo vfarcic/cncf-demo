@@ -87,8 +87,6 @@ flowchart TD
         style https fill:blue
         https-vault(HashiCorp Vault)
         click https-vault "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/vault.md"
-        https-venafi(Venafi)
-        click https-venafi "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/venafi.md"
         https-cert-manager(cert-manager)
         click https-cert-manager "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md"
         https-cert-manager-helm(App as Helm)
@@ -99,7 +97,7 @@ flowchart TD
         click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-carvel.md"
         https-cert-manager-cdk8s(App as cdk8s)
         click https-cert-manager-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-cdk8s.md"
-        https--> https-vault & https-venafi & https-cert-manager
+        https--> https-vault & https-cert-manager
         https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel & https-cert-manager-cdk8s --> db
 
         %% --------------------------------
