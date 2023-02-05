@@ -1,4 +1,4 @@
-# Store Container Image in a Registry with Docker Hub (Docker Distribution)
+# Store Container Image in a Registry with Docker Hub (Distribution)
 
 Wait, is Docker Hub a CNCF project?
 
