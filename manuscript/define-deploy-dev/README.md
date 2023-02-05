@@ -1,4 +1,4 @@
-# Define And Deploy The App To Dev
+# Define and Deploy the App to Dev
 
 TODO: Intro
 
