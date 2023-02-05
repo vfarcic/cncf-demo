@@ -316,8 +316,8 @@ flowchart TD
         %% --------------
         policies{{Policies}}
         style policies fill:blue
+        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
         policies-kyverno(Kyverno)
-        style policies-kyverno fill:red
         policies-opa("Open Policy Agent (OPA)")
         style policies-opa fill:red
         policies-cloud-custodian(Cloud Custodian)
@@ -332,7 +332,6 @@ flowchart TD
         policies-helm(App As Helm)
         style policies-helm fill:red
         policies-kustomize(App As Kustomize)
-        style policies-kustomize fill:red
         policies-cdk8s(App As cdk8s)
         style policies-cdk8s fill:red
         policies-carvel(App As Carvel ytt)

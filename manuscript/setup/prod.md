@@ -8,14 +8,13 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
+# Select the fork as the default repository
 gh repo set-default
 
 # Create a Kubernetes cluster.
 # If you're using a local Kubernetes cluster
 #   (e.g., Rancher Desktop, Minikube, etc.), make sure that it
 #   has at least 8GB of RAM and 4 CPU of memory.
-
-# Select the fork as the default repository
 
 # Install `yq` CLI from https://github.com/mikefarah/yq
 # 'yq' is a lightweight and portable command-line YAML processor

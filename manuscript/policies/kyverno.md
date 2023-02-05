@@ -27,7 +27,7 @@ cat policies/kyverno.yaml
 
 cp policies/kyverno.yaml infra/policies.yaml
 
-git add . 
+git add .
 
 git commit -m "Policies"
 
@@ -35,11 +35,11 @@ git push
 
 kubectl get clusterpolicies
 
-# TODO: Validate Deployment
-# TODO: Validate DB
-# TODO: Mutate
-# TODO: Validate image
-# TODO: Generate
+export POLICY_KIND=clusterpolicy
+
+yq --inplace ".policies.type = \"kyverno\"" settings.yaml
+
+yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
 ```
 
 ## How Did You Define Your App?
