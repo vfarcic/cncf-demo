@@ -8,8 +8,6 @@ Harbor is a CNCF-Graduated, open source container image registry. It has three m
 
 Harbor can be installed in any Kubernetes environment or on a system with Docker support.
 
-TODO: Invite https://www.linkedin.com/in/vadim-bauer to the talk.
-
 ## Setup
 
 ```bash
