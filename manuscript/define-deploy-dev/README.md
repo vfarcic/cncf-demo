@@ -8,7 +8,7 @@ When defining an application, what types of things need to get configured, exact
 
 ### Things that need to get defined
 
-* **Container images** - When defining an application, you need to declare which container image you want to run, and from what registry. Do you need to configure credentials to access this registry? It is also wise to consider what your strategy is for updating this value in your configuration as the application evolves - how do you ensure that you are always running the version that you intend?
+* **Container images** - When defining an application, you need to declare which container image you want to run, and from what registry. Do you need to configure credentials to access this registry? It is also wise to consider what your strategy is for updating the `image` values in your configuration as the application evolves - how do you ensure that you are always running the container image that you intend to run?
 
 * **Application-specific configuration** - This includes environment-dependent values that are used by the application. An example would be if your application needs to connect to a certain database in development but then a different database in production. Also what other applications and third-party services are supporting this application? How does this application connect to those, and with what credentials?
 
