@@ -86,7 +86,7 @@ flowchart TD
 | --- | --- | --- | --- |
 | Build Container Image | Cora Iberkleid - Carvel kbld<br />Ryan Moran - Buildpacks<br />Anders Björklund - Lima | Wednesday, February 8, 2023 | [story](manuscript/build-container-image/README.md) |
 | Store Container Image in a Registry | Vadim Bauer - Harbor<br /> | Tuesday, February 14, 2023 | [story](manuscript/registry/README.md) |
-| Define And Deploy The App To Dev | Andrew Block - Helm<br />Scott Rosenberg - Carvel ytt<br /> | Tuesday, February 21, 2023 | [story](manuscript/define-deploy-dev/README.md) |
+| Define And Deploy The App To Dev | Andrew Block - Helm<br />Scott Rosenberg - Carvel ytt<br />Eli Polonsky - cdk8s<br /> | Tuesday, February 21, 2023 | [story](manuscript/define-deploy-dev/README.md) |
 | Use HTTPS | Ashley Davis - cert-manager<br /> | Tuesday, February 28, 2023 | [story](manuscript/https/README.md) |
 | Setup PostgreSQL DB In Dev | TODO: | TODO: | [story](manuscript/db/README.md) |
 | Manage DB Schema | Marc Campbell - SchemaHero<br /> | TODO: | [story](manuscript/db-schema/README.md) |
