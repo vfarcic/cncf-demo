@@ -4,7 +4,7 @@ Our hero application is a container image, and has a home in a registry. Now the
 
 The act of specifying these choices can be referred to as *configuring* or *defining* the application. The majority of cloud native platforms and frameworks define their configurations via YAML files.  It is best practice to define your application declaratively in a way that can be stored and versioned.
 
-So what types of things need to get configured, exactly? There is much to consider. 
+When defining an application, what types of things need to get configured, exactly? There is much to consider. 
 
 ### Things that need to get defined
 
