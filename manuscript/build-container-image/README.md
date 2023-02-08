@@ -8,6 +8,7 @@ At its core, a container image is simply a tarball of an entire filesystem (or s
 
 `kbld` is a CLI that automates image building, image pushing, and deployment configuration updates. `kbld` is part of the [Carvel](https://carvel.dev/) suite of tools. Whenever a relevant new resource is created, `kbld` builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), `kbld` optionally pushes the resulting image to your registry of choice, and finally `kbld` resolves it to an image digest reference. `kbld` automatically finds image references within your configuration, and you can choose whether `kbld` updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used. `kbld` probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s).
 
+[![kbld in 1 Minute](https://img.youtube.com/vi/saqUgKCS0KI/0.jpg)](https://youtube.com/shorts/saqUgKCS0KI)
 [![Carvel: Clean Tools for Cloud Native Problems](https://img.youtube.com/vi/gsyGOv_Nwb0/0.jpg)](https://via.vmw.com/carvel)
 * [Official site](https://carvel.dev/kbld)
 
