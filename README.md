@@ -85,12 +85,12 @@ flowchart TD
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
 | Build Container Image | Cora Iberkleid - Carvel kbld<br />Ryan Moran - Buildpacks<br />Anders Björklund - Lima | Wednesday, February 8, 2023 | [story](manuscript/build-container-image/README.md) |
-| Store Container Image in a Registry | Vadim Bauer - Harbor<br /> | Tuesday, February 14, 2023 | [story](manuscript/registry/README.md) |
-| Define And Deploy The App To Dev | Andrew Block - Helm<br />Scott Rosenberg - Carvel ytt<br /> | Tuesday, February 21, 2023 | [story](manuscript/define-deploy-dev/README.md) |
+| Store Container Image in a Registry | Vadim Bauer - Harbor<br />Allen Sun - Dragonfly<br />| Tuesday, February 14, 2023 | [story](manuscript/registry/README.md) |
+| Define And Deploy The App To Dev | Andrew Block - Helm<br />Scott Rosenberg - Carvel ytt<br />Eli Polonsky - cdk8s<br /> | Tuesday, February 21, 2023 | [story](manuscript/define-deploy-dev/README.md) |
 | Use HTTPS | Ashley Davis - cert-manager<br /> | Tuesday, February 28, 2023 | [story](manuscript/https/README.md) |
-| Setup PostgreSQL DB In Dev | TODO: | TODO: | [story](manuscript/db/README.md) |
-| Manage DB Schema | Marc Campbell - SchemaHero<br /> | TODO: | [story](manuscript/db-schema/README.md) |
-| Develop The App | TODO: | TODO: | [story](manuscript/develop/README.md) |
+| Set Up PostgreSQL DB In Dev | TODO: | Tuesday, March 7, 2023 | [story](manuscript/db/README.md) |
+| Manage DB Schema | Marc Campbell - SchemaHero<br /> | Tuesday, March 14, 2023 | [story](manuscript/db-schema/README.md) |
+| Develop The App | Nick Powell - Telepresence<br /> | Tuesday, March 21, 2023 | [story](manuscript/develop/README.md) |
 
 ## The Format
 

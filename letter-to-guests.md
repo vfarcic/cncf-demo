@@ -8,6 +8,8 @@ Thank you for being a guest on You Choose! This will be so much fun.
 
 **You’re responsible for a 5-minute (or less) presentation about the technology that you’re representing.** You are welcome to screen share and use slides and/or show a demo. But to keep things fair we will be strict about the 5-minute limit! Consider yourself warned!
 
+We also recommend that you start with a simple, one-sentence description of your tool to set the scene for your presentation. Some viewers may have never heard of your technology.  
+
 **You’ll be available for questions about your technology during the Q&A section of the show.**
 
 **You’ll give a closing statement at the end of the show.** Seriously just one or two sentences.  
