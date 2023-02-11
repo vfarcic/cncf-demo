@@ -20,7 +20,11 @@ Let’s help Hero do some soul-searching and define every teensy aspect of their
 
 ## Choice 1: Helm
 
-TODO: Explanation
+[Helm](https://helm.sh/) is a package manager for Kubernetes. With Helm, you can encapsulate all necessary Kubernetes resources into one atomic unit. This enables folks to be able to share applications with one another, and to more easily install and run a Kubernetes application from a trusted third party.
+
+When using Helm to define the configuration of your own application, you can add dynamic abilities and parameterization. 
+
+Additionally, Helm is a more mature technology that has an incredible ecosystem, and it works well alongside other Kubernetes configuration definition technologies, such as Kustomize and Kubernetes Operators.  
 
 [![You're at the Helm](https://img.youtube.com/vi/oPIiX6vyih8/0.jpg)](https://via.vmw.com/Helm)
 * [Official site](https://helm.sh)
