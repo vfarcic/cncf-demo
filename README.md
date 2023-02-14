@@ -14,7 +14,7 @@ Join us if you dare!  This is not for the faint of heart!
 
 ## The Adventure!
 
-The best place to start the adventure is the beginning. Perform the [setup](manuscript/setup/dev.md) steps and, from there, start the first chapter by to [Build Container Image In Dev Environments](manuscript/build-container-image/README.md). As an alternative, you can use graph below to navigate the adventure.
+The best place to start the adventure is the beginning. Perform the [setup](manuscript/setup/dev.md) steps and, from there, start the first chapter by going to [Build Container Image In Dev Environments](manuscript/build-container-image/README.md). As an alternative, you can use graph below to navigate the adventure.
 
 Almost all items in the graphs contain a link if you prefer to jump straight into a specific part of the aadventure. If you do so, please note that the steps work only if one start from the beginning of any of the chapters (e.g., Development, Production, etc.).
 
@@ -29,7 +29,8 @@ flowchart TD
         style red fill:red
         blue{{Make a choice}}
         style blue fill:blue
-        transparent(Walk)
+        blue(Chosen by viewers)
+        style blue fill:green
 
     end
 ```
@@ -59,6 +60,7 @@ flowchart TD
         bci-lima(Lima)
         click bci-lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
         bci-buildpacks(Cloud Native Buildpacks / CNB)
+        style bci-buildpacks fill:green
         click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
 
         %% -- Build Container Image Connections --
