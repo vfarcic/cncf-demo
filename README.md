@@ -64,7 +64,22 @@ flowchart TD
         click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
 
         %% -- Build Container Image Connections --
-        bci --> bci-kbld & bci-lima & bci-buildpacks --> continue
+        bci --> bci-kbld & bci-lima & bci-buildpacks --> registry
+
+        %% -----------------------------------------
+        %% -- Store Container Image in a Registry --
+        %% -----------------------------------------
+        registry{{Store Container Image In A Registry}}
+        click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/README.md"
+        style registry fill:blue
+        registry-docker-hub(Docker Hub)
+        click registry-docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
+        registry-harbor(Harbor)
+        click registry-harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
+        registry-dragonfly(Dragonfly)
+        click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
+        style registry-dragonfly fill:red
+        registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> continue
 
         continue((The be continued...))
 
