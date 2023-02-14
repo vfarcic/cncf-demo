@@ -1,6 +1,17 @@
 # Define And Deploy The App To Dev With Helm
 
-TODO: Intro
+At its core, a Helm chart is simply a directory that has three required items:
+
+* **templates directory** - a directory of templated Kubernetes resources. Templates are Golang-based.
+
+* **values.yaml file** - contains values for the templated resources
+
+* **chart.yaml file** - contains metadata about the chart
+
+Helm *templates* are the key to defining Kubernetes resources in a dynamic, reusable way. With Helm templates, you can use programming logic to help define your Kubernetes resources. You can also create reusable functions using the [Sprig](http://masterminds.github.io/sprig/) framework. These functions are called *partials*. 
+
+Once you define all of your Kubernetes resources and specify their values in a Helm chart, you use the Helm CLI to install that chart to your Kubernetes cluster. This creates a running instance of your application called a Helm *release*.  
+
 
 ## Setup
 
