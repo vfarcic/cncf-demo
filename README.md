@@ -76,9 +76,9 @@ flowchart TD
         click registry-docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
         registry-harbor(Harbor)
         click registry-harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
+        style registry-harbor fill:green
         registry-dragonfly(Dragonfly)
         click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
-        style registry-dragonfly fill:red
         registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> continue
 
         continue((The be continued...))

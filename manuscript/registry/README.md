@@ -4,6 +4,8 @@ Our hero application's form has leveled up! They are now a container image! Hero
 
 A container image registry is a server that stores and serves images. It enables container images to be easily shared between systems. A container image registry can either be public or private. For example, you may pull the latest official public image of Ubuntu from their public registry. In contrast, a private registry might be used to share the latest version of a propietary application between teams within the same company.
 
+[![Store Image in a Registry - Feat. Harbor, Docker Hub, and Dragonfly (You Choose!, Ch. 1, Ep. 2)](https://img.youtube.com/vi/QP8xGYwevKo/0.jpg)](https://youtu.be/QP8xGYwevKo)
+
 ## Choice 1: Docker Hub
 
 Docker Hub is a service provided by Docker for finding and sharing container images. Users can store and share images to public repositories for free, or to private repositories for a fee. Docker Hub is the world's largest repository of container images, hosting images from community developers, open source projects, and independent software vendors (ISV). Docker Hub additionally can trigger actions after a successful push to a registry. These webhooks aid in integrating Docker Hub with other tools.
