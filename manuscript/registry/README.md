@@ -33,8 +33,6 @@ First because **Nydus-formatted images are made up of smaller pieces that can be
 
 Second because **Nydus knows which part of the image is essential for the start-up of the container** - maybe only 50 MB of data of a 1 GB image - **and it will begin by just pulling that part so the container can be started.** In this way it greatly reduces the container startup time. This is also good for serverless scenerios.  
 
-It is important to note here that the Nydus image format is different from the OCI image format - in order to take advantage of the benefits of Nydus, your OCI images will need to be converted to Nydus images. However the Nydus ecosystem has a number of tools to help with the conversion, such as [a CLI tool](https://github.com/dragonflyoss/image-service/blob/master/docs/nydusify.md) and a [Harbor acceleration service](https://github.com/goharbor/acceleration-service).
-
 * [Dragonfly official site](https://d7y.io)
 * [Nydus official site](https://nydus.dev/)
 
