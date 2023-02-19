@@ -1,6 +1,20 @@
 # Define And Deploy The App To Dev With Kustomize
 
-TODO: Intro
+Kustomize is a template-free way to customize application configuration. It is natively built into *kubectl* as `apply -k`, and it's also available as a standalone binary for integration into other services.
+
+In this section, you will inspect and/or modify the following files:
+
+```bash
+kustomize/
+├── base
+│   ├── deployment.yaml
+│   ├── ingress.yaml
+│   ├── kustomization.yaml
+│   └── service.yaml
+└── overlays
+    └── dev
+        └── ingress.yaml
+```
 
 ## Setup
 
