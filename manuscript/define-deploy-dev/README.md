@@ -31,7 +31,11 @@ Additionally, Helm is a more mature technology that has an incredible ecosystem,
 
 ## Choice 2: Kustomize
 
-TODO: Explanation
+Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as-is. In this way, Kustomize exposes and teaches native kubernetes APIs, rather than hiding them.
+
+Kustomize traverses Kubernetes definition files, and can add, update, or remove configuration options without forking. For example, you can define a *base* Kubernetes deployment that includes all organization-wide defaults. Then you can create a *patch* that references the base deployment but specifies values that are unique to your production environment, and another patch that defines the values that are unique to staging. Then, if an organization-wide value changes, that only needs to be updated in your configuration file one time, in the base yaml, and that change will propagate to your production and staging environment definitions.
+
+This declarative approach to configuration customization has the added benefit of being natively build into **kubectl** with the `apply -k` commmand.  
 
 [![Kustomize - How to Simplify Kubernetes Configuration Management](https://img.youtube.com/vi/Twtbg6LFnAg/0.jpg)](https://youtu.be/Twtbg6LFnAg)
 [![What Is Kustomize?](https://img.youtube.com/vi/C8DpFc4zw80/0.jpg)](https://youtu.be/C8DpFc4zw80)
