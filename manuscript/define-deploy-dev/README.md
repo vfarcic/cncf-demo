@@ -62,6 +62,7 @@ cdk8s runs locally in your development environment, and it produces plain Kubern
 
 cdk8s currently supports Typescript, JavaScript, Java, Python, and Go. Support for more languages is coming soon. 
 
+[![cdk8s in 1 Minute](https://img.youtube.com/vi/0-bAYym6m-g/0.jpg)](https://youtube.com/shorts/0-bAYym6m-g)
 [![cdk8s - Kubernetes Manifests With GoLang, TypeScript, Python And Java](https://img.youtube.com/vi/F2DKtax0NLU/0.jpg)](https://youtu.be/F2DKtax0NLU)
 [![What is cdk8s?](https://img.youtube.com/vi/GCZgLmksJW8/0.jpg)](https://via.vmw.com/cdk8s)
 * [Official site](https://cdk8s.io)

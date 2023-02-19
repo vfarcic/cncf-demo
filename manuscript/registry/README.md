@@ -25,9 +25,16 @@ Harbor is a CNCF-Graduated, open source container image registry. Harbor has thr
 
 Dragonfly is not a registry per se, it is a file distribution system based on peer-to-peer (P2P) networking. 
 
-Dragonfly is useful in distributing container images that need to be made available to all of the nodes of a Kubernetes cluster. For example, Dragonfly can be used to improve the download speeds of container images stored in a local registry in an air-gapped environment. It is also useful to improve cold start times in a use case where an application needs to be able to scale up from zero.
+Dragonfly additionally has a sub-project called [Nydus](https://nydus.dev/) that is an open source filesystem solution that aids in high-efficiency image distribution.
 
-* [Official site](https://d7y.io)
+The Dragonfly/Nydus combo is powerful. 
+
+First because **Nydus-formatted images are made up of smaller pieces that can be moved around independently of one another.** This combined with using Dragonfly's P2P network can take advantage of every node’s bandwidth, greatly reducing image pull time.
+
+Second because **Nydus knows which part of the image is essential for the start-up of the container** - maybe only 50 MB of data of a 1 GB image - **and it will begin by just pulling that part so the container can be started.** In this way it greatly reduces the container startup time. This is also good for serverless scenerios.  
+
+* [Dragonfly official site](https://d7y.io)
+* [Nydus official site](https://nydus.dev/)
 
 ## What Is Your Choice?
 
