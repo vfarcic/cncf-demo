@@ -37,10 +37,12 @@ helm repo update
 
 helm upgrade --install harbor harbor/harbor \
     --namespace harbor --create-namespace \
-    --values harbor/values.yaml
+    --values harbor/values.yaml --wait
 
 kubectl --namespace harbor apply \
     --filename harbor/certificate.yaml
+
+kubectl --namespace harbor get pods
 
 # Wait for a while for all the Pods (except jobservice) to be
 #   ready.
