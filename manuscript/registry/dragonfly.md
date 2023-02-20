@@ -74,4 +74,4 @@ docker image pull $IMAGE:latest
 
 ## Continue The Adventure
 
-[Define And Deploy The App To Dev](../define-deploy-dev/README.md)
+The Adventure will continue soon...

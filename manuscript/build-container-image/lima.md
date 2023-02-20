@@ -27,4 +27,4 @@ docker image ls
 
 ## Continue The Adventure
 
-The Adventure will continue soon...
+[Store Container Image in a Registry](../registry/README.md)

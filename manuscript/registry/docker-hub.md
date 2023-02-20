@@ -47,4 +47,4 @@ echo "https://hub.docker.com/r/$DOCKERHUB_USERNAME/cncf-demo"
 
 ## Continue The Adventure
 
-[Define And Deploy The App To Dev](../define-deploy-dev/README.md)
+The Adventure will continue soon...
