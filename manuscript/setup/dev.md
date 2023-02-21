@@ -73,6 +73,8 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
+yq --inplace ".google.projectId = \"$PROJECT_ID\"" settings.yaml
+
 gcloud projects create $PROJECT_ID
 
 echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID"

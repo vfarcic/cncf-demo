@@ -79,7 +79,23 @@ flowchart TD
         style registry-harbor fill:green
         registry-dragonfly(Dragonfly)
         click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
-        registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> continue
+        registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> ddd
+
+        %% --------------------------------------
+        %% -- Define And Deploy The App To Dev --
+        %% --------------------------------------
+        ddd{{Define And Deploy The App To Dev}}
+        click ddd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/README.md"
+        style ddd fill:blue
+        ddd-helm(Helm)
+        click ddd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md"
+        ddd-kustomize(Kustomize)
+        click ddd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
+        ddd-carvel(Carvel ytt)
+        click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
+        ddd-cdk8s("CDK For Kubernetes (cdk8s)")
+        click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> continue
 
         continue((The be continued...))
 
