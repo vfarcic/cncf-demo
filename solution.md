@@ -239,8 +239,7 @@ flowchart TD
         gitops-kapp(Carvel kapp-controller)
         click gitops-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/kapp.md"
         style gitops-kapp fill:red
-        gitops --> gitops-flux & gitops-argocd & gitops-kapp
-        gitops-flux & gitops-argocd --> ingress
+        gitops --> gitops-flux & gitops-argocd & gitops-kapp --> ingress
 
         %% -------------
         %% -- Ingress --
@@ -258,7 +257,10 @@ flowchart TD
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
-        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux --> app
+        ingress-kapp(GitOps Carvel kapp-controller)
+        click ingress-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-kapp.md"
+        style ingress-kapp fill:red
+        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux & ingress-kapp --> app
 
         %% ----------------------------------
         %% -- Deploy The App To Production --
