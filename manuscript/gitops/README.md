@@ -31,4 +31,4 @@ TODO: Explanation
 
 * [Flux](flux.md)
 * [Argo CD](argocd.md)
-* [Rancher Fleet](rancher-fleet.md)
+* [Carvel kapp-controller](kapp.md)

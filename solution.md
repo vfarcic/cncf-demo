@@ -236,9 +236,10 @@ flowchart TD
         click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
         gitops-argocd(Argo CD)
         click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
-        gitops-rancher-fleet(Rancher Fleet)
-        click gitops-rancher-fleet "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/rancher-fleet.md"
-        gitops --> gitops-flux & gitops-argocd & gitops-rancher-fleet
+        gitops-kapp(Carvel kapp-controller)
+        click gitops-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/kapp.md"
+        style gitops-kapp fill:red
+        gitops --> gitops-flux & gitops-argocd & gitops-kapp
         gitops-flux & gitops-argocd --> ingress
 
         %% -------------
