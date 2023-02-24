@@ -1,5 +1,9 @@
 # Use HTTPS
 
+**If you chose to use `nip.io` instead of a "real" domain name, you should skip this chapter by jumping directly to [Setup PostgreSQL DB](../db/README.md).**
+
+</br>
+
 Hero is now configured and running in a development environment! Hero should be beaming with pride, but instead Hero is feeling…insecure.
 
 Like many of us, Hero has trust issues! How can Hero ensure that the users of their application don’t intend to cause harm to them or to the system? How can Hero’s users trust that Hero won’t harm them? To pass this stage of the journey, Hero needs to learn how to exchange secure communications with each end user.
@@ -16,18 +20,19 @@ In order for TLS* to work, the two communicating entities establish trust by exc
 
 Wow. That’s a lot. Right now all Hero needs to know is that they need to use *certificates* so that they can trust incoming traffic, and so that incoming traffic can trust Hero.  Let’s look at some tools that help Hero build trust. 
 
+</br>
 
 *TLS can also be called SSL, which stands for Secure Sockets Layer
 
 *X.509 certificates can also be called *digital certificates*, *Private Key Infrastructure (PKI) certificates*, or often just *certificates*
 
-**If you chose to use `nip.io` instead of a "real" domain name, you should skip this chapter by jumping directly to [Setup PostgreSQL DB](../db/README.md).**
+</br>
 
 ## Choice 1: HashiCorp Vault
 
 HashiCorp Vault is an identity-based secrets and encryption management system.  With Vault, access to secrets and other sensitive data can be securely managed and tightly controlled. Plus secret management is auditable - an administrator can see who accessed which secret and when.
 
-### What problem is Vault solving?
+### What problem does Vault solve?
 
 Modern systems have a high degree of complexity.  A single user (whether human or machine) may need to access many secrets, for example, database credentials, external service API keys, and HTTPS credentials. And these secrets are often stored in different formats and in different locations, for example, in plain text files, app source code, and in config files.
 
