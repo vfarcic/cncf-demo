@@ -6,6 +6,7 @@ TODO: Intro
 
 TODO: Explanation
 
+[![Remocal K8s Development FTW: Telepresence 101](https://img.youtube.com/vi/VLABvVtUZvk/0.jpg)](https://via.vmw.com/Telepresence)
 * [Official site](https://www.telepresence.io)
 
 ## Choice 2: DevSpace
