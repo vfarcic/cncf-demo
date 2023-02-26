@@ -6,6 +6,8 @@ The act of specifying these choices can be referred to as *configuring* or *defi
 
 When defining an application, what types of things need to get configured, exactly? There is much to consider. 
 
+[![Define And Deploy Apps - Feat. Helm, Kustomize, Carvel ytt, and cdk8s (You Choose!, Ch. 1, Ep. 3)](https://img.youtube.com/vi/QwU3JmjyKoM/0.jpg)](https://youtu.be/QwU3JmjyKoM)
+
 ### Things that need to get defined
 
 * **Container images** - When defining an application, you need to declare which container image you want to run, and from what registry. Do you need to configure credentials to access this registry? It is also wise to consider what your strategy is for updating the `image` values in your configuration as the application evolves - how do you ensure that you are always running the container image that you intend to run?
