@@ -40,7 +40,7 @@ Kustomize traverses Kubernetes definition files, and can add, update, or remove 
 This declarative approach to configuration customization has the added benefit of being natively built into *kubectl* with the `apply -k` commmand.  
 
 [![Kustomize - How to Simplify Kubernetes Configuration Management](https://img.youtube.com/vi/Twtbg6LFnAg/0.jpg)](https://youtu.be/Twtbg6LFnAg)
-[![What Is Kustomize?](https://img.youtube.com/vi/C8DpFc4zw80/0.jpg)](https://youtu.be/C8DpFc4zw80)
+[![Kustomize Demystified](https://img.youtube.com/vi/C8DpFc4zw80/0.jpg)](https://via.vmw.com/Kustomize)
 * [Official site](https://kustomize.io)
 
 ## Choice 3: Carvel ytt
