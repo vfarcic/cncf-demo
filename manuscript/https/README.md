@@ -48,7 +48,20 @@ Vault works primarily using tokens.
 
 ## Choice 2: cert-manager
 
-TODO: Explanation
+cert-manager aims to be (and quite possibly is) the easiest way to automate certificate management in Kubernetes.  Once a cluster admin has installed and configured the proper cert-manager custom Kubernetes resources, the user experience is as follows:
+
+1 - specify what you need (“I need a certificate for example.com…”)
+
+2 - specify how to get it by referencing an `Issuer`* that was set up by a cluster admin (“…from this particular Certificate Authority (CA)…”)
+
+3 - specify the Kubernetes Secret where you want to store the resulting certificate (“…and I want it to be stored in this Secret”)
+
+And that’s it! The certificate gets created and stored in the referenced Secret! The user specifies those three things (and more if they like, for example, the duration in which they want the certificate to be valid) and then cert-manager handles generating the private key, creating the Certificate Signing Request (CSR), and submitting the CSR to the CA. Then, assuming all goes well, cert-manager will take the brand-new certificate (and entire certificate chain) that the CA returned and put it in the Kubernetes Secret that the user specified.  cert-manager will also automatically renew the certificate before it expires! Booya!
+
+So from a user perspective, all you do is create a `Certificate` resource where you specify what you want “I need a certificate for example.com via this particular `Issuer` (from this particular CA) and I want it to be stored in a Secret called example-com-tls” and then the certificate appears in the specified Secret! cert-manager will then ensure the certificate is valid, ensure that it is up-to-date, and will attempt to renew the certificate at a configured time before expiry.
+
+
+*An `Issuer` is another cert-manager custom Kubernetes resource. It tells cert-manager how to connect to a particular CA. cert-manager will obtain certificates from a variety of Issuers, both popular public Issuers as well as private Issuers.
 
 [![What Is HTTPS? How Does It Work? Automate With cert-manager And Let's Encrypt](https://img.youtube.com/vi/D7ijCjE31GA/0.jpg)](https://youtu.be/D7ijCjE31GA)
 [![De-stress Certificates with cert-manager!](https://img.youtube.com/vi/DthwYI46DYo/0.jpg)](https://via.vmw.com/cert-manager)
