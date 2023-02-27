@@ -42,11 +42,6 @@ helm upgrade --install harbor harbor/harbor \
 kubectl --namespace harbor apply \
     --filename harbor/certificate.yaml
 
-kubectl --namespace harbor get pods
-
-# Wait for a while for all the Pods (except jobservice) to be
-#   ready.
-
 export REGISTRY=harbor.$DOMAIN
 
 export IMAGE=$REGISTRY/library/cncf-demo

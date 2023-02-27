@@ -93,6 +93,7 @@ flowchart TD
         click ddd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
         ddd-carvel(Carvel ytt)
         click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
+        style ddd-carvel fill:green
         ddd-cdk8s("CDK For Kubernetes (cdk8s)")
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
         ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> continue
