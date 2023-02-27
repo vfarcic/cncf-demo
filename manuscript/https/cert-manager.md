@@ -1,6 +1,10 @@
 # Use HTTPS With cert-manager
 
-TODO: Intro
+You did it! You installed cert-manager during [setup](/manuscript/setup/dev.md) when you used Helm to install cert-manager. You also created an `Issuer` resource when you applied the file [cert-manager/issuer.yaml](/cert-manager/issuer.yaml) to your cluster.
+
+An `Issuer` is a cert-manager custom Kubernetes resource. It tells cert-manager how to connect to a particular CA. cert-manager will obtain certificates from a variety of Issuers, both popular public Issuers as well as private Issuers.
+
+
 
 ## Setup
 
