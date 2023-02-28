@@ -21,6 +21,8 @@ kubectl apply -f https://github.com/vmware-tanzu/carvel-kapp-controller/releases
 wget -O- https://carvel.dev/install.sh > install.sh
 sudo bash install.sh
 
+kubectl apply -f kapp-controller/preperation.yaml
+
 ls -1 schema-hero
 
 cat kapp-controller/schema-hero.yaml
