@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cncf-demo-values
+  namespace: carvel-apps
+stringData:
+  cncf-demo-values.yaml: |
+    image:
+      tag: latest
+    ingress:
+      host: cncf-demo.sillydemo.com
+      className: nginx
+    tls:
+      enabled: true
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: cncf-demo
+  namespace: carvel-apps
+spec:
+  syncPeriod: 5m
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - git:
+      url: https://github.com/devopsparadox/cncf-demo.git
+      ref: origin/main
+      subPath: helm/app
+  template:
+  - helmTemplate:
+      namespace: production
+      name: cncf-demo
+      valuesFrom:
+      - secretRef:
+          name: cncf-demo-values
+  deploy:
+  - kapp:
+      rawOptions: ["--dangerous-allow-empty-list-of-resources=true"]
+      intoNs: production

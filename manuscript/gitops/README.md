@@ -20,12 +20,11 @@ TODO: Explanation
 * [What is Argo CD?](https://via.vmw.com/ArgoCD)
 * [Official site](https://argoproj.github.io/cd)
 
-## Choice 3: Rancher Fleet
-
+## Choice 3: Carvel Kapp Controller
 TODO: Explanation
-
-[![Rancher Fleet: GitOps Across A Large Number Of Kubernetes Clusters](https://img.youtube.com/vi/rIH_2CUXmwM/0.jpg)](https://youtu.be/rIH_2CUXmwM)
-* [Official site](https://fleet.rancher.io)
+* [Getting Started with kapp-controller
+](https://tanzu.vmware.com/developer/guides/kapp-controller-gs/)
+* [Official site](https://carvel.dev/kapp-controller)
 
 ## What Is Your Choice?
 

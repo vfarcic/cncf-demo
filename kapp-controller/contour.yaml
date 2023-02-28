@@ -1,0 +1,21 @@
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: contour
+  namespace: carvel-apps
+spec:
+  syncPeriod: 5m
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - helmChart:
+      name: contour
+      repository:
+        url: https://charts.bitnami.com/bitnami
+      version: 10.1.3
+  template:
+  - helmTemplate:
+      namespace: projectcontour
+      name: contour
+  deploy:
+  - kapp: {}
