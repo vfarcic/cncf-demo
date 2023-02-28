@@ -1,0 +1,55 @@
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: emissary-ingress-crds
+  namespace: carvel-apps
+spec:
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - http:
+      url: https://app.getambassador.io/yaml/emissary/3.5.1/emissary-crds.yaml
+  template:
+  - ytt: 
+      ignoreUnknownComments: true
+      paths:
+      - "."
+  deploy:
+  - kapp: {}
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: emissary-ingress
+  namespace: carvel-apps
+spec:
+  syncPeriod: 5m
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - helmChart:
+      name: emissary-ingress
+      repository:
+        url: https://app.getambassador.io
+      version: 8.4.0
+  template:
+  - helmTemplate:
+      name: emissary-ingress
+      namespace: emissary
+  - ytt:
+      ignoreUnknownComments: true
+      inline:
+        paths:
+          listener.yaml: |
+            apiVersion: getambassador.io/v3alpha1
+            kind: Listener
+            metadata:
+              name: emissary-ingress-listener-8080
+              namespace: emissary
+            spec:
+              port: 8080
+              protocol: HTTP
+              securityModel: XFP
+              hostBinding:
+                namespace:
+                  from: ALL
+  deploy:
+  - kapp: {}
