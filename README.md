@@ -96,7 +96,27 @@ flowchart TD
         style ddd-carvel fill:green
         ddd-cdk8s("CDK For Kubernetes (cdk8s)")
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
-        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> continue
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> https
+
+        %% ---------------
+        %% -- Use HTTPS --
+        %% ---------------
+        https{{Use HTTPS}}
+        click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/README.md"
+        style https fill:blue
+        https-cert-manager(cert-manager)
+        click https-cert-manager "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md"
+        style https-cert-manager fill:green
+        https-cert-manager-helm(App as Helm)
+        click https-cert-manager-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-helm.md"
+        https-cert-manager-kustomize(App as Kustomize)
+        click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-kustomize.md"
+        https-cert-manager-carvel(App as Carvel ytt)
+        click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-carvel.md"
+        style https-cert-manager-carvel fill:green
+        https-cert-manager-cdk8s(App as cdk8s)
+        click https-cert-manager-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-cdk8s.md"
+        https--> https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel & https-cert-manager-cdk8s --> continue
 
         continue((The be continued...))
 
