@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cert-manager-values
+  namespace: carvel-apps
+stringData:
+  cert-manager-values.yaml: |
+    installCRDs: "true"
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: cert-manager
+  namespace: carvel-apps
+spec:
+  syncPeriod: 5m
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - helmChart:
+      name: cert-manager
+      repository:
+        url: https://charts.jetstack.io
+      version: v1.10.1
+  template:
+  - helmTemplate:
+      namespace: cert-manager
+      name: cert-manager
+      valuesFrom:
+      - secretRef:
+          name: cert-manager-values
+  deploy:
+  - kapp: {}

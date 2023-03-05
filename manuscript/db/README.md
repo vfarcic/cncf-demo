@@ -1,6 +1,10 @@
-# Setup PostgreSQL DB In The Dev Environment
+# Set Up PostgreSQL DB in the Dev Environment
 
-TODO: Intro
+Our Hero application has done it! They’re running in a development environment! End of chapter, goal achieved! But wait. As time goes on Hero is feeling… bloated. There is so much to remember, and keeping track of all that data is really weighing them down.  They should be light and portable, and ready to evolve and scale at a moment’s notice!
+
+Hero needs persistent storage, and there is no need to reinvent the wheel here, so Hero knows they want to implement a third-party database (PostgreSQL) to store application state and user data. However, this decision isn’t as straightforward as it may seem. Should the database run on a dedicated server in the cloud, completely outside of Kubernetes? Or should it run within the cluster? If we run it as a Kubernetes service, which technology should we use to define and manage this third-party application? Should it be mature, tried-and-true `Helm`, or does the new-kid-on-the-block technology `Crossplane` have something to offer?
+
+Time to help Hero choose the best strategy for deploying and managing third-party applications!
 
 ## Choice 1: Helm Chart
 

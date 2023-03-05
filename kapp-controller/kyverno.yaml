@@ -1,0 +1,30 @@
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: kyverno
+  namespace: carvel-apps
+spec:
+  syncPeriod: 5m
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - helmChart:
+      name: kyverno
+      repository:
+        url: https://kyverno.github.io/kyverno
+      version: 2.6.5
+  template:
+  - helmTemplate:
+      namespace: kyverno
+      name: kyverno
+  - ytt:
+      ignoreUnknownComments: true
+      inline:
+        paths:
+          fix.yml: |
+            #@ load("@ytt:overlay", "overlay")
+            #@overlay/match by=overlay.subset({"kind":"Pod"})
+            #@overlay/remove
+            ---
+  deploy:
+  - kapp: {}

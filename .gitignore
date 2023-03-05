@@ -8,3 +8,6 @@
 
 # Ignore DevSpace cache and log folder
 .devspace/
+
+# Ignore VSCode settings
+.vscode/

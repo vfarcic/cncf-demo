@@ -1,0 +1,23 @@
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: cncf-demo
+  namespace: carvel-apps
+spec:
+  syncPeriod: 5m
+  serviceAccountName: infra-provisioner-sa
+  fetch:
+  - git:
+      url: https://github.com/vfarcic/cncf-demo
+      ref: origin/main
+      subPath: yaml/prod
+  template:
+  - ytt:
+      ignoreUnknownComments: true
+      paths:
+      - "."
+  deploy:
+  - kapp:
+      intoNs: production
+      rawOptions: ["--dangerous-allow-empty-list-of-resources=true"]
