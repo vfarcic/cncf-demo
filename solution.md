@@ -208,20 +208,21 @@ flowchart TD
         cluster{{Create a Cluster}}
         click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
         style cluster fill:blue
-        cluster-pulumi(Pulumi)
-        click cluster-pulumi "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/pulumi.md"
+        cluster-kubevela(KubeVela With Terraform)
+        click cluster-kubevela "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/kubevela.md"
+        style cluster-kubevela fill:red
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
-        cluster-terraform(Terraform)
-        click cluster-terraform "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/terraform.md"
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        style cluster-cluster-api fill:red
         cluster-crossplane-google(Google Cloud)
         click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
-        cluster --> cluster-pulumi & cluster-crossplane & cluster-terraform
-        cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
+        cluster --> cluster-crossplane & cluster-cluster-api & cluster-kubevela --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
 
         %% ------------
         %% -- GitOps --
@@ -243,11 +244,11 @@ flowchart TD
         ingress{{Ingress}}
         click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/README.md"
         style ingress fill:blue
-        ingress-contour(Envoy with Contour)
+        ingress-contour(Contour With Envoy)
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
-        emissary-ingress(Emissary-ingress)
+        emissary-ingress(Emissary-ingress With Envoy)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"

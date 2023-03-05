@@ -1,4 +1,4 @@
-# Ingress With Envoy And Contour
+# Ingress With Envoy And Emissary Ingress
 
 TODO: Intro
 
