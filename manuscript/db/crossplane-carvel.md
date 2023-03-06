@@ -14,6 +14,8 @@ cat ytt/values-dev.yaml
 yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
     ytt/values-dev.yaml
 
+yq --inplace ".db.insecure = true" ytt/values-dev.yaml
+
 cat ytt/values-dev.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \

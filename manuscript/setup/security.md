@@ -31,6 +31,8 @@ export REPO_URL=$(git config --get remote.origin.url)
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     argocd/apps.yaml
 
+# TODO: Double-check whether `configs.params.appResyncPeriod`
+#   is still valid in argocd/helm-values.yaml
 helm upgrade --install argocd argo-cd \
     --repo https://argoproj.github.io/argo-helm \
     --namespace argocd --create-namespace \
@@ -40,7 +42,9 @@ kubectl apply --filename argocd/project.yaml
 
 kubectl apply --filename argocd/apps.yaml
 
-yq --inplace ".gitOps.app = \"argocd\"" settings.yaml
+export GITOPS_APP=argocd
+
+yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 ```
 
 ## Setup The App

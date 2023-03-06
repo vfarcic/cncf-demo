@@ -21,7 +21,9 @@ git commit -m "Kyverno"
 
 git push
 
-kubectl --namespace kyverno get all
+kubectl --namespace kyverno get pods
+
+# Wait until the Pods are created and are ready
 
 cat policies/kyverno.yaml
 
@@ -34,6 +36,8 @@ git commit -m "Policies"
 git push
 
 kubectl get clusterpolicies
+
+# Wait until the policies are created
 
 export POLICY_KIND=clusterpolicy
 

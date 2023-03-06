@@ -303,11 +303,11 @@ flowchart TD
         %% -----------
         %% -- Setup --
         %% -----------
-        setup-policies((Setup))
-        click setup-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/policies.md"
+        setup-security((Setup))
+        click setup-security "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/security.md"
 
         %% -- Setup Connections --
-        setup-policies-->policies
+        setup-security-->policies
 
         %% --------------
         %% -- Policies --
@@ -340,12 +340,19 @@ flowchart TD
         %% -- Secrets Management --
         %% ------------------------
         secrets{{Secrets Management}}
-        style secrets fill:red
-        secrets-external-secrets(External Secrets Operator)
-        style secrets-external-secrets fill:red
-        secrets-teller(Teller)
-        style secrets-teller fill:red
-        secrets --> secrets-external-secrets & secrets-teller --> service-mesh
+        click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/README.md"
+        secrets-eso("External Secrets Operator (ESO)")
+        click secrets-eso "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso.md"
+        secrets-eso-google(Google Cloud)
+        click secrets-eso-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-google.md"
+        style secrets-eso-google fill:red
+        secrets-eso-aws(AWS)
+        click secrets-eso-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-aws.md"
+        style secrets-eso-aws fill:red
+        secrets-eso-azure(Azure)
+        click secrets-eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
+        style secrets-eso-azure fill:red
+        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> service-mesh
 
         %% ------------------
         %% -- Service Mesh --
@@ -861,6 +868,8 @@ flowchart TD
         style parsec fill:red
         inclavare-containers(Inclavare Containers)
         style inclavare-containers fill:red
+        secrets-teller(Teller)
+        style secrets-teller fill:red
 
     end
 ```

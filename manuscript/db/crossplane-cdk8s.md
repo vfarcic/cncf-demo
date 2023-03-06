@@ -16,6 +16,8 @@ export ENVIRONMENT=dev
 yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
     app-dev.yaml
 
+yq --inplace ".db.insecure = true" app-dev.yaml
+
 cdk8s synth --output ../yaml/dev --validate 
 
 cd ..

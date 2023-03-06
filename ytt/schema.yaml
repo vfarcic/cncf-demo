@@ -11,6 +11,7 @@ tls:
   enabled: false
 db:
   id: cncf-demo-db-dev
+  insecure: false
   enabled:
     helm: false
     crossplane:

@@ -16,6 +16,9 @@ cat kustomize/overlays/prod/postgresql-crossplane-$XP_DESTINATION.yaml
 yq --inplace ".resources += \"postgresql-crossplane-$XP_DESTINATION.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
+yq --inplace ".resources += \"postgresql-crossplane-secret-$XP_DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
 cat kustomize/overlays/prod/deployment-crossplane-postgresql-$XP_DESTINATION.yaml
 
 yq --inplace ".patchesStrategicMerge = []" \

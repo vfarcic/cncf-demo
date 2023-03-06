@@ -23,6 +23,7 @@ spec:
     size: small
 #@ end
 
+#@ if data.values.db.insecure:
 #@ if data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws or data.values.db.enabled.crossplane.azure:
 ---
 apiVersion: v1
@@ -31,4 +32,5 @@ metadata:
   name: #@ data.values.db.id + "-password"
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
+#@ end
 #@ end
