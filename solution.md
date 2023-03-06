@@ -316,6 +316,7 @@ flowchart TD
         style policies fill:blue
         click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
         policies-kyverno(Kyverno)
+        click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
         policies-opa("Open Policy Agent (OPA)")
         style policies-opa fill:red
         policies-cloud-custodian(Cloud Custodian)
@@ -330,6 +331,7 @@ flowchart TD
         policies-helm(App As Helm)
         style policies-helm fill:red
         policies-kustomize(App As Kustomize)
+        click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
         policies-cdk8s(App As cdk8s)
         style policies-cdk8s fill:red
         policies-carvel(App As Carvel ytt)
@@ -352,7 +354,15 @@ flowchart TD
         secrets-eso-azure(Azure)
         click secrets-eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
         style secrets-eso-azure fill:red
-        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> service-mesh
+        secrets-eso-helm(App As Helm)
+        style secrets-eso-helm fill:red
+        secrets-eso-kustomize(App As Kustomize)
+        style secrets-eso-kustomize fill:red
+        secrets-eso-cdk8s(App As cdk8s)
+        style secrets-eso-cdk8s fill:red
+        secrets-eso-carvel(App As Carvel ytt)
+        style secrets-eso-carvel fill:red
+        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> service-mesh
 
         %% ------------------
         %% -- Service Mesh --
