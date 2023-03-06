@@ -282,6 +282,8 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
+        db-production-kubevela(KubeVela With Terraform)
+        style db-production-kubevela fill:red
         db-production-helm(App As Helm)
         click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
         db-production-kustomize(App As Kustomize)
@@ -290,7 +292,7 @@ flowchart TD
         click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
         db-production-carvel(App As Carvel ytt)
         click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
-        db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
+        db-production --> db-production-crossplane & db-production-kubevela --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
         prod-done((Chapter End))
 
