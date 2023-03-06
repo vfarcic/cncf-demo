@@ -23,7 +23,14 @@ With Helm, the person configuring the third-party application has access to mani
 
 ## Choice 2: Crossplane Composition In Kubernetes
 
-TODO: Explanation
+In our use case, a member of an application team (subsequently called an ‘app friend’) is likely to be the one who is tasked to deploy the application to the development environment, add the database, and connect the application to the new database. Does every app friend at the company who wants to develop/test a Kubernetes application that is connected to a database have to learn this entire process, plus the company’s best practices around consuming infrastructure? What if they want to use a different type of database? What if the application they’re working on has different sizing requirements? What if they’re just busy elsewhere, doing more meaningful work?
+
+With Crossplane, the humans in charge of infrastructurey stuff (subsequently referred to as ‘ops folks’) can configure all of the complex knowledge needed to install PostgresSQL into the cluster, create a database, and connect the application to that database, and then wrap that configuration up into a single Crossplane resource definition called a CompositeResourceDefinition (XRD).
+
+This is an improvement for sure. It is helpful that all of the steps involved in creating and connecting to a database are automated and consolidated into a single resource. And it is also good that company-wide best practices can be suggested here. But to be honest, this Crossplane CompositeResource still seems like a beast of a thing. The humans who interact with it have to understand a lot about infrastructure, and it would be ideal for app friends to be able to get what they need without having to consider the complexities. 
+
+But wait! They can! With Crossplane Compositions*, the ops folks can create a simplified interface that exposes only the aspects of the CompositeResource that the app friends care about. In our use case, this simplified interface (informally called a claim) might give an app friend the ability to create a claim resource that is only 10-20 lines of yaml where an app friend can specify the name of their database, which version of the database they’d like (or use a default), and whether they want their database to be small, medium, or large. And that’s it! The app friend can define what they want and apply the claim to the cluster (or, better yet, push it to a git repo where GitOps magic happens), and then that person can blissfully go about doing their meaningful work while the infrastructurey stuff that they need gets created.
+
 
 [![Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://img.youtube.com/vi/n8KjVmuHm7A/0.jpg)](https://youtu.be/n8KjVmuHm7A)
 [![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
@@ -38,6 +45,9 @@ TODO: Explanation
 [![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
 [![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://via.vmw.com/Crossplane)
 * [Official site](https://crossplane.io)
+
+
+*Here the term *Composition* refers broadly to the feature of Crossplane that allows ops folks to define their own opinionated platform APIs and expose simplified interfaces to app friends. However, a Composition can also refer to the specific Crossplane custom resource that connects Crossplane to each of the wide variety of possible resources that ultimately make up a higher-level CompositeResource. Don’t worry if you don’t understand this part yet. The point is that the terminology is confusing.
 
 ## What Is Your Choice?
 
