@@ -1,7 +1,5 @@
 # Use HTTPS With cert-manager And Kustomize
 
-TODO: Intro
-
 ## Setup
 
 ```bash
@@ -53,4 +51,4 @@ echo "https://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Setup PostgreSQL DB](../db/README.md)
+The Adventure will continue soon...

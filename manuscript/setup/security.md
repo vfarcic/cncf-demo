@@ -31,8 +31,6 @@ export REPO_URL=$(git config --get remote.origin.url)
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     argocd/apps.yaml
 
-# TODO: Double-check whether `configs.params.appResyncPeriod`
-#   is still valid in argocd/helm-values.yaml
 helm upgrade --install argocd argo-cd \
     --repo https://argoproj.github.io/argo-helm \
     --namespace argocd --create-namespace \
@@ -52,7 +50,6 @@ yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 * If you prefer a solution other than Kustomize for defining and packaging applications, please go back to the [Production](prod.md) or an earlier chapter.
 
 ```bash
-# Execute the command that follows only if you are using Argo CD
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     $GITOPS_APP/cncf-demo-kustomize.yaml
 
@@ -78,7 +75,7 @@ yq --inplace ".patchesStrategicMerge = []" \
 
 ## Setup Database
 
-* If you prefer to manage a database in AWS, Azure, or Google Cloud, please go back to the [Production](prod.md) or an earlier chapter. The commands that follow will be using AWS without credentials so no actual AWS resources will be created.
+* If you prefer to manage a real database in AWS, Azure, or Google Cloud, please go back to the [Production](prod.md) or an earlier chapter. The commands that follow will NOT be using credentials so no actual AWS, Azure, or Google Cloud resources will be created for the database.
 
 ```bash
 helm repo add crossplane-stable \
@@ -94,18 +91,55 @@ kubectl apply \
 
 kubectl apply --filename crossplane-config/config-sql.yaml
 
+# Replace `[...]` with `aws` or `azure` or `google` depending on
+#   the provider you want to use
+export DESTINATION=[...]
+
 kubectl apply \
-    --filename crossplane-config/provider-aws-official.yaml
+    --filename crossplane-config/provider-$DESTINATION-official.yaml
 
 yq --inplace \
-    ".resources += \"postgresql-crossplane-aws.yaml\"" \
+    ".resources += \"postgresql-crossplane-$DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
+yq --inplace ".resources += \"postgresql-crossplane-secret-$DESTINATION.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
 yq --inplace \
-    ".patchesStrategicMerge += \"deployment-crossplane-postgresql-aws.yaml\"" \
+    ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$DESTINATION.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
-yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
+yq --inplace ".crossplane.destination = \"$DESTINATION\"" settings.yaml
+```
+
+## Setup Google Cloud
+
+* Please execute the commands in this section only if you are using Google Cloud as the destination.
+
+```bash
+export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+
+yq --inplace \
+    ".production.google.projectId = \"$XP_PROJECT_ID\"" \
+    settings.yaml
+
+gcloud projects create $XP_PROJECT_ID
+```
+
+## Setup AWS
+
+* Please execute the commands in this section only if you are using AWS as the destination.
+
+```bash
+# TODO:
+```
+
+## Setup Azure
+
+* Please execute the commands in this section only if you are using Azure as the destination.
+
+```bash
+# TODO:
 ```
 
 ## Start The Chapter

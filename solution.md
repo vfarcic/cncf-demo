@@ -392,20 +392,20 @@ flowchart TD
         service-mesh-performance(Service Mesh Performance)
         style service-mesh-performance fill:red
         service-mesh --> service-mesh-istio & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery
-        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery --> service-mesh-performance --> scaning-signing
+        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery --> service-mesh-performance --> scanning
 
-        %% -------------
-        %% -- Scaning --
-        %% -------------
-        scaning-signing{{Scaning And Signing}}
-        style scaning-signing fill:red
+        %% --------------
+        %% -- Scanning --
+        %% --------------
+        scanning{{Scanning}}
+        style scanning fill:red
         kubescape(Kubescape)
         style kubescape fill:red
         fonio(Fonio)
         style fonio fill:red
         falco(Falco)
         style falco fill:red
-        scaning-signing --> kubescape & fonio & falco --> signing
+        scanning --> kubescape & fonio & falco --> signing
 
         %% -------------
         %% -- Signing --

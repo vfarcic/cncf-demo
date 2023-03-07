@@ -7,6 +7,10 @@ TODO: Intro
 ```bash
 export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
+yq --inplace \
+    ".production.google.projectId = \"$XP_PROJECT_ID\"" \
+    settings.yaml
+
 gcloud projects create $XP_PROJECT_ID
 
 echo "https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=$XP_PROJECT_ID"

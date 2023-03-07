@@ -54,7 +54,7 @@ kubectl --namespace production get deployments
 
 # Wait until the Deployment is created
 
-# NOTE: if you started from this chapter (Production), the Pods
+# If you started from this chapter (Production), the Pods
 #   will not be running since Crossplane is not configured to
 #   manage Cloud resources so the database was not created and,
 #   with it, the Secret with the authentication was not created

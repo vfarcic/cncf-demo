@@ -7,6 +7,9 @@ TODO: Intro
 * You can skip the steps in this section (the Setup) if you already used Crossplane with Google in one of the previous chapters.
 
 ```bash
+export XP_PROJECT_ID=$(yq ".production.google.projectId" \
+  settings.yaml)
+
 echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$XP_PROJECT_ID"
 
 # Open the URL and *ENABLE* the API

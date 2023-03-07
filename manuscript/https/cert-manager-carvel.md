@@ -1,7 +1,5 @@
 # Use HTTPS With cert-manager And Carvel ytt
 
-TODO: Intro
-
 ## Do
 
 ```bash
@@ -29,4 +27,4 @@ echo "https://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Setup PostgreSQL DB](../db/README.md)
+The Adventure will continue soon...
