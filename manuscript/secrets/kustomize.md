@@ -2,13 +2,6 @@
 
 TODO: Intro
 
-## Setup
-
-```bash
-export DESTINATION=$(yq ".crossplane.destination" \
-    settings.yaml)
-```
-
 ## Do
 
 TODO: Remove the secret from Kustomize
@@ -16,12 +9,34 @@ TODO: Confirm that the secret is removed
 TODO: Apply the secret with ESO
 
 ```bash
-cat kustomize/overlays/prod/kustomization.postgresql-crossplane-secret-google.yaml
+kubectl --namespace production get secret cncf-demo-password \
+    --output jsonpath="{.data.password}" | base64 --decode
 
-yq --inplace ".resources += \"postgresql-crossplane-$XP_DESTINATION.yaml\"" \
+cat kustomize/overlays/prod/postgresql-crossplane-secret-$DESTINATION.yaml
+
+yq --inplace \
+    "del(.resources[] | select(. == \"postgresql-crossplane-secret-$DESTINATION.yaml\"))" \
     kustomize/overlays/prod/kustomization.yaml
+
+cat kustomize/overlays/prod/postgresql-crossplane-password-$DESTINATION.yaml
+
+yq --inplace ".resources += \"postgresql-crossplane-password-$DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
+git add .
+
+git commit -m "Switched to ESO"
+
+git push
+
+kubectl --namespace production get externalsecrets
+
+# Wait until the externalsecret is created
+
+kubectl --namespace production get secret cncf-demo-password \
+    --output jsonpath="{.data.password}" | base64 --decode
 ```
 
 ## Continue The Adventure
 
-[TODO:](TODO:)
+[Mutual TLS](../mtls/README.md)

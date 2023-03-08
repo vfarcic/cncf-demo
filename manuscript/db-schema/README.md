@@ -16,14 +16,7 @@ TODO: Explanation
 
 * [Official site](https://www.liquibase.org)
 
-## Choice 3: Flyway
-
-TODO: Explanation
-
-* [Official site](https://flywaydb.org/)
-
 ## What Is Your Choice?
 
 * [SchemaHero](schemahero.md)
 * [Liquibase](liquibase.md)
-* [Flyway](flyway.md)

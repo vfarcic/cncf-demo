@@ -145,8 +145,6 @@ flowchart TD
         click db-schema-schemahero "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md"
         db-schema-liquibase(Liquibase)
         click db-schema-liquibase "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/liquibase.md"
-        db-schema-flyway(Flyway)
-        click db-schema-flyway "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/flyway.md"
         db-schema-schemahero-helm(App as Helm)
         click db-schema-schemahero-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md"
         db-schema-schemahero-kustomize(App as Kustomize)
@@ -155,7 +153,7 @@ flowchart TD
         click db-schema-schemahero-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-cdk8s.md"
         db-schema-schemahero-carvel(App as Carvel ytt)
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
-        db-schema --> db-schema-flyway & db-schema-liquibase & db-schema-schemahero
+        db-schema --> db-schema-liquibase & db-schema-schemahero
         db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-cdk8s & db-schema-schemahero-carvel --> develop
 
         %% ---------------------
@@ -359,40 +357,40 @@ flowchart TD
         secrets-eso-helm(App As Helm)
         style secrets-eso-helm fill:red
         secrets-eso-kustomize(App As Kustomize)
-        style secrets-eso-kustomize fill:red
         secrets-eso-cdk8s(App As cdk8s)
         style secrets-eso-cdk8s fill:red
         secrets-eso-carvel(App As Carvel ytt)
         style secrets-eso-carvel fill:red
-        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> service-mesh
+        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> mtls
 
-        %% ------------------
-        %% -- Service Mesh --
-        %% ------------------
-        service-mesh{{Service Mesh}}
-        style service-mesh fill:red
-        service-mesh-istio(Istio)
-        style service-mesh-istio fill:red
-        service-mesh-smi("Service Mesh Interface (SMI)")
-        style service-mesh-smi fill:red
-        service-mesh-linkerd(LinkerD)
-        style service-mesh-linkerd fill:red
-        service-mesh-open-service-mesh(Open Service Mesh)
-        style service-mesh-open-service-mesh fill:red
-        service-mesh-aeraki-mesh(Aeraki Mesh)
-        style service-mesh-aeraki-mesh fill:red
-        service-mesh-cilium(Cilium)
-        style service-mesh-cilium fill:red
-        service-mesh-kuma(Kuma)
-        style service-mesh-kuma fill:red
-        service-mesh-network-service-mesh(Network Service Mesh)
-        style service-mesh-network-service-mesh fill:red
-        service-mesh-meshery(Meshery)
-        style service-mesh-meshery fill:red
-        service-mesh-performance(Service Mesh Performance)
-        style service-mesh-performance fill:red
-        service-mesh --> service-mesh-istio & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery
-        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery --> service-mesh-performance --> scanning
+        %% ----------------
+        %% -- Mutual TLS --
+        %% ----------------
+        mtls{{"Mutual TLS (mTLS)"}}
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
+        style mtls fill:red
+        mtls-istio(Istio)
+        style mtls-istio fill:red
+        mtls-smi("Service Mesh Interface (SMI)")
+        style mtls-smi fill:red
+        mtls-linkerd(LinkerD)
+        style mtls-linkerd fill:red
+        mtls-open-service-mesh(Open Service Mesh)
+        style mtls-open-service-mesh fill:red
+        mtls-aeraki-mesh(Aeraki Mesh)
+        style mtls-aeraki-mesh fill:red
+        mtls-cilium(Cilium)
+        style mtls-cilium fill:red
+        mtls-kuma(Kuma)
+        style mtls-kuma fill:red
+        mtls-network-service-mesh(Network Service Mesh)
+        style mtls-network-service-mesh fill:red
+        mtls-meshery(Meshery)
+        style mtls-meshery fill:red
+        mtls-performance(Service Mesh Performance)
+        style mtls-performance fill:red
+        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> mtls-meshery
+        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> mtls-meshery --> mtls-performance --> scanning
 
         %% --------------
         %% -- Scanning --

@@ -30,7 +30,7 @@ gcloud iam service-accounts \
     --iam-account=external-secrets@$XP_PROJECT_ID.iam.gserviceaccount.com
 
 kubectl --namespace external-secrets \
-    create secret generic gcp \
+    create secret generic google \
     --from-file=credentials=account.json
 
 yq --inplace \
@@ -46,6 +46,8 @@ git commit -m "Secret Store"
 git push
 
 kubectl --namespace external-secrets get clustersecretstores
+
+# Wait until the ClusterSecretStore appears
 ```
 
 ## How Did You Define Your App?

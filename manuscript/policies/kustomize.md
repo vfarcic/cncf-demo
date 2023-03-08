@@ -67,6 +67,8 @@ kubectl describe $POLICY_KIND db-cluster
 
 kubectl describe $POLICY_KIND db-production
 
+cat kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
+
 yq --inplace \
     ".spec.parameters.size = \"medium\"" \
     kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml

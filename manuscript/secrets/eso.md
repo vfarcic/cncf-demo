@@ -14,6 +14,10 @@ git add .
 git commit -m "External Secrets"
 
 git push
+
+kubectl --namespace external-secrets get pods
+
+# Wait until the Pods appear
 ```
 
 ## Which Cloud Provider Did You Choose?
