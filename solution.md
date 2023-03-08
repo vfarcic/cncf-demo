@@ -345,11 +345,11 @@ flowchart TD
         %% ------------------------
         secrets{{Secrets Management}}
         click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/README.md"
+        style secrets fill:blue
         secrets-eso("External Secrets Operator (ESO)")
         click secrets-eso "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso.md"
         secrets-eso-google(Google Cloud)
         click secrets-eso-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-google.md"
-        style secrets-eso-google fill:red
         secrets-eso-aws(AWS)
         click secrets-eso-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-aws.md"
         style secrets-eso-aws fill:red

@@ -2,6 +2,8 @@
 
 TODO: Intro
 
+TODO: Install Crossplane
+
 ## Setup
 
 ```bash

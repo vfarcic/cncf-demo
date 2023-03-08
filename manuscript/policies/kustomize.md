@@ -17,7 +17,7 @@ kubectl --namespace production get all,ingresses
 
 # Wait until the Namespace is empty
 
-export PROVIDER=$(yq ".crossplane.destination" settings.yaml)
+export DESTINATION=$(yq ".crossplane.destination" settings.yaml)
 ```
 
 ## Do
@@ -69,7 +69,7 @@ kubectl describe $POLICY_KIND db-production
 
 yq --inplace \
     ".spec.parameters.size = \"medium\"" \
-    kustomize/overlays/prod/postgresql-crossplane-$PROVIDER.yaml
+    kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
 
 git add .
 

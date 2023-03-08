@@ -8,48 +8,49 @@ TODO: Intro
 export XP_PROJECT_ID=$(yq ".production.google.projectId" \
   settings.yaml)
 
-gcloud projects create $PROJECT_ID
-
-echo https://console.cloud.google.com/marketplace/product/google/secretmanager.googleapis.com?project=$PROJECT_ID
+echo https://console.cloud.google.com/marketplace/product/google/secretmanager.googleapis.com?project=$XP_PROJECT_ID
 
 # Open the URL and *ENABLE* the API
 
-gcloud iam service-accounts \
-    --project $PROJECT_ID \
+gcloud iam service-accounts --project $XP_PROJECT_ID \
     create external-secrets
 
-echo -ne '{
-"name": "my-fancy-db",
-"endpoint": "127.0.0.1:8200",
-"username": "jdoe",
-"password": "YouWillNeverFindOut",
-"port": 8200
-}' | gcloud secrets \
-    --project $PROJECT_ID \
-    create a-team-postgresql --data-file=-
+echo -ne '{"password": "YouWillNeverFindOut"}' \
+    | gcloud secrets --project $XP_PROJECT_ID \
+    create production-postgresql --data-file=-
 
-gcloud secrets \
-    --project $PROJECT_ID \
-    add-iam-policy-binding a-team-postgresql \
-    --member "serviceAccount:external-secrets@$PROJECT_ID.iam.gserviceaccount.com" \
+gcloud secrets --project $XP_PROJECT_ID \
+    add-iam-policy-binding production-postgresql \
+    --member "serviceAccount:external-secrets@$XP_PROJECT_ID.iam.gserviceaccount.com" \
     --role "roles/secretmanager.secretAccessor"
 
 gcloud iam service-accounts \
-    --project $PROJECT_ID \
+    --project $XP_PROJECT_ID \
     keys create account.json \
-    --iam-account=external-secrets@$PROJECT_ID.iam.gserviceaccount.com
-
-kubectl create namespace a-team
+    --iam-account=external-secrets@$XP_PROJECT_ID.iam.gserviceaccount.com
 
 kubectl --namespace external-secrets \
     create secret generic gcp \
     --from-file=credentials=account.json
 
-cat secret-store.yaml \
-    | sed -e "s@projectID: .*@projectID: $PROJECT_ID@" \
-    | tee secret-store.yaml
+yq --inplace \
+    ".spec.provider.gcpsm.projectID = \"$XP_PROJECT_ID\"" \
+    eso/secret-store-google.yaml
+
+cp eso/secret-store-google.yaml infra/.
+
+git add .
+
+git commit -m "Secret Store"
+
+git push
+
+kubectl --namespace external-secrets get clustersecretstores
 ```
 
-## Continue The Adventure
+## How Did You Define Your App?
 
-[TODO:](TODO:)
+* [Helm](helm.md)
+* [Kustomize](kustomize.md)
+* [Carvel](carvel.md)
+* [cdk8s](cdk8s.md)

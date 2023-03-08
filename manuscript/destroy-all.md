@@ -14,6 +14,11 @@ export PROJECT_ID=$(yq ".google.projectId" settings.yaml)
 gcloud projects delete $PROJECT_ID --quiet
 
 export PROJECT_ID=$(\
+    yq ".production.google.projectId" settings.yaml)
+
+gcloud projects delete $PROJECT_ID --quiet
+
+export PROJECT_ID=$(\
     yq ".google.crossplane.projectId" settings.yaml)
 
 gcloud projects delete $PROJECT_ID --quiet
