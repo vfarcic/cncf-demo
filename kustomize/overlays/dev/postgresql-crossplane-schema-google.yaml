@@ -1,0 +1,55 @@
+---
+
+apiVersion: databases.schemahero.io/v1alpha4
+kind: Database
+metadata:
+  name: cncf-demo
+spec:
+  immediateDeploy: true
+  connection:
+    postgres:
+      host:
+        valueFrom:
+          secretKeyRef:
+            name: cncf-demo-db-dev
+            key: endpoint
+      user:
+        valueFrom:
+          secretKeyRef:
+            name: cncf-demo-db-dev
+            key: username
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: cncf-demo-db-dev
+            key: password
+      port:
+        valueFrom:
+          secretKeyRef:
+            name: cncf-demo-db-dev
+            key: port
+      dbname:
+        value: cncf-demo-db-dev
+
+---
+
+apiVersion: schemas.schemahero.io/v1alpha4
+kind: Table
+metadata:
+  name: cncf-demo-videos
+spec:
+  database: cncf-demo
+  name: videos
+  schema:
+    postgres:
+      primaryKey:
+      - id
+      columns:
+      - name: id
+        type: text
+        constraints:
+          notNull: true
+      - name: title
+        type: text
+        constraints:
+          notNull: true

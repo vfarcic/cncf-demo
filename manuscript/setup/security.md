@@ -73,57 +73,61 @@ yq --inplace ".patchesStrategicMerge = []" \
     kustomize/overlays/prod/kustomization.yaml
 ```
 
-## Setup Database
-
-* If you prefer to manage a real database in AWS, Azure, or Google Cloud, please go back to the [Production](prod.md) or an earlier chapter. The commands that follow will NOT be using credentials so no actual AWS, Azure, or Google Cloud resources will be created for the database.
-
-```bash
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
-
-helm repo update
-
-helm upgrade --install crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system --create-namespace --wait
-
-kubectl apply \
-    --filename crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply --filename crossplane-config/config-sql.yaml
-
-# Replace `[...]` with `aws` or `azure` or `google` depending on
-#   the provider you want to use
-export DESTINATION=[...]
-
-kubectl apply \
-    --filename crossplane-config/provider-$DESTINATION-official.yaml
-
-yq --inplace \
-    ".resources += \"postgresql-crossplane-$DESTINATION.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
-
-yq --inplace ".resources += \"postgresql-crossplane-secret-$DESTINATION.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
-
-yq --inplace \
-    ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$DESTINATION.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
-
-yq --inplace ".crossplane.destination = \"$DESTINATION\"" settings.yaml
-```
-
 ## Setup Google Cloud
 
 * Please execute the commands in this section only if you are using Google Cloud as the destination.
 
 ```bash
-export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+kubectl create namespace crossplane-system
+
+export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 yq --inplace \
-    ".production.google.projectId = \"$XP_PROJECT_ID\"" \
+    ".production.google.projectId = \"$PROJECT_ID\"" \
     settings.yaml
 
-gcloud projects create $XP_PROJECT_ID
+gcloud projects create $PROJECT_ID
+
+echo "https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=$PROJECT_ID"
+
+# Open the URL and *ENABLE API*
+
+export SA_NAME=devops-toolkit
+
+export SA="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+
+gcloud iam service-accounts create $SA_NAME --project $PROJECT_ID
+
+export ROLE=roles/admin
+
+gcloud projects add-iam-policy-binding --role $ROLE $PROJECT_ID \
+    --member serviceAccount:$SA
+
+gcloud iam service-accounts keys create gcp-creds.json \
+    --project $PROJECT_ID --iam-account $SA
+
+kubectl --namespace crossplane-system \
+    create secret generic gcp-creds \
+    --from-file creds=./gcp-creds.json
+
+echo "apiVersion: gcp.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  projectID: $PROJECT_ID
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: gcp-creds
+      key: creds" \
+    | kubectl apply --filename -
+
+export DESTINATION=google
+
+yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
+    settings.yaml
 ```
 
 ## Setup AWS
@@ -140,6 +144,52 @@ gcloud projects create $XP_PROJECT_ID
 
 ```bash
 # TODO:
+```
+
+## Setup Database
+
+```bash
+helm repo add crossplane-stable \
+    https://charts.crossplane.io/stable
+
+helm repo update
+
+helm upgrade --install crossplane crossplane-stable/crossplane \
+    --namespace crossplane-system --create-namespace --wait
+
+kubectl apply \
+    --filename crossplane-config/provider-kubernetes-incluster.yaml
+
+kubectl apply --filename crossplane-config/config-sql.yaml
+
+kubectl apply \
+    --filename crossplane-config/provider-$DESTINATION-official.yaml
+
+yq --inplace \
+    ".resources += \"postgresql-crossplane-$DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
+yq --inplace ".resources += \"postgresql-crossplane-secret-$DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
+yq --inplace \
+    ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
+yq --inplace ".resources += \"postgresql-crossplane-schema-$DESTINATION.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+```
+
+## Setup Dabase Schema
+
+```bash
+cp argocd/schema-hero.yaml infra/.
+
+git add .
+
+git commit -m "SchemaHero"
+
+git push
 ```
 
 ## Start The Chapter

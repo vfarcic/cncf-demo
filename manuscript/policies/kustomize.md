@@ -33,9 +33,6 @@ git push
 
 kubectl --namespace production get all
 
-# Wait until the resources are created (the Deployment will not
-#   be there)
-
 kubectl describe $POLICY_KIND deployment-production
 
 cat kustomize/overlays/prod/deployment-scaled.yaml

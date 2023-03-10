@@ -27,17 +27,15 @@ yq --inplace ".patchesStrategicMerge = []" \
 yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$XP_DESTINATION.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
-cat kustomize/overlays/prod/kustomization.yaml
-
-cat kustomize/base/postgresql-crossplane-schema-$XP_DESTINATION.yaml
+cat kustomize/overlays/prod/postgresql-crossplane-schema-$XP_DESTINATION.yaml
 
 # Execute the command that follows ONLY if you did NOT follow
 #   the story from the start (if you jumped straight into this
 #   chapter).
 yq --inplace ".resources += \"postgresql-crossplane-schema-$XP_DESTINATION.yaml\"" \
-    kustomize/base/kustomization.yaml
+    kustomize/overlays/prod/kustomization.yaml
 
-cat kustomize/base/kustomization.yaml
+cat kustomize/overlays/prod/kustomization.yaml
 
 git add .
 
