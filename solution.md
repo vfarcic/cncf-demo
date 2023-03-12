@@ -363,10 +363,10 @@ flowchart TD
         style secrets-eso-carvel fill:red
         secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> mtls
 
-        %% ----------------
-        %% -- Mutual TLS --
-        %% ----------------
-        mtls{{"Mutual TLS (mTLS)"}}
+        %% -------------------------------------
+        %% -- Mutual TLS And Network Policies --
+        %% -------------------------------------
+        mtls{{"Mutual TLS (mTLS) And Network Policies"}}
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
         style mtls fill:red
         mtls-istio(Istio)
