@@ -54,5 +54,5 @@ kubectl --namespace external-secrets get clustersecretstores
 
 * [Helm](helm.md)
 * [Kustomize](kustomize.md)
-* [Carvel](carvel.md)
+* [Carvel ytt](carvel.md)
 * [cdk8s](cdk8s.md)

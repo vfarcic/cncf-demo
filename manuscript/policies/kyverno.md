@@ -50,5 +50,5 @@ yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
 
 * [Helm](helm.md)
 * [Kustomize](kustomize.md)
-* [Carvel](carvel.md)
+* [Carvel ytt](carvel.md)
 * [cdk8s](cdk8s.md)

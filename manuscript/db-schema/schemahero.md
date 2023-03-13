@@ -20,5 +20,5 @@ kubectl schemahero install
 
 * [Helm](schemahero-helm.md)
 * [Kustomize](schemahero-kustomize.md)
-* [Carvel](schemahero-carvel.md)
+* [Carvel ytt](schemahero-carvel.md)
 * [cdk8s](schemahero-cdk8s.md)

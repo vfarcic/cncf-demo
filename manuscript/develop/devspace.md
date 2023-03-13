@@ -14,5 +14,5 @@ yq --inplace ".images.app.image = \"$IMAGE\"" devspace.yaml
 
 * [Helm](devspace-helm.md)
 * [Kustomize](devspace-kustomize.md)
-* [Carvel](devspace-carvel.md)
+* [Carvel ytt](devspace-carvel.md)
 * [cdk8s](devspace-cdk8s.md)

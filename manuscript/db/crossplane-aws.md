@@ -36,5 +36,5 @@ export XP_DESTINATION=aws
 
 * [Helm](crossplane-helm.md)
 * [Kustomize](crossplane-kustomize.md)
-* [Carvel](crossplane-carvel.md)
+* [Carvel ytt](crossplane-carvel.md)
 * [cdk8s](crossplane-cdk8s.md)
