@@ -60,7 +60,7 @@ kubectl --namespace projectcontour delete service contour-envoy
 # TODO: Remove NGINX
 # TODO: Remove Emissary
 
-kubectl get vpc.ec2.aws.upbound.io,subnet.ec2.aws.upbound.io,subnetgroup.rds.aws.upbound.io,internetgateway.ec2.aws.upbound.io,routetable.ec2.aws.upbound.io,route.ec2.aws.upbound.io,mainroutetableassociation.ec2.aws.upbound.io,routetableassociation.ec2.aws.upbound.io,securitygroup.ec2.aws.upbound.io,securitygrouprule.ec2.aws.upbound.io,instance.rds.aws.upbound.io
+kubectl get managed
 
 # Wait until all the resources are removed
 
@@ -75,11 +75,11 @@ kubectl --namespace dev delete sqlclaim cncf-demo
 
 kubectl --namespace production delete clusterclaim production
 
-kubectl get clusters.eks.aws.upbound.io,clusterauths.eks.aws.upbound.io,nodegroups.eks.aws.upbound.io,roles.iam.aws.upbound.io,rolepolicyattachments.iam.aws.upbound.io,vpcs.ec2.aws.upbound.io,securitygroups.ec2.aws.upbound.io,securitygrouprules.ec2.aws.upbound.io,subnets.ec2.aws.upbound.io,internetgateways.ec2.aws.upbound.io,routetables.ec2.aws.upbound.io,routes.ec2.aws.upbound.io,mainroutetableassociations.ec2.aws.upbound.io,routetableassociations.ec2.aws.upbound.io
+kubectl get managed
 
 # Wait until all the resources are removed
 
-eksctl delete cluster --name dot --region us-east-1
+eksctl delete cluster --config-file eksctl/config-dev.yaml
 ```
 
 If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy or reset the cluster**.
