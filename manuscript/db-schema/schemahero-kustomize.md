@@ -11,12 +11,12 @@ export SCHEMA_FILE=postgresql-crossplane-schema-$XP_DESTINATION.yaml
 # Execute only if the DB was NOT created with Crossplane
 export SCHEMA_FILE=postgresql-schema.yaml
 
-cat kustomize/base/$SCHEMA_FILE
+cat kustomize/overlays/dev/$SCHEMA_FILE
 
 yq --inplace ".resources += \"$SCHEMA_FILE\"" \
-    kustomize/base/kustomization.yaml
+    kustomize/overlays/dev/kustomization.yaml
 
-cat kustomize/base/kustomization.yaml
+cat kustomize/overlays/dev/kustomization.yaml
 
 kubectl --namespace dev kustomize --enable-helm \
     kustomize/overlays/dev \

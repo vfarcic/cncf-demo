@@ -22,6 +22,8 @@ yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
 
 yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
 
+yq --inplace ".db.insecure = true" ytt/values-prod.yaml
+
 cat ytt/values-prod.yaml
 
 cat ytt/resources/schemahero.yaml

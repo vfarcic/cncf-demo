@@ -16,7 +16,8 @@ yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
 
 cat helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev
+helm upgrade --install cncf-demo helm/app --namespace dev \
+    --set db.insecure=true
 
 # TODO: Remove
 # If AWS
@@ -36,4 +37,4 @@ curl "https://cncf-demo-dev.$DOMAIN/videos"
 
 ## Continue The Adventure
 
-[Manage DB Schema](../db-schema/README.md)
+The Adventure will continue soon...

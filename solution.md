@@ -84,8 +84,6 @@ flowchart TD
         https{{Use HTTPS}}
         click https "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/README.md"
         style https fill:blue
-        https-vault(HashiCorp Vault)
-        click https-vault "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/vault.md"
         https-cert-manager(cert-manager)
         click https-cert-manager "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager.md"
         https-cert-manager-helm(App as Helm)
@@ -96,8 +94,7 @@ flowchart TD
         click https-cert-manager-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-carvel.md"
         https-cert-manager-cdk8s(App as cdk8s)
         click https-cert-manager-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/https/cert-manager-cdk8s.md"
-        https--> https-vault & https-cert-manager
-        https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel & https-cert-manager-cdk8s --> db
+        https--> https-cert-manager--> https-cert-manager-helm & https-cert-manager-kustomize & https-cert-manager-carvel & https-cert-manager-cdk8s --> db
 
         %% --------------------------------
         %% -- Setup PostgreSQL DB In Dev --
@@ -148,8 +145,6 @@ flowchart TD
         click db-schema-schemahero "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md"
         db-schema-liquibase(Liquibase)
         click db-schema-liquibase "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/liquibase.md"
-        db-schema-flyway(Flyway)
-        click db-schema-flyway "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/flyway.md"
         db-schema-schemahero-helm(App as Helm)
         click db-schema-schemahero-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md"
         db-schema-schemahero-kustomize(App as Kustomize)
@@ -158,7 +153,7 @@ flowchart TD
         click db-schema-schemahero-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-cdk8s.md"
         db-schema-schemahero-carvel(App as Carvel ytt)
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
-        db-schema --> db-schema-flyway & db-schema-liquibase & db-schema-schemahero
+        db-schema --> db-schema-liquibase & db-schema-schemahero
         db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-cdk8s & db-schema-schemahero-carvel --> develop
 
         %% ---------------------
@@ -211,20 +206,21 @@ flowchart TD
         cluster{{Create a Cluster}}
         click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
         style cluster fill:blue
-        cluster-pulumi(Pulumi)
-        click cluster-pulumi "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/pulumi.md"
+        cluster-kubevela(KubeVela With Terraform)
+        click cluster-kubevela "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/kubevela.md"
+        style cluster-kubevela fill:red
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
-        cluster-terraform(Terraform)
-        click cluster-terraform "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/terraform.md"
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        style cluster-cluster-api fill:red
         cluster-crossplane-google(Google Cloud)
         click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
-        cluster --> cluster-pulumi & cluster-crossplane & cluster-terraform
-        cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
+        cluster --> cluster-crossplane & cluster-cluster-api & cluster-kubevela --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
 
         %% ------------
         %% -- GitOps --
@@ -246,11 +242,11 @@ flowchart TD
         ingress{{Ingress}}
         click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/README.md"
         style ingress fill:blue
-        ingress-contour(Envoy with Contour)
+        ingress-contour(Contour With Envoy)
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
-        emissary-ingress(Emissary-ingress)
+        emissary-ingress(Emissary-ingress With Envoy)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
@@ -284,6 +280,8 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
+        db-production-kubevela(KubeVela With Terraform)
+        style db-production-kubevela fill:red
         db-production-helm(App As Helm)
         click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
         db-production-kustomize(App As Kustomize)
@@ -292,7 +290,7 @@ flowchart TD
         click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
         db-production-carvel(App As Carvel ytt)
         click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
-        db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
+        db-production --> db-production-crossplane & db-production-kubevela --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
         prod-done((Chapter End))
 
@@ -305,11 +303,11 @@ flowchart TD
         %% -----------
         %% -- Setup --
         %% -----------
-        setup-policies((Setup))
-        click setup-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/policies.md"
+        setup-security((Setup))
+        click setup-security "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/security.md"
 
         %% -- Setup Connections --
-        setup-policies-->policies
+        setup-security-->policies
 
         %% --------------
         %% -- Policies --
@@ -318,6 +316,7 @@ flowchart TD
         style policies fill:blue
         click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
         policies-kyverno(Kyverno)
+        click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
         policies-opa("Open Policy Agent (OPA)")
         style policies-opa fill:red
         policies-cloud-custodian(Cloud Custodian)
@@ -332,6 +331,7 @@ flowchart TD
         policies-helm(App As Helm)
         style policies-helm fill:red
         policies-kustomize(App As Kustomize)
+        click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
         policies-cdk8s(App As cdk8s)
         style policies-cdk8s fill:red
         policies-carvel(App As Carvel ytt)
@@ -342,53 +342,68 @@ flowchart TD
         %% -- Secrets Management --
         %% ------------------------
         secrets{{Secrets Management}}
-        style secrets fill:red
-        secrets-external-secrets(External Secrets Operator)
-        style secrets-external-secrets fill:red
-        secrets-teller(Teller)
-        style secrets-teller fill:red
-        secrets --> secrets-external-secrets & secrets-teller --> service-mesh
+        click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/README.md"
+        style secrets fill:blue
+        secrets-eso("External Secrets Operator (ESO)")
+        click secrets-eso "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso.md"
+        secrets-eso-google(Google Cloud)
+        click secrets-eso-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-google.md"
+        secrets-eso-aws(AWS)
+        click secrets-eso-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-aws.md"
+        style secrets-eso-aws fill:red
+        secrets-eso-azure(Azure)
+        click secrets-eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
+        style secrets-eso-azure fill:red
+        secrets-eso-helm(App As Helm)
+        style secrets-eso-helm fill:red
+        secrets-eso-kustomize(App As Kustomize)
+        secrets-eso-cdk8s(App As cdk8s)
+        style secrets-eso-cdk8s fill:red
+        secrets-eso-carvel(App As Carvel ytt)
+        style secrets-eso-carvel fill:red
+        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> mtls
 
-        %% ------------------
-        %% -- Service Mesh --
-        %% ------------------
-        service-mesh{{Service Mesh}}
-        style service-mesh fill:red
-        service-mesh-istio(Istio)
-        style service-mesh-istio fill:red
-        service-mesh-smi("Service Mesh Interface (SMI)")
-        style service-mesh-smi fill:red
-        service-mesh-linkerd(LinkerD)
-        style service-mesh-linkerd fill:red
-        service-mesh-open-service-mesh(Open Service Mesh)
-        style service-mesh-open-service-mesh fill:red
-        service-mesh-aeraki-mesh(Aeraki Mesh)
-        style service-mesh-aeraki-mesh fill:red
-        service-mesh-cilium(Cilium)
-        style service-mesh-cilium fill:red
-        service-mesh-kuma(Kuma)
-        style service-mesh-kuma fill:red
-        service-mesh-network-service-mesh(Network Service Mesh)
-        style service-mesh-network-service-mesh fill:red
-        service-mesh-meshery(Meshery)
-        style service-mesh-meshery fill:red
-        service-mesh-performance(Service Mesh Performance)
-        style service-mesh-performance fill:red
-        service-mesh --> service-mesh-istio & service-mesh-aeraki-mesh & service-mesh-kuma & service-mesh-network-service-mesh --> service-mesh-meshery
-        service-mesh --> service-mesh-smi --> service-mesh-linkerd & service-mesh-open-service-mesh & service-mesh-cilium --> service-mesh-meshery --> service-mesh-performance --> scaning-signing
+        %% -------------------------------------
+        %% -- Mutual TLS And Network Policies --
+        %% -------------------------------------
+        mtls{{"Mutual TLS (mTLS) And Network Policies"}}
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
+        style mtls fill:red
+        mtls-istio(Istio)
+        style mtls-istio fill:red
+        mtls-smi("Service Mesh Interface (SMI)")
+        style mtls-smi fill:red
+        mtls-linkerd(LinkerD)
+        style mtls-linkerd fill:red
+        mtls-open-service-mesh(Open Service Mesh)
+        style mtls-open-service-mesh fill:red
+        mtls-aeraki-mesh(Aeraki Mesh)
+        style mtls-aeraki-mesh fill:red
+        mtls-cilium(Cilium)
+        style mtls-cilium fill:red
+        mtls-kuma(Kuma)
+        style mtls-kuma fill:red
+        mtls-network-service-mesh(Network Service Mesh)
+        style mtls-network-service-mesh fill:red
+        mtls-meshery(Meshery)
+        style mtls-meshery fill:red
+        mtls-performance(Service Mesh Performance)
+        style mtls-performance fill:red
+        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> mtls-meshery
+        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> mtls-meshery --> mtls-performance --> scanning
 
-        %% -------------
-        %% -- Scaning --
-        %% -------------
-        scaning-signing{{Scaning And Signing}}
-        style scaning-signing fill:red
+        %% --------------
+        %% -- Scanning --
+        %% --------------
+        scanning{{Scanning}}
+        style scanning fill:red
         kubescape(Kubescape)
         style kubescape fill:red
         fonio(Fonio)
         style fonio fill:red
         falco(Falco)
         style falco fill:red
-        scaning-signing --> kubescape & fonio & falco --> signing
+        scanning --> kubescape & fonio & falco --> signing
 
         %% -------------
         %% -- Signing --
@@ -863,6 +878,8 @@ flowchart TD
         style parsec fill:red
         inclavare-containers(Inclavare Containers)
         style inclavare-containers fill:red
+        secrets-teller(Teller)
+        style secrets-teller fill:red
 
     end
 ```

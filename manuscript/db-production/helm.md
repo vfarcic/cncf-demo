@@ -24,6 +24,7 @@ export VALUES=$(\
     yq ".spec.source.helm.values" apps/cncf-demo.yaml \
     | yq ".db.enabled.crossplane.$XP_DESTINATION = true" \
     | yq ".db.id = \"cncf-demo-db\"" \
+    | yq ".db.insecure = true" \
     | yq ".schemahero.enabled = true")
 
 # Execute the command that follows only if you are using Argo CD

@@ -36,7 +36,7 @@ export AWS_SECRET_ACCESS_KEY=[...]
 # Watch https://youtu.be/pNECqaxyewQ if you are not familiar
 #   with `eksctl`
 eksctl create cluster --name dot --region us-east-1 \
-    --version 1.24 --nodegroup-name primary \
+    --version 1.25 --nodegroup-name primary \
     --node-type t3.medium --nodes-min 3 --nodes-max 6 \
     --managed --asg-access
 ```

@@ -1,7 +1,5 @@
 # Use HTTPS With cert-manager And cdk8s
 
-TODO: Intro
-
 ## Do
 
 ```bash
@@ -31,4 +29,4 @@ echo "https://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Setup PostgreSQL DB](../db/README.md)
+[Set Up PostgreSQL DB in the Dev Environment](../db/README.md)

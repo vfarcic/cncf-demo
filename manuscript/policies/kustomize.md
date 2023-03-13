@@ -17,7 +17,7 @@ kubectl --namespace production get all,ingresses
 
 # Wait until the Namespace is empty
 
-export PROVIDER=$(yq ".crossplane.destination" settings.yaml)
+export DESTINATION=$(yq ".crossplane.destination" settings.yaml)
 ```
 
 ## Do
@@ -47,7 +47,16 @@ git commit -m "CNCF Demo scaled"
 
 git push
 
-kubectl --namespace production get all
+kubectl --namespace production get deployments
+
+# Wait until the Deployment is created
+
+# If you started from this chapter (Production), the Pods
+#   will not be running since Crossplane is not configured to
+#   manage Cloud resources so the database was not created and,
+#   with it, the Secret with the authentication was not created
+#   either, hence the Pods that require the Secret are not
+#   starting).
 
 kubectl --namespace production get sqlclaims
 
@@ -55,9 +64,11 @@ kubectl describe $POLICY_KIND db-cluster
 
 kubectl describe $POLICY_KIND db-production
 
+cat kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
+
 yq --inplace \
     ".spec.parameters.size = \"medium\"" \
-    kustomize/overlays/prod/postgresql-crossplane-$PROVIDER.yaml
+    kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
 
 git add .
 
@@ -66,8 +77,10 @@ git commit -m "DB resize"
 git push
 
 kubectl --namespace production get sqlclaims
+
+# Wait until the claim is created
 ```
 
 ## Continue The Adventure
 
-[TODO:](TODO:)
+[Managing Secrets](../secrets/README.md)

@@ -8,6 +8,8 @@ Hero is now configured and running in a development environment! Hero should be 
 
 Like many of us, Hero has trust issues! How can Hero ensure that the users of their application don’t intend to cause harm to them or to the system? How can Hero’s users trust that Hero won’t harm them? To pass this stage of the journey, Hero needs to learn how to exchange secure communications with each end user.
 
+[![Use HTTPS - Feat. cert-manager (You Choose!, Ch. 1, Ep. 4)](https://img.youtube.com/vi/sSbe6qedElE/0.jpg)](https://youtu.be/sSbe6qedElE)
+
 ### What is HTTPS?
 
 Hyper Text Transfer Protocol (HTTP) is a protocol by which two computers communicate with one another. Usually the two computers in question are a web server (where Hero is currently) and a web browser (where user requests originate). HTTP**S** is the secure version of HTTP.
@@ -26,27 +28,7 @@ Wow. That’s a lot. Right now all Hero needs to know is that they need to use *
 
 *X.509 certificates can also be called *digital certificates*, *Private Key Infrastructure (PKI) certificates*, or often just *certificates*
 
-</br>
-
-## Choice 1: HashiCorp Vault
-
-HashiCorp Vault is an identity-based secrets and encryption management system.  With Vault, access to secrets and other sensitive data can be securely managed and tightly controlled. Plus secret management is auditable - an administrator can see who accessed which secret and when.
-
-### What problem does Vault solve?
-
-Modern systems have a high degree of complexity.  A single user (whether human or machine) may need to access many secrets, for example, database credentials, external service API keys, and HTTPS credentials. And these secrets are often stored in different formats and in different locations, for example, in plain text files, app source code, and in config files.
-
-Having sprawling secrets makes for two problems: first, it is more complex and therefore more difficult to secure secrets that are stored in many different places within an organization. The second problem is that it can be hard to know who exactly has access and authorization to what sensitive information.
-
-Vault solves the first problem by taking all of an organization’s credentials and centralizing them so that they are defined in one location, which reduces unwanted exposure.
-
-Vault solves the second problem by validating and authorizing clients (again, both machines and humans) before providing them access to secrets and/or sensitive data. Vault can then provide audit logs, as well as additional services like key rolling and secure storage.
-
-Vault works primarily using tokens.
-
-* [Official site](https://vaultproject.io/)
-
-## Choice 2: cert-manager
+## Choice 1: cert-manager
 
 cert-manager aims to be (and quite possibly is) the easiest way to automate certificate management in Kubernetes.  Once a cluster admin has installed and configured the proper cert-manager custom Kubernetes resources, the user experience is as follows:
 
@@ -69,5 +51,4 @@ So from a user perspective, all you do is create a `Certificate` resource where 
 
 ## What Is Your Choice?
 
-* [HashiCorp Vault](vault.md)
 * [cert-manager](cert-manager.md)
