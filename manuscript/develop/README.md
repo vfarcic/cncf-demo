@@ -23,6 +23,12 @@ TODO: Explanation
 
 * [Official site](https://nocalhost.dev)
 
+## Choice 4: Devfile
+
+TODO: Explanation
+
+* [Official site](https://devfile.io)
+
 ## What Is Your Choice?
 
 * [Telepresence](telepresence.md)
