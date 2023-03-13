@@ -24,14 +24,6 @@ ytt --file ytt/schema.yaml --file ytt/resources \
 
 kubectl --namespace dev apply --filename yaml/dev
 
-# TODO: Remove
-# If AWS
-# kubectl get subnet.ec2.aws.crossplane.io,internetgateway.ec2.aws.crossplane.io,routetable.ec2.aws.crossplane.io,vpc.ec2.aws.crossplane.io,securitygroup.ec2.aws.crossplane.io,database.postgresql.sql.crossplane.io,rdsinstance.database.aws.crossplane.io,dbsubnetgroup.database.aws.crossplane.io
-
-# TODO: Remove
-# If Google Cloud
-# kubectl get object.kubernetes.crossplane.io,database.postgresql.sql.crossplane.io,user.sql.gcp.upbound.io,databaseinstance.sql.gcp.upbound.io
-
 kubectl get managed
 
 kubectl --namespace dev get sqlclaims

@@ -22,12 +22,6 @@ cat kustomize/overlays/dev/kustomization.yaml
 
 kubectl --namespace dev apply --kustomize kustomize/overlays/dev
 
-# TODO: Remove
-# If Google Cloud
-# kubectl get databaseinstances.sql.gcp.upbound.io,users.sql.gcp.upbound.io,databases.postgresql.sql.crossplane.io,objects.kubernetes.crossplane.io
-# If Azure
-# kubectl get resourcegroup.azure.upbound.io,server.dbforpostgresql.azure.upbound.io,firewallrule.dbforpostgresql.azure.upbound.io,database.postgresql.sql.crossplane.io
-
 kubectl get managed
 
 kubectl --namespace dev get sqlclaims
