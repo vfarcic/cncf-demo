@@ -52,7 +52,7 @@ git commit -m "App DB"
 git push
 
 # TODO: Remove
-# If Azure
+# If Azure
 # kubectl get resourcegroup.azure.upbound.io,database.postgresql.sql.crossplane.io,firewallrule.dbforpostgresql.azure.upbound.io,server.dbforpostgresql.azure.upbound.io
 
 kubectl get managed

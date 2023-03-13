@@ -2,7 +2,7 @@
 
 TODO: Intro
 
-## Setup
+## Setup
 
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami

@@ -2,7 +2,7 @@
 
 TODO: Intro
 
-## Setup
+## Setup
 
 * Install [gitops CLI](https://docs.gitops.weave.works/docs/installation/weave-gitops/#gitops-cli)
 

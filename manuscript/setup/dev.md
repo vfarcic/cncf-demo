@@ -13,7 +13,7 @@ cd cncf-demo
 gh repo set-default
 
 # This kubeconfig file will get created later, and added to
-#   `.gitignore`.
+#   `.gitignore`.
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 
 yq --inplace ".kubeConfig = \"$PWD/kubeconfig-dev.yaml\"" \
@@ -36,8 +36,8 @@ export AWS_SECRET_ACCESS_KEY=[...]
 # Replace `[...]` with your account ID
 export AWS_ACCOUNT_ID=[...]
 
-# Watch https://youtu.be/pNECqaxyewQ if you are not familiar
-#   with `eksctl`
+# Watch https://youtu.be/pNECqaxyewQ if you are not familiar
+#   with `eksctl`
 eksctl create cluster --config-file eksctl/config-dev.yaml
 
 eksctl create addon --name aws-ebs-csi-driver --cluster dot \
@@ -123,7 +123,7 @@ kubectl create namespace dev
 # Helm is a package manager for Kubernetes applications
 # Traefik is a reverse proxy server and load balancer that
 #   handles traffic that enters from outside of your Kubernetes
-#   cluster
+#   cluster
 helm upgrade --install traefik traefik \
     --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
@@ -142,7 +142,7 @@ export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
 # This is the IP address by which you can access applications
-#   running in your cluster!
+#   running in your cluster!
 echo $INGRESS_HOST
 
 # Repeat the `export` commands if the output is empty.
@@ -188,7 +188,7 @@ alias curl="curl --insecure"
 #   we'll add more pointing to a different cluster.
 # Configure these subdomains by going to your registrar and
 #   creating three more DNS records of type 'A', each with the
-#   name set to the subdomain (one record for 'harbor', one for
+#   name set to the subdomain (one record for 'harbor', one for
 #   'notary', one for 'cncf-demo-dev'), and the value of each
 #   record set to that same IP address of your output.
 

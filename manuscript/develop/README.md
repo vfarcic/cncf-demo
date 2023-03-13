@@ -23,7 +23,7 @@ TODO: Explanation
 
 * [Official site](https://nocalhost.dev)
 
-## Choice 4: Devfile
+## Choice 4: Devfile
 
 TODO: Explanation
 

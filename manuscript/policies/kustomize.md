@@ -56,7 +56,7 @@ kubectl --namespace production get deployments
 #   manage Cloud resources so the database was not created and,
 #   with it, the Secret with the authentication was not created
 #   either, hence the Pods that require the Secret are not
-#   starting).
+#   starting).
 
 kubectl --namespace production get sqlclaims
 

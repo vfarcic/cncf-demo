@@ -7,10 +7,10 @@ In this section, you will inspect and/or modify the following files:
 ```bash
 kustomize/
 ├── base
-│   ├── deployment.yaml
-│   ├── ingress.yaml
-│   ├── kustomization.yaml
-│   └── service.yaml
+│   ├── deployment.yaml
+│   ├── ingress.yaml
+│   ├── kustomization.yaml
+│   └── service.yaml
 └── overlays
     └── dev
         └── ingress.yaml

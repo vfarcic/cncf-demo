@@ -62,11 +62,11 @@ kubectl --namespace projectcontour delete service contour-envoy
 
 kubectl get managed
 
-# Wait until all the resources are removed
+# Wait until all the resources are removed
 
 unset KUBECONFIG
 
-# Execute the command that follows only if you created a
+# Execute the command that follows only if you created a
 #   development cluster following the instructions in the
 #   `Development` section.
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
@@ -77,7 +77,9 @@ kubectl --namespace production delete clusterclaim production
 
 kubectl get managed
 
-# Wait until all the resources are removed
+# Wait until all the resources are removed
+
+eksctl delete addon --name aws-ebs-csi-driver --cluster dot
 
 eksctl delete cluster --config-file eksctl/config-dev.yaml
 ```

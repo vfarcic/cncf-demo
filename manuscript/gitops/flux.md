@@ -9,13 +9,13 @@ TODO: Intro
 ```bash
 export REPO_URL=$(git config --get remote.origin.url)
 
-# Replace `[...]` with your GitHub token
+# Replace `[...]` with your GitHub token
 export GITHUB_TOKEN=[...]
 
-# Replace `[...]` with your GitHub user
+# Replace `[...]` with your GitHub user
 export GITHUB_USER=[...]
 
-# Replace `[...]` with the GitHub organization where the repo is located
+# Replace `[...]` with the GitHub organization where the repo is located
 export GITHUB_ORG=[...]
 ```
 

@@ -2,7 +2,7 @@
 
 TODO: Intro
 
-## Setup
+## Setup
 
 ```bash
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)

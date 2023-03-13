@@ -45,7 +45,7 @@ export GITOPS_APP=argocd
 yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 ```
 
-## Setup The App
+## Setup The App
 
 * If you prefer a solution other than Kustomize for defining and packaging applications, please go back to the [Production](prod.md) or an earlier chapter.
 
@@ -73,7 +73,7 @@ yq --inplace ".patchesStrategicMerge = []" \
     kustomize/overlays/prod/kustomization.yaml
 ```
 
-## Setup Google Cloud
+## Setup Google Cloud
 
 * Please execute the commands in this section only if you are using Google Cloud as the destination.
 
@@ -130,7 +130,7 @@ yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
     settings.yaml
 ```
 
-## Setup AWS
+## Setup AWS
 
 * Please execute the commands in this section only if you are using AWS as the destination.
 
@@ -138,7 +138,7 @@ yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
 # TODO:
 ```
 
-## Setup Azure
+## Setup Azure
 
 * Please execute the commands in this section only if you are using Azure as the destination.
 
@@ -146,7 +146,7 @@ yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
 # TODO:
 ```
 
-## Setup Database
+## Setup Database
 
 ```bash
 helm repo add crossplane-stable \
