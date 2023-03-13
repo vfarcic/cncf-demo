@@ -1,4 +1,4 @@
-# Manage DB Schema With SchemaHero
+# Manage DB Schema with SchemaHero
 
 Let's install SchemaHero with `krew`, the kubectl plugin tool! You can use `krew` to install and upgrade SchemaHero, and also to interact with SchemaHero objects.
 
