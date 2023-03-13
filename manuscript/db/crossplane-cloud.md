@@ -31,7 +31,7 @@ Some important Crossplane vocabulary:
 * extends Crossplane and provides controllers for new kinds of managed resources
 * for example, the AWS provider extends Crossplane so that it supports AWS-managed resources like `RDSInstance` and `S3Bucket`
 
-*Here, `Composition` refers to the specific Crossplane custom resource that connects Crossplane to each of the resources that ultimately make up a hight-lever CompositResource. The term ‘Composition’ can also broadly refer to the feature of Crossplane that allows ops folks to define their own opinionated platform APIs and expose simplified interfaces to app friends (that is how it is used in the title of this section).
+*Here, `Composition` refers to the specific Crossplane custom resource that connects Crossplane to each of the resources that ultimately make up a higher-level `CompositeResource`. The term ‘Composition’ can also broadly refer to the feature of Crossplane that allows ops folks to define their own opinionated platform APIs and expose simplified interfaces to app friends (that is how it is used in the title of this section).
 
 ## Setup
 
