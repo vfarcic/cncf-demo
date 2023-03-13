@@ -1,0 +1,11 @@
+apiVersion: bootstrap.aws.infrastructure.cluster.x-k8s.io/v1beta1
+kind: AWSIAMConfiguration
+spec:
+  eventBridge:
+    enable: true
+  eks:
+    iamRoleCreation: true
+    managedMachinePool:
+      disable: false
+    fargate:
+      disable: false
