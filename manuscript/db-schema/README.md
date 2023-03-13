@@ -1,6 +1,12 @@
 # Manage DB Schema
 
-TODO: Intro
+Hero is beyond thrilled to have a database! A sidekick! Hero names their new friend 'Lil DeeBee' and, after polite introductions, Hero requests that Lil DeeBee carry around some of this cumbersome data. But in order for Lil DeeBee to do that, it would be wise Lil Deebee to know thyself and establish a database schema.
+
+A database schema defines how data is organized within a relational database. The schema additionally describes how the data may relate to other tables or other schemas. A schema might define, for example, what tables are in a database, the names of those tables, what fields (columns) are included in each table, and what type of data should go in those fields.
+
+For Lil DeeBee, having organized data helps Hero access the data that they need efficiently. And it allows Lil DeeBee to set clear boundaries about who is able to access what data. 
+
+Hero and Lil DeeBee can agree that knowing what you're about and establishing clear boundaries are two keys to a happy existence. 
 
 ## Choice 1: SchemaHero
 
