@@ -33,12 +33,16 @@ export AWS_ACCESS_KEY_ID=[...]
 # Replace `[...]` with your secret access key
 export AWS_SECRET_ACCESS_KEY=[...]
 
+# Replace `[...]` with your account ID
+export AWS_ACCOUNT_ID=[...]
+
 # Watch https://youtu.be/pNECqaxyewQ if you are not familiar
 #   with `eksctl`
-eksctl create cluster --name dot --region us-east-1 \
-    --version 1.25 --nodegroup-name primary \
-    --node-type t3.medium --nodes-min 3 --nodes-max 6 \
-    --managed --asg-access
+eksctl create cluster --config-file eksctl/config-dev.yaml
+
+eksctl create addon --name aws-ebs-csi-driver --cluster dot \
+    --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
+    --force
 ```
 
 ### Azure AKS
@@ -47,6 +51,9 @@ Follow this section ONLY if you're planning to use Azure AKS
 
 ```bash
 export RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
+
+yq --inplace ".azure.resourceGroup = \"$RESOURCE_GROUP\"" \
+    settings.yaml
 
 az group create --location eastus --name $RESOURCE_GROUP
 

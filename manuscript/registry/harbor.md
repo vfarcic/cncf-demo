@@ -37,7 +37,7 @@ helm repo update
 
 helm upgrade --install harbor harbor/harbor \
     --namespace harbor --create-namespace \
-    --values harbor/values.yaml --wait
+    --values harbor/values.yaml --timeout 15m0s --wait
 
 kubectl --namespace harbor apply \
     --filename harbor/certificate.yaml

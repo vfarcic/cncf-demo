@@ -534,9 +534,11 @@ flowchart TD
         %% -------------
         scaling{{Scaling}}
         style scaling fill:red
+        hpa("Horizontal Pod Autoscaler (HPA)")
+        style hpa fill:red
         keda(KEDA)
         style keda fill:red
-        scaling --> keda --> deployment-mc
+        scaling --> hpa & keda --> deployment-mc
 
         %% ------------------------------
         %% -- Multi-Cluster Deployment --
