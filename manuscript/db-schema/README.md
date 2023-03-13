@@ -12,7 +12,7 @@ TODO: Explanation
 
 ## Choice 2: Liquibase
 
-TODO: Explanation
+Sometimes, especially from a data safety perspective, you want to dictate how your database's end state is reached. Liquibase is an open-source database schema change management solution. With it, you can manage revisions of your database. This additionally enables you to deploy (and roll back) changes to specific database versions without needing to know what has already been deployed. You can also deploy database and application changes simultaneously so that they always stay in sync.
 
 * [Official site](https://www.liquibase.org)
 
