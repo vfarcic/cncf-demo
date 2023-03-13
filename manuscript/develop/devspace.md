@@ -1,4 +1,4 @@
-# Develop With DevSpace
+# Develop The Application With DevSpace
 
 TODO: Intro
 

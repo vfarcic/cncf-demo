@@ -1,4 +1,4 @@
-# Develop With DevSpace And Carvel ytt
+# Develop The Application With DevSpace And Carvel ytt
 
 TODO: Intro
 

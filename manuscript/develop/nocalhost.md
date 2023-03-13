@@ -1,4 +1,4 @@
-# Develop With Telepresence
+# Develop The Application With Telepresence
 
 TODO: Intro
 

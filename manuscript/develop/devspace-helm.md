@@ -1,4 +1,4 @@
-# Develop With DevSpace And Helm
+# Develop The Application With DevSpace And Helm
 
 TODO: Intro
 

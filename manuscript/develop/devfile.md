@@ -1,4 +1,4 @@
-# Develop With Devfile
+# Develop The Application With Devfile
 
 TODO: Intro
 

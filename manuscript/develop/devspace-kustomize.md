@@ -1,4 +1,4 @@
-# Develop With DevSpace And Kustomize
+# Develop The Application With DevSpace And Kustomize
 
 TODO: Intro
 

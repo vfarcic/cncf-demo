@@ -1,4 +1,4 @@
-# Develop With DevSpace And cdk8s
+# Develop The Application With DevSpace And cdk8s
 
 TODO: Intro
 
