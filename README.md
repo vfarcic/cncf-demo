@@ -185,7 +185,8 @@ flowchart TD
 | Use HTTPS | Ashley Davis - cert-manager<br /> | Tuesday, February 28, 2023 | [story](manuscript/https/README.md) |
 | Set Up PostgreSQL DB in the Dev Environment | Dan Magnum - Crossplane<br />Andrew Block - Helm<br /> | Tuesday, March 7, 2023 | [story](manuscript/db/README.md) |
 | Manage DB Schema | Marc Campbell - SchemaHero<br />Robert Reeves - Liquibase<br /> | Tuesday, March 14, 2023 | [story](manuscript/db-schema/README.md) |
-| Develop the App | Nick Powell - Telepresence<br />Carl Montanari - DevSpace | Tuesday, March 21, 2023 | [story](manuscript/develop/README.md) |
+| Develop the App | Nick Powell - Telepresence<br />Carl Montanari - DevSpace<br />Elson Yuen - Devfile<br /> | Tuesday, March 21, 2023 | [story](manuscript/develop/README.md) |
+| Chapter 1 Finale! | Just Whitney and Viktor! | Tuesday, March 28, 2023 |  |
 
 ## The Format
 
