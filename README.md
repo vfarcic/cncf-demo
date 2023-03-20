@@ -143,21 +143,45 @@ flowchart TD
         click db-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-google.md"
         db-crossplane-aws(AWS)
         click db-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-aws.md"
+        style db-crossplane-aws fill:green
         db-crossplane-azure(Azure)
         click db-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-azure.md"
         db-crossplane-helm(App as Helm)
         click db-crossplane-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-helm.md"
         db-crossplane-carvel(App as Carvel ytt)
         click db-crossplane-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-carvel.md"
+        style db-crossplane-carvel fill:green
         db-crossplane-kustomize(App as Kustomize)
         click db-crossplane-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-kustomize.md"
         db-crossplane-cdk8s(App as cdk8s)
         click db-crossplane-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db/crossplane-cdk8s.md"
         db --> db-helm & db-crossplane-local & db-crossplane-cloud
-        db-helm --> db-helm-helm & db-helm-kustomize & db-helm-cdk8s & db-helm-carvel --> continue
+        db-helm --> db-helm-helm & db-helm-kustomize & db-helm-cdk8s & db-helm-carvel --> db-schema
         db-crossplane-local --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-cdk8s & db-crossplane-carvel
-        db-crossplane-cloud --> db-crossplane-google & db-crossplane-aws & db-crossplane-azure --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-cdk8s & db-crossplane-carvel --> continue
+        db-crossplane-cloud --> db-crossplane-google & db-crossplane-aws & db-crossplane-azure --> db-crossplane-helm & db-crossplane-kustomize & db-crossplane-cdk8s & db-crossplane-carvel --> db-schema
 
+        %% ----------------------
+        %% -- Manage DB Schema --
+        %% ----------------------
+        db-schema{{Manage DB Schema}}
+        click db-schema "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/README.md"
+        style db-schema fill:blue
+        db-schema-schemahero(SchemaHero)
+        click db-schema-schemahero "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero.md"
+        style db-schema-schemahero fill:green
+        db-schema-liquibase(Liquibase)
+        click db-schema-liquibase "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/liquibase.md"
+        db-schema-schemahero-helm(App as Helm)
+        click db-schema-schemahero-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-helm.md"
+        db-schema-schemahero-kustomize(App as Kustomize)
+        click db-schema-schemahero-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-kustomize.md"
+        db-schema-schemahero-cdk8s(App as cdk8s)
+        click db-schema-schemahero-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-cdk8s.md"
+        db-schema-schemahero-carvel(App as Carvel ytt)
+        click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
+        style db-schema-schemahero-carvel fill:green
+        db-schema --> db-schema-liquibase & db-schema-schemahero
+        db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-cdk8s & db-schema-schemahero-carvel --> continue
 
         continue((The be continued...))
 
