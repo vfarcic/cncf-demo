@@ -40,7 +40,9 @@ TODO: Explanation
 
 ## Choice 4: Devfile
 
-TODO: Explanation
+Devfile is a specification that allows users to declaratively include the development environment information as part of their application. Devfiles can be used to automate and simplify the development process. This can be done by adopting existing devfiles that are available in the public community registry, or by authoring your own devfiles to record custom instructions for how to configure and run your development environment.
+
+To use devfiles, you’ll need a tool that understands them. Tools that provide devfile support include odo, Eclipse Che, VSCode OpenShift Toolkit, Amazon CodeCatalyst, JetBrains Space, OpenShift Dev Console, and IntelliJ OpenShift Toolkit.
 
 * [Official site](https://devfile.io)
 
