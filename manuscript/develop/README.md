@@ -44,7 +44,9 @@ Devfile is a specification that allows users to declaratively include the develo
 
 To use devfiles, you’ll need a tool that understands them. Tools that provide devfile support include odo, Eclipse Che, VSCode OpenShift Toolkit, Amazon CodeCatalyst, JetBrains Space, OpenShift Dev Console, and IntelliJ OpenShift Toolkit.
 
+[![What Is Devfile?](https://img.youtube.com/vi/eGFdEXw9eLE/0.jpg)](https://www.youtube.com/live/eGFdEXw9eLE)
 * [Official site](https://devfile.io)
+
 
 ## What Is Your Choice?
 
