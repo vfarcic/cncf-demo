@@ -1,4 +1,4 @@
-# Develop The Application
+# Develop the Application
 
 Together our application (Hero) and database sidekick (Lil DeeBee) are one hundred percent, absolutely ready to run in a development environment! Finally! The first quest in the long journey to production is complete!
 
