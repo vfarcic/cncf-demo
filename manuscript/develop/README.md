@@ -14,7 +14,9 @@ Let’s help Hero choose which tool to use to help application teams quickly and
 
 ## Choice 1: Telepresence
 
-TODO: Explanation
+Telepresence is a remote-to-local fast feedback development tool for Kubernetes. With Telepresence, application teams can develop locally against a remote Kubernetes cluster. Developers (and stakeholders!) can see the changes they make to their Kubernetes application without building/pushing/running container images. They can also see how their application behaves in their Kubernetes environment, meaning that they can interact with all of the other Kubernetes services that are running in their development cluster. Additionally, developers can use their own local IDEs and tooling, as well as access preview urls so that they can see and share their app’s behavior.
+
+Telepresence works by intercepting traffic that is intended for the application running in the remote Kubernetes cluster, and redirecting that traffic to the copy of that application that is running on the developer’s laptop. 
 
 [![Remocal K8s Development FTW: Telepresence 101](https://img.youtube.com/vi/VLABvVtUZvk/0.jpg)](https://via.vmw.com/Telepresence)
 * [Official site](https://www.telepresence.io)
