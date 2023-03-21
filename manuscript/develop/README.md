@@ -23,7 +23,9 @@ Telepresence works by intercepting traffic that is intended for the application 
 
 ## Choice 2: DevSpace
 
-TODO: Explanation
+With DevSpace, you declare the entire state of the development environment (or any other environment) DECLARATIVELY and DevSpace does the work of bringing that state into being. This can work with a fresh cluster that might get made every time a development session begins, or a DevSpace file can be applied against an already-existing cluster, in which case DevSpace will create and/or modify the defined resources so that the actual state is in sync with the state that is defined in DevSpace. This declarative model can help users create a standardized, well-defined workflow across teams, as well as facilitate quick onboarding.
+
+DevSpace improves the developer experience by enabling a fast development cycle that makes Kubernetes invisible to the developer. This is made possible by a file sync mechanism (aka ‘hot reloading’) where the app source code gets mounted directly into the container that is running in the Kubernetes development environment. That way, when a developer saves an application change, the change is automatically reflected in the Kubernetes development environment. 
 
 [![DevSpace - Development Environments in Kubernetes](https://img.youtube.com/vi/nQly_CEjJc4/0.jpg)](https://youtu.be/nQly_CEjJc4)
 [![Full App Lifecycle In Kubernetes With Argo CD, DevSpace, vCluster, k3d, and GitHub Actions](https://img.youtube.com/vi/uU-EAQ8Vbvk/0.jpg)](https://youtu.be/uU-EAQ8Vbvk)
