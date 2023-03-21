@@ -34,7 +34,7 @@ DevSpace improves the developer experience by enabling a fast development cycle 
 
 ## Choice 3: Nocalhost
 
-TODO: Explanation
+Nocalhost is an open-source IDE plugin for cloud-native applications development.
 
 * [Official site](https://nocalhost.dev)
 
