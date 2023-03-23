@@ -35,4 +35,4 @@ curl "https://cncf-demo-dev.$DOMAIN/videos"
 
 ## Continue The Adventure
 
-The Adventure will continue soon...
+[Manage DB Schema](../db-schema/README.md)
