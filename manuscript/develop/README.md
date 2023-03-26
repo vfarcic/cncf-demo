@@ -12,6 +12,8 @@ AND another question! What development solutions enable developers to remotely c
 
 Let’s help Hero choose which tool to use to help application teams quickly and effectively develop their container-based applications.
 
+[![Develop Apps - Feat. Telepresence, DevSpace, Nocalhost, And Devfile (You Choose!, Ch. 1, Ep. 7)](https://img.youtube.com/vi/YqmLIh31VH0/0.jpg)](https://youtu.be/YqmLIh31VH0)
+
 ## Choice 1: Telepresence
 
 Telepresence is a remote-to-local fast feedback development tool for Kubernetes. With Telepresence, application teams can develop locally against a remote Kubernetes cluster. Developers (and stakeholders!) can see the changes they make to their Kubernetes application without building/pushing/running container images. They can also see how their application behaves in their Kubernetes environment, meaning that they can interact with all of the other Kubernetes services that are running in their development cluster. Additionally, developers can use their own local IDEs and tooling, as well as access preview urls so that they can see and share their app’s behavior.

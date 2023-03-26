@@ -8,6 +8,8 @@ For Lil DeeBee, having organized data helps Hero access the data that they need 
 
 Hero and Lil DeeBee can agree that knowing what you're about and establishing clear boundaries are two keys to a happy existence. 
 
+[![Manage DB Schema - Feat. SchemaHero And Liquibase (You Choose!, Ch. 1, Ep. 6)](https://img.youtube.com/vi/6YW2__HUHxw/0.jpg)](https://youtu.be/6YW2__HUHxw)
+
 ## Choice 1: SchemaHero
 
 SchemaHero is a Kubernetes operator that enables you to define and manage database schemas in a language-agnostic and declarative way. With SchemaHero, you declare your desired schema, and SchemaHero will generate the steps needed to bring the actual schema state in sync with your desired schema state. If you like, you can see these changes (and run policy enforcement on them) before they're applied to your database. Declarative database management with SchemaHero also enables a GitOps approach to database schema changes.

@@ -8,6 +8,8 @@ Another thing to note here is that this database is a dependency of our Hero app
 
 Time to help Hero choose the best strategy for deploying and managing third-party applications!
 
+[![Setup PostgreSQL DB In The Dev Environment - Feat. Helm And Crossplane (You Choose!, Ch. 1, Ep. 5)](https://img.youtube.com/vi/ITBPHJBbjPY/0.jpg)](https://youtu.be/ITBPHJBbjPY)
+
 ## Choice 1: Helm Chart
 
 Helm is a package manager for Kubernetes, and it is currently the dominant way that third-party apps are installed into Kubernetes clusters. Helm is a mature technology with a thriving ecosystem. If our application itself is defined using Helm, adding PostgreSQL as an application dependency is a relatively easy process consisting of just a few Helm CLI commands. 
