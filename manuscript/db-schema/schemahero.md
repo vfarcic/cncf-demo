@@ -9,11 +9,9 @@ Let's install SchemaHero with `krew`, the kubectl plugin tool! You can use `krew
 * Install `krew` from https://krew.sigs.k8s.io/docs/user-guide/setup/install
 
 ```bash
-kubectl krew install schemahero
+chmod +x manuscript/db-schema/schemahero.sh
 
-export PATH="${PATH}:${HOME}/.krew/bin"
-
-kubectl schemahero install
+./manuscript/db-schema/schemahero.sh
 ```
 
 ## How Did You Define Your App?

@@ -181,7 +181,36 @@ flowchart TD
         click db-schema-schemahero-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-schema/schemahero-carvel.md"
         style db-schema-schemahero-carvel fill:green
         db-schema --> db-schema-liquibase & db-schema-schemahero
-        db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-cdk8s & db-schema-schemahero-carvel --> continue
+        db-schema-schemahero --> db-schema-schemahero-helm & db-schema-schemahero-kustomize & db-schema-schemahero-cdk8s & db-schema-schemahero-carvel --> develop
+
+        %% ---------------------
+        %% -- Develop The App --
+        %% ---------------------
+        develop{{Develop The App}}
+        click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/README.md"
+        style develop fill:blue
+        develop-telepresence(Telepresence)
+        click develop-telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
+        develop-devspace(DevSpace)
+        click develop-devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
+        style develop-devspace fill:green
+        develop-nocalhost(Nocalhost)
+        click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
+        develop-devspace-kustomize(App as Kustomize)
+        click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
+        develop-devspace-cdk8s(App as cdk8s)
+        click develop-devspace-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-cdk8s.md"
+        develop-devspace-helm(App as Helm)
+        click develop-devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
+        develop-devspace-carvel(App as Carvel ytt)
+        click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
+        style develop-devspace-carvel fill:green
+        develop-devfile(Devfile)
+        click develop-devfile "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
+        style develop-devfile fill:red
+        develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
+        develop-telepresence & develop-nocalhost & develop-devfile --> continue
+        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> continue
 
         continue((The be continued...))
 

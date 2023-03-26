@@ -1,6 +1,6 @@
 # Destroy
 
-Depending on the paths you took, some resources might not exist and, as a result, the commands that follow might through an error. Feel free to ignore those.
+Depending on the paths you took, some resources might not exist and, as a result, the commands that follow might throw an error. Feel free to ignore those.
 
 ## Google Cloud
 
@@ -78,10 +78,6 @@ kubectl --namespace production delete clusterclaim production
 kubectl get managed
 
 # Wait until all the resources are removed (excluding `database`)
-
-eksctl delete addon --name aws-ebs-csi-driver --cluster dot
-
-kubectl --namespace harbor delete statefulset harbor-redis
 
 eksctl delete cluster --config-file eksctl/config-dev.yaml
 ```

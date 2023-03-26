@@ -48,5 +48,6 @@ telepresence quit
 
 ## Continue The Adventure
 
-[Create And Manage Production Kubernetes Cluster](../cluster/README.md)
+The Adventure will continue soon...
+
 [Destroy Everything](../destroy-all.md)

@@ -26,14 +26,12 @@ kubectl --namespace dev apply --filename yaml/dev
 
 kubectl get managed
 
-kubectl --namespace dev get sqlclaims
+kubectl --namespace dev get sqlclaim
 
-# Wait until it is `READY`
+kubectl --namespace dev wait --for=condition=ready \
+    sqlclaim cncf-demo --timeout=15m
 
 curl "https://cncf-demo-dev.$DOMAIN/videos"
-
-# Proceed further ONLY if the output contains
-#   `relation "videos" does not exist`.
 ```
 
 ## Continue The Adventure

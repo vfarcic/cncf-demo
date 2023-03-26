@@ -33,4 +33,4 @@ curl "https://cncf-demo-dev.$DOMAIN/videos" | jq .
 
 ## Continue The Adventure
 
-The Adventure will continue soon...
+[Develop](../develop/README.md)

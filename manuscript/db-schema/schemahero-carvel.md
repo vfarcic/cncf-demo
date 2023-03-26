@@ -21,13 +21,13 @@ kubectl --namespace dev apply --filename yaml/dev
 
 curl "https://cncf-demo-dev.$DOMAIN/videos"
 
-curl -X POST "https://cncf-demo-dev.$DOMAIN/video?id=wNBG1-PSYmE&title=Kubernetes%20Policies%20And%20Governance%20-%20Ask%20Me%20Anything%20With%20Jim%20Bugwadia"
+curl -X POST "https://cncf-demo-dev.$DOMAIN/video?id=1&title=This%20is%20a%20great%20video"
 
-curl -X POST "https://cncf-demo-dev.$DOMAIN/video?id=VlBiLFaSi7Y&title=Scaleway%20-%20Everything%20We%20Expect%20From%20A%20Cloud%20Computing%20Service%3F"
+curl -X POST "https://cncf-demo-dev.$DOMAIN/video?id=2&title=This%20is%20an%20even%20better%20video"
 
 curl "https://cncf-demo-dev.$DOMAIN/videos" | jq .
 ```
 
 ## Continue The Adventure
 
-The Adventure will continue soon...
+[Develop](../develop/README.md)

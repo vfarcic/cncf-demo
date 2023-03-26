@@ -11,11 +11,9 @@ Finally, `ytt` guarantees that templates produce identical output with the same 
 * [Install the `ytt` CLI](https://carvel.dev/ytt/docs/v0.44.0/install)
 
 ```bash
-yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
-    ytt/schema.yaml
+chmod +x manuscript/define-deploy-dev/carvel-ytt.sh
 
-yq --inplace ".image.repository = \"$IMAGE\"" \
-    ytt/schema.yaml
+./manuscript/define-deploy-dev/carvel-ytt.sh
 ```
 
 ## Do

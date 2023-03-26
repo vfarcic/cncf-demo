@@ -2,13 +2,13 @@
 
 TODO: Intro
 
-At the time of this writing (December 2022), DevSpace is not a CNCF project. However, it announced that it [started the process](https://thenewstack.io/?p=22695066) of joining the foundation so we're including it in the story.
-
 ## Setup
 
 * Install the [`devspace` CLI](https://devspace.sh/docs/getting-started/installation)
 
 ```bash
+yq --inplace ".images.app.image = \"$IMAGE\"" devspace.yaml
+
 yq --inplace \
     ".deployments.app.kubectl.manifests[0] = \"yaml/dev\"" \
     devspace.yaml
@@ -59,5 +59,6 @@ devspace purge --namespace dev
 
 ## Continue The Adventure
 
-[Create And Manage Production Kubernetes Cluster](../cluster/README.md)
+The Adventure will continue soon...
+
 [Destroy Everything](../destroy-all.md)
