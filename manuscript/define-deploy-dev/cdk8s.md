@@ -21,10 +21,9 @@ The bottom line here is that organizations can give freedom to developers to wri
 * We'll define the manifests in Go (even though other languages are supported) so please install and configure [Go](https://go.dev/doc/install).
 
 ```bash
-yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
-    cdk8s/app.yaml
+chmod +x manuscript/define-deploy-dev/cdk8s.sh
 
-yq --inplace ".image.repository = \"$IMAGE\"" cdk8s/app.yaml
+./manuscript/define-deploy-dev/cdk8s.sh
 ```
 
 ## Do

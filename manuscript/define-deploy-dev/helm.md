@@ -18,11 +18,9 @@ Once you define all of your Kubernetes resources and specify their values in a H
 * [Install the `helm` CLI](https://helm.sh/docs/intro/install)
 
 ```bash
-yq --inplace ".ingress.host = \"cncf-demo-dev.$DOMAIN\"" \
-    helm/app/values.yaml
+chmod +x manuscript/define-deploy-dev/helm.sh
 
-yq --inplace ".image.repository = \"$IMAGE\"" \
-    helm/app/values.yaml
+./manuscript/define-deploy-dev/helm.sh
 ```
 
 ## Do

@@ -19,18 +19,9 @@ kustomize/
 ## Setup
 
 ```bash
-yq --inplace ".images[0].name = \"$IMAGE\"" \
-    kustomize/base/kustomization.yaml
+chmod +x manuscript/define-deploy-dev/kustomize.sh
 
-yq --inplace ".images[0].newName = \"$IMAGE\"" \
-    kustomize/base/kustomization.yaml
-
-yq --inplace ".[].value = \"cncf-demo-dev.$DOMAIN\"" \
-    kustomize/overlays/dev/ingress.yaml
-
-yq --inplace \
-    ".spec.template.spec.containers[0].image = \"$IMAGE\"" \
-    kustomize/base/deployment.yaml
+./manuscript/define-deploy-dev/kustomize.sh
 ```
 
 ## Do

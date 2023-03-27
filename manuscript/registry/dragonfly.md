@@ -20,6 +20,8 @@ It is important to note here that the Nydus image format is different from the O
 
 ## Setup
 
+* Make sure that Docker is running
+
 ```bash
 export REGISTRY=index.docker.io
 
@@ -28,28 +30,11 @@ export DOCKERHUB_USERNAME=[...]
 
 export IMAGE=$REGISTRY/$DOCKERHUB_USERNAME/cncf-demo
 
-yq --inplace ".image = \"$IMAGE\"" settings.yaml
-
-# Make sure that Docker is running
-
 docker login --username $DOCKERHUB_USERNAME $REGISTRY
 
-# Create the `values.yaml` configuration file with different container runtime,
-# refer to https://d7y.io/docs/setup/install/helm-charts#runtime-configuration-guide-for-dragonfly-helm-chart.
-cat > values.yaml << EOF
-containerRuntime:
-  docker:
-    enable: true
-    injectHosts: true
-    registryDomains:
-      - 'index.docker.io'
-EOF
+chmod +x manuscript/registry/dragonfly.sh
 
-helm repo add dragonfly https://dragonflyoss.github.io/helm-charts/
-
-helm repo update
-
-helm install --create-namespace --namespace dragonfly-system dragonfly dragonfly/dragonfly -f values.yaml
+./manuscript/registry/dragonfly.sh
 ```
 
 ## Do

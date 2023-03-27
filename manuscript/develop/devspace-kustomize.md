@@ -5,15 +5,9 @@ TODO: Intro
 ## Setup
 
 ```bash
-yq --inplace ".images.app.image = \"$IMAGE\"" devspace.yaml
+chmod +x manuscript/develop/devspace-kustomize.sh
 
-yq --inplace \
-    ".deployments.app.kubectl.manifests[0] = \"kustomize/overlays/dev\"" \
-    devspace.yaml
-
-yq --inplace \
-    ".deployments.app.kubectl.kustomize = true" \
-    devspace.yaml
+./manuscript/develop/devspace-kustomize.sh
 ```
 
 ## Do

@@ -21,6 +21,7 @@ TODO: Explanation
 
 TODO: Explanation
 
+[![Cloud Custodian - Policies? Resource Management? Something Else?](https://img.youtube.com/vi/AuXWI-Mkz9Q/0.jpg)](https://youtu.be/AuXWI-Mkz9Q)
 * [Official site](https://cloudcustodian.io)
 
 ## Choice 4: KubeArmor
@@ -39,6 +40,7 @@ TODO: Explanation
 
 TODO: Explanation
 
+[![Kubernetes Validating Admission Policy Changes The Game](https://img.youtube.com/vi/EsZcDUaSUss/0.jpg)](https://youtu.be/EsZcDUaSUss)
 * [Official site](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy)
 
 ## What Is Your Choice?
