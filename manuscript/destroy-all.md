@@ -79,6 +79,10 @@ kubectl get managed
 
 # Wait until all the resources are removed (excluding `database`)
 
+helm delete harbor --namespace harbor
+
+eksctl delete addon --name aws-ebs-csi-driver --cluster dot
+
 eksctl delete cluster --config-file eksctl/config-dev.yaml
 ```
 
