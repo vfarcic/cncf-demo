@@ -12,9 +12,8 @@ cd cncf-demo
 gh repo set-default
 
 # Create a Kubernetes cluster.
-# If you're using a local Kubernetes cluster
-#   (e.g., Rancher Desktop, Minikube, etc.), make sure that it
-#   has at least 8GB of RAM and 4 CPU of memory.
+# Do NOT use a local Kubernetes cluster since all the tools
+#   we'll run might be too much for your machine.
 
 kubectl create namespace production
 ```
@@ -73,13 +72,23 @@ yq --inplace ".patchesStrategicMerge = []" \
     kustomize/overlays/prod/kustomization.yaml
 ```
 
+## Setup Crossplane
+
+```bash
+helm repo add crossplane-stable \
+    https://charts.crossplane.io/stable
+
+helm repo update
+
+helm upgrade --install crossplane crossplane-stable/crossplane \
+    --namespace crossplane-system --create-namespace --wait
+```
+
 ## Setup Google Cloud
 
 * Please execute the commands in this section only if you are using Google Cloud as the destination.
 
 ```bash
-kubectl create namespace crossplane-system
-
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 yq --inplace \
@@ -110,6 +119,12 @@ kubectl --namespace crossplane-system \
     create secret generic gcp-creds \
     --from-file creds=./gcp-creds.json
 
+kubectl apply \
+    --filename crossplane-config/provider-google-official.yaml
+
+kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
+    --all --timeout=300s
+
 echo "apiVersion: gcp.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
@@ -126,7 +141,7 @@ spec:
 
 export DESTINATION=google
 
-yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
+yq --inplace ".crossplane.destination = \"google\"" \
     settings.yaml
 ```
 
@@ -135,7 +150,34 @@ yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
 * Please execute the commands in this section only if you are using AWS as the destination.
 
 ```bash
-# TODO:
+# Replace `[...]` with your access key ID`
+export AWS_ACCESS_KEY_ID=[...]
+
+# Replace `[...]` with your secret access key
+export AWS_SECRET_ACCESS_KEY=[...]
+
+echo "[default]
+aws_access_key_id = $AWS_ACCESS_KEY_ID
+aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
+" >aws-creds.conf
+
+kubectl --namespace crossplane-system \
+    create secret generic aws-creds \
+    --from-file creds=./aws-creds.conf
+
+kubectl apply \
+    --filename crossplane-config/provider-aws-official.yaml
+
+kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
+    --all --timeout=300s
+
+kubectl apply \
+    --filename crossplane-config/provider-config-aws-official.yaml
+
+export DESTINATION=aws
+
+yq --inplace ".crossplane.destination = \"aws\"" \
+    settings.yaml
 ```
 
 ## Setup Azure
@@ -149,21 +191,10 @@ yq --inplace ".crossplane.destination = \"$DESTINATION\"" \
 ## Setup Database
 
 ```bash
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
-
-helm repo update
-
-helm upgrade --install crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system --create-namespace --wait
-
 kubectl apply \
     --filename crossplane-config/provider-kubernetes-incluster.yaml
 
 kubectl apply --filename crossplane-config/config-sql.yaml
-
-kubectl apply \
-    --filename crossplane-config/provider-$DESTINATION-official.yaml
 
 yq --inplace \
     ".resources += \"postgresql-crossplane-$DESTINATION.yaml\"" \

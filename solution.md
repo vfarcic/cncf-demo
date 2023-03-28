@@ -316,7 +316,7 @@ flowchart TD
         click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
         policies-kyverno(Kyverno)
         click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
-        policies-opa("Open Policy Agent (OPA)")
+        policies-opa("Open Policy Agent (OPA) With Gatekeeper")
         style policies-opa fill:red
         policies-cloud-custodian(Cloud Custodian)
         style policies-cloud-custodian fill:red

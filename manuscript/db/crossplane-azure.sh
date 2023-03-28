@@ -12,7 +12,7 @@ kubectl apply \
     --filename crossplane-config/provider-azure-official.yaml
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
-    --all
+    --all --timeout=300s
 
 kubectl apply \
     --filename crossplane-config/provider-config-azure-official.yaml

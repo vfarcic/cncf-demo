@@ -33,6 +33,8 @@ git push
 
 kubectl --namespace production get all
 
+# Wait until resources are created
+
 kubectl describe $POLICY_KIND deployment-production
 
 cat kustomize/overlays/prod/deployment-scaled.yaml
@@ -51,9 +53,7 @@ kubectl --namespace production get deployments
 
 # Wait until the Deployment is created
 
-# If you started from this chapter (Production), the Pods
-#   will not be running since Crossplane is not configured to
-#   manage Cloud resources so the database was not created and,
+# Pods are not be running since the database was not created and,
 #   with it, the Secret with the authentication was not created
 #   either, hence the Pods that require the Secret are not
 #   starting).

@@ -32,7 +32,7 @@ kubectl apply \
     --filename crossplane-config/provider-gcp-official.yaml
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
-    --all
+    --all --timeout=300s
 
 echo "apiVersion: gcp.upbound.io/v1beta1
 kind: ProviderConfig
