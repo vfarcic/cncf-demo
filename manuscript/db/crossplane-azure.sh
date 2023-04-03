@@ -11,6 +11,8 @@ kubectl --namespace crossplane-system \
 kubectl apply \
     --filename crossplane-config/provider-azure-official.yaml
 
+sleep 2
+
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
     --all --timeout=300s
 

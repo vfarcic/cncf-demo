@@ -14,10 +14,11 @@ cat helm/app/values.yaml
 yq --inplace ".db.enabled.crossplane.$XP_DESTINATION = true" \
     helm/app/values.yaml
 
+yq --inplace ".db.insecure = true" helm/app/values.yaml
+
 cat helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev \
-    --set db.insecure=true
+helm upgrade --install cncf-demo helm/app --namespace dev
 
 kubectl get managed
 

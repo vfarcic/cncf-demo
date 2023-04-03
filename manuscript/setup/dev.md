@@ -109,7 +109,7 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 
 * Create a Kubernetes cluster any way you like, as long as it is not a local cluster (e.g., Docker Desktop, Minikube, etc.)
 
-### The Rest Of The Setup
+## The Rest Of The Setup
 
 ```bash
 # Install `yq` CLI from https://github.com/mikefarah/yq
