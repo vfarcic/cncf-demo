@@ -96,7 +96,23 @@ kubectl apply --filename cert-manager/issuer.yaml
 ## Cache
 
 ```bash
+# Start Rancher Desktop
+
+alias docker=$(which nerdctl)
+
+docker image build --tag cncf-demo:v0.0.1 .
+
+unalias docker
+
+# Start Docker
+
 kbld --file kbld/deployment.yaml
+
+pack build cncf-demo:v0.0.1
+
+./manuscript/registry/harbor.sh
+
+unalias docker
 
 ./manuscript/db/crossplane-cloud.sh
 
@@ -104,9 +120,9 @@ export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 export XP_DESTINATION=google
 
-chmod +x manuscript/db/crossplane-google.sh
-
 ./manuscript/db/crossplane-google.sh
+
+kubectl get nodes
 
 kubectl get managed
 ```
@@ -120,10 +136,8 @@ kubectl get managed
 * [Lima](lima.md)
 * [Cloud Native Buildpacks (CNB)](buildpacks.md)
 
-* [Harbor](harbor.md)
 * [Dragonfly](dragonfly.md)
 
-* [Kustomize](kustomize.md)
 * [Carvel ytt](carvel-ytt.md)
 * [CDK For Kubernetes (cdk8s)](cdk8s.md)
 
@@ -132,7 +146,6 @@ kubectl get managed
 * [cdk8s](cert-manager-cdk8s.md)
 
 * [Helm Chart](helm.md)
-
 * [Kustomize](crossplane-kustomize.md)
 * [Carvel ytt](crossplane-carvel.md)
 * [cdk8s](crossplane-cdk8s.md)

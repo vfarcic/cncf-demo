@@ -13,14 +13,14 @@ chmod +x manuscript/db/crossplane-google.sh
 
 ./manuscript/db/crossplane-google.sh
 
-# GKE starts with a very small control plane.
+# GKE starts with a very smal<zl control plane.
 # Since a lot of CRDs were installed, GKE is likely going to
 #   detect that its control plane is too small for it and
 #   increase its size automatically.
-# That process might take a while and the control plane might
-#   be inaccessible for a while.
-# You might want to wait for a while (e.g., an hour) for the
-#   new control plane to be full operational.
+# As a result, you might experience delays or errors like
+#   `connection refused` and `TLS handshake timeout`.
+# If that happens, wait for a while until the control plane
+#   nodes to be automatically changed for larger ones.
 ```
 
 ## How Did You Define Your App?
