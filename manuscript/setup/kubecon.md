@@ -102,6 +102,8 @@ alias docker=$(which nerdctl)
 
 docker image build --tag cncf-demo:v0.0.1 .
 
+# Quit Rancher Desktop
+
 unalias docker
 
 # Start Docker
@@ -111,8 +113,6 @@ kbld --file kbld/deployment.yaml
 pack build cncf-demo:v0.0.1
 
 ./manuscript/registry/harbor.sh
-
-unalias docker
 
 ./manuscript/db/crossplane-cloud.sh
 
@@ -133,25 +133,17 @@ kubectl get managed
 
 # TODO:
 
-* [Lima](lima.md)
 * [Cloud Native Buildpacks (CNB)](buildpacks.md)
 
-* [Dragonfly](dragonfly.md)
-
-* [Carvel ytt](carvel-ytt.md)
 * [CDK For Kubernetes (cdk8s)](cdk8s.md)
 
 * [Kustomize](cert-manager-kustomize.md)
-* [Carvel ytt](cert-manager-carvel.md)
 * [cdk8s](cert-manager-cdk8s.md)
 
-* [Helm Chart](helm.md)
 * [Kustomize](crossplane-kustomize.md)
-* [Carvel ytt](crossplane-carvel.md)
 * [cdk8s](crossplane-cdk8s.md)
 
 * [Kustomize](schemahero-kustomize.md)
-* [Carvel ytt](schemahero-carvel.md)
 * [cdk8s](schemahero-cdk8s.md)
 
 * [DevSpace](devspace.md)
