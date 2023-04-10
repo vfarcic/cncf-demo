@@ -133,19 +133,5 @@ kubectl get managed
 
 # TODO:
 
-* [Cloud Native Buildpacks (CNB)](buildpacks.md)
-
-* [CDK For Kubernetes (cdk8s)](cdk8s.md)
-
-* [Kustomize](cert-manager-kustomize.md)
-* [cdk8s](cert-manager-cdk8s.md)
-
-* [Kustomize](crossplane-kustomize.md)
-* [cdk8s](crossplane-cdk8s.md)
-
-* [Kustomize](schemahero-kustomize.md)
-* [cdk8s](schemahero-cdk8s.md)
-
-* [DevSpace](devspace.md)
 * [Nocalhost](nocalhost.md)
 * [Devfile](devfile.md)
