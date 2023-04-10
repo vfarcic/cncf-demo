@@ -367,29 +367,35 @@ flowchart TD
         %% -------------------------------------
         mtls{{"Mutual TLS (mTLS) And Network Policies"}}
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
-        style mtls fill:red
         mtls-istio(Istio)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
         style mtls-istio fill:red
         mtls-smi("Service Mesh Interface (SMI)")
-        style mtls-smi fill:red
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/smi.md"
         mtls-linkerd(LinkerD)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         style mtls-linkerd fill:red
         mtls-open-service-mesh(Open Service Mesh)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/osm.md"
         style mtls-open-service-mesh fill:red
         mtls-aeraki-mesh(Aeraki Mesh)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/aeraki-mesh.md"
         style mtls-aeraki-mesh fill:red
         mtls-cilium(Cilium)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
         style mtls-cilium fill:red
         mtls-kuma(Kuma)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/kuma.md"
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/nsm.md"
         style mtls-network-service-mesh fill:red
         mtls-meshery(Meshery)
         style mtls-meshery fill:red
         mtls-performance(Service Mesh Performance)
         style mtls-performance fill:red
-        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> mtls-meshery
-        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> mtls-meshery --> mtls-performance --> scanning
+        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> scanning
+        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> scanning
 
         %% --------------
         %% -- Scanning --
@@ -881,6 +887,8 @@ flowchart TD
         style inclavare-containers fill:red
         secrets-teller(Teller)
         style secrets-teller fill:red
+        mtls-meshery(Meshery)
+        style mtls-meshery fill:red
 
     end
 ```
