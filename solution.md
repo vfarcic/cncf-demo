@@ -384,12 +384,8 @@ flowchart TD
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
         style mtls-network-service-mesh fill:red
-        mtls-meshery(Meshery)
-        style mtls-meshery fill:red
-        mtls-performance(Service Mesh Performance)
-        style mtls-performance fill:red
-        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> mtls-meshery
-        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> mtls-meshery --> mtls-performance --> scanning
+        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> scanning
+        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> scanning
 
         %% --------------
         %% -- Scanning --
@@ -881,6 +877,8 @@ flowchart TD
         style inclavare-containers fill:red
         secrets-teller(Teller)
         style secrets-teller fill:red
+        mtls-meshery(Meshery)
+        style mtls-meshery fill:red
 
     end
 ```
