@@ -221,7 +221,7 @@ flowchart TD
     subgraph Destroy
 
         destroy((Destroy Everything))
-        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy.md"
+        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy-dev.md"
 
     end
 ```

@@ -390,10 +390,6 @@ flowchart TD
         mtls-network-service-mesh(Network Service Mesh)
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/nsm.md"
         style mtls-network-service-mesh fill:red
-        mtls-meshery(Meshery)
-        style mtls-meshery fill:red
-        mtls-performance(Service Mesh Performance)
-        style mtls-performance fill:red
         mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> scanning
         mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> scanning
 
@@ -430,9 +426,11 @@ flowchart TD
         style dex fill:red
         athenz(Athenz)
         style athenz fill:red
+        keycloak(Keycloak)
+        style keycloak fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & athenz --> container-ssh --> misc
+        access-control --> access-control-hexa & dex & athenz & keycloak --> container-ssh --> misc
 
         %% ----------
         %% -- Misc --

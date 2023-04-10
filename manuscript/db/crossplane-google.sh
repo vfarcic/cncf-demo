@@ -8,6 +8,8 @@ echo "https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?proj
 
 echo "Open the URL and *ENABLE API*"
 
+echo "Press any key to continue"
+
 read NOTHING
 
 export SA_NAME=devops-toolkit
@@ -30,6 +32,8 @@ kubectl --namespace crossplane-system \
 
 kubectl apply \
     --filename crossplane-config/provider-gcp-official.yaml
+
+sleep 2
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
     --all --timeout=300s

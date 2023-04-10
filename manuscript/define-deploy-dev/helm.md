@@ -40,7 +40,7 @@ yq --inplace ".image.tag = \"$TAG\"" helm/app/values.yaml
 
 cat helm/app/values.yaml
 
-helm upgrade --install cncf-demo helm/app --namespace dev --wait
+helm upgrade --install cncf-demo helm/app --namespace dev
 
 echo "http://cncf-demo-dev.$DOMAIN"
 

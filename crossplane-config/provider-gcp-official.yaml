@@ -5,4 +5,4 @@ kind: Provider
 metadata:
   name: crossplane-provider-gcp-official
 spec:
-  package: xpkg.upbound.io/upbound/provider-gcp:v0.20.0
+  package: xpkg.upbound.io/upbound/provider-gcp:v0.30.0
