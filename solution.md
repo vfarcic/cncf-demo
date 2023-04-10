@@ -420,9 +420,11 @@ flowchart TD
         style dex fill:red
         athenz(Athenz)
         style athenz fill:red
+        keycloak(Keycloak)
+        style keycloak fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & athenz --> container-ssh --> misc
+        access-control --> access-control-hexa & dex & athenz & keycloak --> container-ssh --> misc
 
         %% ----------
         %% -- Misc --
