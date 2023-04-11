@@ -100,13 +100,17 @@ kubectl apply --filename cert-manager/issuer.yaml
 
 alias docker=$(which nerdctl)
 
+docker system prune --all
+
 docker image build --tag cncf-demo:v0.0.1 .
 
 # Quit Rancher Desktop
 
-unalias docker
-
 # Start Docker
+
+alias docker=/usr/local/bin/docker
+
+docker system prune --all
 
 kbld --file kbld/deployment.yaml
 
@@ -130,8 +134,3 @@ kubectl get managed
 ## Start The Adventure
 
 * [Build Container Image](../build-container-image/README.md)
-
-# TODO:
-
-* [Nocalhost](nocalhost.md)
-* [Devfile](devfile.md)

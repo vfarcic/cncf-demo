@@ -4,11 +4,12 @@ yq --inplace \
 
 gcloud projects create $XP_PROJECT_ID
 
-echo "https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=$XP_PROJECT_ID"
+echo "
 
-echo "Open the URL and *ENABLE API*"
+https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=$XP_PROJECT_ID
 
-echo "Press any key to continue"
+Open the URL and *ENABLE API*
+Press any key to continue"
 
 read NOTHING
 
