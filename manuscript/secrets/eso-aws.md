@@ -6,19 +6,15 @@ TODO: Intro
 
 ```bash
 aws secretsmanager create-secret --name production-postgresql \
+    --region us-east-1 \
     --secret-string '{"password": "YouWillNeverFindOut"}'
 
-# TODO: Rewrite from Google to AWS
-
 kubectl --namespace external-secrets \
-    create secret generic google \
-    --from-file=credentials=account.json
+    create secret generic aws \
+    --from-literal access-key-id=$AWS_ACCESS_KEY_ID \
+    --from-literal secret-access-key=$AWS_SECRET_ACCESS_KEY
 
-yq --inplace \
-    ".spec.provider.gcpsm.projectID = \"$XP_PROJECT_ID\"" \
-    eso/secret-store-google.yaml
-
-cp eso/secret-store-google.yaml infra/.
+cp eso/secret-store-aws.yaml infra/.
 
 git add .
 
