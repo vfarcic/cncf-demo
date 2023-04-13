@@ -349,7 +349,6 @@ flowchart TD
         click secrets-eso-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-google.md"
         secrets-eso-aws(AWS)
         click secrets-eso-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-aws.md"
-        style secrets-eso-aws fill:red
         secrets-eso-azure(Azure)
         click secrets-eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
         style secrets-eso-azure fill:red
