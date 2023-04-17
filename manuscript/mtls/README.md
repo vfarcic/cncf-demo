@@ -1,8 +1,9 @@
-# Mutual TLS (mTLS)
+# Mutual TLS (mTLS) And Network Policies
 
 TODO: Intro
 
 [![What Is Mutual TLS (mTLS), Why Do We Need It, And How Do We Get It?](https://img.youtube.com/vi/b38k2GiLDdc/0.jpg)](https://youtu.be/b38k2GiLDdc)
+[![Kubernetes Network Policies Explained](https://img.youtube.com/vi/18FEA5xXBGY/0.jpg)](https://youtu.be/18FEA5xXBGY)
 
 ## Choice 1: Istio
 
