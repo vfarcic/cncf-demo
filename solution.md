@@ -436,7 +436,7 @@ flowchart TD
         %% ----------
         misc{{Misc}}
         style misc fill:red
-        curiefense(Curiefense) %% API defence
+        curiefense(Curiefense)
         style curiefense fill:red
         confidential-containers(Confidential Containers)
         style confidential-containers fill:red
