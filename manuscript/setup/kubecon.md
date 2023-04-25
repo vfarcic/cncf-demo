@@ -100,7 +100,7 @@ kubectl apply --filename cert-manager/issuer.yaml
 
 alias docker=$(which nerdctl)
 
-docker system prune --all
+docker system prune --all --force
 
 docker image build --tag cncf-demo:v0.0.1 .
 
@@ -110,7 +110,7 @@ docker image build --tag cncf-demo:v0.0.1 .
 
 alias docker=/usr/local/bin/docker
 
-docker system prune --all
+docker system prune --all --force
 
 kbld --file kbld/deployment.yaml
 
