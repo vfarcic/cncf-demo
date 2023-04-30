@@ -14,7 +14,7 @@ TODO: Intro
 code .
 
 # Open the `Nocalhost` extension in VSCode
-# Change the Kube Config value to `kubeconfig-dev.yaml` int the
+# Change the Kube Config value to `kubeconfig-dev.yaml` in the
 #   project directory
 # Set `dev`
 # Click the `Add Cluster` button
