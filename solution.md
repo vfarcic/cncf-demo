@@ -209,15 +209,23 @@ flowchart TD
         style cluster-kubevela fill:red
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
-        cluster-cluster-api(Cluster API)
-        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
         cluster-crossplane-google(Google Cloud)
         click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
-        cluster --> cluster-crossplane & cluster-cluster-api & cluster-kubevela --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        capi-google(Google Cloud)
+        click capi-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-google.md"
+        capi-aws(AWS)
+        click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
+        capi-azure(Azure)
+        click capi-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-azure.md"
+        cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
+        cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> gitops
+        cluster --> cluster-kubevela --> gitops
 
         %% ------------
         %% -- GitOps --
@@ -325,6 +333,8 @@ flowchart TD
         %% Wait with VAC until Kubernetes v1.26 is available in GKE, EKS, and AKS
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
+        falco(Falco)
+        style falco fill:red
         policies-helm(App As Helm)
         style policies-helm fill:red
         policies-kustomize(App As Kustomize)
@@ -333,7 +343,7 @@ flowchart TD
         style policies-cdk8s fill:red
         policies-carvel(App As Carvel ytt)
         style policies-carvel fill:red
-        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> secrets
+        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac & falco --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> secrets
 
         %% ------------------------
         %% -- Secrets Management --
@@ -397,11 +407,7 @@ flowchart TD
         style scanning fill:red
         kubescape(Kubescape)
         style kubescape fill:red
-        fonio(Fonio)
-        style fonio fill:red
-        falco(Falco)
-        style falco fill:red
-        scanning --> kubescape & fonio & falco --> signing
+        scanning --> kubescape --> signing
 
         %% -------------
         %% -- Signing --
@@ -470,7 +476,9 @@ flowchart TD
         style pixie fill:red
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> instrumentation
+        fonio(Fonio)
+        style fonio fill:red
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex & fonio --> instrumentation
 
         %% ---------------------
         %% -- Instrumentation --

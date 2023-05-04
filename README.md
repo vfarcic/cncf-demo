@@ -240,6 +240,16 @@ flowchart TD
 | Develop the App | Nick Powell - Telepresence<br />Carl Montanari - DevSpace<br />Elson Yuen - Devfile<br /> | Tuesday, March 21, 2023 | [story](manuscript/develop/README.md) |
 | Chapter 1 Finale! | Just Whitney and Viktor! | Tuesday, March 28, 2023 |  |
 
+### Production
+
+| Name | Guests | Date | Link |
+| --- | --- | --- | --- |
+| Cluster | TODO: - KubeVela With Terraform<br />TODO: - Crossplane<br />TODO: - Cluster API | | [story](manuscript/cluster/README.md) |
+| GitOps | TODO: - Flux<br />TODO: - Argo CD<br />TODO: - Carvel kapp-controller | | [story](manuscript/gitops/README.md) |
+| Ingress | TODO: - Contour With Envoy<br />TODO: - NGINX<br />TODO: - Emissary-ingress With Envoy | | [story](manuscript/ingress/README.md) |
+| Deploy The App To Production & Database | N/A | | [story](manuscript/ingress/README.md) |
+| Chapter 2 Finale! | Just Whitney and Viktor! | |  |
+
 ## The Format
 
 * Recap of the decisions made in the app's journey so far (<=5 min.)
