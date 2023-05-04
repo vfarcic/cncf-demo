@@ -55,4 +55,4 @@ To use devfiles, you’ll need a tool that understands them. Tools that provide 
 * [Telepresence](telepresence.md)
 * [DevSpace](devspace.md)
 * [Nocalhost](nocalhost.md)
-* [Devfile](devfile.md)
+* Devfile (coming soon)
