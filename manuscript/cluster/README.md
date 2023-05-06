@@ -25,6 +25,6 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* [Pulumi](pulumi.md)
+* [Cluster API](cluster-api.md)
 * [Crossplane](crossplane.md)
-* [Terraform](terraform.md)
+* KubeVela with Terraform (coming soon)

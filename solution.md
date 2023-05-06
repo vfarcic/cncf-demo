@@ -177,7 +177,6 @@ flowchart TD
         develop-devspace-carvel(App as Carvel ytt)
         click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
         develop-devfile(Devfile)
-        click develop-devfile "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
         style develop-devfile fill:red
         develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
         develop-telepresence & develop-nocalhost & develop-devfile --> dev-done
@@ -207,7 +206,6 @@ flowchart TD
         click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
         style cluster fill:blue
         cluster-kubevela(KubeVela With Terraform)
-        click cluster-kubevela "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/kubevela.md"
         style cluster-kubevela fill:red
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"

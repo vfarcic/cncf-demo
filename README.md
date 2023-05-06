@@ -206,7 +206,6 @@ flowchart TD
         click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
         style develop-devspace-carvel fill:green
         develop-devfile(Devfile)
-        click develop-devfile "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
         style develop-devfile fill:red
         develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
         develop-telepresence & develop-nocalhost & develop-devfile --> continue
