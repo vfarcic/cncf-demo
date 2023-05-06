@@ -525,13 +525,16 @@ flowchart TD
         style progressive-delivery-argo-rollouts fill:red
         progressive-delivery-flagger(Flagger)
         style progressive-delivery-flagger fill:red
-        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger
+        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> observability-misc
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        observability-misc{{Misc}}
+        style observability-misc fill:red
         kuberhealthy(kuberhealthy)
         style kuberhealthy fill:red
+        observability-misc --> kuberhealthy
 
     end
 
