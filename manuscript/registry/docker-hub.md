@@ -8,21 +8,15 @@ Distribution is a core library for many other registries too, including GitHub C
 
 ## Setup
 
-* Register in https://hub.docker.com/signup (if you haven't already).
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-export REGISTRY=index.docker.io
+chmod +x manuscript/registry/docker-hub.sh
 
-# Replace `[...]` with your Docker Hub username
-export DOCKERHUB_USERNAME=[...]
+./manuscript/registry/docker-hub.sh
 
-export IMAGE=$REGISTRY/$DOCKERHUB_USERNAME/cncf-demo
-
-yq --inplace ".image = \"$IMAGE\"" settings.yaml
-
-# Make sure that Docker is running
-
-docker login --username $DOCKERHUB_USERNAME $REGISTRY
+source .env
 ```
 
 ## Do

@@ -6,6 +6,7 @@
 /gke_gcloud_auth_plugin_cache
 /image-builder
 /account.json
+/.env
 
 # Ignore DevSpace cache and log folder
 .devspace/
