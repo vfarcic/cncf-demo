@@ -244,11 +244,10 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Cluster | TODO: - KubeVela With Terraform<br />TODO: - Crossplane<br />TODO: - Cluster API | | [story](manuscript/cluster/README.md) |
+| Cluster | TODO: - Crossplane<br />TODO: - Cluster API | | [story](manuscript/cluster/README.md) |
 | GitOps | TODO: - Flux<br />TODO: - Argo CD<br />TODO: - Carvel kapp-controller | | [story](manuscript/gitops/README.md) |
 | Ingress | TODO: - Contour With Envoy<br />TODO: - NGINX<br />TODO: - Emissary-ingress With Envoy | | [story](manuscript/ingress/README.md) |
-| Deploy The App To Production & Database | N/A | | [story](manuscript/ingress/README.md) |
-| Chapter 2 Finale! | Just Whitney and Viktor! | |  |
+| Chapter 2 Finale! (including Deploy The App To Production & Database implementation) | Just Whitney and Viktor! | |  |
 
 ## The Format
 
