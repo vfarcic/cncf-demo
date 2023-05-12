@@ -1,4 +1,4 @@
-# Deploy The App To Production
+# Deploy the App to Production
 
 TODO: Intro
 
