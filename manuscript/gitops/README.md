@@ -1,4 +1,4 @@
-# GitOps
+# Configure Synchronization with GitOps
 
 TODO: Intro
 
