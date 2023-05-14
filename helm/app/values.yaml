@@ -27,6 +27,6 @@ postgresql:
       scripts:
         00_init_script.sh: |
           export PGPASSWORD=$POSTGRES_PASSWORD
-          psql -U postgres -c 'CREATE DATABASE "cncf-demo";'
+          psql -U postgres -c 'CREATE DATABASE "cncf-demo-db-dev";'
 schemahero:
   enabled: false

@@ -40,14 +40,15 @@ Nocalhost is an open-source IDE plugin for cloud-native applications development
 
 * [Official site](https://nocalhost.dev)
 
-## Choice 4: Devfile
+## Choice 4: Devfile With odo
 
 Devfile is a specification that allows users to declaratively include the development environment information as part of their application. Devfiles can be used to automate and simplify the development process. This can be done by adopting existing devfiles that are available in the public community registry, or by authoring your own devfiles to record custom instructions for how to configure and run your development environment.
 
 To use devfiles, you’ll need a tool that understands them. Tools that provide devfile support include odo, Eclipse Che, VSCode OpenShift Toolkit, Amazon CodeCatalyst, JetBrains Space, OpenShift Dev Console, and IntelliJ OpenShift Toolkit.
 
 [![What Is Devfile?](https://img.youtube.com/vi/eGFdEXw9eLE/0.jpg)](https://www.youtube.com/live/eGFdEXw9eLE)
-* [Official site](https://devfile.io)
+* [Official Devfile site](https://devfile.io)
+* [Official odo site](https://odo.dev)
 
 
 ## What Is Your Choice?
@@ -55,4 +56,4 @@ To use devfiles, you’ll need a tool that understands them. Tools that provide 
 * [Telepresence](telepresence.md)
 * [DevSpace](devspace.md)
 * [Nocalhost](nocalhost.md)
-* Devfile (coming soon)
+* [Devfile with odo](devfile.md)

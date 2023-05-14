@@ -205,8 +205,6 @@ flowchart TD
         cluster{{Create a Cluster}}
         click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
         style cluster fill:blue
-        cluster-kubevela(KubeVela With Terraform)
-        style cluster-kubevela fill:red
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
         cluster-crossplane-google(Google Cloud)
@@ -225,7 +223,6 @@ flowchart TD
         click capi-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-azure.md"
         cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
         cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> gitops
-        cluster --> cluster-kubevela --> gitops
 
         %% ------------
         %% -- GitOps --
@@ -285,8 +282,6 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
-        db-production-kubevela(KubeVela With Terraform)
-        style db-production-kubevela fill:red
         db-production-helm(App As Helm)
         click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
         db-production-kustomize(App As Kustomize)
@@ -295,7 +290,7 @@ flowchart TD
         click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
         db-production-carvel(App As Carvel ytt)
         click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
-        db-production --> db-production-crossplane & db-production-kubevela --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
+        db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
         prod-done((Chapter End))
 
@@ -523,13 +518,16 @@ flowchart TD
         style progressive-delivery-argo-rollouts fill:red
         progressive-delivery-flagger(Flagger)
         style progressive-delivery-flagger fill:red
-        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger
+        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> observability-misc
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        observability-misc{{Misc}}
+        style observability-misc fill:red
         kuberhealthy(kuberhealthy)
         style kuberhealthy fill:red
+        observability-misc --> kuberhealthy
 
     end
 

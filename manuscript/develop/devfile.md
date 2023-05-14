@@ -1,4 +1,4 @@
-# Develop The Application With DevFile And odo
+# Develop The Application With Devfile And odo
 
 TODO: Intro
 
