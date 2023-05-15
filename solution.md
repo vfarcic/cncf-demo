@@ -177,7 +177,7 @@ flowchart TD
         devspace-carvel(App as Carvel ytt)
         click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
         devfile(Devfile)
-        click devfile "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
+        style devfile fill:red
         develop --> telepresence & devspace & nocalhost & devfile
         telepresence & nocalhost & devfile --> dev-done
         devspace --> devspace-kustomize & devspace-cdk8s & devspace-helm & devspace-carvel --> dev-done
@@ -641,7 +641,11 @@ flowchart TD
         style app-definitions-crossplane fill:red
         app-definitions-kube-vela(KubeVela)
         style app-definitions-kube-vela fill:red
-        app-definitions --> app-definitions-crossplane & app-definitions-kube-vela --> crd
+        app-definitions-helm(Helm Charts)
+        style app-definitions-helm fill:red
+        app-definitions-kapp-controller(Carvel kapp-controller)
+        style app-definitions-kapp-controller fill:red
+        app-definitions --> app-definitions-crossplane & app-definitions-kube-vela & app-definitions-helm & app-definitions-kapp-controller--> crd
 
         %% --------------------------------------
         %% -- CRDs, Controllers, and Operators --
