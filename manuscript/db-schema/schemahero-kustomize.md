@@ -18,6 +18,10 @@ yq --inplace ".resources += \"$SCHEMA_FILE\"" \
 
 cat kustomize/overlays/dev/kustomization.yaml
 
+# Execute only if the DB was created with Crossplane
+kubectl --namespace dev apply --kustomize kustomize/overlays/dev
+
+# Execute only if the DB was NOT created with Crossplane
 kubectl --namespace dev kustomize --enable-helm \
     kustomize/overlays/dev \
     | kubectl --namespace dev apply --filename -

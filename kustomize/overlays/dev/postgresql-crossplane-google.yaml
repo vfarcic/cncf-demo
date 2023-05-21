@@ -16,6 +16,6 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: cncf-demo-password
+  name: cncf-demo-db-dev-password
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=

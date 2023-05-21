@@ -4,6 +4,9 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
 export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
