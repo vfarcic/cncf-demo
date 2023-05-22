@@ -9,6 +9,15 @@ gcloud projects create $XP_PROJECT_ID
 
 echo "
 
+https://console.cloud.google.com/billing/enable?project=$XP_PROJECT_ID
+
+Open the URL and *ENABLE API*
+Press any key to continue"
+
+read NOTHING
+
+echo "
+
 https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=$XP_PROJECT_ID
 
 Open the URL and *ENABLE API*
@@ -74,12 +83,3 @@ spec:
       name: gcp-creds
       key: creds" \
     | kubectl apply --filename -
-
-echo "
-
-https://console.cloud.google.com/billing/enable?project=$XP_PROJECT_ID
-
-Open the URL and *ENABLE API*
-Press any key to continue"
-
-read NOTHING

@@ -1,3 +1,6 @@
+#!/bin/sh
+set -e
+
 helm repo add crossplane-stable \
     https://charts.crossplane.io/stable
 
