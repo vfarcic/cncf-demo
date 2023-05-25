@@ -162,26 +162,25 @@ flowchart TD
         develop{{Develop The App}}
         click develop "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/README.md"
         style develop fill:blue
-        develop-telepresence(Telepresence)
-        click develop-telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
-        develop-devspace(DevSpace)
-        click develop-devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
-        develop-nocalhost(Nocalhost)
-        click develop-nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
-        develop-devspace-kustomize(App as Kustomize)
-        click develop-devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
-        develop-devspace-cdk8s(App as cdk8s)
-        click develop-devspace-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-cdk8s.md"
-        develop-devspace-helm(App as Helm)
-        click develop-devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
-        develop-devspace-carvel(App as Carvel ytt)
-        click develop-devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
-        develop-devfile(Devfile)
-        style develop-devfile fill:red
-        click develop-telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devfile.md"
-        develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
-        develop-telepresence & develop-nocalhost & develop-devfile --> dev-done
-        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> dev-done
+        telepresence(Telepresence)
+        click telepresence "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/telepresence.md"
+        devspace(DevSpace)
+        click devspace "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace.md"
+        nocalhost(Nocalhost)
+        click nocalhost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/nocalhost.md"
+        devspace-kustomize(App as Kustomize)
+        click devspace-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-kustomize.md"
+        devspace-cdk8s(App as cdk8s)
+        click devspace-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-cdk8s.md"
+        devspace-helm(App as Helm)
+        click devspace-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-helm.md"
+        devspace-carvel(App as Carvel ytt)
+        click devspace-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/develop/devspace-carvel.md"
+        devfile(Devfile)
+        style devfile fill:red
+        develop --> telepresence & devspace & nocalhost & devfile
+        telepresence & nocalhost & devfile --> dev-done
+        devspace --> devspace-kustomize & devspace-cdk8s & devspace-helm & devspace-carvel --> dev-done
 
         dev-done((Chapter End))
 
@@ -642,7 +641,11 @@ flowchart TD
         style app-definitions-crossplane fill:red
         app-definitions-kube-vela(KubeVela)
         style app-definitions-kube-vela fill:red
-        app-definitions --> app-definitions-crossplane & app-definitions-kube-vela --> crd
+        app-definitions-helm(Helm Charts)
+        style app-definitions-helm fill:red
+        app-definitions-kapp-controller(Carvel kapp-controller)
+        style app-definitions-kapp-controller fill:red
+        app-definitions --> app-definitions-crossplane & app-definitions-kube-vela & app-definitions-helm & app-definitions-kapp-controller--> crd
 
         %% --------------------------------------
         %% -- CRDs, Controllers, and Operators --

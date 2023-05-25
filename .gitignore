@@ -13,3 +13,4 @@
 
 # Ignore VSCode settings
 .vscode/
+.odo
