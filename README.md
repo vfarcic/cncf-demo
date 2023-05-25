@@ -244,10 +244,10 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Provision a Production Cluster | TODO: - Crossplane<br />TODO: - Cluster API | Tuesday, July 4, 2023 | [story](manuscript/cluster/README.md) |
-| Configure Synchronization with GitOps | TODO: - Flux<br />TODO: - Argo CD<br />TODO: - Carvel kapp-controller | Tuesday, July 18, 2023 | [story](manuscript/gitops/README.md) |
-| Implement Ingress | TODO: - Contour With Envoy<br />TODO: - NGINX<br />TODO: - Emissary-ingress With Envoy | Tuesday, July 25, 2023 | [story](manuscript/ingress/README.md) |
-| Chapter 2 Finale! (Including [Deploy The App To Production](manuscript/app/README.md) & [Database Implementation](manuscript/db-production/README.md)) | Whitney and Viktor! | Tuesday, August 1, 2023 | [story](manuscript/app/README.md) |
+| Provision a Production Cluster | TODO: - Crossplane<br />TODO: - Cluster API | Tuesday, July 18, 2023 | [story](manuscript/cluster/README.md) |
+| Configure Synchronization with GitOps | TODO: - Flux<br />TODO: - Argo CD<br />TODO: - Carvel kapp-controller | Tuesday, July 25, 2023 | [story](manuscript/gitops/README.md) |
+| Implement Ingress | TODO: - Contour With Envoy<br />TODO: - NGINX<br />TODO: - Emissary-ingress With Envoy | Tuesday, August 1, 2023 | [story](manuscript/ingress/README.md) |
+| Chapter 2 Finale! (Including [Deploy The App To Production](manuscript/app/README.md) & [Database Implementation](manuscript/db-production/README.md)) | Whitney and Viktor! | Tuesday, August 8, 2023 | [story](manuscript/app/README.md) |
 
 ## The Format
 
