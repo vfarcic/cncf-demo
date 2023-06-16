@@ -28,7 +28,8 @@ gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
     'You need a Kubernetes cluster.' \
-    'Do NOT use a local Kubernetes cluster since all the tools we will run might be too much for your machine.'
+    'Do NOT use a local Kubernetes cluster since all the tools
+  we will run might be too much for your machine.'
 
 gum confirm "
 Do you have a Kubernetes cluster?
@@ -51,7 +52,8 @@ gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
     'We are about to install Argo CD.' \
-    'If you prefer a solution other than Argo CD for GitOps, please go back to the prod.md or an earlier chapter.'
+    'If you prefer a solution other than Argo CD for GitOps,
+  please go back to the prod.md or an earlier chapter.'
 
 gum confirm "
 Continue?
@@ -138,6 +140,8 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
+    echo "export PROJECT_ID=$PROJECT_ID" >> .env
+
     yq --inplace ".production.google.projectId = \"${PROJECT_ID}\"" settings.yaml
 
     gcloud projects create ${PROJECT_ID}
@@ -165,15 +169,15 @@ if [[ "$HYPERSCALER" == "google" ]]; then
     echo "apiVersion: gcp.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-name: default
+  name: default
 spec:
-projectID: $PROJECT_ID
-credentials:
+  projectID: $PROJECT_ID
+  credentials:
     source: Secret
     secretRef:
-    namespace: crossplane-system
-    name: gcp-creds
-    key: creds" | kubectl apply --filename -
+      namespace: crossplane-system
+      name: gcp-creds
+      key: creds" | kubectl apply --filename -
 
     yq --inplace ".crossplane.destination = \"google\"" settings.yaml
 
