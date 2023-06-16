@@ -18,9 +18,6 @@ kubectl --namespace crossplane-system \
     create secret generic gcp-creds \
     --from-file creds=./gcp-creds.json
 
-kubectl apply \
-    --filename crossplane-config/provider-gcp-official.yaml
-
 kubectl get pkgrev
 
 # Wait until all the packages are healthy

@@ -22,9 +22,6 @@ kubectl --namespace crossplane-system \
     create secret generic aws-creds \
     --from-file creds=./aws-creds.conf
 
-kubectl apply \
-    --filename crossplane-config/provider-aws-official.yaml
-
 kubectl get pkgrev
 
 # Wait until all the packages are healthy

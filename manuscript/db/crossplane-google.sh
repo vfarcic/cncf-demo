@@ -43,30 +43,6 @@ kubectl --namespace crossplane-system \
     create secret generic gcp-creds \
     --from-file creds=./gcp-creds.json
 
-kubectl apply \
-    --filename crossplane-config/provider-gcp-official.yaml
-
-gum style --foreground 212 --border-foreground 212 --border double --margin "1 2" --padding "2 4" \
-  'GKE starts with a very small control plane.' \
-  '
-Since a lot of CRDs were installed, GKE is likely going to detect
-that its control plane is too small for it and increase its size
-automatically.' \
-  '
-As a result, you might experience delays or errors like
-"connection refused" or "TLS handshake timeout" (among others).' \
-  '
-So, we will wait for a while (e.g., 1h) for the control
-plane nodes to be automatically changed for larger ones.' \
-  '
-This issue will soon be resolved and, when that happens, I will
-remove this message and the sleep command that follows.' \
-  '
-Grab a cup of coffee and watch an episode of your favorite
-series on Netflix.'
-
-gum spin --spinner line --title "Waiting for GKE control plane nodes to resize (1h approx.)..." -- sleep 3600
-
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
     --all --timeout=300s
 

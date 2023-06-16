@@ -115,6 +115,14 @@ helm repo update
 
 helm upgrade --install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace --wait
 
+kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
+
+kubectl apply --filename crossplane-config/config-sql.yaml
+
+sleep 2
+
+kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
+
 ################
 # Hyperscalers #
 ################
@@ -154,10 +162,6 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     kubectl --namespace crossplane-system create secret generic gcp-creds --from-file creds=./gcp-creds.json
 
-    kubectl apply --filename crossplane-config/provider-google-official.yaml
-
-    kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
-
     echo "apiVersion: gcp.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
@@ -189,10 +193,6 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 
     kubectl --namespace crossplane-system create secret generic aws-creds --from-file creds=./aws-creds.conf
 
-    kubectl apply --filename crossplane-config/provider-aws-official.yaml
-
-    kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
-
     kubectl apply --filename crossplane-config/provider-config-aws-official.yaml
 
     yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
@@ -217,10 +217,6 @@ fi
 ##################
 # Setup Database #
 ##################
-
-kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply --filename crossplane-config/config-sql.yaml
 
 yq --inplace ".resources += \"postgresql-crossplane-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
 

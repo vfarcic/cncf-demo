@@ -7,11 +7,6 @@ kubectl --namespace crossplane-system \
     create secret generic aws-creds \
     --from-file creds=./aws-creds.conf
 
-kubectl apply \
-    --filename crossplane-config/provider-aws-official.yaml
-
-sleep 2
-
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io \
     --all --timeout=300s
 
