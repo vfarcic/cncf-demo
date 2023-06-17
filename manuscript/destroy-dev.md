@@ -7,6 +7,4 @@
 chmod +x manuscript/destroy-dev.sh
 
 ./manuscript/destroy-dev.sh
-
-source .env
 ```

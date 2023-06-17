@@ -37,11 +37,6 @@ Do you have a Kubernetes cluster?
 
 echo
 
-GITHUB_ORG=$(gum input --placeholder "GitHub organization (do NOT use GitHub username)" --value "$GITHUB_ORG")
-echo "export GITHUB_ORG=$GITHUB_ORG" >> .env
-
-gh repo fork vfarcic/cncf-demo --clone --remote --org ${GITHUB_ORG}
-
 kubectl create namespace production
 
 ################
@@ -58,8 +53,6 @@ gum style \
 gum confirm "
 Continue?
 " || exit 0
-
-cd cncf-demo
 
 export REPO_URL=$(git config --get remote.origin.url)
 
@@ -121,7 +114,7 @@ kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
 
 kubectl apply --filename crossplane-config/config-sql.yaml
 
-sleep 2
+sleep 60
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
 

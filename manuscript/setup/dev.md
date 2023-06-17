@@ -96,7 +96,7 @@ gcloud container get-server-config --region us-east1
 export K8S_VERSION=[...]
 
 gcloud container clusters create dot --project $PROJECT_ID \
-    --region us-east1 --machine-type n1-standard-4 \
+    --region us-east1 --machine-type e2-standard-4 \
     --num-nodes 1 --cluster-version $K8S_VERSION \
     --node-version $K8S_VERSION
 

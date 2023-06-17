@@ -11,19 +11,18 @@ export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 ## Do
 
 ```bash
-cat $GITOPS_APP/gatekeeper.yaml
+# Gatekeeper causes issues with Argo CD (not sure about Flux),
+#   so we'll install it manually.
 
-cp $GITOPS_APP/gatekeeper.yaml infra/.
+helm repo add gatekeeper \
+    https://open-policy-agent.github.io/gatekeeper/charts
 
-git add . 
+helm repo update
 
-git commit -m "Gatekeeper"
+helm upgrade --install gatekeeper gatekeeper/gatekeeper \
+    --namespace gatekeeper-system --create-namespace
 
-git push
-
-kubectl --namespace gatekeeper-system get pods
-
-# Wait until the Pods are created and are ready
+# TODO: Continue
 
 cat policies/gatekeeper.yaml
 

@@ -46,8 +46,8 @@ TODO: Explanation
 ## What Is Your Choice?
 
 * [Kyverno](kyverno.md)
-* [Open Policy Agent (OPA) with Gatekeeper](gatekeeper.md)
-* [Cloud Custodian](cloud-custodian.md)
-* [KubeArmor](kube-armor.md)
-* [Kubewarden](kubewarden.md)
-* [Validating Admission Policy](vac.md)
+* TODO: Open Policy Agent (OPA) with Gatekeeper
+* TODO: Cloud Custodian
+* TODO: KubeArmor
+* TODO: Kubewarden
+* TODO: Validating Admission Policy
