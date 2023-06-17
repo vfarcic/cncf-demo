@@ -38,7 +38,7 @@ metadata:
     policies.kyverno.io/severity: high
     policies.kyverno.io/subject: SQLClaim
     policies.kyverno.io/description: >-
-      SQLClaims must have size small, medium, or large database size
+      SQLClaims must have small, medium, or large database size.
 spec:
   validationFailureAction: enforce
   background: true
@@ -50,7 +50,7 @@ spec:
         - SQLClaim
         - SQL
     validate:
-      message: SQLClaims must have size small, medium, or large database size
+      message: SQLClaims must have small, medium, or large database size.
       pattern:
         spec:
           parameters:

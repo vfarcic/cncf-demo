@@ -25,11 +25,9 @@ kubectl --namespace gatekeeper-system get pods
 
 # Wait until the Pods are created and are ready
 
-# TODO: Continue rewrite
+cat policies/gatekeeper.yaml
 
-cat policies/kyverno.yaml
-
-cp policies/kyverno.yaml infra/policies.yaml
+cp policies/gatekeeper.yaml infra/policies.yaml
 
 git add .
 
@@ -41,11 +39,14 @@ kubectl get clusterpolicies
 
 # Wait until the policies are created
 
-export POLICY_KIND=clusterpolicy
+export POLICY_KIND=deploymentreplicas
 
-yq --inplace ".policies.type = \"kyverno\"" settings.yaml
+yq --inplace ".policies.type = \"gatekeeper\"" settings.yaml
 
 yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
+
+TODO: Test SQLClaim
+TODO: 
 ```
 
 ## How Did You Define Your App?

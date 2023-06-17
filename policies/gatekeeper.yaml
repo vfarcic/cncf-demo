@@ -1,0 +1,147 @@
+---
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: deploymentreplicas
+  annotations:
+    metadata.gatekeeper.sh/title: Require Multiple Replicas
+    metadata.gatekeeper.sh/category: App
+    metadata.gatekeeper.sh/severity: high
+    metadata.gatekeeper.sh/subject: Deployment
+    description: >-
+      Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
+      This policy validates that Deployments have more than one replica.      
+spec:
+  crd:
+    spec:
+      names:
+        kind: deploymentReplicas
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            replicas:
+              type: integer
+              description: Deployments should have a minimum number of replicas
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package deploymentreplicas
+
+        object_name = input.review.object.metadata.name
+        object_kind = input.review.kind.kind
+
+        violation[{"msg": msg}] {
+            spec := input.review.object.spec
+            expected := input.parameters.replicas
+            value := input.review.object.spec.replicas
+            value <= expected
+            msg := sprintf("Deployment %v should have more than %v replicas to ensure availability.", [object_name, expected])
+        }
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: deploymentReplicas
+metadata:
+  name: deploymentproduction
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+    namespaces: ["production"]
+  parameters:
+    replicas: 2
+---
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: dbcluster
+  annotations:
+    metadata.gatekeeper.sh/title: Require Small, Medium, or Large DB size
+    metadata.gatekeeper.sh/category: DB
+    metadata.gatekeeper.sh/severity: high
+    metadata.gatekeeper.sh/subject: SQLClaim
+    description: >-
+      SQLClaims must have small, medium, or large database size.
+spec:
+  crd:
+    spec:
+      names:
+        kind: dbCluster
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            size:
+              type: string
+              description: SQLClaims must have small, medium, or large database size.
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package dbcluster
+
+        object_name = input.review.object.metadata.name
+        object_kind = input.review.kind.kind
+
+        violation[{"msg": msg}] {
+            spec := input.review.object.spec
+            expected := input.parameters.size
+            value := input.review.object.spec.parameters.size
+            not re_match(expected, value)
+            msg := sprintf("SQLClaim %v size does not satisfy regex %v are not reliable and thus cannot be used in production.", [object_name, expected])
+        }
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: dbCluster
+metadata:
+  name: db
+spec:
+  match:
+    kinds:
+      - apiGroups: ["devopstoolkitseries.com"]
+        kinds: ["SQLClaim", "SQL"]
+  parameters:
+    size: "small|medium|large"
+# ---
+#   rules:
+#   - name: db-must-have-proper-size
+#     match:
+#       resources:
+#         kinds:
+#         - SQLClaim
+#         - SQL
+#     validate:
+#       message: SQLClaims must have size small, medium, or large database size
+#       pattern:
+#         spec:
+#           parameters:
+#             size: "small|medium|large"
+# ---
+# apiVersion: kyverno.io/v1
+# kind: ClusterPolicy
+# metadata:
+#   name: db-production
+#   annotations:
+#     policies.kyverno.io/title: Require Medium or Large DB size
+#     policies.kyverno.io/category: DB
+#     policies.kyverno.io/severity: high
+#     policies.kyverno.io/subject: SQLClaim
+#     policies.kyverno.io/description: >-
+#       SQLClaims with small database instances are not reliable and thus cannot be used in production.
+# spec:
+#   validationFailureAction: enforce
+#   background: true
+#   rules:
+#   - name: db-cannot-be-small
+#     match:
+#       resources:
+#         kinds:
+#         - SQLClaim
+#         namespaces:
+#           - production
+#     validate:
+#       message: SQLClaims with small database instances are not reliable and thus cannot be used in production.
+#       pattern:
+#         spec:
+#           parameters:
+#             size: "!small"
