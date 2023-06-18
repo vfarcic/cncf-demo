@@ -23,8 +23,21 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
+	set +e
 
-	echo "Did not implement it yet!!!!"
+	rm apps/cncf-demo.yaml
+
+	git add .
+
+	git commit -m "Remove the app and the database"
+
+	git push
+
+	set -e
+
+	eksctl delete addon --name aws-ebs-csi-driver --cluster dot
+
+	eksctl delete cluster --config-file eksctl/config-dev.yaml
 
 else
 

@@ -22,30 +22,38 @@ helm repo update
 helm upgrade --install gatekeeper gatekeeper/gatekeeper \
     --namespace gatekeeper-system --create-namespace
 
-# TODO: Continue
-
 cat policies/gatekeeper-templates.yaml
 
 cp policies/gatekeeper-templates.yaml infra/policy-templates.yaml
 
 git add .
 
-git commit -m "Policies"
+git commit -m "Policy templates"
 
 git push
 
-kubectl get clusterpolicies
+kubectl get constrainttemplates
 
-# Wait until the policies are created
+# Wait until the contraints templates are created
 
-export POLICY_KIND=deploymentreplicas
+cat policies/gatekeeper-constraints.yaml
+
+cp policies/gatekeeper-constraints.yaml \
+    infra/policy-constraints.yaml
+
+git add .
+
+git commit -m "Policy templates"
+
+git push
+
+kubectl get constraints
+
+export POLICY_KIND=constraints
 
 yq --inplace ".policies.type = \"gatekeeper\"" settings.yaml
 
 yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
-
-TODO: Test SQLClaim
-TODO: 
 ```
 
 ## How Did You Define Your App?

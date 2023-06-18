@@ -35,7 +35,16 @@ kubectl --namespace production get all
 
 # Wait until resources are created
 
-kubectl describe $POLICY_KIND deployment-production
+kubectl --namespace production get deployments
+
+# The Deployment was NOT created
+
+# If Gatekeeper
+export POLICY_KIND=deploymentreplicas
+
+# TODO: Figure out why Gatekeeper does not show but does enforce
+#   violations.
+kubectl describe $POLICY_KIND deploymentproduction
 
 cat kustomize/overlays/prod/deployment-scaled.yaml
 
@@ -59,6 +68,9 @@ kubectl --namespace production get deployments
 #   starting).
 
 kubectl --namespace production get sqlclaims
+
+# If Gatekeeper
+export POLICY_KIND=deploymentreplicas
 
 kubectl describe $POLICY_KIND db-cluster
 
