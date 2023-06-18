@@ -296,95 +296,7 @@ flowchart TD
 
     end
 
-    Production-->Observability
-
-    subgraph Observability
-
-        %% ----------------
-        %% -- Dashboards --
-        %% ----------------
-        dashboards{{Dashboards}}
-        style dashboards fill:red
-        dashboards-skooner(Skooner)
-        style dashboards-skooner fill:red
-        dashboards-kubernetes(Kubernetes Dashboard)
-        style dashboards-kubernetes fill:red
-        dashboards --> dashboards-skooner & dashboards-kubernetes --> metrics
-
-        %% -------------
-        %% -- Metrics --
-        %% -------------
-        metrics{{Metrics}}
-        style metrics fill:red
-        metrics-prometheus(Prometheus)
-        style metrics-prometheus fill:red
-        metrics-thanos(Thanos)
-        style metrics-thanos fill:red
-        pixie(Pixie)
-        style pixie fill:red
-        cortex(Cortex)
-        style cortex fill:red
-        fonio(Fonio)
-        style fonio fill:red
-        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex & fonio --> instrumentation
-
-        %% ---------------------
-        %% -- Instrumentation --
-        %% ---------------------
-        instrumentation{{Instrumentation}}
-        style instrumentation fill:red
-        instrumentation-open-telemetry(OpenTelemetry)
-        style instrumentation-open-telemetry fill:red
-        instrumentation-open-metrics(OpenMetrics)
-        style instrumentation-open-metrics fill:red
-
-        %% -- Instrumentation Connections --
-        instrumentation-->instrumentation-open-telemetry-->tracing
-        instrumentation-->instrumentation-open-metrics-->tracing
-
-        %% -------------
-        %% -- Tracing --
-        %% -------------
-        tracing{{Tracing}}
-        style tracing fill:red
-        tracing-jaeger(Jaeger)
-        style tracing-jaeger fill:red
-
-        %% -- Tracing Connections --
-        tracing --> tracing-jaeger --> logging
-
-        %% -------------
-        %% -- Logging --
-        %% -------------
-        logging{{Logging}}
-        style logging fill:red
-        logging-fluentd(FluentD)
-        style logging-fluentd fill:red
-        logging --> logging-fluentd --> progressive-delivery
-
-        %% --------------------------
-        %% -- Progressive Delivery --
-        %% --------------------------
-        progressive-delivery{{Progressive Delivery}}
-        style progressive-delivery fill:red
-        progressive-delivery-argo-rollouts(Argo Rollouts)
-        style progressive-delivery-argo-rollouts fill:red
-        progressive-delivery-flagger(Flagger)
-        style progressive-delivery-flagger fill:red
-        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> observability-misc
-
-        %% ----------
-        %% -- Misc --
-        %% ----------
-        observability-misc{{Misc}}
-        style observability-misc fill:red
-        kuberhealthy(kuberhealthy)
-        style kuberhealthy fill:red
-        observability-misc --> kuberhealthy
-
-    end
-
-    Observability-->Security
+    Production-->Security
 
     subgraph Security
 
@@ -531,7 +443,95 @@ flowchart TD
 
     end
 
-    Security-->Scale
+    Security-->Observability
+
+    subgraph Observability
+
+        %% ----------------
+        %% -- Dashboards --
+        %% ----------------
+        dashboards{{Dashboards}}
+        style dashboards fill:red
+        dashboards-skooner(Skooner)
+        style dashboards-skooner fill:red
+        dashboards-kubernetes(Kubernetes Dashboard)
+        style dashboards-kubernetes fill:red
+        dashboards --> dashboards-skooner & dashboards-kubernetes --> metrics
+
+        %% -------------
+        %% -- Metrics --
+        %% -------------
+        metrics{{Metrics}}
+        style metrics fill:red
+        metrics-prometheus(Prometheus)
+        style metrics-prometheus fill:red
+        metrics-thanos(Thanos)
+        style metrics-thanos fill:red
+        pixie(Pixie)
+        style pixie fill:red
+        cortex(Cortex)
+        style cortex fill:red
+        fonio(Fonio)
+        style fonio fill:red
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex & fonio --> instrumentation
+
+        %% ---------------------
+        %% -- Instrumentation --
+        %% ---------------------
+        instrumentation{{Instrumentation}}
+        style instrumentation fill:red
+        instrumentation-open-telemetry(OpenTelemetry)
+        style instrumentation-open-telemetry fill:red
+        instrumentation-open-metrics(OpenMetrics)
+        style instrumentation-open-metrics fill:red
+
+        %% -- Instrumentation Connections --
+        instrumentation-->instrumentation-open-telemetry-->tracing
+        instrumentation-->instrumentation-open-metrics-->tracing
+
+        %% -------------
+        %% -- Tracing --
+        %% -------------
+        tracing{{Tracing}}
+        style tracing fill:red
+        tracing-jaeger(Jaeger)
+        style tracing-jaeger fill:red
+
+        %% -- Tracing Connections --
+        tracing --> tracing-jaeger --> logging
+
+        %% -------------
+        %% -- Logging --
+        %% -------------
+        logging{{Logging}}
+        style logging fill:red
+        logging-fluentd(FluentD)
+        style logging-fluentd fill:red
+        logging --> logging-fluentd --> progressive-delivery
+
+        %% --------------------------
+        %% -- Progressive Delivery --
+        %% --------------------------
+        progressive-delivery{{Progressive Delivery}}
+        style progressive-delivery fill:red
+        progressive-delivery-argo-rollouts(Argo Rollouts)
+        style progressive-delivery-argo-rollouts fill:red
+        progressive-delivery-flagger(Flagger)
+        style progressive-delivery-flagger fill:red
+        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> observability-misc
+
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        observability-misc{{Misc}}
+        style observability-misc fill:red
+        kuberhealthy(kuberhealthy)
+        style kuberhealthy fill:red
+        observability-misc --> kuberhealthy
+
+    end
+
+    Observability-->Scale
 
     subgraph Scale
 
