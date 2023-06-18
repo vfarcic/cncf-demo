@@ -21,4 +21,13 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     gcloud projects delete ${PROJECT_ID} --quiet
 
+elif [[ "$HYPERSCALER" == "aws" ]]; then
+
+
+	echo "Did not implement it yet!!!!"
+
+else
+
+	echo "Did not implement it yet!!!!"
+
 fi

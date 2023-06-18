@@ -4,7 +4,12 @@ set -e
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
-	'Setup for the Security chapter.'
+	'Setup for the Security chapter.
+  
+This script assumes that you jumped straight into this chapter.
+If that is not the case (if you are continuing from the previous
+chapter), please answer with "No" when asked whether you are
+ready to start.'
 
 gum confirm '
 Are you ready to start?
@@ -31,17 +36,106 @@ gum style \
     'Do NOT use a local Kubernetes cluster since all the tools
   we will run might be too much for your machine.'
 
-gum confirm "
-Do you have a Kubernetes cluster?
-" || exit 0
+################
+# Hyperscalers #
+################
 
-echo
+echo "
+Which Hyperscaler do you want to use?"
 
-kubectl create namespace production
+HYPERSCALER=$(gum choose "google" "aws" "azure")
+
+echo "export HYPERSCALER=$HYPERSCALER" >> .env
+
+if [[ "$HYPERSCALER" == "google" ]]; then
+
+    USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+    export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+
+    echo "export PROJECT_ID=$PROJECT_ID" >> .env
+
+    yq --inplace ".production.google.projectId = \"${PROJECT_ID}\"" settings.yaml
+
+    gcloud projects create ${PROJECT_ID}
+
+    echo "
+Please open https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID in a browser and *ENABLE* the API."
+
+    gum input --placeholder "
+Press the enter key to continue."
+
+    echo "
+Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=${PROJECT_ID} in a browser and *ENABLE* the API."
+
+    gum input --placeholder "
+Press the enter key to continue."
+
+    export KUBECONFIG=$PWD/kubeconfig.yaml
+
+    gcloud container clusters create dot --project $PROJECT_ID \
+        --region us-east1 --machine-type e2-standard-4 \
+        --num-nodes 1 --enable-network-policy
+
+    export SA_NAME=devops-toolkit
+
+    export SA="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+
+    gcloud iam service-accounts create $SA_NAME --project $PROJECT_ID
+
+    export ROLE=roles/admin
+
+    gcloud projects add-iam-policy-binding --role $ROLE $PROJECT_ID --member serviceAccount:$SA
+
+    gcloud iam service-accounts keys create gcp-creds.json --project $PROJECT_ID --iam-account $SA
+
+elif [[ "$HYPERSCALER" == "aws" ]]; then
+
+
+    AWS_ACCESS_KEY_ID=$(gum input --placeholder "AWS Access Key ID" --value "$AWS_ACCESS_KEY_ID")
+    echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
+    
+    AWS_SECRET_ACCESS_KEY=$(gum input --placeholder "AWS Secret Access Key" --value "$AWS_SECRET_ACCESS_KEY" --password)
+    echo "export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
+
+    AWS_ACCOUNT_ID=$(gum input --placeholder "AWS Account ID" --value "$AWS_ACCOUNT_ID")
+    echo "export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
+
+    echo "[default]
+aws_access_key_id = $AWS_ACCESS_KEY_ID
+aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
+" >aws-creds.conf
+
+  # Watch https://youtu.be/pNECqaxyewQ if you are not familiar
+  #   with `eksctl`
+  eksctl create cluster --config-file eksctl/config-dev.yaml
+
+  eksctl create addon --name aws-ebs-csi-driver --cluster dot \
+      --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
+      --force
+
+else
+
+    gum style \
+        --foreground 212 --border-foreground 212 --border double \
+        --margin "1 2" --padding "2 4" \
+        'Unfortunately, the demo currently does NOT work in Azure.' \
+        '
+Please let me know in the comments of the video if you would like
+me to add the commands for Azure.' \
+        '
+I will do my best to add the commands if there is interest or you
+can create a pull request if you would like to contribute.'
+
+    exit 0
+
+fi
 
 ################
 # Setup GitOps #
 ################
+
+kubectl create namespace production
 
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
@@ -118,10 +212,6 @@ sleep 60
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
 
-################
-# Hyperscalers #
-################
-
 echo "
 Which Hyperscaler do you want to use?"
 
@@ -130,32 +220,6 @@ HYPERSCALER=$(gum choose "google" "aws" "azure")
 echo "export HYPERSCALER=$HYPERSCALER" >> .env
 
 if [[ "$HYPERSCALER" == "google" ]]; then
-
-    export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
-
-    echo "export PROJECT_ID=$PROJECT_ID" >> .env
-
-    yq --inplace ".production.google.projectId = \"${PROJECT_ID}\"" settings.yaml
-
-    gcloud projects create ${PROJECT_ID}
-
-        echo "
-    Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=${PROJECT_ID} in a browser and *ENABLE* the API."
-
-        gum input --placeholder "
-    Press the enter key to continue."
-
-    export SA_NAME=devops-toolkit
-
-    export SA="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
-
-    gcloud iam service-accounts create $SA_NAME --project $PROJECT_ID
-
-    export ROLE=roles/admin
-
-    gcloud projects add-iam-policy-binding --role $ROLE $PROJECT_ID --member serviceAccount:$SA
-
-    gcloud iam service-accounts keys create gcp-creds.json --project $PROJECT_ID --iam-account $SA
 
     kubectl --namespace crossplane-system create secret generic gcp-creds --from-file creds=./gcp-creds.json
 
@@ -175,18 +239,6 @@ spec:
     yq --inplace ".crossplane.destination = \"google\"" settings.yaml
 
 elif [[ "$HYPERSCALER" == "aws" ]]; then
-
-
-    AWS_ACCESS_KEY_ID=$(gum input --placeholder "AWS Access Key ID" --value "$AWS_ACCESS_KEY_ID")
-    echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
-    
-    AWS_SECRET_ACCESS_KEY=$(gum input --placeholder "AWS Secret Access Key" --value "$AWS_SECRET_ACCESS_KEY" --password)
-    echo "export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
-
-    echo "[default]
-aws_access_key_id = $AWS_ACCESS_KEY_ID
-aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
-" >aws-creds.conf
 
     kubectl --namespace crossplane-system create secret generic aws-creds --from-file creds=./aws-creds.conf
 
