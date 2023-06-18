@@ -24,9 +24,9 @@ helm upgrade --install gatekeeper gatekeeper/gatekeeper \
 
 # TODO: Continue
 
-cat policies/gatekeeper.yaml
+cat policies/gatekeeper-templates.yaml
 
-cp policies/gatekeeper.yaml infra/policies.yaml
+cp policies/gatekeeper-templates.yaml infra/policy-templates.yaml
 
 git add .
 

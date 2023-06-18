@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+rm .env
+
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
@@ -23,6 +25,9 @@ echo "
 |----------------|---------------------|---------------------------------------------------|
 |gitHub CLi      |Yes                  |'https://youtu.be/BII6ZY2Rnlc'                     |
 |yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
+|Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
+|AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
+|eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
 " | gum format
 
 gum confirm "
@@ -47,6 +52,10 @@ HYPERSCALER=$(gum choose "google" "aws" "azure")
 
 echo "export HYPERSCALER=$HYPERSCALER" >> .env
 
+KUBECONFIG=$PWD/kubeconfig.yaml
+
+echo "export KUBECONFIG=$KUBECONFIG" >> .env
+
 if [[ "$HYPERSCALER" == "google" ]]; then
 
     USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -70,8 +79,6 @@ Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.co
 
     gum input --placeholder "
 Press the enter key to continue."
-
-    export KUBECONFIG=$PWD/kubeconfig.yaml
 
     gcloud container clusters create dot --project $PROJECT_ID \
         --region us-east1 --machine-type e2-standard-4 \
@@ -106,9 +113,8 @@ aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 " >aws-creds.conf
 
-  # Watch https://youtu.be/pNECqaxyewQ if you are not familiar
-  #   with `eksctl`
-  eksctl create cluster --config-file eksctl/config-dev.yaml
+  eksctl create cluster --config-file eksctl/config-dev.yaml \
+      --kubeconfig kubeconfig.yaml
 
   eksctl create addon --name aws-ebs-csi-driver --cluster dot \
       --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
@@ -211,13 +217,6 @@ kubectl apply --filename crossplane-config/config-sql.yaml
 sleep 60
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
-
-echo "
-Which Hyperscaler do you want to use?"
-
-HYPERSCALER=$(gum choose "google" "aws" "azure")
-
-echo "export HYPERSCALER=$HYPERSCALER" >> .env
 
 if [[ "$HYPERSCALER" == "google" ]]; then
 

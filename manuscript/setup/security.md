@@ -25,6 +25,8 @@ gh repo set-default
 chmod +x manuscript/setup/security.sh
 
 ./manuscript/setup/security.sh
+
+source .env
 ```
 
 ## Start The Chapter
