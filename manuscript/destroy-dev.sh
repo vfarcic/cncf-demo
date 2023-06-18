@@ -64,7 +64,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	kubectl --namespace production delete sqlclaim cncf-demo
 
-	    COUNTER=$(kubectl get managed | wc -l)
+	COUNTER=$(kubectl get managed | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
