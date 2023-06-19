@@ -95,4 +95,4 @@ kubectl --namespace production get sqlclaims
 
 ## Continue The Adventure
 
-[Managing Secrets](../secrets/README.md)
+[Managing Secrets](../runtime-policies/README.md)

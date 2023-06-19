@@ -341,6 +341,7 @@ flowchart TD
         %% ----------------------
         runtime-policies{{Runtime Policies}}
         style runtime-policies fill:red
+        click runtime-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/README.md"
         kube-armor(KubeArmor)
         style kube-armor fill:red
         falco(Falco)
