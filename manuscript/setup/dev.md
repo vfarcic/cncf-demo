@@ -90,7 +90,7 @@ echo "https://console.cloud.google.com/marketplace/product/google/container.goog
 # Open the URL from the output and enable the Kubernetes API
 
 gcloud container clusters create dot --project $PROJECT_ID \
-    --region us-east1 --machine-type e2-standard-4 \
+    --region us-east1 --machine-type e2-standard-8 \
     --num-nodes 1 --no-enable-autoupgrade
 
 gcloud container clusters get-credentials dot \

@@ -81,7 +81,7 @@ Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.co
 Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
-        --region us-east1 --machine-type e2-standard-4 \
+        --region us-east1 --machine-type e2-standard-8 \
         --num-nodes 1 --enable-network-policy \
         --no-enable-autoupgrade
 
