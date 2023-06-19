@@ -89,16 +89,9 @@ echo "https://console.cloud.google.com/marketplace/product/google/container.goog
 
 # Open the URL from the output and enable the Kubernetes API
 
-gcloud container get-server-config --region us-east1
-
-# Replace `[...]` with a valid master version from the previous
-#   output.
-export K8S_VERSION=[...]
-
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type e2-standard-4 \
-    --num-nodes 1 --cluster-version $K8S_VERSION \
-    --node-version $K8S_VERSION
+    --num-nodes 1 --no-enable-autoupgrade
 
 gcloud container clusters get-credentials dot \
     --project $PROJECT_ID --region us-east1

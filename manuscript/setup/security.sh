@@ -82,7 +82,8 @@ Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
         --region us-east1 --machine-type e2-standard-4 \
-        --num-nodes 1 --enable-network-policy
+        --num-nodes 1 --enable-network-policy \
+        --no-enable-autoupgrade
 
     export SA_NAME=devops-toolkit
 
