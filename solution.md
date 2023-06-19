@@ -309,10 +309,10 @@ flowchart TD
         %% -- Setup Connections --
         setup-security-->policies
 
-        %% --------------
-        %% -- Policies --
-        %% --------------
-        policies{{Policies}}
+        %% -----------------------------------
+        %% -- Admission Controller Policies --
+        %% -----------------------------------
+        policies{{Admission Controller Policies}}
         style policies fill:blue
         click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
         policies-kyverno(Kyverno)
@@ -321,15 +321,11 @@ flowchart TD
         click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/gatekeeper.md"
         policies-cloud-custodian(Cloud Custodian)
         style policies-cloud-custodian fill:red
-        kube-armor(KubeArmor)
-        style kube-armor fill:red
         kubewarden(Kubewarden)
         style kubewarden fill:red
         %% Wait with VAC until Kubernetes v1.26 is available in GKE, EKS, and AKS
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
-        falco(Falco)
-        style falco fill:red
         policies-helm(App As Helm)
         style policies-helm fill:red
         policies-kustomize(App As Kustomize)
@@ -338,7 +334,18 @@ flowchart TD
         style policies-cdk8s fill:red
         policies-carvel(App As Carvel ytt)
         style policies-carvel fill:red
-        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kube-armor & kubewarden & vac & falco --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> secrets
+        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+
+        %% ----------------------
+        %% -- Runtime Policies --
+        %% ----------------------
+        runtime-policies{{Runtime Policies}}
+        style runtime-policies fill:red
+        kube-armor(KubeArmor)
+        style kube-armor fill:red
+        falco(Falco)
+        style falco fill:red
+        runtime-policies --> kube-armor & falco --> secrets
 
         %% ------------------------
         %% -- Secrets Management --

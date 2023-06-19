@@ -56,4 +56,4 @@ To use devfiles, you’ll need a tool that understands them. Tools that provide 
 * [Telepresence](telepresence.md)
 * [DevSpace](devspace.md)
 * [Nocalhost](nocalhost.md)
-* [Devfile with odo](devfile.md)
+* **Devfile with odo** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
