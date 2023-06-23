@@ -23,7 +23,7 @@ spec:
         namespaces:
           - production
     validate:
-      message: "Deployments should have more than one replica to ensure availability."
+      message: "Deployments should have more than two replicas to ensure availability."
       pattern:
         spec:
           replicas: ">2"

@@ -4,7 +4,7 @@
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-chmod +x manuscript/destroy-dev.sh
+chmod +x manuscript/destroy/security.sh
 
-./manuscript/destroy-dev.sh
+./manuscript/destroy/security.sh
 ```

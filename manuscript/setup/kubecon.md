@@ -9,8 +9,7 @@ gh repo set-default
 
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
 
-yq --inplace ".kubeConfig = \"$PWD/kubeconfig-dev.yaml\"" \
-    settings.yaml
+echo "export KUBECONFIG_DEV=$PWD/kubeconfig-dev.yaml" >> .env
 ```
 
 ## Create a management Kubernetes cluster
@@ -35,9 +34,6 @@ echo "https://console.cloud.google.com/marketplace/product/google/container.goog
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type e2-standard-8 \
     --num-nodes 1 --no-enable-autoupgrade
-
-gcloud container clusters get-credentials dot \
-    --project $PROJECT_ID --region us-east1
 ```
 
 ### The Rest Of The Setup

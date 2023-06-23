@@ -47,7 +47,6 @@ TODO: Explanation
 
 * [Kyverno](kyverno.md)
 * [Open Policy Agent (OPA) with Gatekeeper](gatekeeper.md)
-* TODO: Cloud Custodian
-* TODO: KubeArmor
-* TODO: Kubewarden
-* TODO: Validating Admission Policy
+* **Cloud Custodian** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Kubewarden** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Validating Admission Policy** is still (June 2023) an alpha feature and, hence, not available in all Kubernetes distributions. Implementation will be added once it goes GA.

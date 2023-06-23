@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-rm .env
+rm -f .env
 
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
@@ -84,6 +84,9 @@ Press the enter key to continue."
         --region us-east1 --machine-type e2-standard-8 \
         --num-nodes 1 --enable-network-policy \
         --no-enable-autoupgrade
+
+    gcloud container clusters get-credentials dot \
+        --project $PROJECT_ID --region us-east1
 
     export SA_NAME=devops-toolkit
 

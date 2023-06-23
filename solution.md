@@ -591,7 +591,7 @@ flowchart TD
     subgraph Destroy
 
         destroy-all((Destroy Everything))
-        click destroy-all "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy-all.md"
+        click destroy-all "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy/all.md"
 
     end
 ```

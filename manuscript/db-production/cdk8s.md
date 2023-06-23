@@ -76,4 +76,4 @@ curl "https://cncf-demo.$DOMAIN/videos" | jq .
 ## Continue The Adventure
 
 [Policies](../policies/README.md)
-[Destroy Everything](../destroy-all.md)
+[Destroy Everything](../destroy/all.md)

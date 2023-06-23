@@ -50,4 +50,4 @@ devspace purge --namespace dev
 
 The Adventure will continue soon...
 
-[Destroy Everything](../destroy-dev.md)
+[Destroy Everything](../destroy/dev.md)
