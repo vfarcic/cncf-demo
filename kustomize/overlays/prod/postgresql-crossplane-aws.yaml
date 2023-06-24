@@ -11,5 +11,5 @@ spec:
       provider: aws-official
       db: postgresql
   parameters:
-    version: "13.4"
+    version: "15.3"
     size: small

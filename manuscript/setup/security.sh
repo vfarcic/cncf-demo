@@ -117,12 +117,14 @@ aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 " >aws-creds.conf
 
-  eksctl create cluster --config-file eksctl/config-dev.yaml \
-      --kubeconfig kubeconfig.yaml
+    eksctl create cluster --config-file eksctl/config-dev.yaml \
+        --kubeconfig kubeconfig.yaml
 
-  eksctl create addon --name aws-ebs-csi-driver --cluster dot \
-      --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
-      --force
+    sleep 5
+
+    eksctl create addon --name aws-ebs-csi-driver --cluster dot \
+        --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
+        --force
 
 else
 

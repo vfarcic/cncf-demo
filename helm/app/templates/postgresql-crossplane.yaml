@@ -23,7 +23,12 @@ spec:
       {{- end }}
       db: postgresql
   parameters:
+    {{- if or (.Values.db.enabled.crossplane.local) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.google) }}
     version: "11"
+    {{- end }}
+    {{- if .Values.db.enabled.crossplane.aws }}
+    version: "15.3"
+    {{- end }}
     size: small
 
 {{- end }}

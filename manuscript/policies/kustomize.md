@@ -69,12 +69,14 @@ kubectl --namespace production get deployments
 
 kubectl --namespace production get sqlclaims
 
+# The SqlClaim was NOT created
+
 # If Gatekeeper
 export POLICY_KIND=deploymentreplicas
 
-kubectl describe $POLICY_KIND db-cluster
+kubectl describe $POLICY_KIND dbcluster
 
-kubectl describe $POLICY_KIND db-production
+kubectl describe $POLICY_KIND dbproduction
 
 cat kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
 

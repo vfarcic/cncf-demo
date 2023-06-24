@@ -39,12 +39,16 @@ func getPostgresqlHelm(appProps *AppProps) *cdk8s.HelmProps {
 
 func getPostgresqlCrossplane(appProps *AppProps, metadata *cdk8s.ApiObjectMetadata) *dot.SqlClaimProps {
 	provider := "local-k8s"
+	version := "11"
 	if appProps.Db.Enabled.Crossplane.Google {
 		provider = "google-official"
 	} else if appProps.Db.Enabled.Crossplane.AWS {
 		provider = "aws-official"
 	} else if appProps.Db.Enabled.Crossplane.Azure {
 		provider = "azure-official"
+	}
+	if appProps.Db.Enabled.Crossplane.AWS {
+		version = "15.3"
 	}
 	return &dot.SqlClaimProps{
 		Metadata: metadata,
