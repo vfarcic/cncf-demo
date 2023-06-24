@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: only-allow-app-binary
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cncf-demo
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true  
+  process:
+    matchPaths:
+    - path: /usr/local/bin/cncf-demo
+  action: Allow

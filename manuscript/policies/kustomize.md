@@ -23,6 +23,8 @@ export DESTINATION=$(yq ".crossplane.destination" settings.yaml)
 ## Do
 
 ```bash
+# TODO: kapp-controller
+
 cp $GITOPS_APP/cncf-demo-kustomize.yaml apps/cncf-demo.yaml
 
 git add .
@@ -97,4 +99,4 @@ kubectl --namespace production get sqlclaims
 
 ## Continue The Adventure
 
-[Managing Secrets](../runtime-policies/README.md)
+[Runtime Policies](../runtime-policies/README.md)

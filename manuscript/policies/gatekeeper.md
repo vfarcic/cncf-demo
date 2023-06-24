@@ -5,12 +5,10 @@ TODO: Intro
 ## Setup
 
 ```bash
+# TODO: kapp-controller
+
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-```
 
-## Do
-
-```bash
 # Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.
 
@@ -20,8 +18,12 @@ helm repo add gatekeeper \
 helm repo update
 
 helm upgrade --install gatekeeper gatekeeper/gatekeeper \
-    --namespace gatekeeper-system --create-namespace
+    --namespace gatekeeper-system --create-namespace --wait
+```
 
+## Do
+
+```bash
 cat policies/gatekeeper-templates.yaml
 
 cp policies/gatekeeper-templates.yaml infra/policy-templates.yaml

@@ -7,6 +7,8 @@ TODO: Intro
 ```bash
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
+cat $GITOPS_APP/external-secrets.yaml
+
 cp $GITOPS_APP/external-secrets.yaml infra/.
 
 git add . 

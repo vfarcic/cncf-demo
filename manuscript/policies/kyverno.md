@@ -5,12 +5,10 @@ TODO: Intro
 ## Setup
 
 ```bash
+# TODO: kapp-controller
+
 export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-```
 
-## Do
-
-```bash
 cat $GITOPS_APP/kyverno.yaml
 
 cp $GITOPS_APP/kyverno.yaml infra/.
@@ -24,7 +22,11 @@ git push
 kubectl --namespace kyverno get pods
 
 # Wait until the Pods are created and are ready
+```
 
+## Do
+
+```bash
 cat policies/kyverno.yaml
 
 cp policies/kyverno.yaml infra/policies.yaml

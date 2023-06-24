@@ -340,10 +340,10 @@ flowchart TD
         %% -- Runtime Policies --
         %% ----------------------
         runtime-policies{{Runtime Policies}}
-        style runtime-policies fill:red
+        style runtime-policies fill:blue
         click runtime-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/README.md"
         kube-armor(KubeArmor)
-        style kube-armor fill:red
+        click kube-armor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/kubearmor.md"
         falco(Falco)
         style falco fill:red
         runtime-policies --> kube-armor & falco --> secrets
