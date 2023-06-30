@@ -52,7 +52,7 @@ HYPERSCALER=$(gum choose "google" "aws" "azure")
 
 echo "export HYPERSCALER=$HYPERSCALER" >> .env
 
-KUBECONFIG=$PWD/kubeconfig.yaml
+export KUBECONFIG=$PWD/kubeconfig.yaml
 
 echo "export KUBECONFIG=$KUBECONFIG" >> .env
 
@@ -120,7 +120,7 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
     eksctl create cluster --config-file eksctl/config-dev.yaml \
         --kubeconfig kubeconfig.yaml
 
-    sleep 5
+    sleep 10
 
     eksctl create addon --name aws-ebs-csi-driver --cluster dot \
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
