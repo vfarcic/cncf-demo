@@ -28,6 +28,7 @@ echo "
 |Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
 |eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
+|az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
 " | gum format
 
 gum confirm "
@@ -60,7 +61,7 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-    export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+    PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
     echo "export PROJECT_ID=$PROJECT_ID" >> .env
 
@@ -126,20 +127,26 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
         --force
 
-else
+elif [[ "$HYPERSCALER" == "azure" ]]; then
 
-    gum style \
-        --foreground 212 --border-foreground 212 --border double \
-        --margin "1 2" --padding "2 4" \
-        'Unfortunately, the demo currently does NOT work in Azure.' \
-        '
-Please let me know in the comments of the video if you would like
-me to add the commands for Azure.' \
-        '
-I will do my best to add the commands if there is interest or you
-can create a pull request if you would like to contribute.'
+    RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 
-    exit 0
+    echo "export RESOURCE_GROUP=$RESOURCE_GROUP" >> .env
+
+    yq --inplace ".production.azure.resourceGroup = \"${RESOURCE_GROUP}\"" settings.yaml
+
+    export LOCATION=eastus
+
+    yq --inplace ".production.azure.location = \"${LOCATION}\"" settings.yaml
+
+    az group create --name $RESOURCE_GROUP --location $LOCATION
+
+    az aks create --resource-group $RESOURCE_GROUP --name dot \
+        --node-count 3 --node-vm-size Standard_B2s \
+        --enable-managed-identity --yes
+
+    az aks get-credentials --resource-group $RESOURCE_GROUP \
+        --name dot --file $KUBECONFIG
 
 fi
 
@@ -251,20 +258,15 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
     yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
 
-else
+elif [[ "$HYPERSCALER" == "azure" ]]; then
 
-    gum style \
-        --foreground 212 --border-foreground 212 --border double \
-        --margin "1 2" --padding "2 4" \
-        'Unfortunately, the demo currently does NOT work in Azure.' \
-        '
-Please let me know in the comments of the video if you would like
-me to add the commands for Azure.' \
-        '
-I will do my best to add the commands if there is interest or you
-can create a pull request if you would like to contribute.'
+    export SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 
-    exit 0
+    az ad sp create-for-rbac --sdk-auth --role Owner --scopes /subscriptions/$SUBSCRIPTION_ID | tee azure-creds.json
+
+    kubectl --namespace crossplane-system create secret generic azure-creds --from-file creds=./azure-creds.json
+
+    kubectl apply --filename crossplane-config/provider-config-azure-official.yaml
 
 fi
 

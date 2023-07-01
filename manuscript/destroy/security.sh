@@ -46,8 +46,8 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	eksctl delete cluster --config-file eksctl/config-dev.yaml
 
-else
+elif [[ "$HYPERSCALER" == "azure" ]]; then
 
-	echo "Did not implement it yet!!!!"
+	az group delete --name $RESOURCE_GROUP --yes
 
 fi
