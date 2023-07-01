@@ -902,6 +902,10 @@ flowchart TD
         style secrets-teller fill:red
         mtls-meshery(Meshery)
         style mtls-meshery fill:red
+        open-cost(OpenCost)
+        style open-cost fill:red
+        open-function(OpenFunction)
+        style open-function fill:red
 
     end
 ```
