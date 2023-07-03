@@ -370,7 +370,10 @@ flowchart TD
         style secrets-eso-cdk8s fill:red
         secrets-eso-carvel(App As Carvel ytt)
         style secrets-eso-carvel fill:red
+        secrets-sscsid("Secrets Store CSI Driver (SSCSID)")
+        style secrets-sscsid fill:red
         secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> mtls
+        secrets --> secrets-sscsid --> mtls
 
         %% -------------------------------------
         %% -- Mutual TLS And Network Policies --
