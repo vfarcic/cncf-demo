@@ -351,7 +351,7 @@ flowchart TD
         %% ------------------------
         %% -- Secrets Management --
         %% ------------------------
-        secrets{{Secrets Management}}
+        secrets{{Secrets Management In Kubernetes}}
         click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/README.md"
         style secrets fill:blue
         secrets-eso("External Secrets Operator (ESO)")
@@ -372,8 +372,13 @@ flowchart TD
         style secrets-eso-carvel fill:red
         secrets-sscsid("Secrets Store CSI Driver (SSCSID)")
         style secrets-sscsid fill:red
-        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> mtls
-        secrets --> secrets-sscsid --> mtls
+        secrets-client{{Secrets Management Outside Kubernetes}}
+        style secrets-client fill:red
+        secrets-teller(Teller)
+        style secrets-teller fill:red
+        secrets --> secrets-eso --> secrets-eso-google & secrets-eso-aws & secrets-eso-azure --> secrets-eso-helm & secrets-eso-kustomize & secrets-eso-cdk8s & secrets-eso-carvel --> secrets-client
+        secrets --> secrets-sscsid --> secrets-client
+        secrets-client --> secrets-teller --> mtls
 
         %% -------------------------------------
         %% -- Mutual TLS And Network Policies --
@@ -901,8 +906,6 @@ flowchart TD
         style parsec fill:red
         inclavare-containers(Inclavare Containers)
         style inclavare-containers fill:red
-        secrets-teller(Teller)
-        style secrets-teller fill:red
         mtls-meshery(Meshery)
         style mtls-meshery fill:red
         open-cost(OpenCost)
