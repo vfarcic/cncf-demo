@@ -1,4 +1,4 @@
-# Create and Manage Production Kubernetes Cluster
+# Create and Manage a Production Kubernetes Cluster
 
 TODO: Intro
 
@@ -39,7 +39,17 @@ Cluster API is often abbreviated as CAPI. When folks verbally discuss Cluster AP
 
 ## Choice 2: Crossplane
 
-TODO: Explanation
+At a high level, [Crossplane](https://crossplane.io) is a tool that lets you interact with **any** API via Kubernetes. One popular use case is to use Crossplane to provision and manage Kubernetes clusters. 
+
+In Crossplane, when an infrastructure primitive is brought into Kubernetes as a custom resource, this is called a **managed resource**. A cloud provider might have hundreds of infrastructure primitives (for example AWS has over 800), and these can be brought into your Kubernetes cluster as managed resources by Crossplane **providers**. Providers extend Crossplane by installing controllers for new kinds of managed resources. For example, the AWS provider installs support for all 800+ AWS-managed resources like RESInstances and S3Buckets. 
+
+When you provision a cluster using Crossplane, you have granular control over which managed resources you want to use and how those resources interact with one another. You define all of this in a declarative way using a higher-level abstraction called a **Composite Resource Definition**(XRD). 
+
+A composite resource definition can grow to be very complex because infrastructure itself is very complex. However, with Crossplane you can make a simplified interface for other personas in your organization (for example app developers or data scientists) to be able to create their own clusters in a self-service way, and those clusters will follow all of your specified configurations and best practices. This simplified interface is called a **Composite Resource Claim**(XRC). A composite resource claim exposes only the choices that are relevant to the user and hides the complexity.
+
+With Crossplane, the building blocks (managed resources) are not limited to ones pertaining only to cluster provisioning, or to one particular cloud provider. You could make a composite resource (and corresponding composite resource claim) that offers app developers the choice to make an EKS or a GKE cluster, in the size of small, medium, or large⎯all with one simple interface. Or you could make a composite resource claim (underscored by a full-blown composite resource definition) that offers data scientists the ability to provision a GKE cluster for themselves that comes preconfigured with an instance of CloudSQL and a connection to a running database. 
+
+In fact, with infrastructure building blocks expressed as Kubernetes APIs, that means you can interact with your infrastructure using any tool in the Kubernetes ecosystem. Therefore, with Crossplane you can manage your infrastructure using the same tools that you use to manage your workloads. This opens up new possibilities to manage your infrastructure using Kubernetes tools for GitOps, policy management, observability, and much, much more.
 
 [![Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://img.youtube.com/vi/n8KjVmuHm7A/0.jpg)](https://youtu.be/n8KjVmuHm7A)
 [![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
