@@ -2,6 +2,8 @@
 
 TODO: Intro
 
+[![Provision a Production Cluster - Feat. Crossplane And Cluster API (You Choose!, Ch. 2, Ep. 1)](https://img.youtube.com/vi/lzBWIhYC5_E/0.jpg)](https://youtu.be/lzBWIhYC5_E)
+
 ## Choice 1: Cluster API
 
 [Cluster API](https://cluster-api.sigs.k8s.io/) is a Kubernetes sub-project that uses Kubernetes custom resources (and their associated controllers) to manage the lifecycle of Kubernetes clusters. 
