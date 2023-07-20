@@ -208,14 +208,56 @@ flowchart TD
         develop-devfile(Devfile)
         style develop-devfile fill:red
         develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
-        develop-telepresence & develop-nocalhost & develop-devfile --> continue
-        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> continue
+        develop-telepresence & develop-nocalhost & develop-devfile --> dev-done
+        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> dev-done
 
-        continue((The be continued...))
+        dev-done((Chapter End))
 
     end
 
-    Development-->Destroy
+    Development-->Production
+
+    subgraph Production
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-prod((Setup))
+        click setup-prod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/prod.md"
+
+        %% -- Setup Connections --
+        setup-prod-->cluster
+
+        %% -------------
+        %% -- Cluster --
+        %% -------------
+        cluster{{Create a Cluster}}
+        click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
+        style cluster fill:blue
+        cluster-crossplane(Crossplane)
+        click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
+        cluster-crossplane-google(Google Cloud)
+        click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
+        cluster-crossplane-aws(AWS)
+        click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
+        cluster-crossplane-azure(Azure)
+        click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        capi-google(Google Cloud)
+        click capi-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-google.md"
+        capi-aws(AWS)
+        click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
+        capi-azure(Azure)
+        click capi-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-azure.md"
+        cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> continue
+        cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> continue
+
+        continue((The be continued...))
+        
+    end
+
+    Production-->Destroy
 
     subgraph Destroy
 
