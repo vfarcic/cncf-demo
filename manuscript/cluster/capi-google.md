@@ -1,6 +1,12 @@
 # Create And Manage Production Google GKE Cluster With ClusterAPI
 
-TODO: Intro
+In this section, we will create and manage a production-grade Google Cloud GKE cluster using Cluster API.
+
+Among other things, this involves:
+* installing the Cluster API GCP Infrastructure Provider, which is the component responsible for the provisioning of infrastructure/computational resources required by Cluster API
+* providing Cluster API with credentials to be able to access and change Google Cloud resources
+
+Once this is done, we are able to provision Kubernetes clusters in Google Cloud using Cluster API.
 
 ## Setup
 
