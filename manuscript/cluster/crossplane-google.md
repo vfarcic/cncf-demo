@@ -1,10 +1,10 @@
 # Create and Manage Production Google Cloud GKE Cluster with Crossplane
 
-In this section, we will create and manage a production-grade Google Cloud GKE Cluster using Crossplane.
+In this section, we will create and manage a production-grade Google Cloud GKE cluster using Crossplane.
 
 Among other things, this involves installing the Crossplane GCP Provider which creates a new Kubernetes API for every external GCP API, and creating the GCP Provider Config which provides Crossplane with credentials to be able to access and change GCP resources.
 
-Once this is done, we are able to provision Kubernetes resources in Google Cloud using Crossplane Custom Resources. 
+Once this is done, we are able to provision Kubernetes clusters in Google Cloud using Crossplane Custom Resources. 
 
 ## Setup
 
