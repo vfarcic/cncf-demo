@@ -1,6 +1,12 @@
 # Create and Manage Production AWS EKS Cluster with ClusterAPI
 
-TODO: Intro
+In this section, we will create and manage a production-grade AWS EKS cluster using Cluster API.
+
+Among other things, this involves:
+* installing the Cluster API AWS Infrastructure Provider, which is the component responsible for the provisioning of infrastructure/computational resources required by Cluster API
+* providing Cluster API with credentials to be able to access and change AWS cloud resources
+
+Once this is done, we are able to provision Kubernetes clusters in AWS using Cluster API.
 
 ## Setup
 To begin you must install the following:
