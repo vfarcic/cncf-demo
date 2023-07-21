@@ -1,10 +1,16 @@
-# Create And Manage Production AWS EKS Cluster With Crossplane
+# Create and Manage Production AWS EKS Cluster with Crossplane
 
-TODO: Intro
+In this section, we will create and manage a production-grade AWS EKS cluster using Crossplane.
+
+Among other things, this involves:
+* installing the Crossplane AWS Provider which creates a new Kubernetes API for every external AWS API
+* creating the AWS Provider Config which provides Crossplane with credentials to be able to access and change AWS cloud resources
+
+Once this is done, we are able to provision Kubernetes clusters in AWS using Crossplane Custom Resources. 
 
 ## Setup
 
-* You can skip the steps in this section (the Setup) if you already used Crossplane with AWS in one of the previous chapters.
+* You can skip the steps in this section (Setup) if you already used Crossplane with AWS in one of the previous chapters.
 
 ```bash
 # Replace `[...]` with your access key ID`
@@ -62,6 +68,6 @@ yq --inplace \
 kubectl get nodes
 ```
 
-## Continue The Adventure
+## Continue the adventure
 
-The Adventure will continue soon...
+The adventure will continue soon...

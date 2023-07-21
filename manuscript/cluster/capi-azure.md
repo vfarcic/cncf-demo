@@ -1,6 +1,12 @@
-# Create And Manage Production Azure AKS Cluster With ClusterAPI
+# Create and Manage Production Azure AKS Cluster with ClusterAPI
 
-TODO: Intro
+In this section, we will create and manage a production-grade Azure AKS cluster using Cluster API.
+
+Among other things, this involves:
+* installing the Cluster API Azure Infrastructure Provider, which is the component responsible for the provisioning of infrastructure/computational resources required by Cluster API
+* providing Cluster API with credentials to be able to access and change Azure cloud resources
+
+Once this is done, we are able to provision Kubernetes clusters in Azure using Cluster API.
 
 ## Setup
 To begin you must install and configure Azure CLI:
@@ -33,6 +39,9 @@ export EXP_AKS_RESOURCE_HEALTH=true
 
 # Create Secret for azure identity creds
 kubectl create secret generic "${AZURE_CLUSTER_IDENTITY_SECRET_NAME}" --from-literal=clientSecret="${AZURE_CLIENT_SECRET}"
+clusterctl init --infrastructure azure
+
+# Install ClusterAPI Provider for Azure
 clusterctl init --infrastructure azure
 
 yq --inplace ".capi.destination = \"azure\"" settings.yaml
@@ -75,6 +84,6 @@ yq --inplace \
 kubectl get nodes
 ```
 
-## Continue The Adventure
+## Continue the adventure
 
-The Adventure will continue soon...
+The adventure will continue soon...
