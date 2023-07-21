@@ -1,4 +1,4 @@
-# Create And Manage Production Kubernetes Cluster With Crossplane
+# Create and Manage Production Kubernetes Cluster with Crossplane
 
 The goal here is to set up Crossplane to be able to deploy and manage Kubernetes clusters.
 
@@ -25,7 +25,7 @@ kubectl apply \
 kubectl apply --filename crossplane-config/config-k8s.yaml
 ```
 
-## Which Cloud Provider Do You Use?
+## Which cloud provider do you use?
 
 * [Google Cloud](crossplane-google.md)
 * [AWS](crossplane-aws.md)

@@ -1,4 +1,4 @@
-# Create And Manage Production Azure AKS Cluster With Crossplane
+# Create and Manage Production Azure AKS Cluster with Crossplane
 
 TODO: Intro
 
@@ -57,6 +57,6 @@ yq --inplace \
 kubectl get nodes
 ```
 
-## Continue The Adventure
+## Continue the adventure
 
-The Adventure will continue soon...
+The adventure will continue soon...

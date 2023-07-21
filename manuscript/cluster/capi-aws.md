@@ -1,4 +1,4 @@
-# Create And Manage Production AWS EKS Cluster With ClusterAPI
+# Create and Manage Production AWS EKS Cluster with ClusterAPI
 
 TODO: Intro
 
@@ -82,6 +82,6 @@ yq --inplace \
 kubectl get nodes
 ```
 
-## Continue The Adventure
+## Continue the adventure
 
-The Adventure will continue soon...
+The adventure will continue soon...

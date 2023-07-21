@@ -64,6 +64,6 @@ yq --inplace \
 kubectl get nodes
 ```
 
-## Continue The Adventure
+## Continue the Adventure
 
-The Adventure will continue soon...
+The adventure will continue soon...
