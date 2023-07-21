@@ -35,6 +35,9 @@ export EXP_AKS_RESOURCE_HEALTH=true
 kubectl create secret generic "${AZURE_CLUSTER_IDENTITY_SECRET_NAME}" --from-literal=clientSecret="${AZURE_CLIENT_SECRET}"
 clusterctl init --infrastructure azure
 
+# Install ClusterAPI Provider for Azure
+clusterctl init --infrastructure azure
+
 yq --inplace ".capi.destination = \"azure\"" settings.yaml
 ```
 
