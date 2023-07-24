@@ -10,7 +10,7 @@ We will create the Hero-application-specific Applications later when we deploy o
 
 
 ```bash
-# Set the environment variable REPO_URL to point to the 'argocd/apps.yaml' file
+# Set the environment variable REPO_URL to point to the 'argocd/apps.yaml' file in your remote Git repository
 
 export REPO_URL=$(git config --get remote.origin.url)
 
