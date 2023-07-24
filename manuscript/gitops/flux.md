@@ -42,7 +42,7 @@ kubectl --namespace flux-system get gitrepositories
 
 # Wait until all three repositories are ready
 
-# Create a Schemahero Kustomization definition and store it in the infra folder so that it is tracked by Flux
+# Create a SchemaHero Kustomization definition and store it in the infra folder so that it is tracked by Flux
 
 ls -1 schema-hero
 

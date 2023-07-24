@@ -36,7 +36,7 @@ cat argocd/project.yaml
 
 kubectl apply --filename argocd/project.yaml
 
-# Create a Schemahero Application definition and store it in the infra folder
+# Create a SchemaHero Application definition and store it in the infra folder
 
 ls -1 schema-hero
 

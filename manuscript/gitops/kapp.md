@@ -32,7 +32,7 @@ sudo bash install.sh
 
 kubectl apply -f kapp-controller/preperation.yaml
 
-# Create a Schemahero App definition and store it in the infra folder
+# Create a SchemaHero App definition and store it in the infra folder
 
 ls -1 schema-hero
 
