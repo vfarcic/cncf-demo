@@ -28,7 +28,7 @@ wget -O- https://carvel.dev/install.sh > install.sh
 sudo bash install.sh
 
 # Create ServiceAccount, ClusterRole, and ClusterRoleBinding so that kapp-controller can access and change management cluster
-#Create namespaces
+# Create namespaces
 
 kubectl apply -f kapp-controller/preperation.yaml
 
