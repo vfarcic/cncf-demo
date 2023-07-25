@@ -236,10 +236,12 @@ flowchart TD
         style cluster fill:blue
         cluster-crossplane(Crossplane)
         click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
+        style cluster-crossplane fill:green
         cluster-crossplane-google(Google Cloud)
         click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
         cluster-crossplane-aws(AWS)
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
+        style cluster-crossplane-aws fill:green
         cluster-crossplane-azure(Azure)
         click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
         cluster-cluster-api(Cluster API)
