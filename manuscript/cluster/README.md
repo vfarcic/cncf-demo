@@ -1,6 +1,18 @@
 # Create and Manage a Production Kubernetes Cluster
 
-TODO: Intro
+Chapter 2 opens with the sounds of the ocean breeze, the waves crashing, and the slurping noise of Hero finishing the last of their piña colada. Our hero application is chillin’ in their development environment, soaking up the sun alongside their backing service Lil DeeBee the Database Cat, and Hero is able to be natively developed on Kubernetes in a fast-feedback way. Hero is undoubtedly living the good life⎯but after some time, they’re ready for bigger and better things. Hero and Lil DeeBee are eager for the next phase of their journey: to move to a production cluster and serve end users!
+
+What does a production cluster have that a development cluster does not? First, a production environment will almost certainly be bigger, because it is built to hold many copies of the same application that scale horizontally as more and more user requests come in. Production clusters can have thousands of nodes! Also, with a development cluster, an organization may choose to be more relaxed with security or may decide not to implement observability. Some companies only do GitOps in production and they don’t bother in development. Basically, there is a lot of necessary complexity involved in running an application in production, and although [Twelve-Factor App](https://12factor.net/) methodology advocates for development and production environments to be identical, that’s not always how it goes in practice.
+
+
+**What should one look for in a successful cluster provisioning solution?**
+
+First, it is beneficial if the solution is declarative and Kubernetes-native. This way cluster definitions can be stored in Git and managed with GitOps. GitOps has a host of benefits, including drift detection and reconciliation. Additionally, GitOps provides access to all Kubernetes ecosystem tooling, including observability and policy tools, that can now be used with infrastructure resources. The GitOps approach, GitOps tooling, and GitOps benefits will be discussed further in the next choice in our story. 
+
+Another factor to consider in your cluster provisioning solution is the fact that cluster provisioning can be wildly complex, and folks approach this complexity in different ways. There are several decision points where there is a tradeoff to consider: do you want a more opinionated solution where there are fewer customizations that you can make? Or do you want full control and all of the complexity that comes with it? This decision needs to be made at the cloud provider level (for example, AWS has more “knobs” and therefore requires more cognitive load, and GCP is easier to use but offers fewer options), and again this tradeoff is a consideration when evaluating cluster provisioning tools.
+
+Another question to ask is: who in your organization will be doing the cluster provisioning, and is it important for them to understand the complexity? Some companies have one massive cluster with thousands of nodes. Those cluster operators have the full-time job of understanding and managing their cluster infrastructure. But other companies may have many smaller clusters, perhaps one cluster per team. This strategy involves cluster experts too, people who are concerned with how to manage so many clusters at scale. For example, they’re concerned with how to do Kubernetes version upgrades across the many clusters in the organization. But this approach also introduces a cluster user persona (usually a team of app friends) who may need to be able to provision clusters but do not care about the underlying infrastructure choices being made. Does your cluster provisioning solution provide for this persona? To be clear, cluster provisioning is never NOT complex. But with some cluster provisioning tools, the complexity can be hidden for those who don’t need to see it. 
+
 
 [![Provision a Production Cluster - Feat. Crossplane And Cluster API (You Choose!, Ch. 2, Ep. 1)](https://img.youtube.com/vi/lzBWIhYC5_E/0.jpg)](https://youtu.be/lzBWIhYC5_E)
 
@@ -19,7 +31,7 @@ This seems simple enough but there are many possible technology choices for each
 
 Cluster API helps you to define what you want your final cluster to look like in a declarative way. It tackles the complexity of supporting the many options and combinations first by having infrastructure-and-tooling-agnostic, Cluster-API-specific custom resources that are maintained by the project. Notable ones include a **Cluster** custom resource where you can define all of the general configurations for your cluster (it also references infrastructure-specific custom resources, which we will cover momentarily). Another notable Cluster-API custom resource is a **Machine**, which defines what a server should look like in your cluster. In Cluster API, **Machines** are managed by **MachineSets** which are managed by **MachineDeployments**⎯similar to how Pods, ReplicaSets, and Deployments work in Kubernetes. 
 
-Okay- those custom resources seem useful, but how are they addressing the complexity of supporting the gazillion possible manifestations of Kubernetes clusters? That is where the concept of *providers* comes in. The term ‘provider’ refers to any project that provides functionality to Cluster API. You heard that correctly⎯providers are entirely separate projects from Cluster API. They’re not maintained by Cluster API, but they do have to adhere to a core Cluster API contract. Providers are made up of Cluster API-compliant custom resources and their associated controllers, and there are three broad categories of providers:
+Okay- those custom resources seem useful, but how are they addressing the complexity of supporting the gazillion possible manifestations of Kubernetes clusters? That is where the concept of *providers* comes in. The term ‘provider’ refers to any project that provides functionality to Cluster API. You heard that correctly⎯providers are entirely separate projects from Cluster API. They’re not maintained by Cluster API, but they do have to adhere to a core Cluster API contract. Providers are made up of Cluster API-compliant custom resources and their associated controllers, and there are five broad categories of providers. Here are three important ones to know:
 
 1-**Infrastructure providers**. Basically, an infrastructure provider provisions infrastructure resources for the cluster. Examples of cloud infrastructure providers include AWS or GCP. VMware vSphere is an example of a bare metal infrastructure provider. 
 
@@ -58,7 +70,7 @@ In fact, with infrastructure building blocks expressed as Kubernetes APIs, that 
 [![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://via.vmw.com/Crossplane)
 * [Official site](https://crossplane.io)
 
-## What Is Your Choice?
+## What is your choice?
 
 * [Cluster API](cluster-api.md)
 * [Crossplane](crossplane.md)

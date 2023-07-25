@@ -1,7 +1,7 @@
 
-# Create And Manage Production Kubernetes Cluster With ClusterAPI
+# Create and Manage Production Kubernetes Cluster with ClusterAPI
 
-TODO: Intro
+To get started with Cluster API, you first need to create a management cluster. Here we're creating a local [Kind](https://kind.sigs.k8s.io/) cluster and installing Cluster API into it, as well as CLIs for both Kubernetes (Kubectl) and Cluster API (Clusterctl).
 
 ## Setup
 
@@ -24,7 +24,7 @@ clusterctl init
 
 ```
 
-## Which Cloud Provider Do You Use?
+## Which cloud provider do you use?
 
 * [Google Cloud](capi-google.md)
 * [AWS](capi-aws.md)
