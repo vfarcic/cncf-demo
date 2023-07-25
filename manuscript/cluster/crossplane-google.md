@@ -53,9 +53,6 @@ cat crossplane/google-gke.yaml
 kubectl --namespace production apply \
     --filename crossplane/google-gke.yaml
 
-# TODO: Remove
-# kubectl get cluster.container.gcp.upbound.io,nodepool.container.gcp.upbound.io,release.helm.crossplane.io,object.kubernetes.crossplane.io
-
 kubectl get managed
 
 kubectl --namespace production get claim

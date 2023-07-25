@@ -41,9 +41,6 @@ cat crossplane/azure-aks.yaml
 kubectl --namespace production apply \
     --filename crossplane/azure-aks.yaml
 
-# TODO: Remove
-# kubectl get resourcegroup.azure.upbound.io,kubernetescluster.containerservice.azure.upbound.io,release.helm.crossplane.io,object.kubernetes.crossplane.io
-
 kubectl get managed
 
 kubectl --namespace production get claim

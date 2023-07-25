@@ -10,19 +10,13 @@ First we're installing Crossplane*, then we're adding the [Crossplane Kubernetes
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
+chmod +x manuscript/cluster/crossplane.sh
 
-helm repo update
-
-helm upgrade --install crossplane crossplane-stable/crossplane \
-    --namespace crossplane-system --create-namespace --wait
-
-kubectl apply \
-    --filename crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply --filename crossplane-config/config-k8s.yaml
+./manuscript/cluster/crossplane.sh
 ```
 
 ## Which cloud provider do you use?
