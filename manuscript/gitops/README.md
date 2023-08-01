@@ -22,28 +22,6 @@ Software agents (GitOps tools) continuously observe the actual system state and 
 <br><br><br>
 Hero and Lil DeeBee want to be COOL KIDS and get deployed and managed using GitOps, that way they’ll have improved efficiency and security. Hero is also relieved to know that all three of these CNCF GitOps tools follow the GitOps Principles so they really can't go wrong!
 
-
-Hero and Lil DeeBee want to be COOL KIDS and get deployed and managed using GitOps! That way they’ll have improved efficiency and security! 
-
-
-It is worth noting here that GitOps tools need to work in tandem with other Kubernetes add-ons to be able to manage resources that are completely outside of a Kubernetes cluster, but it can be done!
-<br><br><br>
-There are four [GitOps Principles](https://opengitops.dev/):
-
-1-**Resources Are Defined Declaratively**
-A system managed by GitOps must have its desired state expressed declaratively.
-
-2-**Resource Definitions Are Versioned and Immutable**
-The desired state is stored in a way that enforces immutability, enforces versioning, and retains a complete version history. Usually, Git is used for this.
-
-3-**Resource Definitions Are Pulled Automatically**
-Software agents automatically pull the desired state declarations from the source. Here ‘software agents’ refers to the GitOps tool and, again, the source is usually Git.
-
-4-**The Desired State Is Continuously Reconciled With the Actual State**
-Software agents (GitOps tools) continuously observe the actual system state and attempt to apply the desired state.
-<br><br><br>
-Hero and Lil DeeBee want to be COOL KIDS and get deployed and managed using GitOps, that way they’ll have improved efficiency and security. Hero is also relieved to know that all three of these CNCF GitOps tools follow the GitOps Principles so they really can't go wrong!
-
 <br><br>
 ## Choice 1: Flux
 
