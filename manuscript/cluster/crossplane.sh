@@ -1,8 +1,4 @@
 #!/bin/sh
-set +e
-
-source .env
-
 set -e
 
 gum style \
