@@ -208,14 +208,58 @@ flowchart TD
         develop-devfile(Devfile)
         style develop-devfile fill:red
         develop --> develop-telepresence & develop-devspace & develop-nocalhost & develop-devfile
-        develop-telepresence & develop-nocalhost & develop-devfile --> continue
-        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> continue
+        develop-telepresence & develop-nocalhost & develop-devfile --> dev-done
+        develop-devspace --> develop-devspace-kustomize & develop-devspace-cdk8s & develop-devspace-helm & develop-devspace-carvel --> dev-done
 
-        continue((The be continued...))
+        dev-done((Chapter End))
 
     end
 
-    Development-->Destroy
+    Development-->Production
+
+    subgraph Production
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-prod((Setup))
+        click setup-prod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/prod.md"
+
+        %% -- Setup Connections --
+        setup-prod-->cluster
+
+        %% -------------
+        %% -- Cluster --
+        %% -------------
+        cluster{{Create a Cluster}}
+        click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
+        style cluster fill:blue
+        cluster-crossplane(Crossplane)
+        click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
+        style cluster-crossplane fill:green
+        cluster-crossplane-google(Google Cloud)
+        click cluster-crossplane-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-google.md"
+        cluster-crossplane-aws(AWS)
+        click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
+        style cluster-crossplane-aws fill:green
+        cluster-crossplane-azure(Azure)
+        click cluster-crossplane-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-azure.md"
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        capi-google(Google Cloud)
+        click capi-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-google.md"
+        capi-aws(AWS)
+        click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
+        capi-azure(Azure)
+        click capi-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-azure.md"
+        cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> continue
+        cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> continue
+
+        continue((The be continued...))
+        
+    end
+
+    Production-->Destroy
 
     subgraph Destroy
 
@@ -244,9 +288,9 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Provision a Production Cluster | TODO: - Crossplane<br />TODO: - Cluster API | Tuesday, July 18, 2023 | [story](manuscript/cluster/README.md) |
-| Configure Synchronization with GitOps | TODO: - Flux<br />TODO: - Argo CD<br />TODO: - Carvel kapp-controller | Tuesday, July 25, 2023 | [story](manuscript/gitops/README.md) |
-| Implement Ingress | TODO: - Contour With Envoy<br />TODO: - NGINX<br />TODO: - Emissary-ingress With Envoy | Tuesday, August 1, 2023 | [story](manuscript/ingress/README.md) |
+| Provision a Production Cluster | Ramon Ramirez-Linan - Crossplane<br />Richard Case - Cluster API | Tuesday, July 18, 2023 | [story](manuscript/cluster/README.md) |
+| Configure Synchronization with GitOps | Kingdon Barrett - Flux<br />Christian Hernandez - Argo CD<br />Scott Rosenberg - Carvel kapp-controller | Tuesday, July 25, 2023 | [story](manuscript/gitops/README.md) |
+| Implement Ingress | Sunjay Bhatia - Contour with Envoy<br />Ricardo Katz - ingress-nginx<br />Alice Wasko - Emissary-ingress with Envoy | Tuesday, August 1, 2023 | [story](manuscript/ingress/README.md) |
 | Chapter 2 Finale! (Including [Deploy The App To Production](manuscript/app/README.md) & [Database Implementation](manuscript/db-production/README.md)) | Whitney and Viktor! | Tuesday, August 8, 2023 | [story](manuscript/app/README.md) |
 
 ## The Format

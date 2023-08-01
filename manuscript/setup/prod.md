@@ -12,9 +12,10 @@ cd cncf-demo
 gh repo set-default
 
 # Create a Kubernetes cluster.
-# If you're using a local Kubernetes cluster
-#   (e.g., Rancher Desktop, Minikube, etc.), make sure that it
-#   has at least 8GB of RAM and 4 CPU of memory.
+# Do NOT use a local Kubernetes cluster (e.g., Docker Desktop,
+#   Minikube, etc.).
+
+kubectl create namespace production
 
 # Install `yq` CLI from https://github.com/mikefarah/yq
 # 'yq' is a lightweight and portable command-line YAML processor

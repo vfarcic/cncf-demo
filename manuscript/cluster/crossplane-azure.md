@@ -1,10 +1,16 @@
-# Create And Manage Production Azure AKS Cluster With Crossplane
+# Create and Manage Production Azure AKS Cluster with Crossplane
 
-TODO: Intro
+In this section, we will create and manage a production-grade Azure AKS cluster using Crossplane.
+
+Among other things, this involves:
+* installing the Crossplane Azure Provider which creates a new Kubernetes API for every external Azure API
+* creating the Azure Provider Config which provides Crossplane with credentials to be able to access and change Azure cloud resources
+
+Once this is done, we are able to provision Kubernetes clusters in Azure using Crossplane Custom Resources. 
 
 ## Setup
 
-* You can skip the steps in this section (the Setup) if you already used Crossplane with Azure in one of the previous chapters.
+* You can skip the steps in this section (Setup) if you already used Crossplane with Azure in one of the previous chapters.
 
 ```bash
 export SUBSCRIPTION_ID=$(az account show --query id -o tsv)
@@ -35,9 +41,6 @@ cat crossplane/azure-aks.yaml
 kubectl --namespace production apply \
     --filename crossplane/azure-aks.yaml
 
-# TODO: Remove
-# kubectl get resourcegroup.azure.upbound.io,kubernetescluster.containerservice.azure.upbound.io,release.helm.crossplane.io,object.kubernetes.crossplane.io
-
 kubectl get managed
 
 kubectl --namespace production get claim
@@ -57,6 +60,6 @@ yq --inplace \
 kubectl get nodes
 ```
 
-## Continue The Adventure
+## Continue the adventure
 
-[GitOps](../gitops/README.md)
+The adventure will continue soon...
