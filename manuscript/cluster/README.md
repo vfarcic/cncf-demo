@@ -6,6 +6,7 @@ TODO: Intro
 
 TODO: Explanation
 
+[![How To Create, Provision, And Operate Kubernetes With Cluster API (CAPI)](https://img.youtube.com/vi/8yUDUhZ6ako/0.jpg)](https://youtu.be/8yUDUhZ6ako)
 [![What Is Cluster API?](https://img.youtube.com/vi/ubjwT9Jcgz0/0.jpg)](https://tanzu.vmware.com/developer/tv/enlightning/44/)
 * [Official site](https://cluster-api.sigs.k8s.io/)
 
