@@ -5,7 +5,7 @@ Hero and Lil DeeBee can see it in the distance: production! The air is tingling 
 Hero has heard the cool kids discussing this idea called GitOps⎯a resource management technique where you declaratively define the desired state of your application deployment, infrastructure, and/or services, store those Kubernetes resource definitions in Git, and then a GitOps tool keeps those Kubernetes resource definitions in sync with the actual state of the real, running resources that are deployed in your Kubernetes cluster. 
 
 It is worth noting here that GitOps tools need to work in tandem with other Kubernetes add-ons to be able to manage resources that are completely outside of a Kubernetes cluster, but it can be done!
-
+<br><br><br>
 There are four [GitOps Principles](https://opengitops.dev/):
 
 1-**Resources Are Defined Declaratively**
@@ -19,6 +19,8 @@ Software agents automatically pull the desired state declarations from the sourc
 
 4-**The Desired State Is Continuously Reconciled With the Actual State**
 Software agents (GitOps tools) continuously observe the actual system state and attempt to apply the desired state.
+<br><br><br>
+Hero and Lil DeeBee want to be COOL KIDS and get deployed and managed using GitOps, that way they’ll have improved efficiency and security. Hero is also relieved to know that all three of these CNCF GitOps tools follow the GitOps Principles so they really can't go wrong!
 
 
 Hero and Lil DeeBee want to be COOL KIDS and get deployed and managed using GitOps! That way they’ll have improved efficiency and security! 
