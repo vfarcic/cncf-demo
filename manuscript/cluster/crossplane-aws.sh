@@ -45,3 +45,5 @@ kubectl --namespace crossplane-system create secret generic aws-creds --from-fil
 kubectl apply --filename crossplane-config/provider-config-aws-official.yaml
 
 yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
+
+echo "export HYPERSCALER=aws" >> .env

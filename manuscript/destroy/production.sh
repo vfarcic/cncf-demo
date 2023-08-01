@@ -23,13 +23,15 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
+    unset KUBECONFIG
+
 	kubectl --namespace production delete --filename crossplane/aws-eks.yaml
 
-    COUNTER=$(kubectl get managed | wc -l)
+    COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
-        COUNTER=$(kubectl get managed | wc -l)
+        COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
     done
 
 elif [[ "$HYPERSCALER" == "azure" ]]; then
