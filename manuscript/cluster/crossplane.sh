@@ -1,7 +1,9 @@
 #!/bin/sh
-set -e
+set +e
 
 source .env
+
+set -e
 
 gum style \
 	--foreground 212 --border-foreground 212 --border double \

@@ -252,8 +252,23 @@ flowchart TD
         click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
         capi-azure(Azure)
         click capi-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-azure.md"
-        cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> continue
-        cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> continue
+        cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
+        cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> gitops
+
+        %% ------------
+        %% -- GitOps --
+        %% ------------
+        gitops{{GitOps}}
+        click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/README.md"
+        style gitops fill:blue
+        gitops-flux(Flux)
+        click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
+        gitops-argocd(Argo CD)
+        click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
+        style gitops-argocd fill:green
+        gitops-kapp(Carvel kapp-controller)
+        click gitops-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/kapp.md"
+        gitops --> gitops-flux & gitops-argocd & gitops-kapp --> continue
 
         continue((The be continued...))
         
