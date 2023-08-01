@@ -27,7 +27,7 @@ kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
 
 kubectl apply --filename crossplane-config/config-k8s.yaml
 
-sleep 10
+sleep 20
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
 

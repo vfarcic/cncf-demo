@@ -72,4 +72,4 @@ kubectl get nodes
 
 ## Continue the Adventure
 
-The adventure will continue soon...
+[GitOps](../gitops/README.md)

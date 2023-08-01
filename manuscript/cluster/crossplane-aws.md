@@ -12,26 +12,15 @@ Once this is done, we are able to provision Kubernetes clusters in AWS using Cro
 
 * You can skip the steps in this section (Setup) if you already used Crossplane with AWS in one of the previous chapters.
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-# Replace `[...]` with your access key ID`
-export AWS_ACCESS_KEY_ID=[...]
+chmod +x manuscript/cluster/crossplane-aws.sh
 
-# Replace `[...]` with your secret access key
-export AWS_SECRET_ACCESS_KEY=[...]
+./manuscript/cluster/crossplane-aws.sh
 
-echo "[default]
-aws_access_key_id = $AWS_ACCESS_KEY_ID
-aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
-" >aws-creds.conf
-
-kubectl --namespace crossplane-system \
-    create secret generic aws-creds \
-    --from-file creds=./aws-creds.conf
-
-kubectl apply \
-    --filename crossplane-config/provider-config-aws-official.yaml
-
-yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
+source .env
 ```
 
 ## Do
@@ -43,6 +32,11 @@ kubectl --namespace production apply \
     --filename crossplane/aws-eks.yaml
 
 kubectl get managed
+
+# NOTE: There is a problem with the
+#   object.kubernetes.crossplane.io/production-aws-pc resource.
+# It'll be fixed but, until then, the important note is that it
+#   does not affect the "adventure" in any way.
 
 kubectl --namespace production get claim
 
@@ -63,4 +57,4 @@ kubectl get nodes
 
 ## Continue the adventure
 
-The adventure will continue soon...
+[GitOps](../gitops/README.md)
