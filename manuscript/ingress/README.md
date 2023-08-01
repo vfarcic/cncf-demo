@@ -54,21 +54,36 @@ Now, FINALLY, with all of this context, it is time to consider the three CNCF In
 
 ## Choice 1: ingress-nginx
 
-TODO: Explanation
+ingress-nginx is a Kubernetes Ingress implementation that uses Ingress objects to maintain and configure nginx. ingress-nginx is maintained by the Kubernetes project.
+
+ingress-nginx uses the native Kubernetes Ingress object and adds extra functionality via **modules**, of which there are about 30. Modules are added and configured via annotations to the Ingress object.
 
 [![What Is ingress-nginx?](https://img.youtube.com/vi/G-m9mB4y3Og/0.jpg)](https://via.vmw.com/ingress-nginx)
 * [Official site](https://kubernetes.github.io/ingress-nginx)
 
-## Choice 2: Envoy with Contour
+## Choice 2: Contour with Envoy
 
-TODO: Explanation
+Contour is a Kubernetes Ingress Controller that uses Envoy as a load balaner and proxy, with additional features above and beyond the native Kubernetes Ingress object.
+
+Specifically, Contour introduces a **HTTPProxy** CRD that does everything that a native Kubernetes Ingress object does but with more features:
+* minimum annotations
+* capabilities are added to the resources spec itself
+* can separate concerns between teams
+* adds detailed status info (is it valid? what are the errors?)
+* provides statistics for Ops folks
+* TLS cert delegation - a safe way to reference secrets in different namespaces
 
 [![Implementing Ingress with Contour](https://img.youtube.com/vi/oFGyqG_7jTU/0.jpg)](https://via.vmw.com/Contour)
 * [Official site](https://projectcontour.io)
 
-## Choice 3: Emissary-ingress
+## Choice 3: Emissary-ingress with Envoy
 
-TODO: Explanation
+Emissary-ingress is a self-service, Kubernetes-native, API Gateway.
+
+Emissary-ingress introduces many CRDs. Here are the 3 most important:
+* **Mapping** - a mapping controls where we’re sending traffic & whether we are changing anything about that traffic
+* **Listener** - a listener configures what ports we lisen on & what protocol we are listening for. For example, port 8443 only listens for HTTPS
+* **Host** - a host configures what hostname you want to support (can do wildcard). It also has support for TLS.
 
 [![Self-Service Traffic Management with Emissary-ingress](https://img.youtube.com/vi/NpCEh09mOJI/0.jpg)](https://via.vmw.com/Emissary)
 * [Official site](https://www.getambassador.io/products/api-gateway)
