@@ -268,7 +268,29 @@ flowchart TD
         style gitops-argocd fill:green
         gitops-kapp(Carvel kapp-controller)
         click gitops-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/kapp.md"
-        gitops --> gitops-flux & gitops-argocd & gitops-kapp --> continue
+        gitops --> gitops-flux & gitops-argocd & gitops-kapp --> ingress
+
+        %% -------------
+        %% -- Ingress --
+        %% -------------
+        ingress{{Ingress}}
+        click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/README.md"
+        style ingress fill:blue
+        ingress-contour(Contour With Envoy)
+        click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
+        style ingress-contour fill:green
+        ingress-nginx(NGINX)
+        click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
+        emissary-ingress(Emissary-ingress With Envoy)
+        click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
+        ingress-argocd(GitOps With Argo CD)
+        click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
+        style ingress-argocd fill:green
+        ingress-flux(GitOps Flux)
+        click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
+        ingress-kapp(GitOps Carvel kapp-controller)
+        click ingress-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-kapp.md"
+        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux & ingress-kapp --> continue
 
         continue((The be continued...))
         
