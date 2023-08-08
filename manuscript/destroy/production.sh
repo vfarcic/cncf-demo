@@ -23,6 +23,21 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
+	rm -rf yaml/prod/*.yaml
+
+    git add .
+
+    git commit -m "Destroy"
+
+    git push
+
+    COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
+
+    while [ $COUNTER -ne 0 ]; do
+        sleep 10
+        COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
+    done
+
     unset KUBECONFIG
 
 	kubectl --namespace production delete --filename crossplane/aws-eks.yaml
