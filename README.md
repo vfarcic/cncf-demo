@@ -290,7 +290,46 @@ flowchart TD
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
         ingress-kapp(GitOps Carvel kapp-controller)
         click ingress-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-kapp.md"
-        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux & ingress-kapp --> continue
+        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux & ingress-kapp --> app
+
+        %% ----------------------------------
+        %% -- Deploy The App To Production --
+        %% ----------------------------------
+        app{{Deploy The App To Production}}
+        click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/README.md"
+        style app fill:blue
+        app-helm(App As Helm)
+        click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
+        app-kustomize(App As Kustomize)
+        click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
+        app-cdk8s(App As cdk8s)
+        click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
+        app-carvel(App As Carvel ytt)
+        click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
+        style app-carvel fill:green
+        app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> db-production
+
+        %% --------------
+        %% -- Database --
+        %% --------------
+        db-production{{Database}}
+        click db-production "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/README.md"
+        style db-production fill:blue
+        db-production-crossplane(Crossplane)
+        click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
+        style db-production-crossplane fill:green
+        db-production-helm(App As Helm)
+        click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
+        db-production-kustomize(App As Kustomize)
+        click db-production-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/kustomize.md"
+        db-production-cdk8s(App As cdk8s)
+        click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
+        db-production-carvel(App As Carvel ytt)
+        click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
+        style db-production-carvel fill:green
+        db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
+
+        prod-done((Chapter End)) --> continue
 
         continue((The be continued...))
         

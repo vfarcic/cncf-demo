@@ -33,12 +33,9 @@ kubectl --namespace production apply \
 
 kubectl get managed
 
-# NOTE: There is a problem with the
-#   object.kubernetes.crossplane.io/production-aws-pc resource.
-# It'll be fixed but, until then, the important note is that it
-#   does not affect the "adventure" in any way.
-
 kubectl --namespace production get claim
+
+# Wait until the claim is ready
 
 cat crossplane/get-kubeconfig-aws.sh
 

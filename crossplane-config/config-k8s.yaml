@@ -5,4 +5,4 @@ kind: Configuration
 metadata:
   name: crossplane-k8s
 spec:
-  package: xpkg.upbound.io/devops-toolkit/dot-kubernetes:v0.10.52
+  package: xpkg.upbound.io/devops-toolkit/dot-kubernetes:v0.10.53
