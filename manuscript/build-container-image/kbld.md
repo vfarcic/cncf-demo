@@ -42,4 +42,4 @@ docker image tag kbld:$TAG cncf-demo:$TAG
 
 ## Continue The Adventure
 
-[Store Container Image in a Registry](../registry/README.md)
+* [Store Container Image in a Registry](../registry/README.md)

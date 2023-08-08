@@ -49,4 +49,4 @@ echo "https://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Create and Manage a Production Kubernetes Cluster](../cluster/README.md)
+* [Create and Manage a Production Kubernetes Cluster](../cluster/README.md)

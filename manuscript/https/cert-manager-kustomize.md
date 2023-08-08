@@ -43,4 +43,4 @@ echo "https://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Set Up PostgreSQL DB in the Dev Environment](../db/README.md)
+* [Set Up PostgreSQL DB in the Dev Environment](../db/README.md)

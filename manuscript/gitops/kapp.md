@@ -114,4 +114,4 @@ yq --inplace ".gitOps.app = \"kapp-controller\"" settings.yaml
 
 ## Continue The Adventure
 
-[Ingress](../ingress/README.md)
+* [Ingress](../ingress/README.md)

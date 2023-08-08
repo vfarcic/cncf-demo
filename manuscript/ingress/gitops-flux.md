@@ -71,5 +71,5 @@ echo "http://gitops.$DOMAIN"
 
 ## Continue The Adventure
 
-[Deploy The App](../app/README.md)
+* [Deploy The App](../app/README.md)
 

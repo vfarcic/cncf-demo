@@ -50,4 +50,4 @@ echo "http://cncf-demo-dev.$DOMAIN"
 
 ## Continue The Adventure
 
-[Use HTTPS](../https/README.md)
+* [Use HTTPS](../https/README.md)

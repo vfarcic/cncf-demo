@@ -118,4 +118,4 @@ yq --inplace ".gitOps.app = \"argocd\"" settings.yaml
 
 ## Continue The Adventure
 
-[Ingress](../ingress/README.md)
+* [Ingress](../ingress/README.md)

@@ -99,4 +99,4 @@ kubectl --namespace production get sqlclaims
 
 ## Continue The Adventure
 
-[Runtime Policies](../runtime-policies/README.md)
+* [Runtime Policies](../runtime-policies/README.md)

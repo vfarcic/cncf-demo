@@ -47,4 +47,4 @@ echo "https://harbor.$DOMAIN"
 
 ## Continue The Adventure
 
-[Define And Deploy The App To Dev](../define-deploy-dev/README.md)
+* [Define And Deploy The App To Dev](../define-deploy-dev/README.md)

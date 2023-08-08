@@ -56,4 +56,4 @@ kubectl --namespace production get secret cncf-demo-password \
 
 ## Continue The Adventure
 
-[Mutual TLS](../mtls/README.md)
+* [Mutual TLS](../mtls/README.md)

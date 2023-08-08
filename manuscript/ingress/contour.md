@@ -54,5 +54,5 @@ yq --inplace ".production.ingress.className = \"contour\"" \
 
 ## Which GitOps Tool Did You Choose?
 
-[Argo CD](gitops-argocd.md)
-[Flux](gitops-flux.md)
+* [Argo CD](gitops-argocd.md)
+* [Flux](gitops-flux.md)

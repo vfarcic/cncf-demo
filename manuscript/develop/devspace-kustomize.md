@@ -46,4 +46,4 @@ devspace purge --namespace dev
 
 ## Continue The Adventure
 
-[Create and Manage a Production Kubernetes Cluster](../cluster/README.md)
+* [Create and Manage a Production Kubernetes Cluster](../cluster/README.md)

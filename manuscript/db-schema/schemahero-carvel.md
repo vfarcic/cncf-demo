@@ -30,4 +30,4 @@ curl "https://cncf-demo-dev.$DOMAIN/videos" | jq .
 
 ## Continue The Adventure
 
-[Develop](../develop/README.md)
+* [Develop](../develop/README.md)

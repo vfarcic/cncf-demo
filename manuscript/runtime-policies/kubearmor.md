@@ -71,4 +71,4 @@ kubectl --namespace production exec -it $POD -- ls -l /
 
 ## Continue The Adventure
 
-[Managing Secrets](../secrets/README.md)
+* [Managing Secrets](../secrets/README.md)
