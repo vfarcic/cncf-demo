@@ -12,3 +12,4 @@ TODO: Explanation
 ## What Is Your Choice?
 
 * [External Secrets Operator (ESO)](eso.md)
+* **Secrets Store CSI Driver (SSCSID)** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

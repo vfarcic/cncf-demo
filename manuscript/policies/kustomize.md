@@ -5,19 +5,16 @@ TODO: Intro
 ## Setup
 
 ```bash
-rm -f apps/cncf-demo.yaml
+# Install `gum` by following the instructions in
+#   https://github.com/charmbracelet/gum#installation
+# Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with
+#   Charm Gum.
 
-git add .
+chmod +x manuscript/policies/kustomize.sh
 
-git commit -m "Starting over with policies by removing the app"
+./manuscript/policies/kustomize.sh
 
-git push
-
-kubectl --namespace production get all,ingresses
-
-# Wait until the Namespace is empty
-
-export DESTINATION=$(yq ".crossplane.destination" settings.yaml)
+source .env
 ```
 
 ## Do
@@ -33,9 +30,8 @@ git commit -m "CNCF Demo"
 
 git push
 
-kubectl --namespace production get all
-
-# Wait until resources are created
+kubectl --namespace production rollout status \
+    --watch statefulset cncf-demo-controller
 
 kubectl --namespace production get deployments
 
@@ -44,9 +40,9 @@ kubectl --namespace production get deployments
 # If Gatekeeper
 export POLICY_KIND=deploymentreplicas
 
-# TODO: Figure out why Gatekeeper does not show but does enforce
-#   violations.
 kubectl describe $POLICY_KIND deploymentproduction
+
+# Gatekeeper does not show violations, but it does enforce them.
 
 cat kustomize/overlays/prod/deployment-scaled.yaml
 
@@ -64,6 +60,8 @@ kubectl --namespace production get deployments
 
 # Wait until the Deployment is created
 
+kubectl --namespace production get pods
+
 # Pods are not be running since the database was not created and,
 #   with it, the Secret with the authentication was not created
 #   either, hence the Pods that require the Secret are not
@@ -74,11 +72,14 @@ kubectl --namespace production get sqlclaims
 # The SqlClaim was NOT created
 
 # If Gatekeeper
-export POLICY_KIND=deploymentreplicas
+export POLICY_KIND=dbsize
 
 kubectl describe $POLICY_KIND dbcluster
 
 kubectl describe $POLICY_KIND dbproduction
+
+# Gatekeeper (still) does not show violations, but it does
+#   enforce them.
 
 cat kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
 
@@ -94,7 +95,10 @@ git push
 
 kubectl --namespace production get sqlclaims
 
-# Wait until the claim is created
+# Wait until the SqlClaim is created
+
+kubectl --namespace production wait sqlclaim cncf-demo \
+    --for=condition=ready --timeout=15m
 ```
 
 ## Continue The Adventure

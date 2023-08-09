@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-source .env
-
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \

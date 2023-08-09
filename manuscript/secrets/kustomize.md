@@ -35,7 +35,8 @@ yq --inplace \
 
 cat kustomize/overlays/prod/postgresql-crossplane-password-$DESTINATION.yaml
 
-yq --inplace ".resources += \"postgresql-crossplane-password-$DESTINATION.yaml\"" \
+yq --inplace \
+    ".resources += \"postgresql-crossplane-password-$DESTINATION.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
 cp $GITOPS_APP/cncf-demo-kustomize.yaml apps/cncf-demo.yaml

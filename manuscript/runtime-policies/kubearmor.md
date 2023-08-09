@@ -6,33 +6,16 @@ TODO: Intro
 
 ```bash
 # TODO: kapp-controller
+# TODO: Flux
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+# Install `gum` by following the instructions in
+#   https://github.com/charmbracelet/gum#installation
+# Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with
+#   Charm Gum.
 
-export REPO_URL=$(git config --get remote.origin.url)
+chmod +x manuscript/runtime-policies/kubearmor.sh
 
-# Execute the command that follows only if you're using Argo CD
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/kubearmor.yaml
-
-curl -sfL http://get.kubearmor.io/ \
-    | sudo sh -s -- -b /usr/local/bin
-
-mkdir kubearmor
-
-karmor install --save
-
-mv kubearmor.yaml kubearmor/.
-
-cat $GITOPS_APP/kubearmor.yaml
-
-cp $GITOPS_APP/kubearmor.yaml infra/.
-
-git add .
-
-git commit -m "KubeArmor"
-
-git push
+./manuscript/runtime-policies/kubearmor.sh
 ```
 
 ## Do

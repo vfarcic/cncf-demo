@@ -2,7 +2,7 @@
 /kubeconfig-*.yaml
 /aws-creds.conf
 /traces.json
-/azure-creds.json
+/azure-*.json
 /gke_gcloud_auth_plugin_cache
 /image-builder
 /account.json

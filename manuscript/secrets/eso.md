@@ -5,21 +5,16 @@ TODO: Intro
 ## Setup
 
 ```bash
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+# Install `gum` by following the instructions in
+#   https://github.com/charmbracelet/gum#installation
+# Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with
+#   Charm Gum.
 
-cat $GITOPS_APP/external-secrets.yaml
+chmod +x manuscript/secrets/eso.sh
 
-cp $GITOPS_APP/external-secrets.yaml infra/.
+./manuscript/secrets/eso.sh
 
-git add . 
-
-git commit -m "External Secrets"
-
-git push
-
-kubectl --namespace external-secrets get pods
-
-# Wait until the Pods appear
+source .env
 ```
 
 ## Which Cloud Provider Did You Choose?

@@ -268,6 +268,8 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
     kubectl apply --filename crossplane-config/provider-config-azure-official.yaml
 
+    yq --inplace ".crossplane.destination = \"azure\"" settings.yaml
+
 fi
 
 ##################

@@ -1,0 +1,60 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: c7n
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: c7n-kube
+    repoURL: https://cloud-custodian.github.io/helm-charts
+    targetRevision: 0.1.2
+    helm:
+      releaseName: c7n-kube
+      values: |
+        policies:
+          source: configMap
+          configMap:
+            policies:
+              - name: deployment-has-multiple-replicas
+                mode:
+                  type: k8s-admission
+                  on-match: deny
+                  operations:
+                    - CREATE
+                    - UPDATE
+                description: |
+                    Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
+                    This policy validates that Deployments have more than one replica.      
+                resource: k8s.deployment
+        #         filters:
+        #           - or:
+        #               - metadata.labels."app.kubernetes.io/name": absent
+        #               - metadata.labels."app.kubernetes.io/instance": absent
+        #               - metadata.labels."app.kubernetes.io/version": absent
+        #               - metadata.labels."app.kubernetes.io/component": absent
+        #               - metadata.labels."app.kubernetes.io/part-of": absent
+        #               - metadata.labels."app.kubernetes.io/managed-by": absent
+        webhook:
+          namespaceSelector:
+
+        #   caBundle: will-be-replaced-by-cert-manager
+        #   rules:
+        #     - apiGroups: [""]
+        #       apiVersions: ["v1"]
+        #       operations: ["CREATE"]
+        #       resources: ["pods"]
+        #       scope: Namespaced
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: c7n-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
