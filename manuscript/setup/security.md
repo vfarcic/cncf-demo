@@ -12,16 +12,13 @@ cd cncf-demo
 gh repo set-default
 
 # Select the fork as the default repository
+```
 
-# Install `gum` by following the instructions in
-#   https://github.com/charmbracelet/gum#installation
-# Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with
-#   Charm Gum.
+* If you already have the previous chapter up and running and the `vfarcic/cncf-demo` fork is merged with the upstream, you can skip the steps that execute the `security.sh` script.
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
-# If you already have the previous chapter up and running and the
-#   `vfarcic/cncf-demo` fork is merged with the upstream, you can
-#   skip the steps that execute the `security.sh` script.
-
+```bash
 chmod +x manuscript/setup/security.sh
 
 ./manuscript/setup/security.sh

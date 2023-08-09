@@ -4,15 +4,12 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
 # TODO: kapp-controller
 # TODO: Flux
-
-# Install `gum` by following the instructions in
-#   https://github.com/charmbracelet/gum#installation
-# Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with
-#   Charm Gum.
-
 chmod +x manuscript/runtime-policies/kubearmor.sh
 
 ./manuscript/runtime-policies/kubearmor.sh
