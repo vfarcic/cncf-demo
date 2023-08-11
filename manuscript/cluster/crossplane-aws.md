@@ -35,7 +35,8 @@ kubectl get managed
 
 kubectl --namespace production get claim
 
-# Wait until the claim is ready
+kubectl --namespace production wait --for=condition=ready \
+    clusterclaim production --timeout=30m
 
 cat crossplane/get-kubeconfig-aws.sh
 

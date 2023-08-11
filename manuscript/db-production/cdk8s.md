@@ -44,12 +44,6 @@ git commit -m "App DB"
 
 git push
 
-# TODO: Remove
-# If Azure
-# kubectl get resourcegroup.azure.upbound.io,database.postgresql.sql.crossplane.io,firewallrule.dbforpostgresql.azure.upbound.io,server.dbforpostgresql.azure.upbound.io
-# If AWS
-# kubectl get vpc.ec2.aws.upbound.io,subnet.ec2.aws.upbound.io,subnetgroup.rds.aws.upbound.io,internetgateway.ec2.aws.upbound.io,routetable.ec2.aws.upbound.io,route.ec2.aws.upbound.io,mainroutetableassociation.ec2.aws.upbound.io,routetableassociation.ec2.aws.upbound.io,securitygroup.ec2.aws.upbound.io,securitygrouprule.ec2.aws.upbound.io,instance.rds.aws.upbound.io,database.postgresql.sql.crossplane.io,object.kubernetes.crossplane.io
-
 kubectl get managed
 
 kubectl --namespace production get claim

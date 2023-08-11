@@ -45,6 +45,8 @@ kubectl get managed
 
 kubectl --namespace production get claim
 
+# Wait until the claim is ready
+
 cat crossplane/get-kubeconfig-azure.sh
 
 chmod +x crossplane/get-kubeconfig-azure.sh

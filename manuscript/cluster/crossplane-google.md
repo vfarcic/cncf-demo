@@ -57,6 +57,8 @@ kubectl get managed
 
 kubectl --namespace production get claim
 
+# Wait until the claim is ready
+
 cat crossplane/get-kubeconfig-google.sh
 
 chmod +x crossplane/get-kubeconfig-google.sh
