@@ -25,17 +25,19 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	rm -rf yaml/prod/*.yaml
 
+    rm -rf infra/*.yaml
+
     git add .
 
     git commit -m "Destroy"
 
     git push
 
-    COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
+    COUNTER=$(kubectl get managed | grep -v object | grep -v release | grep -v database | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
-        COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
+        COUNTER=$(kubectl get managed | grep -v object | grep -v release | grep -v database | wc -l)
     done
 
     unset KUBECONFIG
