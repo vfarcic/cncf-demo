@@ -14,14 +14,15 @@ spec:
     path: helm/app
     helm:
       releaseName: cncf-demo
-      values: |-
-        image:
-          tag: latest
-        ingress:
-          host: cncf-demo.sillydemo.com
-          className: nginx
-        tls:
-          enabled: true
+      parameters:
+        - name: image.tag
+          value: latest
+        - name: ingress.host
+          value: cncf-demo.sillydemo.com
+        - name: ingress.className
+          value: nginx
+        - name: tls.enabled
+          value: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: production

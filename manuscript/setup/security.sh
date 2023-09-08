@@ -185,33 +185,58 @@ yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 # Setup The App #
 #################
 
-gum style \
-	--foreground 212 --border-foreground 212 --border double \
-	--margin "1 2" --padding "2 4" \
-    'We are about to setup Kustomize.' \
-    'If you prefer a solution other than Kustomize for defining
+echo "
+How would you like to define Kubernetes resources?"
+
+TEMPLATES=$(gum choose "kustomize" "helm" "ytt", "cdk8s")
+
+echo "export TEMPLATES=$TEMPLATES" >> .env
+
+if [[ "$HYPERSCALER" == "kustomize" ]]; then
+
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
+
+    yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
+
+    yq --inplace ".tag = \"v0.0.1\"" settings.yaml
+
+    yq --inplace ".spec.template.spec.containers[0].image = \"index.docker.io/vfarcic/cncf-demo\"" kustomize/base/deployment.yaml
+
+    cd kustomize/overlays/prod
+
+    kustomize edit set image index.docker.io/vfarcic/cncf-demo=index.docker.io/vfarcic/cncf-demo:v0.0.1
+
+    cd ../../..
+
+    yq --inplace ".patchesStrategicMerge = []" kustomize/overlays/prod/kustomization.yaml
+
+elif [[ "$HYPERSCALER" == "helm" ]]; then
+
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
+
+    yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
+
+    yq --inplace ".tag = \"v0.0.1\"" settings.yaml
+
+    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" helm/app/values.yaml
+
+    yq --inplace ".spec.source.helm.parameters[0].value = \"v0.0.1\"" $GITOPS_APP/cncf-demo-helm.yaml
+
+else
+
+    gum style \
+        --foreground 212 --border-foreground 212 --border double \
+        --margin "1 2" --padding "2 4" \
+        'If you prefer a solution other than Kustomize or Helm for defining
 and packaging applications, please go back to the prod.md or an
 earlier chapter.'
 
-gum confirm "
+    gum confirm "
 Continue?
-" || exit 0
+    " || exit 0
 
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
+fi
 
-yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
-
-yq --inplace ".tag = \"v0.0.1\"" settings.yaml
-
-yq --inplace ".spec.template.spec.containers[0].image = \"index.docker.io/vfarcic/cncf-demo\"" kustomize/base/deployment.yaml
-
-cd kustomize/overlays/prod
-
-kustomize edit set image index.docker.io/vfarcic/cncf-demo=index.docker.io/vfarcic/cncf-demo:v0.0.1
-
-cd ../../..
-
-yq --inplace ".patchesStrategicMerge = []" kustomize/overlays/prod/kustomization.yaml
 
 ####################
 # Setup Crossplane #

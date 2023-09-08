@@ -38,15 +38,15 @@ cat $GITOPS_APP/cncf-demo-helm.yaml
 cp $GITOPS_APP/cncf-demo-helm.yaml apps/cncf-demo.yaml
 
 # Execute the command that follows only if you are using Argo CD
-export VALUES=$(\
-    yq ".spec.source.helm.values" apps/cncf-demo.yaml \
-    | yq ".image.tag = \"$TAG\"" \
-    | yq ".ingress.host = \"cncf-demo.$DOMAIN\"" \
-    | yq ".ingress.className = \"$INGRESS_CLASS_NAME\""
-)
+yq --inplace ".spec.source.helm.parameters[0].value = \"$TAG\"" \
+    apps/cncf-demo.yaml
 
 # Execute the command that follows only if you are using Argo CD
-yq --inplace ".spec.source.helm.values = \"$VALUES\"" \
+yq --inplace ".spec.source.helm.parameters[1].value = \"cncf-demo.$DOMAIN\"" \
+    apps/cncf-demo.yaml
+
+# Execute the command that follows only if you are using Argo CD
+yq --inplace ".spec.source.helm.parameters[2].value = \"$INGRESS_CLASS_NAME\"" \
     apps/cncf-demo.yaml
 
 # Execute the command that follows only if you are using Flux
