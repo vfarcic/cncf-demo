@@ -188,11 +188,11 @@ yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 echo "
 How would you like to define Kubernetes resources?"
 
-TEMPLATES=$(gum choose "kustomize" "helm" "ytt", "cdk8s")
+TEMPLATES=$(gum choose "kustomize" "helm" "ytt" "cdk8s")
 
 echo "export TEMPLATES=$TEMPLATES" >> .env
 
-if [[ "$HYPERSCALER" == "kustomize" ]]; then
+if [[ "$TEMPLATES" == "kustomize" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
 
@@ -210,7 +210,7 @@ if [[ "$HYPERSCALER" == "kustomize" ]]; then
 
     yq --inplace ".patchesStrategicMerge = []" kustomize/overlays/prod/kustomization.yaml
 
-elif [[ "$HYPERSCALER" == "helm" ]]; then
+elif [[ "$TEMPLATES" == "helm" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
 
@@ -301,13 +301,34 @@ fi
 # Setup Database #
 ##################
 
-yq --inplace ".resources += \"postgresql-crossplane-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+if [[ "$TEMPLATES" == "kustomize" ]]; then
 
-yq --inplace ".resources += \"postgresql-crossplane-secret-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+    yq --inplace ".resources += \"postgresql-crossplane-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
 
-yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+    yq --inplace ".resources += \"postgresql-crossplane-secret-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
 
-yq --inplace ".resources += \"postgresql-crossplane-schema-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+    yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+
+    yq --inplace ".resources += \"postgresql-crossplane-schema-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+
+elif [[ "$TEMPLATES" == "helm" ]]; then
+
+    if [[ "$HYPERSCALER" == "google" ]]; then
+
+        yq --inplace ".spec.source.helm.parameters[4].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
+
+    elif [[ "$HYPERSCALER" == "aws" ]]; then
+
+        yq --inplace ".spec.source.helm.parameters[5].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
+
+    elif [[ "$HYPERSCALER" == "azure" ]]; then
+
+        yq --inplace ".spec.source.helm.parameters[6].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
+        
+    fi
+
+fi
+
 
 #######################
 # Setup Dabase Schema #

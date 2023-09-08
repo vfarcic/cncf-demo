@@ -23,6 +23,12 @@ spec:
           value: nginx
         - name: tls.enabled
           value: "true"
+        - name: db.enabled.google
+          value: "false"
+        - name: db.enabled.aws
+          value: "false"
+        - name: db.enabled.azure
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: production
