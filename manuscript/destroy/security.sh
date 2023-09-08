@@ -19,6 +19,8 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     gcloud projects delete ${PROJECT_ID} --quiet
 
+	gcloud projects delete cncf-demo-db --quiet
+
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	set +e
@@ -47,5 +49,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 
 	az group delete --name $RESOURCE_GROUP --yes
+
+	az group delete --name cncf-demo-db --yes
 
 fi
