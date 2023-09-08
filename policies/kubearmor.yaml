@@ -6,12 +6,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: cncf-demo
+      control-plane: schemahero
   file:
     matchDirectories:
     - dir: /
       recursive: true  
   process:
     matchPaths:
-    - path: /usr/local/bin/cncf-demo
+    - path: /manager
   action: Allow

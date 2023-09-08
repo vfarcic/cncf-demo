@@ -17,4 +17,4 @@ TODO: Explanation
 ## What Is Your Choice?
 
 * [KubeArmor](kubearmor.md)
-* **Falco** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Falco](falco.md)

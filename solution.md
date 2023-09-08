@@ -327,7 +327,7 @@ flowchart TD
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
         policies-helm(App As Helm)
-        style policies-helm fill:red
+        click policies-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/helm.md"
         policies-kustomize(App As Kustomize)
         click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
         policies-cdk8s(App As cdk8s)
@@ -345,7 +345,7 @@ flowchart TD
         kube-armor(KubeArmor)
         click kube-armor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/kubearmor.md"
         falco(Falco)
-        style falco fill:red
+        click falco "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/falco.md"
         runtime-policies --> kube-armor & falco --> secrets
 
         %% ------------------------

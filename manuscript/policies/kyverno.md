@@ -21,7 +21,7 @@ git push
 
 kubectl --namespace kyverno get pods
 
-# Wait until the Pods are created and are ready
+# Wait until the Pods are created and ready
 ```
 
 ## Do

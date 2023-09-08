@@ -29,7 +29,7 @@ spec:
     {{- if .Values.db.enabled.crossplane.aws }}
     version: "15.3"
     {{- end }}
-    size: small
+    size: {{ .Values.db.size }}
 
 {{- end }}
 {{- if .Values.db.insecure }}

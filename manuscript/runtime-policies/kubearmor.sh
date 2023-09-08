@@ -10,7 +10,6 @@ gum style \
 
 gum confirm '
 Are you ready to start?
-Select "Yes" only if you did NOT follow the story from the start (if you jumped straight into this chapter).
 Feel free to say "No" and inspect the script if you prefer setting up resources manually.
 ' || exit 0
 

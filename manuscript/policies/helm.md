@@ -1,4 +1,4 @@
-# Policies With Kustomize
+# Policies With Helm
 
 TODO: Intro
 
@@ -8,9 +8,9 @@ TODO: Intro
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-chmod +x manuscript/policies/kustomize.sh
+chmod +x manuscript/policies/helm.sh
 
-./manuscript/policies/kustomize.sh
+./manuscript/policies/helm.sh
 
 source .env
 ```
@@ -20,7 +20,7 @@ source .env
 ```bash
 # TODO: kapp-controller
 
-cp $GITOPS_APP/cncf-demo-kustomize.yaml apps/cncf-demo.yaml
+cp $GITOPS_APP/cncf-demo-helm.yaml apps/cncf-demo.yaml
 
 git add .
 
@@ -46,11 +46,14 @@ kubectl describe $POLICY_KIND deploymentproduction
 
 # Gatekeeper does not show violations, but it does enforce them.
 
-cat kustomize/overlays/prod/deployment-scaled.yaml
+cat apps/cncf-demo.yaml
 
-yq --inplace \
-    ".patchesStrategicMerge += \"deployment-scaled.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
+# If Argo CD
+yq --inplace ".spec.source.helm.parameters[9].value = \"3\"" \
+    apps/cncf-demo.yaml
+
+# If Flux
+yq --inplace ".spec.values.replicas = 3" apps/cncf-demo.yaml
 
 git add .
 
@@ -83,11 +86,15 @@ kubectl describe $POLICY_KIND dbproduction
 # Gatekeeper (still) does not show violations, but it does
 #   enforce them.
 
-cat kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
+cat apps/cncf-demo.yaml
 
+# If Argo CD
 yq --inplace \
-    ".spec.parameters.size = \"medium\"" \
-    kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
+    ".spec.source.helm.parameters[10].value = \"medium\"" \
+    apps/cncf-demo.yaml
+
+# If Flux
+yq --inplace ".spec.values.db.size = small" apps/cncf-demo.yaml
 
 git add .
 

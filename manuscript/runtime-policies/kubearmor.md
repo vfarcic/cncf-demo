@@ -18,16 +18,8 @@ chmod +x manuscript/runtime-policies/kubearmor.sh
 ## Do
 
 ```bash
-export POD=$(kubectl --namespace production get pods \
-    --selector app.kubernetes.io/name=cncf-demo \
-    --output jsonpath='{.items[0].metadata.name}')
-
-kubectl --namespace production exec -it $POD -- ls -l /
-
-# If it says that `executable file not found in $PATH`, the image
-#   is probably based on `scratch` so there is nothing to
-#   protect.
-# If that's the case, you can skip the rest of this section.
+kubectl --namespace production exec -it cncf-demo-controller-0 \
+    -- ls -l /
 
 kubectl annotate namespace production \
     kubearmor-file-posture=block --overwrite

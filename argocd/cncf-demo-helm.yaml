@@ -22,12 +22,22 @@ spec:
         - name: ingress.className
           value: nginx
         - name: tls.enabled
+          value: "false"
+        - name: db.enabled.crossplane.google
+          value: "false"
+        - name: db.enabled.crossplane.aws
+          value: "false"
+        - name: db.enabled.crossplane.azure
+          value: "false"
+        - name: schemahero.enabled
           value: "true"
-        - name: db.enabled.google
-          value: "false"
-        - name: db.enabled.aws
-          value: "false"
-        - name: db.enabled.azure
+        - name: db.id
+          value: cncf-demo-db
+        - name: replicas
+          value: "1"
+        - name: db.size
+          value: small
+        - name: db.insecure
           value: "false"
   destination:
     server: https://kubernetes.default.svc

@@ -222,6 +222,8 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
 
     yq --inplace ".spec.source.helm.parameters[0].value = \"v0.0.1\"" $GITOPS_APP/cncf-demo-helm.yaml
 
+    yq --inplace ".spec.source.helm.parameters[3].value = \"false\"" $GITOPS_APP/cncf-demo-helm.yaml
+
 else
 
     gum style \
@@ -326,6 +328,8 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
         yq --inplace ".spec.source.helm.parameters[6].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
         
     fi
+
+    yq --inplace ".spec.source.helm.parameters[11].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
 
 fi
 
