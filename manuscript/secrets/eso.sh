@@ -4,9 +4,9 @@ set -e
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
-	'Setup for the` \
-	`Managing Secrets In Kubernetes With External Secrets Operator (ESO)` \
-	`chapter.'
+	'Setup for the' \
+	'Managing Secrets In Kubernetes With External Secrets Operator (ESO)' \
+	'chapter.'
 
 gum confirm '
 Are you ready to start?

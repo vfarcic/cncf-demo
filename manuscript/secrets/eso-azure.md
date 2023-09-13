@@ -8,12 +8,14 @@ TODO: Intro
 export RESOURCE_GROUP=$(\
     yq ".production.azure.resourceGroup" settings.yaml)
 
-az keyvault create --name cncf-demo \
+KEYVAULT=cncf-demo-$(date +%Y%m%d%H%M%S)
+
+az keyvault create --name $KEYVAULT \
     --resource-group $RESOURCE_GROUP --location eastus \
     | tee azure-keyvault.json
 
 az keyvault secret set --name production-postgresql \
-    --vault-name cncf-demo \
+    --vault-name $KEYVAULT \
     --value '{"password": "YouWillNeverFindOut"}'
 
 export CLIENT_ID=$(jq --raw-output ".clientId" azure-creds.json)
@@ -31,6 +33,10 @@ kubectl --namespace external-secrets \
 yq --inplace ".spec.provider.azurekv.tenantId = \"$TENANT_ID\"" \
     eso/secret-store-azure.yaml
 
+yq --inplace \
+    ".spec.provider.azurekv.vaultUrl = \"https://$KEYVAULT.vault.azure.net\"" \
+    eso/secret-store-azure.yaml
+
 cat eso/secret-store-azure.yaml
 
 cp eso/secret-store-azure.yaml infra/.
@@ -42,8 +48,6 @@ git commit -m "Secret Store"
 git push
 
 kubectl --namespace external-secrets get clustersecretstores
-
-# TODO: Fix the complaint about permissions
 
 # Wait until the ClusterSecretStore appears
 ```

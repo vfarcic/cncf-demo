@@ -1,4 +1,4 @@
-# Managing Secrets From Google Cloud With External Secrets Operator (ESO) and Kustomize
+# Managing Secrets With External Secrets Operator (ESO) and Kustomize
 
 TODO: Intro
 
@@ -15,7 +15,7 @@ cat kustomize/overlays/prod/postgresql-crossplane-secret-$DESTINATION.yaml
 cat kustomize/overlays/prod/postgresql-crossplane-password-$DESTINATION.yaml
 
 # Now the secret is tied to Crossplane objects and we need to
-#   remove them first.
+#   remove it first.
 
 rm apps/cncf-demo.yaml
 

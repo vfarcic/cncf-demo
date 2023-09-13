@@ -28,12 +28,9 @@ git commit -m "CNCF Demo"
 
 git push
 
-kubectl --namespace production rollout status \
-    --watch statefulset cncf-demo-controller
+kubectl --namespace production get statefulsets
 
-# Repeat the previous command if the output claims that it was
-#   `not found` since that means that Argo CD or Flux did not
-#   yet synchronize the resources.
+# Wait until the StatefulSet is created
 
 kubectl --namespace production get deployments
 

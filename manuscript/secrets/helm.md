@@ -1,4 +1,4 @@
-# Managing Secrets From Google Cloud With External Secrets Operator (ESO) and Helm
+# Managing Secrets With External Secrets Operator (ESO) and Helm
 
 TODO: Intro
 
@@ -14,7 +14,7 @@ cat helm/app/templates/postgresql-crossplane.yaml
 # we could have specified it as `kind: ExternalSecret`.
 
 # Now the secret is tied to Crossplane objects and we need to
-#   remove them first.
+#   remove it first.
 
 rm apps/cncf-demo.yaml
 

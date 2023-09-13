@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-rm -f .env
-
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
@@ -29,6 +27,8 @@ echo "
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
 |eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
 |az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
+|helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |
+|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/getting-started/#install-the-cli'|
 " | gum format
 
 gum confirm "
@@ -188,6 +188,10 @@ yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 # Setup The App #
 #################
 
+yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
+
+yq --inplace ".tag = \"v0.0.1\"" settings.yaml
+
 echo "
 How would you like to define Kubernetes resources?"
 
@@ -198,10 +202,6 @@ echo "export TEMPLATES=$TEMPLATES" >> .env
 if [[ "$TEMPLATES" == "kustomize" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
-
-    yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
-
-    yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
     yq --inplace ".spec.template.spec.containers[0].image = \"index.docker.io/vfarcic/cncf-demo\"" kustomize/base/deployment.yaml
 
@@ -217,24 +217,26 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
 
-    yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
-
-    yq --inplace ".tag = \"v0.0.1\"" settings.yaml
-
     yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" helm/app/values.yaml
 
     yq --inplace ".spec.source.helm.parameters[0].value = \"v0.0.1\"" $GITOPS_APP/cncf-demo-helm.yaml
 
     yq --inplace ".spec.source.helm.parameters[3].value = \"false\"" $GITOPS_APP/cncf-demo-helm.yaml
 
+elif [[ "$TEMPLATES" == "cdk8s" ]]; then
+
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
+
+    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" cdk8s/app-prod.yaml
+
+    yq --inplace ".image.tag = \"v0.0.1\"" cdk8s/app-prod.yaml
+
 else
 
     gum style \
         --foreground 212 --border-foreground 212 --border double \
         --margin "1 2" --padding "2 4" \
-        'If you prefer a solution other than Kustomize or Helm for defining
-and packaging applications, please go back to the prod.md or an
-earlier chapter.'
+        'Carvel ytt has not been implemented yet.'
 
     gum confirm "
 Continue?
@@ -340,6 +342,22 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
 
     yq --inplace ".spec.source.helm.parameters[11].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
 
+elif [[ "$TEMPLATES" == "cdk8s" ]]; then
+
+    yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" cdk8s/app-prod.yaml
+
+    yq --inplace ".db.id = \"cncf-demo-db\"" cdk8s/app-prod.yaml
+
+    yq --inplace ".db.insecure = true" cdk8s/app-prod.yaml
+
+    yq --inplace ".db.size = \"small\"" cdk8s/app-prod.yaml
+
+    cd cdk8s
+
+    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate 
+
+    cd ../
+    
 fi
 
 
