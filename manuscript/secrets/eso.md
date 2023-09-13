@@ -1,4 +1,4 @@
-# Managing Secrets With External Secrets Operator (ESO)
+# Managing Secrets In Kubernetes With External Secrets Operator (ESO)
 
 TODO: Intro
 

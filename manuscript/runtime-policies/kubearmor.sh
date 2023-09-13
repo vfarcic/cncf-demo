@@ -33,7 +33,7 @@ GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 REPO_URL=$(git config --get remote.origin.url)
 
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/kubearmor.yaml
+    $GITOPS_APP/kubearmor.yaml
 
 echo 'Please enter sudo password to install `karmor` CLI.'
 

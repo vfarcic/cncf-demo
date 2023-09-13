@@ -48,7 +48,9 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	eksctl delete addon --name aws-ebs-csi-driver --cluster dot
 
-	eksctl delete cluster --config-file eksctl/config-dev.yaml
+	eksctl delete nodegroup --name primary --cluster dot --drain=false --wait
+
+	eksctl delete cluster --config-file eksctl/config-dev.yaml --wait
 
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 

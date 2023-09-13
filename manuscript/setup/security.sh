@@ -59,7 +59,8 @@ echo "export KUBECONFIG=$KUBECONFIG" >> .env
 
 if [[ "$HYPERSCALER" == "google" ]]; then
 
-    USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    # USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    gcloud components install gke-gcloud-auth-plugin
 
     PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
@@ -257,6 +258,12 @@ kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
 kubectl apply --filename crossplane-config/config-sql.yaml
 
 sleep 60
+
+if [[ "$HYPERSCALER" == "google" ]]; then
+    
+    gum spin --title "Waiting for GKE control plane to be recreated (15 min.)..." sleep 900
+
+fi
 
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=600s
 

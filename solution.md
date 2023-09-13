@@ -363,7 +363,7 @@ flowchart TD
         eso-azure(Azure)
         click eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
         eso-helm(App As Helm)
-        style eso-helm fill:red
+        click eso-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
         eso-kustomize(App As Kustomize)
         click eso-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
         eso-cdk8s(App As cdk8s)
