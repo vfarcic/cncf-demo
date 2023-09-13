@@ -1,4 +1,4 @@
-# Managing Secrets With External Secrets Operator (ESO) and cdk8s
+# Managing Secrets With External Secrets Operator (ESO) and Carvel ytt
 
 TODO: Intro
 
@@ -8,7 +8,7 @@ TODO: Intro
 kubectl --namespace production get secret cncf-demo-db-password \
     --output jsonpath="{.data.password}" | base64 --decode
 
-cat yaml/prod/cncf-demo.k8s.yaml
+cat yaml/prod/app.yaml
 
 # Instead of specifying the secret as `kind: Secret`,
 # we could have specified it as `kind: ExternalSecret`.
@@ -28,17 +28,15 @@ kubectl get managed
 
 # Wait until all the managed resources are deleted
 
-yq --inplace ".db.insecure = false" cdk8s/app-prod.yaml
+yq --inplace ".db.insecure = false" ytt/values-prod.yaml
 
-cd cdk8s
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
-ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
+cat yaml/prod/app.yaml
 
-cd ..
-
-cat yaml/prod/cncf-demo.k8s.yaml
-
-cp $GITOPS_APP/cncf-demo-cdk8s.yaml apps/cncf-demo.yaml
+cp $GITOPS_APP/cncf-demo-ytt.yaml apps/cncf-demo.yaml
 
 git add .
 
@@ -49,11 +47,11 @@ git push
 kubectl --namespace production \
     get externalsecrets.external-secrets.io
 
-# TODO: Check why it fails in Azure
-
 # Wait until the externalsecret is created
 
-kubectl --namespace production get secret cncf-demo-password \
+# TODO: Check why it fails in Azure
+
+kubectl --namespace production get secret cncf-demo-db-password \
     --output jsonpath="{.data.password}" | base64 --decode
 ```
 

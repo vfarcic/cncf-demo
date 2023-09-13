@@ -15,7 +15,7 @@ spec:
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: dbSize
 metadata:
-  name: dbsizecluster
+  name: dbcluster
 spec:
   match:
     kinds:
@@ -27,7 +27,7 @@ spec:
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: dbSize
 metadata:
-  name: dbsizeproduction
+  name: dbproduction
 spec:
   match:
     kinds:

@@ -4,35 +4,15 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-# Replace `[...]` with your access key ID`
-export AWS_ACCESS_KEY_ID=[...]
+chmod +x manuscript/secrets/eso-aws.sh
 
-# Replace `[...]` with your secret access key
-export AWS_SECRET_ACCESS_KEY=[...]
+./manuscript/secrets/eso-aws.sh
 
-aws secretsmanager create-secret --name production-postgresql \
-    --region us-east-1 \
-    --secret-string '{"password": "YouWillNeverFindOut"}'
-
-kubectl --namespace external-secrets \
-    create secret generic aws \
-    --from-literal access-key-id=$AWS_ACCESS_KEY_ID \
-    --from-literal secret-access-key=$AWS_SECRET_ACCESS_KEY
-
-cat eso/secret-store-aws.yaml
-
-cp eso/secret-store-aws.yaml infra/.
-
-git add .
-
-git commit -m "Secret Store"
-
-git push
-
-kubectl --namespace external-secrets get clustersecretstores
-
-# Wait until the ClusterSecretStore appears
+source .env
 ```
 
 ## How Did You Define Your App?

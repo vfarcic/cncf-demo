@@ -83,7 +83,7 @@ Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.co
 Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
-        --region us-east1 --machine-type e2-standard-4 \
+        --zone us-east1-b --machine-type e2-standard-8 \
         --num-nodes 1 --enable-network-policy \
         --no-enable-autoupgrade
 
@@ -233,14 +233,11 @@ elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
 else
 
-    gum style \
-        --foreground 212 --border-foreground 212 --border double \
-        --margin "1 2" --padding "2 4" \
-        'Carvel ytt has not been implemented yet.'
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
 
-    gum confirm "
-Continue?
-    " || exit 0
+    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" ytt/values-prod.yaml
+
+    yq --inplace ".image.tag = \"v0.0.1\"" ytt/values-prod.yaml
 
 fi
 
@@ -352,12 +349,28 @@ elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
     yq --inplace ".db.size = \"small\"" cdk8s/app-prod.yaml
 
+    yq --inplace ".schemahero.enabled = true" cdk8s/app-prod.yaml
+
     cd cdk8s
 
     ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate 
 
     cd ../
-    
+
+else
+
+    yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" ytt/values-prod.yaml
+
+    yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
+
+    yq --inplace ".db.insecure = true" ytt/values-prod.yaml
+
+    yq --inplace ".db.size = \"small\"" ytt/values-prod.yaml
+
+    yq --inplace ".schemahero.enabled = true" ytt/values-prod.yaml
+
+    ytt --file ytt/schema.yaml --file ytt/resources --data-values-file ytt/values-prod.yaml | tee yaml/prod/app.yaml
+
 fi
 
 
