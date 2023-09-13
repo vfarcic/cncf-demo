@@ -179,6 +179,8 @@ kubectl apply --filename argocd/apps.yaml
 
 export GITOPS_APP=argocd
 
+echo "export GITOPS_APP=$GITOPS_APP" >> .env
+
 yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 
 #################
@@ -256,7 +258,7 @@ kubectl apply --filename crossplane-config/config-sql.yaml
 
 sleep 60
 
-kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
+kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=600s
 
 if [[ "$HYPERSCALER" == "google" ]]; then
 
