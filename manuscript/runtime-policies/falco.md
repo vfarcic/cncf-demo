@@ -17,13 +17,12 @@ chmod +x manuscript/runtime-policies/falco.sh
 ## Do
 
 ```bash
-
 kubectl --namespace production exec -it cncf-demo-controller-0 \
     -- sh -c "ls /"
 
 kubectl --namespace falco logs \
     --selector app.kubernetes.io/name=falco --container falco \
-    | grep Notice | jq .
+    | grep cncf-demo-controller-0 | jq .
 
 export POD=$(kubectl --namespace falco get pods \
     --selector "app.kubernetes.io/name=falco" --no-headers \

@@ -7,6 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: #@ data.values.name
 spec:
+  replicas: #@ data.values.replicas
   selector:
     matchLabels:
       app.kubernetes.io/name: #@ data.values.name

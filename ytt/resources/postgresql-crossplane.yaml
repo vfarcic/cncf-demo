@@ -23,11 +23,13 @@ spec:
     version: "15.3"
     #@ if/end data.values.db.enabled.crossplane.local or data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.azure:
     version: "11"
-    size: small
+    size: #@ data.values.db.size
 #@ end
 
-#@ if data.values.db.insecure:
 #@ if data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws or data.values.db.enabled.crossplane.azure:
+
+#@ if data.values.db.insecure:
+
 ---
 apiVersion: v1
 kind: Secret
@@ -35,5 +37,31 @@ metadata:
   name: #@ data.values.db.id + "-password"
 data:
   password: T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0=
+
+#@ else:
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: #@ data.values.db.id + "-password"
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    #@ if/end data.values.db.enabled.crossplane.google:
+    name: google
+    #@ if/end data.values.db.enabled.crossplane.azure:
+    name: azure
+    #@ if/end data.values.db.enabled.crossplane.aws:
+    name: aws
+  target:
+    name: #@ data.values.db.id + "-password"
+    creationPolicy: Owner
+  dataFrom:
+  - extract:
+      key: production-postgresql
+
 #@ end
+
 #@ end

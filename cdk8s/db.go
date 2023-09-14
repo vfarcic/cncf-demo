@@ -5,6 +5,7 @@ import (
 
 	shdb "example.com/cdk8s/imports/databasesschemaheroio"
 	dot "example.com/cdk8s/imports/devopstoolkitseriescom"
+	eso "example.com/cdk8s/imports/externalsecretsio"
 	"example.com/cdk8s/imports/k8s"
 	sht "example.com/cdk8s/imports/schemasschemaheroio"
 	"github.com/aws/jsii-runtime-go"
@@ -40,6 +41,7 @@ func getPostgresqlHelm(appProps *AppProps) *cdk8s.HelmProps {
 func getPostgresqlCrossplane(appProps *AppProps, metadata *cdk8s.ApiObjectMetadata) *dot.SqlClaimProps {
 	provider := "local-k8s"
 	version := "11"
+	size := appProps.Db.Size
 	if appProps.Db.Enabled.Crossplane.Google {
 		provider = "google-official"
 	} else if appProps.Db.Enabled.Crossplane.AWS {
@@ -61,8 +63,8 @@ func getPostgresqlCrossplane(appProps *AppProps, metadata *cdk8s.ApiObjectMetada
 				},
 			},
 			Parameters: &dot.SqlClaimSpecParameters{
-				Version: jsii.String("11"),
-				Size:    jsii.String("small"),
+				Version: jsii.String(version),
+				Size:    jsii.String(size),
 			},
 		},
 	}
@@ -80,6 +82,42 @@ func getPostgresqlSecret(appProps *AppProps) *k8s.KubeSecretProps {
 		Data: &map[string]*string{
 			"password": jsii.String("T1QrOXZQcDhMdXhoeFVQWVpLSk1kUG1YM04xTzBTd3YzWG5ZVjI0UFZzcz0="),
 		},
+	}
+}
+
+func getPostgresqlExternalSecret(appProps *AppProps) *eso.ExternalSecretProps {
+	metadata := &cdk8s.ApiObjectMetadata{
+		Name: jsii.String(fmt.Sprintf("%s-password", appProps.Db.Id)),
+		Labels: &map[string]*string{
+			"app.kubernetes.io/name": jsii.String(appProps.Name),
+		},
+	}
+	secretStoreRef := &eso.ExternalSecretSpecSecretStoreRef{
+		Kind: jsii.String("ClusterSecretStore"),
+	}
+	if appProps.Db.Enabled.Crossplane.Google {
+		secretStoreRef.Name = jsii.String("google")
+	} else if appProps.Db.Enabled.Crossplane.Azure {
+		secretStoreRef.Name = jsii.String("azure")
+	} else if appProps.Db.Enabled.Crossplane.AWS {
+		secretStoreRef.Name = jsii.String("aws")
+	}
+	spec := &eso.ExternalSecretSpec{
+		RefreshInterval: jsii.String("1m"),
+		SecretStoreRef:  secretStoreRef,
+		Target: &eso.ExternalSecretSpecTarget{
+			Name:           jsii.String(fmt.Sprintf("%s-password", appProps.Db.Id)),
+			CreationPolicy: jsii.String("Owner"),
+		},
+		DataFrom: &[]*eso.ExternalSecretSpecDataFrom{
+			{
+				Key: jsii.String("production-postgresql"),
+			},
+		},
+	}
+	return &eso.ExternalSecretProps{
+		Metadata: metadata,
+		Spec:     spec,
 	}
 }
 

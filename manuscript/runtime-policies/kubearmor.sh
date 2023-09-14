@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-rm -f .env
-
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
@@ -33,7 +31,7 @@ GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 REPO_URL=$(git config --get remote.origin.url)
 
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/kubearmor.yaml
+    $GITOPS_APP/kubearmor.yaml
 
 echo 'Please enter sudo password to install `karmor` CLI.'
 

@@ -2,6 +2,7 @@ name: "cncf-demo"
 image:
   repository: index.docker.io/vfarcic/cncf-demo
   tag: latest
+replicas: 1
 ingress:
   host: cncf-demo-dev.sillydemo.com
   className: traefik
@@ -17,5 +18,6 @@ db:
       google: false
       aws: false
       azure: false
+  size: small
 schemahero:
   enabled: false

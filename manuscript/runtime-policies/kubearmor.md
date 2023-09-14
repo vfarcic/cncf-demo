@@ -9,7 +9,6 @@ TODO: Intro
 
 ```bash
 # TODO: kapp-controller
-# TODO: Flux
 chmod +x manuscript/runtime-policies/kubearmor.sh
 
 ./manuscript/runtime-policies/kubearmor.sh
@@ -38,7 +37,8 @@ kubectl --namespace production get kubearmorpolicies
 
 # Wait until the policy is created
 
-kubectl --namespace production exec -it $POD -- ls -l /
+kubectl --namespace production exec -it cncf-demo-controller-0 \
+    -- ls -l /
 ```
 
 ## Continue The Adventure

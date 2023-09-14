@@ -331,9 +331,9 @@ flowchart TD
         policies-kustomize(App As Kustomize)
         click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
         policies-cdk8s(App As cdk8s)
-        style policies-cdk8s fill:red
+        click policies-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cdk8s.md"
         policies-carvel(App As Carvel ytt)
-        style policies-carvel fill:red
+        click policies-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/carvel.md"
         policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
 
         %% ----------------------
@@ -363,17 +363,18 @@ flowchart TD
         eso-azure(Azure)
         click eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
         eso-helm(App As Helm)
-        style eso-helm fill:red
+        click eso-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
         eso-kustomize(App As Kustomize)
         click eso-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
         eso-cdk8s(App As cdk8s)
-        style eso-cdk8s fill:red
+        click eso-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
         eso-carvel(App As Carvel ytt)
-        style eso-carvel fill:red
+        click eso-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
         sscsid("Secrets Store CSI Driver (SSCSID)")
         style sscsid fill:red
         client{{Secrets Management Outside Kubernetes}}
-        style client fill:red
+        click eso-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
+        style client fill:blue
         teller(Teller)
         style teller fill:red
         teller-aws(AWS)

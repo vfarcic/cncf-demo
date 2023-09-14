@@ -2,3 +2,4 @@ language: go
 app: go run .
 imports:
   - k8s
+  - crds/externalsecrets.yaml

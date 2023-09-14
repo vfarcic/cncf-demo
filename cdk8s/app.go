@@ -4,6 +4,7 @@ import (
 	"example.com/cdk8s/imports/certmanagerio"
 	shdb "example.com/cdk8s/imports/databasesschemaheroio"
 	dot "example.com/cdk8s/imports/devopstoolkitseriescom"
+	eso "example.com/cdk8s/imports/externalsecretsio"
 	"example.com/cdk8s/imports/k8s"
 	sht "example.com/cdk8s/imports/schemasschemaheroio"
 	"github.com/aws/constructs-go/constructs/v10"
@@ -14,6 +15,7 @@ import (
 type AppProps struct {
 	Name       string     `yaml:"name"`
 	Image      Image      `yaml:"image"`
+	Replicas   float64    `yaml:"replicas"`
 	Ingress    Ingress    `yaml:"ingress"`
 	Tls        Tls        `yaml:"tls"`
 	Db         Db         `yaml:"db"`
@@ -38,6 +40,7 @@ type Db struct {
 	Id       string    `yaml:"id"`
 	Insecure bool      `yaml:"insecure"`
 	Enabled  DbEnabled `yaml:"enabled"`
+	Size     string    `yaml:"size"`
 }
 
 type DbEnabled struct {
@@ -79,8 +82,12 @@ func NewApp(scope constructs.Construct, id *string, appProps *AppProps) construc
 		cdk8s.NewHelm(construct, jsii.String("postgresql"), getPostgresqlHelm(appProps))
 	} else if appProps.Db.Enabled.Crossplane.Local || appProps.Db.Enabled.Crossplane.Google || appProps.Db.Enabled.Crossplane.AWS || appProps.Db.Enabled.Crossplane.Azure {
 		dot.NewSqlClaim(construct, jsii.String("sqlClaim"), getPostgresqlCrossplane(appProps, apiMetadata))
-		if !appProps.Db.Enabled.Crossplane.Local && appProps.Db.Insecure {
-			k8s.NewKubeSecret(construct, jsii.String("secret"), getPostgresqlSecret(appProps))
+		if !appProps.Db.Enabled.Crossplane.Local {
+			if appProps.Db.Insecure {
+				k8s.NewKubeSecret(construct, jsii.String("secret"), getPostgresqlSecret(appProps))
+			} else {
+				eso.NewExternalSecret(construct, jsii.String("external-secret"), getPostgresqlExternalSecret(appProps))
+			}
 		}
 	}
 	if appProps.SchemaHero.Enabled {
@@ -122,6 +129,7 @@ func getDeploymentProps(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeD
 	return &k8s.KubeDeploymentProps{
 		Metadata: metadata,
 		Spec: &k8s.DeploymentSpec{
+			Replicas: jsii.Number(appProps.Replicas),
 			Selector: &k8s.LabelSelector{MatchLabels: metadata.Labels},
 			Template: &k8s.PodTemplateSpec{
 				Metadata: metadata,

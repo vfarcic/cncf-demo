@@ -3,7 +3,7 @@ kind: ClusterConfig
 metadata:
   name: dot
   region: us-east-1
-  version: "1.25"
+  version: "1.26"
 managedNodeGroups:
   - name: primary
     instanceType: t3.medium

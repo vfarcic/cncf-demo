@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-rm -f .env
-
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
@@ -29,6 +27,8 @@ echo "
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
 |eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
 |az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
+|helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |
+|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/getting-started/#install-the-cli'|
 " | gum format
 
 gum confirm "
@@ -59,7 +59,8 @@ echo "export KUBECONFIG=$KUBECONFIG" >> .env
 
 if [[ "$HYPERSCALER" == "google" ]]; then
 
-    USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    # USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    gcloud components install gke-gcloud-auth-plugin
 
     PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
@@ -82,7 +83,7 @@ Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.co
 Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
-        --region us-east1 --machine-type e2-standard-4 \
+        --zone us-east1-b --machine-type e2-standard-8 \
         --num-nodes 1 --enable-network-policy \
         --no-enable-autoupgrade
 
@@ -179,11 +180,17 @@ kubectl apply --filename argocd/apps.yaml
 
 export GITOPS_APP=argocd
 
+echo "export GITOPS_APP=$GITOPS_APP" >> .env
+
 yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 
 #################
 # Setup The App #
 #################
+
+yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
+
+yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
 echo "
 How would you like to define Kubernetes resources?"
@@ -195,10 +202,6 @@ echo "export TEMPLATES=$TEMPLATES" >> .env
 if [[ "$TEMPLATES" == "kustomize" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
-
-    yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
-
-    yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
     yq --inplace ".spec.template.spec.containers[0].image = \"index.docker.io/vfarcic/cncf-demo\"" kustomize/base/deployment.yaml
 
@@ -214,28 +217,27 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
 
-    yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
-
-    yq --inplace ".tag = \"v0.0.1\"" settings.yaml
-
     yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" helm/app/values.yaml
 
     yq --inplace ".spec.source.helm.parameters[0].value = \"v0.0.1\"" $GITOPS_APP/cncf-demo-helm.yaml
 
     yq --inplace ".spec.source.helm.parameters[3].value = \"false\"" $GITOPS_APP/cncf-demo-helm.yaml
 
+elif [[ "$TEMPLATES" == "cdk8s" ]]; then
+
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
+
+    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" cdk8s/app-prod.yaml
+
+    yq --inplace ".image.tag = \"v0.0.1\"" cdk8s/app-prod.yaml
+
 else
 
-    gum style \
-        --foreground 212 --border-foreground 212 --border double \
-        --margin "1 2" --padding "2 4" \
-        'If you prefer a solution other than Kustomize or Helm for defining
-and packaging applications, please go back to the prod.md or an
-earlier chapter.'
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
 
-    gum confirm "
-Continue?
-    " || exit 0
+    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" ytt/values-prod.yaml
+
+    yq --inplace ".image.tag = \"v0.0.1\"" ytt/values-prod.yaml
 
 fi
 
@@ -256,7 +258,13 @@ kubectl apply --filename crossplane-config/config-sql.yaml
 
 sleep 60
 
-kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
+if [[ "$HYPERSCALER" == "google" ]]; then
+    
+    gum spin --title "Waiting for GKE control plane to be recreated (15 min.)..." sleep 900
+
+fi
+
+kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=600s
 
 if [[ "$HYPERSCALER" == "google" ]]; then
 
@@ -330,6 +338,38 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
     fi
 
     yq --inplace ".spec.source.helm.parameters[11].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
+
+elif [[ "$TEMPLATES" == "cdk8s" ]]; then
+
+    yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" cdk8s/app-prod.yaml
+
+    yq --inplace ".db.id = \"cncf-demo-db\"" cdk8s/app-prod.yaml
+
+    yq --inplace ".db.insecure = true" cdk8s/app-prod.yaml
+
+    yq --inplace ".db.size = \"small\"" cdk8s/app-prod.yaml
+
+    yq --inplace ".schemahero.enabled = true" cdk8s/app-prod.yaml
+
+    cd cdk8s
+
+    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate 
+
+    cd ../
+
+else
+
+    yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" ytt/values-prod.yaml
+
+    yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
+
+    yq --inplace ".db.insecure = true" ytt/values-prod.yaml
+
+    yq --inplace ".db.size = \"small\"" ytt/values-prod.yaml
+
+    yq --inplace ".schemahero.enabled = true" ytt/values-prod.yaml
+
+    ytt --file ytt/schema.yaml --file ytt/resources --data-values-file ytt/values-prod.yaml | tee yaml/prod/app.yaml
 
 fi
 
