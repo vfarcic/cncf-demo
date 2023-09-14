@@ -23,7 +23,7 @@ echo "
 ## You will need following tools installed:
 |Name            |Required             |More info                                          |
 |----------------|---------------------|---------------------------------------------------|
-|gitHub CLi      |Yes                  |'https://youtu.be/BII6ZY2Rnlc'                     |
+|gitHub CLI      |Yes                  |'https://cli.github.com/'                          |
 |yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
 |Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
