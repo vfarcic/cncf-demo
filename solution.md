@@ -449,9 +449,11 @@ flowchart TD
         style athenz fill:red
         keycloak(Keycloak)
         style keycloak fill:red
+        paralus(Paralus)
+        style paralus fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & athenz & keycloak --> container-ssh --> misc
+        access-control --> access-control-hexa & dex & athenz & keycloak & paralus --> container-ssh --> misc
 
         %% ----------
         %% -- Misc --
