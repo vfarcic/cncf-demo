@@ -393,30 +393,24 @@ flowchart TD
         mtls{{"Mutual TLS (mTLS) And Network Policies"}}
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
         mtls-istio(Istio)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
+        click mtls-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
         style mtls-istio fill:red
-        mtls-smi("Service Mesh Interface (SMI)")
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/smi.md"
-        mtls-linkerd(LinkerD)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
+        mtls-linkerd("LinkerD (SMI)")
+        click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         style mtls-linkerd fill:red
-        mtls-open-service-mesh(Open Service Mesh)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/osm.md"
-        style mtls-open-service-mesh fill:red
         mtls-aeraki-mesh(Aeraki Mesh)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/aeraki-mesh.md"
+        click mtls-aeraki-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/aeraki-mesh.md"
         style mtls-aeraki-mesh fill:red
         mtls-cilium(Cilium)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
+        click mtls-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
         style mtls-cilium fill:red
         mtls-kuma(Kuma)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/kuma.md"
+        click mtls-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/kuma.md"
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/nsm.md"
         style mtls-network-service-mesh fill:red
-        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium --> scanning
-        mtls --> mtls-smi --> mtls-linkerd & mtls-open-service-mesh --> scanning
+        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium & mtls-linkerd--> scanning
 
         %% --------------
         %% -- Scanning --
