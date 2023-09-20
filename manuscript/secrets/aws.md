@@ -8,9 +8,11 @@ TODO: Intro
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-chmod +x manuscript/secrets/eso-aws.sh
+# TODO: SSCSID
 
-./manuscript/secrets/eso-aws.sh
+chmod +x manuscript/secrets/aws.sh
+
+./manuscript/secrets/aws.sh
 
 source .env
 ```

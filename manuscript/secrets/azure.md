@@ -5,6 +5,8 @@ TODO: Intro
 ## Setup
 
 ```bash
+# TODO: SSCSID
+
 export RESOURCE_GROUP=$(\
     yq ".production.azure.resourceGroup" settings.yaml)
 

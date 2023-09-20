@@ -5,6 +5,8 @@ TODO: Intro
 ## Do
 
 ```bash
+# TODO: SSCSID
+
 kubectl --namespace production get secret cncf-demo-db-password \
     --output jsonpath="{.data.password}" | base64 --decode
 

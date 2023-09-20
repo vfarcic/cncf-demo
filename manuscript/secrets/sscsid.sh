@@ -5,7 +5,7 @@ gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
 	'Setup for the' \
-	'Managing Secrets In Kubernetes With External Secrets Operator (ESO)' \
+	'Managing Secrets In Kubernetes With Secrets Store CSI Driver (SSCSID)' \
 	'chapter.'
 
 gum confirm '
@@ -32,13 +32,13 @@ Do you have those tools installed?
 
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
-cp $GITOPS_APP/external-secrets.yaml infra/.
+cp $GITOPS_APP/sscsid.yaml infra/.
 
 APP_COUNTER_OLD=$(kubectl get applications --all-namespaces | wc -l)
 
 git add . 
 
-git commit -m "External Secrets"
+git commit -m "SSCSID"
 
 git push
 
@@ -49,4 +49,4 @@ while [ $APP_COUNTER_OLD = $APP_COUNTER ]; do
 	APP_COUNTER=$(kubectl get applications --all-namespaces | wc -l)
 done
 
-yq --inplace ".secrets = \"eso\"" settings.yaml
+yq --inplace ".secrets = \"sscsid\"" settings.yaml

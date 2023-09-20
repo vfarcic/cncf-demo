@@ -356,25 +356,25 @@ flowchart TD
         style secrets fill:blue
         eso("External Secrets Operator (ESO)")
         click eso "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso.md"
-        eso-google(Google Cloud)
-        click eso-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-google.md"
-        eso-aws(AWS)
-        click eso-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-aws.md"
-        eso-azure(Azure)
-        click eso-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso-azure.md"
-        eso-helm(App As Helm)
-        click eso-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
-        eso-kustomize(App As Kustomize)
-        click eso-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
-        eso-cdk8s(App As cdk8s)
-        click eso-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
-        eso-carvel(App As Carvel ytt)
-        click eso-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
         sscsid("Secrets Store CSI Driver (SSCSID)")
-        style sscsid fill:red
-        client{{Secrets Management Outside Kubernetes}}
-        click eso-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
-        style client fill:blue
+        click sscsid "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/sscsid.md"
+        secrets-google(Google Cloud)
+        click secrets-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/google.md"
+        secrets-aws(AWS)
+        click secrets-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/aws.md"
+        secrets-azure(Azure)
+        click secrets-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/azure.md"
+        secrets-helm(App As Helm)
+        click secrets-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
+        secrets-kustomize(App As Kustomize)
+        click secrets-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
+        secrets-cdk8s(App As cdk8s)
+        click secrets-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
+        secrets-carvel(App As Carvel ytt)
+        click secrets-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
+        client-secrets{{Secrets Management Outside Kubernetes}}
+        click client-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
+        style client-secrets fill:blue
         teller(Teller)
         style teller fill:red
         teller-aws(AWS)
@@ -383,9 +383,8 @@ flowchart TD
         style teller-azure fill:red
         teller-google(Google Cloud)
         style teller-google fill:red
-        secrets --> eso --> eso-google & eso-aws & eso-azure --> eso-helm & eso-kustomize & eso-cdk8s & eso-carvel --> client
-        secrets --> sscsid --> client
-        client --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        secrets --> sscsid
 
         %% -------------------------------------
         %% -- Mutual TLS And Network Policies --
