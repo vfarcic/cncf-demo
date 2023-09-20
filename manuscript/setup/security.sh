@@ -198,6 +198,7 @@ How would you like to define Kubernetes resources?"
 TEMPLATES=$(gum choose "kustomize" "helm" "ytt" "cdk8s")
 
 echo "export TEMPLATES=$TEMPLATES" >> .env
+yq --inplace ".templates = \"$TEMPLATES\"" settings.yaml
 
 if [[ "$TEMPLATES" == "kustomize" ]]; then
 

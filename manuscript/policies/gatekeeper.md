@@ -7,8 +7,6 @@ TODO: Intro
 ```bash
 # TODO: kapp-controller
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-
 # Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.
 
