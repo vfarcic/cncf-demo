@@ -60,6 +60,8 @@ git push
 kubectl --namespace production get deployments
 
 # Wait until the Deployment is created
+# It might take a while until Argo CD gives up on trying to
+#   reconcile the previous commit.
 
 kubectl --namespace production get pods
 
@@ -97,8 +99,6 @@ git commit -m "DB resize"
 git push
 
 kubectl --namespace production get sqlclaims
-
-# Wait until the SqlClaim is created
 
 kubectl --namespace production wait sqlclaim cncf-demo \
     --for=condition=ready --timeout=15m

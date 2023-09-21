@@ -8,8 +8,6 @@ TODO: Intro
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-# TODO: SSCSID
-
 chmod +x manuscript/secrets/aws.sh
 
 ./manuscript/secrets/aws.sh

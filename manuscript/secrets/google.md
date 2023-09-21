@@ -5,8 +5,6 @@ TODO: Intro
 ## Setup
 
 ```bash
-# TODO: SSCSID
-
 export XP_PROJECT_ID=$(yq ".production.google.projectId" \
   settings.yaml)
 

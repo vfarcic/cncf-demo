@@ -5,8 +5,6 @@ TODO: Intro
 ## Setup
 
 ```bash
-# TODO: kapp-controller
-
 # Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.
 

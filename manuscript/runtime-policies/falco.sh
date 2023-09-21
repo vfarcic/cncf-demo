@@ -35,3 +35,5 @@ while [ $APP_COUNTER_OLD = $APP_COUNTER ]; do
 	sleep 10
 	APP_COUNTER=$(kubectl get applications --all-namespaces | wc -l)
 done
+
+sleep 5
