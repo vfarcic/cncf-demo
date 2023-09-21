@@ -18,6 +18,13 @@ az keyvault secret set --name production-postgresql \
     --vault-name $KEYVAULT \
     --value '{"password": "YouWillNeverFindOut"}'
 
+# Now navigate to the newly established Azure Key-Vault.
+# Then select Role Assignment (IAM).
+# Select the member aks-external-secrets-example-agentpool and
+#   assign the role Key Vault Secret Officer to the member.
+# You have now authorized access to the azure key-vault for the
+#   managed identities in azure.
+
 yq --inplace \
     ".spec.provider.azurekv.vaultUrl = \"https://$KEYVAULT.vault.azure.net\"" \
     eso/secret-store-azure.yaml

@@ -49,8 +49,6 @@ git push
 kubectl --namespace production \
     get externalsecrets.external-secrets.io
 
-# TODO: Check why it fails in Azure
-
 # Wait until the externalsecret is created
 
 kubectl --namespace production get secret cncf-demo-password \

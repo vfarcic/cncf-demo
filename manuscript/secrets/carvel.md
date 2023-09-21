@@ -49,8 +49,6 @@ kubectl --namespace production \
 
 # Wait until the externalsecret is created
 
-# TODO: Check why it fails in Azure
-
 kubectl --namespace production get secret cncf-demo-db-password \
     --output jsonpath="{.data.password}" | base64 --decode
 ```
