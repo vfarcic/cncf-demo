@@ -8,7 +8,10 @@ TODO: Intro
 export RESOURCE_GROUP=$(\
     yq ".production.azure.resourceGroup" settings.yaml)
 
-KEYVAULT=cncf-demo-$(date +%Y%m%d%H%M%S)
+export KEYVAULT=cncf-demo-$(date +%Y%m%d%H%M%S)
+
+yq --inplace ".production.azure.keyvault = \"$KEYVAULT\"" \
+    settings.yaml
 
 az keyvault create --name $KEYVAULT \
     --resource-group $RESOURCE_GROUP --location eastus \
@@ -18,7 +21,7 @@ az keyvault secret set --name production-postgresql \
     --vault-name $KEYVAULT \
     --value '{"password": "YouWillNeverFindOut"}'
 
-# Now navigate to the newly established Azure Key-Vault.
+# Navigate to the newly established Azure Key-Vault.
 # Then select Role Assignment (IAM).
 # Select the member aks-external-secrets-example-agentpool and
 #   assign the role Key Vault Secret Officer to the member.
@@ -26,7 +29,7 @@ az keyvault secret set --name production-postgresql \
 #   managed identities in azure.
 
 yq --inplace \
-    ".spec.provider.azurekv.vaultUrl = \"https://$KEYVAULT.vault.azure.net\"" \
+    ".spec.provider.azurekv.vaultUrl = \"https://$KEYVAULT.vault.azure.net/\"" \
     eso/secret-store-azure.yaml
 
 cat eso/secret-store-azure.yaml

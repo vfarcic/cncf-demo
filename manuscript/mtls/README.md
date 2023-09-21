@@ -11,11 +11,12 @@ TODO: Explanation
 
 * [Official site](https://istio.io)
 
-## Choice 2: Service Mesh Interface (SMI)
+## Choice 2: LinkerD (SMI)
 
 TODO: Explanation
 
-* [Official site](https://smi-spec.io)
+[![What Is Linkerd Kubernetes Service Mesh? Linkerd Tutorial Part 1](https://img.youtube.com/vi/mDC3KA_6vfg/0.jpg)](https://youtu.be/mDC3KA_6vfg)
+* [Official site](https://linkerd.io)
 
 ## Choice 3: Aeraki Mesh
 
@@ -45,7 +46,7 @@ TODO: Explanation
 ## What Is Your Choice?
 
 * [Istio](istio.md)
-* [Service Mesh Interface (SMI)](smi.md)
+* [LinkerD (SMI)](linkerd.md)
 * [Aeraki Mesh](aeraki-mesh.md)
 * [Cilium](cilium.md)
 * [Kuma](kuma.md)

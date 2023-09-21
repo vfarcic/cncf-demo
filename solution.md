@@ -376,11 +376,11 @@ flowchart TD
         click client-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
         style client-secrets fill:blue
         teller(Teller)
-        style teller fill:red
+        click teller "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller.md"
         teller-aws(AWS)
         style teller-aws fill:red
         teller-azure(Azure)
-        style teller-azure fill:red
+        click teller-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
         teller-google(Google Cloud)
         style teller-google fill:red
         secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
