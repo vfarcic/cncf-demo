@@ -17,6 +17,8 @@ export AZURE_CLI=1
 cat teller/azure.yaml
 
 teller env --config teller/azure.yaml
+
+teller sh --config teller/azure.yaml
 ```
 
 ## Continue The Adventure

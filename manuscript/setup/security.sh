@@ -83,7 +83,7 @@ Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.co
 Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
-        --region us-east1 --machine-type e2-standard-4 \
+        --region us-east1 --machine-type e2-standard-8 \
         --num-nodes 1 --enable-network-policy \
         --no-enable-autoupgrade
 
@@ -259,12 +259,6 @@ kubectl apply --filename crossplane-config/config-sql.yaml
 
 sleep 60
 
-if [[ "$HYPERSCALER" == "google" ]]; then
-    
-    gum spin --title "Waiting for GKE control plane to be recreated (15 min.)..." sleep 900
-
-fi
-
 kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=600s
 
 if [[ "$HYPERSCALER" == "google" ]]; then
@@ -373,7 +367,6 @@ else
     ytt --file ytt/schema.yaml --file ytt/resources --data-values-file ytt/values-prod.yaml | tee yaml/prod/app.yaml
 
 fi
-
 
 #######################
 # Setup Dabase Schema #

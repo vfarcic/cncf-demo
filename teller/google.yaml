@@ -1,0 +1,5 @@
+providers:
+  google_secretmanager:
+    env:
+      PRODUCTION_POSTGRESQL:
+        path: projects/vfarcic/secrets/production-postgresql/versions/1

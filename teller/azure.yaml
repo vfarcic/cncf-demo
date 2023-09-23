@@ -1,0 +1,5 @@
+providers:
+  azure_keyvault:
+    env:
+      PRODUCTION_POSTGRESQL:
+        path: production-postgresql

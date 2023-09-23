@@ -382,7 +382,7 @@ flowchart TD
         teller-azure(Azure)
         click teller-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
         teller-google(Google Cloud)
-        style teller-google fill:red
+        click teller-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-google.md"
         secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
         secrets --> sscsid
 
