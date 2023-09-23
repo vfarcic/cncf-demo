@@ -369,6 +369,18 @@ flowchart TD
 | Implement Ingress | Sunjay Bhatia - Contour with Envoy<br />Ricardo Katz - ingress-nginx<br />Alice Wasko - Emissary-ingress with Envoy | Tuesday, August 1, 2023 | [story](manuscript/ingress/README.md) |
 | Chapter 2 Finale! (Including [Deploy The App To Production](manuscript/app/README.md) & [Database Implementation](manuscript/db-production/README.md)) | Whitney and Viktor! | Tuesday, August 8, 2023 | [story](manuscript/app/README.md) |
 
+### Security
+
+| Name | Guests | Date | Link |
+| --- | --- | --- | --- |
+| Admission Controller Policies | Kyverno<br />Open Policy Agent (OPA) With Gatekeeper<br />Cloud Custodian<br />Kubewarden<br />Kubernetes Validating Admission Policy | N/A | N/A |
+| Runtime Policies | KubeArmor<br />Falco | N/A | N/A |
+| Secrets Management | External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller | N/A | N/A |
+| Mutual TLS And Network Policies | Istio<br />LinkerD (SMI)<br />Aeraki Mesh<br />Cilium<br />Kuma<br />Network Service Mesh | N/A | N/A |
+| Scanning & Signing | Kubescape<br />Notary | N/A | N/A |
+| Access Control | Hexa<br />Athenz<br />Keycloak<br />Paralus<br />ContainerSSH | N/A | N/A |
+| Misc | Curiefense<br />Confidential Containers | N/A | N/A |
+
 ## The Format
 
 * Recap of the decisions made in the app's journey so far (<=5 min.)
