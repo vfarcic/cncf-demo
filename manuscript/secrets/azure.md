@@ -19,7 +19,7 @@ az keyvault create --name $KEYVAULT \
 
 az keyvault secret set --name production-postgresql \
     --vault-name $KEYVAULT \
-    --value '{"password": "YouWillNeverFindOut"}'
+    --value YouWillNeverFindOut
 
 # Navigate to the newly established Azure Key-Vault.
 # Then select Role Assignment (IAM).

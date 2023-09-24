@@ -22,7 +22,9 @@ cat teller/google.yaml
 
 teller env --config teller/google.yaml
 
-teller sh --config teller/google.yaml
+eval $(teller env --config teller/google.yaml)
+
+echo $PRODUCTION_POSTGRESQL
 ```
 
 ## Continue The Adventure

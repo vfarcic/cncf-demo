@@ -15,7 +15,7 @@ echo https://console.cloud.google.com/marketplace/product/google/secretmanager.g
 gcloud iam service-accounts --project $PROJECT_ID \
     create external-secrets
 
-echo -ne '{"password": "YouWillNeverFindOut"}' \
+echo -ne YouWillNeverFindOut \
     | gcloud secrets --project $PROJECT_ID \
     create production-postgresql --data-file=-
 

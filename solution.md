@@ -378,9 +378,9 @@ flowchart TD
         teller(Teller)
         click teller "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller.md"
         teller-aws(AWS)
-        style teller-aws fill:red
+        click teller-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-aws.md"
         teller-azure(Azure)
-        click teller-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
+        click teller-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
         teller-google(Google Cloud)
         click teller-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-google.md"
         secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
@@ -393,13 +393,9 @@ flowchart TD
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
         mtls-istio(Istio)
         click mtls-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
-        style mtls-istio fill:red
         mtls-linkerd("LinkerD (SMI)")
         click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         style mtls-linkerd fill:red
-        mtls-aeraki-mesh(Aeraki Mesh)
-        click mtls-aeraki-mesh "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/aeraki-mesh.md"
-        style mtls-aeraki-mesh fill:red
         mtls-cilium(Cilium)
         click mtls-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
         style mtls-cilium fill:red
@@ -409,7 +405,7 @@ flowchart TD
         mtls-network-service-mesh(Network Service Mesh)
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/nsm.md"
         style mtls-network-service-mesh fill:red
-        mtls --> mtls-istio & mtls-aeraki-mesh & mtls-kuma & mtls-network-service-mesh & mtls-cilium & mtls-linkerd--> scanning
+        mtls --> mtls-istio & mtls-kuma & mtls-network-service-mesh & mtls-cilium & mtls-linkerd--> scanning
 
         %% --------------
         %% -- Scanning --

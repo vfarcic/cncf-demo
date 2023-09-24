@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: cncf-demo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cncf-demo
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            methods: ["GET"]

@@ -1,0 +1,6 @@
+providers:
+  aws_secretsmanager:
+    env:
+      PRODUCTION_POSTGRESQL:
+        path: production-postgresql
+        field: password

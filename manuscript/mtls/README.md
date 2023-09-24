@@ -18,11 +18,11 @@ TODO: Explanation
 [![What Is Linkerd Kubernetes Service Mesh? Linkerd Tutorial Part 1](https://img.youtube.com/vi/mDC3KA_6vfg/0.jpg)](https://youtu.be/mDC3KA_6vfg)
 * [Official site](https://linkerd.io)
 
-## Choice 3: Aeraki Mesh
+## Choice 3: Network Service Mesh
 
 TODO: Explanation
 
-* [Official site](https://www.aeraki.net)
+* [Official site](https://networkservicemesh.io)
 
 ## Choice 4: Cilium
 
@@ -37,17 +37,10 @@ TODO: Explanation
 
 * [Official site](https://kuma.io)
 
-## Choice 6: Network Service Mesh
-
-TODO: Explanation
-
-* [Official site](https://networkservicemesh.io)
-
 ## What Is Your Choice?
 
 * [Istio](istio.md)
 * [LinkerD (SMI)](linkerd.md)
-* [Aeraki Mesh](aeraki-mesh.md)
+* [Network Service Mesh](nsm.md)
 * [Cilium](cilium.md)
 * [Kuma](kuma.md)
-* [Network Service Mesh](nsm.md)

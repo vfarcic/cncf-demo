@@ -376,7 +376,7 @@ flowchart TD
 | Admission Controller Policies | Kyverno<br />Open Policy Agent (OPA) With Gatekeeper<br />Cloud Custodian<br />Kubewarden<br />Kubernetes Validating Admission Policy | N/A | N/A |
 | Runtime Policies | KubeArmor<br />Falco | N/A | N/A |
 | Secrets Management | External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller | N/A | N/A |
-| Mutual TLS And Network Policies | Istio<br />LinkerD (SMI)<br />Aeraki Mesh<br />Cilium<br />Kuma<br />Network Service Mesh | N/A | N/A |
+| Mutual TLS And Network Policies | Istio<br />LinkerD (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | N/A | N/A |
 | Scanning & Signing | Kubescape<br />Notary | N/A | N/A |
 | Access Control | Hexa<br />Athenz<br />Keycloak<br />Paralus<br />ContainerSSH | N/A | N/A |
 | Misc | Curiefense<br />Confidential Containers | N/A | N/A |

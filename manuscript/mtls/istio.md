@@ -48,109 +48,85 @@ kubectl --namespace production get pods
 
 # Istio side-car is now added to the Pods
 
-# TODO: Rewrite
+kubectl --namespace production apply --filename istio/mtls.yaml
 
-kubectl exec "$(kubectl get pod -l app=sleep -n bar \
-    -o jsonpath={.items..metadata.name})" -c sleep -n bar \
-    -- curl http://httpbin.foo:8000/ip -s -o /dev/null \
-    -w "%{http_code}\n"
+kubectl --namespace production --tty --stdin exec sleep -- sh
 
-kubectl exec "$(kubectl get pod -l app=sleep -n foo \
-    -o jsonpath={.items..metadata.name})" -c sleep -n foo \
-    -- curl -s http://httpbin.foo:8000/headers -s \
-    | grep X-Forwarded-Client-Cert \
-    | sed 's/Hash=[a-z0-9]*;/Hash=<redacted>;/'
+apk add -U curl
 
-kubectl exec "$(kubectl get pod -l app=sleep -n foo \
-    -o jsonpath={.items..metadata.name})" -c sleep -n foo \
-    -- curl http://httpbin.legacy:8000/headers -s \
-    | grep X-Forwarded-Client-Cert
+curl -s http://httpbin:8080/headers | grep X-Forwarded-Client-Cert
 
-kubectl apply -f - <<EOF
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: "default"
-  namespace: "foo"
-spec:
-  mtls:
-    mode: STRICT
-EOF
+# Cert shows that the communication between the Pods is
+#   encrypted (mTLS)
 
-for from in "foo" "bar" "legacy"; do
-    for to in "foo" "bar" "legacy"; do
-        kubectl exec "$(kubectl get pod -l app=sleep -n ${from} \
-        -o jsonpath={.items..metadata.name})" -c sleep \
-        -n ${from} -- curl "http://httpbin.${to}:8000/ip" -s \
-        -o /dev/null \
-        -w "sleep.${from} to httpbin.${to}: %{http_code}\n"
-    done
-done
+exit
 
-############################
-# Authorization with Istio #
-############################
+cat istio/peer-authentication.yaml
 
-kubectl apply -f - <<EOF
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: allow-nothing
-  namespace: foo
-spec:
-  {}
-EOF
+kubectl --namespace production apply \
+    --filename istio/peer-authentication.yaml
 
-kubectl exec "$(kubectl get pod -l app=sleep -n bar \
-    -o jsonpath={.items..metadata.name})" -c sleep -n bar \
-    -- curl http://httpbin.foo:8000/ip -s -o /dev/null \
-    -w "%{http_code}\n"
+kubectl --namespace production --tty --stdin exec sleep -- sh
 
-kubectl apply -f - <<EOF
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: "productpage-viewer"
-  namespace: foo
-spec:
-  selector:
-    matchLabels:
-      app: httpbin
-  action: ALLOW
-  rules:
-  - to:
-    - operation:
-        methods: ["GET"]
-EOF
+curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
-kubectl exec "$(kubectl get pod -l app=sleep -n bar \
-    -o jsonpath={.items..metadata.name})" -c sleep -n bar \
-    -- curl http://httpbin.foo:8000/ip -s -o /dev/null \
-    -w "%{http_code}\n"
+# Both apps are "meshed", so the communication is allowed.
 
-kubectl exec "$(kubectl get pod -l app=sleep -n bar \
-    -o jsonpath={.items..metadata.name})" -c sleep -n bar \
-    -- curl -XPOST http://httpbin.foo:8000/ip -s -o /dev/null \
-    -w "%{http_code}\n"
+exit
 
-#######################
-# TODO: Pros And Cons #
-#######################
+kubectl --namespace default apply --filename istio/mtls.yaml
 
-# Cons:
-# - TODO:
+kubectl --namespace default --tty --stdin exec sleep -- sh
 
-# Pros:
-# - TODO:
+apk add -U curl
 
-###########
-# Destroy #
-###########
+curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
-# TODO:
+# The communication is not allowed since the Pod in the
+#   `default` Namespace is NOT "meshed" and therefore not
+#   authenticated.
 
+exit
+
+cat istio/authorization-policy-deny.yaml
+
+kubectl --namespace production apply \
+    --filename istio/authorization-policy-deny.yaml
+
+kubectl --namespace production --tty --stdin exec sleep -- sh
+
+curl http://cncf-demo.production:8080
+
+# The access was denied
+
+exit
+
+cat istio/authorization-policy-allow.yaml
+
+kubectl --namespace production apply \
+    --filename istio/authorization-policy-allow.yaml
+
+kubectl --namespace production --tty --stdin exec sleep -- sh
+
+curl http://cncf-demo.production:8080
+
+# The access was allowed
+```
+
+## Destroy
+
+```bash
+kubectl --namespace production delete --filename istio/mtls.yaml
+
+kubectl --namespace production delete \
+    --filename istio/peer-authentication.yaml
+
+kubectl --namespace default delete --filename istio/mtls.yaml
+
+kubectl --namespace production delete \
+    --filename istio/authorization-policy-allow.yaml
 ```
 
 ## Continue The Adventure
 
-* [Mutual TLS And Network Policies](../mtls/README.md)
+* [Mutual TLS And Network Policies](../scanning/README.md)

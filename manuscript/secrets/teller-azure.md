@@ -18,7 +18,9 @@ cat teller/azure.yaml
 
 teller env --config teller/azure.yaml
 
-teller sh --config teller/azure.yaml
+eval $(teller env --config teller/azure.yaml)
+
+echo $PRODUCTION_POSTGRESQL
 ```
 
 ## Continue The Adventure
