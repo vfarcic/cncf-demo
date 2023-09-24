@@ -5,36 +5,36 @@ TODO: Intro
 ## Setup
 
 ```bash
-export XP_PROJECT_ID=$(yq ".production.google.projectId" \
+export PROJECT_ID=$(yq ".production.google.projectId" \
   settings.yaml)
 
-echo https://console.cloud.google.com/marketplace/product/google/secretmanager.googleapis.com?project=$XP_PROJECT_ID
+echo https://console.cloud.google.com/marketplace/product/google/secretmanager.googleapis.com?project=$PROJECT_ID
 
 # Open the URL and *ENABLE* the API
 
-gcloud iam service-accounts --project $XP_PROJECT_ID \
+gcloud iam service-accounts --project $PROJECT_ID \
     create external-secrets
 
 echo -ne '{"password": "YouWillNeverFindOut"}' \
-    | gcloud secrets --project $XP_PROJECT_ID \
+    | gcloud secrets --project $PROJECT_ID \
     create production-postgresql --data-file=-
 
-gcloud secrets --project $XP_PROJECT_ID \
+gcloud secrets --project $PROJECT_ID \
     add-iam-policy-binding production-postgresql \
-    --member "serviceAccount:external-secrets@$XP_PROJECT_ID.iam.gserviceaccount.com" \
+    --member "serviceAccount:external-secrets@$PROJECT_ID.iam.gserviceaccount.com" \
     --role "roles/secretmanager.secretAccessor"
 
 gcloud iam service-accounts \
-    --project $XP_PROJECT_ID \
+    --project $PROJECT_ID \
     keys create account.json \
-    --iam-account=external-secrets@$XP_PROJECT_ID.iam.gserviceaccount.com
+    --iam-account=external-secrets@$PROJECT_ID.iam.gserviceaccount.com
 
 kubectl --namespace external-secrets \
     create secret generic google \
     --from-file=credentials=account.json
 
 yq --inplace \
-    ".spec.provider.gcpsm.projectID = \"$XP_PROJECT_ID\"" \
+    ".spec.provider.gcpsm.projectID = \"$PROJECT_ID\"" \
     eso/secret-store-google.yaml
 
 cp eso/secret-store-google.yaml infra/.

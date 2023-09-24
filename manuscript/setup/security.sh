@@ -83,12 +83,13 @@ Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.co
 Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
-        --region us-east1 --machine-type e2-standard-8 \
-        --num-nodes 1 --enable-network-policy \
+        --zone us-east1-b --machine-type e2-standard-8 \
+        --enable-autoscaling --num-nodes 1 --min-nodes 1 \
+        --max-nodes 3 --enable-network-policy \
         --no-enable-autoupgrade
 
     gcloud container clusters get-credentials dot \
-        --project $PROJECT_ID --region us-east1
+        --project $PROJECT_ID --zone us-east1-b
 
     export SA_NAME=devops-toolkit
 
@@ -242,7 +243,6 @@ else
 
 fi
 
-
 ####################
 # Setup Crossplane #
 ####################
@@ -377,5 +377,17 @@ cp argocd/schema-hero.yaml infra/.
 git add .
 
 git commit -m "SchemaHero"
+
+git push
+
+################
+# Sync The App #
+################
+
+cp $GITOPS_APP/cncf-demo-$TEMPLATES.yaml apps/cncf-demo.yaml
+
+git add .
+
+git commit -m "CNCF Demo"
 
 git push
