@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  annotations:
+    linkerd.io/inject: enabled
+  labels:
+    linkerd.io/extension: viz

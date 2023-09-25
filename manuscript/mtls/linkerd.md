@@ -5,31 +5,34 @@ TODO: Intro
 ## Setup
 
 ```bash
-# TODO: kapp-controller
+# We'll install LinkerD manually instead of using Argo CD, Flux,
+#   or Carvel kapp-controller since that would require us to
+#   generate certificates manually (the CLI does that for us).
+# In the "real world" situation, you should do it through GitOps
+#   by using LinkerD's Helm chart and your own certificates.
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+# TODO: Continue
 
-cat $GITOPS_APP/istio.yaml
+curl --proto '=https' --tlsv1.2 \
+    -sSfL https://run.linkerd.io/install | sh
 
-cp $GITOPS_APP/istio.yaml infra/.
+linkerd check --pre
 
-git add . 
+linkerd install --crds | kubectl apply --filename -
 
-git commit -m "Istio"
+linkerd install | kubectl apply --filename -
 
-git push
+linkerd viz install | kubectl apply --filename -
 
-kubectl --namespace istio-system get pods
-
-# Wait until the Pods are created and ready
+linkerd check
 ```
 
 # Do
 
 ```bash
-cat istio/namespace-production.yaml
+cat linkerd/namespace-production.yaml
 
-cp istio/namespace-production.yaml apps/.
+cp linkerd/namespace-production.yaml apps/.
 
 git add . 
 
@@ -52,23 +55,26 @@ kubectl --namespace production get pods
 ## Authorization (mTLS)
 
 ```bash
-kubectl --namespace production apply --filename istio/mtls.yaml
+kubectl --namespace production apply --filename linkerd/mtls.yaml
 
 kubectl --namespace production --tty --stdin exec sleep \
     --container sleep -- sh
 
 apk add -U curl
 
-curl -s http://httpbin:8080/headers \
-    | grep X-Forwarded-Client-Cert
-
-# Cert shows that the communication between the Pods is
-#   encrypted (mTLS)
+curl -s http://httpbin:8080/headers
 
 exit
+
+linkerd viz --namespace production edges pod
+
+# The `SECURED` column shows that the communication between the
+#   Pods is encrypted (mTLS)
 ```
 
 ## Authentication
+
+TODO: Continue
 
 ```bash
 cat istio/peer-authentication.yaml
