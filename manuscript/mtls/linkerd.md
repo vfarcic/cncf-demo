@@ -1,4 +1,4 @@
-# Mutual TLS (mTLS) And Network Policies With Istio
+# Mutual TLS (mTLS) And Network Policies With LinkerD
 
 TODO: Intro
 
@@ -36,20 +36,20 @@ cp linkerd/namespace-production.yaml apps/.
 
 git add . 
 
-git commit -m "Istio"
+git commit -m "LinkerD"
 
 git push
 
 kubectl get namespace production --output yaml
 
-# Wait until the `istio-injection` label was added.
+# Wait until the `linkerd.io/inject` label was added.
 
 kubectl --namespace production delete pods \
     --selector app.kubernetes.io/name=cncf-demo
 
 kubectl --namespace production get pods
 
-# Istio side-car is now added to the Pods
+# LinkerD side-car is now added to the Pods
 ```
 
 ## Authorization (mTLS)
@@ -77,12 +77,12 @@ linkerd viz --namespace production edges pod
 TODO: Continue
 
 ```bash
-cat istio/peer-authentication.yaml
+cat linkerd/peer-authentication.yaml
 
-kubectl --namespace production apply \
-    --filename istio/peer-authentication.yaml
+kubectl apply --filename linkerd/peer-authentication.yaml
 
-kubectl --namespace production --tty --stdin exec sleep -- sh
+kubectl --namespace production --tty --stdin exec sleep \
+    --container sleep -- sh
 
 curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
@@ -90,9 +90,10 @@ curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
 exit
 
-kubectl --namespace default apply --filename istio/mtls.yaml
+kubectl --namespace default apply --filename linkerd/mtls.yaml
 
-kubectl --namespace default --tty --stdin exec sleep -- sh
+kubectl --namespace default --tty --stdin exec sleep \
+    --container sleep -- sh
 
 apk add -U curl
 
@@ -108,14 +109,18 @@ exit
 ## Policies
 
 ```bash
-cat istio/authorization-policy-deny.yaml
+cat linkerd/authorization-policy-deny.yaml
 
 kubectl --namespace production apply \
-    --filename istio/authorization-policy-deny.yaml
+    --filename linkerd/authorization-policy-deny.yaml
 
-kubectl --namespace production --tty --stdin exec sleep -- sh
+kubectl --namespace production --tty --stdin exec sleep \
+    --container sleep -- sh
+
+# TODO: Continue
 
 curl http://cncf-demo.production:8080
+curl http://httpbin:8080/headers -w "%{http_code}\n" # TODO: Remove
 
 # The access was denied
 

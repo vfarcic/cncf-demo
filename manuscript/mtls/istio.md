@@ -76,7 +76,8 @@ cat istio/peer-authentication.yaml
 kubectl --namespace production apply \
     --filename istio/peer-authentication.yaml
 
-kubectl --namespace production --tty --stdin exec sleep -- sh
+kubectl --namespace production --tty --stdin exec sleep \
+    --container sleep -- sh
 
 curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
@@ -86,7 +87,8 @@ exit
 
 kubectl --namespace default apply --filename istio/mtls.yaml
 
-kubectl --namespace default --tty --stdin exec sleep -- sh
+kubectl --namespace default --tty --stdin exec sleep \
+    --container sleep -- sh
 
 apk add -U curl
 
@@ -107,7 +109,8 @@ cat istio/authorization-policy-deny.yaml
 kubectl --namespace production apply \
     --filename istio/authorization-policy-deny.yaml
 
-kubectl --namespace production --tty --stdin exec sleep -- sh
+kubectl --namespace production --tty --stdin exec sleep \
+    --container sleep -- sh
 
 curl http://cncf-demo.production:8080
 

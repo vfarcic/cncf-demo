@@ -1,13 +1,36 @@
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
+# ---
+# apiVersion: policy.linkerd.io/v1beta1
+# kind: Server
+# metadata:
+#   name: cncf-demo
+# spec:
+#   podSelector:
+#     matchLabels:
+#       app.kubernetes.io/name: cncf-demo
+#   port: 8080
+#   proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
 metadata:
-  name: cncf-demo
+  name: httpbin
 spec:
-  selector:
+  podSelector:
     matchLabels:
-      app.kubernetes.io/name: cncf-demo
-  action: DENY
-  rules:
-    - to:
-        - operation:
-            methods: ["GET"]
+      app: httpbin
+  port: 8080
+  proxyProtocol: HTTP/1
+# ---
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: cncf-demo
+# spec:
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/name: cncf-demo
+#   action: DENY
+#   rules:
+#     - to:
+#         - operation:
+#             methods: ["GET"]

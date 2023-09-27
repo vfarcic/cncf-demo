@@ -397,13 +397,10 @@ flowchart TD
         click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         style mtls-linkerd fill:red
         mtls-cilium(Cilium)
-        click mtls-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
         style mtls-cilium fill:red
         mtls-kuma(Kuma)
-        click mtls-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/kuma.md"
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
-        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/nsm.md"
         style mtls-network-service-mesh fill:red
         mtls --> mtls-istio & mtls-kuma & mtls-network-service-mesh & mtls-cilium & mtls-linkerd--> scanning
 
@@ -523,7 +520,26 @@ flowchart TD
         style logging fill:red
         logging-fluentd(FluentD)
         style logging-fluentd fill:red
-        logging --> logging-fluentd --> progressive-delivery
+        logging --> logging-fluentd --> observability-network
+
+        %% ----------------
+        %% -- Networking --
+        %% ----------------
+        observability-network{{Networking}}
+        style observability-network fill:red
+        observability-network-istio(Istio)
+        style observability-network-istio fill:red
+        observability-network-linkerd("LinkerD (SMI)")
+        style observability-network-linkerd fill:red
+        observability-network-cilium(Cilium)
+        click observability-network-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
+        style observability-network-cilium fill:red
+        observability-network-kuma(Kuma)
+        click observability-network-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/kuma.md"
+        style observability-network-kuma fill:red
+        observability-network-network-service-mesh(Network Service Mesh)
+        style observability-network-network-service-mesh fill:red
+        observability-network --> observability-network-istio & observability-network-linkerd & observability-network-cilium & observability-network-kuma & observability-network-network-service-mesh --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --

@@ -1,8 +1,10 @@
 ---
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: default
-spec:
-  mtls:
-    mode: STRICT
+  name: production
+  annotations:
+    linkerd.io/inject: enabled
+    config.linkerd.io/default-inbound-policy: all-authenticated
+  labels:
+    linkerd.io/extension: viz
