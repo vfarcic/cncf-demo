@@ -636,7 +636,9 @@ flowchart TD
         style pipelines-keptn fill:red
         pipelines-serverless-workflow(Serverless Workflow)
         style pipelines-serverless-workflow fill:red
-        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow --> supply-chain
+        pipecd(PipeCD)
+        style pipecd fill:red
+        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd --> supply-chain
 
         %% ------------------
         %% -- Supply Chain --
