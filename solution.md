@@ -395,7 +395,6 @@ flowchart TD
         click mtls-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
         mtls-linkerd("LinkerD (SMI)")
         click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
-        style mtls-linkerd fill:red
         mtls-cilium(Cilium)
         style mtls-cilium fill:red
         mtls-kuma(Kuma)

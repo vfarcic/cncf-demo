@@ -11,8 +11,6 @@ TODO: Intro
 # In the "real world" situation, you should do it through GitOps
 #   by using LinkerD's Helm chart and your own certificates.
 
-# TODO: Continue
-
 curl --proto '=https' --tlsv1.2 \
     -sSfL https://run.linkerd.io/install | sh
 
@@ -55,6 +53,8 @@ kubectl --namespace production get pods
 ## Authorization (mTLS)
 
 ```bash
+cat linkerd/mtls.yaml
+
 kubectl --namespace production apply --filename linkerd/mtls.yaml
 
 kubectl --namespace production --tty --stdin exec sleep \
@@ -77,7 +77,22 @@ linkerd viz --namespace production edges pod
 ```bash
 cat linkerd/peer-authentication.yaml
 
-kubectl apply --filename linkerd/peer-authentication.yaml
+cp linkerd/peer-authentication.yaml \
+    apps/namespace-production.yaml
+
+git add . 
+
+git commit -m "LinkerD"
+
+git push
+
+kubectl get namespace production --output yaml
+
+# Wait until the `config.linkerd.io/default-inbound-policy`
+#   annotation was added.
+
+kubectl --namespace production delete pods \
+    --selector app.kubernetes.io/name=cncf-demo
 
 kubectl --namespace production --tty --stdin exec sleep \
     --container sleep -- sh
@@ -106,11 +121,17 @@ exit
 
 ## Policies
 
-TODO: Continue
-
 ```bash
-# TODO: Add `config.linkerd.io/default-inbound-policy: deny`
-#   annotation to the Pods of cnf-demo
+echo "
+spec:
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/default-inbound-policy: deny
+" | tee tmp/patch.yaml
+
+kubectl --namespace production patch deployment cncf-demo \
+    --patch-file tmp/patch.yaml
 
 kubectl --namespace production --tty --stdin exec sleep \
     --container sleep -- sh
@@ -121,8 +142,16 @@ curl http://cncf-demo.production:8080
 
 exit
 
-# TODO: Add `config.linkerd.io/default-inbound-policy: deny`
-#   annotation to the Pods of cnf-demo
+echo "
+spec:
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/default-inbound-policy: all-authenticated
+" | tee tmp/patch.yaml
+
+kubectl --namespace production patch deployment cncf-demo \
+    --patch-file tmp/patch.yaml
 
 kubectl --namespace production --tty --stdin exec sleep -- sh
 
@@ -136,9 +165,6 @@ exit
 ## Destroy
 
 ```bash
-# TODO: Remove `config.linkerd.io/default-inbound-policy: deny`
-#   annotation to the Pods of cnf-demo
-
 kubectl --namespace production delete --filename istio/mtls.yaml
 
 kubectl --namespace default delete --filename istio/mtls.yaml

@@ -52,6 +52,8 @@ kubectl --namespace production get pods
 ## Authorization (mTLS)
 
 ```bash
+cat istio/mtls.yaml
+
 kubectl --namespace production apply --filename istio/mtls.yaml
 
 kubectl --namespace production --tty --stdin exec sleep \
