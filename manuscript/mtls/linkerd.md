@@ -74,8 +74,6 @@ linkerd viz --namespace production edges pod
 
 ## Authentication
 
-TODO: Continue
-
 ```bash
 cat linkerd/peer-authentication.yaml
 
@@ -108,48 +106,42 @@ exit
 
 ## Policies
 
-```bash
-cat linkerd/authorization-policy-deny.yaml
+TODO: Continue
 
-kubectl --namespace production apply \
-    --filename linkerd/authorization-policy-deny.yaml
+```bash
+# TODO: Add `config.linkerd.io/default-inbound-policy: deny`
+#   annotation to the Pods of cnf-demo
 
 kubectl --namespace production --tty --stdin exec sleep \
     --container sleep -- sh
 
-# TODO: Continue
-
 curl http://cncf-demo.production:8080
-curl http://httpbin:8080/headers -w "%{http_code}\n" # TODO: Remove
 
 # The access was denied
 
 exit
 
-cat istio/authorization-policy-allow.yaml
-
-kubectl --namespace production apply \
-    --filename istio/authorization-policy-allow.yaml
+# TODO: Add `config.linkerd.io/default-inbound-policy: deny`
+#   annotation to the Pods of cnf-demo
 
 kubectl --namespace production --tty --stdin exec sleep -- sh
 
 curl http://cncf-demo.production:8080
 
 # The access was allowed
+
+exit
 ```
 
 ## Destroy
 
 ```bash
+# TODO: Remove `config.linkerd.io/default-inbound-policy: deny`
+#   annotation to the Pods of cnf-demo
+
 kubectl --namespace production delete --filename istio/mtls.yaml
 
-kubectl --namespace production delete \
-    --filename istio/peer-authentication.yaml
-
 kubectl --namespace default delete --filename istio/mtls.yaml
-
-kubectl --namespace production delete \
-    --filename istio/authorization-policy-allow.yaml
 ```
 
 ## Continue The Adventure
