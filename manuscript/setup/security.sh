@@ -57,9 +57,12 @@ export KUBECONFIG=$PWD/kubeconfig.yaml
 
 echo "export KUBECONFIG=$KUBECONFIG" >> .env
 
+helm repo add cilium https://helm.cilium.io
+
+helm repo update
+
 if [[ "$HYPERSCALER" == "google" ]]; then
 
-    # USE_GKE_GCLOUD_AUTH_PLUGIN=True
     gcloud components install gke-gcloud-auth-plugin
 
     PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
@@ -86,10 +89,22 @@ Press the enter key to continue."
         --zone us-east1-b --machine-type e2-standard-8 \
         --enable-autoscaling --num-nodes 1 --min-nodes 1 \
         --max-nodes 3 --enable-network-policy \
+        --node-taints node.cilium.io/agent-not-ready=true:NoExecute \
         --no-enable-autoupgrade
 
     gcloud container clusters get-credentials dot \
         --project $PROJECT_ID --zone us-east1-b
+
+    NATIVE_CIDR="$(gcloud container clusters describe dot \
+        --zone us-east1-b --format 'value(clusterIpv4Cidr)')"
+
+    helm install cilium cilium/cilium --version "1.14.2" \
+        --namespace kube-system --set nodeinit.enabled=true \
+        --set nodeinit.reconfigureKubelet=true \
+        --set nodeinit.removeCbrBridge=true \
+        --set cni.binPath=/home/kubernetes/bin \
+        --set gke.enabled=true --set ipam.mode=kubernetes \
+        --set ipv4NativeRoutingCIDR=$NATIVE_CIDR
 
     export SA_NAME=devops-toolkit
 
@@ -120,10 +135,20 @@ aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 " >aws-creds.conf
 
-    eksctl create cluster --config-file eksctl/config-dev.yaml \
+    eksctl create cluster \
+        --config-file eksctl/config-cilium.yaml \
         --kubeconfig kubeconfig.yaml
 
     sleep 10
+
+    kubectl --namespace kube-system patch daemonset aws-node \
+        --type strategic \
+        --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
+
+    helm install cilium cilium/cilium --version "1.14.2" \
+        --namespace kube-system --set eni.enabled=true \
+        --set ipam.mode=eni --set routingMode=native \
+        --set egressMasqueradeInterfaces=eth0
 
     eksctl create addon --name aws-ebs-csi-driver --cluster dot \
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
@@ -145,10 +170,14 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
     az aks create --resource-group $RESOURCE_GROUP --name dot \
         --node-count 3 --node-vm-size Standard_B2s \
-        --enable-managed-identity --yes
+        --enable-managed-identity --network-plugin none --yes
 
     az aks get-credentials --resource-group $RESOURCE_GROUP \
         --name dot --file $KUBECONFIG
+
+    helm install cilium cilium/cilium --version "1.14.2" \
+        --namespace kube-system --set aksbyocni.enabled=true \
+        --set nodeinit.enabled=true
 
 fi
 
