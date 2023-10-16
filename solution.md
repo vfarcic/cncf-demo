@@ -558,7 +558,9 @@ flowchart TD
         style observability-misc fill:red
         kuberhealthy(kuberhealthy)
         style kuberhealthy fill:red
-        observability-misc --> kuberhealthy
+        smp("Service Mesh Performance (SMP)")
+        style smp fill:red
+        observability-misc --> kuberhealthy --> smp
 
     end
 
@@ -573,9 +575,11 @@ flowchart TD
         style scaling fill:red
         hpa("Horizontal Pod Autoscaler (HPA)")
         style hpa fill:red
+        hpa("Vertical Pod Autoscaler (VPA)")
+        style vpa fill:red
         keda(KEDA)
         style keda fill:red
-        scaling --> hpa & keda --> deployment-mc
+        scaling --> hpa & vpa & keda --> deployment-mc
 
         %% ------------------------------
         %% -- Multi-Cluster Deployment --
@@ -586,7 +590,9 @@ flowchart TD
         style deployment-mc-karmada fill:red
         open-kruise(OpenKruise)
         style open-kruise fill:red
-        deployment-mc --> deployment-mc-karmada & open-kruise --> lb-mc
+        headlamp(Headlamp)
+        style headlamp fill:red
+        deployment-mc --> deployment-mc-karmada & open-kruise & headlamp --> lb-mc
 
         %% ---------------------------------
         %% -- Load Balancing & Networking --
@@ -724,12 +730,14 @@ flowchart TD
         style kube-edge fill:red
         super-edge(SuperEdge)
         style super-edge fill:red
+        fabedge(FabEdge)
+        style fabedge fill:red
 
         %% ---------------
         %% -- Baremetal --
         %% ---------------
-        metal3-io(Metal3.io)
-        style metal3-io fill:red
+        metal3(Metal3)
+        style metal3 fill:red
         tinkerbell(Tinkerbell)
         style tinkerbell fill:red
 
@@ -809,7 +817,10 @@ flowchart TD
         style storage-cube-fs fill:red
         storage-pravega(Pravega)
         style storage-pravega fill:red
-        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega --> backup
+        carina(Carina)
+        style carina fill:red
+        hwameistor(HwameiStor)
+        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor --> backup
 
         %% ------------
         %% -- Backup --
@@ -862,7 +873,9 @@ flowchart TD
         style serverless-knative fill:red
         serverless-devs(Serverless Devs)
         style serverless-devs fill:red
-        serverless --> serverless-knative & serverless-devs
+        open-function(OpenFunction)
+        style open-function fill:red
+        serverless --> serverless-knative & serverless-devs & open-function
 
         %% ---------------------------------
         %% -- Machine Learning & Big Data --
@@ -927,9 +940,56 @@ flowchart TD
         style mtls-meshery fill:red
         open-cost(OpenCost)
         style open-cost fill:red
-        open-function(OpenFunction)
-        style open-function fill:red
-
+        kcp(kcp)
+        style kcp fill:red
+        microcks(Microcks)
+        style microcks fill:red
+        sops(SOPS)
+        style sops fill:red
+        slimtoolkit(SlimToolkit)
+        style slimtoolkit fill:red
+        werf(werf)
+        style werf fill:red
+        openebs(OpenEBS)
+        style openebs fill:red
+        metallb(MetalLB)
+        style metallb fill:red
+        trickster(Trickster)
+        style trickster fill:red
+        openelb(OpenELB)
+        style openelb fill:red
+        inspektor-gadget(Inspektor Gadget)
+        style inspektor-gadget fill:red
+        ko(ko)
+        style ko fill:red
+        armada(Armada)
+        style armada fill:red
+        zot(zot)
+        style zot fill:red
+        kpt(kpt)
+        style kpt fill:red
+        kube-vip(kube-vip)
+        style kube-vip fill:red
+        capsule(Capsule)
+        style capsule fill:red
+        clusternet(Clusternet)
+        style clusternet fill:red
+        opc(Open Policy Containers)
+        style opc fill:red
+        eraser(Eraser)
+        style eraser fill:red
+        merbridge(Merbridge)
+        style merbridge fill:red
+        kepler(Keppler)
+        style kepler fill:red
+        xline(Xline)
+        style xline fill:red
+        kcl(KCL)
+        style kcl fill:red
+        openfga(OpenFGA)
+        style openfga fill:red
+        kubeclipper(KubeClipper)
+        style kubeclipper fill:red
     end
 ```
 
