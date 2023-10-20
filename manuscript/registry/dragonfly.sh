@@ -11,7 +11,9 @@ containerRuntime:
       - 'index.docker.io'
 EOF
 
+set +e
 helm repo add dragonfly https://dragonflyoss.github.io/helm-charts/
+set -e
 
 helm repo update
 

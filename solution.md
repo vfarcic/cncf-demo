@@ -926,8 +926,6 @@ flowchart TD
         style vitess fill:red
         tikv(TiKV)
         style tikv fill:red
-        spiffe(Spiffe)
-        style spiffe fill:red
         spire(Spire)
         style spire fill:red
         tuf("The Update Framework (TUF)")

@@ -1,8 +1,9 @@
 #!/bin/sh
 set -e
 
-helm repo add crossplane-stable \
-    https://charts.crossplane.io/stable
+set +e
+helm repo add crossplane-stable https://charts.crossplane.io/stable
+set -e
 
 helm repo update
 

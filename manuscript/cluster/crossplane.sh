@@ -17,7 +17,9 @@ Feel free to say "No" and inspect the script if you prefer setting up resources 
 # Hyperscalers #
 ################
 
+set +e
 helm repo add crossplane-stable https://charts.crossplane.io/stable
+set -e
 
 helm repo update
 

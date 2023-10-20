@@ -1,43 +1,35 @@
-# Mutual TLS (mTLS) And Network Policies With Istio
+# Mutual TLS (mTLS) And Network Policies With Cilium And SPIFFE
 
 TODO: Intro
 
 ## Setup
 
+* Cilium is already installed in the cluster by default if you followed the provided setup instructions.
+
 ```bash
-# TODO: Rewrite to Cilium
+kubectl --namespace kube-system get pods \
+    --selector app.kubernetes.io/part-of=cilium
 
-# TODO: kapp-controller
+# Confirm that Cilium is are running
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-
-cat $GITOPS_APP/istio.yaml
-
-cp $GITOPS_APP/istio.yaml infra/.
-
-git add . 
-
-git commit -m "Istio"
-
-git push
-
-kubectl --namespace istio-system get pods
-
-# Wait until the Pods are created and ready
+helm upgrade cilium cilium/cilium --namespace kube-system \
+    --set authentication.mutual.spire.enabled=true \
+    --set authentication.mutual.spire.install.enabled=true \
+    --reuse-values --wait
 ```
 
 # Do
 
 ```bash
-cat istio/namespace-production.yaml
+# cat istio/namespace-production.yaml
 
-cp istio/namespace-production.yaml apps/.
+# cp istio/namespace-production.yaml apps/.
 
-git add . 
+# git add . 
 
-git commit -m "Istio"
+# git commit -m "Istio"
 
-git push
+# git push
 
 kubectl get namespace production --output yaml
 

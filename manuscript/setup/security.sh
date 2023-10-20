@@ -57,7 +57,9 @@ export KUBECONFIG=$PWD/kubeconfig.yaml
 
 echo "export KUBECONFIG=$KUBECONFIG" >> .env
 
+set +e
 helm repo add cilium https://helm.cilium.io
+set -e
 
 helm repo update
 
@@ -104,7 +106,7 @@ Press the enter key to continue."
         --set nodeinit.removeCbrBridge=true \
         --set cni.binPath=/home/kubernetes/bin \
         --set gke.enabled=true --set ipam.mode=kubernetes \
-        --set ipv4NativeRoutingCIDR=$NATIVE_CIDR
+        --set ipv4NativeRoutingCIDR=$NATIVE_CIDR --wait
 
     export SA_NAME=devops-toolkit
 
@@ -148,11 +150,11 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
     helm install cilium cilium/cilium --version "1.14.2" \
         --namespace kube-system --set eni.enabled=true \
         --set ipam.mode=eni --set routingMode=native \
-        --set egressMasqueradeInterfaces=eth0
+        --set egressMasqueradeInterfaces=eth0 --wait
 
     eksctl create addon --name aws-ebs-csi-driver --cluster dot \
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
-        --force
+        --region us-east-1 --force
 
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 
@@ -177,7 +179,7 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
     helm install cilium cilium/cilium --version "1.14.2" \
         --namespace kube-system --set aksbyocni.enabled=true \
-        --set nodeinit.enabled=true
+        --set nodeinit.enabled=true --wait
 
 fi
 
@@ -276,7 +278,9 @@ fi
 # Setup Crossplane #
 ####################
 
+set +e
 helm repo add crossplane-stable https://charts.crossplane.io/stable
+set -e
 
 helm repo update
 

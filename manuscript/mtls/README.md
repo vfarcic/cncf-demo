@@ -24,7 +24,7 @@ TODO: Explanation
 
 * [Official site](https://networkservicemesh.io)
 
-## Choice 4: Cilium
+## Choice 4: Cilium and SPIFFE
 
 TODO: Explanation
 
@@ -42,5 +42,5 @@ TODO: Explanation
 * [Istio](istio.md)
 * [LinkerD (SMI)](linkerd.md)
 * [Network Service Mesh](nsm.md)
-* [Cilium](cilium.md)
+* [Cilium and SPIFFE](cilium.md)
 * [Kuma](kuma.md)

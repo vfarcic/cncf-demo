@@ -18,7 +18,9 @@ yq --inplace \
     ".externalURL = \"https://harbor.$DOMAIN\"" \
     harbor/values.yaml
 
+set +e
 helm repo add harbor https://helm.goharbor.io
+set -e
 
 helm repo update
 
