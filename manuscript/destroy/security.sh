@@ -46,7 +46,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
         COUNTER=$(kubectl get managed | wc -l)
     done
 
-	eksctl delete addon --name aws-ebs-csi-driver --cluster dot
+	eksctl delete addon --name aws-ebs-csi-driver --cluster dot --region us-east-1
 
 	eksctl delete nodegroup --name primary --cluster dot --drain=false --wait
 
