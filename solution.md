@@ -691,15 +691,15 @@ flowchart TD
         %% --------------------------------------
         crd{{CRDs, Controllers, and Operators}}
         style crd fill:red
-        crd-kubebuilder(Kubebuilder)
-        style crd-kubebuilder fill:red
+        kubebuilder(Kubebuilder)
+        style kubebuilder fill:red
         crd-kube-rs(kube-rs)
         style crd-kube-rs fill:red
         crd-kudo(KUDO)
         style crd-kudo fill:red
         crd-operator-framework(Operator Framework)
         style crd-operator-framework fill:red
-        crd --> crd-kubebuilder & crd-kube-rs & crd-kudo & crd-operator-framework
+        crd --> kubebuilder & crd-kube-rs & crd-kudo & crd-operator-framework
 
         %% -----------
         %% -- TODO: --
@@ -754,13 +754,14 @@ flowchart TD
         %% ------------------------
         wasm{{"WebAssembly (Wasm)"}}
         style wasm fill:red
-        wasm-krustlet(Krustlet)
-        style wasm-krustlet fill:red
+        %% Not maintained
+        %% wasm-krustlet(Krustlet)
+        %% style wasm-krustlet fill:red
         wasm-cloud(wasmCloud)
         style wasm-cloud fill:red
         wasm-edge(WasmEdge)
         style wasm-edge fill:red
-        wasm --> wasm-krustlet & wasm-cloud & wasm-edge
+        wasm --> wasm-cloud & wasm-edge
         
         %% ----------------------
         %% -- Virtual Machines --

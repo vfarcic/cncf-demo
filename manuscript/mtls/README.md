@@ -41,6 +41,6 @@ TODO: Explanation
 
 * [Istio](istio.md)
 * [LinkerD (SMI)](linkerd.md)
-* [Network Service Mesh](nsm.md)
-* [Cilium and SPIFFE](cilium.md)
-* [Kuma](kuma.md)
+* **Network Service Mesh** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Cilium and SPIFFE** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Kuma** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

@@ -16,58 +16,46 @@ helm upgrade cilium cilium/cilium --namespace kube-system \
     --set authentication.mutual.spire.enabled=true \
     --set authentication.mutual.spire.install.enabled=true \
     --reuse-values --wait
-```
 
-# Do
+kubectl --namespace kube-system \
+    rollout restart deployment/cilium-operator
 
-```bash
-# cat istio/namespace-production.yaml
-
-# cp istio/namespace-production.yaml apps/.
-
-# git add . 
-
-# git commit -m "Istio"
-
-# git push
-
-kubectl get namespace production --output yaml
-
-# Wait until the `istio-injection` label was added.
-
-kubectl --namespace production delete pods \
-    --selector app.kubernetes.io/name=cncf-demo
-
-kubectl --namespace production get pods
-
-# Istio side-car is now added to the Pods
+çkubectl --namespace kube-system rollout restart ds/cilium
 ```
 
 ## Authorization (mTLS)
 
 ```bash
-cat istio/mtls.yaml
+cat cilium/mtls.yaml
 
 kubectl --namespace production apply --filename istio/mtls.yaml
 
-kubectl --namespace production --tty --stdin exec sleep \
-    --container sleep -- sh
+kubectl --namespace production get cep
 
-apk add -U curl
+IDENTITY_ID=$(kubectl --namespace production get cep \
+    --selector app=sleep \
+    --output jsonpath='{.items[0].status.identity.id}')
 
-curl -s http://httpbin:8080/headers \
-    | grep X-Forwarded-Client-Cert
+echo $IDENTITY_ID
 
-# Cert shows that the communication between the Pods is
-#   encrypted (mTLS)
+kubectl --namespace cilium-spire exec spire-server-0 \
+    --container spire-server \
+    -- /opt/spire/bin/spire-server entry show \
+    -spiffeID spiffe://spiffe.cilium/identity/$IDENTITY_ID
 
-exit
+kubectl --namespace cilium-spire exec spire-server-0 \
+    --container spire-server \
+    -- /opt/spire/bin/spire-server entry show \
+    -selector cilium:mutual-auth
+
+kubectl get ciliumidentities
 ```
 
 ## Authentication
 
 ```bash
-cat istio/peer-authentication.yaml
+# TODO: Continue https://docs.cilium.io/en/latest/network/servicemesh/mutual-authentication/mutual-authentication-example/#enforce-mutual-authentication
+cat cilium/peer-authentication.yaml
 
 kubectl --namespace production apply \
     --filename istio/peer-authentication.yaml

@@ -152,7 +152,7 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
         --set ipam.mode=eni --set routingMode=native \
         --set egressMasqueradeInterfaces=eth0 --wait
 
-    eksctl create addon --name aws-ebs-csi-driver --cluster dot \
+    eksctl create addon --name aws-ebs-csi-driver --cluster dot-production \
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
         --region us-east-1 --force
 
