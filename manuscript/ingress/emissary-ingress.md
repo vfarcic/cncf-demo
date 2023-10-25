@@ -55,9 +55,16 @@ yq --inplace ".production.ingress.ip = \"$INGRESS_IP\"" \
 
 yq --inplace ".production.ingress.className = \"ambassador\"" \
     settings.yaml
+
+# Execute the command that follows only if you jumped straight
+#   into the "Production" chapter and did not already define the
+#   domain.
+yq --inplace ".production.domain = \"$INGRESS_IP.nip.io\"" \
+    settings.yaml
 ```
 
 ## Which GitOps Tool Did You Choose?
 
 * [Argo CD](gitops-argocd.md)
 * [Flux](gitops-flux.md)
+* [Carvel kapp-controller](gitops-kapp.md)

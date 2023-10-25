@@ -33,7 +33,7 @@ kubectl --namespace production apply \
 
 kubectl get managed
 
-kubectl --namespace production get claim
+kubectl --namespace production get clusterclaims
 
 kubectl --namespace production wait --for=condition=ready \
     clusterclaim production --timeout=30m

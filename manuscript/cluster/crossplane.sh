@@ -27,6 +27,8 @@ helm upgrade --install crossplane crossplane-stable/crossplane --namespace cross
 
 kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
 
+kubectl apply --filename crossplane-config/provider-helm-incluster.yaml
+
 kubectl apply --filename crossplane-config/config-k8s.yaml
 
 sleep 60

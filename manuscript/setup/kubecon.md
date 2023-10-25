@@ -5,121 +5,165 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
+# Select the fork as the default repository
 gh repo set-default
 
-export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+eval "$(teller sh)"
 
-echo "export KUBECONFIG_DEV=$PWD/kubeconfig-dev.yaml" >> .env
-```
+eksctl create cluster --config-file eksctl/config-cilium.yaml
 
-## Create a management Kubernetes cluster
+sleep 10
 
-### Google Cloud GKE
+kubectl --namespace kube-system patch daemonset aws-node \
+    --type strategic \
+    --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
 
-Follow this section ONLY if you're planning to use Google Cloud GKE
+helm install cilium cilium/cilium --version "1.14.2" \
+    --namespace kube-system --set eni.enabled=true \
+    --set ipam.mode=eni --set routingMode=native \
+    --set egressMasqueradeInterfaces=eth0 --wait
 
-```bash
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+eksctl create addon --name aws-ebs-csi-driver --cluster dot-production \
+    --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
+    --region us-east-1 --force
 
-export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
+kubectl create namespace production
 
-yq --inplace ".google.projectId = \"$PROJECT_ID\"" settings.yaml
+yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" \
+    settings.yaml
 
-gcloud projects create $PROJECT_ID
+yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
-echo "https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID"
+alias curl="curl --insecure"
 
-# Open the URL from the output and enable the Kubernetes API
+chmod +x manuscript/cluster/crossplane.sh
 
-gcloud container clusters create dot --project $PROJECT_ID \
-    --region us-east1 --machine-type e2-standard-4 \
-    --num-nodes 1 --no-enable-autoupgrade
-```
+./manuscript/cluster/crossplane.sh
 
-### The Rest Of The Setup
+chmod +x manuscript/cluster/crossplane-aws.sh
 
-```bash
-kubectl create namespace dev
+./manuscript/cluster/crossplane-aws.sh
 
-helm upgrade --install traefik traefik \
-    --repo https://helm.traefik.io/traefik \
-    --namespace traefik --create-namespace --wait
+source .env
 
-export INGRESS_HOST=$(kubectl --namespace traefik \
-    get service traefik \
-    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-
-echo $INGRESS_HOST
-
-export DOMAIN=sillydemo.com
-
-# Configure DNS for the following subdomains (skip this step if
-#   you chose to use `nip.io` instead of a "real" domain):
-# - harbor
-# - notary
-# - cncf-demo-dev
-# Do not use a wildcard for those subdomains since, later on,
-#   we'll add more pointing to a different cluster.
-# Configure these subdomains by going to your registrar and
-#   creating three more DNS records of type 'A', each with the
-#   name set to the subdomain (one record for 'harbor', one for
-#   'notary', one for 'cncf-demo-dev'), and the value of each
-#   record set to that same IP address of your output.
-
-helm repo add jetstack https://charts.jetstack.io
-
-helm repo update
-
-helm upgrade --install cert-manager jetstack/cert-manager \
-    --namespace cert-manager --create-namespace \
-    --set installCRDs=true --wait
-
-export EMAIL=viktor@farcic.com
-
-yq --inplace ".spec.acme.email = \"$EMAIL\"" \
-    cert-manager/issuer.yaml
-
-kubectl apply --filename cert-manager/issuer.yaml
-```
-
-## Cache
-
-```bash
-# Start Rancher Desktop
-
-alias docker=$(which nerdctl)
-
-docker system prune --all --force
-
-docker image build --tag cncf-demo:v0.0.1 .
-
-# Quit Rancher Desktop
-
-# Start Docker
-
-alias docker=/usr/local/bin/docker
-
-docker system prune --all --force
-
-kbld --file kbld/deployment.yaml
-
-pack build cncf-demo:v0.0.1
-
-./manuscript/registry/harbor.sh
-
-./manuscript/db/crossplane-cloud.sh
-
-export XP_PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
-
-export XP_DESTINATION=google
-
-./manuscript/db/crossplane-google.sh
-
-kubectl get nodes
+kubectl --namespace production apply \
+    --filename crossplane/aws-eks.yaml
 
 kubectl get managed
 ```
 
-## Start The Adventure
+## Start The Chapter
 
-* [Build Container Image](../build-container-image/README.md)
+* [Create And Manage Production Kubernetes Cluster](../cluster/README.md)
+
+## The Flow
+
+```mermaid
+flowchart TD
+
+    subgraph Production
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-prod((Setup))
+        click setup-prod "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/prod.md"
+
+        %% -- Setup Connections --
+        setup-prod-->cluster
+
+        %% -------------
+        %% -- Cluster --
+        %% -------------
+        cluster{{Create a Cluster}}
+        click cluster "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/README.md"
+        style cluster fill:blue
+        cluster-crossplane(Crossplane)
+        click cluster-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/crossplane.md"
+        cluster-crossplane-aws(AWS)
+        click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
+        cluster-cluster-api(Cluster API)
+        click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
+        style cluster-cluster-api fill:red
+        capi-aws(AWS)
+        click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
+        style capi-aws fill:red
+        cluster --> cluster-crossplane --> cluster-crossplane-aws --> gitops
+        cluster --> cluster-cluster-api --> capi-aws --> gitops
+
+        %% ------------
+        %% -- GitOps --
+        %% ------------
+        gitops{{GitOps}}
+        click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/README.md"
+        style gitops fill:blue
+        gitops-flux(Flux)
+        style gitops-flux fill:red
+        click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
+        gitops-argocd(Argo CD)
+        click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
+        style gitops-argocd fill:red
+        gitops-kapp(Carvel kapp-controller)
+        click gitops-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/kapp.md"
+        gitops --> gitops-flux & gitops-argocd & gitops-kapp --> ingress
+
+        %% -------------
+        %% -- Ingress --
+        %% -------------
+        ingress{{Ingress}}
+        click ingress "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/README.md"
+        style ingress fill:blue
+        ingress-contour(Contour With Envoy)
+        click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
+        ingress-nginx(NGINX)
+        click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
+        style ingress-nginx fill:red
+        emissary-ingress(Emissary-ingress With Envoy)
+        click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
+        style emissary-ingress fill:red
+        ingress-argocd(GitOps With Argo CD)
+        click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
+        style ingress-argocd fill:red
+        ingress-flux(GitOps Flux)
+        click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
+        style ingress-flux fill:red
+        ingress-kapp(GitOps Carvel kapp-controller)
+        click ingress-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-kapp.md"
+        ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux & ingress-kapp --> app
+
+        %% ----------------------------------
+        %% -- Deploy The App To Production --
+        %% ----------------------------------
+        app{{Deploy The App To Production}}
+        click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/README.md"
+        style app fill:blue
+        app-helm(App As Helm)
+        click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
+        app-kustomize(App As Kustomize)
+        click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
+        style app-kustomize fill:red
+        app-cdk8s(App As cdk8s)
+        click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
+        style app-cdk8s fill:red
+        app-carvel(App As Carvel ytt)
+        click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
+        style app-carvel fill:red
+        app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> prod-done
+
+        prod-done((Chapter End))
+
+    end
+```
+
+## Destroy
+
+```bash
+eksctl delete addon --name aws-ebs-csi-driver \
+    --cluster dot-production --region us-east-1
+
+eksctl delete nodegroup --name primary --cluster dot-production \
+    --drain=false --region us-east-1 --wait
+
+eksctl delete cluster --config-file eksctl/config-cilium.yaml \
+    --wait
+```

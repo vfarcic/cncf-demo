@@ -7,7 +7,8 @@ We also create an Carvel kapp-controller App that will eventually watch our Hero
 ## Setup
 
 ```bash
-# Set the environment variable REPO_URL to point to the 'kapp-controller/apps.yaml' file in your remote Git repository
+# Set the environment variable REPO_URL to point to the
+#   'kapp-controller/apps.yaml' file in your remote Git repository
 
 export REPO_URL=$(git config --get remote.origin.url)
 
@@ -20,17 +21,13 @@ yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
 ```bash
 # Install kapp-controller
 
-kubectl apply -f https://github.com/vmware-tanzu/carvel-kapp-controller/releases/latest/download/release.yml
-
-# Install kapp-controller CLI
-
-wget -O- https://carvel.dev/install.sh > install.sh
-sudo bash install.sh
+kubectl apply \
+    --filename https://github.com/vmware-tanzu/carvel-kapp-controller/releases/latest/download/release.yml
 
 # Create ServiceAccount, ClusterRole, and ClusterRoleBinding so that kapp-controller can access and change management cluster
 # Create namespaces
 
-kubectl apply -f kapp-controller/preperation.yaml
+kubectl apply --filename kapp-controller/preperation.yaml
 
 # Create a SchemaHero App definition and store it in the infra folder
 
@@ -100,14 +97,6 @@ yq --inplace ".spec.acme.email = \"$EMAIL\"" infra/issuer.yaml
 yq --inplace \
     ".spec.acme.solvers[0].http01.ingress.class = \"$INGRESS_CLASS_NAME\"" \
     infra/issuer.yaml
-
-# Commit to Git 
-
-git add .
-
-git commit -m "Infra"
-
-git push
 
 yq --inplace ".gitOps.app = \"kapp-controller\"" settings.yaml
 ```

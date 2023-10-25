@@ -63,6 +63,29 @@ yq --inplace \
     ".spec.values.ingress.className = \"$INGRESS_CLASS_NAME\"" \
     apps/cncf-demo.yaml
 
+# Execute the command that follows only if you are using Carvel
+#   kapp-controller.
+echo "
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cncf-demo-values
+  namespace: carvel-apps
+stringData:
+  cncf-demo-values.yaml: |
+    image:
+      tag: $TAG
+    ingress:
+      host: cncf-demo.$DOMAIN
+      className: $INGRESS_CLASS_NAME
+    tls:
+      enabled: true
+spec:
+  source:
+    repoURL: https://github.com/devopsparadox/cncf-demo.git" \
+    | tee -a apps/cncf-demo.yaml
+
 cat apps/cncf-demo.yaml
 
 git add .

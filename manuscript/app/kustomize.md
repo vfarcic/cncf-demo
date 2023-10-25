@@ -2,6 +2,8 @@
 
 TODO: Intro
 
+* If you chose to do GitOps with Carvel kapp-controller, **Kustomize is not yet supported** and you should choose a different way to define the app. Please go back to [Deploy the App to Production](README.md) and pick a different format.
+
 ## Setup
 
 ```bash

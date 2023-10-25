@@ -37,6 +37,6 @@ kind: Provider
 metadata:
   name: crossplane-provider-helm
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.14.0
+  package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.15.0
   controllerConfigRef:
     name: crossplane-provider-helm

@@ -16,7 +16,7 @@ export INGRESS_CLASS_NAME=$(\
 export REPO_URL=$(git config --get remote.origin.url)
 
 # Execute the command that follows only if you are using Argo CD
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
     $GITOPS_APP/cncf-demo-ytt.yaml
 
 export TAG=$(yq ".tag" settings.yaml)
@@ -47,9 +47,8 @@ yq --inplace ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
 
 cat ytt/values-prod.yaml
 
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml
+# ytt --file ytt/schema.yaml --file ytt/resources \
+#     --data-values-file ytt/values-prod.yaml
 
 git add .
 

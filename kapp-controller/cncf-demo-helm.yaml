@@ -1,19 +1,4 @@
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cncf-demo-values
-  namespace: carvel-apps
-stringData:
-  cncf-demo-values.yaml: |
-    image:
-      tag: latest
-    ingress:
-      host: cncf-demo.sillydemo.com
-      className: nginx
-    tls:
-      enabled: true
----
 apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
