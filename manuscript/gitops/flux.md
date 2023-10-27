@@ -8,21 +8,15 @@ We also create an Flux Kustomization that will eventually watch our Hero applica
 
 ## Setup
 
-* Install the [Flux CLI](https://fluxcd.io/flux/get-started/#install-the-flux-cli)
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-# Set the environment variable REPO_URL to point to your remote Git repository
+chmod +x manuscript/gitops/flux.sh
 
-export REPO_URL=$(git config --get remote.origin.url)
+./manuscript/gitops/flux.sh
 
-# Replace `[...]` with your GitHub token
-export GITHUB_TOKEN=[...]
-
-# Replace `[...]` with your GitHub user
-export GITHUB_USER=[...]
-
-# Replace `[...]` with the GitHub organization where the repo is located
-export GITHUB_ORG=[...]
+source .env
 ```
 
 ## Do

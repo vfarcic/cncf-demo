@@ -1,4 +1,4 @@
-# Ingress With NGINX
+# Ingress With Envoy And Emissary Ingress
 
 TODO: Intro
 
@@ -11,26 +11,29 @@ export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 ## Do
 
 ```bash
-cat $GITOPS_APP/nginx.yaml
+kubectl apply \
+    --filename https://app.getambassador.io/yaml/emissary/3.4.0/emissary-crds.yaml
 
-cp $GITOPS_APP/nginx.yaml infra/.
+cat $GITOPS_APP/emissary-ingress.yaml
+
+# TODO: Add to Argo CD
+
+cp $GITOPS_APP/emissary-ingress.yaml infra/.
 
 git add . 
 
-git commit -m "NGINX"
+git commit -m "Contour"
 
 git push
 
-kubectl --namespace ingress-nginx get all
-
 # If NOT EKS
-export INGRESS_IP=$(kubectl --namespace ingress-nginx \
-    get service ingress-nginx-controller \
+export INGRESS_IP=$(kubectl --namespace emissary \
+    get service emissary-ingress \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
 # If EKS
-export INGRESS_HOSTNAME=$(kubectl --namespace ingress-nginx \
-    get service ingress-nginx-controller \
+export INGRESS_HOSTNAME=$(kubectl --namespace emissary \
+    get service emissary-ingress \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
 # If EKS
@@ -47,17 +50,7 @@ echo $INGRESS_IP
 #   them and execute `export INGRESS_IP=[...]` with `[...]`
 #   being the selected IP.
 
-yq --inplace ".production.ingress.ip = \"$INGRESS_IP\"" \
-    settings.yaml
-
-yq --inplace ".production.ingress.className = \"nginx\"" \
-    settings.yaml
-
-# Execute the command that follows only if you jumped straight
-#   into the "Production" chapter and did not already define the
-#   domain.
-yq --inplace ".production.domain = \"$INGRESS_IP.nip.io\"" \
-    settings.yaml
+export INGRESS_CLASS_NAME=ambassador
 ```
 
 ## Which GitOps Tool Did You Choose?

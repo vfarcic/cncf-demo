@@ -1,20 +1,5 @@
 # Deploy The App Defined As Helm Chart To Production With GitOps
 
-TODO: Intro
-
-## Setup
-
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
-
-```bash
-chmod +x manuscript/app/helm.sh
-
-./manuscript/app/helm.sh
-
-source .env
-```
-
 ## Do
 
 ```bash
@@ -81,13 +66,7 @@ git push
 
 kubectl --namespace production get all,ingresses
 
-# If you chose to use `nip.io` instead of a "real" domain,
-#   replace `https` with `http`.
-echo "https://cncf-demo.$DOMAIN"
+echo "http://cncf-demo.$DOMAIN"
 
 # Open it in a browser.
 ```
-
-## Continue The Adventure
-
-* [Setup PostgreSQL DB In The Production Environment](../db-production/README.md)

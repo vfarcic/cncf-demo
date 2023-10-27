@@ -5,7 +5,7 @@ metadata:
   name: schema-hero
   namespace: flux-system
 spec:
-  interval: 5m0s
+  interval: 1m
   path: ./schema-hero
   prune: true
   sourceRef:

@@ -6,14 +6,15 @@ We also create an Carvel kapp-controller App that will eventually watch our Hero
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-# Set the environment variable REPO_URL to point to the
-#   'kapp-controller/apps.yaml' file in your remote Git repository
+chmod +x manuscript/gitops/kapp.sh
 
-export REPO_URL=$(git config --get remote.origin.url)
+./manuscript/gitops/kapp.sh
 
-yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
-    kapp-controller/apps.yaml
+source .env
 ```
 
 ## Do

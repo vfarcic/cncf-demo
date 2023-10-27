@@ -38,8 +38,6 @@ dig +short gitops.$DOMAIN
 gitops create dashboard gitops --password=admin --export \
     | tee infra/weave-gitops-dashboard.yaml
 
-cat infra/weave-gitops-dashboard.yaml
-
 export INGRESS_CLASS_NAME=$(\
   yq ".production.ingress.className" settings.yaml)
 

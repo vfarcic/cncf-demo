@@ -12,8 +12,6 @@ eval "$(teller sh)"
 
 eksctl create cluster --config-file eksctl/config-cilium.yaml
 
-sleep 10
-
 kubectl --namespace kube-system patch daemonset aws-node \
     --type strategic \
     --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
@@ -50,11 +48,24 @@ kubectl --namespace production apply \
     --filename crossplane/aws-eks.yaml
 
 kubectl get managed
+
+export GITHUB_USER=vfarcic
+
+export GITHUB_ORG=devopsparadox
+
+chmod +x crossplane/*.sh
+
+chmod +x manuscript/app/*.sh
+
+export IMAGE=index.docker.io/vfarcic/cncf-demo
+
+export TAG=v0.0.1
 ```
 
 ## Start The Chapter
 
-* [Create And Manage Production Kubernetes Cluster](../cluster/README.md)
+* [Cluster API](../cluster/kubecon-cluster-api.md)
+* [Crossplane](../cluster/kubecon-crossplane-aws.md)
 
 ## The Flow
 
@@ -98,7 +109,6 @@ flowchart TD
         click gitops "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/README.md"
         style gitops fill:blue
         gitops-flux(Flux)
-        style gitops-flux fill:red
         click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
         gitops-argocd(Argo CD)
         click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
@@ -117,7 +127,6 @@ flowchart TD
         click ingress-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/contour.md"
         ingress-nginx(NGINX)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
-        style ingress-nginx fill:red
         emissary-ingress(Emissary-ingress With Envoy)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
         style emissary-ingress fill:red
@@ -126,7 +135,6 @@ flowchart TD
         style ingress-argocd fill:red
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
-        style ingress-flux fill:red
         ingress-kapp(GitOps Carvel kapp-controller)
         click ingress-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-kapp.md"
         ingress-->ingress-contour & ingress-nginx & emissary-ingress --> ingress-argocd & ingress-flux & ingress-kapp --> app
@@ -141,7 +149,6 @@ flowchart TD
         click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
         app-kustomize(App As Kustomize)
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
-        style app-kustomize fill:red
         app-cdk8s(App As cdk8s)
         click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
         style app-cdk8s fill:red
@@ -158,6 +165,10 @@ flowchart TD
 ## Destroy
 
 ```bash
+chmod +x manuscript/destroy/production.sh
+
+./manuscript/destroy/production.sh
+
 eksctl delete addon --name aws-ebs-csi-driver \
     --cluster dot-production --region us-east-1
 

@@ -8,3 +8,5 @@ providers:
         path: projects/vfarcic/secrets/aws-secret-access-key/versions/3
       AWS_ACCOUNT_ID:
         path: projects/vfarcic/secrets/aws-account-id/versions/1
+      GITHUB_TOKEN:
+        path: projects/vfarcic/secrets/github-token/versions/2

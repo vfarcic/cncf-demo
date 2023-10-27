@@ -6,36 +6,15 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+chmod +x manuscript/app/kustomize.sh
 
-export DOMAIN=$(yq ".production.domain" settings.yaml)
+./manuscript/app/kustomize.sh
 
-export INGRESS_CLASS_NAME=$(\
-    yq ".production.ingress.className" settings.yaml)
-
-# Execute the command that follows only if you are using Argo CD
-export REPO_URL=$(git config --get remote.origin.url)
-
-# Execute the command that follows only if you are using Argo CD
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    $GITOPS_APP/cncf-demo-kustomize.yaml
-
-export IMAGE=$(yq ".image" settings.yaml)
-
-export TAG=$(yq ".tag" settings.yaml)
-
-yq --inplace \
-    ".spec.template.spec.containers[0].image = \"$IMAGE\"" \
-    kustomize/base/deployment.yaml
-
-export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
-
-echo $INGRESS_IP
-
-# Configure DNS for the following subdomains (skip this step if
-#   you chose to use `nip.io` instead of a "real" domain):
-# - cncf-demo
+source .env
 ```
 
 ## Do
