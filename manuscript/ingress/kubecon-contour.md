@@ -13,6 +13,8 @@ git commit -m "Contour"
 
 git push
 
+kubectl --namespace projectcontour get all
+
 export INGRESS_HOSTNAME=$(kubectl --namespace projectcontour \
     get service contour-envoy \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
@@ -36,6 +38,6 @@ export INGRESS_CLASS_NAME=contour
 
 ## Which GitOps Tool Did You Choose?
 
-* [Argo CD](gitops-argocd.md)
-* [Flux](gitops-flux.md)
-* [Carvel kapp-controller](gitops-kapp.md)
+* [Argo CD](kubecon-gitops-argocd.md)
+* [Flux](kubecon-gitops-flux.md)
+* [Carvel kapp-controller](kubecon-gitops-kapp.md)

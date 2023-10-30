@@ -5,20 +5,7 @@ TODO: Intro
 ## Setup
 
 ```bash
-export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
-
-# Replace `[...]` with the domain (e.g., sillydemo.com).
-# If you do not have a domain, replace `[...]` with
-#   `$INGRESS_IP.nip.io`.
-# If you do choose to use `nip.io` instead of a "real" domain,
-#   beware that:
-#   - when opening an application in a browser, you will have to
-#     allow insecure connections.
-#   - when executing `curl` commands, you will have to add the
-#     `--insecure` flag.
-#   - you will NOT be able to choose Harbor as container image
-#     registry.
-export DOMAIN=[...]
+export DOMAIN=$INGRESS_IP.nip.io
 
 yq --inplace ".production.domain = \"$DOMAIN\"" settings.yaml
 

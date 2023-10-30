@@ -11,12 +11,11 @@ export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 ## Do
 
 ```bash
+# Execute only if using Carvel kapp-controller
 kubectl apply \
     --filename https://app.getambassador.io/yaml/emissary/3.4.0/emissary-crds.yaml
 
 cat $GITOPS_APP/emissary-ingress.yaml
-
-# TODO: Add to Argo CD
 
 cp $GITOPS_APP/emissary-ingress.yaml infra/.
 
@@ -25,6 +24,8 @@ git add .
 git commit -m "Contour"
 
 git push
+
+kubectl --namespace emissary get all
 
 # If NOT EKS
 export INGRESS_IP=$(kubectl --namespace emissary \

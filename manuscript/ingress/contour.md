@@ -21,6 +21,8 @@ git commit -m "Contour"
 
 git push
 
+kubectl --namespace projectcontour get all
+
 # If NOT EKS
 export INGRESS_IP=$(kubectl --namespace projectcontour \
     get service contour-envoy \

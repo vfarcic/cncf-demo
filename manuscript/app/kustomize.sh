@@ -55,8 +55,8 @@ gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
     "Use the IP $INGRESS_IP to configure DNS for the following subdomains." \
-	'(Skip this step if you chose to use `nip.io` instead of a "real" domain.)' \
-    '- cncf-demo'
+	'(Skip this step if you chose to use `nip.io` instead of a "real" domain.)
+- cncf-demo'
 
 gum confirm "
 Continue?

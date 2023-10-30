@@ -4,30 +4,13 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+./manuscript/app/carvel.sh
 
-export DOMAIN=$(yq ".production.domain" settings.yaml)
-
-export INGRESS_CLASS_NAME=$(\
-    yq ".production.ingress.className" settings.yaml)
-
-# Execute the command that follows only if you are using Argo CD
-export REPO_URL=$(git config --get remote.origin.url)
-
-# Execute the command that follows only if you are using Argo CD
-yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
-    $GITOPS_APP/cncf-demo-ytt.yaml
-
-export TAG=$(yq ".tag" settings.yaml)
-
-export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
-
-echo $INGRESS_IP
-
-# Configure DNS for the following subdomains (skip this step if
-#   you chose to use `nip.io` instead of a "real" domain):
-# - cncf-demo
+source .env
 ```
 
 ## Do
@@ -37,8 +20,6 @@ cat $GITOPS_APP/cncf-demo-ytt.yaml
 
 cp $GITOPS_APP/cncf-demo-ytt.yaml apps/cncf-demo.yaml
 
-yq --inplace ".image.tag = \"$TAG\"" ytt/values-prod.yaml
-
 yq --inplace ".ingress.host = \"cncf-demo.$DOMAIN\"" \
     ytt/values-prod.yaml
 
@@ -47,8 +28,9 @@ yq --inplace ".ingress.className = \"$INGRESS_CLASS_NAME\"" \
 
 cat ytt/values-prod.yaml
 
-# ytt --file ytt/schema.yaml --file ytt/resources \
-#     --data-values-file ytt/values-prod.yaml
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 

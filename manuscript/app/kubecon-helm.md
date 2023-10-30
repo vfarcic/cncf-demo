@@ -1,10 +1,16 @@
 # Deploy The App Defined As Helm Chart To Production With GitOps
 
+## Setup
+
+```bash
+./manuscript/app/helm.sh
+
+source .env
+```
+
 ## Do
 
 ```bash
-cat $GITOPS_APP/cncf-demo-helm.yaml
-
 cp $GITOPS_APP/cncf-demo-helm.yaml apps/cncf-demo.yaml
 
 # Execute the command that follows only if you are using Argo CD

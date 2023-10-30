@@ -1,5 +1,15 @@
 # Deploy The App Defined As Kustomize To Production With GitOps
 
+## Setup
+
+```bash
+chmod +x manuscript/app/kustomize.sh
+
+./manuscript/app/kustomize.sh
+
+source .env
+```
+
 ## Do
 
 ```bash

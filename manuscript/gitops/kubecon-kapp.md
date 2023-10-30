@@ -53,4 +53,6 @@ export GITOPS_APP=kapp-controller
 
 ## Continue The Adventure
 
-* [Ingress](../ingress/README.md)
+* [ingress-nginx](../ingress/kubecon-nginx.md)
+* [Envoy with Contour](../ingress/kubecon-contour.md)
+* [Emissary-ingress](../ingress/kubecon-emissary-ingress.md)

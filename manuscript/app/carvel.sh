@@ -4,7 +4,7 @@ set -e
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
-	'Setup for the GitOps With Carvel kapp-controller chapter.'
+	'Setup for the Deploy The App Defined As Carvel ytt To Production With GitOps chapter.'
 
 gum confirm '
 Are you ready to start?
@@ -27,24 +27,36 @@ Do you have those tools installed?
 # Setup #
 #########
 
-GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-echo "export GITOPS_APP=$GITOPS_APP" >> .env
+if [ -z "$GITOPS_APP" ]; then
+	GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+	echo "export GITOPS_APP=$GITOPS_APP" >> .env
+fi
 
-DOMAIN=$(yq ".production.domain" settings.yaml)
-echo "export DOMAIN=$DOMAIN" >> .env
+if [ -z "$DOMAIN" ]; then
+	DOMAIN=$(yq ".production.domain" settings.yaml)
+	echo "export DOMAIN=$DOMAIN" >> .env
+fi
 
-INGRESS_CLASS_NAME=$(yq ".production.ingress.className" settings.yaml)
-echo "export INGRESS_CLASS_NAME=$INGRESS_CLASS_NAME" >> .env
+if [ -z "$INGRESS_CLASS_NAME" ]; then
+	INGRESS_CLASS_NAME=$(yq ".production.ingress.className" settings.yaml)
+	echo "export INGRESS_CLASS_NAME=$INGRESS_CLASS_NAME" >> .env
+fi
 
 if [[ "$GITOPS_APP" == "argocd" ]]; then
 	REPO_URL=$(git config --get remote.origin.url)
-	yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
+	yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
 fi
 
-TAG=$(yq ".tag" settings.yaml)
-echo "export TAG=$TAG" >> .env
+if [ -z "$TAG" ]; then
+	TAG=$(yq ".tag" settings.yaml)
+	echo "export TAG=$TAG" >> .env
+fi
 
-INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
+yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
+
+if [ -z "$INGRESS_IP" ]; then
+	INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
+fi
 
 gum style \
 	--foreground 212 --border-foreground 212 --border double \

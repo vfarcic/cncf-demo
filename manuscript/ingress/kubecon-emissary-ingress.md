@@ -1,13 +1,5 @@
 # Ingress With Envoy And Emissary Ingress
 
-TODO: Intro
-
-## Setup
-
-```bash
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-```
-
 ## Do
 
 ```bash
@@ -15,8 +7,6 @@ kubectl apply \
     --filename https://app.getambassador.io/yaml/emissary/3.4.0/emissary-crds.yaml
 
 cat $GITOPS_APP/emissary-ingress.yaml
-
-# TODO: Add to Argo CD
 
 cp $GITOPS_APP/emissary-ingress.yaml infra/.
 
@@ -26,17 +16,12 @@ git commit -m "Contour"
 
 git push
 
-# If NOT EKS
-export INGRESS_IP=$(kubectl --namespace emissary \
-    get service emissary-ingress \
-    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+kubectl --namespace emissary get all
 
-# If EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace emissary \
     get service emissary-ingress \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
-# If EKS
 export INGRESS_IP=$(dig +short $INGRESS_HOSTNAME) 
 
 echo $INGRESS_IP
@@ -55,6 +40,6 @@ export INGRESS_CLASS_NAME=ambassador
 
 ## Which GitOps Tool Did You Choose?
 
-* [Argo CD](gitops-argocd.md)
-* [Flux](gitops-flux.md)
-* [Carvel kapp-controller](gitops-kapp.md)
+* [Argo CD](kubecon-gitops-argocd.md)
+* [Flux](kubecon-gitops-flux.md)
+* [Carvel kapp-controller](kubecon-gitops-kapp.md)

@@ -5,7 +5,6 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
-# Select the fork as the default repository
 gh repo set-default
 
 eval "$(teller sh)"
@@ -54,6 +53,8 @@ export GITHUB_USER=vfarcic
 export GITHUB_ORG=devopsparadox
 
 chmod +x crossplane/*.sh
+
+chmod +x manuscript/gitops/*.sh
 
 chmod +x manuscript/app/*.sh
 
@@ -129,7 +130,6 @@ flowchart TD
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/nginx.md"
         emissary-ingress(Emissary-ingress With Envoy)
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
-        style emissary-ingress fill:red
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
         style ingress-argocd fill:red
@@ -154,7 +154,6 @@ flowchart TD
         style app-cdk8s fill:red
         app-carvel(App As Carvel ytt)
         click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
-        style app-carvel fill:red
         app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> prod-done
 
         prod-done((Chapter End))
@@ -162,7 +161,7 @@ flowchart TD
     end
 ```
 
-## Destroy
+## Destroy
 
 ```bash
 chmod +x manuscript/destroy/production.sh
