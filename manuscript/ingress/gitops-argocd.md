@@ -4,35 +4,15 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
+chmod +x manuscript/ingress/gitops-argocd.sh
 
-# Replace `[...]` with the domain (e.g., sillydemo.com).
-# If you do not have a domain, replace `[...]` with
-#   `$INGRESS_IP.nip.io`.
-# If you do choose to use `nip.io` instead of a "real" domain,
-#   beware that:
-#   - when opening an application in a browser, you will have to
-#     allow insecure connections.
-#   - when executing `curl` commands, you will have to add the
-#     `--insecure` flag.
-#   - you will NOT be able to choose Harbor as container image
-#     registry.
-export DOMAIN=[...]
+./manuscript/ingress/gitops-argocd.sh
 
-yq --inplace ".production.domain = \"$DOMAIN\"" settings.yaml
-
-# Configure DNS for the following subdomains (skip this step if
-#   you chose to use `nip.io` instead of a "real" domain):
-# - gitops
-
-dig +short gitops.$DOMAIN
-
-# Repeat the previous command if the output is NOT the IP address
-#   of the Ingress controller.
-
-export INGRESS_CLASS_NAME=$(\
-    yq ".production.ingress.className" settings.yaml)
+source .env
 ```
 
 ## Do

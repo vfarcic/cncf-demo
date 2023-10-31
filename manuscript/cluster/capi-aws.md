@@ -9,6 +9,7 @@ Among other things, this involves:
 Once this is done, we are able to provision Kubernetes clusters in AWS using Cluster API.
 
 ## Setup
+
 To begin you must install the following:
 1. [clusterawsadm CLI](https://cluster-api-aws.sigs.k8s.io/topics/using-clusterawsadm-to-fulfill-prerequisites.html#using-clusterawsadm-to-fulfill-prerequisites)
 
@@ -34,17 +35,28 @@ aws ec2 create-key-pair --key-name default --output json | jq .KeyMaterial -r
 ## NOTE: Only RSA keys are supported by AWS.
 aws ec2 import-key-pair --key-name default --public-key-material "$(cat ~/.ssh/id_rsa.pub)"
 
-
-# Export Environment Variables
 export CLUSTER_TOPOLOGY=true
+
 export EXP_CLUSTER_RESOURCE_SET=true
+
 export EXP_MACHINE_POOL=true
+
 export CAPA_EKS_IAM=true
+
 export CAPA_EKS_ADD_ROLES=true
+
 export EXP_EKS_FARGATE=true
+
+export AWS_B64ENCODED_CREDENTIALS=$(clusterawsadm bootstrap credentials encode-as-profile)
 
 # Install ClusterAPI Provider for AWS
 clusterctl init --infrastructure aws
+
+# Set the SSH Key pair name as created above
+export AWS_SSH_KEY_NAME=default
+
+# Select worker node instance types
+export AWS_NODE_MACHINE_TYPE=t3.large
 
 yq --inplace ".capi.destination = \"aws\"" settings.yaml
 ```
@@ -52,26 +64,18 @@ yq --inplace ".capi.destination = \"aws\"" settings.yaml
 ## Do
 
 ```bash
-# Set values
-# Replace `[...]` with your desired region
-export AWS_REGION=`[...]`
-
-# Set the SSH Key pair name as created above
-export AWS_SSH_KEY_NAME=default
-# Select worker node instance types
-export AWS_NODE_MACHINE_TYPE=t3.large
-
 # Generate cluster manifest
-clusterctl generate cluster production --flavor eks-managedmachinepool-vpccni --kubernetes-version v1.24.1 --worker-machine-count=3 > capi/aws-eks.yaml
+clusterctl generate cluster production \
+    --flavor eks-managedmachinepool-vpccni \
+    --kubernetes-version v1.28.1 --worker-machine-count 3 \
+    --target-namespace production \
+    | tee capi/aws-eks.yaml
 
 # Create the cluster
-kubectl --namespace production apply --filename capi/aws-eks.yaml
+kubectl apply --filename capi/aws-eks.yaml
 
-kubectl --namespace production get Cluster
-kubectl --namespace production get AWSManagedCluster
-kubectl --namespace production get AWSManagedControlPlane
-kubectl --namespace production get MachinePool
-kubectl --namespace production get AWSManagedMachinePool
+kubectl --namespace production get \
+    clusters,awsmanagedclusters,awsmanagedcontrolplanes,machinepools,awsmanagedmachinepools
 
 cat capi/get-kubeconfig-aws.sh
 
@@ -86,6 +90,8 @@ yq --inplace \
     settings.yaml
 
 kubectl get nodes
+
+kubectl create namespace production
 ```
 
 ## Continue the adventure

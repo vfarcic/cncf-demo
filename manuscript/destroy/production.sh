@@ -33,23 +33,32 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
     git push
 
-    COUNTER=$(kubectl get managed | grep -v object | grep -v release | grep -v database | wc -l)
+    set +e
+    COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | grep -v database | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
-        COUNTER=$(kubectl get managed | grep -v object | grep -v release | grep -v database | wc -l)
+        COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | grep -v database | wc -l)
     done
+    set -e
 
     unset KUBECONFIG
 
+    set +e
 	kubectl --namespace production delete --filename crossplane/aws-eks.yaml
 
-    COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
+    COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
-        COUNTER=$(kubectl get managed | grep -v object | grep -v release | wc -l)
+        COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | wc -l)
     done
+
+    kubectl delete --filename capi/aws-eks.yaml
+
+    clusterawsadm bootstrap iam delete-cloudformation-stack --config capi-config/capa-iam-config.yaml
+
+    set -e
 
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 

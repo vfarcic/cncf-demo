@@ -4,7 +4,7 @@ set -e
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
-	'Setup for the Deploy The App Defined As Carvel ytt To Production With GitOps chapter.'
+	'Setup for the Deploy The App Defined As cdk8s To Production With GitOps chapter.'
 
 gum confirm '
 Are you ready to start?
@@ -44,12 +44,7 @@ fi
 
 if [[ "$GITOPS_APP" == "argocd" ]]; then
 	REPO_URL=$(git config --get remote.origin.url)
-	yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
-fi
-
-if [[ "$GITOPS_APP" == "kapp-controller" ]]; then
-	REPO_URL=$(git config --get remote.origin.url)
-	yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
+	yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
 fi
 
 if [ -z "$TAG" ]; then

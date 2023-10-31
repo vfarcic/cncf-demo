@@ -82,6 +82,8 @@ yq --inplace \
     settings.yaml
 
 kubectl get nodes
+
+kubectl create namespace production
 ```
 
 ## Continue the adventure

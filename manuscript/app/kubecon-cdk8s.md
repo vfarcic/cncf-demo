@@ -5,29 +5,9 @@ TODO: Intro
 ## Setup
 
 ```bash
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+./manuscript/app/cdk8s.sh
 
-export DOMAIN=$(yq ".production.domain" settings.yaml)
-
-export INGRESS_CLASS_NAME=$(\
-    yq ".production.ingress.className" settings.yaml)
-
-# Execute the command that follows only if you are using Argo CD
-export REPO_URL=$(git config --get remote.origin.url)
-
-# Execute the command that follows only if you are using Argo CD
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    $GITOPS_APP/cncf-demo-cdk8s.yaml
-
-export TAG=$(yq ".tag" settings.yaml)
-
-export INGRESS_IP=$(yq ".production.ingress.ip" settings.yaml)
-
-echo $INGRESS_IP
-
-# Configure DNS for the following subdomains (skip this step if
-#   you chose to use `nip.io` instead of a "real" domain):
-# - cncf-demo
+source .env
 ```
 
 ## Do
@@ -63,9 +43,7 @@ git push
 
 kubectl --namespace production get all,ingresses
 
-# If you chose to use `nip.io` instead of a "real" domain,
-#   replace `https` with `http`.
-echo "https://cncf-demo.$DOMAIN"
+echo "http://cncf-demo.$DOMAIN"
 
 # Open it in a browser.
 ```

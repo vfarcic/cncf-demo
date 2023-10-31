@@ -8,6 +8,8 @@ TODO: Intro
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
+chmod +x manuscript/app/carvel.sh
+
 ./manuscript/app/carvel.sh
 
 source .env

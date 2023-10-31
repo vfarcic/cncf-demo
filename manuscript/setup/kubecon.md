@@ -20,7 +20,8 @@ helm install cilium cilium/cilium --version "1.14.2" \
     --set ipam.mode=eni --set routingMode=native \
     --set egressMasqueradeInterfaces=eth0 --wait
 
-eksctl create addon --name aws-ebs-csi-driver --cluster dot-production \
+eksctl create addon --name aws-ebs-csi-driver \
+    --cluster dot-production \
     --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
     --region us-east-1 --force
 
@@ -32,7 +33,11 @@ yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" \
 yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
 alias curl="curl --insecure"
+```
 
+## Crossplane
+
+```bash
 chmod +x manuscript/cluster/crossplane.sh
 
 ./manuscript/cluster/crossplane.sh
@@ -47,7 +52,61 @@ kubectl --namespace production apply \
     --filename crossplane/aws-eks.yaml
 
 kubectl get managed
+```
 
+## CAPI
+
+```bash
+export AWS_REGION=us-east-1
+
+export CLUSTER_TOPOLOGY=true
+
+export EXP_CLUSTER_RESOURCE_SET=true
+
+export EXP_MACHINE_POOL=true
+
+export CAPA_EKS_IAM=true
+
+export CAPA_EKS_ADD_ROLES=true
+
+export EXP_EKS_FARGATE=true
+
+clusterctl init
+
+clusterawsadm bootstrap iam create-cloudformation-stack \
+    --config capi-config/capa-iam-config.yaml
+
+aws ec2 create-key-pair --key-name default --output json \
+    | jq .KeyMaterial -r
+
+export AWS_B64ENCODED_CREDENTIALS=$(\
+    clusterawsadm bootstrap credentials encode-as-profile)
+
+clusterctl init --infrastructure aws
+
+export AWS_SSH_KEY_NAME=default
+
+export AWS_NODE_MACHINE_TYPE=t3.medium
+
+yq --inplace ".capi.destination = \"aws\"" settings.yaml
+
+clusterctl generate cluster production \
+    --flavor eks-managedmachinepool-vpccni \
+    --kubernetes-version v1.28.1 --worker-machine-count 3 \
+    --target-namespace production \
+    | tee capi/aws-eks.yaml
+
+kubectl apply --filename capi/aws-eks.yaml
+
+kubectl --namespace production get \
+    clusters,awsmanagedclusters,awsmanagedcontrolplanes,machinepools,awsmanagedmachinepools
+
+chmod +x capi/*.sh
+```
+
+## The Rest
+
+```bash
 export GITHUB_USER=vfarcic
 
 export GITHUB_ORG=devopsparadox
@@ -55,6 +114,8 @@ export GITHUB_ORG=devopsparadox
 chmod +x crossplane/*.sh
 
 chmod +x manuscript/gitops/*.sh
+
+chmod +x manuscript/ingress/*.sh
 
 chmod +x manuscript/app/*.sh
 
@@ -65,7 +126,7 @@ export TAG=v0.0.1
 
 ## Start The Chapter
 
-* [Cluster API](../cluster/kubecon-cluster-api.md)
+* [Cluster API](../cluster/kubecon-capi-aws)
 * [Crossplane](../cluster/kubecon-crossplane-aws.md)
 
 ## The Flow
@@ -96,10 +157,8 @@ flowchart TD
         click cluster-crossplane-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-crossplane-aws.md"
         cluster-cluster-api(Cluster API)
         click cluster-cluster-api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/cluster-api.md"
-        style cluster-cluster-api fill:red
         capi-aws(AWS)
         click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
-        style capi-aws fill:red
         cluster --> cluster-crossplane --> cluster-crossplane-aws --> gitops
         cluster --> cluster-cluster-api --> capi-aws --> gitops
 
@@ -113,7 +172,6 @@ flowchart TD
         click gitops-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/flux.md"
         gitops-argocd(Argo CD)
         click gitops-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/argocd.md"
-        style gitops-argocd fill:red
         gitops-kapp(Carvel kapp-controller)
         click gitops-kapp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops/kapp.md"
         gitops --> gitops-flux & gitops-argocd & gitops-kapp --> ingress
@@ -132,7 +190,6 @@ flowchart TD
         click ingress-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/emissary-ingress.md"
         ingress-argocd(GitOps With Argo CD)
         click ingress-argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-argocd.md"
-        style ingress-argocd fill:red
         ingress-flux(GitOps Flux)
         click ingress-flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/ingress/gitops-flux.md"
         ingress-kapp(GitOps Carvel kapp-controller)

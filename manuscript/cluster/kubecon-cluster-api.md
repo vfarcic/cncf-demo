@@ -9,7 +9,6 @@ First you need to install:
 1. [Docker](https://www.docker.com/)
 2. [Kubectl](https://kubernetes.io/docs/tasks/tools/)
 2. [Clusterctl](https://cluster-api.sigs.k8s.io/user/quick-start.html#install-clusterctl)
-3. [Kind](https://kind.sigs.k8s.io/docs/user/quick-start#installation)
 
 ```bash
 # Export environment variables

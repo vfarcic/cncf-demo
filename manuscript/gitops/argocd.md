@@ -8,14 +8,15 @@ We also create an Argo CD Application that will eventually watch our Hero applic
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-# Set the environment variable REPO_URL to point to the 'argocd/apps.yaml' file in your remote Git repository
+chmod +x manuscript/gitops/argocd.sh
 
-export REPO_URL=$(git config --get remote.origin.url)
+./manuscript/gitops/argocd.sh
 
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/apps.yaml
+source .env
 ```
 
 ## Do

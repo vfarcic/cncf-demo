@@ -34,6 +34,8 @@ echo $INGRESS_IP
 #   being the selected IP.
 
 export INGRESS_CLASS_NAME=contour
+
+export DOMAIN=$INGRESS_IP.nip.io
 ```
 
 ## Which GitOps Tool Did You Choose?
