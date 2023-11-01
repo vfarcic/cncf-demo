@@ -3,8 +3,6 @@
 ## Setup
 
 ```bash
-chmod +x manuscript/gitops/kapp.sh
-
 ./manuscript/gitops/kapp.sh
 
 source .env

@@ -47,6 +47,11 @@ if [[ "$GITOPS_APP" == "argocd" ]]; then
 	yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
 fi
 
+if [[ "$GITOPS_APP" == "kapp-controller" ]]; then
+	REPO_URL=$(git config --get remote.origin.url)
+	yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
+fi
+
 if [ -z "$TAG" ]; then
 	TAG=$(yq ".tag" settings.yaml)
 	echo "export TAG=$TAG" >> .env

@@ -33,16 +33,25 @@ yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" \
 yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
 alias curl="curl --insecure"
+
+chmod +x capi/*.sh
+
+chmod +x crossplane/*.sh
+
+chmod +x manuscript/gitops/*.sh
+
+chmod +x manuscript/ingress/*.sh
+
+chmod +x manuscript/app/*.sh
+
+chmod +x manuscript/cluster/*.sh
 ```
 
 ## Crossplane
 
 ```bash
-chmod +x manuscript/cluster/crossplane.sh
 
 ./manuscript/cluster/crossplane.sh
-
-chmod +x manuscript/cluster/crossplane-aws.sh
 
 ./manuscript/cluster/crossplane-aws.sh
 
@@ -50,8 +59,6 @@ source .env
 
 kubectl --namespace production apply \
     --filename crossplane/aws-eks.yaml
-
-kubectl get managed
 ```
 
 ## CAPI
@@ -71,6 +78,10 @@ export CAPA_EKS_ADD_ROLES=true
 
 export EXP_EKS_FARGATE=true
 
+export AWS_SSH_KEY_NAME=default
+
+export AWS_NODE_MACHINE_TYPE=t3.medium
+
 clusterctl init
 
 clusterawsadm bootstrap iam create-cloudformation-stack \
@@ -84,10 +95,6 @@ export AWS_B64ENCODED_CREDENTIALS=$(\
 
 clusterctl init --infrastructure aws
 
-export AWS_SSH_KEY_NAME=default
-
-export AWS_NODE_MACHINE_TYPE=t3.medium
-
 yq --inplace ".capi.destination = \"aws\"" settings.yaml
 
 clusterctl generate cluster production \
@@ -97,27 +104,19 @@ clusterctl generate cluster production \
     | tee capi/aws-eks.yaml
 
 kubectl apply --filename capi/aws-eks.yaml
-
-kubectl --namespace production get \
-    clusters,awsmanagedclusters,awsmanagedcontrolplanes,machinepools,awsmanagedmachinepools
-
-chmod +x capi/*.sh
 ```
 
 ## The Rest
 
 ```bash
+kubectl get managed | grep False
+
+kubectl --namespace production get \
+    clusters,awsmanagedclusters,awsmanagedcontrolplanes,machinepools,awsmanagedmachinepools
+
 export GITHUB_USER=vfarcic
 
 export GITHUB_ORG=devopsparadox
-
-chmod +x crossplane/*.sh
-
-chmod +x manuscript/gitops/*.sh
-
-chmod +x manuscript/ingress/*.sh
-
-chmod +x manuscript/app/*.sh
 
 export IMAGE=index.docker.io/vfarcic/cncf-demo
 
@@ -208,7 +207,6 @@ flowchart TD
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
         app-cdk8s(App As cdk8s)
         click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
-        style app-cdk8s fill:red
         app-carvel(App As Carvel ytt)
         click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
         app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> prod-done
