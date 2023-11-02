@@ -45,7 +45,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
     unset KUBECONFIG
 
     set +e
-	kubectl --namespace production delete --filename crossplane/aws-eks.yaml
+    kubectl --namespace production delete --filename crossplane/aws-eks.yaml
 
     COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | wc -l)
 
