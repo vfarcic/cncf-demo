@@ -419,7 +419,9 @@ flowchart TD
         style signing fill:red
         notary(Notary)
         style notary fill:red
-        signing --> notary --> access-control
+        spiffe-spire(SPIFFE & SPIRE)
+        style spiffe-spire fill:red
+        signing --> notary & spiffe-spire --> access-control
 
         %% --------------------
         %% -- Access Control --
