@@ -4,24 +4,17 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
 # TODO: kapp-controller
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+chmod +x manuscript/policies/kyverno.sh
 
-cat $GITOPS_APP/kyverno.yaml
+./manuscript/policies/kyverno.sh
 
-cp $GITOPS_APP/kyverno.yaml infra/.
-
-git add . 
-
-git commit -m "Kyverno"
-
-git push
-
-kubectl --namespace kyverno get pods
-
-# Wait until the Pods are created and ready
+source .env
 ```
 
 ## Do

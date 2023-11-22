@@ -39,11 +39,11 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	set -e
 
-	COUNTER=$(kubectl get managed | wc -l)
+	COUNTER=$(kubectl get managed --no-headers | grep -v database | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
-        COUNTER=$(kubectl get managed | wc -l)
+        COUNTER=$(kubectl get managed --no-headers | grep -v database | wc -l)
     done
 
 	set +e

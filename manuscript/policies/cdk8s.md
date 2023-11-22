@@ -2,35 +2,12 @@
 
 TODO: Intro
 
-## Setup
-
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
-
-```bash
-chmod +x manuscript/policies/cdk8s.sh
-
-./manuscript/policies/cdk8s.sh
-
-source .env
-```
-
 ## Do
 
 ```bash
 # TODO: kapp-controller
 
-cp $GITOPS_APP/cncf-demo-cdk8s.yaml apps/cncf-demo.yaml
-
-git add .
-
-git commit -m "CNCF Demo"
-
-git push
-
-kubectl --namespace production get statefulsets
-
-# Wait until the StatefulSet is created
+kubectl --namespace production delete deployment cncf-demo
 
 kubectl --namespace production get deployments
 

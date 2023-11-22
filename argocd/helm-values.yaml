@@ -5,6 +5,8 @@ configs:
   cm:
     application.resourceTrackingMethod: annotation
     timeout.reconciliation: 60s
+  params:
+    "server.insecure": true
 server:
   extraArgs:
   - --insecure
