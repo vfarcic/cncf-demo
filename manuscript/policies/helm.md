@@ -7,8 +7,6 @@ TODO: Intro
 ```bash
 # TODO: kapp-controller
 
-kubectl --namespace production delete deployment cncf-demo
-
 kubectl --namespace production get deployments
 
 # The Deployment was NOT created

@@ -52,6 +52,10 @@ export POLICY_KIND=constraints
 yq --inplace ".policies.type = \"gatekeeper\"" settings.yaml
 
 yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
+
+kubectl --namespace production delete deployment cncf-demo
+
+kubectl --namespace production delete sqlclaim cncf-demo
 ```
 
 ## How Did You Define Your App?
