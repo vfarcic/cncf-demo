@@ -51,7 +51,6 @@ spec:
       resources:
         kinds:
           - SQLClaim
-          - SQL
         operations:
           - CREATE
           - UPDATE

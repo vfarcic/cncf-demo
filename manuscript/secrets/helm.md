@@ -27,6 +27,11 @@ git push
 kubectl get managed
 
 # Wait until all the managed resources are deleted
+#   (ignore `database`).
+
+kubectl patch \
+    database.postgresql.sql.crossplane.io cncf-demo-db \
+    --type merge --patch '{"metadata":{"finalizers":null}}'
 
 cp $GITOPS_APP/cncf-demo-helm.yaml apps/cncf-demo.yaml
 

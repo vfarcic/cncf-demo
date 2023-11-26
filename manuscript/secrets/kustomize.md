@@ -28,6 +28,11 @@ git push
 kubectl get managed
 
 # Wait until all the managed resources are deleted
+#   (ignore `database`).
+
+kubectl patch \
+    database.postgresql.sql.crossplane.io cncf-demo-db \
+    --type merge --patch '{"metadata":{"finalizers":null}}'
 
 yq --inplace \
     "del(.resources[] | select(. == \"postgresql-crossplane-secret-$DESTINATION.yaml\"))" \
@@ -47,7 +52,8 @@ git commit -m "Switched to ESO"
 
 git push
 
-kubectl --namespace production get externalsecrets
+kubectl --namespace production \
+    get externalsecrets.external-secrets.io
 
 # Wait until the externalsecret is created
 

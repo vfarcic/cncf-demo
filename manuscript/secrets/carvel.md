@@ -27,6 +27,11 @@ git push
 kubectl get managed
 
 # Wait until all the managed resources are deleted
+#   (ignore `database`).
+
+kubectl patch \
+    database.postgresql.sql.crossplane.io cncf-demo-db \
+    --type merge --patch '{"metadata":{"finalizers":null}}'
 
 yq --inplace ".db.insecure = false" ytt/values-prod.yaml
 

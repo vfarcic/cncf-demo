@@ -56,6 +56,8 @@ yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
 kubectl --namespace production delete deployment cncf-demo
 
 kubectl --namespace production delete sqlclaim cncf-demo
+
+# If it gets stuck deleting the claim, stop it with `ctrl+c`.
 ```
 
 ## How Did You Define Your App?
