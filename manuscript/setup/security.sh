@@ -100,7 +100,7 @@ Press the enter key to continue."
     NATIVE_CIDR="$(gcloud container clusters describe dot \
         --zone us-east1-b --format 'value(clusterIpv4Cidr)')"
 
-    helm install cilium cilium/cilium --version "1.14.2" \
+    helm install cilium cilium/cilium --version "1.14.4" \
         --namespace kube-system --set nodeinit.enabled=true \
         --set nodeinit.reconfigureKubelet=true \
         --set nodeinit.removeCbrBridge=true \
@@ -405,22 +405,10 @@ fi
 # Setup Dabase Schema #
 #######################
 
-cp argocd/schema-hero.yaml infra/.
+rm -f apps/cncf-demo.yaml
 
 git add .
 
 git commit -m "SchemaHero"
-
-git push
-
-################
-# Sync The App #
-################
-
-cp $GITOPS_APP/cncf-demo-$TEMPLATES.yaml apps/cncf-demo.yaml
-
-git add .
-
-git commit -m "CNCF Demo"
 
 git push

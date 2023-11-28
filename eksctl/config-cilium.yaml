@@ -9,6 +9,7 @@ managedNodeGroups:
     instanceType: t3.medium
     minSize: 3
     maxSize: 6
+    maxPodsPerNode: 110
     iam:
       withAddonPolicies:
         autoScaler: true

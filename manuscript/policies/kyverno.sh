@@ -27,7 +27,7 @@ Do you have those tools installed?
 # Setup #
 #########
 
-rm apps/cncf-demo.yaml
+rm -f apps/cncf-demo.yaml
 
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 

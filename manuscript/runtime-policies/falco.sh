@@ -37,3 +37,6 @@ while [ $APP_COUNTER_OLD = $APP_COUNTER ]; do
 done
 
 sleep 5
+
+kubectl --namespace falco wait daemonset falco \
+	--for=condition=ready

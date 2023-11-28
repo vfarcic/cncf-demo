@@ -9,6 +9,7 @@ TODO: Intro
 
 ```bash
 # TODO: kapp-controller
+
 chmod +x manuscript/runtime-policies/falco.sh
 
 ./manuscript/runtime-policies/falco.sh

@@ -18,6 +18,9 @@ kubectl describe $POLICY_KIND deploymentproduction
 
 # Gatekeeper does not show violations, but it does enforce them.
 
+# If the output is empty, ArgoCD/Flux did not yet sync the
+#   resources. Wait a few seconds and try again.
+
 cat kustomize/overlays/prod/deployment-scaled.yaml
 
 yq --inplace \
@@ -55,11 +58,11 @@ kubectl describe $POLICY_KIND dbproduction
 # Gatekeeper (still) does not show violations, but it does
 #   enforce them.
 
-cat kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
+cat kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
 
 yq --inplace \
     ".spec.parameters.size = \"medium\"" \
-    kustomize/overlays/prod/postgresql-crossplane-$DESTINATION.yaml
+    kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
 
 git add .
 

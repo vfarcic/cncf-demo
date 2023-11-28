@@ -5,11 +5,11 @@ TODO: Intro
 ## Setup
 
 ```bash
-rm apps/cncf-demo.yaml
+rm -f apps/cncf-demo.yaml
 
-git add . 
+git add .
 
-git commit -m "Removed the app"
+git commit -m "CNCF Demo"
 
 git push
 
