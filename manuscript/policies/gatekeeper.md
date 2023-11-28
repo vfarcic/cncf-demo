@@ -60,6 +60,14 @@ export POLICY_KIND=constraints
 yq --inplace ".policies.type = \"gatekeeper\"" settings.yaml
 
 yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
+
+cp $GITOPS_APP/cncf-demo-$TEMPLATES.yaml apps/cncf-demo.yaml
+
+git add .
+
+git commit -m "CNCF Demo"
+
+git push
 ```
 
 ## How Did You Define Your App?

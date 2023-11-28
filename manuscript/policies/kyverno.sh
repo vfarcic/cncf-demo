@@ -45,6 +45,3 @@ while [ $COUNTER -eq "0" ]; do
 	sleep 10
 	COUNTER=$(kubectl --namespace kyverno get pods --no-headers | wc -l)
 done
-
-# Wait until the Pods are created and ready
-
