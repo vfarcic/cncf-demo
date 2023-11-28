@@ -27,6 +27,8 @@ Do you have those tools installed?
 # Setup #
 #########
 
+rm apps/cncf-demo.yaml
+
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
 cp $GITOPS_APP/kyverno.yaml infra/.

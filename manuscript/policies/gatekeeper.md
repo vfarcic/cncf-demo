@@ -5,6 +5,14 @@ TODO: Intro
 ## Setup
 
 ```bash
+rm apps/cncf-demo.yaml
+
+git add . 
+
+git commit -m "Removed the app"
+
+git push
+
 # Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.
 
@@ -52,12 +60,6 @@ export POLICY_KIND=constraints
 yq --inplace ".policies.type = \"gatekeeper\"" settings.yaml
 
 yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
-
-kubectl --namespace production delete deployment cncf-demo
-
-kubectl --namespace production delete sqlclaim cncf-demo
-
-# If it gets stuck deleting the claim, stop it with `ctrl+c`.
 ```
 
 ## How Did You Define Your App?

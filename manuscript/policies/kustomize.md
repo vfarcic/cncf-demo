@@ -43,7 +43,7 @@ kubectl --namespace production get pods
 
 kubectl --namespace production get sqlclaims
 
-# The SqlClaim was NOT created
+# The SqlClaim was NOT created or it's not synced.
 
 # If Gatekeeper
 export POLICY_KIND=dbsize
