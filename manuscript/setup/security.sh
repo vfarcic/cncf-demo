@@ -35,13 +35,6 @@ gum confirm "
 Do you have those tools installed?
 " || exit 0
 
-gum style \
-	--foreground 212 --border-foreground 212 --border double \
-	--margin "1 2" --padding "2 4" \
-    'You need a Kubernetes cluster.' \
-    'Do NOT use a local Kubernetes cluster since all the tools
-  we will run might be too much for your machine.'
-
 ################
 # Hyperscalers #
 ################
@@ -405,7 +398,7 @@ fi
 # Setup Dabase Schema #
 #######################
 
-rm -f apps/cncf-demo.yaml
+cp argocd/schema-hero.yaml infra/.
 
 git add .
 

@@ -91,8 +91,15 @@ func NewApp(scope constructs.Construct, id *string, appProps *AppProps) construc
 		}
 	}
 	if appProps.SchemaHero.Enabled {
-		shdb.NewDatabase(construct, jsii.String("database"), getPostgresqlDatabase(appProps, apiMetadata))
-		sht.NewTable(construct, jsii.String("table"), getPostgresqlTable(appProps, apiMetadata))
+		dbMetadata := &cdk8s.ApiObjectMetadata{
+			Name:   id,
+			Labels: &labels,
+			Annotations: &map[string]*string{
+				"argocd.argoproj.io/hook": jsii.String("PreSync"),
+			},
+		}
+		shdb.NewDatabase(construct, jsii.String("database"), getPostgresqlDatabase(appProps, dbMetadata))
+		sht.NewTable(construct, jsii.String("table"), getPostgresqlTable(appProps, dbMetadata))
 	}
 	return construct
 }

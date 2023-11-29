@@ -5,6 +5,8 @@ apiVersion: databases.schemahero.io/v1alpha4
 kind: Database
 metadata:
   name: #@ data.values.name
+  annotations:
+    argocd.argoproj.io/hook: PreSync
 spec:
   immediateDeploy: true
   connection:
@@ -59,6 +61,8 @@ apiVersion: schemas.schemahero.io/v1alpha4
 kind: Table
 metadata:
   name: #@ data.values.name + "-videos"
+  annotations:
+    argocd.argoproj.io/hook: PreSync
 spec:
   database: #@ data.values.name
   name: videos
