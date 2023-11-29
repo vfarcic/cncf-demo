@@ -38,7 +38,7 @@ export AWS_ACCOUNT_ID=[...]
 
 # Watch https://youtu.be/pNECqaxyewQ if you are not familiar
 #   with `eksctl`
-eksctl create cluster --config-file eksctl/config-dev.yaml
+eksctl create cluster --config-file eksctl/config-cilium.yaml
 
 eksctl create addon --name aws-ebs-csi-driver --cluster dot \
     --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \

@@ -83,7 +83,7 @@ helm delete harbor --namespace harbor
 
 eksctl delete addon --name aws-ebs-csi-driver --cluster dot
 
-eksctl delete cluster --config-file eksctl/config-dev.yaml
+eksctl delete cluster --config-file eksctl/config-cilium.yaml
 ```
 
 If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy or reset the cluster**.
