@@ -4,12 +4,11 @@ metadata:
   name: dot-production
   region: us-east-1
   version: "1.28"
-nodeGroups:
+managedNodeGroups:
   - name: primary
-    instanceType: t3.medium
+    instanceType: t3.large
     minSize: 3
     maxSize: 6
-    maxPodsPerNode: 110
     iam:
       withAddonPolicies:
         autoScaler: true
