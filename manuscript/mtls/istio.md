@@ -130,6 +130,8 @@ kubectl --namespace production --tty --stdin exec sleep -- sh
 curl http://cncf-demo.production:8080
 
 # The access was allowed
+
+exit
 ```
 
 ## Destroy

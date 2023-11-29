@@ -7,13 +7,6 @@ TODO: Intro
 This section asssumes that you created a secret store and a secret by following the instructions in the [Managing Secrets From AWS With External Secrets Operator (ESO)](aws.md) section.
 
 ```bash
-# export PROJECT_ID=$(\
-#     yq ".production.google.projectId" settings.yaml)
-
-# yq --inplace \
-#     ".providers.google_secretmanager.env.PRODUCTION_POSTGRESQL.path = \"projects/$PROJECT_ID/secrets/production-postgresql/versions/1\"" \
-#     teller/google.yaml
-
 # Replace `[...]` with your access key ID`
 export AWS_ACCESS_KEY_ID=[...]
 

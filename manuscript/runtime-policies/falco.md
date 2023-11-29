@@ -29,8 +29,11 @@ export POD=$(kubectl --namespace falco get pods \
     --selector "app.kubernetes.io/name=falco" --no-headers \
     --output custom-columns=":metadata.name" | head -1)
 
-kubectl --namespace falco exec -it $POD \
-    -- sh -c "cat /etc/falco/falco_rules.yaml"
+kubectl --namespace falco exec -it $POD -- sh
+
+cat /etc/falco/falco_rules.yaml
+
+exit
 ```
 
 ## Continue The Adventure

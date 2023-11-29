@@ -391,6 +391,7 @@ flowchart TD
         %% -------------------------------------
         mtls{{"Mutual TLS (mTLS) And Network Policies"}}
         click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
+        style mtls fill:blue
         mtls-istio(Istio)
         click mtls-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
         mtls-linkerd("LinkerD (SMI)")
@@ -407,21 +408,20 @@ flowchart TD
         %% -- Scanning --
         %% --------------
         scanning{{Scanning}}
-        style scanning fill:red
+        style scanning fill:blue
         kubescape(Kubescape)
-        style kubescape fill:red
         scanning --> kubescape --> signing
 
         %% -------------
         %% -- Signing --
         %% -------------
         signing{{Signing}}
-        style signing fill:red
+        style signing fill:blue
         notary(Notary)
         style notary fill:red
-        spiffe-spire(SPIFFE & SPIRE)
-        style spiffe-spire fill:red
-        signing --> notary & spiffe-spire --> access-control
+        spiffe(SPIFFE & SPIRE)
+        style spiffe fill:red
+        signing --> notary & spiffe --> access-control
 
         %% --------------------
         %% -- Access Control --
@@ -540,7 +540,16 @@ flowchart TD
         style observability-network-kuma fill:red
         observability-network-network-service-mesh(Network Service Mesh)
         style observability-network-network-service-mesh fill:red
-        observability-network --> observability-network-istio & observability-network-linkerd & observability-network-cilium & observability-network-kuma & observability-network-network-service-mesh --> progressive-delivery
+        observability-network --> observability-network-istio & observability-network-linkerd & observability-network-cilium & observability-network-kuma & observability-network-network-service-mesh --> observability-scanning
+
+        %% --------------
+        %% -- Security --
+        %% --------------
+        observability-scanning{{Security}}
+        style observability-scanning fill:red
+        observability-kubescape(Kubescape)
+        style observability-kubescape fill:red
+        observability-scanning --> observability-kubescape --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --

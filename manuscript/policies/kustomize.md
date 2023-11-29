@@ -7,6 +7,10 @@ TODO: Intro
 ```bash
 # TODO: kapp-controller
 
+kubectl --namespace production get svc
+
+# Wait until the `cncf-demo` Service is created
+
 kubectl --namespace production get deployments
 
 # The Deployment was NOT created
@@ -17,9 +21,6 @@ export POLICY_KIND=deploymentreplicas
 kubectl describe $POLICY_KIND deploymentproduction
 
 # Gatekeeper does not show violations, but it does enforce them.
-
-# If the output is empty, ArgoCD/Flux did not yet sync the
-#   resources. Wait a few seconds and try again.
 
 cat kustomize/overlays/prod/deployment-scaled.yaml
 
