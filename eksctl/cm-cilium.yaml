@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cilium-cni-configuration
+  namespace: kube-system
+data:
+  cni-config: |
+    {
+      "cniVersion": "0.3.1",
+      "name": "cilium",
+      "type": "cilium-cni",
+      "enable-debug": false,
+      "eni": {
+        "first-interface-index": 0
+      }
+    }

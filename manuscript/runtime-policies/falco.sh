@@ -39,4 +39,4 @@ done
 sleep 5
 
 kubectl --namespace falco wait daemonset falco \
-	--for=condition=ready
+	--for=condition=ready --timeout=15m
