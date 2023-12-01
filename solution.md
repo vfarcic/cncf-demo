@@ -447,11 +447,12 @@ flowchart TD
         %% ----------
         misc{{Misc}}
         style misc fill:red
-        curiefense(Curiefense)
-        style curiefense fill:red
+        %% Not maintained
+        %% curiefense(Curiefense)
+        %% style curiefense fill:red
         confidential-containers(Confidential Containers)
         style confidential-containers fill:red
-        misc --> curiefense & confidential-containers --> security-done
+        misc --> confidential-containers --> security-done
 
         security-done((Chapter End))
 
