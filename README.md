@@ -378,7 +378,7 @@ flowchart TD
 | Secrets Management | External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller | Tuesday, January 23, 2024 | N/A |
 | Mutual TLS And Network Policies | Istio<br />LinkerD (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
 | Scanning & Signing | Kubescape<br />Notary<br />SPIFFE & SPIRE | Tuesday, February 6, 2024 | N/A |
-| Access Control | Hexa<br />Athenz<br />Keycloak<br />Paralus<br />ContainerSSH | Tuesday, February 13, 2024 | N/A |
+| Access Control | Hexa<br />Dex<br />Athenz<br />Keycloak<br />Paralus<br />ContainerSSH | Tuesday, February 13, 2024 | N/A |
 | Misc | Curiefense<br />Confidential Containers | Tuesday, February 20, 2024 | N/A |
 | Chapter 3 Finale! | | Tuesday, February 27, 2024 | N/A |
 
