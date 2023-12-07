@@ -71,7 +71,12 @@ In fact, with infrastructure building blocks expressed as Kubernetes APIs, that 
 [![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://via.vmw.com/Crossplane)
 * [Official site](https://crossplane.io)
 
+## Choice 3: KubeClipper
+
+TODO:
+
 ## What is your choice?
 
 * [Cluster API](cluster-api.md)
 * [Crossplane](crossplane.md)
+* **KubeClipper** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

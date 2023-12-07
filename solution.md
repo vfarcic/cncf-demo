@@ -223,8 +223,11 @@ flowchart TD
         click capi-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-aws.md"
         capi-azure(Azure)
         click capi-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cluster/capi-azure.md"
+        kubeclipper(KubeClipper)
+        style kubeclipper fill:red
         cluster --> cluster-crossplane --> cluster-crossplane-google & cluster-crossplane-aws & cluster-crossplane-azure --> gitops
         cluster --> cluster-cluster-api --> capi-google & capi-aws & capi-azure --> gitops
+        cluster --> kubeclipper --> gitops
 
         %% ------------
         %% -- GitOps --
@@ -442,9 +445,11 @@ flowchart TD
         style keycloak fill:red
         paralus(Paralus)
         style paralus fill:red
+        openfga(OpenFGA)
+        style openfga fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & athenz & keycloak & paralus --> container-ssh --> security_misc
+        access-control --> access-control-hexa & dex & athenz & keycloak & paralus & openfga --> container-ssh --> security_misc
 
         %% ----------
         %% -- Misc --
@@ -996,10 +1001,6 @@ flowchart TD
         style xline fill:red
         kcl(KCL)
         style kcl fill:red
-        openfga(OpenFGA)
-        style openfga fill:red
-        kubeclipper(KubeClipper)
-        style kubeclipper fill:red
     end
 ```
 
