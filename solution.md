@@ -185,8 +185,10 @@ flowchart TD
         dev-done((Chapter End))
 
     end
+```
 
-    Development-->Production
+```mermaid
+flowchart TD
 
     subgraph Production
 
@@ -295,8 +297,10 @@ flowchart TD
         prod-done((Chapter End))
 
     end
+```
 
-    Production-->Security
+```mermaid
+flowchart TD
 
     subgraph Security
 
@@ -440,25 +444,27 @@ flowchart TD
         style paralus fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & athenz & keycloak & paralus --> container-ssh --> misc
+        access-control --> access-control-hexa & dex & athenz & keycloak & paralus --> container-ssh --> security_misc
 
         %% ----------
         %% -- Misc --
         %% ----------
-        misc{{Misc}}
-        style misc fill:red
+        security_misc{{Misc}}
+        style security_misc fill:red
         %% Not maintained
         %% curiefense(Curiefense)
         %% style curiefense fill:red
         confidential-containers(Confidential Containers)
         style confidential-containers fill:red
-        misc --> confidential-containers --> security-done
+        security_misc --> confidential-containers --> security-done
 
         security-done((Chapter End))
 
     end
+```
 
-    Security-->Observability
+```mermaid
+flowchart TD
 
     subgraph Observability
 
@@ -575,8 +581,10 @@ flowchart TD
         observability-misc --> kuberhealthy --> smp
 
     end
+```
 
-    Observability-->Scale
+```mermaid
+flowchart TD
 
     subgraph Scale
 
@@ -624,15 +632,6 @@ flowchart TD
         style open-cluster-management fill:red
         clusterpedia(Clusterpedia)
         style clusterpedia fill:red
-
-    end
-
-    Scale-->Destroy
-
-    subgraph Destroy
-
-        destroy-all((Destroy Everything))
-        click destroy-all "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy/all.md"
 
     end
 ```
