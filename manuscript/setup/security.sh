@@ -272,7 +272,13 @@ fi
 # Setup Crossplane #
 ####################
 
-helm upgrade --install crossplane crossplane --repo https://charts.crossplane.io/stable --namespace crossplane-system --create-namespace --wait
+set +e
+helm repo add crossplane-stable https://charts.crossplane.io/stable
+set -e
+
+helm repo update
+
+helm upgrade --install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace --wait
 
 kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
 

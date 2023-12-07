@@ -1,0 +1,69 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: kubewarden
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  url: https://charts.kubewarden.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubewarden-crds
+  namespace: flux-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kubewarden-crds
+      version: 1.4.4
+      sourceRef:
+        kind: HelmRepository
+        name: kubewarden
+        namespace: flux-system
+  releaseName: kubewarden-crds
+  targetNamespace: kubewarden
+  install:
+    createNamespace: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubewarden-controller
+  namespace: flux-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kubewarden-controller
+      version: 2.0.5
+      sourceRef:
+        kind: HelmRepository
+        name: kubewarden
+        namespace: flux-system
+  releaseName: kubewarden-controller
+  targetNamespace: kubewarden
+  install:
+    createNamespace: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubewarden-defaults
+  namespace: flux-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kubewarden-defaults
+      version: 1.9.2
+      sourceRef:
+        kind: HelmRepository
+        name: kubewarden
+        namespace: flux-system
+  releaseName: kubewarden-defaults
+  targetNamespace: kubewarden
+  install:
+    createNamespace: true

@@ -4,7 +4,7 @@ TODO: Intro
 
 ## Setup
 
-At this moment (June 2023), Validating Admission Policy is available as an alpha feature hence it needs to be enabled in Kubernetes.
+At this moment (June 2023), Validating Admission Policy is available as a beta feature hence it needs to be enabled in Kubernetes.
 If you setup the cluster following the setup instructions of this chapter, alpha features are already enabled.
 Otheriwse, you might need to enable it yourself.
 

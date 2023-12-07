@@ -1,0 +1,81 @@
+# ---
+# apiVersion: policies.kubewarden.io/v1
+# kind: ClusterAdmissionPolicy
+# metadata:
+#   name: deploymentproduction
+#   annotations:
+#     policies.kubewarden.io/title: Require Multiple Replicas
+#     policies.kubewarden.io/category: App
+#     policies.kubewarden.io/severity: high
+#     policies.kubewarden.io/subject: Deployment
+#     policies.kubewarden.io/description: >-
+#       Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
+#       This policy validates that Deployments have more than one replica.      
+# spec:
+#   validationFailureAction: enforce
+#   background: false
+#   rules:
+#   - name: deployment-has-multiple-replicas
+#     match:
+#       resources:
+#         kinds:
+#           - Deployment
+#         namespaces:
+#           - production
+#         operations:
+#           - CREATE
+#           - UPDATE
+#     validate:
+#       message: "Deployments should have more than two replicas to ensure availability."
+#       pattern:
+#         spec:
+#           replicas: ">2"
+# ---
+apiVersion: policies.kubewarden.io/v1
+kind: ClusterAdmissionPolicy
+metadata:
+  name: dbcluster
+  annotations:
+    policies.kubewarden.io/title: Require Small, Medium, or Large DB size
+    policies.kubewarden.io/category: DB
+    policies.kubewarden.io/severity: high
+    policies.kubewarden.io/subject: SQLClaim
+    policies.kubewarden.io/description: >-
+      SQLClaims must have small, medium, or large database size.
+spec:
+  module: registry://c8n.io/vfarcic/kubewarden-crossplane-sql:v0.0.2
+  rules:
+    - apiGroups: ["devopstoolkitseries.com"]
+      apiVersions: ["v1alpha1"]
+      resources: ["sqlclaims", "sqls"]
+      operations:
+        - CREATE
+        - UPDATE
+  mutating: false
+  settings:
+    allowed_sizes: ["small", "medium", "large"]
+---
+apiVersion: policies.kubewarden.io/v1
+kind: AdmissionPolicy
+metadata:
+  name: dbproduction
+  namespace: production
+  annotations:
+    policies.kubewarden.io/title: Require Medium or Large DB size
+    policies.kubewarden.io/category: DB
+    policies.kubewarden.io/severity: high
+    policies.kubewarden.io/subject: SQLClaim
+    policies.kubewarden.io/description: >-
+      SQLClaims with small database instances are not reliable and thus cannot be used in production.
+spec:
+  module: registry://c8n.io/vfarcic/kubewarden-crossplane-sql:v0.0.2
+  rules:
+    - apiGroups: ["devopstoolkitseries.com"]
+      apiVersions: ["v1alpha1"]
+      resources: ["sqlclaims", "sqls"]
+      operations:
+        - CREATE
+        - UPDATE
+  mutating: false
+  settings:
+    allowed_sizes: ["medium", "large"]
