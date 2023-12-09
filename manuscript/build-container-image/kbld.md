@@ -24,9 +24,12 @@ Fun fact: `kbld` can work with multiple changing applications simultaneously, wh
 #  and the kbld configuration points image 'cncf-demo' to our current directory
 cat kbld/deployment.yaml
 
+# build an image from the referenced source code and record the resulting
+# image ref in a new file called `deployment-kbld.yaml`
+kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
+
 # now in the deployment definition the container image field references our
 #  newly-built container image!
-kbld --file kbld/deployment.yaml | tee kbld/deployment-kbld.yaml
 
 # Replace `[...]` with the image tag from the output
 #  (everything after 'kbld:')
