@@ -20,6 +20,7 @@ Once you define all of your Kubernetes resources and specify their values in a H
 ```bash
 chmod +x manuscript/define-deploy-dev/helm.sh
 
+# This script sets the `ingress.host` and `image.repository` values in the helm/app/values.yaml file using environment variables that we set earlier in the journey
 ./manuscript/define-deploy-dev/helm.sh
 ```
 
