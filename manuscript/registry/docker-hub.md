@@ -27,13 +27,13 @@ source .env
 echo $IMAGE
 
 # Tag the local image "cncf-demo:$TAG" to point at the registry and have the full sha-256 tag
-docker image tag cncf-demo:$TAG $IMAGE:$TAG
+docker image tag cncf-demo:$TAG ${IMAGE}:$TAG
 
 # Tag the local image "cncf-demo:$TAG" to point at the registry with the "latest" tag
 docker image tag cncf-demo:$TAG ${IMAGE}:latest
 
 # Push the two images to Docker Hub
-docker image push $IMAGE:$TAG
+docker image push ${IMAGE}:$TAG
 
 docker image push ${IMAGE}:latest
 
