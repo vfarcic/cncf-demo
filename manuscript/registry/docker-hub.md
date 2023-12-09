@@ -9,13 +9,15 @@ Distribution is a core library for many other registries too, including GitHub C
 ## Setup
 
 * Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+* Charm Gum provides utilities to help you write useful shell scripts with just a few lines of code. Watch https://youtu.be/U8zCHA-9VLA to learn more.
 
 ```bash
 chmod +x manuscript/registry/docker-hub.sh
 
+# this shell script collects your Docker username and password, sets variables, saves export commands for DOCKERHUB_USERNAME & IMAGE environment variables to the a fresh .env file, and logs you in to Docker.
 ./manuscript/registry/docker-hub.sh
 
+# execute the commands in your .env file, which are simply setting DOCKERHUB_USERNAME & IMAGE environment variables to use in the next section.do
 source .env
 ```
 
