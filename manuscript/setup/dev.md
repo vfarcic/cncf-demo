@@ -9,13 +9,16 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
-gh repo set-default
-
 # Select the fork as the default repository
 
-# This kubeconfig file will get created later, and added to
+gh repo set-default
+
+# The kubeconfig file will get created later, and added to
 #   `.gitignore`.
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
+# The command to create a KUBECONFIG_DEV variable with the path to our
+#   `kubeconfig-dev.yaml` file is added to the hidden `.env` file
 
 echo "export KUBECONFIG_DEV=$PWD/kubeconfig-dev.yaml" >> .env
 ```
