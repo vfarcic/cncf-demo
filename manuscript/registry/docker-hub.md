@@ -14,10 +14,10 @@ Distribution is a core library for many other registries too, including GitHub C
 ```bash
 chmod +x manuscript/registry/docker-hub.sh
 
-# this shell script collects your Docker username and password, sets variables, saves export commands for DOCKERHUB_USERNAME & IMAGE environment variables to the a fresh .env file, and logs you in to Docker.
+# This shell script collects your Docker username and password, sets variables, saves export commands for DOCKERHUB_USERNAME & IMAGE environment variables to a fresh .env file, and logs you in to Docker.
 ./manuscript/registry/docker-hub.sh
 
-# execute the commands in your .env file, which are simply setting DOCKERHUB_USERNAME & IMAGE environment variables to use in the next section.do
+# Execute the commands in your .env file, which are simply setting DOCKERHUB_USERNAME & IMAGE environment variables to use in the next section.
 source .env
 ```
 
@@ -26,14 +26,18 @@ source .env
 ```bash
 echo $IMAGE
 
+# Tag the local image "cncf-demo:$TAG" to point at the registry and have the full sha-256 tag
 docker image tag cncf-demo:$TAG $IMAGE:$TAG
 
+# Tag the local image "cncf-demo:$TAG" to point at the registry with the "latest" tag
 docker image tag cncf-demo:$TAG ${IMAGE}:latest
 
+# Push the two images to Docker Hub
 docker image push $IMAGE:$TAG
 
 docker image push ${IMAGE}:latest
 
+# Generate your Docker Hub url
 echo "https://hub.docker.com/r/$DOCKERHUB_USERNAME/cncf-demo"
 
 # Open it in a browser
