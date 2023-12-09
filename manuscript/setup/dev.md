@@ -81,6 +81,8 @@ Follow this section ONLY if you're planning to use Google Cloud GKE
 ```bash
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+# create a project
+
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 yq --inplace ".google.projectId = \"$PROJECT_ID\"" settings.yaml
@@ -91,10 +93,14 @@ echo "https://console.cloud.google.com/marketplace/product/google/container.goog
 
 # Open the URL from the output and enable the Kubernetes API
 
+# create a cluster
+
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type e2-standard-4 \
     --num-nodes 1 --enable-network-policy \
     --no-enable-autoupgrade
+
+# generate kubeconfig file
 
 gcloud container clusters get-credentials dot \
     --project $PROJECT_ID --region us-east1
