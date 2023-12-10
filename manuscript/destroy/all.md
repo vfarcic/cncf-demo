@@ -6,7 +6,7 @@ Depending on the paths you took, some resources might not exist and, as a result
 
 Execute the commands in this section only if you used Google Cloud.
 
-If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy the cluster** first. Otherwise, the commands that follow might be undone by Crossplane discovering drifs and recreating deleted resources.
+If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy the cluster** first. Otherwise, the commands that follow might be undone by Crossplane discovering drifts and recreating deleted resources.
 
 ```bash
 export PROJECT_ID=$(yq ".google.projectId" settings.yaml)
@@ -23,7 +23,7 @@ gcloud projects delete $PROJECT_ID --quiet
 
 Execute the commands in this section only if you used Azure.
 
-If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy the cluster** first. Otherwise, the commands that follow might be undone by Crossplane discovering drifs and recreating deleted resources.
+If you created the dev/management cluster yourself (e.g., a local Rancher Desktop cluster) instead of following the instructions in the `Development` section, **destroy the cluster** first. Otherwise, the commands that follow might be undone by Crossplane discovering drifts and recreating deleted resources.
 
 ```bash
 export RESOURCE_GROUP=$(yq ".azure.resourceGroup" settings.yaml)

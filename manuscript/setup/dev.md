@@ -9,13 +9,16 @@ gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo
 
-gh repo set-default
-
 # Select the fork as the default repository
 
-# This kubeconfig file will get created later, and added to
+gh repo set-default
+
+# The kubeconfig file will get created later, and added to
 #   `.gitignore`.
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+
+# The command to create a KUBECONFIG_DEV variable with the path to our
+#   `kubeconfig-dev.yaml` file is added to the hidden `.env` file
 
 echo "export KUBECONFIG_DEV=$PWD/kubeconfig-dev.yaml" >> .env
 ```
@@ -78,6 +81,8 @@ Follow this section ONLY if you're planning to use Google Cloud GKE
 ```bash
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+# create a project
+
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
 yq --inplace ".google.projectId = \"$PROJECT_ID\"" settings.yaml
@@ -88,10 +93,14 @@ echo "https://console.cloud.google.com/marketplace/product/google/container.goog
 
 # Open the URL from the output and enable the Kubernetes API
 
+# create a cluster
+
 gcloud container clusters create dot --project $PROJECT_ID \
     --region us-east1 --machine-type e2-standard-4 \
     --num-nodes 1 --enable-network-policy \
     --no-enable-autoupgrade
+
+# generate kubeconfig file
 
 gcloud container clusters get-credentials dot \
     --project $PROJECT_ID --region us-east1
@@ -127,12 +136,12 @@ export INGRESS_HOST=$(kubectl --namespace traefik \
     get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-# If EKS
+# Only if you are using EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
     get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
-# If EKS
+# Only if you are using EKS
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
 # This is the IP address by which you can access applications
