@@ -136,12 +136,12 @@ export INGRESS_HOST=$(kubectl --namespace traefik \
     get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-# If YES EKS
+# Only if you are using EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
     get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
-# If YES EKS
+# Only if you are using EKS
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
 # This is the IP address by which you can access applications
