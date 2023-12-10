@@ -38,11 +38,9 @@ kubectl --namespace production get admissionpolicies
 
 # Wait until the policies are created
 
-# TODO: Continue
+export POLICY_KIND=admissionpolicy
 
-export POLICY_KIND=clusterpolicy
-
-yq --inplace ".policies.type = \"kyverno\"" settings.yaml
+yq --inplace ".policies.type = \"kubewarden\"" settings.yaml
 
 yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
 

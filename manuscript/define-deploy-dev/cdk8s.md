@@ -17,7 +17,7 @@ The bottom line here is that organizations can give freedom to developers to wri
 
 ## Setup
 
-* [Install the `cdk8s` CLI](https://cdk8s.io/docs/latest/getting-started/#install-the-cli)
+* [Install the `cdk8s` CLI](https://cdk8s.io/docs/latest/cli/installation)
 * We'll define the manifests in Go (even though other languages are supported) so please install and configure [Go](https://go.dev/doc/install).
 
 ```bash

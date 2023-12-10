@@ -27,8 +27,9 @@ echo "
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
 |eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
 |az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
+|kustomize       |If using Kustomize   |'https://kubectl.docs.kubernetes.io/installation/kustomize/'|
 |helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |
-|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/getting-started/#install-the-cli'|
+|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/cli/installation'    |
 " | gum format
 
 gum confirm "
@@ -166,7 +167,8 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
     az aks create --resource-group $RESOURCE_GROUP --name dot \
         --node-count 3 --node-vm-size Standard_B2s \
-        --enable-managed-identity --network-plugin none --yes
+        --enable-managed-identity --network-plugin none \
+        --generate-ssh-keys --yes
 
     az aks get-credentials --resource-group $RESOURCE_GROUP \
         --name dot --file $KUBECONFIG

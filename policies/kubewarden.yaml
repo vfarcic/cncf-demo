@@ -1,36 +1,30 @@
-# ---
-# apiVersion: policies.kubewarden.io/v1
-# kind: ClusterAdmissionPolicy
-# metadata:
-#   name: deploymentproduction
-#   annotations:
-#     policies.kubewarden.io/title: Require Multiple Replicas
-#     policies.kubewarden.io/category: App
-#     policies.kubewarden.io/severity: high
-#     policies.kubewarden.io/subject: Deployment
-#     policies.kubewarden.io/description: >-
-#       Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
-#       This policy validates that Deployments have more than one replica.      
-# spec:
-#   validationFailureAction: enforce
-#   background: false
-#   rules:
-#   - name: deployment-has-multiple-replicas
-#     match:
-#       resources:
-#         kinds:
-#           - Deployment
-#         namespaces:
-#           - production
-#         operations:
-#           - CREATE
-#           - UPDATE
-#     validate:
-#       message: "Deployments should have more than two replicas to ensure availability."
-#       pattern:
-#         spec:
-#           replicas: ">2"
-# ---
+---
+apiVersion: policies.kubewarden.io/v1
+kind: AdmissionPolicy
+metadata:
+  name: deploymentproduction
+  namespace: production
+  annotations:
+    policies.kubewarden.io/title: Require Multiple Replicas
+    policies.kubewarden.io/category: App
+    policies.kubewarden.io/severity: high
+    policies.kubewarden.io/subject: Deployment
+    policies.kubewarden.io/description: >-
+      Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
+      This policy validates that Deployments have more than two replicas.      
+spec:
+  module: registry://c8n.io/vfarcic/kubewarden-deployment:v0.0.3
+  rules:
+    - apiGroups: ["apps"]
+      apiVersions: ["v1"]
+      resources: ["deployments"]
+      operations:
+        - CREATE
+        - UPDATE
+  mutating: false
+  settings:
+    replicasGreaterThan: 2
+---
 apiVersion: policies.kubewarden.io/v1
 kind: ClusterAdmissionPolicy
 metadata:

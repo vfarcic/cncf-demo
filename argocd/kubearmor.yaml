@@ -15,7 +15,7 @@ spec:
     path: kubearmor
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: kubearmor
   syncPolicy:
     automated:
       selfHeal: true

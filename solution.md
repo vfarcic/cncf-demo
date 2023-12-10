@@ -329,8 +329,8 @@ flowchart TD
         policies-cloud-custodian(Cloud Custodian)
         style policies-cloud-custodian fill:red
         kubewarden(Kubewarden)
-        style kubewarden fill:red
-        %% Wait with VAC until Kubernetes v1.26 is available in GKE, EKS, and AKS
+        click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
+        %% Wait with VAP until it's GA
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
         policies-helm(App As Helm)
