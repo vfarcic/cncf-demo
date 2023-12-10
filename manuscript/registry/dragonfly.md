@@ -49,19 +49,22 @@ chmod +x manuscript/registry/dragonfly.sh
 ```bash
 echo $IMAGE
 
-docker image tag cncf-demo:$TAG $IMAGE:$TAG
+# Tag the local image "cncf-demo:$TAG" to point at the registry and have the full sha-256 tag
+docker image tag cncf-demo:$TAG ${IMAGE}:$TAG
 
+# Tag the local image "cncf-demo:$TAG" to point at the registry with the "latest" tag
 docker image tag cncf-demo:$TAG ${IMAGE}:latest
 
-docker image push $IMAGE:$TAG
+# Push the two images to Docker Hub
+docker image push ${IMAGE}:$TAG
 
 docker image push ${IMAGE}:latest
 
 # Pull image through dragonfly.
-docker image pull $IMAGE:$TAG
+docker image pull ${IMAGE}:$TAG
 
 # Pull image through dragonfly.
-docker image pull $IMAGE:latest
+docker image pull ${IMAGE}:latest
 ```
 
 ## Continue The Adventure
