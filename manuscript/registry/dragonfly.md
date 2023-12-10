@@ -23,17 +23,24 @@ It is important to note here that the Nydus image format is different from the O
 * Make sure that Docker is running
 
 ```bash
+# We're using Dragonfly with Docker Hub but it also works well with Harbor
 export REGISTRY=index.docker.io
 
 # Replace `[...]` with your Docker Hub username
 export DOCKERHUB_USERNAME=[...]
 
+# Tag your container image with the registry location
 export IMAGE=$REGISTRY/$DOCKERHUB_USERNAME/cncf-demo
 
 docker login --username $DOCKERHUB_USERNAME $REGISTRY
 
+# Change the permissions of this script
 chmod +x manuscript/registry/dragonfly.sh
 
+# Run the script. This does the following:
+# 1. Adds an “image” entry to settings.yaml and saves your image name for future use
+# 2. Creates a “values.yaml” file and adds the config that Dragonfly needs to use Docker Hub as the underlying image registry
+# 3. Installs Dragonfly using Helm
 ./manuscript/registry/dragonfly.sh
 ```
 
