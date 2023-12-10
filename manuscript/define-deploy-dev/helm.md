@@ -40,7 +40,7 @@ cat helm/app/templates/service.yaml
 
 cat helm/app/templates/ingress.yaml
 
-# View the values.yaml file. Earlier, when we ran the script, we set the `ingress.host` and `image.repository` to reflect our personal journey.
+# View the values.yaml file. Earlier, when we ran the `./manuscript/define-deploy-dev/helm.sh` script, we set the `ingress.host` and `image.repository` to reflect our personal journey.
 cat helm/app/values.yaml
 
 # In the values.yaml file, set the `.image.tag` to be the tag of the image we recently created.
