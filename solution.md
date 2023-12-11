@@ -425,7 +425,7 @@ flowchart TD
         signing{{Signing}}
         style signing fill:blue
         notary(Notary)
-        style notary fill:red
+        click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
         spiffe(SPIFFE & SPIRE)
         style spiffe fill:red
         signing --> notary & spiffe --> access-control
@@ -434,7 +434,7 @@ flowchart TD
         %% -- Access Control --
         %% --------------------
         access-control{{Access Control}}
-        style access-control fill:red
+        style access-control fill:blue
         access-control-hexa(Hexa)
         style access-control-hexa fill:red
         dex(Dex)

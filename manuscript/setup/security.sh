@@ -25,7 +25,7 @@ echo "
 |yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
 |Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
-|eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
+|eksctl          |If using AWS         |'https://eksctl.io/installation/'                  |
 |az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
 |kustomize       |If using Kustomize   |'https://kubectl.docs.kubernetes.io/installation/kustomize/'|
 |helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |

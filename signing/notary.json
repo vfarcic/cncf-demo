@@ -1,0 +1,21 @@
+{
+    "version": "1.0",
+    "trustPolicies": [
+      {
+        "name": "dot-images",
+        "registryScopes": [
+          "ttl.sh/silly-demo-20231129222446"
+        ],
+        "signatureVerification": {
+          "level": "strict"
+        },
+        "trustStores": [
+          "ca:devopstoolkitseries.com"
+        ],
+        "trustedIdentities": [
+          "*"
+        ]
+      }
+    ]
+  }
+  

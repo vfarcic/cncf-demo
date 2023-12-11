@@ -16,5 +16,5 @@ TODO: Explanation
 
 ## What Is Your Choice?
 
-* **Notary** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [notary](notary.md)
 * **SPIFFE & SPIRE** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
