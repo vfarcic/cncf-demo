@@ -1,6 +1,8 @@
 # Setup Prerequisites
 
-Think of the instructions in this section as adventure prerequisites. You need to prepare for the adventure. You need to get the right equipment. This is not the adventure itself (that comes soon) but ensurance that you are ready for it.
+Prepare for your adventure! Get the right equipment! Think of the instructions in this section as adventure prerequisites. This is not the adventure itself (that comes soon) but ensurance that you are ready for it.
+
+GET READY FOR ADVENTURE!
 
 ```bash
 # Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar
@@ -12,14 +14,17 @@ cd cncf-demo
 # Select the fork as the default repository
 
 gh repo set-default
+```
 
-# The kubeconfig file will get created later, and added to
-#   `.gitignore`.
+In later steps, when you create your cluster, a kubeconfig file will get created which has your cluster connection credentials (among other things). Run this command to tell your cluster creation tool which file to use for kubeconfig -- `kubeconfig-dev.yaml`. That file has already been added to `.gitignore`.
+
+```bash
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+```
 
-# The command to create a KUBECONFIG_DEV variable with the path to our
-#   `kubeconfig-dev.yaml` file is added to the hidden `.env` file
+Add a command to create a KUBECONFIG_DEV variable with the path to our `kubeconfig-dev.yaml` file is added to the hidden `.env` file. Depending on your journey, you might need this later.
 
+```bash
 echo "export KUBECONFIG_DEV=$PWD/kubeconfig-dev.yaml" >> .env
 ```
 
@@ -80,7 +85,7 @@ Follow this section ONLY if you're planning to use Google Cloud GKE
 
 ```bash
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-
+```
 # create a project
 
 export PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
