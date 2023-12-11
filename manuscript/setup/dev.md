@@ -1,6 +1,9 @@
 # Setup Prerequisites
 
-Think of the instructions in this section as adventure prerequisites. You need to prepare for the adventure. You need to get the right equipment. This is not the adventure itself (that comes soon) but ensurance that you are ready for it.
+Prepare for your adventure! Get the right equipment! Think of the instructions in this section as adventure prerequisites. This is not the adventure itself (that comes soon) but ensurance that you are ready for it.
+
+**GET READY FOR ADVENTURE!**
+______________
 
 ```bash
 # Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar
@@ -12,14 +15,19 @@ cd cncf-demo
 # Select the fork as the default repository
 
 gh repo set-default
+```
 
-# The kubeconfig file will get created later, and added to
-#   `.gitignore`.
+In later steps, when you create your cluster, a `kubeconfig` file will get created which has your cluster connection credentials (among other things).
+
+ Tell your cluster creation tool which file to use for Kubernetes to store its configuration -- `kubeconfig-dev.yaml`. That file has already been added to `.gitignore`.
+
+```bash
 export KUBECONFIG=$PWD/kubeconfig-dev.yaml
+```
 
-# The command to create a KUBECONFIG_DEV variable with the path to our
-#   `kubeconfig-dev.yaml` file is added to the hidden `.env` file
+Next we'll create a hidden `.env` file where you can store important stuff that you might need later. First, store a command to create a `KUBECONFIG_DEV` variable with the path to your `kubeconfig-dev.yaml`. Depending on your journey, you might need this later.
 
+```bash
 echo "export KUBECONFIG_DEV=$PWD/kubeconfig-dev.yaml" >> .env
 ```
 
@@ -114,34 +122,37 @@ Follow this section ONLY if you're NOT planning to use EKS, AKS, or GKE
 
 ## The Rest Of The Setup
 
+First, create a `dev` namespace!
 ```bash
-# Install `yq` CLI from https://github.com/mikefarah/yq
-# 'yq' is a lightweight and portable command-line YAML processor
-
-# Install `jq` CLI from https://stedolan.github.io/jq/download
-# 'jq' is a lightweight and portable command-line JSON processor
-
 kubectl create namespace dev
+```
+If needed, [install the `yq` CLI](https://github.com/mikefarah/yq). `yq` is a lightweight and portable command-line YAML processor.
 
-# Helm is a package manager for Kubernetes applications
-# Traefik is a reverse proxy server and load balancer that
-#   handles traffic that enters from outside of your Kubernetes
-#   cluster
+If needed, [install `jq` CLI](https://stedolan.github.io/jq/download). `jq` is a lightweight and portable command-line JSON processor.
+
+If needed, [install Helm](https://helm.sh/docs/intro/install/). Helm is a package manager for Kubernetes applications.
+
+Install Traefik. Traefik is a reverse proxy server and load balancer that handles traffic that enters from outside of your Kubernetes cluster.
+
+```bash
 helm upgrade --install traefik traefik \
     --repo https://helm.traefik.io/traefik \
     --namespace traefik --create-namespace --wait
+```
+Depending on what cloud provider you chose for your adventure, the commands for finding your cluster IP are different. Only run the ones that apply to you. 
 
+```bash
 # If NOT EKS
 export INGRESS_HOST=$(kubectl --namespace traefik \
     get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-# Only if you are using EKS
+# Only if you ARE using EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace traefik \
     get service traefik \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
-# Only if you are using EKS
+# Only if you ARE using EKS
 export INGRESS_HOST=$(dig +short $INGRESS_HOSTNAME) 
 
 # This is the IP address by which you can access applications
@@ -156,45 +167,52 @@ echo $INGRESS_HOST
 # If the output continues having more than one IP, choose one of
 #   them and execute `export INGRESS_HOST=[...]` with `[...]`
 #   being the selected IP.
+```
 
-# Use the output to configure DNS domain. Do this by going to
-#   your registrar and creating a DNS record of type 'A' with the
-#   value set to the IP address of your output.
+Use the output--your cluster's IP address--to configure DNS domain. Do this by going to your registrar and creating a DNS record of type 'A' with the value set to the IP address of your output.
 
+If you do choose to use `nip.io` instead of a "real" domain, beware that:
+   - when opening an application in a browser, you will have to
+     allow insecure connections.
+   - when executing `curl` commands, you will have to add the
+     `--insecure` flag. There is a command below that will
+      create an `alias` for `curl` that will add the
+     `--insecure` argument.
+   - you will NOT be able to choose Harbor as container image
+     registry.
+   - you will have to skip the **Use HTTPS** section coming
+     later on in the story.
+
+```bash
 # Replace `[...]` with the domain (e.g., sillydemo.com).
-# If you do not have a domain, replace `[...]` with
-#   `$INGRESS_HOST.nip.io`.
-# If you do choose to use `nip.io` instead of a "real" domain,
-#   beware that:
-#   - when opening an application in a browser, you will have to
-#     allow insecure connections.
-#   - when executing `curl` commands, you will have to add the
-#     `--insecure` flag. There is a command below that will
-#      create an `alias` for `curl` that will add the
-#     `--insecure` argument.
-#   - you will NOT be able to choose Harbor as container image
-#     registry.
-#   - you will have to skip the **Use HTTPS** section coming
-#     later on in the story.
+
+# If you do not have a domain, replace `[...]` with `$INGRESS_HOST.nip.io`.
+
 export DOMAIN=[...]
+```
 
-# Execute this step ONLY if you chose to use `nip.io` instead of
-#   a "real" domain
+Execute this step ONLY if you chose to use `nip.io` instead of
+  a "real" domain
+
+```bash
 alias curl="curl --insecure"
+```
+Configure DNS for the following subdomains (skip this step if you chose to use `nip.io` instead of a "real" domain):
+   - harbor
+   - notary
+   - cncf-demo-dev
 
-# Configure DNS for the following subdomains (skip this step if
-#   you chose to use `nip.io` instead of a "real" domain):
-# - harbor
-# - notary
-# - cncf-demo-dev
-# Do not use a wildcard for those subdomains since, later on,
-#   we'll add more pointing to a different cluster.
-# Configure these subdomains by going to your registrar and
-#   creating three more DNS records of type 'A', each with the
-#   name set to the subdomain (one record for 'harbor', one for
-#   'notary', one for 'cncf-demo-dev'), and the value of each
-#   record set to that same IP address of your output.
+**Do not use a wildcard for those subdomains** since, later on, we'll add more pointing to a different cluster.
+Configure these subdomains by going to your registrar and
+creating three more DNS records of type 'A', each with the
+name set to the subdomain (one record for 'harbor', one for
+'notary', one for 'cncf-demo-dev'), and the value of each
+record set to that same IP address of your output.
+_________________________________
 
+Deploy and configure cert-manager to automate the process of issuing and renewing TLS certificates.
+
+```bash
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain.
 helm repo add jetstack https://charts.jetstack.io
@@ -205,12 +223,12 @@ helm repo update
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain.
-# Deploy cert-manager to automate the process of issuing and
-#   renewing TLS certificates.
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true --wait
-
+```
+Create a cert-manager ClusterIssuer resource that can issue TLS certificates.
+```bash
 # Replace `[...]` with your email.
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain.
@@ -223,11 +241,10 @@ yq --inplace ".spec.acme.email = \"$EMAIL\"" \
 
 # Skip this step if you chose to use `nip.io` instead of a
 #   "real" domain.
-# Create a ClusterIssuer resource that can issue TLS
-#   certificates.
 kubectl apply --filename cert-manager/issuer.yaml
 ```
 
 ## Start The Adventure
+#### EEK! So exciting!!!
 
 * [Build Container Image](../build-container-image/README.md)
