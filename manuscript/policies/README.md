@@ -1,6 +1,24 @@
-# Admisison Controller Policies
+# Admission Controller Policies
 
-TODO: Intro
+Hero and Lil DeeBee are doing the thing! They’re running in production and serving end users! Ahhhhh, this is the life. However, Hero can’t help but notice… this place is kinda rough around the edges. For one thing, it seems like any old workload is allowed to run in here. There are bloated apps taking WAY more resources than they need, apps pulling images from unsafe, public image repositories, and apps who haven’t received any traffic in ages—just to name a few of the unsavory characters roaming about. Not to be a snob or anything, but Hero feels like production needs some rules about what objects are allowed to be here. This will help to make production a safe and productive community. So let’s help Hero and Lil DeeBee choose a CNCF tool that will implement admission controller policies!
+
+A policy is an organization-specific rule about what actions (like create, update, delete) are allowed to happen on what objects in a system. An admission controller policy is a rule specifically about what you are allowing into your Kubernetes cluster. 
+
+Admission controller policies are helpful in many ways, such as:
+
+* **Security** <br>
+for example, ensuring that Pods do not run in privileged mode
+
+* **Governance** <br>
+for example, label every Ingress with a certain label
+
+* **Automation** <br>
+for example, when a new namespace is created, add a ConfigMap in that namespace
+
+* **Cost Optimization** <br>
+for example, there should not be any services of type LoadBalancer in a given namespace
+
+<br>
 
 ## Choice 1: Kyverno
 
