@@ -5,49 +5,63 @@ TODO: Intro
 ## Setup
 
 ```bash
-# TODO: kapp-controller
+python3 -m venv custodian
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+source custodian/bin/activate
 
-cat $GITOPS_APP/cloud-custodian.yaml
+pip install c7n
 
-cp $GITOPS_APP/cloud-custodian.yaml infra/.
+pip install c7n_kube
 
-git add . 
+# # TODO: kapp-controller
 
-git commit -m "Cloud Custodian"
+# export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
-git push
+# cat $GITOPS_APP/cloud-custodian.yaml
 
-kubectl --namespace c7n-system get pods
+# cp $GITOPS_APP/cloud-custodian.yaml infra/.
 
-# Wait until the Pods are created and are ready
+# git add . 
+
+# git commit -m "Cloud Custodian"
+
+# git push
+
+# kubectl --namespace c7n-system get pods
+
+# # Wait until the Pods are created and are ready
 ```
 
 ## Do
 
 ```bash
-# TODO: Continue
+custodian run --output-dir=output policies/cloud-custodian.yaml \
+    --cache-period 0
 
-cat policies/kyverno.yaml
+custodian run --output-dir=output policies/cloud-custodian.yaml \
+    --cache-period 0 --verbose
 
-cp policies/kyverno.yaml infra/policies.yaml
+# # TODO: Continue
 
-git add .
+# cat policies/custodian.yaml
 
-git commit -m "Policies"
+# cp policies/custodian.yaml infra/custodian.yaml
 
-git push
+# git add .
 
-kubectl get clusterpolicies
+# git commit -m "Policies"
 
-# Wait until the policies are created
+# git push
 
-export POLICY_KIND=clusterpolicy
+# kubectl get clusterpolicies
 
-yq --inplace ".policies.type = \"kyverno\"" settings.yaml
+# # Wait until the policies are created
 
-yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
+# export POLICY_KIND=clusterpolicy
+
+# yq --inplace ".policies.type = \"kyverno\"" settings.yaml
+
+# yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
 ```
 
 ## How Did You Define Your App?

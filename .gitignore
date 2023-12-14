@@ -7,6 +7,8 @@
 /image-builder
 /account.json
 /.env
+/custodian
+/output
 
 # Ignore DevSpace cache and log folder
 .devspace/

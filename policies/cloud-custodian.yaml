@@ -1,19 +1,12 @@
 policies:
-  - name: my-first-policy
+  - name: deploymentproduction
     description: |
       Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
-      This policy validates that Deployments have more than one replica.      
+      This policy validates that Deployments have more than two replicas.
     resource: k8s.deployment
-    mode:
-      type: k8s-admission
-      on-match: deny
-      operations:
-        - CREATE
-        - UPDATE
     filters:
       - type: value
-        key: spec.replicas
-        value: 2
-        op: greater-than
+        key: metadata.namespace
+        value: production
     # actions:
     #   - type: delete
