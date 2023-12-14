@@ -179,6 +179,62 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
 fi
 
+#################
+# Setup Ingress #
+#################
+
+cat $GITOPS_APP/contour.yaml
+
+cp $GITOPS_APP/contour.yaml infra/.
+
+git add . 
+
+git commit -m "Contour"
+
+git push
+
+COUNTER=$(kubectl --namespace projectcontour get pods)
+
+while [ -z "$COUNTER" ]; do
+    sleep 10
+    COUNTER=$(kubectl --namespace projectcontour get pods)
+done
+
+if [[ "$HYPERSCALER" == "aws" ]]; then
+
+    INGRESS_IPNAME=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+
+    INGRESS_IP=$(dig +short $INGRESS_IPNAME) 
+
+    while [ -z "$INGRESS_IP" ]; do
+        sleep 10
+        INGRESS_IPNAME=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+        INGRESS_IP=$(dig +short $INGRESS_IPNAME) 
+    done
+
+    INGRESS_IP_LINES=$(echo $INGRESS_IP | wc -l | tr -d ' ')
+
+    if [ $INGRESS_IP_LINES -gt 1 ]; then
+        INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
+    fi
+
+else
+
+    INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+
+    while [ -z "$COUNTER" ]; do
+        sleep 10
+        INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+    done
+
+fi
+
+echo "export INGRESS_HOST=$INGRESS_IP.nip.io" >> .env
+yq --inplace ".ingress.host = \"$INGRESS_IP.nip.io\"" settings.yaml
+
+echo "export INGRESS_CLASSNAME=contour" >> .env
+yq --inplace ".ingress.classname = \"contour\"" settings.yaml
+
 ################
 # Setup GitOps #
 ################
@@ -196,7 +252,7 @@ gum confirm "
 Continue?
 " || exit 0
 
-export REPO_URL=$(git config --get remote.origin.url)
+REPO_URL=$(git config --get remote.origin.url)
 
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" argocd/apps.yaml
 
@@ -206,7 +262,7 @@ kubectl apply --filename argocd/project.yaml
 
 kubectl apply --filename argocd/apps.yaml
 
-export GITOPS_APP=argocd
+GITOPS_APP=argocd
 
 echo "export GITOPS_APP=$GITOPS_APP" >> .env
 

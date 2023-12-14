@@ -76,7 +76,9 @@ flowchart TD
         click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
         ddd-cdk8s("CDK For Kubernetes (cdk8s)")
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
-        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> https
+        kcl(KCL)
+        style kcl fill:red
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s & kcl --> https
 
         %% ---------------
         %% -- Use HTTPS --
@@ -269,13 +271,13 @@ flowchart TD
         app{{Deploy The App To Production}}
         click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/README.md"
         style app fill:blue
-        app-helm(App As Helm)
+        app-helm(App as Helm)
         click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
-        app-kustomize(App As Kustomize)
+        app-kustomize(App as Kustomize)
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
-        app-cdk8s(App As cdk8s)
+        app-cdk8s(App as cdk8s)
         click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
-        app-carvel(App As Carvel ytt)
+        app-carvel(App as Carvel ytt)
         click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
         app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> db-production
 
@@ -287,13 +289,13 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
-        db-production-helm(App As Helm)
+        db-production-helm(App as Helm)
         click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
-        db-production-kustomize(App As Kustomize)
+        db-production-kustomize(App as Kustomize)
         click db-production-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/kustomize.md"
-        db-production-cdk8s(App As cdk8s)
+        db-production-cdk8s(App as cdk8s)
         click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
-        db-production-carvel(App As Carvel ytt)
+        db-production-carvel(App as Carvel ytt)
         click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
         db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
@@ -326,22 +328,34 @@ flowchart TD
         click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
         policies-opa("Open Policy Agent (OPA) With Gatekeeper")
         click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/gatekeeper.md"
-        policies-cloud-custodian(Cloud Custodian)
-        style policies-cloud-custodian fill:red
+        cloud-custodian(Cloud Custodian)
+        click cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
+        cloud-custodian-helm(App as Helm)
+        click cloud-custodian-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-helm.md"
+        style cloud-custodian-helm fill:red
+        cloud-custodian-kustomize(App as Kustomize)
+        click cloud-custodian-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-kustomize.md"
+        cloud-custodian-cdk8s(App as cdk8s)
+        click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
+        style cloud-custodian-cdk8s fill:red
+        cloud-custodian-carvel(App as Carvel ytt)
+        click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
+        style cloud-custodian-carvel fill:red
         kubewarden(Kubewarden)
         click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
         %% Wait with VAP until it's GA
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
-        policies-helm(App As Helm)
+        policies-helm(App as Helm)
         click policies-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/helm.md"
-        policies-kustomize(App As Kustomize)
+        policies-kustomize(App as Kustomize)
         click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
-        policies-cdk8s(App As cdk8s)
+        policies-cdk8s(App as cdk8s)
         click policies-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cdk8s.md"
-        policies-carvel(App As Carvel ytt)
+        policies-carvel(App as Carvel ytt)
         click policies-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/carvel.md"
-        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+        policies --> policies-kyverno & policies-opa & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+        policies --> cloud-custodian --> cloud-custodian-helm & cloud-custodian-kustomize & cloud-custodian-cdk8s & cloud-custodian-carvel --> runtime-policies
 
         %% ----------------------
         %% -- Runtime Policies --
@@ -371,13 +385,13 @@ flowchart TD
         click secrets-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/aws.md"
         secrets-azure(Azure)
         click secrets-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/azure.md"
-        secrets-helm(App As Helm)
+        secrets-helm(App as Helm)
         click secrets-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
-        secrets-kustomize(App As Kustomize)
+        secrets-kustomize(App as Kustomize)
         click secrets-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
-        secrets-cdk8s(App As cdk8s)
+        secrets-cdk8s(App as cdk8s)
         click secrets-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
-        secrets-carvel(App As Carvel ytt)
+        secrets-carvel(App as Carvel ytt)
         click secrets-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
         client-secrets{{Secrets Management Outside Kubernetes}}
         click client-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
@@ -423,17 +437,21 @@ flowchart TD
         %% -- Signing --
         %% -------------
         signing{{Signing}}
+        click signing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/README.md"
         style signing fill:blue
         notary(Notary)
         click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
         spiffe(SPIFFE & SPIRE)
         style spiffe fill:red
-        signing --> notary & spiffe --> access-control
+        opc(Open Policy Containers)
+        style opc fill:red
+        signing --> notary & spiffe & opc --> access-control
 
         %% --------------------
         %% -- Access Control --
         %% --------------------
         access-control{{Access Control}}
+        click access-control "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/README.md"
         style access-control fill:blue
         access-control-hexa(Hexa)
         style access-control-hexa fill:red
@@ -583,7 +601,9 @@ flowchart TD
         style kuberhealthy fill:red
         smp("Service Mesh Performance (SMP)")
         style smp fill:red
-        observability-misc --> kuberhealthy --> smp
+        kepler(Keppler)
+        style kepler fill:red
+        observability-misc --> kuberhealthy & smp & kepler
 
     end
 ```
@@ -989,18 +1009,15 @@ flowchart TD
         style capsule fill:red
         clusternet(Clusternet)
         style clusternet fill:red
-        opc(Open Policy Containers)
-        style opc fill:red
+        %% Removes old images from Kubernetes nodes (drop 1)
         eraser(Eraser)
         style eraser fill:red
-        merbridge(Merbridge)
+        %% Speeds up service mesh (drop 1)
+        merbridge(Merbridge *)
         style merbridge fill:red
-        kepler(Keppler)
-        style kepler fill:red
+        %% Compatible with ETCD (drop 1)
         xline(Xline)
         style xline fill:red
-        kcl(KCL)
-        style kcl fill:red
     end
 ```
 
