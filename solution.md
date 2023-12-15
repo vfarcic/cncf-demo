@@ -508,11 +508,13 @@ flowchart TD
         %% ----------------
         dashboards{{Dashboards}}
         style dashboards fill:red
-        dashboards-skooner(Skooner)
-        style dashboards-skooner fill:red
-        dashboards-kubernetes(Kubernetes Dashboard)
-        style dashboards-kubernetes fill:red
-        dashboards --> dashboards-skooner & dashboards-kubernetes --> metrics
+        skooner(Skooner)
+        style skooner fill:red
+        kubernetes-dashboard(Kubernetes Dashboard)
+        style kubernetes-dashboard fill:red
+        meshery(Meshery)
+        style meshery fill:red
+        dashboards --> skooner & kubernetes-dashboard & meshery --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -755,13 +757,18 @@ flowchart TD
         style crd-operator-framework fill:red
         crd --> kubebuilder & crd-kube-rs & crd-kudo & crd-operator-framework
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
+        %% ------------------
+        %% -- Miscelaneous --
+        %% ------------------
+        idp-misc{{Miscelaneous}}
+        style idp-misc fill:red
         dev-stream(DevStream)
         style dev-stream fill:red
         dapr("Distributed Application Runtime (Dapr)")
         style dapr fill:red
+        porter(Porter)
+        style porter fill:red
+        idp-misc --> dev-stream & dapr & porter
 
     end
 ```
@@ -769,11 +776,13 @@ flowchart TD
 ```mermaid
 flowchart TD
 
-    subgraph edge["Edge & Baremetal"]
+    subgraph edge-baremetal["Edge & Baremetal"]
 
         %% ----------
         %% -- Edge --
         %% ----------
+        edge{{Edge}}
+        style edge fill:red
         akri(Akri)
         style akri fill:red
         keylime(Keylime)
@@ -786,14 +795,18 @@ flowchart TD
         style super-edge fill:red
         fabedge(FabEdge)
         style fabedge fill:red
+        edge --> akri & keylime & open-yurt & kube-edge & super-edge & fabedge --> baremetal
 
         %% ---------------
         %% -- Baremetal --
         %% ---------------
+        baremetal{{Edge}}
+        style baremetal fill:red
         metal3(Metal3)
         style metal3 fill:red
         tinkerbell(Tinkerbell)
         style tinkerbell fill:red
+        baremetal --> metal3 & tinkerbell
 
     end
 ```
@@ -875,6 +888,7 @@ flowchart TD
         carina(Carina)
         style carina fill:red
         hwameistor(HwameiStor)
+        style hwameistor fill:red
         openebs(OpenEBS)
         style openebs fill:red
         storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor & openebs --> backup
@@ -937,95 +951,129 @@ flowchart TD
         %% ---------------------------------
         %% -- Machine Learning & Big Data --
         %% ---------------------------------
+        ml{{Machine Learning & Big Data}}
+        style ml fill:red
         kube-dl(KubeDL)
         style kube-dl fill:red
         fluid(Fluid)
         style fluid fill:red
+        ml --> kube-dl & fluid
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
-        konveyor(Konveyor)
-        style konveyor fill:red
-        krator(Krator)
-        style krator fill:red
-        kured(Kured)
-        style kured fill:red
-        oras(ORAS)
-        style oras fill:red
-        porter(Porter)
-        style porter fill:red
+        %% ---------------------
+        %% -- Other Databases --
+        %% ---------------------
+        other-db{{Other Databases}}
+        style other-db fill:red
+        tikv(TiKV)
+        style tikv fill:red
+        vitess(Vitess)
+        style vitess fill:red
+        vineyard(Vineyard)
+        style vineyard fill:red
+        etcd(etcd)
+        style etcd fill:red
+        other-db --> tikv & vitess & vineyard & etcd
+
+        %% ----------------------
+        %% -- Jobs and Batches --
+        %% ----------------------
+        jobs{{Jobs and Batches}}
+        style jobs fill:red
+        volcano(Volcano)
+        style volcano fill:red
+        armada(Armada)
+        style armada fill:red
+        jobs --> volcano & armada
+
+        %% -----------------------
+        %% -- Container Runtime --
+        %% -----------------------
+        container-runtime{{Container Runtime}}
+        style container-runtime fill:red
         cri-o(CRI-O)
         style cri-o fill:red
         containerd(containerd)
         style containerd fill:red
-        etcd(etcd)
-        style etcd fill:red
+        container-runtime --> cri-o & containerd
+
+        %% ---------
+        %% -- TBD --
+        %% ---------
+        tbd{{TBD}}
+        style tbd fill:red
+        %% -- Deployment and life cycle of Konveyor (formerly Tackle) on Kubernetes and OpenShift (drop 1) --
+        konveyor(Konveyor)
+        style konveyor fill:red
+        %% -- Kubernetes Rust State Machine Operator (drop 1) --
+        krator(Krator)
+        style krator fill:red
+        %% - Kubernetes daemonset that performs safe automatic node reboots when the need to do so is indicated by the package management system of the underlying OS (drop 1) --
+        kured(Kured)
+        style kured fill:red
+        %% -- OCI registry client - managing content like artifacts, images, packages --
+        oras(ORAS)
+        style oras fill:red
+        %% -- Find, install and publish Kubernetes packages (drop 1) --
         artifact-hub(Artifact Hub)
         style artifact-hub fill:red
-        volcano(Volcano)
-        style volcano fill:red        
+        %% -- The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#) (drop 1) --
         grpc(gRPC)
         style grpc fill:red
+        %% -- DNS server that chains plugins (drop 1) --
         core-dns(CoreDNS)
         style core-dns fill:red
-        virtual-kubelet(Virtual Kubelet)
-        style virtual-kubelet fill:red
-        vineyard(Vineyard)
-        style vineyard fill:red
-        trickster(Trickster)
-        style trickster fill:red
-        tremor(Tremor)
-        style tremor fill:red
-        sealer(Sealer)
-        style sealer fill:red
-        vitess(Vitess)
-        style vitess fill:red
-        tikv(TiKV)
-        style tikv fill:red
-        spire(Spire)
-        style spire fill:red
+        %% -- Not maintained --
+        %% virtual-kubelet(Virtual Kubelet)
+        %% style virtual-kubelet fill:red
+        %% -- Not maintained --
+        %% tremor(Tremor)
+        %% style tremor fill:red
+        %% -- Not maintained --
+        %% sealer(Sealer)
+        %% style sealer fill:red
+        %% -- Python reference implementation of The Update Framework (TUF) (drop 1) --
         tuf("The Update Framework (TUF)")
         style tuf fill:red
+        %% -- Platform AbstRaction for SECurity service (drop 1) --
         parsec(Parsec)
         style parsec fill:red
-        inclavare-containers(Inclavare Containers)
-        style inclavare-containers fill:red
-        mtls-meshery(Meshery)
-        style mtls-meshery fill:red
+        %% -- Not maintained --
+        %% inclavare-containers(Inclavare Containers)
+        %% style inclavare-containers fill:red
+        %% -- Visibility into current and historical Kubernetes spend and resource allocation (drop 1) --
         open-cost(OpenCost)
         style open-cost fill:red
+        %% -- Control Plane for Kubernetes APIs (drop 1) --
         kcp(kcp)
         style kcp fill:red
+        %% -- Kubernetes native tool for mocking and testing API and micro-services (drop 1) --
         microcks(Microcks)
         style microcks fill:red
-        %% A network load-balancer implementation for Kubernetes using standard routing protocols (drop 1)
+        %% -- A network load-balancer implementation for Kubernetes using standard routing protocols (drop 1) --
         metallb(MetalLB)
         style metallb fill:red
-        %% Load Balancer Implementation for Kubernetes in Bare-Metal, Edge, and Virtualization (drop 1)
+        %% -- Load Balancer Implementation for Kubernetes in Bare-Metal, Edge, and Virtualization (drop 1) --
         openelb(OpenELB)
         style openelb fill:red
-        %% Multi-kubernetes-cluster batch job meta-scheduler (drop 1)
-        armada(Armada)
-        style armada fill:red
-        %% Virtual IP and load balancer for Kubernetes (drop 1)
+        %% -- Virtual IP and load balancer for Kubernetes (drop 1) --
         kube-vip(kube-vip)
         style kube-vip fill:red
-        %% Namespace management (drop 1)
+        %% -- Namespace management (drop 1) --
         capsule(Capsule)
         style capsule fill:red
-        %% Multi-cluster management. KinD setup from the quickstart does not work (drop 1)
+        %% -- Multi-cluster management. KinD setup from the quickstart does not work (drop 1) --
         clusternet(Clusternet)
         style clusternet fill:red
-        %% Removes old images from Kubernetes nodes (drop 1)
+        %% -- Removes old images from Kubernetes nodes (drop 1) --
         eraser(Eraser)
         style eraser fill:red
-        %% Speeds up service mesh (drop 1)
+        %% -- Speeds up service mesh (drop 1) --
         merbridge(Merbridge *)
         style merbridge fill:red
-        %% Compatible with ETCD (drop 1)
+        %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
         style xline fill:red
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline
     end
 ```
 
