@@ -40,13 +40,17 @@ flowchart TD
         bci{{Build Container Image}}
         click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/README.md"
         style bci fill:blue
-        bci-kbld(Carvel kbld)
-        click bci-kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md"
-        bci-lima(Lima)
-        click bci-lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
-        bci-buildpacks(Cloud Native Buildpacks / CNB)
-        click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
-        bci --> bci-kbld & bci-lima & bci-buildpacks --> registry
+        kbld(Carvel kbld)
+        click kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md"
+        lima(Lima)
+        click lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
+        buildpacks(Cloud Native Buildpacks / CNB)
+        click buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
+        ko(ko)
+        style ko fill:red
+        slimtoolkit(SlimToolkit)
+        style slimtoolkit fill:red
+        bci --> kbld & lima & buildpacks & ko & slimtoolkit --> registry
 
         %% -----------------------------------------
         %% -- Store Container Image in a Registry --
@@ -54,13 +58,15 @@ flowchart TD
         registry{{Store Container Image In A Registry}}
         click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/README.md"
         style registry fill:blue
-        registry-docker-hub(Docker Hub)
-        click registry-docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
-        registry-harbor(Harbor)
-        click registry-harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
-        registry-dragonfly(Dragonfly)
-        click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
-        registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> ddd
+        docker-hub(Docker Hub)
+        click docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
+        harbor(Harbor)
+        click harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
+        dragonfly(Dragonfly)
+        click dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
+        zot(zot)
+        style zot fill:red
+        registry --> docker-hub & harbor & dragonfly & zot --> ddd
 
         %% --------------------------------------
         %% -- Define And Deploy The App To Dev --
@@ -78,7 +84,9 @@ flowchart TD
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
         kcl(KCL)
         style kcl fill:red
-        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s & kcl --> https
+        kpt(kpt)
+        style kpt fill:red
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s & kcl & kpt --> https
 
         %% ---------------
         %% -- Use HTTPS --
@@ -404,8 +412,12 @@ flowchart TD
         click teller-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
         teller-google(Google Cloud)
         click teller-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-google.md"
-        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        sops(SOPS)
+        style sops fill:red
+        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets
         secrets --> sscsid
+        client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        client-secrets --> sops --> mtls
 
         %% -------------------------------------
         %% -- Mutual TLS And Network Policies --
@@ -603,7 +615,11 @@ flowchart TD
         style smp fill:red
         kepler(Keppler)
         style kepler fill:red
-        observability-misc --> kuberhealthy & smp & kepler
+        inspektor-gadget(Inspektor Gadget)
+        style inspektor-gadget fill:red
+        trickster(Trickster)
+        style trickster fill:red
+        observability-misc --> kuberhealthy & smp & kepler & inspektor-gadget & trickster
 
     end
 ```
@@ -679,7 +695,9 @@ flowchart TD
         style pipelines-serverless-workflow fill:red
         pipecd(PipeCD)
         style pipecd fill:red
-        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd --> supply-chain
+        werf(werf)
+        style werf fill:red
+        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd & werf --> supply-chain
 
         %% ------------------
         %% -- Supply Chain --
@@ -857,7 +875,9 @@ flowchart TD
         carina(Carina)
         style carina fill:red
         hwameistor(HwameiStor)
-        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor --> backup
+        openebs(OpenEBS)
+        style openebs fill:red
+        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor & openebs --> backup
 
         %% ------------
         %% -- Backup --
@@ -979,34 +999,22 @@ flowchart TD
         style kcp fill:red
         microcks(Microcks)
         style microcks fill:red
-        sops(SOPS)
-        style sops fill:red
-        slimtoolkit(SlimToolkit)
-        style slimtoolkit fill:red
-        werf(werf)
-        style werf fill:red
-        openebs(OpenEBS)
-        style openebs fill:red
+        %% A network load-balancer implementation for Kubernetes using standard routing protocols (drop 1)
         metallb(MetalLB)
         style metallb fill:red
-        trickster(Trickster)
-        style trickster fill:red
+        %% Load Balancer Implementation for Kubernetes in Bare-Metal, Edge, and Virtualization (drop 1)
         openelb(OpenELB)
         style openelb fill:red
-        inspektor-gadget(Inspektor Gadget)
-        style inspektor-gadget fill:red
-        ko(ko)
-        style ko fill:red
+        %% Multi-kubernetes-cluster batch job meta-scheduler (drop 1)
         armada(Armada)
         style armada fill:red
-        zot(zot)
-        style zot fill:red
-        kpt(kpt)
-        style kpt fill:red
+        %% Virtual IP and load balancer for Kubernetes (drop 1)
         kube-vip(kube-vip)
         style kube-vip fill:red
+        %% Namespace management (drop 1)
         capsule(Capsule)
         style capsule fill:red
+        %% Multi-cluster management. KinD setup from the quickstart does not work (drop 1)
         clusternet(Clusternet)
         style clusternet fill:red
         %% Removes old images from Kubernetes nodes (drop 1)

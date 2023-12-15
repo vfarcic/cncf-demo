@@ -375,7 +375,7 @@ flowchart TD
 | --- | --- | --- | --- |
 | Admission Controller Policies | Kyverno<br />Open Policy Agent (OPA) With Gatekeeper<br />Cloud Custodian<br />Kubewarden<br />Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | N/A |
 | Runtime Policies | KubeArmor<br />Falco | Tuesday, January 16, 2024 | N/A |
-| Secrets Management | External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller | Tuesday, January 23, 2024 | N/A |
+| Secrets Management | External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller<br />SOPS | Tuesday, January 23, 2024 | N/A |
 | Mutual TLS And Network Policies | Istio<br />LinkerD (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
 | Scanning & Signing | Oshrat Nir - Kubescape<br />Notary<br />SPIFFE & SPIRE<br />Open Policy Containers | Tuesday, February 6, 2024 | N/A |
 | Access Control | Hexa<br />Dex<br />Athenz<br />Keycloak<br />Paralus<br />OpenFGA<br />ContainerSSH | Tuesday, February 13, 2024 | N/A |

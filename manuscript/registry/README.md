@@ -43,3 +43,4 @@ Second because **Nydus knows which part of the image is essential for the start-
 * [Docker Hub](docker-hub.md)
 * [Harbor](harbor.md)
 * [Dragonfly](dragonfly.md)
+* **zot** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
