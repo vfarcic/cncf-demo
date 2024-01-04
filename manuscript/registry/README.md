@@ -29,7 +29,7 @@ Dragonfly additionally has a sub-project called [Nydus](https://nydus.dev/) that
 
 The Dragonfly/Nydus combo is powerful. 
 
-First because **Nydus-formatted images are made up of smaller pieces that can be moved around independently of one another.** This combined with using Dragonfly's P2P network can take advantage of every node’s bandwidth, greatly reducing image pull time.
+First because **Nydus-formatted images are made up of smaller pieces that can be moved around independently of one another.** This combined with using Dragonfly's P2P network can take advantage of every node's bandwidth, greatly reducing image pull time.
 
 Second because **Nydus knows which part of the image is essential for the start-up of the container** - maybe only 50 MB of data of a 1 GB image - **and it will begin by just pulling that part so the container can be started.** In this way it greatly reduces the container startup time. This is also good for serverless scenerios.  
 

@@ -1,6 +1,6 @@
 # Define and Deploy the App to Dev
 
-Our hero application is a container image, and has a home in a registry. Now they have eyes on a development environment. But in order to run in the environment, a lot of choices need to be made and documented. Like, a LOT of choices. Hero’s head is spinning!
+Our hero application is a container image, and has a home in a registry. Now they have eyes on a development environment. But in order to run in the environment, a lot of choices need to be made and documented. Like, a LOT of choices. Hero's head is spinning!
 
 The act of specifying these choices can be referred to as *configuring* or *defining* the application. The majority of cloud native platforms and frameworks define their configurations via YAML files.  It is best practice to define your application declaratively in a way that can be stored and versioned.
 
@@ -14,11 +14,11 @@ When defining an application, what types of things need to get configured, exact
 
 * **Application-specific configuration** - This includes environment-dependent values that are used by the application. An example would be if your application needs to connect to a certain database in development but then a different database in production. Also what other applications and third-party services are supporting this application? How does this application connect to those, and with what credentials?
 
-* **Infrastructure configuration** - On what physical infrastructure does this application run? In your company’s data center, or in the cloud?  If the cloud, which provider? Under what account? How is the compute accessed and manipulated every time a change needs to be made? How are permissions given and managed?
+* **Infrastructure configuration** - On what physical infrastructure does this application run? In your company's data center, or in the cloud?  If the cloud, which provider? Under what account? How is the compute accessed and manipulated every time a change needs to be made? How are permissions given and managed?
 
 * **Kubernetes-specific components** - Kubernetes itself has many resource objects that help to describe an application deployment - these need to be defined and managed too. Some examples are Deployments, Roles, Namespaces, Services, Persistent Volume Claims, ConfigMaps, and ServiceAccounts, to name a few.
 
-Let’s help Hero do some soul-searching and define every teensy aspect of their identity! What tool is best for the job?
+Let's help Hero do some soul-searching and define every teensy aspect of their identity! What tool is best for the job?
 
 ## Choice 1: Helm
 
@@ -50,7 +50,7 @@ This declarative approach to configuration customization has the added benefit o
 With `ytt`, you can:
 * **add programming logic to your YAML** - for example, you can externalize values to variables, extract repeated snippets to functions, and make whole sections conditional. `ytt` does this using a Python-like language called Starlark. 
 
-* **patch YAML files** - this means you can use ‘overlay’ YAML files to modify base YAML files. With patching, you can do things like matching, inserting, replacing, or removing items.
+* **patch YAML files** - this means you can use ‘overlay' YAML files to modify base YAML files. With patching, you can do things like matching, inserting, replacing, or removing items.
 
 * **make YAML files into reusable templates**
 

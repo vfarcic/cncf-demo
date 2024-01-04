@@ -8,7 +8,7 @@ type CsiPersistentVolumeSource struct {
 	//
 	// Required.
 	Driver *string `field:"required" json:"driver" yaml:"driver"`
-	// volumeHandle is the unique volume name returned by the CSI volume plugin’s CreateVolume to refer to the volume on all subsequent calls.
+	// volumeHandle is the unique volume name returned by the CSI volume plugin's CreateVolume to refer to the volume on all subsequent calls.
 	//
 	// Required.
 	VolumeHandle *string `field:"required" json:"volumeHandle" yaml:"volumeHandle"`
