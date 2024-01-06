@@ -11,7 +11,7 @@ TODO: Explanation
 
 * [Official site](https://istio.io)
 
-## Choice 2: LinkerD (SMI)
+## Choice 2: Linkerd (SMI)
 
 TODO: Explanation
 
@@ -40,7 +40,7 @@ TODO: Explanation
 ## What Is Your Choice?
 
 * [Istio](istio.md)
-* [LinkerD (SMI)](linkerd.md)
+* [Linkerd (SMI)](linkerd.md)
 * **Network Service Mesh** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Cilium and SPIFFE** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Kuma** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
