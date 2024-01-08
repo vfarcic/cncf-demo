@@ -1,6 +1,41 @@
 # Policies With Kyverno
 
-TODO: Intro
+There are five main capabilities of Kyverno:
+
+* **Resource Validation**
+<br>
+-Is it allowed? - ‘Yes’ or ‘No’ response
+<br>
+-‘No’ usually includes a custom message about WHY
+
+* **Resource Mutation**
+<br>
+-Should the resource be changed? If so, how?
+<br>
+-Good for adding information that is only known at runtime
+
+* **Resource Generation**
+<br>
+-Kyverno can create new Kubernetes resources
+<br>
+-for example, if a new namespace is created, clone a specific secret
+<br>
+*Resource generation enables multitenancy*
+
+* **Software Supply Chain**
+<br>
+-Kyverno has a rule type ‘Verify Images’ that can verify signatures & verify attestations
+<br>
+-secures container images (and other OCI artifacts)
+<br>
+*Verify images supports both Sigstore and Notary*
+
+* **Resource Clean Up**
+<br>
+-clean up any resource
+<br>
+-for example, remove old pods based on age
+
 
 ## Setup
 
