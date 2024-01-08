@@ -18,7 +18,7 @@ There are five main capabilities of Kyverno:
 <br>
 -Kyverno can create new Kubernetes resources
 <br>
--for example, if a new namespace is created, clone a specific secret
+-For example, if a new namespace is created, clone a specific secret
 <br>
 *Resource generation enables multitenancy*
 
@@ -26,15 +26,15 @@ There are five main capabilities of Kyverno:
 <br>
 -Kyverno has a rule type ‘Verify Images’ that can verify signatures & verify attestations
 <br>
--secures container images (and other OCI artifacts)
+-Secures container images and other OCI artifacts
 <br>
 *Verify images supports both Sigstore and Notary*
 
 * **Resource Clean Up**
 <br>
--clean up any resource
+-Clean up any resource
 <br>
--for example, remove old pods based on age
+-For example, remove old pods based on age
 
 
 ## Setup
