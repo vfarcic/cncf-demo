@@ -41,7 +41,7 @@ An admission controller policy is a collection of one or many rules that set exp
 
 An admission controller policy can be either *validating* or mutating.
 
-A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.  An example of a validating admission controller policy is: **Do not allow any services of type LoadBalancer to be created**. 
+A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.  An example of a validating admission controller policy is: **Do not allow any images to be run that are not from the company's internal registry**. 
 
 A *mutating* admission controller policy sets rules about whether a resource should be changed, and if so, how. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy, and then the admission controller might edit the resource before it is further validated and stored in etcd. An example of a mutating admission controller policy is: **When an ingress object is created in a certain namespace, label it with a certain label**. 
 <br>
@@ -102,4 +102,4 @@ TODO: Explanation
 * [Open Policy Agent (OPA) with Gatekeeper](gatekeeper.md)
 * [Cloud Custodian](cloud-custodian.md)
 * [Kubewarden](kubewarden.md)
-* **Validating Admission Policy** is still (June 2023) an alpha feature and, hence, not available in all Kubernetes distributions. Implementation will be added once it goes GA.
+* **Validating Admission Policy** is a beta feature as of January 2024. Implementation will be added once it goes GA.
