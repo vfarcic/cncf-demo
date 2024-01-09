@@ -30,7 +30,7 @@ First, a webhook is created that teaches the kube-API server that when it sees a
 
 Second, the kube-API sends any matching request to the *admission controller* that configured the webhook. The admission controller is a piece of software, and the software itself is different depending on what the tech is. The CNCF technologies that we are evaluating as part of this step each can act as an admission controller. Admission controllers can also be called **policy engines**. 
 
-As a side note, the term *admission controller* is confusing because unlike other types of controllers in Kubernetes, an admission controller does not run as a reconciliation loop. Instead it is activated by the aforementioned admission controller webhooks. 
+As a side note, the term *admission controller* is confusing because unlike other types of controllers in Kubernetes, an admission controller does not run as a reconciliation loop. Instead, it is activated by the aforementioned admission controller webhooks. 
 
 An admission controller policy is a collection of one or many rules that set expectations for actions that can or cannot happen in a system. 
 <br>
@@ -39,7 +39,7 @@ An admission controller policy is a collection of one or many rules that set exp
 ### Validating Admission Controller Policies Vs. Mutating Admission Controller Policies
 <br>
 
-An admission controller policy can be either *validating* or mutating.
+An admission controller policy can be either *validating* or *mutating*.
 
 A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.
 
@@ -84,7 +84,7 @@ Rego is a declarative, purpose-built policy language written specifically for OP
 
 OPA Gatekeeper is the go-to project for using OPA as a Kubernetes admission controller. 
 
-Just like Kyverno, OPA has excellect community support (over 150 Rego built-ins!), as well as a CLI to enable you to incorporate policy into your pipeline. 
+Just like Kyverno, OPA has excellent community support (over 150 Rego built-ins!), as well as a CLI to enable you to incorporate policy into your pipeline. 
 
 
 [![How to apply policies in Kubernetes using Open Policy Agent (OPA) and Gatekeeper](https://img.youtube.com/vi/14lGc7xMAe4/0.jpg)](https://youtu.be/14lGc7xMAe4)
@@ -93,7 +93,14 @@ Just like Kyverno, OPA has excellect community support (over 150 Rego built-ins!
 
 ## Choice 3: Cloud Custodian
 
-TODO: Explanation
+Cloud Custodian is a rules engine that helps you to manage your cloud resources by filtering them, tagging them, and then applying actions to your resources. Cloud Custodian policies are written in a high-level YAML DSL that focuses on readability and simplicity. 
+
+Cloud Custodian is meant to help you manage your entire cloud estate, with Kubernetes support in beta (as of January 2024). It can be run locally, on an instance, or serverless in AWS Lambda. 
+
+With Cloud Custodian, there is huge flexibility with what types of cloud resources can be managed, as well as what actions can be applied to those resources. Custodian also can do event-based policies which support both real-time enforement and serverless compute. 
+
+Cloud Custodian also has a wonderful community with over 400 contributors to the project. 
+
 
 [![Cloud Custodian - Policies? Resource Management? Something Else?](https://img.youtube.com/vi/AuXWI-Mkz9Q/0.jpg)](https://youtu.be/AuXWI-Mkz9Q)
 [![Cloud Custodian: Governance as Code That Developers Love](https://img.youtube.com/vi/lv7wR6M9CWk/0.jpg)](https://youtu.be/lv7wR6M9CWk)
