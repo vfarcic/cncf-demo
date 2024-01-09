@@ -453,11 +453,9 @@ flowchart TD
         style signing fill:blue
         notary(Notary)
         click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
-        spiffe(SPIFFE & SPIRE)
-        style spiffe fill:red
         opc(Open Policy Containers)
         style opc fill:red
-        signing --> notary & spiffe & opc --> access-control
+        signing --> notary & opc --> access-control
 
         %% --------------------
         %% -- Access Control --
@@ -1073,7 +1071,9 @@ flowchart TD
         %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
         style xline fill:red
-        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline
+        spiffe(SPIFFE & SPIRE)
+        style spiffe fill:red
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & spiffe
     end
 ```
 
