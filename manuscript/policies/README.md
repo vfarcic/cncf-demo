@@ -120,7 +120,14 @@ All of this enables policy authors to be able to write policies in a programming
 
 ## Choice 5: Validating Admission Policy
 
-TODO: Explanation
+As of January 2024, the ValidatingAdmissionPolicy Kubernetes object is beta. Once GA’d, ValidatingAdmissionPolicy will be part of the Kubernetes cluster control plane.
+
+ValidatingAdmissionPolicy is a fully declarative and Kubernetes-native way to define rules about what is or is not allowed to happen to an object in Kubernetes. ValidatingAdmissionPolicies offer a declarative, in-process alternative to validating admission webhooks. However, as the name suggests, ValidatingAdmissionPolicy is only used for validating, not mutating.
+
+ValidatingAdmissionPolicies use Common Expression Language (CEL) to declare the validation rules of a policy. CEL is an extensible, low-overhead, declarative language for expression evaluation. CEL is Turing-incomplete which means you can’t write general programs with it. This is good because it protects other Kubernetes API-server users from mistakes or malice. 
+
+A ValidatingAdmissionPolicy cannot be used without a ValidatingAdmissionPolicyBinding. A ValidatingAdmissionPolicyBinding object provides scoping - it tells Kubernetes where to use a ValidatingAdmissionPolicy. ValidatingAdmissionPolicyBindings can be parameterized.
+
 
 [![Kubernetes Validating Admission Policy Changes The Game](https://img.youtube.com/vi/EsZcDUaSUss/0.jpg)](https://youtu.be/EsZcDUaSUss)
 [![What Is ValidatingAdmissionPolicy in Kubernetes?](https://img.youtube.com/vi/Cw_GE6nQPiY/0.jpg)](https://youtu.be/Cw_GE6nQPiY)
