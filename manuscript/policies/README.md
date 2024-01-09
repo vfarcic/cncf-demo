@@ -108,7 +108,12 @@ Cloud Custodian also has a wonderful community with over 400 contributors to the
 
 ## Choice 4: Kubewarden
 
-TODO: Explanation
+Kubewarden is a policy engine for Kubernetes that allows you to write policies in any language or Domain Specific Language (DSL) that you are familiar with. Kubewarden accomplishes this by building policies using WebAssembly (wasm). 
+
+With WebAssembly, first you write code as usual, but then when you compile it you create a wasm module that you can run on any OS/architecture. With Kubewarden, the wasm module that represents a policy runs as part of its policy engine. Additionally, Kubewarden policies are OCI artifacts and can be distributed using container registries and integrated into CI/CD pipelines. 
+
+All of this enables policy authors to be able to write policies in a programming language that they’re comfortable with, using their existing tools and skills, while still providing Kubernetes Operators with all of the functionality that they need to effectively implement cluster-level policies and increase the security and reliability of their system.
+
 
 [![Kubewarden, the Universal Policy Framework](https://img.youtube.com/vi/bLQ_mtbNRUY/0.jpg)](https://youtu.be/bLQ_mtbNRUY)
 * [Official site](https://kubewarden.io)
