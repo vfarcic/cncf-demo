@@ -373,7 +373,7 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Admission Controller Policies | Jim Bugwadia - Kyverno<br />Rita Zhang - Open Policy Agent (OPA) with Gatekeeper<br />Kevin Sonney - Cloud Custodian<br />Flavio Castelli - Kubewarden<br />Tim Bannister - Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | N/A |
+| Admission Controller Policies | Jim Bugwadia - Kyverno<br />Rita Zhang - Open Policy Agent (OPA) with Gatekeeper<br />Kevin Sonney - Cloud Custodian<br />Flavio Castelli - Kubewarden<br />Tim Bannister - Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | [story](manuscript/policies/README.md) |
 | Runtime Policies | Barun Acharya - KubeArmor<br />Falco | Tuesday, January 16, 2024 | N/A |
 | Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller<br />Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | N/A |
 | Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
