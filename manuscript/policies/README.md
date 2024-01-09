@@ -41,9 +41,20 @@ An admission controller policy is a collection of one or many rules that set exp
 
 An admission controller policy can be either *validating* or mutating.
 
-A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.  An example of a validating admission controller policy is: **Do not allow any images to be run that are not from the company's internal registry**. 
+A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.
 
-A *mutating* admission controller policy sets rules about whether a resource should be changed, and if so, how. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy, and then the admission controller might edit the resource before it is further validated and stored in etcd. An example of a mutating admission controller policy is: **When an ingress object is created in a certain namespace, label it with a certain label**. 
+Here are some examples of validating admission controller policies:
+* Do not allow any images to be run that are not from the company's internal registry
+* Require all Pods to specify resource requests and limits
+* Only permit access to the system at certain times of day
+
+
+A *mutating* admission controller policy sets rules about whether a resource should be changed, and if so, how. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy, and then the admission controller might edit the resource before it is further validated and stored in etcd.
+
+Here are some examples of mutating admission controller policies:
+* When an ingress object is created in a certain namespace, label it with a certain label
+* Inject sidecar containers into pods
+* Set specific annotations on all resources
 <br>
 <br>
 ## Choice 1: Kyverno
