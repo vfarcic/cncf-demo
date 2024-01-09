@@ -30,7 +30,7 @@ First, a webhook is created that teaches the kube-API server that when it sees a
 
 Second, the kube-API sends any matching request to the *admission controller* that configured the webhook. The admission controller is a piece of software, and the software itself is different depending on what the tech is. The CNCF technologies that we are evaluating as part of this step each can act as an admission controller. Admission controllers can also be called **policy engines**. 
 
-As a side note, the term *admission controller* is confusing because unlike other types of controllers in Kubernetes, an admission controller does not run as a reconciliation loop. Instead it is activated by the aforementioned admission controller webhooks. 
+As a side note, the term *admission controller* is confusing because unlike other types of controllers in Kubernetes, an admission controller does not run as a reconciliation loop. Instead, it is activated by the aforementioned admission controller webhooks. 
 
 An admission controller policy is a collection of one or many rules that set expectations for actions that can or cannot happen in a system. 
 <br>
@@ -39,11 +39,22 @@ An admission controller policy is a collection of one or many rules that set exp
 ### Validating Admission Controller Policies Vs. Mutating Admission Controller Policies
 <br>
 
-An admission controller policy can be either *validating* or mutating.
+An admission controller policy can be either *validating* or *mutating*.
 
-A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.  An example of a validating admission controller policy is: **Do not allow any images to be run that are not from the company's internal registry**. 
+A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.
 
-A *mutating* admission controller policy sets rules about whether a resource should be changed, and if so, how. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy, and then the admission controller might edit the resource before it is further validated and stored in etcd. An example of a mutating admission controller policy is: **When an ingress object is created in a certain namespace, label it with a certain label**. 
+Here are some examples of validating admission controller policies:
+* Do not allow any images to be run that are not from the company's internal registry
+* Require all Pods to specify resource requests and limits
+* Only permit access to the system at certain times of day
+
+
+A *mutating* admission controller policy sets rules about whether a resource should be changed, and if so, how. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy, and then the admission controller might edit the resource before it is further validated and stored in etcd.
+
+Here are some examples of mutating admission controller policies:
+* When an ingress object is created in a certain namespace, label it with a certain label
+* Inject sidecar containers into pods
+* Set specific annotations on all resources
 <br>
 <br>
 ## Choice 1: Kyverno
@@ -67,7 +78,14 @@ Kyverno also has over 280 policies available to the public, many created by the 
 
 ## Choice 2: Open Policy Agent (OPA) with Gatekeeper
 
-TODO: Explanation
+Open Policy Agent (OPA) is a general-purpose policy engine that allows you to use a unified policy framework across your entire cloud native stack, not just Kubernetes. Besides Kubernetes, you can use OPA to enforce policies in microservices, CI/CD pipelines, API gateways and more. 
+
+Rego is a declarative, purpose-built policy language written specifically for OPA.
+
+OPA Gatekeeper is the go-to project for using OPA as a Kubernetes admission controller. 
+
+Just like Kyverno, OPA has excellent community support (over 150 Rego built-ins!), as well as a CLI to enable you to incorporate policy into your pipeline. 
+
 
 [![How to apply policies in Kubernetes using Open Policy Agent (OPA) and Gatekeeper](https://img.youtube.com/vi/14lGc7xMAe4/0.jpg)](https://youtu.be/14lGc7xMAe4)
 [![Open Policy Agent and Rego - the Policy Power Duo!](https://img.youtube.com/vi/FlVBw5PNKZQ/0.jpg)](https://youtu.be/FlVBw5PNKZQ)
@@ -75,7 +93,14 @@ TODO: Explanation
 
 ## Choice 3: Cloud Custodian
 
-TODO: Explanation
+Cloud Custodian is a rules engine that helps you to manage your cloud resources by filtering them, tagging them, and then applying actions to your resources. Cloud Custodian policies are written in a high-level YAML DSL that focuses on readability and simplicity. 
+
+Cloud Custodian is meant to help you manage your entire cloud estate, with Kubernetes support in beta (as of January 2024). It can be run locally, on an instance, or serverless in AWS Lambda. 
+
+With Cloud Custodian, there is huge flexibility with what types of cloud resources can be managed, as well as what actions can be applied to those resources. Custodian also can do event-based policies which support both real-time enforement and serverless compute. 
+
+Cloud Custodian also has a wonderful community with over 400 contributors to the project. 
+
 
 [![Cloud Custodian - Policies? Resource Management? Something Else?](https://img.youtube.com/vi/AuXWI-Mkz9Q/0.jpg)](https://youtu.be/AuXWI-Mkz9Q)
 [![Cloud Custodian: Governance as Code That Developers Love](https://img.youtube.com/vi/lv7wR6M9CWk/0.jpg)](https://youtu.be/lv7wR6M9CWk)
@@ -83,14 +108,26 @@ TODO: Explanation
 
 ## Choice 4: Kubewarden
 
-TODO: Explanation
+Kubewarden is a policy engine for Kubernetes that allows you to write policies in any language or Domain Specific Language (DSL) that you are familiar with. Kubewarden accomplishes this by building policies using WebAssembly (wasm). 
+
+With WebAssembly, first you write code as usual, but then when you compile it you create a wasm module that you can run on any OS/architecture. With Kubewarden, the wasm module that represents a policy runs as part of its policy engine. Additionally, Kubewarden policies are OCI artifacts and can be distributed using container registries and integrated into CI/CD pipelines. 
+
+All of this enables policy authors to be able to write policies in a programming language that they’re comfortable with, using their existing tools and skills, while still providing Kubernetes Operators with all of the functionality that they need to effectively implement cluster-level policies and increase the security and reliability of their system.
+
 
 [![Kubewarden, the Universal Policy Framework](https://img.youtube.com/vi/bLQ_mtbNRUY/0.jpg)](https://youtu.be/bLQ_mtbNRUY)
 * [Official site](https://kubewarden.io)
 
 ## Choice 5: Validating Admission Policy
 
-TODO: Explanation
+As of January 2024, the ValidatingAdmissionPolicy Kubernetes object is beta. Once GA’d, ValidatingAdmissionPolicy will be part of the Kubernetes cluster control plane.
+
+ValidatingAdmissionPolicy is a fully declarative and Kubernetes-native way to define rules about what is or is not allowed to happen to an object in Kubernetes. ValidatingAdmissionPolicies offer a declarative, in-process alternative to validating admission webhooks. However, as the name suggests, ValidatingAdmissionPolicy is only used for validating, not mutating.
+
+ValidatingAdmissionPolicies use Common Expression Language (CEL) to declare the validation rules of a policy. CEL is an extensible, low-overhead, declarative language for expression evaluation. CEL is Turing-incomplete which means you can’t write general programs with it. This is good because it protects other Kubernetes API-server users from mistakes or malice. 
+
+A ValidatingAdmissionPolicy cannot be used without a ValidatingAdmissionPolicyBinding. A ValidatingAdmissionPolicyBinding object provides scoping - it tells Kubernetes where to use a ValidatingAdmissionPolicy. ValidatingAdmissionPolicyBindings can be parameterized.
+
 
 [![Kubernetes Validating Admission Policy Changes The Game](https://img.youtube.com/vi/EsZcDUaSUss/0.jpg)](https://youtu.be/EsZcDUaSUss)
 [![What Is ValidatingAdmissionPolicy in Kubernetes?](https://img.youtube.com/vi/Cw_GE6nQPiY/0.jpg)](https://youtu.be/Cw_GE6nQPiY)
