@@ -78,7 +78,14 @@ Kyverno also has over 280 policies available to the public, many created by the 
 
 ## Choice 2: Open Policy Agent (OPA) with Gatekeeper
 
-TODO: Explanation
+Open Policy Agent (OPA) is a general-purpose policy engine that allows you to use a unified policy framework across your entire cloud native stack, not just Kubernetes. Besides Kubernetes, you can use OPA to enforce policies in microservices, CI/CD pipelines, API gateways and more. 
+
+Rego is a declarative, purpose-built policy language written specifically for OPA.
+
+OPA Gatekeeper is the go-to project for using OPA as a Kubernetes admission controller. 
+
+Just like Kyverno, OPA has excellect community support (over 150 Rego built-ins!), as well as a CLI to enable you to incorporate policy into your pipeline. 
+
 
 [![How to apply policies in Kubernetes using Open Policy Agent (OPA) and Gatekeeper](https://img.youtube.com/vi/14lGc7xMAe4/0.jpg)](https://youtu.be/14lGc7xMAe4)
 [![Open Policy Agent and Rego - the Policy Power Duo!](https://img.youtube.com/vi/FlVBw5PNKZQ/0.jpg)](https://youtu.be/FlVBw5PNKZQ)
