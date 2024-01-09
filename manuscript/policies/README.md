@@ -20,9 +20,45 @@ for example, there should not be any services of type LoadBalancer in a given na
 
 <br>
 
+### Admission Controllers - What They Are and How They Work
+
+<br>
+
+When you create an admission controller policy, two things happen. 
+
+First, a webhook is created that teaches the kube-API server that when it sees a request that pairs a certain kind of resource with a certain action (for example, create, update, or delete), the kube-API should send that request somewhere. This webhook is called an *admission controller webhook*, and basically, it is configuration for the kube-API server.
+
+Second, the kube-API sends any matching request to the *admission controller* that configured the webhook. The admission controller is a piece of software, and the software itself is different depending on what the tech is. The CNCF technologies that we are evaluating as part of this step each can act as an admission controller. Admission controllers can also be called **policy engines**. 
+
+As a side note, the term *admission controller* is confusing because unlike other types of controllers in Kubernetes, an admission controller does not run as a reconciliation loop. Instead it is activated by the aforementioned admission controller webhooks. 
+
+An admission controller policy is a collection of one or many rules that set expectations for actions that can or cannot happen in a system. 
+<br>
+<br>
+
+### Validating Admission Controller Policies Vs. Mutating Admission Controller Policies
+<br>
+
+An admission controller policy can be either *validating* or mutating.
+
+A *validating* admission controller policy sets rules about whether a certain action is allowed to be performed on a certain resource. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy and return one of two answers: “Yes, this action is allowed to be performed on this resource”, or “No, this action is not allowed to be performed on this resource”. The kube-api will then act accordingly.  An example of a validating admission controller policy is: **Do not allow any images to be run that are not from the company's internal registry**. 
+
+A *mutating* admission controller policy sets rules about whether a resource should be changed, and if so, how. After the rule is set, the admission controller software will evaluate any requests that are covered by this policy, and then the admission controller might edit the resource before it is further validated and stored in etcd. An example of a mutating admission controller policy is: **When an ingress object is created in a certain namespace, label it with a certain label**. 
+<br>
+<br>
 ## Choice 1: Kyverno
 
-TODO: Explanation
+Kyverno is a policy engine that is specifically built for Kubernetes. This has three benefits:
+
+* **Integrates with other tools in the Kubernetes ecosystem** <br>
+for example, GitOps tools and observability tools
+
+* **No need to learn a new language** <br>
+with Kyverno, policy is written in YAML
+
+* **Universal reasonablity** <br>
+
+Kyverno also has over 280 policies available to the public, many created by the community. Kyverno offers policy reports that decouple policies from policy results, and a CLI that allows you to use Kyverno in your CI/CD pipeline.
 
 [![Kubernetes-Native Policy Management With Kyverno](https://img.youtube.com/vi/DREjzfTzNpA/0.jpg)](https://youtu.be/DREjzfTzNpA)
 [![No-Code Policy with Kyverno](https://img.youtube.com/vi/JsHA1UTxLHQ/0.jpg)](https://youtu.be/JsHA1UTxLHQ)
@@ -66,4 +102,4 @@ TODO: Explanation
 * [Open Policy Agent (OPA) with Gatekeeper](gatekeeper.md)
 * [Cloud Custodian](cloud-custodian.md)
 * [Kubewarden](kubewarden.md)
-* **Validating Admission Policy** is still (June 2023) an alpha feature and, hence, not available in all Kubernetes distributions. Implementation will be added once it goes GA.
+* **Validating Admission Policy** is a beta feature as of January 2024. Implementation will be added once it goes GA.
