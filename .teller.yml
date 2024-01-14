@@ -3,9 +3,9 @@ providers:
   google_secretmanager:
     env:
       AWS_ACCESS_KEY_ID:
-        path: projects/vfarcic/secrets/aws-access-key-id/versions/3
+        path: projects/vfarcic/secrets/aws-access-key-id/versions/4
       AWS_SECRET_ACCESS_KEY:
-        path: projects/vfarcic/secrets/aws-secret-access-key/versions/3
+        path: projects/vfarcic/secrets/aws-secret-access-key/versions/4
       AWS_ACCOUNT_ID:
         path: projects/vfarcic/secrets/aws-account-id/versions/1
       GITHUB_TOKEN:

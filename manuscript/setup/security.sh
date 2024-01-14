@@ -179,6 +179,39 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
 fi
 
+################
+# Setup GitOps #
+################
+
+kubectl create namespace production
+
+gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--margin "1 2" --padding "2 4" \
+    'We are about to install Argo CD.' \
+    'If you prefer a solution other than Argo CD for GitOps,
+  please go back to the prod.md or an earlier chapter.'
+
+gum confirm "
+Continue?
+" || exit 0
+
+REPO_URL=$(git config --get remote.origin.url)
+
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" argocd/apps.yaml
+
+helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values argocd/helm-values.yaml --wait
+
+kubectl apply --filename argocd/project.yaml
+
+kubectl apply --filename argocd/apps.yaml
+
+GITOPS_APP=argocd
+
+echo "export GITOPS_APP=$GITOPS_APP" >> .env
+
+yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
+
 #################
 # Setup Ingress #
 #################
@@ -234,39 +267,6 @@ yq --inplace ".ingress.host = \"$INGRESS_IP.nip.io\"" settings.yaml
 
 echo "export INGRESS_CLASSNAME=contour" >> .env
 yq --inplace ".ingress.classname = \"contour\"" settings.yaml
-
-################
-# Setup GitOps #
-################
-
-kubectl create namespace production
-
-gum style \
-	--foreground 212 --border-foreground 212 --border double \
-	--margin "1 2" --padding "2 4" \
-    'We are about to install Argo CD.' \
-    'If you prefer a solution other than Argo CD for GitOps,
-  please go back to the prod.md or an earlier chapter.'
-
-gum confirm "
-Continue?
-" || exit 0
-
-REPO_URL=$(git config --get remote.origin.url)
-
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" argocd/apps.yaml
-
-helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values argocd/helm-values.yaml --wait
-
-kubectl apply --filename argocd/project.yaml
-
-kubectl apply --filename argocd/apps.yaml
-
-GITOPS_APP=argocd
-
-echo "export GITOPS_APP=$GITOPS_APP" >> .env
-
-yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 
 #################
 # Setup The App #

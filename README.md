@@ -29,8 +29,8 @@ flowchart TD
         style red fill:red
         blue{{Make a choice}}
         style blue fill:blue
-        blue(Chosen by viewers)
-        style blue fill:green
+        green(Chosen by viewers)
+        style green fill:green
 
     end
 ```
@@ -214,8 +214,10 @@ flowchart TD
         dev-done((Chapter End))
 
     end
+```
 
-    Development-->Production
+```mermaid
+flowchart TD
 
     subgraph Production
 
@@ -329,18 +331,67 @@ flowchart TD
         style db-production-carvel fill:green
         db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
-        prod-done((Chapter End)) --> continue
-
-        continue((The be continued...))
+        prod-done((Chapter End))
         
     end
+```
 
-    Production-->Destroy
+```mermaid
+flowchart TD
 
-    subgraph Destroy
+    subgraph Security
 
-        destroy((Destroy Everything))
-        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy/dev.md"
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-security((Setup))
+        click setup-security "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/security.md"
+
+        %% -- Setup Connections --
+        setup-security-->policies
+
+        %% -----------------------------------
+        %% -- Admission Controller Policies --
+        %% -----------------------------------
+        policies{{Admission Controller Policies}}
+        style policies fill:blue
+        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
+        kyverno(Kyverno)
+        click kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
+        style kyverno fill:green
+        policies-opa("Open Policy Agent (OPA) With Gatekeeper")
+        click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/gatekeeper.md"
+        cloud-custodian(Cloud Custodian)
+        click cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
+        cloud-custodian-helm(App as Helm)
+        click cloud-custodian-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-helm.md"
+        style cloud-custodian-helm fill:red
+        cloud-custodian-kustomize(App as Kustomize)
+        click cloud-custodian-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-kustomize.md"
+        cloud-custodian-cdk8s(App as cdk8s)
+        click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
+        style cloud-custodian-cdk8s fill:red
+        cloud-custodian-carvel(App as Carvel ytt)
+        click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
+        style cloud-custodian-carvel fill:red
+        kubewarden(Kubewarden)
+        click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
+        %% Wait with VAP until it's GA
+        vac(Kubernetes Validating Admission Policy)
+        style vac fill:red
+        policies-helm(App as Helm)
+        click policies-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/helm.md"
+        policies-kustomize(App as Kustomize)
+        click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
+        policies-cdk8s(App as cdk8s)
+        click policies-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cdk8s.md"
+        policies-carvel(App as Carvel ytt)
+        style policies-carvel fill:green
+        click policies-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/carvel.md"
+        policies --> kyverno & policies-opa & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> continue
+        policies --> cloud-custodian --> cloud-custodian-helm & cloud-custodian-kustomize & cloud-custodian-cdk8s & cloud-custodian-carvel --> continue
+
+        continue((The be continued...))
 
     end
 ```
