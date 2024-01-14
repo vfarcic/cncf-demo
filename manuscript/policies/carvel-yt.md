@@ -1,30 +1,23 @@
-# Policies With Kustomize
+# Policies With Carvel ytt
 
 TODO: Intro
 
 ## Do
 
 ```bash
-# TODO: kapp-controller
+cat policies/kyverno.yaml
 
 kubectl --namespace production get deployments
 
 # The Deployment was NOT created
 
-# If Gatekeeper
-export POLICY_KIND=deploymentreplicas
+kubectl describe clusterpolicy deploymentproduction
 
-kubectl describe $POLICY_KIND deploymentproduction
+yq --inplace ".replicas = 3" ytt/values-prod.yaml
 
-# Gatekeeper does not show violations, but it does enforce them.
-
-yq --inplace ".replicas = 3" cdk8s/app-prod.yaml
-
-cd cdk8s
-
-ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
-
-cd ..
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
@@ -35,8 +28,6 @@ git push
 kubectl --namespace production get deployments
 
 # Wait until the Deployment is created
-# It might take a while until Argo CD gives up on trying to
-#   reconcile the previous commit.
 
 kubectl --namespace production get pods
 
@@ -49,23 +40,15 @@ kubectl --namespace production get sqlclaims
 
 # The SqlClaim was NOT created
 
-# If Gatekeeper
-export POLICY_KIND=dbsize
+kubectl describe clusterpolicy dbcluster
 
-kubectl describe $POLICY_KIND dbcluster
+kubectl describe clusterpolicy dbproduction
 
-kubectl describe $POLICY_KIND dbproduction
+yq --inplace ".db.size = \"medium\"" ytt/values-prod.yaml
 
-# Gatekeeper (still) does not show violations, but it does
-#   enforce them.
-
-yq --inplace ".db.size = \"medium\"" cdk8s/app-prod.yaml
-
-cd cdk8s
-
-ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
-
-cd ..
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
@@ -74,6 +57,8 @@ git commit -m "DB resize"
 git push
 
 kubectl --namespace production get sqlclaims
+
+# Wait until the SqlClaim is created
 
 kubectl --namespace production wait sqlclaim cncf-demo \
     --for=condition=ready --timeout=15m

@@ -112,7 +112,7 @@ Kubewarden is a policy engine for Kubernetes that allows you to write policies i
 
 With WebAssembly, first you write code as usual, but then when you compile it you create a wasm module that you can run on any OS/architecture. With Kubewarden, the wasm module that represents a policy runs as part of its policy engine. Additionally, Kubewarden policies are OCI artifacts and can be distributed using container registries and integrated into CI/CD pipelines. 
 
-All of this enables policy authors to be able to write policies in a programming language that they’re comfortable with, using their existing tools and skills, while still providing Kubernetes Operators with all of the functionality that they need to effectively implement cluster-level policies and increase the security and reliability of their system.
+All of this enables policy authors to be able to write policies in a programming language that they're comfortable with, using their existing tools and skills, while still providing Kubernetes Operators with all of the functionality that they need to effectively implement cluster-level policies and increase the security and reliability of their system.
 
 
 [![Kubewarden, the Universal Policy Framework](https://img.youtube.com/vi/bLQ_mtbNRUY/0.jpg)](https://youtu.be/bLQ_mtbNRUY)
@@ -120,11 +120,11 @@ All of this enables policy authors to be able to write policies in a programming
 
 ## Choice 5: Validating Admission Policy
 
-As of January 2024, the ValidatingAdmissionPolicy Kubernetes object is beta. Once GA’d, ValidatingAdmissionPolicy will be part of the Kubernetes cluster control plane.
+As of January 2024, the ValidatingAdmissionPolicy Kubernetes object is beta. Once GA'd, ValidatingAdmissionPolicy will be part of the Kubernetes cluster control plane.
 
 ValidatingAdmissionPolicy is a fully declarative and Kubernetes-native way to define rules about what is or is not allowed to happen to an object in Kubernetes. ValidatingAdmissionPolicies offer a declarative, in-process alternative to validating admission webhooks. However, as the name suggests, ValidatingAdmissionPolicy is only used for validating, not mutating.
 
-ValidatingAdmissionPolicies use Common Expression Language (CEL) to declare the validation rules of a policy. CEL is an extensible, low-overhead, declarative language for expression evaluation. CEL is Turing-incomplete which means you can’t write general programs with it. This is good because it protects other Kubernetes API-server users from mistakes or malice. 
+ValidatingAdmissionPolicies use Common Expression Language (CEL) to declare the validation rules of a policy. CEL is an extensible, low-overhead, declarative language for expression evaluation. CEL is Turing-incomplete which means you can't write general programs with it. This is good because it protects other Kubernetes API-server users from mistakes or malice. 
 
 A ValidatingAdmissionPolicy cannot be used without a ValidatingAdmissionPolicyBinding. A ValidatingAdmissionPolicyBinding object provides scoping - it tells Kubernetes where to use a ValidatingAdmissionPolicy. ValidatingAdmissionPolicyBindings can be parameterized.
 

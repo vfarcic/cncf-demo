@@ -4,9 +4,9 @@ There are five main capabilities of Kyverno:
 
 * **Resource Validation**
 <br>
--Is it allowed? - ‘Yes’ or ‘No’ response
+-Is it allowed? - 'Yes' or 'No' response
 <br>
--‘No’ usually includes a custom message about WHY
+-'No' usually includes a custom message about WHY
 
 * **Resource Mutation**
 <br>
@@ -24,7 +24,7 @@ There are five main capabilities of Kyverno:
 
 * **Software Supply Chain**
 <br>
--Kyverno has a rule type ‘Verify Images’ that can verify signatures & verify attestations
+-Kyverno has a rule type 'Verify Images' that can verify signatures & verify attestations
 <br>
 -Secures container images and other OCI artifacts
 <br>

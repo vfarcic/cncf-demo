@@ -25,7 +25,7 @@ linkerd viz install | kubectl apply --filename -
 linkerd check
 ```
 
-# Do
+# Do
 
 ```bash
 cat linkerd/namespace-production.yaml
@@ -162,7 +162,7 @@ curl http://cncf-demo.production:8080
 exit
 ```
 
-## Destroy
+## Destroy
 
 ```bash
 kubectl --namespace production delete --filename istio/mtls.yaml

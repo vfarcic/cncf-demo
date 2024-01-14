@@ -17,5 +17,6 @@ pkgs.mkShell {
     kubernetes-helm
     nodePackages.cdk8s-cli
     teller
+    ytt
   ];
 }

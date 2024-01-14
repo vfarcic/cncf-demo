@@ -50,7 +50,7 @@ This declarative approach to configuration customization has the added benefit o
 With `ytt`, you can:
 * **add programming logic to your YAML** - for example, you can externalize values to variables, extract repeated snippets to functions, and make whole sections conditional. `ytt` does this using a Python-like language called Starlark. 
 
-* **patch YAML files** - this means you can use ‘overlay' YAML files to modify base YAML files. With patching, you can do things like matching, inserting, replacing, or removing items.
+* **patch YAML files** - this means you can use 'overlay' YAML files to modify base YAML files. With patching, you can do things like matching, inserting, replacing, or removing items.
 
 * **make YAML files into reusable templates**
 

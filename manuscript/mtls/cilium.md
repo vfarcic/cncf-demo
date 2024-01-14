@@ -114,7 +114,7 @@ curl http://cncf-demo.production:8080
 # The access was allowed
 ```
 
-## Destroy
+## Destroy
 
 ```bash
 kubectl --namespace production delete --filename istio/mtls.yaml

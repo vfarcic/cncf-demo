@@ -16,7 +16,7 @@ export POLICY_KIND=deploymentreplicas
 
 kubectl describe $POLICY_KIND deploymentproduction
 
-# Gatekeeper does not show violations, but it does enforce them.
+# Gatekeeper does not show violations, but it does enforce them.
 
 cat apps/cncf-demo.yaml
 
@@ -55,7 +55,7 @@ kubectl describe $POLICY_KIND dbcluster
 
 kubectl describe $POLICY_KIND dbproduction
 
-# Gatekeeper (still) does not show violations, but it does
+# Gatekeeper (still) does not show violations, but it does
 #   enforce them.
 
 cat apps/cncf-demo.yaml
@@ -86,4 +86,4 @@ kubectl --namespace production wait sqlclaim cncf-demo \
 
 The adventure will continue soon...
 
-In the meantime... [Destroy Everything](../destroy/all.md)
+In the meantime... [Destroy Everything](../destroy/security.md)

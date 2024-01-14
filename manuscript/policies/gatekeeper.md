@@ -20,7 +20,7 @@ git commit -m "CNCF Demo"
 
 git push
 
-# Gatekeeper causes issues with Argo CD (not sure about Flux),
+# Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.
 
 helm repo add gatekeeper \

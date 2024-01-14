@@ -10,7 +10,7 @@ kubectl --namespace production get secret cncf-demo-db-password \
 
 cat yaml/prod/app.yaml
 
-# Instead of specifying the secret as `kind: Secret`,
+# Instead of specifying the secret as `kind: Secret`,
 # we could have specified it as `kind: ExternalSecret`.
 
 # Now the secret is tied to Crossplane objects and we need to

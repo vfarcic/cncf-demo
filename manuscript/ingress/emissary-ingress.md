@@ -11,7 +11,7 @@ export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 ## Do
 
 ```bash
-# Execute only if using Carvel kapp-controller
+# Execute only if using Carvel kapp-controller
 kubectl apply \
     --filename https://app.getambassador.io/yaml/emissary/3.4.0/emissary-crds.yaml
 

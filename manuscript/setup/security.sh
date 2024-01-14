@@ -30,6 +30,7 @@ echo "
 |kustomize       |If using Kustomize   |'https://kubectl.docs.kubernetes.io/installation/kustomize/'|
 |helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |
 |cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/cli/installation'    |
+|ytt             |If using Carvel ytt  |'https://carvel.dev/ytt/docs/latest/install'       |
 " | gum format
 
 gum confirm "
@@ -232,6 +233,8 @@ while [ -z "$COUNTER" ]; do
     sleep 10
     COUNTER=$(kubectl --namespace projectcontour get pods)
 done
+
+sleep 10
 
 if [[ "$HYPERSCALER" == "aws" ]]; then
 

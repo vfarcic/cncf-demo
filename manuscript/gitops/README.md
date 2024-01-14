@@ -15,7 +15,7 @@ A system managed by GitOps must have its desired state expressed declaratively.
 The desired state is stored in a way that enforces immutability, enforces versioning, and retains a complete version history. Usually, Git is used for this.
 
 3-**Resource Definitions Are Pulled Automatically**
-Software agents automatically pull the desired state declarations from the source. Here ‘software agents' refers to the GitOps tool and, again, the source is usually Git.
+Software agents automatically pull the desired state declarations from the source. Here 'software agents' refers to the GitOps tool and, again, the source is usually Git.
 
 4-**The Desired State Is Continuously Reconciled With the Actual State**
 Software agents (GitOps tools) continuously observe the actual system state and attempt to apply the desired state.

@@ -17,7 +17,7 @@ chmod +x manuscript/policies/cloud-custodian.sh
 ```bash
 kubectl --namespace production get deployments
 
-# Wait until the `cncf-demo` Deployment is created
+# Wait until the `cncf-demo` Deployment is created
 
 source custodian/bin/activate
 

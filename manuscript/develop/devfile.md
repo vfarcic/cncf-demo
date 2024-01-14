@@ -24,7 +24,7 @@ odo set namespace dev
 
 odo dev
 
-# Open http://localhost:20001 in a browser
+# Open http://localhost:20001 in a browser
 
 # Open a second terminal and navigate to the project root
 
