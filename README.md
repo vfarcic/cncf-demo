@@ -428,10 +428,11 @@ flowchart TD
 | Runtime Policies | Barun Acharya - KubeArmor<br />Thomas Labarussias - Falco | Tuesday, January 16, 2024 | [story](manuscript/runtime-policies/README.md) |
 | Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | N/A |
 | Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
-| Scanning and Signing | Oshrat Nir - Kubescape<br />Notary<br />Open Policy Containers | Tuesday, February 6, 2024 | N/A |
-| Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Paralus<br />OpenFGA<br />ContainerSSH | Tuesday, February 13, 2024 | N/A |
-| Misc | Confidential Containers | Tuesday, February 20, 2024 | N/A |
-| Chapter 3 Finale! | Whitney and Viktor! | Tuesday, February 27, 2024 | N/A |
+| Scanning | Oshrat Nir - Kubescape<br />Trivy | Tuesday, February 6, 2024 | N/A |
+| Signing | Notary<br />Sigstore<br />Open Policy Containers | Tuesday, February 13, 2024 | N/A |
+| Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Paralus<br />OpenFGA<br />ContainerSSH | Tuesday, February 20, 2024 | N/A |
+| Misc | Confidential Containers | Tuesday, February 27, 2024 | N/A |
+| Chapter 3 Finale! | Whitney and Viktor! | Tuesday, March 4, 2024 |  |
 
 ## The Format
 
