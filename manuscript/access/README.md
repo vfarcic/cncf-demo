@@ -6,12 +6,14 @@ TODO: Intro
 
 TODO: Explanation
 
+[![What Is Access Policy Orchestration? What Is Hexa?](https://img.youtube.com/vi/2TEuuPSVGCw/0.jpg)](https://youtu.be/2TEuuPSVGCw)
 * [Official site](https://hexaorchestration.org/)
 
 ## Choice 2: Dex
 
 TODO: Explanation
 
+[![What Is Dex?](https://img.youtube.com/vi/6SYV9dqwHQY/0.jpg)](https://youtu.be/6SYV9dqwHQY)
 * [Official site](https://dexidp.io)
 
 ## Choice 3: Athenz
@@ -24,12 +26,14 @@ TODO: Explanation
 
 TODO: Explanation
 
+[![Keycloak: The Open Source IAM for Modern Applications](https://img.youtube.com/vi/FPPFbKUZkME/0.jpg)](https://youtu.be/FPPFbKUZkME)
 * [Official site](https://keycloak.org)
 
 ## Choice 5: Paralus
 
 TODO: Explanation
 
+[![Hello Paralus, Goodbye RBAC Stress!](https://img.youtube.com/vi/GxdwAIutXNU/0.jpg)](https://youtu.be/GxdwAIutXNU)
 * [Official site](https://paralus.io)
 
 ## Choice 6: OpenFGA

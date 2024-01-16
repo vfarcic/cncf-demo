@@ -425,8 +425,8 @@ flowchart TD
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
 | Admission Controller Policies | Jim Bugwadia - Kyverno<br />Rita Zhang - Open Policy Agent (OPA) with Gatekeeper<br />Kevin Sonney - Cloud Custodian<br />Flavio Castelli - Kubewarden<br />Tim Bannister - Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | [story](manuscript/policies/README.md) |
-| Runtime Policies | Barun Acharya - KubeArmor<br />Falco | Tuesday, January 16, 2024 | N/A |
-| Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller<br />Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | N/A |
+| Runtime Policies | Barun Acharya - KubeArmor<br />Thomas Labarussias - Falco | Tuesday, January 16, 2024 | [story](manuscript/runtime-policies/README.md) |
+| Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | N/A |
 | Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
 | Scanning and Signing | Oshrat Nir - Kubescape<br />Notary<br />Open Policy Containers | Tuesday, February 6, 2024 | N/A |
 | Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Paralus<br />OpenFGA<br />ContainerSSH | Tuesday, February 13, 2024 | N/A |
