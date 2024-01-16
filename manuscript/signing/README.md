@@ -6,12 +6,14 @@ TODO: Intro
 
 TODO: Explanation
 
+[![Ensuring Software Authenticity: Introduction to Notary Project](https://img.youtube.com/vi/GaCAiwb3Mhw/0.jpg)](https://youtu.be/GaCAiwb3Mhw)
 * [Official site](https://notaryproject.dev)
 
 ## Choice 2: SPIFFE & SPIRE
 
 TODO: Explanation
 
+[![Solving for the Bottom Turtle with SPIFFE and SPIRE](https://img.youtube.com/vi/T-LI-evwV0w/0.jpg)](https://youtu.be/T-LI-evwV0w)
 * [Official site](https://spiffe.io)
 
 ## What Is Your Choice?
