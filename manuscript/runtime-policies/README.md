@@ -6,7 +6,7 @@ Applications running here each have their own supporting services and dependenci
 
 The answer: Runtime policies! Runtime policies help to protect Hero, Lil DeeBee, and their neighbors from security vulnerabilities and threats during their execution. These policies help to secure against unknown unknowns at runtime. But all of the applications in the cluster each have so many processes running! As the estate grows there might be hundreds of thousands or even millions of processes running at once! How can a runtime security tool even begin to monitor them all?
 
-With runtime security, monitoring is done at the kernel level of each host machine. That means that runtime security is not application-specific. A runtime security tool will look at kernel-level events such as a process being executed, a file being opened, something being accessed over the network, or a particular system being made.
+With runtime security, monitoring is done at the kernel level of each host machine. That means that runtime security is not application-specific. A runtime security tool will look at kernel-level events such as a process being executed, a file being opened, something being accessed over the network, or a particular system call being made.
 
 When one is implementing runtime policy, the first step is to monitor these kernel-level events to define expected behavior in the system. Then one can create a policy that will do something when an unexpected event occurs. What that something is depends on the tool—so let’s learn about CNCF tools that help to define and enforce runtime policy!
 
@@ -32,7 +32,7 @@ In Falco, a *threat* is an event that could endanger the system. Falco can monit
 
 A Falco Rule is a YAML file that defines the conditions under which an alert should be generated. You can make your own of course, but there are also about 70 Falco Rules that the Falco community has created and maintains. 
 
-Falco alerts can be forwarded to 50+ compatible destinations, such as Slack or Telegram. Falco also has a sub-project called Falco Talon which can take action on alerts. For example, when an alert happens then kill a container, or start collecting additional information.
+Falco alerts can be forwarded to 50+ compatible destinations, such as Slack or Telegram. Falco also has a sub-project called Falco Talon which can take action on alerts. For example, when an alert happens then kill a container, or when a different alert happens then start collecting additional information.
 
 
 [![Detecting Kubernetes Security Threats with Falco](https://img.youtube.com/vi/0tBSKRvH3xo/0.jpg)](https://youtu.be/0tBSKRvH3xo)
