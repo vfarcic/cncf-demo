@@ -426,7 +426,7 @@ flowchart TD
 | --- | --- | --- | --- |
 | Admission Controller Policies | Jim Bugwadia - Kyverno<br />Rita Zhang - Open Policy Agent (OPA) with Gatekeeper<br />Kevin Sonney - Cloud Custodian<br />Flavio Castelli - Kubewarden<br />Tim Bannister - Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | [story](manuscript/policies/README.md) |
 | Runtime Policies | Barun Acharya - KubeArmor<br />Thomas Labarussias - Falco | Tuesday, January 16, 2024 | [story](manuscript/runtime-policies/README.md) |
-| Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | N/A |
+| Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Anish Ramasekar - Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | N/A |
 | Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
 | Scanning | Oshrat Nir - Kubescape<br />Trivy | Tuesday, February 6, 2024 | N/A |
 | Signing | Notary<br />Sigstore<br />Open Policy Containers | Tuesday, February 13, 2024 | N/A |
