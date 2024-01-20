@@ -30,7 +30,7 @@ custodian run --output-dir=output policies/cloud-custodian.yaml \
 
 ## How Did You Define Your App?
 
-* **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Helm](cloud-custodian-helm.md)
 * [Kustomize](cloud-custodian-kustomize.md)
 * **Carvel ytt** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

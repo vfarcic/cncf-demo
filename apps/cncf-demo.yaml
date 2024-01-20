@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cncf-demo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    repoURL: https://github.com/vfarcic/cncf-demo
+    targetRevision: HEAD
+    path: helm/app
+    helm:
+      releaseName: cncf-demo
+      parameters:
+        - name: image.tag
+          value: v0.0.1
+        - name: ingress.host
+          value: cncf-demo.sillydemo.com
+        - name: ingress.className
+          value: nginx
+        - name: tls.enabled
+          value: "false"
+        - name: db.enabled.crossplane.google
+          value: "false"
+        - name: db.enabled.crossplane.aws
+          value: "true"
+        - name: db.enabled.crossplane.azure
+          value: "false"
+        - name: schemahero.enabled
+          value: "true"
+        - name: db.id
+          value: cncf-demo-db
+        - name: replicas
+          value: "1"
+        - name: db.size
+          value: small
+        - name: db.insecure
+          value: "true"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
