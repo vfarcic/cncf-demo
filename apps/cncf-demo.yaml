@@ -34,9 +34,9 @@ spec:
         - name: db.id
           value: cncf-demo-db
         - name: replicas
-          value: "1"
+          value: "3"
         - name: db.size
-          value: small
+          value: medium
         - name: db.insecure
           value: "true"
   destination:

@@ -5,11 +5,16 @@ TODO: Intro
 ## Do
 
 ```bash
-cat kustomize/overlays/prod/deployment-scaled.yaml
+cat apps/cncf-demo.yaml
 
-yq --inplace \
-    ".patchesStrategicMerge += \"deployment-scaled.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
+# If Argo CD
+yq --inplace ".spec.source.helm.parameters[9].value = \"3\"" \
+    apps/cncf-demo.yaml
+
+# If Flux
+yq --inplace ".spec.values.replicas = 3" apps/cncf-demo.yaml
+
+
 
 cat kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
 

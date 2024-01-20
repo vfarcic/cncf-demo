@@ -21,6 +21,8 @@ kubectl --namespace production get deployments
 
 source custodian/bin/activate
 
+cat policies/cloud-custodian.yaml
+
 custodian run --output-dir=output policies/cloud-custodian.yaml \
     --cache-period 0
 
