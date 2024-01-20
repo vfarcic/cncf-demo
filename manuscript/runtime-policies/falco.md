@@ -38,4 +38,6 @@ exit
 
 ## Continue The Adventure
 
-* [Managing Secrets](../secrets/README.md)
+The adventure will continue soon...
+
+In the meantime... [Destroy Everything](../destroy/security.md)

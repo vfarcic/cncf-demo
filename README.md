@@ -388,8 +388,21 @@ flowchart TD
         policies-carvel(App as Carvel ytt)
         style policies-carvel fill:green
         click policies-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/carvel.md"
-        policies --> kyverno & policies-opa & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> continue
-        policies --> cloud-custodian --> cloud-custodian-helm & cloud-custodian-kustomize & cloud-custodian-cdk8s & cloud-custodian-carvel --> continue
+        policies --> kyverno & policies-opa & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+        policies --> cloud-custodian --> cloud-custodian-helm & cloud-custodian-kustomize & cloud-custodian-cdk8s & cloud-custodian-carvel --> runtime-policies
+
+        %% ----------------------
+        %% -- Runtime Policies --
+        %% ----------------------
+        runtime-policies{{Runtime Policies}}
+        style runtime-policies fill:blue
+        click runtime-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/README.md"
+        kube-armor(KubeArmor)
+        click kube-armor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/kubearmor.md"
+        style kube-armor fill:green
+        falco(Falco)
+        click falco "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/falco.md"
+        runtime-policies --> kube-armor & falco --> continue
 
         continue((The be continued...))
 

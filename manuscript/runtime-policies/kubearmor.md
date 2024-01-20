@@ -48,4 +48,7 @@ kubectl --namespace production exec -it cncf-demo-controller-0 \
 
 ## Continue The Adventure
 
-* [Managing Secrets](../secrets/README.md)
+The adventure will continue soon...
+
+In the meantime... [Destroy Everything](../destroy/security.md)
+

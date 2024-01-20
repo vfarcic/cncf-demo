@@ -77,6 +77,4 @@ kubectl --namespace production wait sqlclaim cncf-demo \
 
 ## Continue The Adventure
 
-The adventure will continue soon...
-
-In the meantime... [Destroy Everything](../destroy/all.md)
+* [Runtime Policies](../runtime-policies/README.md)
