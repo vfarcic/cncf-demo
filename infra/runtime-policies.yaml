@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: only-allow-app-binary
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      control-plane: schemahero
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true  
+  process:
+    matchPaths:
+    - path: /manager
+  action: Allow
