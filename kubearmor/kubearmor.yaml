@@ -1,0 +1,3075 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.4.1
+  name: kubearmorpolicies.security.kubearmor.com
+spec:
+  group: security.kubearmor.com
+  names:
+    kind: KubeArmorPolicy
+    listKind: KubeArmorPolicyList
+    plural: kubearmorpolicies
+    shortNames:
+    - ksp
+    singular: kubearmorpolicy
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: KubeArmorPolicy is the Schema for the kubearmorpolicies API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: KubeArmorPolicySpec defines the desired state of KubeArmorPolicy
+            properties:
+              action:
+                enum:
+                - Allow
+                - Audit
+                - Block
+                type: string
+              apparmor:
+                type: string
+              capabilities:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchCapabilities:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        capability:
+                          pattern: (chown|dac_override|dac_read_search|fowner|fsetid|kill|setgid|setuid|setpcap|linux_immutable|net_bind_service|net_broadcast|net_admin|net_raw|ipc_lock|ipc_owner|sys_module|sys_rawio|sys_chroot|sys_ptrace|sys_pacct|sys_admin|sys_boot|sys_nice|sys_resource|sys_time|sys_tty_config|mknod|lease|audit_write|audit_control|setfcap|mac_override|mac_admin)$
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - capability
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                required:
+                - matchCapabilities
+                type: object
+              file:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchDirectories:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        dir:
+                          pattern: ^\/$|^\/.*\/$
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        readOnly:
+                          type: boolean
+                        recursive:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - dir
+                      type: object
+                    type: array
+                  matchPaths:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        path:
+                          pattern: ^\/+.*[^\/]$
+                          type: string
+                        readOnly:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - path
+                      type: object
+                    type: array
+                  matchPatterns:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        pattern:
+                          type: string
+                        readOnly:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - pattern
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              message:
+                type: string
+              network:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchProtocols:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        protocol:
+                          pattern: (icmp|ICMP|tcp|TCP|udp|UDP|raw|RAW)$
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - protocol
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                required:
+                - matchProtocols
+                type: object
+              process:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchDirectories:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        dir:
+                          pattern: ^\/$|^\/.*\/$
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        recursive:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - dir
+                      type: object
+                    type: array
+                  matchPaths:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        path:
+                          pattern: ^\/+.*[^\/]$
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - path
+                      type: object
+                    type: array
+                  matchPatterns:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        pattern:
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - pattern
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              selector:
+                properties:
+                  matchLabels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
+              severity:
+                maximum: 10
+                minimum: 1
+                type: integer
+              syscalls:
+                properties:
+                  matchPaths:
+                    items:
+                      properties:
+                        fromSource:
+                          items:
+                            properties:
+                              dir:
+                                type: string
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                              recursive:
+                                type: boolean
+                            type: object
+                          type: array
+                        path:
+                          pattern: (^\/+.*[^\/]$)|(^\/$|^\/.*\/$)
+                          type: string
+                        recursive:
+                          type: boolean
+                        syscall:
+                          items:
+                            enum:
+                            - read
+                            - write
+                            - open
+                            - close
+                            - stat
+                            - fstat
+                            - lstat
+                            - poll
+                            - lseek
+                            - mmap
+                            - mprotect
+                            - munmap
+                            - brk
+                            - rt_sigaction
+                            - rt_sigprocmask
+                            - rt_sigreturn
+                            - ioctl
+                            - pread64
+                            - pwrite64
+                            - readv
+                            - writev
+                            - access
+                            - pipe
+                            - select
+                            - sched_yield
+                            - mremap
+                            - msync
+                            - mincore
+                            - madvise
+                            - shmget
+                            - shmat
+                            - shmctl
+                            - dup
+                            - dup2
+                            - pause
+                            - nanosleep
+                            - getitimer
+                            - alarm
+                            - setitimer
+                            - getpid
+                            - sendfile
+                            - socket
+                            - connect
+                            - accept
+                            - sendto
+                            - recvfrom
+                            - sendmsg
+                            - recvmsg
+                            - shutdown
+                            - bind
+                            - listen
+                            - getsockname
+                            - getpeername
+                            - socketpair
+                            - setsockopt
+                            - getsockopt
+                            - clone
+                            - fork
+                            - vfork
+                            - execve
+                            - exit
+                            - wait4
+                            - kill
+                            - uname
+                            - semget
+                            - semop
+                            - semctl
+                            - shmdt
+                            - msgget
+                            - msgsnd
+                            - msgrcv
+                            - msgctl
+                            - fcntl
+                            - flock
+                            - fsync
+                            - fdatasync
+                            - truncate
+                            - ftruncate
+                            - getdents
+                            - getcwd
+                            - chdir
+                            - fchdir
+                            - rename
+                            - mkdir
+                            - rmdir
+                            - creat
+                            - link
+                            - unlink
+                            - symlink
+                            - readlink
+                            - chmod
+                            - fchmod
+                            - chown
+                            - fchown
+                            - lchown
+                            - umask
+                            - gettimeofday
+                            - getrlimit
+                            - getrusage
+                            - sysinfo
+                            - times
+                            - ptrace
+                            - getuid
+                            - syslog
+                            - getgid
+                            - setuid
+                            - setgid
+                            - geteuid
+                            - getegid
+                            - setpgid
+                            - getppid
+                            - getpgrp
+                            - setsid
+                            - setreuid
+                            - setregid
+                            - getgroups
+                            - setgroups
+                            - setresuid
+                            - getresuid
+                            - setresgid
+                            - getresgid
+                            - getpgid
+                            - setfsuid
+                            - setfsgid
+                            - getsid
+                            - capget
+                            - capset
+                            - rt_sigpending
+                            - rt_sigtimedwait
+                            - rt_sigqueueinfo
+                            - rt_sigsuspend
+                            - sigaltstack
+                            - utime
+                            - mknod
+                            - uselib
+                            - personality
+                            - ustat
+                            - statfs
+                            - fstatfs
+                            - sysfs
+                            - getpriority
+                            - setpriority
+                            - sched_setparam
+                            - sched_getparam
+                            - sched_setscheduler
+                            - sched_getscheduler
+                            - sched_get_priority_max
+                            - sched_get_priority_min
+                            - sched_rr_get_interval
+                            - mlock
+                            - munlock
+                            - mlockall
+                            - munlockall
+                            - vhangup
+                            - modify_ldt
+                            - pivot_root
+                            - _sysctl
+                            - prctl
+                            - arch_prctl
+                            - adjtimex
+                            - setrlimit
+                            - chroot
+                            - sync
+                            - acct
+                            - settimeofday
+                            - mount
+                            - umount2
+                            - swapon
+                            - swapoff
+                            - reboot
+                            - sethostname
+                            - setdomainname
+                            - iopl
+                            - ioperm
+                            - create_module
+                            - init_module
+                            - delete_module
+                            - get_kernel_syms
+                            - query_module
+                            - quotactl
+                            - nfsservctl
+                            - getpmsg
+                            - putpmsg
+                            - afs_syscall
+                            - tuxcall
+                            - security
+                            - gettid
+                            - readahead
+                            - setxattr
+                            - lsetxattr
+                            - fsetxattr
+                            - getxattr
+                            - lgetxattr
+                            - fgetxattr
+                            - listxattr
+                            - llistxattr
+                            - flistxattr
+                            - removexattr
+                            - lremovexattr
+                            - fremovexattr
+                            - tkill
+                            - time
+                            - futex
+                            - sched_setaffinity
+                            - sched_getaffinity
+                            - set_thread_area
+                            - io_setup
+                            - io_destroy
+                            - io_getevents
+                            - io_submit
+                            - io_cancel
+                            - get_thread_area
+                            - lookup_dcookie
+                            - epoll_create
+                            - epoll_ctl_old
+                            - epoll_wait_old
+                            - remap_file_pages
+                            - getdents64
+                            - set_tid_address
+                            - restart_syscall
+                            - semtimedop
+                            - fadvise64
+                            - timer_create
+                            - timer_settime
+                            - timer_gettime
+                            - timer_getoverrun
+                            - timer_delete
+                            - clock_settime
+                            - clock_gettime
+                            - clock_getres
+                            - clock_nanosleep
+                            - exit_group
+                            - epoll_wait
+                            - epoll_ctl
+                            - tgkill
+                            - utimes
+                            - vserver
+                            - mbind
+                            - set_mempolicy
+                            - get_mempolicy
+                            - mq_open
+                            - mq_unlink
+                            - mq_timedsend
+                            - mq_timedreceive
+                            - mq_notify
+                            - mq_getsetattr
+                            - kexec_load
+                            - waitid
+                            - add_key
+                            - request_key
+                            - keyctl
+                            - ioprio_set
+                            - ioprio_get
+                            - inotify_init
+                            - inotify_add_watch
+                            - inotify_rm_watch
+                            - migrate_pages
+                            - openat
+                            - mkdirat
+                            - mknodat
+                            - fchownat
+                            - futimesat
+                            - newfstatat
+                            - unlinkat
+                            - renameat
+                            - linkat
+                            - symlinkat
+                            - readlinkat
+                            - fchmodat
+                            - faccessat
+                            - pselect6
+                            - ppoll
+                            - unshare
+                            - set_robust_list
+                            - get_robust_list
+                            - splice
+                            - tee
+                            - sync_file_range
+                            - vmsplice
+                            - move_pages
+                            - utimensat
+                            - epoll_pwait
+                            - signalfd
+                            - timerfd_create
+                            - eventfd
+                            - fallocate
+                            - timerfd_settime
+                            - timerfd_gettime
+                            - accept4
+                            - signalfd4
+                            - eventfd2
+                            - epoll_create1
+                            - dup3
+                            - pipe2
+                            - inotify_init1
+                            - preadv
+                            - pwritev
+                            - rt_tgsigqueueinfo
+                            - perf_event_open
+                            - recvmmsg
+                            - fanotify_init
+                            - fanotify_mark
+                            - prlimit64
+                            - name_to_handle_at
+                            - open_by_handle_at
+                            - clock_adjtime
+                            - syncfs
+                            - sendmmsg
+                            - setns
+                            - getcpu
+                            - process_vm_readv
+                            - process_vm_writev
+                            - kcmp
+                            - finit_module
+                            - sched_setattr
+                            - sched_getattr
+                            - renameat2
+                            - seccomp
+                            - getrandom
+                            - memfd_create
+                            - kexec_file_load
+                            - bpf
+                            - execveat
+                            - userfaultfd
+                            - membarrier
+                            - mlock2
+                            - copy_file_range
+                            - preadv2
+                            - pwritev2
+                            - pkey_mprotect
+                            - pkey_alloc
+                            - pkey_free
+                            - statx
+                            - io_pgetevents
+                            - rseq
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  matchSyscalls:
+                    items:
+                      properties:
+                        fromSource:
+                          items:
+                            properties:
+                              dir:
+                                type: string
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                              recursive:
+                                type: boolean
+                            type: object
+                          type: array
+                        syscall:
+                          items:
+                            enum:
+                            - read
+                            - write
+                            - open
+                            - close
+                            - stat
+                            - fstat
+                            - lstat
+                            - poll
+                            - lseek
+                            - mmap
+                            - mprotect
+                            - munmap
+                            - brk
+                            - rt_sigaction
+                            - rt_sigprocmask
+                            - rt_sigreturn
+                            - ioctl
+                            - pread64
+                            - pwrite64
+                            - readv
+                            - writev
+                            - access
+                            - pipe
+                            - select
+                            - sched_yield
+                            - mremap
+                            - msync
+                            - mincore
+                            - madvise
+                            - shmget
+                            - shmat
+                            - shmctl
+                            - dup
+                            - dup2
+                            - pause
+                            - nanosleep
+                            - getitimer
+                            - alarm
+                            - setitimer
+                            - getpid
+                            - sendfile
+                            - socket
+                            - connect
+                            - accept
+                            - sendto
+                            - recvfrom
+                            - sendmsg
+                            - recvmsg
+                            - shutdown
+                            - bind
+                            - listen
+                            - getsockname
+                            - getpeername
+                            - socketpair
+                            - setsockopt
+                            - getsockopt
+                            - clone
+                            - fork
+                            - vfork
+                            - execve
+                            - exit
+                            - wait4
+                            - kill
+                            - uname
+                            - semget
+                            - semop
+                            - semctl
+                            - shmdt
+                            - msgget
+                            - msgsnd
+                            - msgrcv
+                            - msgctl
+                            - fcntl
+                            - flock
+                            - fsync
+                            - fdatasync
+                            - truncate
+                            - ftruncate
+                            - getdents
+                            - getcwd
+                            - chdir
+                            - fchdir
+                            - rename
+                            - mkdir
+                            - rmdir
+                            - creat
+                            - link
+                            - unlink
+                            - symlink
+                            - readlink
+                            - chmod
+                            - fchmod
+                            - chown
+                            - fchown
+                            - lchown
+                            - umask
+                            - gettimeofday
+                            - getrlimit
+                            - getrusage
+                            - sysinfo
+                            - times
+                            - ptrace
+                            - getuid
+                            - syslog
+                            - getgid
+                            - setuid
+                            - setgid
+                            - geteuid
+                            - getegid
+                            - setpgid
+                            - getppid
+                            - getpgrp
+                            - setsid
+                            - setreuid
+                            - setregid
+                            - getgroups
+                            - setgroups
+                            - setresuid
+                            - getresuid
+                            - setresgid
+                            - getresgid
+                            - getpgid
+                            - setfsuid
+                            - setfsgid
+                            - getsid
+                            - capget
+                            - capset
+                            - rt_sigpending
+                            - rt_sigtimedwait
+                            - rt_sigqueueinfo
+                            - rt_sigsuspend
+                            - sigaltstack
+                            - utime
+                            - mknod
+                            - uselib
+                            - personality
+                            - ustat
+                            - statfs
+                            - fstatfs
+                            - sysfs
+                            - getpriority
+                            - setpriority
+                            - sched_setparam
+                            - sched_getparam
+                            - sched_setscheduler
+                            - sched_getscheduler
+                            - sched_get_priority_max
+                            - sched_get_priority_min
+                            - sched_rr_get_interval
+                            - mlock
+                            - munlock
+                            - mlockall
+                            - munlockall
+                            - vhangup
+                            - modify_ldt
+                            - pivot_root
+                            - _sysctl
+                            - prctl
+                            - arch_prctl
+                            - adjtimex
+                            - setrlimit
+                            - chroot
+                            - sync
+                            - acct
+                            - settimeofday
+                            - mount
+                            - umount2
+                            - swapon
+                            - swapoff
+                            - reboot
+                            - sethostname
+                            - setdomainname
+                            - iopl
+                            - ioperm
+                            - create_module
+                            - init_module
+                            - delete_module
+                            - get_kernel_syms
+                            - query_module
+                            - quotactl
+                            - nfsservctl
+                            - getpmsg
+                            - putpmsg
+                            - afs_syscall
+                            - tuxcall
+                            - security
+                            - gettid
+                            - readahead
+                            - setxattr
+                            - lsetxattr
+                            - fsetxattr
+                            - getxattr
+                            - lgetxattr
+                            - fgetxattr
+                            - listxattr
+                            - llistxattr
+                            - flistxattr
+                            - removexattr
+                            - lremovexattr
+                            - fremovexattr
+                            - tkill
+                            - time
+                            - futex
+                            - sched_setaffinity
+                            - sched_getaffinity
+                            - set_thread_area
+                            - io_setup
+                            - io_destroy
+                            - io_getevents
+                            - io_submit
+                            - io_cancel
+                            - get_thread_area
+                            - lookup_dcookie
+                            - epoll_create
+                            - epoll_ctl_old
+                            - epoll_wait_old
+                            - remap_file_pages
+                            - getdents64
+                            - set_tid_address
+                            - restart_syscall
+                            - semtimedop
+                            - fadvise64
+                            - timer_create
+                            - timer_settime
+                            - timer_gettime
+                            - timer_getoverrun
+                            - timer_delete
+                            - clock_settime
+                            - clock_gettime
+                            - clock_getres
+                            - clock_nanosleep
+                            - exit_group
+                            - epoll_wait
+                            - epoll_ctl
+                            - tgkill
+                            - utimes
+                            - vserver
+                            - mbind
+                            - set_mempolicy
+                            - get_mempolicy
+                            - mq_open
+                            - mq_unlink
+                            - mq_timedsend
+                            - mq_timedreceive
+                            - mq_notify
+                            - mq_getsetattr
+                            - kexec_load
+                            - waitid
+                            - add_key
+                            - request_key
+                            - keyctl
+                            - ioprio_set
+                            - ioprio_get
+                            - inotify_init
+                            - inotify_add_watch
+                            - inotify_rm_watch
+                            - migrate_pages
+                            - openat
+                            - mkdirat
+                            - mknodat
+                            - fchownat
+                            - futimesat
+                            - newfstatat
+                            - unlinkat
+                            - renameat
+                            - linkat
+                            - symlinkat
+                            - readlinkat
+                            - fchmodat
+                            - faccessat
+                            - pselect6
+                            - ppoll
+                            - unshare
+                            - set_robust_list
+                            - get_robust_list
+                            - splice
+                            - tee
+                            - sync_file_range
+                            - vmsplice
+                            - move_pages
+                            - utimensat
+                            - epoll_pwait
+                            - signalfd
+                            - timerfd_create
+                            - eventfd
+                            - fallocate
+                            - timerfd_settime
+                            - timerfd_gettime
+                            - accept4
+                            - signalfd4
+                            - eventfd2
+                            - epoll_create1
+                            - dup3
+                            - pipe2
+                            - inotify_init1
+                            - preadv
+                            - pwritev
+                            - rt_tgsigqueueinfo
+                            - perf_event_open
+                            - recvmmsg
+                            - fanotify_init
+                            - fanotify_mark
+                            - prlimit64
+                            - name_to_handle_at
+                            - open_by_handle_at
+                            - clock_adjtime
+                            - syncfs
+                            - sendmmsg
+                            - setns
+                            - getcpu
+                            - process_vm_readv
+                            - process_vm_writev
+                            - kcmp
+                            - finit_module
+                            - sched_setattr
+                            - sched_getattr
+                            - renameat2
+                            - seccomp
+                            - getrandom
+                            - memfd_create
+                            - kexec_file_load
+                            - bpf
+                            - execveat
+                            - userfaultfd
+                            - membarrier
+                            - mlock2
+                            - copy_file_range
+                            - preadv2
+                            - pwritev2
+                            - pkey_mprotect
+                            - pkey_alloc
+                            - pkey_free
+                            - statx
+                            - io_pgetevents
+                            - rseq
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              tags:
+                items:
+                  type: string
+                type: array
+            type: object
+          status:
+            description: KubeArmorPolicyStatus defines the observed state of KubeArmorPolicy
+            properties:
+              status:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.4.1
+  name: kubearmorhostpolicies.security.kubearmor.com
+spec:
+  group: security.kubearmor.com
+  names:
+    kind: KubeArmorHostPolicy
+    listKind: KubeArmorHostPolicyList
+    plural: kubearmorhostpolicies
+    shortNames:
+    - hsp
+    singular: kubearmorhostpolicy
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: KubeArmorHostPolicy is the Schema for the kubearmorhostpolicies
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: KubeArmorHostPolicySpec defines the desired state of KubeArmorHostPolicy
+            properties:
+              action:
+                enum:
+                - Allow
+                - Audit
+                - Block
+                type: string
+              apparmor:
+                type: string
+              capabilities:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchCapabilities:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        capability:
+                          pattern: (chown|dac_override|dac_read_search|fowner|fsetid|kill|setgid|setuid|setpcap|linux_immutable|net_bind_service|net_broadcast|net_admin|net_raw|ipc_lock|ipc_owner|sys_module|sys_rawio|sys_chroot|sys_ptrace|sys_pacct|sys_admin|sys_boot|sys_nice|sys_resource|sys_time|sys_tty_config|mknod|lease|audit_write|audit_control|setfcap|mac_override|mac_admin)$
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - capability
+                      - fromSource
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                required:
+                - matchCapabilities
+                type: object
+              file:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchDirectories:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        dir:
+                          pattern: ^\/$|^\/.*\/$
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        readOnly:
+                          type: boolean
+                        recursive:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - dir
+                      type: object
+                    type: array
+                  matchPaths:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        path:
+                          pattern: ^\/+.*[^\/]$
+                          type: string
+                        readOnly:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - path
+                      type: object
+                    type: array
+                  matchPatterns:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        pattern:
+                          type: string
+                        readOnly:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - pattern
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              message:
+                type: string
+              network:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchProtocols:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        protocol:
+                          pattern: (icmp|ICMP|tcp|TCP|udp|UDP|raw|RAW)$
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - fromSource
+                      - protocol
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                required:
+                - matchProtocols
+                type: object
+              nodeSelector:
+                properties:
+                  matchLabels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
+              process:
+                properties:
+                  action:
+                    enum:
+                    - Allow
+                    - Audit
+                    - Block
+                    type: string
+                  matchDirectories:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        dir:
+                          pattern: ^\/$|^\/.*\/$
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        recursive:
+                          type: boolean
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - dir
+                      type: object
+                    type: array
+                  matchPaths:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        fromSource:
+                          items:
+                            properties:
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                            type: object
+                          type: array
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        path:
+                          pattern: ^\/+.*[^\/]$
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - path
+                      type: object
+                    type: array
+                  matchPatterns:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - Allow
+                          - Audit
+                          - Block
+                          type: string
+                        message:
+                          type: string
+                        ownerOnly:
+                          type: boolean
+                        pattern:
+                          type: string
+                        severity:
+                          maximum: 10
+                          minimum: 1
+                          type: integer
+                        tags:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - pattern
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              severity:
+                maximum: 10
+                minimum: 1
+                type: integer
+              syscalls:
+                properties:
+                  matchPaths:
+                    items:
+                      properties:
+                        fromSource:
+                          items:
+                            properties:
+                              dir:
+                                type: string
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                              recursive:
+                                type: boolean
+                            type: object
+                          type: array
+                        path:
+                          pattern: (^\/+.*[^\/]$)|(^\/$|^\/.*\/$)
+                          type: string
+                        recursive:
+                          type: boolean
+                        syscall:
+                          items:
+                            enum:
+                            - read
+                            - write
+                            - open
+                            - close
+                            - stat
+                            - fstat
+                            - lstat
+                            - poll
+                            - lseek
+                            - mmap
+                            - mprotect
+                            - munmap
+                            - brk
+                            - rt_sigaction
+                            - rt_sigprocmask
+                            - rt_sigreturn
+                            - ioctl
+                            - pread64
+                            - pwrite64
+                            - readv
+                            - writev
+                            - access
+                            - pipe
+                            - select
+                            - sched_yield
+                            - mremap
+                            - msync
+                            - mincore
+                            - madvise
+                            - shmget
+                            - shmat
+                            - shmctl
+                            - dup
+                            - dup2
+                            - pause
+                            - nanosleep
+                            - getitimer
+                            - alarm
+                            - setitimer
+                            - getpid
+                            - sendfile
+                            - socket
+                            - connect
+                            - accept
+                            - sendto
+                            - recvfrom
+                            - sendmsg
+                            - recvmsg
+                            - shutdown
+                            - bind
+                            - listen
+                            - getsockname
+                            - getpeername
+                            - socketpair
+                            - setsockopt
+                            - getsockopt
+                            - clone
+                            - fork
+                            - vfork
+                            - execve
+                            - exit
+                            - wait4
+                            - kill
+                            - uname
+                            - semget
+                            - semop
+                            - semctl
+                            - shmdt
+                            - msgget
+                            - msgsnd
+                            - msgrcv
+                            - msgctl
+                            - fcntl
+                            - flock
+                            - fsync
+                            - fdatasync
+                            - truncate
+                            - ftruncate
+                            - getdents
+                            - getcwd
+                            - chdir
+                            - fchdir
+                            - rename
+                            - mkdir
+                            - rmdir
+                            - creat
+                            - link
+                            - unlink
+                            - symlink
+                            - readlink
+                            - chmod
+                            - fchmod
+                            - chown
+                            - fchown
+                            - lchown
+                            - umask
+                            - gettimeofday
+                            - getrlimit
+                            - getrusage
+                            - sysinfo
+                            - times
+                            - ptrace
+                            - getuid
+                            - syslog
+                            - getgid
+                            - setuid
+                            - setgid
+                            - geteuid
+                            - getegid
+                            - setpgid
+                            - getppid
+                            - getpgrp
+                            - setsid
+                            - setreuid
+                            - setregid
+                            - getgroups
+                            - setgroups
+                            - setresuid
+                            - getresuid
+                            - setresgid
+                            - getresgid
+                            - getpgid
+                            - setfsuid
+                            - setfsgid
+                            - getsid
+                            - capget
+                            - capset
+                            - rt_sigpending
+                            - rt_sigtimedwait
+                            - rt_sigqueueinfo
+                            - rt_sigsuspend
+                            - sigaltstack
+                            - utime
+                            - mknod
+                            - uselib
+                            - personality
+                            - ustat
+                            - statfs
+                            - fstatfs
+                            - sysfs
+                            - getpriority
+                            - setpriority
+                            - sched_setparam
+                            - sched_getparam
+                            - sched_setscheduler
+                            - sched_getscheduler
+                            - sched_get_priority_max
+                            - sched_get_priority_min
+                            - sched_rr_get_interval
+                            - mlock
+                            - munlock
+                            - mlockall
+                            - munlockall
+                            - vhangup
+                            - modify_ldt
+                            - pivot_root
+                            - _sysctl
+                            - prctl
+                            - arch_prctl
+                            - adjtimex
+                            - setrlimit
+                            - chroot
+                            - sync
+                            - acct
+                            - settimeofday
+                            - mount
+                            - umount2
+                            - swapon
+                            - swapoff
+                            - reboot
+                            - sethostname
+                            - setdomainname
+                            - iopl
+                            - ioperm
+                            - create_module
+                            - init_module
+                            - delete_module
+                            - get_kernel_syms
+                            - query_module
+                            - quotactl
+                            - nfsservctl
+                            - getpmsg
+                            - putpmsg
+                            - afs_syscall
+                            - tuxcall
+                            - security
+                            - gettid
+                            - readahead
+                            - setxattr
+                            - lsetxattr
+                            - fsetxattr
+                            - getxattr
+                            - lgetxattr
+                            - fgetxattr
+                            - listxattr
+                            - llistxattr
+                            - flistxattr
+                            - removexattr
+                            - lremovexattr
+                            - fremovexattr
+                            - tkill
+                            - time
+                            - futex
+                            - sched_setaffinity
+                            - sched_getaffinity
+                            - set_thread_area
+                            - io_setup
+                            - io_destroy
+                            - io_getevents
+                            - io_submit
+                            - io_cancel
+                            - get_thread_area
+                            - lookup_dcookie
+                            - epoll_create
+                            - epoll_ctl_old
+                            - epoll_wait_old
+                            - remap_file_pages
+                            - getdents64
+                            - set_tid_address
+                            - restart_syscall
+                            - semtimedop
+                            - fadvise64
+                            - timer_create
+                            - timer_settime
+                            - timer_gettime
+                            - timer_getoverrun
+                            - timer_delete
+                            - clock_settime
+                            - clock_gettime
+                            - clock_getres
+                            - clock_nanosleep
+                            - exit_group
+                            - epoll_wait
+                            - epoll_ctl
+                            - tgkill
+                            - utimes
+                            - vserver
+                            - mbind
+                            - set_mempolicy
+                            - get_mempolicy
+                            - mq_open
+                            - mq_unlink
+                            - mq_timedsend
+                            - mq_timedreceive
+                            - mq_notify
+                            - mq_getsetattr
+                            - kexec_load
+                            - waitid
+                            - add_key
+                            - request_key
+                            - keyctl
+                            - ioprio_set
+                            - ioprio_get
+                            - inotify_init
+                            - inotify_add_watch
+                            - inotify_rm_watch
+                            - migrate_pages
+                            - openat
+                            - mkdirat
+                            - mknodat
+                            - fchownat
+                            - futimesat
+                            - newfstatat
+                            - unlinkat
+                            - renameat
+                            - linkat
+                            - symlinkat
+                            - readlinkat
+                            - fchmodat
+                            - faccessat
+                            - pselect6
+                            - ppoll
+                            - unshare
+                            - set_robust_list
+                            - get_robust_list
+                            - splice
+                            - tee
+                            - sync_file_range
+                            - vmsplice
+                            - move_pages
+                            - utimensat
+                            - epoll_pwait
+                            - signalfd
+                            - timerfd_create
+                            - eventfd
+                            - fallocate
+                            - timerfd_settime
+                            - timerfd_gettime
+                            - accept4
+                            - signalfd4
+                            - eventfd2
+                            - epoll_create1
+                            - dup3
+                            - pipe2
+                            - inotify_init1
+                            - preadv
+                            - pwritev
+                            - rt_tgsigqueueinfo
+                            - perf_event_open
+                            - recvmmsg
+                            - fanotify_init
+                            - fanotify_mark
+                            - prlimit64
+                            - name_to_handle_at
+                            - open_by_handle_at
+                            - clock_adjtime
+                            - syncfs
+                            - sendmmsg
+                            - setns
+                            - getcpu
+                            - process_vm_readv
+                            - process_vm_writev
+                            - kcmp
+                            - finit_module
+                            - sched_setattr
+                            - sched_getattr
+                            - renameat2
+                            - seccomp
+                            - getrandom
+                            - memfd_create
+                            - kexec_file_load
+                            - bpf
+                            - execveat
+                            - userfaultfd
+                            - membarrier
+                            - mlock2
+                            - copy_file_range
+                            - preadv2
+                            - pwritev2
+                            - pkey_mprotect
+                            - pkey_alloc
+                            - pkey_free
+                            - statx
+                            - io_pgetevents
+                            - rseq
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  matchSyscalls:
+                    items:
+                      properties:
+                        fromSource:
+                          items:
+                            properties:
+                              dir:
+                                type: string
+                              path:
+                                pattern: ^\/+.*[^\/]$
+                                type: string
+                              recursive:
+                                type: boolean
+                            type: object
+                          type: array
+                        syscall:
+                          items:
+                            enum:
+                            - read
+                            - write
+                            - open
+                            - close
+                            - stat
+                            - fstat
+                            - lstat
+                            - poll
+                            - lseek
+                            - mmap
+                            - mprotect
+                            - munmap
+                            - brk
+                            - rt_sigaction
+                            - rt_sigprocmask
+                            - rt_sigreturn
+                            - ioctl
+                            - pread64
+                            - pwrite64
+                            - readv
+                            - writev
+                            - access
+                            - pipe
+                            - select
+                            - sched_yield
+                            - mremap
+                            - msync
+                            - mincore
+                            - madvise
+                            - shmget
+                            - shmat
+                            - shmctl
+                            - dup
+                            - dup2
+                            - pause
+                            - nanosleep
+                            - getitimer
+                            - alarm
+                            - setitimer
+                            - getpid
+                            - sendfile
+                            - socket
+                            - connect
+                            - accept
+                            - sendto
+                            - recvfrom
+                            - sendmsg
+                            - recvmsg
+                            - shutdown
+                            - bind
+                            - listen
+                            - getsockname
+                            - getpeername
+                            - socketpair
+                            - setsockopt
+                            - getsockopt
+                            - clone
+                            - fork
+                            - vfork
+                            - execve
+                            - exit
+                            - wait4
+                            - kill
+                            - uname
+                            - semget
+                            - semop
+                            - semctl
+                            - shmdt
+                            - msgget
+                            - msgsnd
+                            - msgrcv
+                            - msgctl
+                            - fcntl
+                            - flock
+                            - fsync
+                            - fdatasync
+                            - truncate
+                            - ftruncate
+                            - getdents
+                            - getcwd
+                            - chdir
+                            - fchdir
+                            - rename
+                            - mkdir
+                            - rmdir
+                            - creat
+                            - link
+                            - unlink
+                            - symlink
+                            - readlink
+                            - chmod
+                            - fchmod
+                            - chown
+                            - fchown
+                            - lchown
+                            - umask
+                            - gettimeofday
+                            - getrlimit
+                            - getrusage
+                            - sysinfo
+                            - times
+                            - ptrace
+                            - getuid
+                            - syslog
+                            - getgid
+                            - setuid
+                            - setgid
+                            - geteuid
+                            - getegid
+                            - setpgid
+                            - getppid
+                            - getpgrp
+                            - setsid
+                            - setreuid
+                            - setregid
+                            - getgroups
+                            - setgroups
+                            - setresuid
+                            - getresuid
+                            - setresgid
+                            - getresgid
+                            - getpgid
+                            - setfsuid
+                            - setfsgid
+                            - getsid
+                            - capget
+                            - capset
+                            - rt_sigpending
+                            - rt_sigtimedwait
+                            - rt_sigqueueinfo
+                            - rt_sigsuspend
+                            - sigaltstack
+                            - utime
+                            - mknod
+                            - uselib
+                            - personality
+                            - ustat
+                            - statfs
+                            - fstatfs
+                            - sysfs
+                            - getpriority
+                            - setpriority
+                            - sched_setparam
+                            - sched_getparam
+                            - sched_setscheduler
+                            - sched_getscheduler
+                            - sched_get_priority_max
+                            - sched_get_priority_min
+                            - sched_rr_get_interval
+                            - mlock
+                            - munlock
+                            - mlockall
+                            - munlockall
+                            - vhangup
+                            - modify_ldt
+                            - pivot_root
+                            - _sysctl
+                            - prctl
+                            - arch_prctl
+                            - adjtimex
+                            - setrlimit
+                            - chroot
+                            - sync
+                            - acct
+                            - settimeofday
+                            - mount
+                            - umount2
+                            - swapon
+                            - swapoff
+                            - reboot
+                            - sethostname
+                            - setdomainname
+                            - iopl
+                            - ioperm
+                            - create_module
+                            - init_module
+                            - delete_module
+                            - get_kernel_syms
+                            - query_module
+                            - quotactl
+                            - nfsservctl
+                            - getpmsg
+                            - putpmsg
+                            - afs_syscall
+                            - tuxcall
+                            - security
+                            - gettid
+                            - readahead
+                            - setxattr
+                            - lsetxattr
+                            - fsetxattr
+                            - getxattr
+                            - lgetxattr
+                            - fgetxattr
+                            - listxattr
+                            - llistxattr
+                            - flistxattr
+                            - removexattr
+                            - lremovexattr
+                            - fremovexattr
+                            - tkill
+                            - time
+                            - futex
+                            - sched_setaffinity
+                            - sched_getaffinity
+                            - set_thread_area
+                            - io_setup
+                            - io_destroy
+                            - io_getevents
+                            - io_submit
+                            - io_cancel
+                            - get_thread_area
+                            - lookup_dcookie
+                            - epoll_create
+                            - epoll_ctl_old
+                            - epoll_wait_old
+                            - remap_file_pages
+                            - getdents64
+                            - set_tid_address
+                            - restart_syscall
+                            - semtimedop
+                            - fadvise64
+                            - timer_create
+                            - timer_settime
+                            - timer_gettime
+                            - timer_getoverrun
+                            - timer_delete
+                            - clock_settime
+                            - clock_gettime
+                            - clock_getres
+                            - clock_nanosleep
+                            - exit_group
+                            - epoll_wait
+                            - epoll_ctl
+                            - tgkill
+                            - utimes
+                            - vserver
+                            - mbind
+                            - set_mempolicy
+                            - get_mempolicy
+                            - mq_open
+                            - mq_unlink
+                            - mq_timedsend
+                            - mq_timedreceive
+                            - mq_notify
+                            - mq_getsetattr
+                            - kexec_load
+                            - waitid
+                            - add_key
+                            - request_key
+                            - keyctl
+                            - ioprio_set
+                            - ioprio_get
+                            - inotify_init
+                            - inotify_add_watch
+                            - inotify_rm_watch
+                            - migrate_pages
+                            - openat
+                            - mkdirat
+                            - mknodat
+                            - fchownat
+                            - futimesat
+                            - newfstatat
+                            - unlinkat
+                            - renameat
+                            - linkat
+                            - symlinkat
+                            - readlinkat
+                            - fchmodat
+                            - faccessat
+                            - pselect6
+                            - ppoll
+                            - unshare
+                            - set_robust_list
+                            - get_robust_list
+                            - splice
+                            - tee
+                            - sync_file_range
+                            - vmsplice
+                            - move_pages
+                            - utimensat
+                            - epoll_pwait
+                            - signalfd
+                            - timerfd_create
+                            - eventfd
+                            - fallocate
+                            - timerfd_settime
+                            - timerfd_gettime
+                            - accept4
+                            - signalfd4
+                            - eventfd2
+                            - epoll_create1
+                            - dup3
+                            - pipe2
+                            - inotify_init1
+                            - preadv
+                            - pwritev
+                            - rt_tgsigqueueinfo
+                            - perf_event_open
+                            - recvmmsg
+                            - fanotify_init
+                            - fanotify_mark
+                            - prlimit64
+                            - name_to_handle_at
+                            - open_by_handle_at
+                            - clock_adjtime
+                            - syncfs
+                            - sendmmsg
+                            - setns
+                            - getcpu
+                            - process_vm_readv
+                            - process_vm_writev
+                            - kcmp
+                            - finit_module
+                            - sched_setattr
+                            - sched_getattr
+                            - renameat2
+                            - seccomp
+                            - getrandom
+                            - memfd_create
+                            - kexec_file_load
+                            - bpf
+                            - execveat
+                            - userfaultfd
+                            - membarrier
+                            - mlock2
+                            - copy_file_range
+                            - preadv2
+                            - pwritev2
+                            - pkey_mprotect
+                            - pkey_alloc
+                            - pkey_free
+                            - statx
+                            - io_pgetevents
+                            - rseq
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                  severity:
+                    maximum: 10
+                    minimum: 1
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              tags:
+                items:
+                  type: string
+                type: array
+            required:
+            - nodeSelector
+            type: object
+          status:
+            description: KubeArmorHostPolicyStatus defines the observed state of KubeArmorHostPolicy
+            properties:
+              status:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubearmor
+  namespace: kubearmor
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubearmor-clusterrole
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - nodes
+  - namespaces
+  - configmaps
+  verbs:
+  - get
+  - patch
+  - list
+  - watch
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  - daemonsets
+  - statefulsets
+  verbs:
+  - get
+  - patch
+  - list
+  - watch
+  - update
+- apiGroups:
+  - security.kubearmor.com
+  resources:
+  - kubearmorpolicies
+  - kubearmorhostpolicies
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - delete
+- nonResourceURLs:
+  - /apis
+  - /apis/*
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubearmor-clusterrolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubearmor-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: kubearmor
+  namespace: kubearmor
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    kubearmor-app: kubearmor-relay
+  name: kubearmor
+  namespace: kubearmor
+spec:
+  ports:
+  - port: 32767
+    protocol: TCP
+    targetPort: 32767
+  selector:
+    kubearmor-app: kubearmor-relay
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    kubearmor-app: kubearmor-relay
+  name: kubearmor-relay
+  namespace: kubearmor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      kubearmor-app: kubearmor-relay
+  template:
+    metadata:
+      annotations:
+        kubearmor-policy: audited
+      labels:
+        kubearmor-app: kubearmor-relay
+    spec:
+      containers:
+      - env:
+        - name: ENABLE_STDOUT_LOGS
+          value: "false"
+        - name: ENABLE_STDOUT_ALERTS
+          value: "false"
+        - name: ENABLE_STDOUT_MSGS
+          value: "false"
+        image: kubearmor/kubearmor-relay-server:latest
+        name: kubearmor-relay-server
+        ports:
+        - containerPort: 32767
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: kubearmor
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    kubearmor-app: kubearmor
+  name: kubearmor
+  namespace: kubearmor
+spec:
+  selector:
+    matchLabels:
+      kubearmor-app: kubearmor
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/kubearmor: unconfined
+      labels:
+        kubearmor-app: kubearmor
+    spec:
+      containers:
+      - args:
+        - -gRPC=32767
+        env:
+        - name: KUBEARMOR_NODENAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: KUBEARMOR_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: kubearmor/kubearmor:stable
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - if [ -z $(pgrep kubearmor) ]; then exit 1; fi;
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        name: kubearmor
+        ports:
+        - containerPort: 32767
+        securityContext:
+          capabilities:
+            add:
+            - SETUID
+            - SETGID
+            - SETPCAP
+            - SYS_ADMIN
+            - SYS_PTRACE
+            - MAC_ADMIN
+            - SYS_RESOURCE
+            - IPC_LOCK
+            - CAP_DAC_OVERRIDE
+            - CAP_DAC_READ_SEARCH
+            drop:
+            - ALL
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/kubearmor/BPF
+          name: bpf
+        - mountPath: /lib/modules
+          name: lib-modules-path
+          readOnly: true
+        - mountPath: /sys/fs/bpf
+          name: sys-fs-bpf-path
+        - mountPath: /sys/kernel/security
+          name: sys-kernel-security-path
+        - mountPath: /sys/kernel/debug
+          name: sys-kernel-debug-path
+        - mountPath: /media/root/etc/os-release
+          name: os-release-path
+          readOnly: true
+        - mountPath: /usr/src
+          name: usr-src-path
+          readOnly: true
+        - mountPath: /etc/apparmor.d
+          name: etc-apparmor-d-path
+        - mountPath: /var/run/containerd/containerd.sock
+          name: containerd-sock-path
+          readOnly: true
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      hostPID: true
+      initContainers:
+      - image: kubearmor/kubearmor-init:stable
+        imagePullPolicy: Always
+        name: init
+        securityContext:
+          capabilities:
+            add:
+            - SETUID
+            - SETGID
+            - SETPCAP
+            - SYS_ADMIN
+            - SYS_PTRACE
+            - MAC_ADMIN
+            - SYS_RESOURCE
+            - IPC_LOCK
+            - CAP_DAC_OVERRIDE
+            - CAP_DAC_READ_SEARCH
+            drop:
+            - ALL
+          privileged: false
+        volumeMounts:
+        - mountPath: /opt/kubearmor/BPF
+          name: bpf
+        - mountPath: /lib/modules
+          name: lib-modules-path
+          readOnly: true
+        - mountPath: /sys/fs/bpf
+          name: sys-fs-bpf-path
+        - mountPath: /sys/kernel/security
+          name: sys-kernel-security-path
+        - mountPath: /sys/kernel/debug
+          name: sys-kernel-debug-path
+        - mountPath: /media/root/etc/os-release
+          name: os-release-path
+          readOnly: true
+        - mountPath: /usr/src
+          name: usr-src-path
+          readOnly: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      restartPolicy: Always
+      serviceAccountName: kubearmor
+      terminationGracePeriodSeconds: 60
+      tolerations:
+      - operator: Exists
+      volumes:
+      - emptyDir: {}
+        name: bpf
+      - hostPath:
+          path: /lib/modules
+          type: DirectoryOrCreate
+        name: lib-modules-path
+      - hostPath:
+          path: /sys/fs/bpf
+          type: Directory
+        name: sys-fs-bpf-path
+      - hostPath:
+          path: /sys/kernel/security
+          type: Directory
+        name: sys-kernel-security-path
+      - hostPath:
+          path: /sys/kernel/debug
+          type: Directory
+        name: sys-kernel-debug-path
+      - hostPath:
+          path: /etc/os-release
+          type: File
+        name: os-release-path
+      - hostPath:
+          path: /usr/src
+          type: Directory
+        name: usr-src-path
+      - hostPath:
+          path: /etc/apparmor.d
+          type: DirectoryOrCreate
+        name: etc-apparmor-d-path
+      - hostPath:
+          path: /var/run/containerd/containerd.sock
+          type: Socket
+        name: containerd-sock-path
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    kubearmor-app: kubearmor-controller
+  name: kubearmor-controller-webhook-server-cert
+  namespace: kubearmor
+stringData:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIFYjCCA0qgAwIBAgIBezANBgkqhkiG9w0BAQsFADBDMQswCQYDVQQGEwJVUzEJ
+    MAcGA1UECBMAMRIwEAYDVQQKEwlrdWJlYXJtb3IxFTATBgNVBAMTDGt1YmVhcm1v
+    ci1jYTAeFw0yNDAxMjAxOTEyMTZaFw0yNzAxMjAxOTEyMTZaMEMxCzAJBgNVBAYT
+    AlVTMQkwBwYDVQQIEwAxEjAQBgNVBAoTCWt1YmVhcm1vcjEVMBMGA1UEAxMMa3Vi
+    ZWFybW9yLWNhMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuy+1HJFl
+    5/pEyPmvI6Zh4wXX1cPu1W+5Clcf1RBCXxlc2VFU3TyTJ3LjLxnwicvtvNBCT7Um
+    /4e2lHtcDGPom7bVxMtG4kT5QZDajpaOyGAuLeHp1tquSQOh9nqYh2MYoDjwGAgl
+    Ub+GmsdnQqc4FyMdQWX6RkZ179LsNYs/AQ41H6mvIn4hgzLrAZ2uPwOGNtpf9xeA
+    HDncRvm4m3Jjd9kI7Om2U/7tITnGx7nogYiVKxSwz1yEvWVljTPczE96HHhLqUrt
+    10NGFyYZGK9Xt/GtUzAwc637IJ/7PXpZrZz6/FTyFMfBGDIMn+Yl4Ewz00BQ3nxg
+    ouO2I3m/JR5H7HKPFoIWfbXqNbAIW3Efsn+SWOBCPa3TWJqn+501bmj3VZIwaHQo
+    CNhwsQZCtVzixkvjT3cYwoYFdspMQaWi6E0BZwKaSYdaiVA4jV7vhjUMChKaC+2u
+    nO913QXpOczBKmlxM5YGa2fV1XFV+yPD9p0AD7Zxu/Adjkl6CkadT7w5k6KvnU1R
+    /GqIqV/NTkWTbUPOmlt37tvw/c/tdx0VRd+4MDR0dOpy3eU2RI9QhzJ8tLIjY6Wr
+    2+192HmMTtKf2MilXDKFbI78utk1IWDimjT9k6liLGyoL2XQg6d8YSHkgT4ozkV+
+    +1jKHLGx6H2ZSEuyLQxQQb7vRtpxAWBAnOsCAwEAAaNhMF8wDgYDVR0PAQH/BAQD
+    AgGGMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD
+    AQH/MB0GA1UdDgQWBBQ92ruYNeQA5xm3/To6c35NFz7fojANBgkqhkiG9w0BAQsF
+    AAOCAgEADPkUuJ4aEnDnOhqgTgyFXvLIIk+/6O4a+8opvmg0fzHv68tnBMtFoRBC
+    G/z/fQeyDH+3aRFdMoWx76EoERyE7Nf9nZ6bLEVTsj8CryGFnqTnVL3Epwcq3keN
+    YIs6c/ZwJHy6QY42CYZzxahlWuDL7S+Zi6AcgcwaH4vOiS9DOZP8KK4wULZU+9xh
+    YluNHm1YpLdmeYXa7UvPE16t/L63KkRSncxV/8rTnG5qLsIDyWd4lTwqhLt6XbKP
+    dhU10i/lqePY/9eWAU61T/iKTiT0Y+bHiSgjJopr6pMlyMorqmEGHomyKypBFZDA
+    I2AkrLz79xaQtQOvXp++EzZm3U8pW8nGUnOW26ddDfDdG27SSAPqdUBW7TzmZ3Ng
+    EGagL+rJJF3pT9LE8EK+2dS20bO73YcM0kJ90u7xiI41ir7RWQXtf7rQlqjGNsAJ
+    qHNvLqFjUvoKWKcgWD71dLNA2PMwonlLAdjcsaq+cKmwQW5DSK1PAIl3+FAJB09m
+    YZ34OQFpDlBm8mEfZlJWNJmjdwC/buoOdifeyYdyv3ignyO1K8ta9ec53FbfvBUV
+    HXeNh+/kRpMWlXvdN6M075Y+7FzOTvFpP3FeNVjhGw3pX0qS1dlkwbh3sX+BhvNX
+    8d0rb3M+qNIAAtHOEtPnCKh6FXibRED6cwKZ8aMrDlCDMcsH06w=
+    -----END CERTIFICATE-----
+  tls.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIF2TCCA8GgAwIBAgICBNIwDQYJKoZIhvcNAQELBQAwQzELMAkGA1UEBhMCVVMx
+    CTAHBgNVBAgTADESMBAGA1UEChMJa3ViZWFybW9yMRUwEwYDVQQDEwxrdWJlYXJt
+    b3ItY2EwHhcNMjQwMTIwMTkxMjE4WhcNMjcwMTIwMTkxMjE4WjBIMQswCQYDVQQG
+    EwJVUzEJMAcGA1UECBMAMRIwEAYDVQQKEwlrdWJlYXJtb3IxGjAYBgNVBAMTEWt1
+    YmVhcm1vci13ZWJob29rMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA
+    v03OXCC7aa9ceAb0G8FpVAO2zHgcsL2pACgEMh/WXBSE/ImUYRR4Cs3OBmwNWJfz
+    1uNdJu/NWJ26cKoXjzI0tGHgE7v3tJ7StLBLBPQ9FAMEIzKq3Xxkn0ZBgheXDYAo
+    AKRZsOHRMpvDLPXghjy1KA8629udS6HEWGmmdg3fC8rV1NZ42ch1tMn0KFQiTcbC
+    0/2Dlc8vcfH92g2l3dDsLhO4EjNAnT5xPIPnPHeaJRNr0PZtdGBXkX0s0+3LeiEe
+    zBES/aqgVLIH96rumWuAvKplEnY2bboZzKMUK2qDZ8Bl9o7oJHbRNtx3wpwrLnTL
+    Ba/vxjZC7cSHPzCws5Av4T/GmXMgg7kmicV9vqvJKYQBvpRh7jPGevrY+Ft7yPxs
+    LAwdc1zNnmYxDNZ1HR+SkHL/2y8K3xUafxiekmTzgWFe82U2ycSGC52TJDR9sI0/
+    LohEQG7/qD0r8MVdN1g9A+XPuAEoRiho0uQMYsDPBF8o0kGWREbbpvIOFhqUyCL2
+    6xyWq/x6xixjS9/JKnq+JGkGHuAC/0ofQEvhm6TiG6DdYIyeG3Kna2O92xcbfIHv
+    yu3e5i+Js9h1M1frYDGqxpFIWB7cK3JyL9PbkFcHxSx0MWvmnS9WyQQFy87s84C2
+    Eqjt5v6cVL7sGU5msTICJ+/ngWW4XIZozYoXnIauaQMCAwEAAaOB0TCBzjAOBgNV
+    HQ8BAf8EBAMCB4AwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMAwGA1Ud
+    EwEB/wQCMAAwDgYDVR0OBAcEBQECAwQFMH8GA1UdEQR4MHaCMmt1YmVhcm1vci1j
+    b250cm9sbGVyLXdlYmhvb2stc2VydmljZS5rdWJlYXJtb3Iuc3ZjgkBrdWJlYXJt
+    b3ItY29udHJvbGxlci13ZWJob29rLXNlcnZpY2Uua3ViZWFybW9yLnN2Yy5jbHVz
+    dGVyLmxvY2FsMA0GCSqGSIb3DQEBCwUAA4ICAQCW43Ex15cnH9oeiOzV+md9JX1u
+    tBKcJbPJNHLGTGuf2xdoI8LKtdRY19CFIlQ21rHWG3RehkQY/JnJdtbvqe6J81QW
+    cUbV03MbLGmuVXSuAMJwIG47keymzP/MTHaSXIgUJM2/4VvJlunq1d2hXCXF/YBt
+    n3wJR9ID6ky8VsfH/mdo2/39Ccq5kIhyrHcNOw2E6GMEkSQC+tcOhkKpHe40nmlS
+    hi5G8lSP3t7+l/jpLRhR4t1K4QiGXQNDZhTGnwaPm6FwFm3srBN7CB3AG7R7CuXt
+    G1M8SNSus8mP56Tx/gGSmXEm5qGpbBKDKBUYSfr9VvmrKz+QnVhTyajOa7gRBqqF
+    S3RaSDFJIYIFkWVVJ181BWdCQtXbYGZiQ8DNPWH0RgzX/5EFHUwTblxTP2Mepf6P
+    Crjju6+JtAm9Zcgam2z6zKlD3yxZiPDs/ZUeqHJfi9vxe7M8AwZKFCjROEdyyY0t
+    ZadScyc0KpDcKJt79ko8gZ8TbwS8c4KXpu3jTwEKD/BGAFTJb5Bfe285wAsKENdW
+    +2AqNv10tkEPFcDKKaoZNG8MYB4bKqPkAqp5nWOZwdEUhTbs2bLagsGp0iCRlXt9
+    6qdzPXvkt3o+5xxeRLkCl0ieG0GodVBhUFlor3uP+3AHmW8mqnl2ZweERRqr5t2E
+    7uPnRaCLs6cp5TcVDA==
+    -----END CERTIFICATE-----
+  tls.key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIJKgIBAAKCAgEAv03OXCC7aa9ceAb0G8FpVAO2zHgcsL2pACgEMh/WXBSE/ImU
+    YRR4Cs3OBmwNWJfz1uNdJu/NWJ26cKoXjzI0tGHgE7v3tJ7StLBLBPQ9FAMEIzKq
+    3Xxkn0ZBgheXDYAoAKRZsOHRMpvDLPXghjy1KA8629udS6HEWGmmdg3fC8rV1NZ4
+    2ch1tMn0KFQiTcbC0/2Dlc8vcfH92g2l3dDsLhO4EjNAnT5xPIPnPHeaJRNr0PZt
+    dGBXkX0s0+3LeiEezBES/aqgVLIH96rumWuAvKplEnY2bboZzKMUK2qDZ8Bl9o7o
+    JHbRNtx3wpwrLnTLBa/vxjZC7cSHPzCws5Av4T/GmXMgg7kmicV9vqvJKYQBvpRh
+    7jPGevrY+Ft7yPxsLAwdc1zNnmYxDNZ1HR+SkHL/2y8K3xUafxiekmTzgWFe82U2
+    ycSGC52TJDR9sI0/LohEQG7/qD0r8MVdN1g9A+XPuAEoRiho0uQMYsDPBF8o0kGW
+    REbbpvIOFhqUyCL26xyWq/x6xixjS9/JKnq+JGkGHuAC/0ofQEvhm6TiG6DdYIye
+    G3Kna2O92xcbfIHvyu3e5i+Js9h1M1frYDGqxpFIWB7cK3JyL9PbkFcHxSx0MWvm
+    nS9WyQQFy87s84C2Eqjt5v6cVL7sGU5msTICJ+/ngWW4XIZozYoXnIauaQMCAwEA
+    AQKCAgBcW5v9LnBMnbTu3ayMmdvYC9L89CAl0+r7gFZGPMiou99YbLOOCuvJi4Kj
+    5xaqZvH6FNqsKanh1oRkUDn/kCWR0I71+BGmyebABTyyr5etSad9tsB3Hc8Wdjy6
+    KdlrUyv841vJ4bu1yy13T12OcVCkfnXUHzrZgMfiR19uL1Q3xT1m/ARsYDMzjSyr
+    K7NECWmWHxagBN7LDCGaXGxvoqXjuPFtGAFh6PuSU7wXnUZ2D+JFiDNftAOS4fP6
+    fRt3YvYTX0rj3LR7L1hZYdS/jP8iFsGlIB027Fn4SeM68rluJZ0UY/n/YL2w1s+a
+    zPqr+wbpP/9qmlfFotQI1eD5T+tM5kxR7qUDHKd5WidTsO0cogmsrbnITG0PK/mT
+    LuO2ag2rWKVZc1SoiTjYpXoYA1FGU4QR5rwN/0cpxnFuGQTnzFuhVsyfy+ot/aiw
+    csA4uGDifCfy2G/9GDsgIwsCQEDTnGvZ+a1cmL7XZaaM7imB3mq1lIDAu/O0ifXD
+    /dFniKOovXcaA4I21kkjeOFop1J+5wVTJETDHyB8KVYHQVe2VBSyF0fMi6CcGWuC
+    IqoudOsXyhO+eGXWdShMk8mCrdi8NpChMLSNYsaPxBqNcwBc+HcPnf8sSbvNRvIf
+    4/4gftVI7Yeql+mrbS+edZVlvuCJiSv9KJhR5FLkuy1fz88dwQKCAQEA1oeaEdmv
+    dHHkFrjqO/iSfthKwKPS+fPXlve7zZSTEBsJ5x2yUDUGz9a3M/JIp50uOt0r2Egl
+    OTbUpGUXlPEIPLjzYlsFZ0NuBlCbVoHz8eDpNQVee/b3Luy5vxFbcVTfU1/Sg2mN
+    5IItw8f2XhalpQlLY8ts15quBxOuWrZ40MfnHPOEwp9EUJ0hWpBDZ5beYFjddlBs
+    DPSwRmxGR7N+SzBBv+6edSho2deHcrmwYWvDuYbFu2CxCCCjhzyRJIORmRvqE0lN
+    nGLcqQX0Sl+hJ1+Tc/1SCnSbsFfabmefTUvrWe3j37KfoE7O1ZCKAYaMFezus0BO
+    74622wYtycI4bQKCAQEA5EjVmzeKAvxRQ5LP9+6Dm8xRp837EglN8Ml89IGb8+v7
+    9/FNgP4ekBAkEQttP4FQDn7xiH0KSgPTxRvcufpPk9LgFJxHsYU0mmCmCB2w4uFB
+    6yScbZsxBYHApsv6XNERf91M0T/uZLC5rFsOr5Cw/0fR9RulCblc4InLd3VoKP2d
+    6cKuGTNCfEzZ6t7rBG9EA9pJ8bE4hfTPw4wc7RTKa2aEQt0nx7rivZ7nG5OQdHSm
+    Q7iRPdGB+v8Ks3Dw6NAhfe1ziUtK6JrbuOTfc4cQmD1lKS3jDcZaGLeINX4blpih
+    XPn90QKqYkujoBhoZpwIxnNvH9C16ON3NY5mBcAhLwKCAQEAqZr5duVYbsJgJoq5
+    PQKPp1MO/nBGqzBaINPpGWY+Qnxt/teekwTpRsYlfx8sy79bvlP/hvW64Bn2UaZO
+    14UcEw3R9c+qXPKVeM6fkOwa1f8PwMhm47DjyaiETYfGeLo1+a+HOjfoY2F8Fw3v
+    PIHBIdJQVSyN94Ml1Rh9PuCGceGpWV05d7j9BJLFvNjTQYGofBmltRVt52xINNUD
+    V0qULZOQV9KqWkvBYYChaFVgGhVd3z6q8zJFo/xR7Og4g9q08Ix+KhNJFbufYs3/
+    ThF+0icg55G+G+AG+orqeWDZM/4yqp2GC+QniVDk+zlTslMSS39PVE4iWgjFjjG7
+    X4h6nQKCAQEAuhva8UjtHhQAWFu3asSrzPdc1rYp6wFk5loNofSMZObNq8ywx+nk
+    lsRh8vdi4HQXBUpetUxjeAX4vuhBIem8uKIhhwwFsucLBJSop1M1YzILoJ1fXkg4
+    ReoLWrBO8x6K6rhLKQi63KHrLWWq6lzGv8gYloAsI2pYGsKb+07fVRO2it3pO6g7
+    msS4oC+OYDYpuA5dXEqD70mvnBd9eZcKk1anmy9bgAyPT9HdTfEWwqpa5jjxR/mm
+    wy7r1XDNJrCPrW9JUvPsJQgi+3Cz7yZ80/CxqUm8ov1DdIUj6aBe836JhxhT4fMP
+    X0WVJy7e5lBtIwT24nQv6aaQCDyIVkXVhwKCAQEAwB5mDwxq6dze0hpOT25MXX9F
+    4pthTfqEPcTT8d7j436yiw4+hQfG4dj8Dn0ZIkCC39vJXAfS+Pbtc6D4q8iEdLlo
+    f4IPD/9OIYoJ2SLkIbou5Ioi4gg/rPfSSKtx9rqaKZCUAcZpDXs0G+FWBUmyPqLM
+    VCDLEzeS/qfOXAeDFl9oNRFDPQgb1h59ttUFx9AtzmMYjVs0fdBauesBuO55cnSX
+    nMjVYdLCvb0GE50jgRfoALGCcTk26eHgiASe9iJN4OjDwqEluPiNXSLghucwv/br
+    AueLiaEriTyEN2hxnnyz6vtiNxEOsQRK1wMJnNcRaosA3UNLm+OAcSBXuuAD4w==
+    -----END RSA PRIVATE KEY-----
+type: kubernetes.io/tls
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubearmor-controller
+  namespace: kubearmor
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubearmor-controller-clusterrole
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+  - patch
+  - list
+  - watch
+  - update
+- apiGroups:
+  - security.kubearmor.com
+  resources:
+  - kubearmorpolicies
+  - kubearmorhostpolicies
+  verbs:
+  - create
+  - delete
+  - get
+  - patch
+  - list
+  - watch
+  - update
+- apiGroups:
+  - security.kubearmor.com
+  resources:
+  - kubearmorpolicies/status
+  - kubearmorhostpolicies/status
+  verbs:
+  - get
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubearmor-controller-clusterrolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubearmor-controller-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: kubearmor-controller
+  namespace: kubearmor
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kubearmor-controller-leader-election-role
+  namespace: kubearmor
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - patch
+  - list
+  - watch
+  - update
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+  - delete
+  - get
+  - patch
+  - list
+  - watch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubearmor-controller-leader-election-rolebinding
+  namespace: kubearmor
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kubearmor-controller-leader-election-role
+subjects:
+- kind: ServiceAccount
+  name: kubearmor-controller
+  namespace: kubearmor
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubearmor-controller-proxy-role
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubearmor-controller-proxy-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubearmor-controller-proxy-role
+subjects:
+- kind: ServiceAccount
+  name: kubearmor-controller
+  namespace: kubearmor
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubearmor-controller-metrics-reader-role
+rules:
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubearmor-controller-metrics-reader-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubearmor-controller-metrics-reader-role
+subjects:
+- kind: ServiceAccount
+  name: kubearmor-controller
+  namespace: kubearmor
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    kubearmor-app: kubearmor-controller
+  name: kubearmor-controller
+  namespace: kubearmor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      kubearmor-app: kubearmor-controller
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/kube-rbac-proxy: unconfined
+        container.apparmor.security.beta.kubernetes.io/manager: unconfined
+        kubearmor-policy: audited
+      labels:
+        kubearmor-app: kubearmor-controller
+    spec:
+      containers:
+      - args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=10
+        image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
+        resources:
+          limits:
+            cpu: 100m
+            memory: 40Mi
+          requests:
+            cpu: 100m
+            memory: 20Mi
+      - args:
+        - --metrics-bind-address=127.0.0.1:8080
+        - --leader-elect
+        - --health-probe-bind-address=:8081
+        command:
+        - /manager
+        image: kubearmor/kubearmor-controller:latest
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        ports:
+        - containerPort: 9443
+          name: webhook-server
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+          readOnly: true
+        - mountPath: /sys/kernel/security
+          name: sys-path
+          readOnly: true
+      priorityClassName: system-node-critical
+      serviceAccountName: kubearmor-controller
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: kubearmor-controller-webhook-server-cert
+      - hostPath:
+          path: /sys/kernel/security
+          type: Directory
+        name: sys-path
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    kubearmor-app: kubearmor-controller
+  name: kubearmor-controller-metrics-service
+  namespace: kubearmor
+spec:
+  ports:
+  - name: https
+    port: 8443
+    protocol: TCP
+    targetPort: https
+  selector:
+    kubearmor-app: kubearmor-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubearmor-controller-webhook-service
+  namespace: kubearmor
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 9443
+  selector:
+    kubearmor-app: kubearmor-controller
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: kubearmor-controller-mutating-webhook-configuration
+  namespace: kubearmor
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZZakNDQTBxZ0F3SUJBZ0lCZXpBTkJna3Foa2lHOXcwQkFRc0ZBREJETVFzd0NRWURWUVFHRXdKVlV6RUoKTUFjR0ExVUVDQk1BTVJJd0VBWURWUVFLRXdscmRXSmxZWEp0YjNJeEZUQVRCZ05WQkFNVERHdDFZbVZoY20xdgpjaTFqWVRBZUZ3MHlOREF4TWpBeE9URXlNVFphRncweU56QXhNakF4T1RFeU1UWmFNRU14Q3pBSkJnTlZCQVlUCkFsVlRNUWt3QndZRFZRUUlFd0F4RWpBUUJnTlZCQW9UQ1d0MVltVmhjbTF2Y2pFVk1CTUdBMVVFQXhNTWEzVmkKWldGeWJXOXlMV05oTUlJQ0lqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FnOEFNSUlDQ2dLQ0FnRUF1eSsxSEpGbAo1L3BFeVBtdkk2Wmg0d1hYMWNQdTFXKzVDbGNmMVJCQ1h4bGMyVkZVM1R5VEozTGpMeG53aWN2dHZOQkNUN1VtCi80ZTJsSHRjREdQb203YlZ4TXRHNGtUNVFaRGFqcGFPeUdBdUxlSHAxdHF1U1FPaDlucVloMk1Zb0Rqd0dBZ2wKVWIrR21zZG5RcWM0RnlNZFFXWDZSa1oxNzlMc05Zcy9BUTQxSDZtdkluNGhnekxyQVoydVB3T0dOdHBmOXhlQQpIRG5jUnZtNG0zSmpkOWtJN09tMlUvN3RJVG5HeDdub2dZaVZLeFN3ejF5RXZXVmxqVFBjekU5NkhIaExxVXJ0CjEwTkdGeVlaR0s5WHQvR3RVekF3YzYzN0lKLzdQWHBaclp6Ni9GVHlGTWZCR0RJTW4rWWw0RXd6MDBCUTNueGcKb3VPMkkzbS9KUjVIN0hLUEZvSVdmYlhxTmJBSVczRWZzbitTV09CQ1BhM1RXSnFuKzUwMWJtajNWWkl3YUhRbwpDTmh3c1FaQ3RWeml4a3ZqVDNjWXdvWUZkc3BNUWFXaTZFMEJad0thU1lkYWlWQTRqVjd2aGpVTUNoS2FDKzJ1Cm5POTEzUVhwT2N6QkttbHhNNVlHYTJmVjFYRlYreVBEOXAwQUQ3Wnh1L0FkamtsNkNrYWRUN3c1azZLdm5VMVIKL0dxSXFWL05Ua1dUYlVQT21sdDM3dHZ3L2MvdGR4MFZSZCs0TURSMGRPcHkzZVUyUkk5UWh6Sjh0TElqWTZXcgoyKzE5MkhtTVR0S2YyTWlsWERLRmJJNzh1dGsxSVdEaW1qVDlrNmxpTEd5b0wyWFFnNmQ4WVNIa2dUNG96a1YrCisxaktITEd4NkgyWlNFdXlMUXhRUWI3dlJ0cHhBV0JBbk9zQ0F3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUUQKQWdHR01CMEdBMVVkSlFRV01CUUdDQ3NHQVFVRkJ3TUNCZ2dyQmdFRkJRY0RBVEFQQmdOVkhSTUJBZjhFQlRBRApBUUgvTUIwR0ExVWREZ1FXQkJROTJydVlOZVFBNXhtMy9UbzZjMzVORno3Zm9qQU5CZ2txaGtpRzl3MEJBUXNGCkFBT0NBZ0VBRFBrVXVKNGFFbkRuT2hxZ1RneUZYdkxJSWsrLzZPNGErOG9wdm1nMGZ6SHY2OHRuQk10Rm9SQkMKRy96L2ZRZXlESCszYVJGZE1vV3g3NkVvRVJ5RTdOZjluWjZiTEVWVHNqOENyeUdGbnFUblZMM0Vwd2NxM2tlTgpZSXM2Yy9ad0pIeTZRWTQyQ1laenhhaGxXdURMN1MrWmk2QWNnY3dhSDR2T2lTOURPWlA4S0s0d1VMWlUrOXhoCllsdU5IbTFZcExkbWVZWGE3VXZQRTE2dC9MNjNLa1JTbmN4Vi84clRuRzVxTHNJRHlXZDRsVHdxaEx0NlhiS1AKZGhVMTBpL2xxZVBZLzllV0FVNjFUL2lLVGlUMFkrYkhpU2dqSm9wcjZwTWx5TW9ycW1FR0hvbXlLeXBCRlpEQQpJMkFrckx6Nzl4YVF0UU92WHArK0V6Wm0zVThwVzhuR1VuT1cyNmRkRGZEZEcyN1NTQVBxZFVCVzdUem1aM05nCkVHYWdMK3JKSkYzcFQ5TEU4RUsrMmRTMjBiTzczWWNNMGtKOTB1N3hpSTQxaXI3UldRWHRmN3JRbHFqR05zQUoKcUhOdkxxRmpVdm9LV0tjZ1dENzFkTE5BMlBNd29ubExBZGpjc2FxK2NLbXdRVzVEU0sxUEFJbDMrRkFKQjA5bQpZWjM0T1FGcERsQm04bUVmWmxKV05KbWpkd0MvYnVvT2RpZmV5WWR5djNpZ255TzFLOHRhOWVjNTNGYmZ2QlVWCkhYZU5oKy9rUnBNV2xYdmRONk0wNzVZKzdGek9UdkZwUDNGZU5WamhHdzNwWDBxUzFkbGt3Ymgzc1grQmh2TlgKOGQwcmIzTStxTklBQXRIT0V0UG5DS2g2RlhpYlJFRDZjd0taOGFNckRsQ0RNY3NIMDZ3PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    service:
+      name: kubearmor-controller-webhook-service
+      namespace: kubearmor
+      path: /mutate-pods
+  failurePolicy: Ignore
+  name: annotation.kubearmor.com
+  objectSelector:
+    matchExpressions:
+    - key: kubearmor-app
+      operator: DoesNotExist
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - pods
+  sideEffects: NoneOnDryRun
+---
+apiVersion: v1
+data:
+  cluster: default
+  defaultCapabilitiesPosture: audit
+  defaultFilePosture: audit
+  defaultNetworkPosture: audit
+  gRPC: "32767"
+  visibility: process,network
+kind: ConfigMap
+metadata:
+  labels:
+    kubearmor-app: kubearmor-configmap
+  name: kubearmor-config
+  namespace: kubearmor

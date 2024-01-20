@@ -14,13 +14,14 @@ yq --inplace ".spec.source.helm.parameters[9].value = \"3\"" \
 # If Flux
 yq --inplace ".spec.values.replicas = 3" apps/cncf-demo.yaml
 
-
-
-cat kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
-
+# If Argo CD
 yq --inplace \
-    ".spec.parameters.size = \"medium\"" \
-    kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
+    ".spec.source.helm.parameters[10].value = \"medium\"" \
+    apps/cncf-demo.yaml
+
+# If Flux
+yq --inplace ".spec.values.db.size = small" apps/cncf-demo.yaml
+
 
 git add .
 
