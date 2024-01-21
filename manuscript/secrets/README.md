@@ -6,7 +6,7 @@ These are all of Hero’s secrets, and they know it is absolutely vital to keep 
 
 Many of these problems can be solved with a vault. A vault is a piece of software that stores secrets safely and has an API to interact with it—and probably has other functionality too, depending on the implementation. Some examples of vaults are Hashicorp Vault, Google Secrets Manager, and Azure Key Vault.
 
-But then can Hero safely bring secrets from a vault into their Kubernetes production environment, and rotate those Kubernetes secrets when the old ones expire? How should Hero safely reference secrets in their configuration files? How can Hero centralize the management of their secrets when those secrets come from many different vaults across the organization?
+However, there are still many considerations, for example, how can Hero safely bring secrets from a vault into their Kubernetes production environment, and rotate those secrets when the old ones expire? How should Hero safely reference secrets in their configuration files? How can Hero centralize the management of their secrets when those secrets come from many different vaults across the organization?
 
 Let’s explore some secrets management tools that help with these issues.
 
@@ -20,7 +20,7 @@ External Secrets Operator (ESO) is a Kubernetes operator that talks to a vault A
 * stores the secret in Kubernetes
 * manages the lifecycle of the Kubernetes secret
 
-As of January 2024, ESO has some enticing Alpha features too, including the ability to generate a secret and store it as a Kubernetes secret (to create pull secrets for container registries, for example), and functionality to read a Kubernetes secret and store it in a vault, which is helpful to replicate secrets between clusters or to create backups of Kubernetes secrets. 
+As of January 2024, ESO has some enticing Alpha features too, including the ability to generate a secret and store it as a Kubernetes Secret object (to create pull secrets for container registries, for example), and functionality to read a Kubernetes Secret and store it in a vault, which is helpful to replicate secrets between clusters or to create backups of Kubernetes Secrets. 
 
 
 [![Manage Kubernetes Secrets With External Secrets Operator (ESO)](https://img.youtube.com/vi/SyRZe5YVCVk/0.jpg)](https://youtu.be/SyRZe5YVCVk)
@@ -40,7 +40,7 @@ Secrets Store CSI Driver integrates vaults into Kubernetes by mounting a tempora
 
 ## Choice 3: Secrets OPerationS (SOPS)
 
-Secrets OPerationS (SOPS) is an CLI tool that simplifies the process of encrypting and decrypting files containing secrets. SOPS works by encrypting the contents of a file, which can then be safely committed to a version control system like Git. When access to the secrets is required, SOPS decrypts the file and ensures that only authorized individuals or systems can view or use the sensitive data.
+Secrets OPerationS (SOPS) is a CLI tool that simplifies the process of encrypting and decrypting files containing secrets. SOPS works by encrypting the contents of a file, which can then be safely committed to a version control system like Git. When access to the secrets is required, SOPS decrypts the file and ensures that only authorized individuals or systems can view or use the sensitive data.
 
 SOPS works with many file types, including YAML, JSON, and ENV, and supports multiple encryption methods, such as PGP, AWS Key Management Service (KMS), and Google Cloud KMS. It also supports role-based access control.
 
