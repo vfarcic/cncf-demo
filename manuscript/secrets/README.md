@@ -20,7 +20,7 @@ External Secrets Operator (ESO) is a Kubernetes operator that talks to a vault A
 * stores the secret in Kubernetes
 * manages the lifecycle of the Kubernetes secret
 
-As of January 2024, ESO has some enticing Alpha features too, including the ability to generate a secret and store it as a Kubernetes secret (helpful to create pull secrets for container registries, for example), and functionality to read a Kubernetes secret and store it in a vault (helpful to replicate secrets between clusters, or to create backups of Kubernetes secrets). 
+As of January 2024, ESO has some enticing Alpha features too, including the ability to generate a secret and store it as a Kubernetes secret (to create pull secrets for container registries, for example), and functionality to read a Kubernetes secret and store it in a vault, which is helpful to replicate secrets between clusters or to create backups of Kubernetes secrets. 
 
 
 [![Manage Kubernetes Secrets With External Secrets Operator (ESO)](https://img.youtube.com/vi/SyRZe5YVCVk/0.jpg)](https://youtu.be/SyRZe5YVCVk)
