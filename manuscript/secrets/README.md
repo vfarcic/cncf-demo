@@ -40,13 +40,21 @@ Secrets Store CSI Driver integrates vaults into Kubernetes by mounting a tempora
 
 ## Choice 3: Secrets OPerationS (SOPS)
 
-TODO: Explanation
+Secrets OPerationS (SOPS) is an CLI tool that simplifies the process of encrypting and decrypting files containing secrets. SOPS works by encrypting the contents of a file, which can then be safely committed to a version control system like Git. When access to the secrets is required, SOPS decrypts the file and ensures that only authorized individuals or systems can view or use the sensitive data.
+
+SOPS works with many file types, including YAML, JSON, and ENV, and supports multiple encryption methods, such as PGP, AWS Key Management Service (KMS), and Google Cloud KMS. It also supports role-based access control.
+
 
 * [Official site](https://getsops.io)
 
 ## Choice 4: Teller
 
-TODO: Explanation
+Teller is a secrets management command-line tool that provides a centralized hub for managing secrets from over 10 different vault and keystore providers. 
+
+Having one access point to many vaults helps to make it easier for users to track, manage, use, and rotate secrets—while adding security by reducing the attack surface. 
+
+Teller minimizes the amount of time that a secret is used by operating entirely in-memory, as well as by fetching and populating secrets just in time. At no point are secrets written to disk. 
+
 
 * [Official site](https://tlr.dev)
 
