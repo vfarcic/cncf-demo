@@ -25,6 +25,7 @@ TODO: Explanation
 
 TODO: Explanation
 
+[![Understanding Network Service Mesh](https://img.youtube.com/vi/qiYGhV3s51s/0.jpg)](https://youtu.be/qiYGhV3s51s)
 * [Official site](https://networkservicemesh.io)
 
 ## Choice 4: Cilium and SPIFFE
@@ -33,6 +34,7 @@ TODO: Explanation
 
 [![Kubernetes Networking, Security, And Observability With eBPF And Cilium](https://img.youtube.com/vi/sfhRFtYbuyo/0.jpg)](https://youtu.be/sfhRFtYbuyo)
 [![Cilium Networking, Security and Observability](https://img.youtube.com/vi/8sSnPI619u4/0.jpg)](https://youtu.be/8sSnPI619u4)
+[![Solving for the Bottom Turtle with SPIFFE and SPIRE](https://img.youtube.com/vi/T-LI-evwV0w/0.jpg)](https://youtu.be/T-LI-evwV0w)
 * [Official site](https://cilium.io)
 
 ## Choice 5: Kuma

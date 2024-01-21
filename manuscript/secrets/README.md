@@ -34,5 +34,5 @@ TODO: Explanation
 
 * [External Secrets Operator (ESO)](eso.md)
 * [Secrets Store CSI Driver (SSCSID)](sscsid.md)
-* [Secrets OPerationS (SOPS)](sops.md)
+* Secrets OPerationS (SOPS) has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * [Teller](teller.md)
