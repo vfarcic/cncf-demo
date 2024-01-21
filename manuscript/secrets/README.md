@@ -18,7 +18,21 @@ TODO: Explanation
 [![Keeping Secrets Secret: Secrets Store CSI Driver](https://img.youtube.com/vi/Fn9VLfw5AhE/0.jpg)](https://youtu.be/Fn9VLfw5AhE)
 * [Official site](https://secrets-store-csi-driver.sigs.k8s.io)
 
+## Choice 3: Secrets OPerationS (SOPS)
+
+TODO: Explanation
+
+* [Official site](https://getsops.io)
+
+## Choice 4: Teller
+
+TODO: Explanation
+
+* [Official site](https://tlr.dev)
+
 ## What Is Your Choice?
 
 * [External Secrets Operator (ESO)](eso.md)
 * [Secrets Store CSI Driver (SSCSID)](sscsid.md)
+* [Secrets OPerationS (SOPS)](sops.md)
+* [Teller](teller.md)
