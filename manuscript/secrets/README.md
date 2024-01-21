@@ -29,7 +29,10 @@ As of January 2024, ESO has some enticing Alpha features too, including the abil
 
 ## Choice 2: Secrets Store CSI Driver (SSCSID)
 
-TODO: Explanation
+Container Storage Interface (CSI) is a standard interface between Kubernetes and external storage vendors. Secrets Store CSI Driver uses this interface to enable Kubernetes to mount secrets from vaults directly into pods as storage volumes.
+
+Secrets Store CSI Driver integrates vaults into Kubernetes by mounting a temporary filesystem volume with the secret(s) from the vault into the workload pod, bypassing the need to store secrets directly in Kubernetes, as Kubernetes Secrets. SSCSID additionally uses workload pod identity to access the vault, so it only can access what that pod needs and nothing more.
+
 
 [![Eliminate Kubernetes Secrets With Secrets Store CSI Driver (SSCSID)](https://img.youtube.com/vi/DsQu66ZMG4M/0.jpg)](https://youtu.be/DsQu66ZMG4M)
 [![Keeping Secrets Secret: Secrets Store CSI Driver](https://img.youtube.com/vi/Fn9VLfw5AhE/0.jpg)](https://youtu.be/Fn9VLfw5AhE)
