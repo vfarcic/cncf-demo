@@ -37,6 +37,8 @@ kubectl --namespace production get deployment cncf-demo \
 custodian run --output-dir=output policies/cloud-custodian.yaml \
     --cache-period 0
 
+deactivate
+
 kubectl --namespace production wait sqlclaim cncf-demo \
     --for=condition=ready --timeout=15m
 ```

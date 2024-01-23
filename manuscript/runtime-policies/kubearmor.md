@@ -40,7 +40,9 @@ kubectl --namespace production get kubearmorpolicies
 kubectl --namespace production exec -it cncf-demo-controller-0 \
     -- ls -l /
 
-# KubeArmor might fail to work depending on the OS.
+# KubeArmor might fail to work depending on the OS, as is the
+#   case of AKS Azure cluster created in this demo if you
+#   followed the setup instructions for Azure.
 # Check whether the OS of the cluster is one of the supported
 #   ones in
 #   https://docs.kubearmor.io/kubearmor/quick-links/support_matrix#kubernetes-support-matrix.

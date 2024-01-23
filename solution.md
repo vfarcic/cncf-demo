@@ -346,7 +346,6 @@ flowchart TD
         click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
         cloud-custodian-carvel(App as Carvel ytt)
         click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
-        style cloud-custodian-carvel fill:red
         kubewarden(Kubewarden)
         click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
         %% Wait with VAP until it's GA

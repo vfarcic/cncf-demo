@@ -1,21 +1,19 @@
-# Policies With Cloud Custodian and cdk8s
+# Policies With Cloud Custodian and Carvel ytt
 
 TODO: Intro
 
 ## Do
 
 ```bash
-cat cdk8s/app-prod.yaml
+cat ytt/values-prod.yaml
 
-yq --inplace ".replicas = 3" cdk8s/app-prod.yaml
+yq --inplace ".replicas = 3" ytt/values-prod.yaml
 
-yq --inplace ".db.size = \"medium\"" cdk8s/app-prod.yaml
+yq --inplace ".db.size = \"medium\"" ytt/values-prod.yaml
 
-cd cdk8s
-
-ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
-
-cd ..
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
