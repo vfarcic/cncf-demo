@@ -365,12 +365,10 @@ flowchart TD
         click cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
         cloud-custodian-helm(App as Helm)
         click cloud-custodian-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-helm.md"
-        style cloud-custodian-helm fill:red
         cloud-custodian-kustomize(App as Kustomize)
         click cloud-custodian-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-kustomize.md"
         cloud-custodian-cdk8s(App as cdk8s)
         click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
-        style cloud-custodian-cdk8s fill:red
         cloud-custodian-carvel(App as Carvel ytt)
         click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
         style cloud-custodian-carvel fill:red

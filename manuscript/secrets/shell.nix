@@ -15,6 +15,7 @@ pkgs.mkShell {
     azure-cli
     kustomize
     kubernetes-helm
+    nodejs_21
     nodePackages.cdk8s-cli
     teller
     ytt

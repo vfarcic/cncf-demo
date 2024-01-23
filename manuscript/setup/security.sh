@@ -433,7 +433,7 @@ elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
     cd cdk8s
 
-    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate 
+    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
 
     cd ../
 

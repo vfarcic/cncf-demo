@@ -344,7 +344,6 @@ flowchart TD
         click cloud-custodian-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-kustomize.md"
         cloud-custodian-cdk8s(App as cdk8s)
         click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
-        style cloud-custodian-cdk8s fill:red
         cloud-custodian-carvel(App as Carvel ytt)
         click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
         style cloud-custodian-carvel fill:red
