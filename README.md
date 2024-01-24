@@ -437,11 +437,11 @@ flowchart TD
 | Admission Controller Policies | Jim Bugwadia - Kyverno<br />Rita Zhang - Open Policy Agent (OPA) with Gatekeeper<br />Kevin Sonney - Cloud Custodian<br />Flavio Castelli - Kubewarden<br />Tim Bannister - Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | [story](manuscript/policies/README.md) |
 | Runtime Policies | Barun Acharya - KubeArmor<br />Thomas Labarussias - Falco | Tuesday, January 16, 2024 | [story](manuscript/runtime-policies/README.md) |
 | Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Anish Ramasekar - Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Marcus Noble - Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | [story](manuscript/secrets/README.md) |
-| Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
-| Scanning | Oshrat Nir - Kubescape<br />Snyk? | Tuesday, February 6, 2024 | N/A |
-| Signing | Notary<br />Sigstore<br />Open Policy Containers | Tuesday, February 13, 2024 | N/A |
-| Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Saim Safdar - Paralus<br />OpenFGA<br />ContainerSSH | Tuesday, February 20, 2024 | N/A |
-| Misc | Confidential Containers | Tuesday, February 27, 2024 | N/A |
+| Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Nick Young - Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
+| Kubernetes Scanning | Oshrat Nir - Kubescape<br />Snyk? | Tuesday, February 6, 2024 | N/A |
+| Signing Artifacts | Notary<br />Sigstore<br />Open Policy Containers | Tuesday, February 13, 2024 | N/A |
+| Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Saim Safdar - Paralus<br />OpenFGA | Tuesday, February 20, 2024 | N/A |
+| Misc | Confidential Containers<br />ContainerSSH | Tuesday, February 27, 2024 | N/A |
 | Chapter 3 Finale! | Whitney and Viktor! | Tuesday, March 4, 2024 |  |
 
 ## The Format
