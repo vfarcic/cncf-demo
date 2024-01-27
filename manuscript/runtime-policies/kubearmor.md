@@ -50,7 +50,4 @@ kubectl --namespace production exec -it cncf-demo-controller-0 \
 
 ## Continue The Adventure
 
-The adventure will continue soon...
-
-In the meantime... [Destroy Everything](../destroy/security.md)
-
+* [Managing Secrets in Kubernetes](../secrets/README.md)
