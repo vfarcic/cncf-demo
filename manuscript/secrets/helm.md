@@ -29,6 +29,8 @@ kubectl get managed
 # Wait until all the managed resources are deleted
 #   (ignore `database`).
 
+# Execute the command that follows only if `database` resource
+#   was left "dangling".
 kubectl patch \
     database.postgresql.sql.crossplane.io cncf-demo-db \
     --type merge --patch '{"metadata":{"finalizers":null}}'

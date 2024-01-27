@@ -10,9 +10,6 @@ However, there are still many considerations, for example, how can Hero safely b
 
 Let’s explore some secrets management tools that help with these issues.
 
-
-
-
 ## Choice 1: External Secrets Operator (ESO)
 
 External Secrets Operator (ESO) is a Kubernetes operator that talks to a vault API and does the following:
@@ -21,7 +18,6 @@ External Secrets Operator (ESO) is a Kubernetes operator that talks to a vault A
 * manages the lifecycle of the Kubernetes secret
 
 As of January 2024, ESO has some enticing Alpha features too, including the ability to generate a secret and store it as a Kubernetes Secret object (to create pull secrets for container registries, for example), and functionality to read a Kubernetes Secret and store it in a vault, which is helpful to replicate secrets between clusters or to create backups of Kubernetes Secrets. 
-
 
 [![Manage Kubernetes Secrets With External Secrets Operator (ESO)](https://img.youtube.com/vi/SyRZe5YVCVk/0.jpg)](https://youtu.be/SyRZe5YVCVk)
 [![Exploring External Secrets Operator (ESO)](https://img.youtube.com/vi/kK4hwXisW8g/0.jpg)](https://youtu.be/kK4hwXisW8g)
@@ -33,34 +29,11 @@ Container Storage Interface (CSI) is a standard interface between Kubernetes and
 
 Secrets Store CSI Driver integrates vaults into Kubernetes by mounting a temporary filesystem volume with the secret(s) from the vault into the workload pod, bypassing the need to store secrets directly in Kubernetes, as Kubernetes Secrets. SSCSID additionally uses workload pod identity to access the vault, so it only can access what that pod needs and nothing more.
 
-
 [![Eliminate Kubernetes Secrets With Secrets Store CSI Driver (SSCSID)](https://img.youtube.com/vi/DsQu66ZMG4M/0.jpg)](https://youtu.be/DsQu66ZMG4M)
 [![Keeping Secrets Secret: Secrets Store CSI Driver](https://img.youtube.com/vi/Fn9VLfw5AhE/0.jpg)](https://youtu.be/Fn9VLfw5AhE)
 * [Official site](https://secrets-store-csi-driver.sigs.k8s.io)
-
-## Choice 3: Secrets OPerationS (SOPS)
-
-Secrets OPerationS (SOPS) is a CLI tool that simplifies the process of encrypting and decrypting files containing secrets. SOPS works by encrypting the contents of a file, which can then be safely committed to a version control system like Git. When access to the secrets is required, SOPS decrypts the file and ensures that only authorized individuals or systems can view or use the sensitive data.
-
-SOPS works with many file types, including YAML, JSON, and ENV, and supports multiple encryption methods, such as PGP, AWS Key Management Service (KMS), and Google Cloud KMS. It also supports role-based access control.
-
-
-* [Official site](https://getsops.io)
-
-## Choice 4: Teller
-
-Teller is a secrets management command-line tool that provides a centralized hub for managing secrets from over 10 different vault and keystore providers. 
-
-Having one access point to many vaults helps to make it easier for users to track, manage, use, and rotate secrets—while adding security by reducing the attack surface. 
-
-Teller minimizes the amount of time that a secret is used by operating entirely in-memory, as well as by fetching and populating secrets just in time. At no point are secrets written to disk. 
-
-
-* [Official site](https://tlr.dev)
 
 ## What Is Your Choice?
 
 * [External Secrets Operator (ESO)](eso.md)
 * [Secrets Store CSI Driver (SSCSID)](sscsid.md)
-* Secrets OPerationS (SOPS) has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* [Teller](teller.md)

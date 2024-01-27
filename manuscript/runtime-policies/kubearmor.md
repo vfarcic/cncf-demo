@@ -50,5 +50,4 @@ kubectl --namespace production exec -it cncf-demo-controller-0 \
 
 ## Continue The Adventure
 
-* [Secrets Management](../secrets/README.md)
-
+* [Managing Secrets in Kubernetes](../secrets/README.md)

@@ -399,7 +399,52 @@ flowchart TD
         style kube-armor fill:green
         falco(Falco)
         click falco "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/falco.md"
-        runtime-policies --> kube-armor & falco --> continue
+        runtime-policies --> kube-armor & falco --> secrets
+
+        %% ------------------------
+        %% -- Secrets Management --
+        %% ------------------------
+        secrets{{Secrets Management In Kubernetes}}
+        click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/README.md"
+        style secrets fill:blue
+        eso("External Secrets Operator (ESO)")
+        click eso "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso.md"
+        style eso fill:green
+        sscsid("Secrets Store CSI Driver (SSCSID)")
+        click sscsid "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/sscsid.md"
+        secrets-google(Google Cloud)
+        click secrets-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/google.md"
+        secrets-aws(AWS)
+        click secrets-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/aws.md"
+        style secrets-aws fill:green
+        secrets-azure(Azure)
+        click secrets-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/azure.md"
+        secrets-helm(App as Helm)
+        click secrets-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
+        secrets-kustomize(App as Kustomize)
+        click secrets-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
+        secrets-cdk8s(App as cdk8s)
+        click secrets-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
+        secrets-carvel(App as Carvel ytt)
+        click secrets-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
+        style secrets-carvel fill:green
+        client-secrets{{Secrets Management Outside Kubernetes}}
+        click client-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
+        style client-secrets fill:blue
+        teller(Teller)
+        click teller "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller.md"
+        teller-aws(AWS)
+        click teller-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-aws.md"
+        teller-azure(Azure)
+        click teller-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
+        teller-google(Google Cloud)
+        click teller-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-google.md"
+        sops(SOPS)
+        style sops fill:red
+        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets
+        secrets --> sscsid
+        client-secrets --> teller --> teller-aws & teller-azure & teller-google --> continue
+        client-secrets --> sops --> continue
 
         continue((The be continued...))
 
