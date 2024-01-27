@@ -60,4 +60,4 @@ kubectl --namespace production get secret cncf-demo-db-password \
 
 ## Continue The Adventure
 
-* [Secrets Management Outside Kubernetes](client.md)
+* [Mutual TLS and Network Policies](../mtls/README.md)
