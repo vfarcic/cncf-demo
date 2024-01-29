@@ -8,6 +8,8 @@ Network Policies and mTLS are often added to a Kubernetes cluster using an appli
 
 \* These “layers” refer to the [Open Systems Interconnection model (OSI model)](https://en.wikipedia.org/wiki/OSI_model)
 
+\*\* Spoiler alert! Each one of these technologies provides security, networking, and observability to your cluster. Today we’re examining the projects through the lenses of security and networking. Observability is wildly important too, but we’re not to that part of the story yet!
+
 [![What Is Mutual TLS (mTLS), Why Do We Need It, And How Do We Get It?](https://img.youtube.com/vi/b38k2GiLDdc/0.jpg)](https://youtu.be/b38k2GiLDdc)
 [![Kubernetes Networking](https://img.youtube.com/vi/3G3BNMTx3bE/0.jpg)](https://youtu.be/3G3BNMTx3bE)
 [![Kubernetes Network Policies Explained](https://img.youtube.com/vi/18FEA5xXBGY/0.jpg)](https://youtu.be/18FEA5xXBGY)
