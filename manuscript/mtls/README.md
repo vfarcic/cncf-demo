@@ -30,7 +30,12 @@ It is most efficient to run Istio in Kubernetes, but workloads can run anywhere.
 
 ## Choice 2: Linkerd (SMI)
 
-TODO: Explanation
+To recap: *service mesh* is an infrastructure layer that adds security, networking, and observability uniformly across your entire application and, when done well, across your entire system. These characteristics are not optional; if they’re not added via service mesh, developers have to add them directly to their applications.
+
+Linkerd is a service mesh that emphasizes performance and operational simplicity while still supplying advanced functionality. The secret sauce is that they use a custom-written Rust proxy as the data plane. The Linkerd service proxy was purpose-built for service mesh. This proxy uses about 10% of the resource consumption of Envoy. 
+
+Linkerd has especially good multi-cluster support. With Linkerd 2.14, if your network supports direct pod-to-pod communication between clusters, then Linkerd clusters will all act like one big cluster - no gateways needed!
+
 
 [![What Is Linkerd Kubernetes Service Mesh? Linkerd Tutorial Part 1](https://img.youtube.com/vi/mDC3KA_6vfg/0.jpg)](https://youtu.be/mDC3KA_6vfg)
 [![Linkerd: The Stress-Free Service Mesh](https://img.youtube.com/vi/iCvw3YFNw0E/0.jpg)](https://youtu.be/iCvw3YFNw0E)
