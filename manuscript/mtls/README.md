@@ -59,7 +59,12 @@ TODO: Explanation
 
 ## Choice 5: Kuma
 
-TODO: Explanation
+Kuma touts itself as a “universal control plane for your service mesh”. It is an application layer (L7) service mesh and, like Istio, Kuma uses Envoy as the underlying networking technology. 
+
+The main differentiator is that Kuma is designed to be run not only on Kubernetes, but also on VMs, on bare metal, or on any combination thereof. This provides connectivity between both legacy and cloud environments which can help with application modernization and/or migration to cloud or multi-cloud.
+
+Besides being a universal mesh, Kuma also provides a simple developer experience, and it works with geographically distributed systems out of the box.
+
 
 [![Learn Service Mesh With Kuma](https://img.youtube.com/vi/PnD_PHfoN_o/0.jpg)](https://youtu.be/PnD_PHfoN_o)
 * [Official site](https://kuma.io)
