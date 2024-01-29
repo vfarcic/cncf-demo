@@ -16,7 +16,14 @@ Network Policies and mTLS are often added to a Kubernetes cluster using an appli
 
 ## Choice 1: Istio
 
-TODO: Explanation
+Like [Ingress](manuscript/ingress/README.md), the L7 service mesh technologies (Linkerd, Istio, Kuma) each act as a *control plane* that does the complicated work of configuring and managing an underlying networking technology (often referred to as the *data plane*). This data plane can also be called a *networking layer*, *service proxy*, or just *proxy*. The job of the data plane is to add security, capture usage data, and, most importantly, actually route the requests.
+
+In this model, the L7 service mesh adds a *sidecar* to each and every Pod that runs in the cluster. A sidecar is an extra container that runs alongside the workload container in a Pod. That sidecar acts as a proxy for all requests to and from the workload container. The sidecar can provide additional security (like mTLS!), observability, and connectivity (like NetworkPolicy implementation!).
+
+Istio is an application layer (L7) service mesh that uses a technology called Envoy as the data plane. Envoy is full-featured and powerful, but also very complex. Istio simplifies the process of configuring and using Envoy. Istio provides a human-friendly, centralized control plane where you can see and manage all of the activity of the Envoy sidecar containers.
+
+It is most efficient to run Istio in Kubernetes, but workloads can run anywhere. Istio can also support VMs as part of the mesh. Istio has a sidecarless model called Ambient Mesh. 
+
 
 [![Sailing Into a Sea of Microservices With Istio](https://img.youtube.com/vi/W3K2Ufng8Zg/0.jpg)](https://youtu.be/W3K2Ufng8Zg)
 * [Official site](https://istio.io)
