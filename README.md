@@ -484,7 +484,7 @@ flowchart TD
 | Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Anish Ramasekar - Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Marcus Noble - Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | [story](manuscript/secrets/README.md) |
 | Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd (SMI)<br />Nick Young - Cilium<br />Charly Molter - Kuma<br />Michael Chenetz - Network Service Mesh | Tuesday, January 30, 2024 | N/A |
 | Kubernetes Scanning | Oshrat Nir - Kubescape<br />Snyk | Tuesday, February 6, 2024 | N/A |
-| Signing Artifacts | Notary<br />Hector Fernandez - Sigstore<br />Gert Drapers - Open Policy Containers | Tuesday, February 13, 2024 | N/A |
+| Signing Artifacts | Milind Gokarn - Notary<br />Hector Fernandez - Sigstore<br />Gert Drapers - Open Policy Containers | Tuesday, February 13, 2024 | N/A |
 | Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Saim Safdar - Paralus<br />OpenFGA | Tuesday, February 20, 2024 | N/A |
 | Misc | Confidential Containers<br />ContainerSSH | Tuesday, February 27, 2024 | N/A |
 | Chapter 3 Finale! | Whitney and Viktor! | Tuesday, March 4, 2024 |  |
