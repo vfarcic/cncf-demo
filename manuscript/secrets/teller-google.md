@@ -29,6 +29,4 @@ echo $PRODUCTION_POSTGRESQL
 
 ## Continue The Adventure
 
-The adventure will continue soon...
-
-In the meantime... [Destroy Everything](../destroy/security.md)
+[Mutual TLS (mTLS) and Network Policies](../mtls/README.md)

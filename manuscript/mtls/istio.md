@@ -142,4 +142,7 @@ kubectl --namespace production delete \
 
 ## Continue The Adventure
 
-* [Mutual TLS And Network Policies](../scanning/README.md)
+<!-- * [Kubernetes Scanning](../scanning/README.md) -->
+The adventure will continue soon...
+
+In the meantime... [Destroy Everything](../destroy/security.md)
