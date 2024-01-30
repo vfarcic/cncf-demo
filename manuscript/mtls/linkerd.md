@@ -172,4 +172,4 @@ kubectl --namespace default delete --filename istio/mtls.yaml
 
 ## Continue The Adventure
 
-* [Mutual TLS And Network Policies](../scanning/README.md)
+* [Kubernetes Scanning](../scanning/README.md)

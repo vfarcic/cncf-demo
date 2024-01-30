@@ -28,7 +28,7 @@ It is most efficient to run Istio in Kubernetes, but workloads can run anywhere.
 [![Sailing Into a Sea of Microservices With Istio](https://img.youtube.com/vi/W3K2Ufng8Zg/0.jpg)](https://youtu.be/W3K2Ufng8Zg)
 * [Official site](https://istio.io)
 
-## Choice 2: Linkerd (SMI)
+## Choice 2: Linkerd
 
 To recap: *service mesh* is an infrastructure layer that adds security, networking, and observability uniformly across your entire application and, when done well, across your entire system. These characteristics are not optional; if they’re not added via service mesh, developers have to add them directly to their applications.
 
@@ -72,7 +72,7 @@ Besides being a universal mesh, Kuma also provides a simple developer experience
 ## What Is Your Choice?
 
 * [Istio](istio.md)
-* [Linkerd (SMI)](linkerd.md)
+* [Linkerd](linkerd.md)
 * **Network Service Mesh** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Cilium and SPIFFE** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Kuma** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
