@@ -427,7 +427,6 @@ flowchart TD
         mtls-linkerd("LinkerD (SMI)")
         click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         mtls-cilium(Cilium)
-        style mtls-cilium fill:red
         mtls-kuma(Kuma)
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
