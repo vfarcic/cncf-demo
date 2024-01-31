@@ -19,5 +19,6 @@ pkgs.mkShell {
     nodePackages.cdk8s-cli
     teller
     ytt
+    cilium-cli
   ];
 }
