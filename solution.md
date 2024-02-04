@@ -76,6 +76,8 @@ flowchart TD
         click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
         ddd-cdk8s("CDK For Kubernetes (cdk8s)")
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
+        kcl(KCL)
+        style kcl fill:red
         ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> https
 
         %% ---------------
@@ -501,19 +503,18 @@ flowchart TD
         style fonio fill:red
         metrics --> metrics-prometheus & metrics-thanos & pixie & cortex & fonio --> instrumentation
 
-        %% ---------------------
-        %% -- Instrumentation --
-        %% ---------------------
+        %% ---------------------------------
+        %% -- Instrumentation & Exporters --
+        %% ---------------------------------
         instrumentation{{Instrumentation}}
         style instrumentation fill:red
-        instrumentation-open-telemetry(OpenTelemetry)
-        style instrumentation-open-telemetry fill:red
-        instrumentation-open-metrics(OpenMetrics)
-        style instrumentation-open-metrics fill:red
-
-        %% -- Instrumentation Connections --
-        instrumentation-->instrumentation-open-telemetry-->tracing
-        instrumentation-->instrumentation-open-metrics-->tracing
+        open-telemetry(OpenTelemetry)
+        style open-telemetry fill:red
+        open-metrics(OpenMetrics)
+        style open-metrics fill:red
+        keppler(Keppler)
+        style keppler fill:red
+        instrumentation--> open-telemetry & open-metrics & keppler -->tracing
 
         %% -------------
         %% -- Tracing --
@@ -902,6 +903,12 @@ flowchart TD
         fluid(Fluid)
         style fluid fill:red
 
+        %% ---------------
+        %% -- Databases --
+        %% ---------------
+        xline(Xline)
+        style xline fill:red
+
         %% -----------
         %% -- TODO: --
         %% -----------
@@ -993,14 +1000,9 @@ flowchart TD
         style opc fill:red
         eraser(Eraser)
         style eraser fill:red
-        merbridge(Merbridge)
-        style merbridge fill:red
-        kepler(Keppler)
-        style kepler fill:red
-        xline(Xline)
-        style xline fill:red
-        kcl(KCL)
-        style kcl fill:red
+        %% Not much activity
+        %% merbridge(Merbridge)
+        %% style merbridge fill:red
     end
 ```
 
