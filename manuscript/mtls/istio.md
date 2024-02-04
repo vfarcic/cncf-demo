@@ -4,27 +4,20 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
 # TODO: kapp-controller
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+chmod +x manuscript/mtls/istio.sh
 
-cat $GITOPS_APP/istio.yaml
+./manuscript/mtls/istio.sh
 
-cp $GITOPS_APP/istio.yaml infra/.
-
-git add . 
-
-git commit -m "Istio"
-
-git push
-
-kubectl --namespace istio-system get pods
-
-# Wait until the Pods are created and ready
+source .env
 ```
 
-# Do
+# Do
 
 ```bash
 cat istio/namespace-production.yaml
@@ -61,8 +54,7 @@ kubectl --namespace production --tty --stdin exec sleep \
 
 apk add -U curl
 
-curl -s http://httpbin:8080/headers \
-    | grep X-Forwarded-Client-Cert
+curl -s http://httpbin:8080/headers | grep X-Forwarded-Client-Cert
 
 # Cert shows that the communication between the Pods is
 #   encrypted (mTLS)
@@ -134,7 +126,7 @@ curl http://cncf-demo.production:8080
 exit
 ```
 
-## Destroy
+## Destroy
 
 ```bash
 kubectl --namespace production delete --filename istio/mtls.yaml
@@ -150,4 +142,7 @@ kubectl --namespace production delete \
 
 ## Continue The Adventure
 
-* [Mutual TLS And Network Policies](../scanning/README.md)
+<!-- * [Kubernetes Scanning](../scanning/README.md) -->
+The adventure will continue soon...
+
+In the meantime... [Destroy Everything](../destroy/security.md)

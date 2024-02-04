@@ -9,14 +9,14 @@ metadata:
 spec:
   project: production
   source:
-    repoURL: https://github.com/devopsparadox/cncf-demo.git
+    repoURL: https://github.com/vfarcic/cncf-demo
     targetRevision: HEAD
     path: helm/app
     helm:
       releaseName: cncf-demo
       parameters:
         - name: image.tag
-          value: latest
+          value: v0.0.1
         - name: ingress.host
           value: cncf-demo.sillydemo.com
         - name: ingress.className
@@ -26,7 +26,7 @@ spec:
         - name: db.enabled.crossplane.google
           value: "false"
         - name: db.enabled.crossplane.aws
-          value: "false"
+          value: "true"
         - name: db.enabled.crossplane.azure
           value: "false"
         - name: schemahero.enabled
@@ -38,7 +38,7 @@ spec:
         - name: db.size
           value: small
         - name: db.insecure
-          value: "false"
+          value: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: production

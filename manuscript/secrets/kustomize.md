@@ -8,7 +8,7 @@ TODO: Intro
 kubectl --namespace production get secret cncf-demo-db-password \
     --output jsonpath="{.data.password}" | base64 --decode
 
-# Instead of specifying the secret like this:
+# Instead of specifying the secret like this:
 cat kustomize/overlays/prod/postgresql-crossplane-secret-$HYPERSCALER.yaml
 
 # ...we could have specified it like:
@@ -30,8 +30,8 @@ kubectl get managed
 # Wait until all the managed resources are deleted
 #   (ignore `database`).
 
-# Execute the command that follows only if the `database`
-#   resource is still present.
+# Execute the command that follows only if `database` resource
+#   was left "dangling".
 kubectl patch \
     database.postgresql.sql.crossplane.io cncf-demo-db \
     --type merge --patch '{"metadata":{"finalizers":null}}'

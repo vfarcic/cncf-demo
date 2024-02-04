@@ -9,7 +9,7 @@ curl -s \
     https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh \
     | /bin/bash
 
-mv ~/.kubescape/bin/kubescape /usr/local/bin/.
+sudo mv ~/.kubescape/bin/kubescape /usr/local/bin/.
 ```
 
 ## Do

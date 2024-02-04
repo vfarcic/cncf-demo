@@ -1,0 +1,14 @@
+gitOps:
+  app: argocd
+ingress:
+  host: 52.72.225.129.nip.io
+  classname: contour
+image: index.docker.io/vfarcic/cncf-demo
+tag: v0.0.1
+templates: helm
+crossplane:
+  destination: aws
+production:
+  azure:
+    resourceGroup: dot-20240123133515
+    location: eastus

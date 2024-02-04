@@ -1,10 +1,10 @@
 # Choose Your Own Adventure: The Treacherous Trek to Production
 
-From the moment of their inception as source code on the developer’s laptop, our hero knows that they are destined for great things. They long to be a real, running application, living in production, serving end users! But the epic journey to production is an arduous one, filled with cascading choices—choices concerning app design, testing, security, container image building, deployment strategy, and observability, to name a few. And who knows what other unseen forces lurk in the shadows! One wrong step could be catastrophic.
+From the moment of their inception as source code on the developer's laptop, our hero knows that they are destined for great things. They long to be a real, running application, living in production, serving end users! But the epic journey to production is an arduous one, filled with cascading choices - choices concerning app design, testing, security, container image building, deployment strategy, and observability, to name a few. And who knows what other unseen forces lurk in the shadows! One wrong step could be catastrophic.
 
 ## Pitch
 
-It is up to us, the audience, to guide our hero; and to help them grow from source code to container image, to their final form as a running application in production. In this ‘Choose Your Own Adventure’-style journey, Whitney and Viktor will present a linear view of all of the choices that an anthropomorphized application must make as they try to find their way to the fabled land of production. Throughout the trek, the audience will vote to choose which path our hero application will take. Can we navigate CNCF projects and avoid pitfalls and dead-ends to get our application to production?
+It is up to us, the audience, to guide our hero; and to help them grow from source code to container image, to their final form as a running application in production. In this "Choose Your Own Adventure"-style journey, Whitney and Viktor will present a linear view of all of the choices that an anthropomorphized application must make as they try to find their way to the fabled land of production. Throughout the trek, the audience will vote to choose which path our hero application will take. Can we navigate CNCF projects and avoid pitfalls and dead-ends to get our application to production?
 
 Join us if you dare!  This is not for the faint of heart!
 
@@ -29,8 +29,8 @@ flowchart TD
         style red fill:red
         blue{{Make a choice}}
         style blue fill:blue
-        blue(Chosen by viewers)
-        style blue fill:green
+        green(Chosen by viewers)
+        style green fill:green
 
     end
 ```
@@ -214,8 +214,10 @@ flowchart TD
         dev-done((Chapter End))
 
     end
+```
 
-    Development-->Production
+```mermaid
+flowchart TD
 
     subgraph Production
 
@@ -329,18 +331,122 @@ flowchart TD
         style db-production-carvel fill:green
         db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
-        prod-done((Chapter End)) --> continue
-
-        continue((The be continued...))
+        prod-done((Chapter End))
         
     end
+```
 
-    Production-->Destroy
+```mermaid
+flowchart TD
 
-    subgraph Destroy
+    subgraph Security
 
-        destroy((Destroy Everything))
-        click destroy "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/destroy/dev.md"
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-security((Setup))
+        click setup-security "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/security.md"
+
+        %% -- Setup Connections --
+        setup-security-->policies
+
+        %% -----------------------------------
+        %% -- Admission Controller Policies --
+        %% -----------------------------------
+        policies{{Admission Controller Policies}}
+        style policies fill:blue
+        click policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/README.md"
+        kyverno(Kyverno)
+        click kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
+        style kyverno fill:green
+        policies-opa("Open Policy Agent (OPA) With Gatekeeper")
+        click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/gatekeeper.md"
+        cloud-custodian(Cloud Custodian)
+        click cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
+        cloud-custodian-helm(App as Helm)
+        click cloud-custodian-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-helm.md"
+        cloud-custodian-kustomize(App as Kustomize)
+        click cloud-custodian-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-kustomize.md"
+        cloud-custodian-cdk8s(App as cdk8s)
+        click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
+        cloud-custodian-carvel(App as Carvel ytt)
+        click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
+        kubewarden(Kubewarden)
+        click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
+        %% Wait with VAP until it's GA
+        vac(Kubernetes Validating Admission Policy)
+        style vac fill:red
+        policies-helm(App as Helm)
+        click policies-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/helm.md"
+        policies-kustomize(App as Kustomize)
+        click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
+        policies-cdk8s(App as cdk8s)
+        click policies-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cdk8s.md"
+        policies-carvel(App as Carvel ytt)
+        style policies-carvel fill:green
+        click policies-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/carvel.md"
+        policies --> kyverno & policies-opa & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+        policies --> cloud-custodian --> cloud-custodian-helm & cloud-custodian-kustomize & cloud-custodian-cdk8s & cloud-custodian-carvel --> runtime-policies
+
+        %% ----------------------
+        %% -- Runtime Policies --
+        %% ----------------------
+        runtime-policies{{Runtime Policies}}
+        style runtime-policies fill:blue
+        click runtime-policies "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/README.md"
+        kube-armor(KubeArmor)
+        click kube-armor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/kubearmor.md"
+        style kube-armor fill:green
+        falco(Falco)
+        click falco "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/runtime-policies/falco.md"
+        runtime-policies --> kube-armor & falco --> secrets
+
+        %% ------------------------
+        %% -- Secrets Management --
+        %% ------------------------
+        secrets{{Secrets Management In Kubernetes}}
+        click secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/README.md"
+        style secrets fill:blue
+        eso("External Secrets Operator (ESO)")
+        click eso "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/eso.md"
+        style eso fill:green
+        sscsid("Secrets Store CSI Driver (SSCSID)")
+        click sscsid "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/sscsid.md"
+        secrets-google(Google Cloud)
+        click secrets-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/google.md"
+        secrets-aws(AWS)
+        click secrets-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/aws.md"
+        style secrets-aws fill:green
+        secrets-azure(Azure)
+        click secrets-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/azure.md"
+        secrets-helm(App as Helm)
+        click secrets-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
+        secrets-kustomize(App as Kustomize)
+        click secrets-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
+        secrets-cdk8s(App as cdk8s)
+        click secrets-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
+        secrets-carvel(App as Carvel ytt)
+        click secrets-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
+        style secrets-carvel fill:green
+        client-secrets{{Secrets Management Outside Kubernetes}}
+        click client-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
+        style client-secrets fill:blue
+        teller(Teller)
+        click teller "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller.md"
+        teller-aws(AWS)
+        click teller-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-aws.md"
+        teller-azure(Azure)
+        click teller-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
+        teller-google(Google Cloud)
+        click teller-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-google.md"
+        sops(SOPS)
+        style sops fill:red
+        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets
+        secrets --> sscsid
+        client-secrets --> teller --> teller-aws & teller-azure & teller-google --> continue
+        client-secrets --> sops --> continue
+
+        continue((The be continued...))
 
     end
 ```
@@ -373,14 +479,15 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Admission Controller Policies | Kyverno<br />Open Policy Agent (OPA) With Gatekeeper<br />Cloud Custodian<br />Kubewarden<br />Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | N/A |
-| Runtime Policies | KubeArmor<br />Falco | Tuesday, January 16, 2024 | N/A |
-| Secrets Management | External Secrets Operator (ESO)<br />Secrets Store CSI Driver (SSCSID)<br />Teller | Tuesday, January 23, 2024 | N/A |
-| Mutual TLS And Network Policies | Istio<br />LinkerD (SMI)<br />Cilium<br />Kuma<br />Network Service Mesh | Tuesday, January 30, 2024 | N/A |
-| Scanning & Signing | Kubescape<br />Notary<br />SPIFFE & SPIRE | Tuesday, February 6, 2024 | N/A |
-| Access Control | Hexa<br />Dex<br />Athenz<br />Keycloak<br />Paralus<br />OpenFGA<br />ContainerSSH | Tuesday, February 13, 2024 | N/A |
-| Misc | Confidential Containers | Tuesday, February 20, 2024 | N/A |
-| Chapter 3 Finale! | | Tuesday, February 27, 2024 | N/A |
+| Admission Controller Policies | Jim Bugwadia - Kyverno<br />Rita Zhang - Open Policy Agent (OPA) with Gatekeeper<br />Kevin Sonney - Cloud Custodian<br />Flavio Castelli - Kubewarden<br />Tim Bannister - Kubernetes Validating Admission Policy | Tuesday, January 9, 2024 | [story](manuscript/policies/README.md) |
+| Runtime Policies | Barun Acharya - KubeArmor<br />Thomas Labarussias - Falco | Tuesday, January 16, 2024 | [story](manuscript/runtime-policies/README.md) |
+| Secrets Management | Gergely Brautigam - External Secrets Operator (ESO)<br />Anish Ramasekar - Secrets Store CSI Driver (SSCSID)<br />Saeid Bostandoust - Teller<br />Marcus Noble - Secrets OPerationS (SOPS) | Tuesday, January 23, 2024 | [story](manuscript/secrets/README.md) |
+| Mutual TLS and Network Policies | Marino Wijay - Istio<br />Flynn - Linkerd <br />Nick Young - Cilium<br />Charly Molter - Kuma<br />Michael Chenetz - Network Service Mesh | Tuesday, January 30, 2024 | [story](manuscript/mtls/README.md) |
+| Kubernetes Scanning | Oshrat Nir - Kubescape<br />Snyk | Tuesday, February 6, 2024 | N/A |
+| Signing Artifacts | Milind Gokarn - Notary<br />Hector Fernandez - Sigstore<br />Gert Drapers - Open Policy Containers | Tuesday, February 13, 2024 | N/A |
+| Access Control | Hexa<br />Dex<br />Abhijeet Vaidya - Athenz<br />Keycloak<br />Saim Safdar - Paralus<br />OpenFGA | Tuesday, February 20, 2024 | N/A |
+| Misc | Confidential Containers<br />ContainerSSH | Tuesday, February 27, 2024 | N/A |
+| Chapter 3 Finale! | Whitney and Viktor! | Tuesday, March 4, 2024 |  |
 
 ## The Format
 

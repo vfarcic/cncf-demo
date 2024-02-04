@@ -7,20 +7,9 @@ TODO: Intro
 * Cilium is already installed in the cluster by default if you followed the provided setup instructions.
 
 ```bash
-kubectl --namespace kube-system get pods \
-    --selector app.kubernetes.io/part-of=cilium
+chmod +x manuscript/mtls/cilium.sh
 
-# Confirm that Cilium is are running
-
-helm upgrade cilium cilium/cilium --namespace kube-system \
-    --set authentication.mutual.spire.enabled=true \
-    --set authentication.mutual.spire.install.enabled=true \
-    --reuse-values --wait
-
-kubectl --namespace kube-system \
-    rollout restart deployment/cilium-operator
-
-çkubectl --namespace kube-system rollout restart ds/cilium
+./manuscript/mtls/cilium.sh
 ```
 
 ## Authorization (mTLS)
@@ -28,12 +17,12 @@ kubectl --namespace kube-system \
 ```bash
 cat cilium/mtls.yaml
 
-kubectl --namespace production apply --filename istio/mtls.yaml
+kubectl --namespace production apply --filename cilium/mtls.yaml
 
-kubectl --namespace production get cep
+kubectl --namespace production get ciliumendpoints
 
-IDENTITY_ID=$(kubectl --namespace production get cep \
-    --selector app=sleep \
+IDENTITY_ID=$(kubectl --namespace production \
+    get ciliumendpoints --selector app=sleep \
     --output jsonpath='{.items[0].status.identity.id}')
 
 echo $IDENTITY_ID
@@ -51,83 +40,54 @@ kubectl --namespace cilium-spire exec spire-server-0 \
 kubectl get ciliumidentities
 ```
 
-## Authentication
-
-```bash
-# TODO: Continue https://docs.cilium.io/en/latest/network/servicemesh/mutual-authentication/mutual-authentication-example/#enforce-mutual-authentication
-cat cilium/peer-authentication.yaml
-
-kubectl --namespace production apply \
-    --filename istio/peer-authentication.yaml
-
-kubectl --namespace production --tty --stdin exec sleep \
-    --container sleep -- sh
-
-curl http://cncf-demo.production:8080 -w "%{http_code}\n"
-
-# Both apps are "meshed", so the communication is allowed.
-
-exit
-
-kubectl --namespace default apply --filename istio/mtls.yaml
-
-kubectl --namespace default --tty --stdin exec sleep \
-    --container sleep -- sh
-
-apk add -U curl
-
-curl http://cncf-demo.production:8080 -w "%{http_code}\n"
-
-# The communication is not allowed since the Pod in the
-#   `default` Namespace is NOT "meshed" and therefore not
-#   authenticated.
-
-exit
-```
-
 ## Policies
 
 ```bash
-cat istio/authorization-policy-deny.yaml
+kubectl --namespace production --tty --stdin exec sleep \
+    --container sleep -- apk add -U curl
+
+cat cilium/network-policy.yaml
 
 kubectl --namespace production apply \
-    --filename istio/authorization-policy-deny.yaml
+    --filename cilium/network-policy.yaml
 
 kubectl --namespace production --tty --stdin exec sleep \
-    --container sleep -- sh
+    --container sleep -- \
+    curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
-curl http://cncf-demo.production:8080
+# The communication is allowed since the `sleep` endpoint
+#    in the `production` Namespace is allowed to talk with the
+#   `cncf-demo` in the `production` Namespace.
 
-# The access was denied
+kubectl --namespace default apply --filename cilium/mtls.yaml
 
-exit
+kubectl --namespace default --tty --stdin exec sleep \
+    --container sleep -- apk add -U curl
 
-cat istio/authorization-policy-allow.yaml
+kubectl --namespace default --tty --stdin exec sleep \
+    --container sleep -- \
+    curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
-kubectl --namespace production apply \
-    --filename istio/authorization-policy-allow.yaml
+# The communication is NOT allowed since the `sleep` endpoint
+#    in the `default` Namespace is NOT allowed to talk with the
+#   `cncf-demo` in the `production` Namespace.
 
-kubectl --namespace production --tty --stdin exec sleep -- sh
-
-curl http://cncf-demo.production:8080
-
-# The access was allowed
+# Stop `curl` (if it did not already time out) by pressing
+#   `ctrl+c`.
 ```
 
-## Destroy
+## Destroy
 
-```bash
-kubectl --namespace production delete --filename istio/mtls.yaml
-
+```sh
 kubectl --namespace production delete \
-    --filename istio/peer-authentication.yaml
+    --filename cilium/network-policy.yaml
 
-kubectl --namespace default delete --filename istio/mtls.yaml
-
-kubectl --namespace production delete \
-    --filename istio/authorization-policy-allow.yaml
+kubectl --namespace production delete --filename cilium/mtls.yaml
 ```
 
 ## Continue The Adventure
 
-* [Mutual TLS And Network Policies](../scanning/README.md)
+<!-- * [Kubernetes Scanning](../scanning/README.md) -->
+The adventure will continue soon...
+
+In the meantime... [Destroy Everything](../destroy/security.md)

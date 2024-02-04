@@ -9,7 +9,7 @@ TODO: Intro
 
 kubectl --namespace production get svc
 
-# Wait until the `cncf-demo` Service is created
+# Wait until the `cncf-demo` Service is created
 
 kubectl --namespace production get deployments
 
@@ -18,9 +18,11 @@ kubectl --namespace production get deployments
 # If Gatekeeper
 export POLICY_KIND=deploymentreplicas
 
-kubectl describe $POLICY_KIND deploymentproduction
+kubectl --namespace production \
+    describe $POLICY_KIND deploymentproduction
 
-# Gatekeeper does not show violations, but it does enforce them.
+# Gatekeeper and Kubewarden do not show violations, but they do
+#   enforce them.
 
 cat kustomize/overlays/prod/deployment-scaled.yaml
 
@@ -52,12 +54,18 @@ kubectl --namespace production get sqlclaims
 # If Gatekeeper
 export POLICY_KIND=dbsize
 
+# If Kubewarden
+export POLICY_KIND=clusteradmissionpolicy
+
 kubectl describe $POLICY_KIND dbcluster
 
-kubectl describe $POLICY_KIND dbproduction
+# If Kubewarden
+export POLICY_KIND=admissionpolicy
 
-# Gatekeeper (still) does not show violations, but it does
-#   enforce them.
+kubectl --namespace production describe $POLICY_KIND dbproduction
+
+# Gatekeeper and Kubewarden (still) do not show violations, but
+#   they do enforce them.
 
 cat kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
 

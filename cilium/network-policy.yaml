@@ -1,0 +1,13 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cncf-demo
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: cncf-demo
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: sleep

@@ -25,10 +25,12 @@ echo "
 |yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
 |Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
-|eksctl          |If using AWS         |'https://eksctl.io/introduction/#installation'     |
+|eksctl          |If using AWS         |'https://eksctl.io/installation/'                  |
 |az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
+|kustomize       |If using Kustomize   |'https://kubectl.docs.kubernetes.io/installation/kustomize/'|
 |helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |
-|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/getting-started/#install-the-cli'|
+|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/cli/installation'    |
+|ytt             |If using Carvel ytt  |'https://carvel.dev/ytt/docs/latest/install'       |
 " | gum format
 
 gum confirm "
@@ -39,11 +41,8 @@ Do you have those tools installed?
 # Hyperscalers #
 ################
 
-echo "
-Which Hyperscaler do you want to use?"
-
+echo "## Which Hyperscaler do you want to use?" | gum format
 HYPERSCALER=$(gum choose "google" "aws" "azure")
-
 echo "export HYPERSCALER=$HYPERSCALER" >> .env
 
 export KUBECONFIG=$PWD/kubeconfig.yaml
@@ -141,10 +140,13 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
         --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
 
     helm upgrade --install cilium cilium/cilium \
-        --version "1.14.2" --namespace kube-system \
+        --version "1.15.0" --namespace kube-system \
         --set eni.enabled=true --set ipam.mode=eni \
         --set routingMode=native \
-        --set egressMasqueradeInterfaces=eth0 --wait
+        --set egressMasqueradeInterfaces=eth0 \
+        --set authentication.mutual.spire.enabled=true \
+        --set authentication.mutual.spire.install.enabled=true \
+        --wait
 
     eksctl create addon --name aws-ebs-csi-driver --cluster dot-production \
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
@@ -166,7 +168,8 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
     az aks create --resource-group $RESOURCE_GROUP --name dot \
         --node-count 3 --node-vm-size Standard_B2s \
-        --enable-managed-identity --network-plugin none --yes
+        --enable-managed-identity --network-plugin none \
+        --generate-ssh-keys --yes
 
     az aks get-credentials --resource-group $RESOURCE_GROUP \
         --name dot --file $KUBECONFIG
@@ -194,7 +197,7 @@ gum confirm "
 Continue?
 " || exit 0
 
-export REPO_URL=$(git config --get remote.origin.url)
+REPO_URL=$(git config --get remote.origin.url)
 
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" argocd/apps.yaml
 
@@ -204,11 +207,69 @@ kubectl apply --filename argocd/project.yaml
 
 kubectl apply --filename argocd/apps.yaml
 
-export GITOPS_APP=argocd
+GITOPS_APP=argocd
 
 echo "export GITOPS_APP=$GITOPS_APP" >> .env
 
 yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
+
+#################
+# Setup Ingress #
+#################
+
+cat $GITOPS_APP/contour.yaml
+
+cp $GITOPS_APP/contour.yaml infra/.
+
+git add . 
+
+git commit -m "Contour"
+
+git push
+
+COUNTER=$(kubectl --namespace projectcontour get pods)
+
+while [ -z "$COUNTER" ]; do
+    sleep 10
+    COUNTER=$(kubectl --namespace projectcontour get pods)
+done
+
+sleep 10
+
+if [[ "$HYPERSCALER" == "aws" ]]; then
+
+    INGRESS_IPNAME=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+
+    INGRESS_IP=$(dig +short $INGRESS_IPNAME) 
+
+    while [ -z "$INGRESS_IP" ]; do
+        sleep 10
+        INGRESS_IPNAME=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+        INGRESS_IP=$(dig +short $INGRESS_IPNAME) 
+    done
+
+    INGRESS_IP_LINES=$(echo $INGRESS_IP | wc -l | tr -d ' ')
+
+    if [ $INGRESS_IP_LINES -gt 1 ]; then
+        INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
+    fi
+
+else
+
+    INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+
+    while [ -z "$COUNTER" ]; do
+        sleep 10
+        INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+    done
+
+fi
+
+echo "export INGRESS_HOST=$INGRESS_IP.nip.io" >> .env
+yq --inplace ".ingress.host = \"$INGRESS_IP.nip.io\"" settings.yaml
+
+echo "export INGRESS_CLASSNAME=contour" >> .env
+yq --inplace ".ingress.classname = \"contour\"" settings.yaml
 
 #################
 # Setup The App #
@@ -375,7 +436,7 @@ elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
     cd cdk8s
 
-    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate 
+    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
 
     cd ../
 

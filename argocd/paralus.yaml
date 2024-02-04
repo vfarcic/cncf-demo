@@ -1,0 +1,44 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paralus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: ztka
+    repoURL: https://paralus.github.io/helm-charts
+    targetRevision: 0.2.6
+    helm:
+      releaseName: paralus
+      parameters:
+        - name: fqdn.domain
+          value: paralus.acme.com
+        - name: ingress.className
+          value: traefik
+        - name: ingress.enabled
+          value: "true"
+        - name: deploy.postgresql.enable
+          value: "true"
+        - name: deploy.contour.enable
+          value: "false"
+        - name: kratos.kratos.development
+          value: "true"
+        - name: paralus.initialize.adminEmail
+          value: jdoe@acme.com
+        - name: paralus.initialize.adminFirstName
+          value: John
+        - name: paralus.initialize.adminLastName
+          value: Doe
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: paralus
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

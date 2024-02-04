@@ -1,6 +1,13 @@
 # Policies with Open Policy Agent (OPA) and Gatekeeper
 
-TODO: Intro
+In OPA Gatekeeper, a *Constraint* is a declaration for a system to meet a given set of requirements. Each Constraint is written with Rego, a declarative query language used by OPA.
+
+Before defining a Constraint, you need to create a *Constraint Template*. A Constraint Template allows people to declare new Constraints. Each template has two elements:
+* The Rego logic that enforces the Constraint
+* The schema for the Constraint
+
+Once you apply the Constraint Template, then you are able to create individual Constraint CRDs that comply with your Constraint Template.
+
 
 ## Setup
 
@@ -13,7 +20,7 @@ git commit -m "CNCF Demo"
 
 git push
 
-# Gatekeeper causes issues with Argo CD (not sure about Flux),
+# Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.
 
 helm repo add gatekeeper \

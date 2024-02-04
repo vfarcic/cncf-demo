@@ -1,15 +1,15 @@
-# Mutual TLS (mTLS) And Network Policies With LinkerD
+# Mutual TLS (mTLS) And Network Policies With Linkerd
 
 TODO: Intro
 
 ## Setup
 
 ```bash
-# We'll install LinkerD manually instead of using Argo CD, Flux,
+# We'll install Linkerd manually instead of using Argo CD, Flux,
 #   or Carvel kapp-controller since that would require us to
 #   generate certificates manually (the CLI does that for us).
 # In the "real world" situation, you should do it through GitOps
-#   by using LinkerD's Helm chart and your own certificates.
+#   by using Linkerd's Helm chart and your own certificates.
 
 curl --proto '=https' --tlsv1.2 \
     -sSfL https://run.linkerd.io/install | sh
@@ -25,7 +25,7 @@ linkerd viz install | kubectl apply --filename -
 linkerd check
 ```
 
-# Do
+# Do
 
 ```bash
 cat linkerd/namespace-production.yaml
@@ -34,7 +34,7 @@ cp linkerd/namespace-production.yaml apps/.
 
 git add . 
 
-git commit -m "LinkerD"
+git commit -m "Linkerd"
 
 git push
 
@@ -47,7 +47,7 @@ kubectl --namespace production delete pods \
 
 kubectl --namespace production get pods
 
-# LinkerD side-car is now added to the Pods
+# Linkerd side-car is now added to the Pods
 ```
 
 ## Authorization (mTLS)
@@ -82,7 +82,7 @@ cp linkerd/peer-authentication.yaml \
 
 git add . 
 
-git commit -m "LinkerD"
+git commit -m "Linkerd"
 
 git push
 
@@ -162,7 +162,7 @@ curl http://cncf-demo.production:8080
 exit
 ```
 
-## Destroy
+## Destroy
 
 ```bash
 kubectl --namespace production delete --filename istio/mtls.yaml
@@ -172,4 +172,7 @@ kubectl --namespace default delete --filename istio/mtls.yaml
 
 ## Continue The Adventure
 
-* [Mutual TLS And Network Policies](../scanning/README.md)
+<!-- * [Kubernetes Scanning](../scanning/README.md) -->
+The adventure will continue soon...
+
+In the meantime... [Destroy Everything](../destroy/security.md)

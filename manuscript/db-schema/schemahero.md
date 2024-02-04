@@ -4,8 +4,6 @@ Let's install SchemaHero with `krew`, the kubectl plugin tool! You can use `krew
 
 ## Setup
 
-## Setup
-
 * Install `krew` from https://krew.sigs.k8s.io/docs/user-guide/setup/install
 
 ```bash

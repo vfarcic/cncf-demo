@@ -40,13 +40,17 @@ flowchart TD
         bci{{Build Container Image}}
         click bci "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/README.md"
         style bci fill:blue
-        bci-kbld(Carvel kbld)
-        click bci-kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md"
-        bci-lima(Lima)
-        click bci-lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
-        bci-buildpacks(Cloud Native Buildpacks / CNB)
-        click bci-buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
-        bci --> bci-kbld & bci-lima & bci-buildpacks --> registry
+        kbld(Carvel kbld)
+        click kbld "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/kbld.md"
+        lima(Lima)
+        click lima "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/lima.md"
+        buildpacks(Cloud Native Buildpacks / CNB)
+        click buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
+        ko(ko)
+        style ko fill:red
+        slimtoolkit(SlimToolkit)
+        style slimtoolkit fill:red
+        bci --> kbld & lima & buildpacks & ko & slimtoolkit --> registry
 
         %% -----------------------------------------
         %% -- Store Container Image in a Registry --
@@ -54,13 +58,15 @@ flowchart TD
         registry{{Store Container Image In A Registry}}
         click registry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/README.md"
         style registry fill:blue
-        registry-docker-hub(Docker Hub)
-        click registry-docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
-        registry-harbor(Harbor)
-        click registry-harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
-        registry-dragonfly(Dragonfly)
-        click registry-dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
-        registry --> registry-docker-hub & registry-harbor & registry-dragonfly --> ddd
+        docker-hub(Docker Hub)
+        click docker-hub "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/docker-hub.md"
+        harbor(Harbor)
+        click harbor "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/harbor.md"
+        dragonfly(Dragonfly)
+        click dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
+        zot(zot)
+        style zot fill:red
+        registry --> docker-hub & harbor & dragonfly & zot --> ddd
 
         %% --------------------------------------
         %% -- Define And Deploy The App To Dev --
@@ -78,7 +84,9 @@ flowchart TD
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
         kcl(KCL)
         style kcl fill:red
-        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s --> https
+        kpt(kpt)
+        style kpt fill:red
+        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s & kcl & kpt --> https
 
         %% ---------------
         %% -- Use HTTPS --
@@ -271,13 +279,13 @@ flowchart TD
         app{{Deploy The App To Production}}
         click app "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/README.md"
         style app fill:blue
-        app-helm(App As Helm)
+        app-helm(App as Helm)
         click app-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/helm.md"
-        app-kustomize(App As Kustomize)
+        app-kustomize(App as Kustomize)
         click app-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/kustomize.md"
-        app-cdk8s(App As cdk8s)
+        app-cdk8s(App as cdk8s)
         click app-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/cdk8s.md"
-        app-carvel(App As Carvel ytt)
+        app-carvel(App as Carvel ytt)
         click app-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/app/carvel.md"
         app --> app-helm & app-kustomize & app-cdk8s & app-carvel --> db-production
 
@@ -289,13 +297,13 @@ flowchart TD
         style db-production fill:blue
         db-production-crossplane(Crossplane)
         click db-production-crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/crossplane.md"
-        db-production-helm(App As Helm)
+        db-production-helm(App as Helm)
         click db-production-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/helm.md"
-        db-production-kustomize(App As Kustomize)
+        db-production-kustomize(App as Kustomize)
         click db-production-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/kustomize.md"
-        db-production-cdk8s(App As cdk8s)
+        db-production-cdk8s(App as cdk8s)
         click db-production-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/cdk8s.md"
-        db-production-carvel(App As Carvel ytt)
+        db-production-carvel(App as Carvel ytt)
         click db-production-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/db-production/carvel.md"
         db-production --> db-production-crossplane --> db-production-helm & db-production-kustomize & db-production-cdk8s & db-production-carvel --> prod-done
 
@@ -328,22 +336,31 @@ flowchart TD
         click policies-kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kyverno.md"
         policies-opa("Open Policy Agent (OPA) With Gatekeeper")
         click policies-opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/gatekeeper.md"
-        policies-cloud-custodian(Cloud Custodian)
-        style policies-cloud-custodian fill:red
+        cloud-custodian(Cloud Custodian)
+        click cloud-custodian "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian.md"
+        cloud-custodian-helm(App as Helm)
+        click cloud-custodian-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-helm.md"
+        cloud-custodian-kustomize(App as Kustomize)
+        click cloud-custodian-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-kustomize.md"
+        cloud-custodian-cdk8s(App as cdk8s)
+        click cloud-custodian-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-cdk8s.md"
+        cloud-custodian-carvel(App as Carvel ytt)
+        click cloud-custodian-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cloud-custodian-carvel.md"
         kubewarden(Kubewarden)
-        style kubewarden fill:red
-        %% Wait with VAC until Kubernetes v1.26 is available in GKE, EKS, and AKS
+        click kubewarden "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kubewarden.md"
+        %% Wait with VAP until it's GA
         vac(Kubernetes Validating Admission Policy)
         style vac fill:red
-        policies-helm(App As Helm)
+        policies-helm(App as Helm)
         click policies-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/helm.md"
-        policies-kustomize(App As Kustomize)
+        policies-kustomize(App as Kustomize)
         click policies-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/kustomize.md"
-        policies-cdk8s(App As cdk8s)
+        policies-cdk8s(App as cdk8s)
         click policies-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/cdk8s.md"
-        policies-carvel(App As Carvel ytt)
+        policies-carvel(App as Carvel ytt)
         click policies-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies/carvel.md"
-        policies --> policies-kyverno & policies-opa & policies-cloud-custodian & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+        policies --> policies-kyverno & policies-opa & kubewarden & vac --> policies-helm & policies-kustomize & policies-cdk8s & policies-carvel --> runtime-policies
+        policies --> cloud-custodian --> cloud-custodian-helm & cloud-custodian-kustomize & cloud-custodian-cdk8s & cloud-custodian-carvel --> runtime-policies
 
         %% ----------------------
         %% -- Runtime Policies --
@@ -373,13 +390,13 @@ flowchart TD
         click secrets-aws "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/aws.md"
         secrets-azure(Azure)
         click secrets-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/azure.md"
-        secrets-helm(App As Helm)
+        secrets-helm(App as Helm)
         click secrets-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/helm.md"
-        secrets-kustomize(App As Kustomize)
+        secrets-kustomize(App as Kustomize)
         click secrets-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/kustomize.md"
-        secrets-cdk8s(App As cdk8s)
+        secrets-cdk8s(App as cdk8s)
         click secrets-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/cdk8s.md"
-        secrets-carvel(App As Carvel ytt)
+        secrets-carvel(App as Carvel ytt)
         click secrets-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/carvel.md"
         client-secrets{{Secrets Management Outside Kubernetes}}
         click client-secrets "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/client.md"
@@ -392,8 +409,12 @@ flowchart TD
         click teller-azure "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-azure.md"
         teller-google(Google Cloud)
         click teller-google "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/secrets/teller-google.md"
-        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        sops(SOPS)
+        style sops fill:red
+        secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets
         secrets --> sscsid
+        client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        client-secrets --> sops --> mtls
 
         %% -------------------------------------
         %% -- Mutual TLS And Network Policies --
@@ -406,7 +427,6 @@ flowchart TD
         mtls-linkerd("LinkerD (SMI)")
         click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         mtls-cilium(Cilium)
-        style mtls-cilium fill:red
         mtls-kuma(Kuma)
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
@@ -425,18 +445,20 @@ flowchart TD
         %% -- Signing --
         %% -------------
         signing{{Signing}}
+        click signing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/README.md"
         style signing fill:blue
         notary(Notary)
-        style notary fill:red
-        spiffe(SPIFFE & SPIRE)
-        style spiffe fill:red
-        signing --> notary & spiffe --> access-control
+        click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
+        opc(Open Policy Containers)
+        style opc fill:red
+        signing --> notary & opc --> access-control
 
         %% --------------------
         %% -- Access Control --
         %% --------------------
         access-control{{Access Control}}
-        style access-control fill:red
+        click access-control "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/README.md"
+        style access-control fill:blue
         access-control-hexa(Hexa)
         style access-control-hexa fill:red
         dex(Dex)
@@ -480,11 +502,13 @@ flowchart TD
         %% ----------------
         dashboards{{Dashboards}}
         style dashboards fill:red
-        dashboards-skooner(Skooner)
-        style dashboards-skooner fill:red
-        dashboards-kubernetes(Kubernetes Dashboard)
-        style dashboards-kubernetes fill:red
-        dashboards --> dashboards-skooner & dashboards-kubernetes --> metrics
+        skooner(Skooner)
+        style skooner fill:red
+        kubernetes-dashboard(Kubernetes Dashboard)
+        style kubernetes-dashboard fill:red
+        meshery(Meshery)
+        style meshery fill:red
+        dashboards --> skooner & kubernetes-dashboard & meshery --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -584,7 +608,13 @@ flowchart TD
         style kuberhealthy fill:red
         smp("Service Mesh Performance (SMP)")
         style smp fill:red
-        observability-misc --> kuberhealthy --> smp
+        kepler(Keppler)
+        style kepler fill:red
+        inspektor-gadget(Inspektor Gadget)
+        style inspektor-gadget fill:red
+        trickster(Trickster)
+        style trickster fill:red
+        observability-misc --> kuberhealthy & smp & kepler & inspektor-gadget & trickster
 
     end
 ```
@@ -660,7 +690,9 @@ flowchart TD
         style pipelines-serverless-workflow fill:red
         pipecd(PipeCD)
         style pipecd fill:red
-        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd --> supply-chain
+        werf(werf)
+        style werf fill:red
+        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd & werf --> supply-chain
 
         %% ------------------
         %% -- Supply Chain --
@@ -718,13 +750,18 @@ flowchart TD
         style crd-operator-framework fill:red
         crd --> kubebuilder & crd-kube-rs & crd-kudo & crd-operator-framework
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
+        %% ------------------
+        %% -- Miscelaneous --
+        %% ------------------
+        idp-misc{{Miscelaneous}}
+        style idp-misc fill:red
         dev-stream(DevStream)
         style dev-stream fill:red
         dapr("Distributed Application Runtime (Dapr)")
         style dapr fill:red
+        porter(Porter)
+        style porter fill:red
+        idp-misc --> dev-stream & dapr & porter
 
     end
 ```
@@ -732,11 +769,13 @@ flowchart TD
 ```mermaid
 flowchart TD
 
-    subgraph edge["Edge & Baremetal"]
+    subgraph edge-baremetal["Edge & Baremetal"]
 
         %% ----------
         %% -- Edge --
         %% ----------
+        edge{{Edge}}
+        style edge fill:red
         akri(Akri)
         style akri fill:red
         keylime(Keylime)
@@ -749,14 +788,18 @@ flowchart TD
         style super-edge fill:red
         fabedge(FabEdge)
         style fabedge fill:red
+        edge --> akri & keylime & open-yurt & kube-edge & super-edge & fabedge --> baremetal
 
         %% ---------------
         %% -- Baremetal --
         %% ---------------
+        baremetal{{Edge}}
+        style baremetal fill:red
         metal3(Metal3)
         style metal3 fill:red
         tinkerbell(Tinkerbell)
         style tinkerbell fill:red
+        baremetal --> metal3 & tinkerbell
 
     end
 ```
@@ -838,7 +881,10 @@ flowchart TD
         carina(Carina)
         style carina fill:red
         hwameistor(HwameiStor)
-        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor --> backup
+        style hwameistor fill:red
+        openebs(OpenEBS)
+        style openebs fill:red
+        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor & openebs --> backup
 
         %% ------------
         %% -- Backup --
@@ -898,111 +944,131 @@ flowchart TD
         %% ---------------------------------
         %% -- Machine Learning & Big Data --
         %% ---------------------------------
+        ml{{Machine Learning & Big Data}}
+        style ml fill:red
         kube-dl(KubeDL)
         style kube-dl fill:red
         fluid(Fluid)
         style fluid fill:red
+        ml --> kube-dl & fluid
 
-        %% ---------------
-        %% -- Databases --
-        %% ---------------
-        xline(Xline)
-        style xline fill:red
+        %% ---------------------
+        %% -- Other Databases --
+        %% ---------------------
+        other-db{{Other Databases}}
+        style other-db fill:red
+        tikv(TiKV)
+        style tikv fill:red
+        vitess(Vitess)
+        style vitess fill:red
+        vineyard(Vineyard)
+        style vineyard fill:red
+        etcd(etcd)
+        style etcd fill:red
+        other-db --> tikv & vitess & vineyard & etcd
 
-        %% -----------
-        %% -- TODO: --
-        %% -----------
-        konveyor(Konveyor)
-        style konveyor fill:red
-        krator(Krator)
-        style krator fill:red
-        kured(Kured)
-        style kured fill:red
-        oras(ORAS)
-        style oras fill:red
-        porter(Porter)
-        style porter fill:red
+        %% ----------------------
+        %% -- Jobs and Batches --
+        %% ----------------------
+        jobs{{Jobs and Batches}}
+        style jobs fill:red
+        volcano(Volcano)
+        style volcano fill:red
+        armada(Armada)
+        style armada fill:red
+        jobs --> volcano & armada
+
+        %% -----------------------
+        %% -- Container Runtime --
+        %% -----------------------
+        container-runtime{{Container Runtime}}
+        style container-runtime fill:red
         cri-o(CRI-O)
         style cri-o fill:red
         containerd(containerd)
         style containerd fill:red
-        etcd(etcd)
-        style etcd fill:red
+        container-runtime --> cri-o & containerd
+
+        %% ---------
+        %% -- TBD --
+        %% ---------
+        tbd{{TBD}}
+        style tbd fill:red
+        %% -- Deployment and life cycle of Konveyor (formerly Tackle) on Kubernetes and OpenShift (drop 1) --
+        konveyor(Konveyor)
+        style konveyor fill:red
+        %% -- Kubernetes Rust State Machine Operator (drop 1) --
+        krator(Krator)
+        style krator fill:red
+        %% - Kubernetes daemonset that performs safe automatic node reboots when the need to do so is indicated by the package management system of the underlying OS (drop 1) --
+        kured(Kured)
+        style kured fill:red
+        %% -- OCI registry client - managing content like artifacts, images, packages --
+        oras(ORAS)
+        style oras fill:red
+        %% -- Find, install and publish Kubernetes packages (drop 1) --
         artifact-hub(Artifact Hub)
         style artifact-hub fill:red
-        volcano(Volcano)
-        style volcano fill:red        
+        %% -- The C based gRPC (C++, Python, Ruby, Objective-C, PHP, C#) (drop 1) --
         grpc(gRPC)
         style grpc fill:red
+        %% -- DNS server that chains plugins (drop 1) --
         core-dns(CoreDNS)
         style core-dns fill:red
-        virtual-kubelet(Virtual Kubelet)
-        style virtual-kubelet fill:red
-        vineyard(Vineyard)
-        style vineyard fill:red
-        trickster(Trickster)
-        style trickster fill:red
-        tremor(Tremor)
-        style tremor fill:red
-        sealer(Sealer)
-        style sealer fill:red
-        vitess(Vitess)
-        style vitess fill:red
-        tikv(TiKV)
-        style tikv fill:red
-        spire(Spire)
-        style spire fill:red
+        %% -- Not maintained --
+        %% virtual-kubelet(Virtual Kubelet)
+        %% style virtual-kubelet fill:red
+        %% -- Not maintained --
+        %% tremor(Tremor)
+        %% style tremor fill:red
+        %% -- Not maintained --
+        %% sealer(Sealer)
+        %% style sealer fill:red
+        %% -- Python reference implementation of The Update Framework (TUF) (drop 1) --
         tuf("The Update Framework (TUF)")
         style tuf fill:red
+        %% -- Platform AbstRaction for SECurity service (drop 1) --
         parsec(Parsec)
         style parsec fill:red
-        inclavare-containers(Inclavare Containers)
-        style inclavare-containers fill:red
-        mtls-meshery(Meshery)
-        style mtls-meshery fill:red
+        %% -- Not maintained --
+        %% inclavare-containers(Inclavare Containers)
+        %% style inclavare-containers fill:red
+        %% -- Visibility into current and historical Kubernetes spend and resource allocation (drop 1) --
         open-cost(OpenCost)
         style open-cost fill:red
+        %% -- Control Plane for Kubernetes APIs (drop 1) --
         kcp(kcp)
         style kcp fill:red
+        %% -- Kubernetes native tool for mocking and testing API and micro-services (drop 1) --
         microcks(Microcks)
         style microcks fill:red
-        sops(SOPS)
-        style sops fill:red
-        slimtoolkit(SlimToolkit)
-        style slimtoolkit fill:red
-        werf(werf)
-        style werf fill:red
-        openebs(OpenEBS)
-        style openebs fill:red
+        %% -- A network load-balancer implementation for Kubernetes using standard routing protocols (drop 1) --
         metallb(MetalLB)
         style metallb fill:red
-        trickster(Trickster)
-        style trickster fill:red
+        %% -- Load Balancer Implementation for Kubernetes in Bare-Metal, Edge, and Virtualization (drop 1) --
         openelb(OpenELB)
         style openelb fill:red
-        inspektor-gadget(Inspektor Gadget)
-        style inspektor-gadget fill:red
-        ko(ko)
-        style ko fill:red
-        armada(Armada)
-        style armada fill:red
-        zot(zot)
-        style zot fill:red
-        kpt(kpt)
-        style kpt fill:red
+        %% -- Virtual IP and load balancer for Kubernetes (drop 1) --
         kube-vip(kube-vip)
         style kube-vip fill:red
+        %% -- Namespace management (drop 1) --
         capsule(Capsule)
         style capsule fill:red
+        %% -- Multi-cluster management. KinD setup from the quickstart does not work (drop 1) --
         clusternet(Clusternet)
         style clusternet fill:red
-        opc(Open Policy Containers)
-        style opc fill:red
+        %% -- Removes old images from Kubernetes nodes (drop 1) --
         eraser(Eraser)
         style eraser fill:red
-        %% Not much activity
-        %% merbridge(Merbridge)
-        %% style merbridge fill:red
+        %% -- Speeds up service mesh (drop 1) --
+        merbridge(Merbridge *)
+        style merbridge fill:red
+        %% -- Compatible with ETCD (drop 1) --
+        xline(Xline)
+        style xline fill:red
+        spiffe(SPIFFE & SPIRE)
+        style spiffe fill:red
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & spiffe
     end
 ```
 

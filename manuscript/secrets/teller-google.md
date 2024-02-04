@@ -29,4 +29,4 @@ echo $PRODUCTION_POSTGRESQL
 
 ## Continue The Adventure
 
-* [Mutual TLS (mTLS) And Network Policies](../mtls/README.md)
+[Mutual TLS (mTLS) and Network Policies](../mtls/README.md)

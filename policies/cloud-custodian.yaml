@@ -1,19 +1,48 @@
 policies:
-  - name: my-first-policy
+  - name: deploymentproduction
     description: |
       Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
-      This policy validates that Deployments have more than one replica.      
+      This policy validates that Deployments have more than two replicas.
     resource: k8s.deployment
-    mode:
-      type: k8s-admission
-      on-match: deny
-      operations:
-        - CREATE
-        - UPDATE
     filters:
       - type: value
+        key: metadata.namespace
+        value: production
+      - type: value
         key: spec.replicas
-        value: 2
-        op: greater-than
+        value: 3
+        op: less-than
+    # actions:
+    #   - type: delete
+  - name: dbcluster
+    description: |
+      SQLClaims must have small, medium, or large database size.
+    resource: k8s.custom-cluster-resource
+    query:
+      - group: devopstoolkitseries.com
+        version: v1alpha1
+        plural: sqlclaims
+    filters:
+      - type: value
+        key: spec.parameters.size
+        value: ["small", "medium", "large"]
+        op: not-in
+    # actions:
+    #   - type: delete
+  - name: dbproduction
+    description: |
+      SQLClaims with small database instances are not reliable and thus cannot be used in production.
+    resource: k8s.custom-namespaced-resource
+    query:
+      - group: devopstoolkitseries.com
+        version: v1alpha1
+        plural: sqlclaims
+    filters:
+      - type: value
+        key: metadata.namespace
+        value: production
+      - type: value
+        key: spec.parameters.size
+        value: small
     # actions:
     #   - type: delete

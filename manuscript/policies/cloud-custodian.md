@@ -4,55 +4,35 @@ TODO: Intro
 
 ## Setup
 
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+
 ```bash
-# TODO: kapp-controller
+chmod +x manuscript/policies/cloud-custodian.sh
 
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-
-cat $GITOPS_APP/cloud-custodian.yaml
-
-cp $GITOPS_APP/cloud-custodian.yaml infra/.
-
-git add . 
-
-git commit -m "Cloud Custodian"
-
-git push
-
-kubectl --namespace c7n-system get pods
-
-# Wait until the Pods are created and are ready
+./manuscript/policies/cloud-custodian.sh
 ```
-
 ## Do
 
 ```bash
-# TODO: Continue
+kubectl --namespace production get deployments
 
-cat policies/kyverno.yaml
+# Wait until the `cncf-demo` Deployment is created
 
-cp policies/kyverno.yaml infra/policies.yaml
+source custodian/bin/activate
 
-git add .
+cat policies/cloud-custodian.yaml
 
-git commit -m "Policies"
+custodian run --output-dir=output policies/cloud-custodian.yaml \
+    --cache-period 0
 
-git push
-
-kubectl get clusterpolicies
-
-# Wait until the policies are created
-
-export POLICY_KIND=clusterpolicy
-
-yq --inplace ".policies.type = \"kyverno\"" settings.yaml
-
-yq --inplace ".policies.kind = \"$POLICY_KIND\"" settings.yaml
+custodian run --output-dir=output policies/cloud-custodian.yaml \
+    --cache-period 0 --verbose
 ```
 
 ## How Did You Define Your App?
 
-* [Helm](helm.md)
-* [Kustomize](kustomize.md)
-* [Carvel ytt](carvel.md)
-* [cdk8s](cdk8s.md)
+* [Helm](cloud-custodian-helm.md)
+* [Kustomize](cloud-custodian-kustomize.md)
+* [Carvel ytt](cloud-custodian-carvel.md)
+* [cdk8s](cloud-custodian-cdk8s.md)

@@ -10,7 +10,7 @@ kubectl --namespace production get secret cncf-demo-db-password \
 
 cat yaml/prod/app.yaml
 
-# Instead of specifying the secret as `kind: Secret`,
+# Instead of specifying the secret as `kind: Secret`,
 # we could have specified it as `kind: ExternalSecret`.
 
 # Now the secret is tied to Crossplane objects and we need to
@@ -29,6 +29,8 @@ kubectl get managed
 # Wait until all the managed resources are deleted
 #   (ignore `database`).
 
+# Execute the command that follows only if `database` resource
+#   was left "dangling".
 kubectl patch \
     database.postgresql.sql.crossplane.io cncf-demo-db \
     --type merge --patch '{"metadata":{"finalizers":null}}'

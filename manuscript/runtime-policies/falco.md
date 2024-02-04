@@ -38,4 +38,4 @@ exit
 
 ## Continue The Adventure
 
-* [Managing Secrets](../secrets/README.md)
+* [Managing Secrets in Kubernetes](../secrets/README.md)
