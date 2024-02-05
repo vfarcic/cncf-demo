@@ -87,7 +87,4 @@ kubectl --namespace production delete --filename cilium/mtls.yaml
 
 ## Continue The Adventure
 
-<!-- * [Kubernetes Scanning](../scanning/README.md) -->
-The adventure will continue soon...
-
-In the meantime... [Destroy Everything](../destroy/security.md)
+* [Kubernetes Scanning](../scanning/README.md)
