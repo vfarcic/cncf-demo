@@ -10,6 +10,13 @@ TODO: Explanation
 [![Be a Security Hero with Kubescape as Your Sidekick](https://img.youtube.com/vi/LWmKabIerOQ/0.jpg)](https://youtu.be/LWmKabIerOQ)
 * [Official site](https://kubescape.io)
 
+## Choice 2: Snyk
+
+TODO: Explanation
+
+* [Official site](https://snyk.io/)
+
 ## What Is Your Choice?
 
 * [Kubescape](kubescape.md)
+* [Snyk](snyk.md)
