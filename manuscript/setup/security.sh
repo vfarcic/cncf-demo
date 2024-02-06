@@ -139,14 +139,11 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
         --type strategic \
         --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
 
-    helm upgrade --install cilium cilium/cilium \
+    helm install cilium cilium/cilium \
         --version "1.15.0" --namespace kube-system \
         --set eni.enabled=true --set ipam.mode=eni \
         --set routingMode=native \
-        --set egressMasqueradeInterfaces=eth0 \
-        --set authentication.mutual.spire.enabled=true \
-        --set authentication.mutual.spire.install.enabled=true \
-        --wait
+        --set egressMasqueradeInterfaces=eth0 --wait
 
     eksctl create addon --name aws-ebs-csi-driver --cluster dot-production \
         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
