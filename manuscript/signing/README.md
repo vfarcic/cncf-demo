@@ -14,6 +14,7 @@ TODO: Explanation
 TODO: Explanation
 
 [![Signed, Sealed, Delivered, I’m Yours! An Introduction to Sigstore](https://img.youtube.com/vi/Q726pjHLsiE/0.jpg)](https://youtu.be/Q726pjHLsiE)
+[![Signing and Verifying Container Images With Sigstore Cosign and Kyverno](https://img.youtube.com/vi/HLb1Q086u6M/0.jpg)](https://youtu.be/HLb1Q086u6M)
 * [Official site](https://www.sigstore.dev/)
 
 
