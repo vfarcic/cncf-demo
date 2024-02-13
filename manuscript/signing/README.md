@@ -1,6 +1,21 @@
 # Signing Artifacts
 
-TODO: Intro
+Hero is sitting pretty in production. The neighboring apps and objects all belong, Hero feels protected against unknown unknowns at runtime, and Hero can safely and easily access needed secrets. Hero is only allowed to communicate with necessary services, and those communications are secure. The cluster has been scanned for security vulnerabilities and misconfigurations, and all risks and threats have been addressed. So can Hero and Lil DeeBee finally relax already?!
+
+Nope!
+
+There is another threat boundary to consider - container images! Sure they all look like they’re from familiar, trusted sources but those pesky little gremlins can’t be trusted! Some are dressed up to look safe but when run they’ll fire up malicious code that can hurt Hero and the system! Code might be containerized by an attacker and made to look like familiar images, or an image might be from a truly trusted source but then modified by an attacker in transit.
+
+And now that Hero knows that images might be nefarious, Hero sees them everywhere! There are application code images like Hero, base images for those app images, images that run third-party tools (like every tool we’ve added so far in the story!), and images made in-house, to name a few. How can Hero know that they’re all safe to run?!
+
+There are other artifacts all over the system too - Helm charts, policies, software bills of materials (SBOMs), et cetera - all of which can be hijacked and modified. Hero is shaking in fear!
+
+That is where **artifact signing** swoops in to save the day! What does it mean to sign a digital artifact? A statement called an *attestation* makes a claim about the artifact (for example, the trustworthiness of the origin) and the artifact signature verifies the attestation. The signature has an associated X.509 certificate to establish the identity of the signing party. So basically, an attestation is a statement that is signed by a particular identity (human or process) at a point in time. Attestations and X.509 certificates are stored alongside artifacts and move between registries and systems together. So, if an artifact is signed, that means that its metadata points to a signed attestation and X.509 certificate that makes some claim about that artifact. Note here that you still have to trust the human or entity that is making the claim - the signature verifies the identity of the attestation author but not the truthfulness of the claim itself. Meaning people and processes can still lie to your face.
+
+There are many types of artifacts, verifying tools, and strategies. For example, container images are often verified as part of the pulling process, and SBOMs might get verified, appended with new information, and re-signed as software moves through a supply chain.
+
+Let’s investigate some signing tools now!
+
 
 ## Choice 1: Notary Project
 
