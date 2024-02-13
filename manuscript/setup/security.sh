@@ -245,12 +245,6 @@ if [[ "$HYPERSCALER" == "aws" ]]; then
         INGRESS_IP=$(dig +short $INGRESS_IPNAME) 
     done
 
-    INGRESS_IP_LINES=$(echo $INGRESS_IP | wc -l | tr -d ' ')
-
-    if [ $INGRESS_IP_LINES -gt 1 ]; then
-        INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
-    fi
-
 else
 
     INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
@@ -260,6 +254,14 @@ else
         INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
     done
 
+fi
+
+INGRESS_IP=$(echo $INGRESS_IP | awk '{print $1;}')
+
+INGRESS_IP_LINES=$(echo $INGRESS_IP | wc -l | tr -d ' ')
+
+if [ $INGRESS_IP_LINES -gt 1 ]; then
+    INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
 fi
 
 echo "export INGRESS_HOST=$INGRESS_IP.nip.io" >> .env

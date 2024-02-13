@@ -83,6 +83,8 @@ kubectl --namespace production delete \
     --filename cilium/network-policy.yaml
 
 kubectl --namespace production delete --filename cilium/mtls.yaml
+
+kubectl --namespace default delete --filename cilium/mtls.yaml
 ```
 
 ## Continue The Adventure
