@@ -27,7 +27,7 @@ Let’s investigate some signing tools now!
 
 **Notary** is a legacy client/server for signing images.
 
-With Notary Project, a user can specify verification levels like “strict”, “permissive”, “audit”, and “skip”, which helps to incrementally adopt signatures. 
+With Notary Project, a user can specify verification levels like *strict*, *permissive*, *audit*, and *skip*, which helps to incrementally adopt signatures. 
 
 Notary Project also provides granularity with signature revocations. You can choose to revoke an individual signature (for example, revoke one particular image built by the owner of this particular private key), or you can revoke a whole identity (for example, revoke every image built by the owner of this particular private key). 
 
@@ -57,7 +57,9 @@ Sigstore is difficult to understand but simple to use. Besides not needing key m
 
 ## Choice 3: Open Policy Containers
 
-TODO: Explanation
+Open Policy Containers (OPCR) takes a collection of Open Policy Agent (OPA) policy-related artifacts and stores them as an Open Container Initiative (OCI) v2 container image, which allows the user to package and distribute OPA policies in a way that leverages industry standards. Because the policy is now an OCI container image, users can additionally version their policies, and add any other metadata that they please. 
+
+Admittedly, Open Policy Containers doesn’t fit very snugly into this “Artifact Signing” system design step, but it does use Sigstore’s *Cosign* tool under the hood to sign and verify the OCI policy artifacts that it creates.
 
 [![Open Policy Containers: The What, Why, and How](https://img.youtube.com/vi/gCPDSni9rXY/0.jpg)](https://youtu.be/gCPDSni9rXY)
 * [Official site](https://openpolicycontainers.com/)
