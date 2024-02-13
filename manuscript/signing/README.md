@@ -22,12 +22,13 @@ TODO: Explanation
 
 TODO: Explanation
 
+[![Open Policy Containers: The What, Why, and How](https://img.youtube.com/vi/gCPDSni9rXY/0.jpg)](https://youtu.be/gCPDSni9rXY)
 * [Official site](https://openpolicycontainers.com/)
 
 ## What Is Your Choice?
 
 * [Notary Project](notary.md)
-* [Sigstore](notary.md)
+* [Sigstore](sigstore.md)
 * Open Policy Containers has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 
 
