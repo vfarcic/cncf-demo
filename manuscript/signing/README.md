@@ -21,7 +21,20 @@ Let’s investigate some signing tools now!
 
 ## Choice 1: Notary Project
 
-TODO: Explanation
+**Notary Project** is a specification that defines how a signature is created. The specification includes encryption standards, signature formats, and a spec for how to generate signatures. Notary Project additionally includes specifications for signature verification and for extendability with plugins.
+
+**Notation** is a Notary project tool that implements the Notary Project specification. Notation can be used as a CLI tool or as libraries.
+
+**Notary** is a legacy client/server for signing images.
+
+With Notary Project, a user can specify verification levels like “strict”, “permissive”, “audit”, and “skip”, which helps to incrementally adopt signatures. 
+
+Notary Project also provides granularity with signature revocations. You can choose to revoke an individual signature (for example, revoke one particular image built by the owner of this particular private key), or you can revoke a whole identity (for example, revoke every image built by the owner of this particular private key). 
+
+Notation plugins include signing plugins that integrate Notation with third-party key management systems, verification plugins that extend signature verification logic, and you can build your own plugins to help integrate Notary Project with your signing infrastructure.
+
+However, the main differentiator between Notary Project and Sigstore is that Sigstore publishes signatures to a immutable, transparent public log (this simplifies key management - more about that in a moment), and Notary Project does not. Therefore Notary Project shines in use cases where privacy and compliance are significant concerns, like for air-gapped and/or highly regulated systems.
+
 
 [![Ensuring Software Authenticity: Introduction to Notary Project](https://img.youtube.com/vi/GaCAiwb3Mhw/0.jpg)](https://youtu.be/GaCAiwb3Mhw)
 * [Official site](https://notaryproject.dev)
