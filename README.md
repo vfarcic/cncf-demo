@@ -486,8 +486,8 @@ flowchart TD
 | Kubernetes Scanning | Oshrat Nir - Kubescape<br />Jamie Smith - Snyk | Tuesday, February 6, 2024 | [story](manuscript/scanning/README.md) |
 | Signing Artifacts | Milind Gokarn - Notary<br />Hector Fernandez - Sigstore<br />Gert Drapers - Open Policy Containers | Tuesday, February 13, 2024 | N/A |
 | Generating Workload Identity | SPIFFE<br />SPIRE<br />Abhijeet Vaidya - Athenz | Tuesday, February 20, 2024 | N/A |
-| Authenticating Users | Dex<br />Keycloak | Tuesday, February 27, 2024 | N/A |
-| Authorizing Access | Hexa<br />Saim Safdar - Paralus<br />OpenFGA  | Tuesday, March 5, 2024 | N/A |
+| Authenticating Users | Maksim Nabokikh - Dex<br />Keycloak | Tuesday, February 27, 2024 | N/A |
+| Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | N/A |
 | Misc | Confidential Containers<br />ContainerSSH | Tuesday, March 12, 2024 | N/A |
 | Chapter 3 Finale!<br />AT KUBECON | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
 
