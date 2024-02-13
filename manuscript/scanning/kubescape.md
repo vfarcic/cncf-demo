@@ -28,4 +28,4 @@ kubescape scan workload deployment/cncf-demo \
 
 ## Continue The Adventure
 
-* [Signing](../signing/README.md)
+* [Artifact Signing](../signing/README.md)
