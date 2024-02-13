@@ -1,4 +1,4 @@
-# Signing with Notary
+# Artifact signing with Notary Project
 
 TODO: Intro
 
