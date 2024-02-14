@@ -427,6 +427,7 @@ flowchart TD
         mtls-linkerd("LinkerD (SMI)")
         click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
         mtls-cilium(Cilium)
+        click mtls-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
         mtls-kuma(Kuma)
         style mtls-kuma fill:red
         mtls-network-service-mesh(Network Service Mesh)
@@ -437,9 +438,13 @@ flowchart TD
         %% -- Scanning --
         %% --------------
         scanning{{Scanning}}
+        click signing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/README.md"
         style scanning fill:blue
         kubescape(Kubescape)
-        scanning --> kubescape --> signing
+        click kubescape "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/scanning/kubescape.md"
+        snyk(Snyk)
+        click snyk "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/scanning/snyk.md"
+        scanning --> kubescape & snyk --> signing
 
         %% -------------
         %% -- Signing --
@@ -449,9 +454,26 @@ flowchart TD
         style signing fill:blue
         notary(Notary)
         click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
+        sigstore(Sigstore)
+        click sigstore "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/sigstore.md"
         opc(Open Policy Containers)
         style opc fill:red
-        signing --> notary & opc --> access-control
+        signing --> notary & sigstore & opc --> identity
+
+        %% -----------------------
+        %% -- Workload Identity --
+        %% -----------------------
+
+        identity{{Workload Identity}}
+        click identity "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/identity/README.md"
+        style identity fill:blue
+        spiffe(SPIFFE)
+        style spiffe fill:red
+        spire(SPIRE)
+        style spire fill:red
+        athenz(Athenz)
+        style athenz fill:red
+        identity --> spiffe & spire & athenz --> access-control
 
         %% --------------------
         %% -- Access Control --
@@ -463,8 +485,6 @@ flowchart TD
         style access-control-hexa fill:red
         dex(Dex)
         style dex fill:red
-        athenz(Athenz)
-        style athenz fill:red
         keycloak(Keycloak)
         style keycloak fill:red
         paralus(Paralus)
@@ -473,7 +493,7 @@ flowchart TD
         style openfga fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & athenz & keycloak & paralus & openfga --> container-ssh --> security_misc
+        access-control --> access-control-hexa & dex & keycloak & paralus & openfga --> container-ssh --> security_misc
 
         %% ----------
         %% -- Misc --
@@ -1066,9 +1086,7 @@ flowchart TD
         %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
         style xline fill:red
-        spiffe(SPIFFE & SPIRE)
-        style spiffe fill:red
-        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & spiffe
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline
     end
 ```
 

@@ -16,27 +16,21 @@ TODO: Explanation
 [![What Is Dex?](https://img.youtube.com/vi/6SYV9dqwHQY/0.jpg)](https://youtu.be/6SYV9dqwHQY)
 * [Official site](https://dexidp.io)
 
-## Choice 3: Athenz
-
-TODO: Explanation
-
-* [Official site](https://athenz.io)
-
-## Choice 4: Keycloak
+## Choice 3: Keycloak
 
 TODO: Explanation
 
 [![Keycloak: The Open Source IAM for Modern Applications](https://img.youtube.com/vi/FPPFbKUZkME/0.jpg)](https://youtu.be/FPPFbKUZkME)
 * [Official site](https://keycloak.org)
 
-## Choice 5: Paralus
+## Choice 4: Paralus
 
 TODO: Explanation
 
 [![Hello Paralus, Goodbye RBAC Stress!](https://img.youtube.com/vi/GxdwAIutXNU/0.jpg)](https://youtu.be/GxdwAIutXNU)
 * [Official site](https://paralus.io)
 
-## Choice 6: OpenFGA
+## Choice 5: OpenFGA
 
 TODO: Explanation
 
@@ -46,7 +40,6 @@ TODO: Explanation
 
 * **Hexa** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Dex** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Athenz** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Keycloak** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Paralus** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **OpenFGA** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

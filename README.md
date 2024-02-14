@@ -443,8 +443,54 @@ flowchart TD
         style sops fill:red
         secrets --> eso --> secrets-google & secrets-aws & secrets-azure --> secrets-helm & secrets-kustomize & secrets-cdk8s & secrets-carvel --> client-secrets
         secrets --> sscsid
-        client-secrets --> teller --> teller-aws & teller-azure & teller-google --> continue
-        client-secrets --> sops --> continue
+        client-secrets --> teller --> teller-aws & teller-azure & teller-google --> mtls
+        client-secrets --> sops --> mtls
+
+        %% -------------------------------------
+        %% -- Mutual TLS And Network Policies --
+        %% -------------------------------------
+        mtls{{"Mutual TLS (mTLS) And Network Policies"}}
+        click mtls "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/README.md"
+        style mtls fill:blue
+        mtls-istio(Istio)
+        click mtls-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/istio.md"
+        mtls-linkerd("LinkerD (SMI)")
+        click mtls-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/linkerd.md"
+        mtls-cilium(Cilium)
+        click mtls-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
+        style mtls-cilium fill:green
+        mtls-kuma(Kuma)
+        style mtls-kuma fill:red
+        mtls-network-service-mesh(Network Service Mesh)
+        style mtls-network-service-mesh fill:red
+        mtls --> mtls-istio & mtls-kuma & mtls-network-service-mesh & mtls-cilium & mtls-linkerd--> scanning
+
+        %% --------------
+        %% -- Scanning --
+        %% --------------
+        scanning{{Scanning}}
+        click signing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/README.md"
+        style scanning fill:blue
+        kubescape(Kubescape)
+        click kubescape "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/scanning/kubescape.md"
+        style kubescape fill:green
+        snyk(Snyk)
+        click snyk "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/scanning/snyk.md"
+        scanning --> kubescape & snyk --> signing
+
+        %% -------------
+        %% -- Signing --
+        %% -------------
+        signing{{Signing}}
+        click signing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/README.md"
+        style signing fill:blue
+        notary(Notary)
+        click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
+        click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
+        sigstore(Sigstore)
+        opc(Open Policy Containers)
+        style opc fill:red
+        signing --> notary & sigstore & opc --> continue
 
         continue((The be continued...))
 
