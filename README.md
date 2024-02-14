@@ -488,7 +488,7 @@ flowchart TD
 | Generating Workload Identity | SPIFFE<br />SPIRE<br />Abhijeet Vaidya - Athenz | Tuesday, February 20, 2024 | N/A |
 | Authenticating Users | Maksim Nabokikh - Dex<br />Keycloak | Tuesday, February 27, 2024 | N/A |
 | Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | N/A |
-| Misc | Confidential Containers<br />ContainerSSH | Tuesday, March 12, 2024 | N/A |
+| Miscellanous | Suraj Deshmukh - Confidential Containers<br />ContainerSSH | Tuesday, March 12, 2024 | N/A |
 | Chapter 3 Finale!<br />AT KUBECON | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
 
 ## The Format
