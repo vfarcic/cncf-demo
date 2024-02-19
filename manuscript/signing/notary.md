@@ -41,4 +41,4 @@ notation verify $IMAGE_DIGEST
 
 ## Continue The Adventure
 
-* [Access Control](../access/README.md)
+* [Generating Workload Identity](../workload-identity/README.md)
