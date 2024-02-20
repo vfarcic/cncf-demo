@@ -6,7 +6,7 @@ TODO: Intro
 
 * Make sure that Docker is up-and-running.
 * Install `notation` CLI by following the instructions at https://notaryproject.dev/docs/user-guides/installation/cli/.
-
+* The demo is using `ttl.sh` to push images to simplify the process. Use whichever "real" registry you used so far instead.
 
 ```bash
 export IMAGE=cncf-demo-$(date +%Y%m%d%H%M%S)
