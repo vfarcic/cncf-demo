@@ -6,7 +6,7 @@ spec:
   id: production
   compositionSelector:
     matchLabels:
-      provider: azure-official
+      provider: azure
       cluster: aks
   parameters:
     nodeSize: medium

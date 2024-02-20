@@ -486,7 +486,7 @@ flowchart TD
         style signing fill:blue
         notary(Notary)
         click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
-        click notary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/signing/notary.md"
+        style notary fill:green
         sigstore(Sigstore)
         opc(Open Policy Containers)
         style opc fill:red

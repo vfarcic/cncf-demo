@@ -13,13 +13,13 @@ spec:
       provider: local-k8s
       {{- end }}
       {{- if .Values.db.enabled.crossplane.google }}
-      provider: google-official
+      provider: google
       {{- end }}
       {{- if .Values.db.enabled.crossplane.azure }}
-      provider: azure-official
+      provider: azure
       {{- end }}
       {{- if .Values.db.enabled.crossplane.aws }}
-      provider: aws-official
+      provider: aws
       {{- end }}
       db: postgresql
   parameters:

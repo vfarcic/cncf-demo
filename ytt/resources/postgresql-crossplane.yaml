@@ -12,11 +12,11 @@ spec:
       #@ if/end data.values.db.enabled.crossplane.local:
       provider: local-k8s
       #@ if/end data.values.db.enabled.crossplane.google:
-      provider: google-official
+      provider: google
       #@ if/end data.values.db.enabled.crossplane.azure:
-      provider: azure-official
+      provider: azure
       #@ if/end data.values.db.enabled.crossplane.aws:
-      provider: aws-official
+      provider: aws
       db: postgresql
   parameters:
     #@ if/end data.values.db.enabled.crossplane.aws:

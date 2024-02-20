@@ -8,7 +8,7 @@ spec:
   id: cncf-demo-db
   compositionSelector:
     matchLabels:
-      provider: aws-official
+      provider: aws
       db: postgresql
   parameters:
     version: "15.3"

@@ -14,7 +14,7 @@ spec:
   id: cncf-demo-db-dev
   compositionSelector:
     matchLabels:
-      provider: azure-official
+      provider: azure
       db: postgresql
   parameters:
     version: "11"

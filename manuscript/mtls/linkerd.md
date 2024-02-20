@@ -165,9 +165,10 @@ exit
 ## Destroy
 
 ```bash
-kubectl --namespace production delete --filename istio/mtls.yaml
+kubectl --namespace production delete \
+    --filename linkerd/mtls.yaml
 
-kubectl --namespace default delete --filename istio/mtls.yaml
+kubectl --namespace default delete --filename linkerd/mtls.yaml
 ```
 
 ## Continue The Adventure

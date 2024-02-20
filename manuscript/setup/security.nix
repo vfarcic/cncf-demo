@@ -8,6 +8,7 @@ pkgs.mkShell {
     gum
     gh
     yq-go
+    jq
     kubectl
     google-cloud-sdk
     awscli2
@@ -20,5 +21,7 @@ pkgs.mkShell {
     teller
     ytt
     cilium-cli
+    linkerd
+    notation
   ];
 }

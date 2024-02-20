@@ -43,11 +43,11 @@ func getPostgresqlCrossplane(appProps *AppProps, metadata *cdk8s.ApiObjectMetada
 	version := "11"
 	size := appProps.Db.Size
 	if appProps.Db.Enabled.Crossplane.Google {
-		provider = "google-official"
+		provider = "google"
 	} else if appProps.Db.Enabled.Crossplane.AWS {
-		provider = "aws-official"
+		provider = "aws"
 	} else if appProps.Db.Enabled.Crossplane.Azure {
-		provider = "azure-official"
+		provider = "azure"
 	}
 	if appProps.Db.Enabled.Crossplane.AWS {
 		version = "15.3"
