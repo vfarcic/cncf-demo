@@ -53,5 +53,5 @@ Athens supports SPIFFE’s SVIDs for identity.
 
 ## What Is Your Choice?
 
-* **SPIRE** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [SPIRE](spire.md)
 * **Athenz** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

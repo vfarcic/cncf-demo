@@ -463,17 +463,37 @@ flowchart TD
         %% -----------------------
         %% -- Workload Identity --
         %% -----------------------
-
         identity{{Workload Identity}}
-        click identity "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/identity/README.md"
+        click identity "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workload-identity/README.md"
         style identity fill:blue
-        spiffe(SPIFFE)
-        style spiffe fill:red
         spire(SPIRE)
-        style spire fill:red
+        click spire "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workload-identity/spire.md"
+        spire-istio(Istio)
+        style spire-istio fill:red
+        spire-linkerd(Linkerd)
+        style spire-linkerd fill:red
+        spire-nsm(Network Service Mesh)
+        style spire-nsm fill:red
+        spire-cilium(Cilium)
+        click spire-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workload-identity/spire-cilium.md"
+        spire-kuma(Kuma)
+        style spire-kuma fill:red
         athenz(Athenz)
         style athenz fill:red
-        identity --> spiffe & spire & athenz --> access-control
+        identity --> spire --> spire-istio & spire-linkerd & spire-nsm & spire-cilium & spire-kuma --> user-authentication
+        identity --> athenz --> user-authentication
+
+        %% ------------------------
+        %% -- User Authorization --
+        %% ------------------------
+        user-authentication{{User Authentication}}
+        click user-authentication "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/user-authentication/README.md"
+        style user-authentication fill:blue
+        dex(Dex)
+        style dex fill:red
+        keycloak(Keycloak)
+        style keycloak fill:red
+        user-authentication --> dex & keycloak --> access-control
 
         %% --------------------
         %% -- Access Control --
@@ -483,17 +503,13 @@ flowchart TD
         style access-control fill:blue
         access-control-hexa(Hexa)
         style access-control-hexa fill:red
-        dex(Dex)
-        style dex fill:red
-        keycloak(Keycloak)
-        style keycloak fill:red
         paralus(Paralus)
         style paralus fill:red
         openfga(OpenFGA)
         style openfga fill:red
         container-ssh(ContainerSSH)
         style container-ssh fill:red
-        access-control --> access-control-hexa & dex & keycloak & paralus & openfga --> container-ssh --> security_misc
+        access-control --> access-control-hexa & paralus & openfga --> container-ssh --> security_misc
 
         %% ----------
         %% -- Misc --
