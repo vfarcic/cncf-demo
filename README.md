@@ -532,9 +532,9 @@ flowchart TD
 | Kubernetes Scanning | Oshrat Nir - Kubescape<br />Jamie Smith - Snyk | Tuesday, February 6, 2024 | [story](manuscript/scanning/README.md) |
 | Signing Artifacts | Milind Gokarn - Notary<br />Hector Fernandez - Sigstore<br />Gert Drapers - Open Policy Containers | Tuesday, February 13, 2024 | [story](manuscript/signing/README.md) |
 | Generating Workload Identity | Frederick Kautz - SPIFFE<br />Daniel Feldman - SPIRE<br />Abhijeet Vaidya - Athenz | Tuesday, February 20, 2024 | [story](manuscript/workload-identity/README.md) |
-| Authenticating Users | Maksim Nabokikh - Dex<br />Alexander Schwartz - Keycloak | Tuesday, February 27, 2024 | N/A |
+| Authenticating Users | Maksim Nabokikh - Dex<br />Alexander Schwartz - Keycloak | Tuesday, February 27, 2024 | [story](manuscript/user-authentication/README.md) |
 | Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | N/A |
-| Miscellanous | Suraj Deshmukh - Confidential Containers<br />Rachid Zarouali - ContainerSSH | Tuesday, March 12, 2024 | N/A |
+| Miscellaneous | Suraj Deshmukh - Confidential Containers<br />Rachid Zarouali - ContainerSSH | Tuesday, March 12, 2024 | N/A |
 | Chapter 3 Finale!<br />AT KUBECON | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
 
 ## The Format
