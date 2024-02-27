@@ -8,4 +8,4 @@ SPIRE was already installed when we set up Cilium mTLS. There's nothing for us t
 
 ## Continue The Adventure
 
-* [Authorizing Users](../user-authentication/README.md)
+* [Authenticating Users](../user-authentication/README.md)
