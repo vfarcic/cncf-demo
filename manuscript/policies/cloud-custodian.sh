@@ -15,7 +15,7 @@ echo "
 ## You will need following tools installed:
 |Name            |Required             |More info                                          |
 |----------------|---------------------|---------------------------------------------------|
-|python3         |Yes                  |'https://www.python.org/downloads'                 |
+|python3         |Yes                  |'https://python.org/downloads'                     |
 " | gum format
 
 gum confirm "

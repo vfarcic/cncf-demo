@@ -1,0 +1,29 @@
+{
+  "packages": [
+    "gum@0.13.0",
+    "gh@2.44.1",
+    "yq-go@4.41.1",
+    "jq@1.7.1",
+    "kubectl@1.29.2",
+    "google-cloud-sdk@452.0.1",
+    "awscli2@2.15.15",
+    "eksctl@0.171.0",
+    "azure-cli@2.56.0",
+    "kustomize@5.3.0",
+    "kubernetes-helm@3.14.1",
+    "nodejs_21@21.6.2",
+    "nodePackages.cdk8s-cli@2.198.37",
+    "teller@1.5.6",
+    "ytt@0.48.0",
+    "cilium-cli@0.15.22",
+    "linkerd@2.14.9",
+    "notation@1.1.0",
+    "clusterctl@1.6.1",
+    "crossplane-cli@1.15.0",
+    "fluxcd@2.2.3"
+  ],
+  "shell": {
+    "init_hook": [],
+    "scripts": {}
+  }
+}
