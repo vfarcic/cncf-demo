@@ -1,4 +1,4 @@
-# Access Control
+# Access Authorization
 
 TODO: Intro
 

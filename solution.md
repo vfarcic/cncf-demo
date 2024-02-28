@@ -493,23 +493,21 @@ flowchart TD
         style dex fill:red
         keycloak(Keycloak)
         style keycloak fill:red
-        user-authentication --> dex & keycloak --> access-control
+        user-authentication --> dex & keycloak --> access-authorization
 
-        %% --------------------
-        %% -- Access Control --
-        %% --------------------
-        access-control{{Access Control}}
-        click access-control "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/README.md"
-        style access-control fill:blue
-        access-control-hexa(Hexa)
-        style access-control-hexa fill:red
+        %% --------------------------
+        %% -- Access Authorization --
+        %% --------------------------
+        access-authorization{{Access Control}}
+        click access-authorization "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/README.md"
+        style access-authorization fill:blue
+        hexa(Hexa)
+        style hexa fill:red
         paralus(Paralus)
         style paralus fill:red
         openfga(OpenFGA)
         style openfga fill:red
-        container-ssh(ContainerSSH)
-        style container-ssh fill:red
-        access-control --> access-control-hexa & paralus & openfga --> container-ssh --> security_misc
+        access-authorization --> hexa & paralus & openfga --> security_misc
 
         %% ----------
         %% -- Misc --
@@ -521,7 +519,9 @@ flowchart TD
         %% style curiefense fill:red
         confidential-containers(Confidential Containers)
         style confidential-containers fill:red
-        security_misc --> confidential-containers --> security-done
+        container-ssh(ContainerSSH)
+        style container-ssh fill:red
+        security_misc --> confidential-containers & container-ssh --> security-done
 
         security-done((Chapter End))
 
