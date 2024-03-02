@@ -33,8 +33,9 @@ custodian run --output-dir=output policies/cloud-custodian.yaml \
 
 deactivate
 
-kubectl --namespace production wait sqlclaim cncf-demo \
-    --for=condition=ready --timeout=15m
+crossplane beta trace sqlclaim cncf-demo --namespace production
+
+# Wait until all the resources are available
 ```
 
 ## Continue The Adventure

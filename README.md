@@ -490,9 +490,45 @@ flowchart TD
         sigstore(Sigstore)
         opc(Open Policy Containers)
         style opc fill:red
-        signing --> notary & sigstore & opc --> continue
+        signing --> notary & sigstore & opc --> identity
 
-        continue((The be continued...))
+        %% -----------------------
+        %% -- Workload Identity --
+        %% -----------------------
+        identity{{Workload Identity}}
+        click identity "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workload-identity/README.md"
+        style identity fill:blue
+        spire(SPIRE)
+        style spire fill:green
+        click spire "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workload-identity/spire.md"
+        spire-istio(Istio)
+        style spire-istio fill:red
+        spire-linkerd(Linkerd)
+        style spire-linkerd fill:red
+        spire-nsm(Network Service Mesh)
+        style spire-nsm fill:red
+        spire-cilium(Cilium)
+        style spire-cilium fill:green
+        click spire-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workload-identity/spire-cilium.md"
+        spire-kuma(Kuma)
+        style spire-kuma fill:red
+        athenz(Athenz)
+        style athenz fill:red
+        identity --> spire --> spire-istio & spire-linkerd & spire-nsm & spire-cilium & spire-kuma --> user-authentication
+        identity --> athenz --> user-authentication
+
+        %% ------------------------
+        %% -- User Authorization --
+        %% ------------------------
+        user-authentication{{User Authentication}}
+        click user-authentication "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/user-authentication/README.md"
+        style user-authentication fill:blue
+        dex(Dex)
+        style dex fill:red
+        keycloak(Keycloak)
+        style keycloak fill:green
+        click keycloak "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/user-authentication/keycloak.md"
+        user-authentication --> dex & keycloak --> continue
 
     end
 ```

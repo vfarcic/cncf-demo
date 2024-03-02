@@ -47,4 +47,4 @@ Keycloak uses a plug-in system to provide support for many different access mana
 ## What Is Your Choice?
 
 * **Dex** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Keycloak** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Keycloak](keycloak.md)

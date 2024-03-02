@@ -492,7 +492,7 @@ flowchart TD
         dex(Dex)
         style dex fill:red
         keycloak(Keycloak)
-        style keycloak fill:red
+        click keycloak "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/user-authentication/keycloak.md"
         user-authentication --> dex & keycloak --> access-authorization
 
         %% --------------------------
