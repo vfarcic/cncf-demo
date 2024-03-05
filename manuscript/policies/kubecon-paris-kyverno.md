@@ -31,9 +31,7 @@ kubectl --namespace production get deployments
 
 # The Deployment was NOT created
 
-kubectl describe deploymentreplicas deploymentproduction
-
-# Gatekeeper does not show violations, but it does enforce them.
+kubectl describe clusterpolicy deploymentproduction
 
 yq --inplace ".replicas = 3" ytt/values-prod.yaml
 
@@ -62,9 +60,9 @@ kubectl --namespace production get sqlclaims
 
 # The SqlClaim was NOT created
 
-kubectl describe dbsize dbcluster
+kubectl describe clusterpolicy dbcluster
 
-kubectl describe dbsize dbproduction
+kubectl describe clusterpolicy dbproduction
 
 # Gatekeeper (still) does not show violations, but it does
 #   enforce them.
@@ -82,11 +80,6 @@ git commit -m "DB resize"
 git push
 
 kubectl --namespace production get sqlclaims
-
-# Wait until the SqlClaim is created
-
-kubectl --namespace production wait sqlclaim cncf-demo \
-    --for=condition=ready --timeout=15m
 ```
 
 ## Continue The Adventure

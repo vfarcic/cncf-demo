@@ -11,9 +11,6 @@ TODO: Intro
 # In the "real world" situation, you should do it through GitOps
 #   by using Linkerd's Helm chart and your own certificates.
 
-curl --proto '=https' --tlsv1.2 \
-    -sSfL https://run.linkerd.io/install | sh
-
 linkerd check --pre
 
 linkerd install --crds | kubectl apply --filename -
@@ -25,7 +22,7 @@ linkerd viz install | kubectl apply --filename -
 linkerd check
 ```
 
-# Do
+## Do
 
 ```bash
 cat linkerd/namespace-production.yaml

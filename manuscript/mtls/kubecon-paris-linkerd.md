@@ -1,6 +1,20 @@
 # Mutual TLS (mTLS) And Network Policies With Linkerd
 
-# Do
+## Setup
+
+```sh
+linkerd check --pre
+
+linkerd install --crds | kubectl apply --filename -
+
+linkerd install | kubectl apply --filename -
+
+linkerd viz install | kubectl apply --filename -
+
+linkerd check
+```
+
+## Do
 
 ```bash
 cat linkerd/namespace-production.yaml

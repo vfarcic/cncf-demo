@@ -19,58 +19,23 @@ eval "$(teller sh)"
 
 source .env
 
-kubectl port-forward svc/argocd-server 8080:80 -n argocd
+kubectl port-forward svc/argocd-server 8080:80 -n argocd &
 
 # Open http://localhost:8080
 
 ./manuscript/policies/kyverno.sh
 
-# Wait until it is synced by Argo CD
-
 ./manuscript/policies/gatekeeper.sh
-
-# Wait until it is synced by Argo CD
 
 ./manuscript/policies/kubewarden.sh
 
-# Wait until it is synced by Argo CD
-
 ./manuscript/runtime-policies/kubearmor.sh
-
-# Wait until it is synced by Argo CD
 
 ./manuscript/runtime-policies/falco.sh
 
-# Wait until it is synced by Argo CD
-
 ./manuscript/secrets/eso.sh
 
-# Wait until it is synced by Argo CD
-
 ./manuscript/secrets/aws.sh
-
-# Wait until it is synced by Argo CD
-
-./manuscript/mtls/istio.sh
-
-# Wait until it is synced by Argo CD
-
-curl --proto '=https' --tlsv1.2 \
-    -sSfL https://run.linkerd.io/install | sh
-
-linkerd check --pre
-
-linkerd install --crds | kubectl apply --filename -
-
-linkerd install | kubectl apply --filename -
-
-linkerd viz install | kubectl apply --filename -
-
-linkerd check
-
-./manuscript/mtls/cilium.sh
-
-# Wait until it is synced by Argo CD
 
 source .env
 ```
@@ -79,20 +44,20 @@ source .env
 
 Admission Controller Policies:
 * OPA
-* Kyverno
+* Kyverno (done)
 * Kubewarden
 
 Runtime Policies:
 * Falco
-* KubeArmor
+* KubeArmor (done)
 
 Secrets Management:
-* ESO
+* ESO (done)
 * SSCSI
 * SOPS
 
 mTLS & Network Policies:
-* Cilium
+* Cilium (done)
 * Linkerd
 * Istio
 

@@ -14,25 +14,6 @@ cat yaml/prod/app.yaml
 # Now the secret is tied to Crossplane objects and we need to
 #   remove it first.
 
-rm apps/cncf-demo.yaml
-
-git add .
-
-git commit -m "Removed the app"
-
-git push
-
-kubectl get managed
-
-# Wait until all the managed resources are deleted
-#   (ignore `database`).
-
-# Execute the command that follows only if `database` resource
-#   was left "dangling".
-kubectl patch \
-    database.postgresql.sql.crossplane.io cncf-demo-db \
-    --type merge --patch '{"metadata":{"finalizers":null}}'
-
 yq --inplace ".db.insecure = false" ytt/values-prod.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \

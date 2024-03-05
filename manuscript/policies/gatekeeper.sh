@@ -25,11 +25,13 @@ Do you have those tools installed?
 
 rm -f apps/cncf-demo.yaml
 
+set +e
 git add .
 
 git commit -m "CNCF Demo"
 
 git push
+set -e
 
 # Gatekeeper causes issues with Argo CD (not sure about Flux),
 #   so we'll install it manually.

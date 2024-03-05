@@ -1,5 +1,11 @@
 # Mutual TLS (mTLS) And Network Policies With Cilium And SPIFFE
 
+## Setup
+
+```sh
+./manuscript/mtls/cilium.sh
+```
+
 ## Authorization (mTLS)
 
 ```bash

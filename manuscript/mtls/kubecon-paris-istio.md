@@ -1,6 +1,12 @@
 # Mutual TLS (mTLS) And Network Policies With Istio
 
-# Do
+## Setup
+
+```sh
+./manuscript/mtls/istio.sh
+```
+
+## Do
 
 ```bash
 cat istio/namespace-production.yaml

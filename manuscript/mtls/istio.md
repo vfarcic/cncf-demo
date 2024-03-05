@@ -17,7 +17,7 @@ chmod +x manuscript/mtls/istio.sh
 source .env
 ```
 
-# Do
+## Do
 
 ```bash
 cat istio/namespace-production.yaml
