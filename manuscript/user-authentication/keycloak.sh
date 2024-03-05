@@ -28,6 +28,8 @@ INGRESS_HOST=$(yq ".ingress.host" settings.yaml)
 
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
+REPO_URL=$(git config --get remote.origin.url)
+
 yq --inplace ".spec.ingressClassName = \"$INGRESS_CLASSNAME\"" \
     keycloak/ingress.yaml
 
@@ -35,13 +37,16 @@ yq --inplace \
     ".spec.rules[0].host = \"keycloak.$INGRESS_HOST\"" \
     keycloak/ingress.yaml
 
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+    $GITOPS_APP/keycloak.yaml
+
 cp $GITOPS_APP/keycloak.yaml infra/.
 
 APP_COUNTER_OLD=$(kubectl get applications --all-namespaces | wc -l)
 
 git add .
 
-git commit -m "Falco"
+git commit -m "Keycloak"
 
 git push
 

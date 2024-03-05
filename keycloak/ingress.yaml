@@ -3,9 +3,6 @@ kind: Ingress
 metadata:
   name: keycloak
 spec:
-  tls:
-    - hosts:
-        - KEYCLOAK_HOST
   rules:
     - host: KEYCLOAK_HOST
       http:
