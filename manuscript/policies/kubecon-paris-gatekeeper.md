@@ -1,29 +1,5 @@
 # Policies with Open Policy Agent (OPA) and Gatekeeper
 
-In OPA Gatekeeper, a *Constraint* is a declaration for a system to meet a given set of requirements. Each Constraint is written with Rego, a declarative query language used by OPA.
-
-Before defining a Constraint, you need to create a *Constraint Template*. A Constraint Template allows people to declare new Constraints. Each template has two elements:
-* The Rego logic that enforces the Constraint
-* The schema for the Constraint
-
-Once you apply the Constraint Template, then you are able to create individual Constraint CRDs that comply with your Constraint Template.
-
-
-## Setup
-
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
-
-```bash
-# TODO: kapp-controller
-
-chmod +x manuscript/policies/gatekeeper.sh
-
-./manuscript/policies/gatekeeper.sh
-
-source .env
-```
-
 ## Do
 
 ```bash
