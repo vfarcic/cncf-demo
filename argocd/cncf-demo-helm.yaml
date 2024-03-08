@@ -26,7 +26,7 @@ spec:
         - name: db.enabled.crossplane.google
           value: "false"
         - name: db.enabled.crossplane.aws
-          value: "true"
+          value: "false"
         - name: db.enabled.crossplane.azure
           value: "false"
         - name: schemahero.enabled
@@ -39,6 +39,12 @@ spec:
           value: small
         - name: db.insecure
           value: "true"
+        - name: fga.enabled
+          value: "false"
+        - name: fga.storeId
+          value: STORE_ID
+        - name: fga.modeId
+          value: MODEL_ID
   destination:
     server: https://kubernetes.default.svc
     namespace: production

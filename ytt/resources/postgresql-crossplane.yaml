@@ -24,6 +24,8 @@ spec:
     #@ if/end data.values.db.enabled.crossplane.local or data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.azure:
     version: "11"
     size: #@ data.values.db.size
+    databases:
+    - #@ data.values.db.id
 #@ end
 
 #@ if data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.aws or data.values.db.enabled.crossplane.azure:

@@ -13,3 +13,5 @@ spec:
   parameters:
     version: "15.3"
     size: small
+    databases:
+      - cncf-demo-db

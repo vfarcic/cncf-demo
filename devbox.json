@@ -1,6 +1,7 @@
 {
   "packages": [
     "gum@0.13.0",
+    "bat@0.24.0",
     "gh@2.44.1",
     "yq-go@4.41.1",
     "jq@1.7.1",
@@ -23,7 +24,9 @@
     "fluxcd@2.2.3"
   ],
   "shell": {
-    "init_hook": [],
+    "init_hook": [
+      "alias cat='bat --paging never --theme DarkNeon --style plain'"
+    ],
     "scripts": {}
   }
 }

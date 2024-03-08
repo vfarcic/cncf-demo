@@ -62,6 +62,10 @@ func httpErrorInternalServerError(err error, span trace.Span, ctx *gin.Context) 
 	httpError(err, span, ctx, http.StatusInternalServerError)
 }
 
+func httpStatusUnauthorized(err error, span trace.Span, ctx *gin.Context) {
+	httpError(err, span, ctx, http.StatusUnauthorized)
+}
+
 func httpError(err error, span trace.Span, ctx *gin.Context, status int) {
 	log.Println(err.Error())
 	span.RecordError(err)

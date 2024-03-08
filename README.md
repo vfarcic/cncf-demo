@@ -528,7 +528,33 @@ flowchart TD
         keycloak(Keycloak)
         style keycloak fill:green
         click keycloak "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/user-authentication/keycloak.md"
-        user-authentication --> dex & keycloak --> continue
+        user-authentication --> dex & keycloak --> access-authorization
+
+        %% --------------------------
+        %% -- Access Authorization --
+        %% --------------------------
+        access-authorization{{Access Control}}
+        click access-authorization "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/README.md"
+        style access-authorization fill:blue
+        hexa(Hexa)
+        style hexa fill:red
+        paralus(Paralus)
+        style paralus fill:red
+        openfga(OpenFGA)
+        click openfga "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga.md"
+        style openfga fill:green
+        openfga-helm(App as Helm)
+        click openfga-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga-helm.md"
+        openfga-kustomize(App as Kustomize)
+        click openfga-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga-kustomize.md"
+        openfga-carvel(App as Carvel ytt)
+        click openfga-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga-carvel.md"
+        style openfga-carvel fill:green
+        openfga-cdk8s(App as cdk8s)
+        style openfga-cdk8s fill:red
+        access-authorization --> hexa & paralus & openfga
+        openfga --> openfga-helm & openfga-kustomize & openfga-carvel & openfga-cdk8s --> continue
+        hexa & paralus --> continue
 
     end
 ```

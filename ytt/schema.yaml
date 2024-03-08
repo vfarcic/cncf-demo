@@ -35,3 +35,8 @@ postgresql:
           psql -U postgres -c 'CREATE DATABASE "cncf-demo";'
 schemahero:
   enabled: false
+fga:
+  enabled: false
+  url: ""
+  storeId: ""
+  modeId: ""

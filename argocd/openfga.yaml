@@ -1,0 +1,40 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openfga
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: openfga
+    repoURL: https://openfga.github.io/helm-charts
+    targetRevision: "0.1.39"
+    helm:
+      releaseName: openfga
+      parameters:
+        - name: ingress.enabled
+          value: "true"
+        - name: ingress.className
+          value: CLASS_NAME
+        - name: ingress.hosts[0].host
+          value: HOST
+        - name: ingress.hosts[0].paths[0].path
+          value: "/"
+        - name: ingress.hosts[0].paths[0].pathType
+          value: ImplementationSpecific
+        - name: replicaCount
+          value: "1"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openfga
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true

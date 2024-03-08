@@ -26,4 +26,4 @@ TODO: Explanation
 
 * **Hexa** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Paralus** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **OpenFGA** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [OpenFGA](openfga.md)

@@ -23,13 +23,24 @@ func videosGetHandler(ctx *gin.Context) {
 	traceContext, span := tp.Tracer(serviceName).Start(ctx, "video-get")
 	defer func() { span.End() }()
 
+	span.AddEvent("Authorizing the user")
+	allowed, err := fgaCheck(ctx.Query("user"), "reader")
+	if err != nil {
+		httpErrorInternalServerError(err, span, ctx)
+		return
+	}
+	if !allowed {
+		httpStatusUnauthorized(errors.New("not allowed"), span, ctx)
+		return
+	}
+
 	span.AddEvent("Establishing connection to the database")
 	db := getDB(ctx)
 	if db == nil {
 		return
 	}
 	var videos []Video
-	err := db.ModelContext(traceContext, &videos).Select()
+	err = db.ModelContext(traceContext, &videos).Select()
 	if err != nil {
 		httpErrorInternalServerError(err, span, ctx)
 		return
@@ -40,6 +51,17 @@ func videosGetHandler(ctx *gin.Context) {
 func videoPostHandler(ctx *gin.Context) {
 	traceContext, span := tp.Tracer(serviceName).Start(ctx, "video-post")
 	defer func() { span.End() }()
+
+	span.AddEvent("Authorizing the user")
+	allowed, err := fgaCheck(ctx.Query("user"), "writer")
+	if err != nil {
+		httpErrorInternalServerError(err, span, ctx)
+		return
+	}
+	if !allowed {
+		httpStatusUnauthorized(errors.New("not allowed"), span, ctx)
+		return
+	}
 
 	span.AddEvent("Establishing connection to the database...")
 	db := getDB(ctx)
@@ -62,7 +84,7 @@ func videoPostHandler(ctx *gin.Context) {
 		ID:    id,
 		Title: title,
 	}
-	_, err := db.ModelContext(traceContext, video).Insert()
+	_, err = db.ModelContext(traceContext, video).Insert()
 	if err != nil {
 		httpErrorInternalServerError(err, span, ctx)
 		return

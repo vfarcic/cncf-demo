@@ -86,4 +86,12 @@ spec:
             #@ else:
             value: #@ data.values.db.id
             #@ end
+          #@ if data.values.fga.enabled:
+          - name: FGA_API_URL
+            value: http://openfga.openfga:8080
+          - name: FGA_STORE_ID
+            value: #@ data.values.fga.storeId
+          - name: FGA_MODEL_ID
+            value: #@ data.values.fga.modeId
+          #@ end
         #@ end

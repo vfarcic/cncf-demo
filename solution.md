@@ -506,8 +506,18 @@ flowchart TD
         paralus(Paralus)
         style paralus fill:red
         openfga(OpenFGA)
-        style openfga fill:red
-        access-authorization --> hexa & paralus & openfga --> security_misc
+        click openfga "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga.md"
+        openfga-helm(App as Helm)
+        click openfga-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga-helm.md"
+        openfga-kustomize(App as Kustomize)
+        click openfga-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga-kustomize.md"
+        openfga-carvel(App as Carvel ytt)
+        click openfga-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/access/openfga-carvel.md"
+        openfga-cdk8s(App as cdk8s)
+        style openfga-cdk8s fill:red
+        access-authorization --> hexa & paralus & openfga
+        openfga --> openfga-helm & openfga-kustomize & openfga-carvel & openfga-cdk8s --> security_misc
+        hexa & paralus --> security_misc
 
         %% ----------
         %% -- Misc --

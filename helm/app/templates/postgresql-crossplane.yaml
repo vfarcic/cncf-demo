@@ -30,6 +30,8 @@ spec:
     version: "15.3"
     {{- end }}
     size: {{ .Values.db.size }}
+    databases:
+    - {{ .Values.db.id }}
 
 {{- end }}
 {{- if or (.Values.db.enabled.crossplane.google) (.Values.db.enabled.crossplane.azure) (.Values.db.enabled.crossplane.aws) }}

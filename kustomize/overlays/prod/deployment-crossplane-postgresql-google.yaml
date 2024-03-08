@@ -32,3 +32,9 @@ spec:
                 key: password
           - name: DB_NAME
             value: cncf-demo-db
+          - name: FGA_API_URL
+            value: ""
+          - name: FGA_STORE_ID
+            value: ""
+          - name: FGA_MODEL_ID
+            value: ""

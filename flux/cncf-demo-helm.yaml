@@ -22,4 +22,22 @@ spec:
       host: cncf-demo.sillydemo.com
       className: nginx
     tls:
+      enabled: false
+    db:
+      id: cncf-demo-db
+      enabled:
+        crossplane:
+          google: false
+          aws: false
+          azure: false
+      size: small
+      insecure: true
+    schemahero:
+      enabled: true
+    replicas: 1
+    fga:
+      enabled: false
+      storeId: STORE_ID
+      modeId: MODEL_ID
+    tls:
       enabled: true
