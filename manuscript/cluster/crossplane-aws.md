@@ -38,11 +38,8 @@ kubectl --namespace production get clusterclaims
 kubectl --namespace production wait --for=condition=ready \
     clusterclaim production --timeout=30m
 
-cat crossplane/get-kubeconfig-aws.sh
-
-chmod +x crossplane/get-kubeconfig-aws.sh
-
-./crossplane/get-kubeconfig-aws.sh
+aws eks update-kubeconfig --region us-east-1 \
+    --name production --kubeconfig kubeconfig-prod.yaml
 
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 

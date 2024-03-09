@@ -10,5 +10,5 @@ spec:
       cluster: eks
   parameters:
     nodeSize: medium
-    minNodeCount: 3
+    minNodeCount: 2
     version: "1.29"

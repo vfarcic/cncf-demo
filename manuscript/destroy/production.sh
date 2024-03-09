@@ -38,6 +38,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
+        echo "Waiting for $COUNTER resources to be deleted"
         COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | grep -v database | wc -l)
     done
     set -e
@@ -51,6 +52,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
     while [ $COUNTER -ne 0 ]; do
         sleep 10
+        echo "Waiting for $COUNTER resources to be deleted"
         COUNTER=$(kubectl get managed --no-headers | grep -v object | grep -v release | wc -l)
     done
 

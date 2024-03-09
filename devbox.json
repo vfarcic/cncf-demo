@@ -9,6 +9,7 @@
     "google-cloud-sdk@452.0.1",
     "awscli2@2.15.15",
     "eksctl@0.171.0",
+    "path:gcloud#google-cloud-sdk",
     "azure-cli@2.56.0",
     "kustomize@5.3.0",
     "kubernetes-helm@3.14.1",
@@ -21,7 +22,8 @@
     "notation@1.1.0",
     "clusterctl@1.6.1",
     "crossplane-cli@1.15.0",
-    "fluxcd@2.2.3"
+    "fluxcd@2.2.3",
+    "aws-iam-authenticator@0.6.17"
   ],
   "shell": {
     "init_hook": [

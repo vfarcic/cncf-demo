@@ -1,6 +1,26 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "aws-iam-authenticator@0.6.17": {
+      "last_modified": "2024-02-24T23:06:34Z",
+      "resolved": "github:NixOS/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0#aws-iam-authenticator",
+      "source": "devbox-search",
+      "version": "0.6.17",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/3kn5mb6imvrcrllpxrw4h0mipjn3cbc3-aws-iam-authenticator-0.6.17"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/sajssjcchizk37b4af219y5ignv0g8df-aws-iam-authenticator-0.6.17"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/78x7f20gqai70xapwjzhcd625pzxyh7k-aws-iam-authenticator-0.6.17"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/ldb52pfzyw9jmyd1qfva5q08ha12i3f9-aws-iam-authenticator-0.6.17"
+        }
+      }
+    },
     "awscli2@2.15.15": {
       "last_modified": "2024-02-10T18:15:24Z",
       "resolved": "github:NixOS/nixpkgs/10b813040df67c4039086db0f6eaf65c536886c6#awscli2",
@@ -38,6 +58,26 @@
         },
         "x86_64-linux": {
           "store_path": "/nix/store/r0w81398bbmfkcng5g5dbqcr1145cvh3-python3.11-azure-cli-2.56.0"
+        }
+      }
+    },
+    "bat@0.24.0": {
+      "last_modified": "2024-02-24T23:06:34Z",
+      "resolved": "github:NixOS/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0#bat",
+      "source": "devbox-search",
+      "version": "0.24.0",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/43ixsdb4ksw9lvbsy3zvwka74myrr62v-bat-0.24.0"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/zvs97w08g5bzf0p70fj2iag0pm2y6lms-bat-0.24.0"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/bsywa983fl6sk4df7jh89ym2jz81v65q-bat-0.24.0"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/k4rwiqjqqbhd6nsw3ypfifhjjcygym3y-bat-0.24.0"
         }
       }
     },

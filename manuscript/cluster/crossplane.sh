@@ -33,5 +33,5 @@ kubectl apply --filename crossplane-config/config-k8s.yaml
 
 sleep 60
 
-kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=300s
+kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=1800s
 

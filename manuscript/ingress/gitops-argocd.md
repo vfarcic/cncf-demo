@@ -27,7 +27,7 @@ yq --inplace \
     ".server.ingress.ingressClassName = \"$INGRESS_CLASS_NAME\"" \
     argocd/helm-values.yaml
 
-yq --inplace ".server.ingress.hosts[0] = \"gitops.$DOMAIN\"" \
+yq --inplace ".server.ingress.hostname = \"gitops.$DOMAIN\"" \
     argocd/helm-values.yaml
 
 # Skip this step if you chose to use `nip.io` instead of a
@@ -43,7 +43,8 @@ yq --inplace ".server.ingress.tls[0].secretName = \"argocd\"" \
 
 cat argocd/helm-values.yaml
 
-helm upgrade --install argocd argo/argo-cd \
+helm upgrade --install argocd argo-cd \
+    --repo https://argoproj.github.io/argo-helm \
     --namespace argocd --create-namespace \
     --values argocd/helm-values.yaml --wait
 

@@ -39,5 +39,3 @@ spec:
       enabled: false
       storeId: STORE_ID
       modeId: MODEL_ID
-    tls:
-      enabled: true

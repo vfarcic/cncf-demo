@@ -3,7 +3,7 @@ kind: ClusterConfig
 metadata:
   name: dot-production
   region: us-east-1
-  version: "1.28"
+  version: "1.29"
 managedNodeGroups:
   - name: primary
     instanceType: t3.large

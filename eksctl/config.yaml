@@ -6,7 +6,7 @@ metadata:
   version: "1.29"
 managedNodeGroups:
   - name: primary
-    instanceType: t3.medium
+    instanceType: t3.large
     minSize: 3
     maxSize: 6
     iam:

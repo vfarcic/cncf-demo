@@ -67,7 +67,7 @@ yq --inplace ".capi.destination = \"aws\"" settings.yaml
 # Generate cluster manifest
 clusterctl generate cluster production \
     --flavor eks-managedmachinepool-vpccni \
-    --kubernetes-version v1.28.1 --worker-machine-count 3 \
+    --kubernetes-version v1.29.0 --worker-machine-count 3 \
     --target-namespace production \
     | tee capi/aws-eks.yaml
 

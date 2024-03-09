@@ -42,8 +42,8 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 	COUNTER=$(kubectl get managed --no-headers | grep -v database | wc -l)
 
     while [ $COUNTER -ne 0 ]; do
-		echo "Waiting for all Crossplane managed resources to be deleted..."
         sleep 10
+		echo "Waiting for $COUNTER resources to be deleted"
         COUNTER=$(kubectl get managed --no-headers | grep -v database | wc -l)
     done
 

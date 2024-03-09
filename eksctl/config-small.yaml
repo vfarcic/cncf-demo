@@ -6,9 +6,9 @@ metadata:
   version: "1.29"
 managedNodeGroups:
   - name: primary
-    instanceType: t3.medium
-    minSize: 3
-    maxSize: 6
+    instanceType: t3.large
+    minSize: 1
+    maxSize: 3
     iam:
       withAddonPolicies:
         autoScaler: true
