@@ -47,4 +47,4 @@ export GITOPS_APP=argocd
 
 * [ingress-nginx](../ingress/rejekts-paris-nginx.md)
 * [Envoy with Contour](../ingress/rejekts-paris-contour.md)
-* [Emissary-ingress](../ingress/rejekts-paris-emissary-ingress.md) (pending)
+* [Emissary-ingress](../ingress/rejekts-paris-emissary-ingress.md)

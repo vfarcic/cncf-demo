@@ -43,23 +43,23 @@ source .env
 ## Checklist
 
 Admission Controller Policies:
-* OPA
-* Kyverno (done)
-* Kubewarden
+* OPA (pending)
+* Kyverno
+* Kubewarden (pending)
 
 Runtime Policies:
-* Falco
-* KubeArmor (done)
+* Falco (pending)
+* KubeArmor
 
 Secrets Management:
-* ESO (done)
-* SSCSI
-* SOPS
+* ESO
+* SSCSI (pending)
+* SOPS (pending)
 
 mTLS & Network Policies:
-* Cilium (done)
-* Linkerd
-* Istio
+* Cilium
+* Linkerd (pending)
+* Istio (pending)
 
 ## What Is Your Choice?
 

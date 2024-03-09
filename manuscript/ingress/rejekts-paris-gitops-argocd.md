@@ -33,5 +33,5 @@ open "http://gitops.$DOMAIN"
 
 * [Helm](../app/rejekts-paris-helm.md)
 * [Kustomize](../app/rejekts-paris-kustomize.md)
-* [Carvel ytt](../app/rejekts-paris-carvel.md) (pending)
-* [cdk8s](../app/rejekts-paris-cdk8s.md) (pending)
+* [Carvel ytt](../app/rejekts-paris-carvel.md)
+* [cdk8s](../app/rejekts-paris-cdk8s.md)

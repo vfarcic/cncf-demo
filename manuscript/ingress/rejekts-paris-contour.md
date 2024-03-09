@@ -42,4 +42,4 @@ export DOMAIN=$INGRESS_IP.nip.io
 
 * [Argo CD](rejekts-paris-gitops-argocd.md)
 * [Flux](rejekts-paris-gitops-flux.md)
-* [Carvel kapp-controller](rejekts-paris-gitops-kapp.md) (pending)
+* [Carvel kapp-controller](rejekts-paris-gitops-kapp.md)

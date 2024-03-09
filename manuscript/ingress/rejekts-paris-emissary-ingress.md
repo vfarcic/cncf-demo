@@ -1,13 +1,5 @@
 # Ingress With Envoy And Emissary Ingress
 
-TODO: Intro
-
-## Setup
-
-```bash
-export GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-```
-
 ## Do
 
 ```bash
@@ -26,17 +18,10 @@ git push
 
 kubectl --namespace emissary get all
 
-# If NOT EKS
-export INGRESS_IP=$(kubectl --namespace emissary \
-    get service emissary-ingress \
-    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-
-# If EKS
 export INGRESS_HOSTNAME=$(kubectl --namespace emissary \
     get service emissary-ingress \
     --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
-# If EKS
 export INGRESS_IP=$(dig +short $INGRESS_HOSTNAME) 
 
 echo $INGRESS_IP
@@ -50,21 +35,13 @@ echo $INGRESS_IP
 #   them and execute `export INGRESS_IP=[...]` with `[...]`
 #   being the selected IP.
 
-yq --inplace ".production.ingress.ip = \"$INGRESS_IP\"" \
-    settings.yaml
+export INGRESS_CLASS_NAME=ambassador
 
-yq --inplace ".production.ingress.className = \"ambassador\"" \
-    settings.yaml
-
-# Execute the command that follows only if you jumped straight
-#   into the "Production" chapter and did not already define the
-#   domain.
-yq --inplace ".production.domain = \"$INGRESS_IP.nip.io\"" \
-    settings.yaml
+export DOMAIN=$INGRESS_IP.nip.io
 ```
 
 ## Which GitOps Tool Did You Choose?
 
-* [Argo CD](gitops-argocd.md)
-* [Flux](gitops-flux.md)
-* [Carvel kapp-controller](gitops-kapp.md)
+* [Argo CD](rejekts-paris-gitops-argocd.md)
+* [Flux](rejekts-paris-gitops-flux.md)
+* [Carvel kapp-controller](rejekts-paris-gitops-kapp.md)

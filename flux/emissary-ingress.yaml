@@ -28,6 +28,7 @@ spec:
   install:
     createNamespace: true
 ---
+apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
   name: emissary-ingress-listener-8080

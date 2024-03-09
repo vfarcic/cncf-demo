@@ -5,7 +5,7 @@ metadata:
   name: cncf-demo
   namespace: carvel-apps
 spec:
-  syncPeriod: 5m
+  syncPeriod: 1m
   serviceAccountName: infra-provisioner-sa
   fetch:
   - git:

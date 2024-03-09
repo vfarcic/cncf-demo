@@ -22,12 +22,37 @@ export KUBECONFIG=$PWD/kubeconfig.yaml
 
 kubectl create namespace production
 
-yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" \
-    settings.yaml
- 
-yq --inplace ".tag = \"v0.0.1\"" settings.yaml
-
 alias curl="curl --insecure"
+
+export REPO_URL=$(git config --get remote.origin.url)
+
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+    argocd/apps.yaml
+
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+    argocd/cncf-demo-kustomize.yaml
+
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+    argocd/cncf-demo-ytt.yaml
+
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+    argocd/cncf-demo-cdk8s.yaml
+
+yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
+    kapp-controller/apps.yaml
+
+yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
+    kapp-controller/cncf-demo-ytt.yaml
+
+yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
+    kapp-controller/cncf-demo-kustomize
+
+yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
+    kapp-controller/cncf-demo-cdk8s
+
+export IMAGE=index.docker.io/vfarcic/cncf-demo
+
+export TAG=v0.0.1
 ```
 
 ## Setup CAPI
@@ -69,8 +94,6 @@ export AWS_SSH_KEY_NAME=default
 
 export AWS_NODE_MACHINE_TYPE=t3.large
 
-yq --inplace ".capi.destination = \"aws\"" settings.yaml
-
 clusterctl generate cluster production \
     --flavor eks-managedmachinepool-vpccni \
     --kubernetes-version v1.29.0 --worker-machine-count 2 \
@@ -80,7 +103,7 @@ clusterctl generate cluster production \
 kubectl apply --filename capi/aws-eks.yaml
 ```
 
-## Crossplane
+## Setup Crossplane
 
 ```sh
 ./manuscript/cluster/crossplane.sh
@@ -91,22 +114,6 @@ source .env
 
 kubectl --namespace production apply \
     --filename crossplane/aws-eks-small.yaml
-```
-
-## GitOps
-
-```sh
-export REPO_URL=$(git config --get remote.origin.url)
-
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/apps.yaml
-
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-    argocd/cncf-demo-kustomize.yaml
-
-export IMAGE=index.docker.io/vfarcic/cncf-demo
-
-export TAG=v0.0.1
 ```
 
 ## Setup CAPI
@@ -124,7 +131,7 @@ export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 kubectl get nodes
 ```
 
-## Crossplane
+## Setup Crossplane
 
 ```sh
 crossplane beta trace clusterclaim production --namespace production
@@ -138,6 +145,8 @@ export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 
 kubectl get nodes
 ```
+
+## Misc
 
 ```sh
 export KUBECONFIG=$PWD/kubeconfig.yaml

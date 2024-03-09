@@ -28,4 +28,4 @@ kubectl create namespace production
 
 * [Flux](../gitops/rejekts-paris-flux.md)
 * [Argo CD](../gitops/rejekts-paris-argocd.md)
-* [Carvel kapp-controller](../gitops/rejekts-paris-kapp.md) (pending)
+* [Carvel kapp-controller](../gitops/rejekts-paris-kapp.md)

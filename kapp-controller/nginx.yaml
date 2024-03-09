@@ -21,7 +21,7 @@ metadata:
   name: ingress-nginx
   namespace: carvel-apps
 spec:
-  syncPeriod: 5m
+  syncPeriod: 1m
   serviceAccountName: infra-provisioner-sa
   fetch:
   - helmChart:
