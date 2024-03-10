@@ -18,9 +18,7 @@ yq --inplace ".db.insecure = false" ytt/values-prod.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \
     --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml
-
-cat yaml/prod/app.yaml
+    | tee yaml/prod/app.yaml | yq .
 
 cp $GITOPS_APP/cncf-demo-ytt.yaml apps/cncf-demo.yaml
 

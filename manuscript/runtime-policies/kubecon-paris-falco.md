@@ -25,3 +25,4 @@ exit
 
 * [External Secrets Operator (ESO)](../secrets/kubecon-paris-eso.md)
 * [Secrets Store CSI Driver (SSCSID)](../secrets/kubecon-paris-sscsid.md)
+* [SOPS](../secrets/kubecon-paris-sops.md)

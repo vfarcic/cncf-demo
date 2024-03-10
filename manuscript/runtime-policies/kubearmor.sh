@@ -16,6 +16,7 @@ echo "
 |Name            |Required             |More info                                          |
 |----------------|---------------------|---------------------------------------------------|
 |yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
+|karmor          |Yes                  |'https://docs.kubearmor.io/kubearmor/quick-links/deployment_guide#install-karmor-cli-optional'|
 " | gum format
 
 gum confirm "
@@ -32,11 +33,6 @@ REPO_URL=$(git config --get remote.origin.url)
 
 yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
     $GITOPS_APP/kubearmor.yaml
-
-echo 'Please enter sudo password to install `karmor` CLI.'
-
-curl -sfL http://get.kubearmor.io/ \
-    | sudo sh -s -- -b /usr/local/bin
 
 mkdir kubearmor
 

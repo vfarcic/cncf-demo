@@ -3,8 +3,6 @@
 ## Do
 
 ```bash
-cat policies/kyverno.yaml
-
 cp policies/kyverno.yaml infra/policies.yaml
 
 git add .
@@ -12,6 +10,8 @@ git add .
 git commit -m "Policies"
 
 git push
+
+cat policies/kyverno.yaml
 
 kubectl get clusterpolicies
 

@@ -69,94 +69,42 @@ linkerd viz --namespace production edges pod
 #   Pods is encrypted (mTLS)
 ```
 
-## Authentication
-
-```bash
-cat linkerd/peer-authentication.yaml
-
-cp linkerd/peer-authentication.yaml \
-    apps/namespace-production.yaml
-
-git add . 
-
-git commit -m "Linkerd"
-
-git push
-
-kubectl get namespace production --output yaml
-
-# Wait until the `config.linkerd.io/default-inbound-policy`
-#   annotation was added.
-
-kubectl --namespace production delete pods \
-    --selector app.kubernetes.io/name=cncf-demo
-
-kubectl --namespace production --tty --stdin exec sleep \
-    --container sleep -- sh
-
-curl http://cncf-demo.production:8080 -w "%{http_code}\n"
-
-# Both apps are "meshed", so the communication is allowed.
-
-exit
-
-kubectl --namespace default apply --filename linkerd/mtls.yaml
-
-kubectl --namespace default --tty --stdin exec sleep \
-    --container sleep -- sh
-
-apk add -U curl
-
-curl http://cncf-demo.production:8080 -w "%{http_code}\n"
-
-# The communication is not allowed since the Pod in the
-#   `default` Namespace is NOT "meshed" and therefore not
-#   authenticated.
-
-exit
-```
-
 ## Policies
 
-```bash
-echo "
-spec:
-  template:
-    metadata:
-      annotations:
-        config.linkerd.io/default-inbound-policy: deny
-" | tee tmp/patch.yaml
+Since Cilium CNI is already set up, we will use its policies.
 
-kubectl --namespace production patch deployment cncf-demo \
-    --patch-file tmp/patch.yaml
+```bash
+kubectl --namespace production --tty --stdin exec sleep \
+    --container sleep -- apk add -U curl
+
+cat cilium/network-policy.yaml
+
+kubectl --namespace production apply \
+    --filename cilium/network-policy.yaml
 
 kubectl --namespace production --tty --stdin exec sleep \
-    --container sleep -- sh
+    --container sleep -- \
+    curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
-curl http://cncf-demo.production:8080
+# The communication is allowed since the `sleep` endpoint
+#    in the `production` Namespace is allowed to talk with the
+#   `cncf-demo` in the `production` Namespace.
 
-# The access was denied
+kubectl --namespace default apply --filename cilium/mtls.yaml
 
-exit
+kubectl --namespace default --tty --stdin exec sleep \
+    --container sleep -- apk add -U curl
 
-echo "
-spec:
-  template:
-    metadata:
-      annotations:
-        config.linkerd.io/default-inbound-policy: all-authenticated
-" | tee tmp/patch.yaml
+kubectl --namespace default --tty --stdin exec sleep \
+    --container sleep -- \
+    curl http://cncf-demo.production:8080 -w "%{http_code}\n"
 
-kubectl --namespace production patch deployment cncf-demo \
-    --patch-file tmp/patch.yaml
+# The communication is NOT allowed since the `sleep` endpoint
+#    in the `default` Namespace is NOT allowed to talk with the
+#   `cncf-demo` in the `production` Namespace.
 
-kubectl --namespace production --tty --stdin exec sleep -- sh
-
-curl http://cncf-demo.production:8080
-
-# The access was allowed
-
-exit
+# Stop `curl` (if it did not already time out) by pressing
+#   `ctrl+c`.
 ```
 
 ## Destroy
@@ -165,7 +113,7 @@ exit
 kubectl --namespace production delete \
     --filename linkerd/mtls.yaml
 
-kubectl --namespace default delete --filename linkerd/mtls.yaml
+kubectl --namespace default delete --filename cilium/mtls.yaml
 ```
 
 ## Continue The Adventure

@@ -9,8 +9,6 @@
 ## Do
 
 ```bash
-cat istio/namespace-production.yaml
-
 cp istio/namespace-production.yaml apps/.
 
 git add . 
@@ -18,6 +16,8 @@ git add .
 git commit -m "Istio"
 
 git push
+
+cat istio/namespace-production.yaml
 
 kubectl get namespace production --output yaml
 
@@ -114,3 +114,7 @@ curl http://cncf-demo.production:8080
 
 exit
 ```
+
+## Destroy
+
+* [Destroy](../destroy/security.md)

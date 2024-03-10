@@ -69,3 +69,7 @@ kubectl --namespace default --tty --stdin exec sleep \
 # Stop `curl` (if it did not already time out) by pressing
 #   `ctrl+c`.
 ```
+
+## Destroy
+
+* [Destroy](../destroy/security.md)

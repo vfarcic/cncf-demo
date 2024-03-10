@@ -18,11 +18,14 @@ kubectl --namespace production get deployments
 # If Gatekeeper
 export POLICY_KIND=deploymentreplicas
 
+# If Gatekeeper or Kyverno
+kubectl describe $POLICY_KIND deploymentproduction
+
+# If Kubewarden
 kubectl --namespace production \
     describe $POLICY_KIND deploymentproduction
 
-# Gatekeeper and Kubewarden do not show violations, but they do
-#   enforce them.
+# Gatekeeper and KubeWarden do not show violations, but they do enforce them.
 
 cat kustomize/overlays/prod/deployment-scaled.yaml
 
@@ -54,18 +57,20 @@ kubectl --namespace production get sqlclaims
 # If Gatekeeper
 export POLICY_KIND=dbsize
 
-# If Kubewarden
-export POLICY_KIND=clusteradmissionpolicy
-
+# If Gatekeeper or Kyverno
 kubectl describe $POLICY_KIND dbcluster
 
 # If Kubewarden
-export POLICY_KIND=admissionpolicy
+kubectl describe clusteradmissionpolicy dbcluster
 
-kubectl --namespace production describe $POLICY_KIND dbproduction
+# If Gatekeeper or Kyverno
+kubectl describe $POLICY_KIND dbproduction
 
-# Gatekeeper and Kubewarden (still) do not show violations, but
-#   they do enforce them.
+# If Kubewarden
+kubectl --namespace production \
+    describe admissionpolicy dbproduction
+
+# Gatekeeper and Kubewarden (still) do not show violations, but they do enforce them.
 
 cat kustomize/overlays/prod/postgresql-crossplane-$HYPERSCALER.yaml
 

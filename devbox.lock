@@ -261,6 +261,26 @@
         }
       }
     },
+    "karmor@1.1.1": {
+      "last_modified": "2024-02-28T16:16:04Z",
+      "resolved": "github:NixOS/nixpkgs/96990c69fd59e807cee8ff874d0526c70dffdf8f#karmor",
+      "source": "devbox-search",
+      "version": "1.1.1",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/avf0bysri7289f1l5bcn3x97fph9x6qa-karmor-1.1.1"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/vhbzlidbd1m9cgzpykxs79w497yz8bj6-karmor-1.1.1"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/ns1fliyp3w3kr2cxzkng33slvz0w6qa5-karmor-1.1.1"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/13cdv64k8rkvk9dq7acz0p70dr1qb9ik-karmor-1.1.1"
+        }
+      }
+    },
     "kubectl@1.29.2": {
       "last_modified": "2024-02-16T04:19:51Z",
       "resolved": "github:NixOS/nixpkgs/5e55f0bb65124b05d0a52e164514c03596023634#kubectl",

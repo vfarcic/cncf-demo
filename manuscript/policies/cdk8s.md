@@ -14,7 +14,14 @@ kubectl --namespace production get deployments
 # If Gatekeeper
 export POLICY_KIND=deploymentreplicas
 
+# If Gatekeeper or Kyverno
 kubectl describe $POLICY_KIND deploymentproduction
+
+# If Kubewarden
+kubectl --namespace production \
+    describe $POLICY_KIND deploymentproduction
+
+# Gatekeeper and KubeWarden do not show violations, but they do enforce them.
 
 # Gatekeeper does not show violations, but it does enforce them.
 
@@ -52,12 +59,20 @@ kubectl --namespace production get sqlclaims
 # If Gatekeeper
 export POLICY_KIND=dbsize
 
+# If Gatekeeper or Kyverno
 kubectl describe $POLICY_KIND dbcluster
 
+# If Kubewarden
+kubectl describe clusteradmissionpolicy dbcluster
+
+# If Gatekeeper or Kyverno
 kubectl describe $POLICY_KIND dbproduction
 
-# Gatekeeper (still) does not show violations, but it does
-#   enforce them.
+# If Kubewarden
+kubectl --namespace production \
+    describe admissionpolicy dbproduction
+
+# Gatekeeper and Kubewarden (still) do not show violations, but they do enforce them.
 
 yq --inplace ".db.size = \"medium\"" cdk8s/app-prod.yaml
 

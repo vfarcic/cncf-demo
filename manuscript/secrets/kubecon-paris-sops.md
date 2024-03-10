@@ -8,4 +8,8 @@ SOPS does work natively with Flux, but you might have choosen Argo CD.
 
 All in all, SOPS is not meant to run in Kubernetes and we do not yet have a "proper" controller for it. So, even though it can be used, we won't use it.
 
-Please return to the [Managing Secrets In Kubernetes](README.md) page and choose a different option.
+## What Is Your Choice?
+
+* [Istio](../mtls/kubecon-paris-istio.md)
+* [Linkerd](../mtls/kubecon-paris-linkerd.md)
+* [Cilium and SPIFFE](../mtls/kubecon-paris-cilium.md)

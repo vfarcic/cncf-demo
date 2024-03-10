@@ -9,8 +9,6 @@ kubectl --namespace production exec -it cncf-demo-controller-0 \
 kubectl annotate namespace production \
     kubearmor-file-posture=block --overwrite
 
-cat policies/kubearmor.yaml
-
 cp policies/kubearmor.yaml infra/runtime-policies.yaml
 
 git add .
@@ -18,6 +16,8 @@ git add .
 git commit -m "KubeArmor"
 
 git push
+
+cat policies/kubearmor.yaml
 
 kubectl --namespace production get kubearmorpolicies
 
@@ -30,4 +30,5 @@ kubectl --namespace production exec -it cncf-demo-controller-0 \
 ## What Is Your Choice?
 
 * [External Secrets Operator (ESO)](../secrets/kubecon-paris-eso.md)
-* Secrets Store CSI Driver (SSCSID)
+* [Secrets Store CSI Driver (SSCSID)](../secrets/kubecon-paris-sscsid.md)
+* [SOPS](../secrets/kubecon-paris-sops.md)

@@ -38,4 +38,4 @@ curl "http://cncf-demo.$DOMAIN"
 
 ## Destroy
 
-* [Destroy](../destroy/rejekts-paris-production)
+* [Destroy](../destroy/rejekts-paris-production.md)
