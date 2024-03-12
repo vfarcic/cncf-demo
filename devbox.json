@@ -28,7 +28,8 @@
   ],
   "shell": {
     "init_hook": [
-      "alias cat='bat --paging never --theme DarkNeon --style plain'"
+      "alias cat='bat --paging never --theme DarkNeon --style plain'",
+      "PS1=\"➜ \""
     ],
     "scripts": {}
   }

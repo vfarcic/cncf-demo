@@ -4,42 +4,17 @@ TODO: Intro
 
 ## Setup
 
-FIXME: Move to a script
+* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
+* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-# Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[1].value = \"$INGRESS_CLASSNAME\"" \
-    argocd/openfga.yaml
+chmod +x manuscript/access/openfga.sh
 
-# Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[2].value = \"openfga.$INGRESS_HOST\"" \
-    argocd/openfga.yaml
+./manuscript/access/openfga.sh
 
-# Execute only if using Flux
-yq --inplace ".spec.values.ingress.className = \"$INGRESS_CLASSNAME\"" \
-    flux/openfga-release.yaml
-
-# Execute only if using Flux
-yq --inplace ".spec.values.ingress.hosts[0].host = \"openfga.$INGRESS_HOST\"" \
-    flux/openfga-release.yaml
-
-cp $GITOPS_APP/openfga*.yaml infra/.
-
-git add .
-
-git commit -m "OpenFGA"
-
-git push
-
-COUNTER=$(kubectl --namespace openfga get pods)
-
-while [ -z "$COUNTER" ]; do
-    sleep 10
-    COUNTER=$(kubectl --namespace openfga get pods)
-done
-
-export FGA_API_URL="http://openfga.$INGRESS_HOST"
+source .env
 ```
+
 
 * Install `fga` CLI by following the instructions at https://openfga.dev/docs/getting-started/install-sdk (the CLI tab).
 * OpenFGA was installed with in-memory database and is publicly accessible through Ingress. A "real" DB should be used and the server should not be accessible.
@@ -79,6 +54,8 @@ cat openfga.go
 
 cat video.go
 ```
+
+* What follows assumes that authentication is done with a different tool and that the requests we're sending are using authenticated users.
 
 ## How Did You Define Your App?
 

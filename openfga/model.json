@@ -6,12 +6,12 @@
             "type": "document",
             "relations": {
                 "reader": { "this": {} },
-                "writer": { "this": {} },
+                "writer": { "this": {} }
             },
             "metadata": {
                 "relations": {
                     "reader": { "directly_related_user_types": [ { "type": "user" } ] },
-                    "writer": { "directly_related_user_types": [ { "type": "user" } ] },
+                    "writer": { "directly_related_user_types": [ { "type": "user" } ] }
                 }
             }
         }
