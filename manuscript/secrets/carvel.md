@@ -31,8 +31,8 @@ kubectl get managed
 
 # Execute the command that follows only if `database` resource
 #   was left "dangling".
-kubectl patch \
-    database.postgresql.sql.crossplane.io cncf-demo-db \
+kubectl patch database.postgresql.sql.crossplane.io \
+    cncf-demo-db-cncf-demo-db \
     --type merge --patch '{"metadata":{"finalizers":null}}'
 
 yq --inplace ".db.insecure = false" ytt/values-prod.yaml

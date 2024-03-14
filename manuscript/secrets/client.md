@@ -24,4 +24,4 @@ Teller minimizes the amount of time that a secret is used by operating entirely 
 ## What Is Your Choice?
 
 * [Teller](teller.md)
-* **Secrets OPerationS (SOPS)** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Secrets OPerationS (SOPS)](sops.md)

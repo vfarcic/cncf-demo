@@ -31,7 +31,7 @@ git push
 
 kubectl --namespace production get pods
 
-# Wait until new Pod is created
+# Wait until new Pods are created
 
 curl "http://cncf-demo.$INGRESS_HOST/videos"
 

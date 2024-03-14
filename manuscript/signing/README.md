@@ -68,6 +68,6 @@ Admittedly, Open Policy Containers doesn’t fit very snugly into this “Artifa
 
 * [Notary Project](notary.md)
 * [Sigstore](sigstore.md)
-* Open Policy Containers has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Open Policy Containers** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 
 

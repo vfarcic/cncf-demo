@@ -15,11 +15,13 @@ chmod +x manuscript/user-authentication/keycloak.sh
 
 ## Do
 
+* Keycloak does not work with `nip.io`. A "real" domain with SSL certificates is required. To circumbent that, we'll open it through `port-forward`.
+
 ```sh
-echo "http://keycloak.$INGRESS_HOST"
+kubectl port-forward svc/keycloak 8080:8080 -n keycloak
 ```
 
-* Open the URL from the output in a browser.
+* Open [http://localhost:8080](http://localhost:8080) from the output in a browser.
 * Select `Administration Console` and `Sign In` using `admin` as both username and password.
 * Explore the dashboard
 

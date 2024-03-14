@@ -35,6 +35,9 @@ git commit -m "CNCF Demo scaled"
 
 git push
 
+# In case of Argo CD, it might take a while until the previous sync times out and a new one starts.
+# You can speed it up by opening the app in Argo CD and clicking the `SYNC STATUS` button follows by `TERMINATE`.
+
 kubectl --namespace production get deployments
 
 # Wait until the Deployment is created
@@ -79,6 +82,9 @@ git add .
 git commit -m "DB resize"
 
 git push
+
+# In case of Argo CD, it might take a while until the previous sync times out and a new one starts.
+# You can speed it up by opening the app in Argo CD and clicking the `SYNC STATUS` button follows by `TERMINATE`.
 
 kubectl --namespace production get sqlclaims
 
