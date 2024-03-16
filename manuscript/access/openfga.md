@@ -15,7 +15,6 @@ chmod +x manuscript/access/openfga.sh
 source .env
 ```
 
-
 * Install `fga` CLI by following the instructions at https://openfga.dev/docs/getting-started/install-sdk (the CLI tab).
 * OpenFGA was installed with in-memory database and is publicly accessible through Ingress. A "real" DB should be used and the server should not be accessible.
 
