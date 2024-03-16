@@ -1,0 +1,191 @@
+---
+# We are creating a new namespace that ContainerSSH will run in.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: containerssh
+---
+# We are creating a new namespace we can use to launch guest containers. This will be locked down.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: containerssh-guests
+---
+# Let's apply a network policy for the containerssh-guests namespace so guests can't connect any network resources.
+# This might not work if your CNI doesn't support network policies (e.g. Docker Desktop)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: containerssh-guest-policy
+  namespace: containerssh-guests
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# Let's create a ConfigMap that contains the ContainerSSH configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: containerssh-config
+  namespace: containerssh
+data:
+  config.yaml: |
+    # Let's log on the debug level so we can see what's going on.
+    log:
+      level: debug
+    ssh:
+      hostkeys:
+        # This points to the host key we will create in the next step.
+        - /etc/containerssh/host.key
+    auth:
+      # The authentication server will be running in the same pod, so we use 127.0.0.1
+      url: http://127.0.0.1:8080
+    # We run the guest containers in the same Kubernetes cluster as ContainerSSH is running in
+    backend: kubernetes
+    kubernetes:
+      connection:
+        host: kubernetes.default.svc
+        cacertFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      pod:
+        metadata:
+          namespace: containerssh-guests
+        spec:
+          containers:
+            - name: shell
+              image: containerssh/containerssh-guest-image
+              ## Further options to lock down the execution.
+              ## See https://containerssh.io/reference/kubernetes/ for mre options
+              #
+              # securityContext:
+              #    runAsNonRoot: true
+              #    runAsUser: 1000
+              # resources:
+              #   limits:
+              #     memory: "128Mi"
+              #     cpu: "500m"
+---
+# We create a secret that holds the host key.
+# This is hard-coded for the example, for production you'd need to generate
+# a new host key with openssl genrsa and then base64-encode it.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: containerssh-hostkey
+  namespace: containerssh
+data:
+  host.key: |
+    LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBeFhJVGFXR25FY2UvN2M2RzQwR3Iya3JkOGVJWGJZSzJ4ZWVXN1d4TDczd2hrdFloCmw1YWRSS0ZxeEJtYmFKcjhBdGtSZTRFZk9pNEpOdzB3aGE3amQ2YUdwWHFPb0VUTEtTUmZLTWYyUmwvT3BKQkIKdkFycWlPRFZqc2pqUStwM24wWDF1cTNOaEhvR3l3OXNDS1cwRXgvRnRWVjN2R29VTTNoWGdxcTZjUmhuaEprYgo0dEtOWkdvekVTc1l5a08wUEtvSHRnejkrRnU3dFhjbTExQkN4TEFGMGxOSU43emFzY0hqT0xVRTBLOGhEMFROCjlERkJQa3hvemNwQWNWSzMwQmttYlN6eW1EbjdpSDJrTTFNL0JpZThQT0ZQaXZDbmI0N2JkaEs5ZDk1Z2V5UkUKTTRoNE1pcDhhamFuU3IwUXRJSUUxV3Z1aFB5TkJQWVByRS90V3dJREFRQUJBb0lCQVFDQ2g1M3BweE5LSCtIMApsdnA1dHVxano2Yld4Lzl3K0Y5WWluZ3UwYytKcldpTXFGOWcxY04yb2JmeG1IUXpQWEtwZDFPbGNJRnlkd2pFCmlrV3Z1eVRKN3g5SXVyTWJwUjhpUGRkaklIN2htMmtEUmhNTys3QjllUlgxNVR6Sm8zSWRxNlIrRzNTb3hmdEQKdHhoV3h5VTdGMkFmTnplSEtpSGN2UXd0YUMwRm9sQ1BCUnJWbms2ZDkxRERUOFV2a1c1ZGkzczlvcC9BTUFTbAoxRExXRHloK0ErdzViVEFWQzJYc0xmd1ZlSXlGdXpMVzNUTkNaWmNGamNvcktVMmQ3ZjFtd1pSbktEaWVBUWp3Ck9rQ2xIM0xxRnN2OHNvbDQ1Sk9zMTFWNUFpVXpFaUJpWnZ1UWtiaTcyWXVHMGh6NHFNR0plYXA0K0VXZFZFWHoKMzU2VWZhK1JBb0dCQVBIWHZkemFuM3l4ODFqT1NqUzNVd2ZURU0xTlB1SldQVmZEV0RNSEx4TTNPUDVDc2IyTApXSHdWSDg2WU8xdC9UR0pkbXJDTzJ1NWNOL0srR3MxWjJSYkdSM2U3M2NkOStYZjl3WmpBaVBWTlRKQVRUR25PCmE2SkhaaEgzaUFlRmU4dkx6SUxCeTVBd1UxdUsvM2graVRBVldZdTNiTHZWZC9JTzNYWWdZMGsvQW9HQkFORUEKLzRuTDNXOWdXNFBCR01qQmo5MnBYYllQVmlRNFA0VjhBMUhGZ1g2Q2FjcnJCN2U3VWd3Q3hYWFQrOFZWMUtrKwp2WDZlcnBSVk5qK3NDMVpEQmtXT09pRWd1RWtMNVZ4Y0hxZlg1akJJTU44cDBKd1IrSWdlM1duNDdNZ3ZpRDc3CmJVWjVxT2RQLzdhR2J3VnJvZkdCNUNJc1JKTU1BMmo4Rnd5TmZwamxBb0dBRTZadzhkbjlyWGNVQzdvdlExdEYKN3RQU2dLdnZHUnJpdnhmTE9kSXluQUFYckdrazRmN0pnTU9Db3hteGNQekY2eFFwOW9DVS8xc1UzSzlmcENIUgp4c3p6ajZIL0lpOTFMcSs2cER1NHBSM1R3NzBkcjFjclhiTXBjdnBHM2oyVlVuakx0REFrNXlGV0ZKRVZzdWV0CkkvQUlKNWNPeWJCTm42aGZqREtUZnFjQ2dZRUFzbnNsdmVqb2VwcFF6Rnp6NjB6UXJMeGJtSVBVVGkzeW9PMWMKY0ZJMzJXOUpKTTQ4MHZ3V2ZzZEhGTzRvVFVhVXlzc1hTNi82NmhVeXRJRVpWVnI3V2g2eEtXVWx1c3Q3M0xtVwpQRU0xQWZwRU1lOGxoSUljT1RJU1p0TDZjYUdWdWlOQUdEVUF0amdzNlJRNGJ1cVJhd28vWmFka0VDYnNLcFZNCm9aMmJoTGtDZ1lBV1ZKU29tSW5XOXJ3eDF0bU1rODhXcVBYMGVJTllYK05PRE1EbjJrMlhTVzc5dVBsQUlqM3EKSkF0dXZsdmtlYm04NXlCUHllSEZiSkZTdlM2bzJIdmt5WGVnTjFZTWJjL1BmaFlKZmNQL2NlSTRkOGRFZndNWQpScDQyM2dqNFZsdnVac25PTGhJWEtlaVpVQnp3MXk0U1R0eWF2Tk1ieGU2WnZMSzNGeGxnTXc9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
+---
+# We are creating a new service account that can be used to launch new containers.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: containerssh
+  namespace: containerssh
+automountServiceAccountToken: true
+---
+# We are creating a new role that will let the service account launch pods in the containerssh-guests namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: containerssh
+  namespace: containerssh-guests
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - pods/logs
+      - pods/exec
+    verbs:
+      - '*'
+---
+# We are creating a role binding that binds the containerssh service account to the containerssh role.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: containerssh
+  namespace: containerssh-guests
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: containerssh
+subjects:
+  - kind: ServiceAccount
+    name: containerssh
+    namespace: containerssh
+---
+# Now we are creating a deployment that runs ContainerSSH.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: containerssh
+  namespace: containerssh
+  labels:
+    app: containerssh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: containerssh
+  template:
+    metadata:
+      labels:
+        app: containerssh
+    spec:
+      # We are using the containerssh service account
+      serviceAccountName: containerssh
+      containers:
+        # Run ContainerSSH
+        - name: containerssh
+          image: containerssh/containerssh:0.4
+          securityContext:
+            # Read only container
+            readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 2222
+          volumeMounts:
+              # Mount the host key
+            - name: hostkey
+              mountPath: /etc/containerssh/host.key
+              subPath: host.key
+              readOnly: true
+              # Mount the config file
+            - name: config
+              mountPath: /etc/containerssh/config.yaml
+              subPath: config.yaml
+              readOnly: true
+        # Run the auth-config test server for authentication
+        - name: containerssh-authconfig
+          image: containerssh/containerssh-test-authconfig:0.4
+          securityContext:
+            readOnlyRootFilesystem: true
+      # Don't allow containers running as root (ContainerSSH doesn't need it)
+      securityContext:
+        runAsNonRoot: true
+      volumes:
+        - name: hostkey
+          secret:
+            secretName: containerssh-hostkey
+        - name: config
+          configMap:
+            name: containerssh-config
+---
+# Create a service that makes the SSH service public on port 22
+apiVersion: v1
+kind: Service
+metadata:
+  name: containerssh
+  namespace: containerssh
+spec:
+  selector:
+    app: containerssh
+  ports:
+    - protocol: TCP
+      port: 2222
+      targetPort: 2222
+  type: LoadBalancer
+  

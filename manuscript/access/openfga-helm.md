@@ -74,4 +74,4 @@ curl "http://cncf-demo.$INGRESS_HOST/videos" | jq .
 
 ## Continue The Adventure
 
-* [Secrets Management Outside Kubernetes](client.md)
+* [Security Misfits](../security-misc/README.md)

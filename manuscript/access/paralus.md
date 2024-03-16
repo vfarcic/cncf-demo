@@ -25,4 +25,4 @@ TODO:
 
 ## Continue The Adventure
 
-* [ContainerSSH](../containerssh.md)
+* [Security Misfits](../security-misc/README.md)

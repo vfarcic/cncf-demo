@@ -524,7 +524,6 @@ flowchart TD
         %% ----------
         security_misc{{Misc}}
         click security_misc "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/security-misc/README.md"
-        style security_misc fill:red
         %% Not maintained
         %% curiefense(Curiefense)
         %% style curiefense fill:red
