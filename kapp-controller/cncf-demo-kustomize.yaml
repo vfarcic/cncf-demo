@@ -8,16 +8,16 @@ spec:
   syncPeriod: 1m
   serviceAccountName: infra-provisioner-sa
   fetch:
-  - git:
-      url: https://github.com/vfarcic/cncf-demo
-      ref: origin/main
-      subPath: kustomize/overlays/prod
+    - git:
+        url: https://github.com/vfarcic/cncf-demo
+        ref: origin/main
+        subPath: kustomize/overlays/prod
   template:
-  - ytt:
-      ignoreUnknownComments: true
-      paths:
-      - "."
+    - ytt:
+        ignoreUnknownComments: true
+        paths:
+          - "."
   deploy:
-  - kapp:
-      intoNs: production
-      rawOptions: ["--dangerous-allow-empty-list-of-resources=true"]
+    - kapp:
+        rawOptions: ["--dangerous-allow-empty-list-of-resources=true"]
+        intoNs: production

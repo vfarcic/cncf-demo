@@ -11,8 +11,6 @@ gh repo set-default
 
 devbox shell
 
-PS1="➜ "
-
 eval "$(teller sh)"
 
 eksctl create cluster --config-file eksctl/config-small.yaml \
@@ -45,10 +43,10 @@ yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
     kapp-controller/cncf-demo-ytt.yaml
 
 yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
-    kapp-controller/cncf-demo-kustomize
+    kapp-controller/cncf-demo-kustomize.yaml
 
 yq --inplace ".spec.fetch[0].git.url = \"$REPO_URL\"" \
-    kapp-controller/cncf-demo-cdk8s
+    kapp-controller/cncf-demo-cdk8s.yaml
 
 export IMAGE=index.docker.io/vfarcic/cncf-demo
 
@@ -129,11 +127,18 @@ kubectl --namespace production get \
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 
 kubectl get nodes
+
+helm upgrade --install argocd argo-cd \
+    --repo https://argoproj.github.io/argo-helm \
+    --namespace argocd --create-namespace \
+    --values argocd/helm-values.yaml --wait
 ```
 
 ## Setup Crossplane
 
 ```sh
+export KUBECONFIG=$PWD/kubeconfig.yaml
+
 crossplane beta trace clusterclaim production --namespace production
 
 # Wait until all the resources are available
@@ -144,6 +149,11 @@ aws eks update-kubeconfig --region us-east-1 \
 export KUBECONFIG=$PWD/kubeconfig-prod.yaml
 
 kubectl get nodes
+
+helm upgrade --install argocd argo-cd \
+    --repo https://argoproj.github.io/argo-helm \
+    --namespace argocd --create-namespace \
+    --values argocd/helm-values.yaml --wait
 ```
 
 ## Misc

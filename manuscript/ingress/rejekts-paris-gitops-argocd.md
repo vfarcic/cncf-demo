@@ -22,6 +22,8 @@ helm upgrade --install argocd argo-cd \
     --namespace argocd --create-namespace \
     --values argocd/helm-values.yaml --wait
 
+kubectl --namespace argocd get ingresses
+
 open "http://gitops.$DOMAIN"
 
 # Login with the following credentials:
