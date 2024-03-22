@@ -554,7 +554,9 @@ flowchart TD
         style kubernetes-dashboard fill:red
         meshery(Meshery)
         style meshery fill:red
-        dashboards --> skooner & kubernetes-dashboard & meshery --> metrics
+        headlamp(Headlamp)
+        style headlamp fill:red
+        dashboards --> skooner & kubernetes-dashboard & meshery & headlamp --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -692,9 +694,7 @@ flowchart TD
         style deployment-mc-karmada fill:red
         open-kruise(OpenKruise)
         style open-kruise fill:red
-        headlamp(Headlamp)
-        style headlamp fill:red
-        deployment-mc --> deployment-mc-karmada & open-kruise & headlamp --> lb-mc
+        deployment-mc --> deployment-mc-karmada & open-kruise --> lb-mc
 
         %% ---------------------------------
         %% -- Load Balancing & Networking --

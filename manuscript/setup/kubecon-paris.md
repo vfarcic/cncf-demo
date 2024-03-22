@@ -9,8 +9,6 @@ gh repo set-default
 
 devbox shell
 
-PS1="➜ "
-
 eval "$(teller sh)"
 
 ./manuscript/setup/security.sh
