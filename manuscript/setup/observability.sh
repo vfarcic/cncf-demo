@@ -70,7 +70,7 @@ Please open https://console.cloud.google.com/marketplace/product/google/containe
 Press the enter key to continue."
 
     gcloud container clusters create dot --project $PROJECT_ID \
-        --zone us-east1-b --machine-type e2-standard-8 \
+        --zone us-east1-b --machine-type e2-standard-4 \
         --enable-autoscaling --num-nodes 1 --min-nodes 1 \
         --max-nodes 3 --enable-network-policy \
         --node-taints node.cilium.io/agent-not-ready=true:NoExecute \
@@ -175,9 +175,13 @@ Continue?
 
 REPO_URL=$(git config --get remote.origin.url)
 
-yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" argocd/apps.yaml
+yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+    argocd/apps.yaml
 
-helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --namespace argocd --create-namespace --values argocd/helm-values.yaml --wait
+helm upgrade --install argocd argo-cd \
+    --repo https://argoproj.github.io/argo-helm \
+    --namespace argocd --create-namespace \
+    --values argocd/helm-values.yaml --wait
 
 kubectl apply --filename argocd/project.yaml
 
@@ -192,8 +196,6 @@ yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 #################
 # Setup Ingress #
 #################
-
-cat $GITOPS_APP/contour.yaml
 
 cp $GITOPS_APP/contour.yaml infra/.
 
@@ -226,11 +228,15 @@ if [[ "$HYPERSCALER" == "aws" ]]; then
 
 else
 
-    INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+    INGRESS_IP=$(kubectl --namespace projectcontour \
+        get service contour-envoy \
+        --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-    while [ -z "$COUNTER" ]; do
+    while [ -z "$INGRESS_IP" ]; do
         sleep 10
-        INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+        INGRESS_IP=$(kubectl --namespace projectcontour \
+            get service contour-envoy \
+            --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
     done
 
 fi

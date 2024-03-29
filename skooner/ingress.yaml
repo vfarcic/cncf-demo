@@ -1,0 +1,17 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: skooner
+spec:
+  rules:
+    - host: dashboard.35.227.123.210.nip.io
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: skooner
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
+  ingressClassName: contour

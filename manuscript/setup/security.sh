@@ -248,7 +248,7 @@ else
 
     INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-    while [ -z "$COUNTER" ]; do
+    while [ -z "$INGRESS_IP" ]; do
         sleep 10
         INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
     done

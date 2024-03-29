@@ -3,21 +3,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: contour
+  name: skooner
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: production
   source:
-    chart: contour
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 10.1.3
-    helm:
-      releaseName: contour
+    repoURL: https://github.com/vfarcic/cncf-demo
+    targetRevision: HEAD
+    path: skooner
   destination:
     server: https://kubernetes.default.svc
-    namespace: projectcontour
+    namespace: skooner
   syncPolicy:
     automated:
       selfHeal: true

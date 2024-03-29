@@ -30,4 +30,4 @@ source .env
 
 ## Start The Chapter
 
-* [Policies](../observability/README.md)
+* [Dashboards](../dashboards/README.md)

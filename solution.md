@@ -552,9 +552,10 @@ flowchart TD
         %% -- Dashboards --
         %% ----------------
         dashboards{{Dashboards}}
-        style dashboards fill:red
+        click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/README.md"
+        style dashboards fill:blue
         skooner(Skooner)
-        style skooner fill:red
+        click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
         kubernetes-dashboard(Kubernetes Dashboard)
         style kubernetes-dashboard fill:red
         meshery(Meshery)

@@ -1,7 +1,7 @@
 gitOps:
   app: argocd
 ingress:
-  host: 52.72.225.129.nip.io
+  host: 35.227.123.210.nip.io
   classname: contour
 image: index.docker.io/vfarcic/cncf-demo
 tag: v0.0.1
