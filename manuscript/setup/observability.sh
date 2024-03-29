@@ -4,9 +4,7 @@ set -e
 gum style \
 	--foreground 212 --border-foreground 212 --border double \
 	--margin "1 2" --padding "2 4" \
-	'Setup for the Security chapter.
-  
-This script assumes that you jumped straight into this chapter.
+	'This script assumes that you jumped straight into this chapter.
 If that is not the case (if you are continuing from the previous
 chapter), please answer with "No" when asked whether you are
 ready to start.'
@@ -27,10 +25,6 @@ echo "
 |AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
 |eksctl          |If using AWS         |'https://eksctl.io/installation/'                  |
 |az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
-|kustomize       |If using Kustomize   |'https://kubectl.docs.kubernetes.io/installation/kustomize/'|
-|helm            |If using Helm        |'https://helm.sh/docs/intro/install/'              |
-|cdk8s           |If using cdk8s       |'https://cdk8s.io/docs/latest/cli/installation'    |
-|ytt             |If using Carvel ytt  |'https://carvel.dev/ytt/docs/latest/install'       |
 " | gum format
 
 gum confirm "
@@ -57,7 +51,9 @@ helm repo update
 
 if [[ "$HYPERSCALER" == "google" ]]; then
 
+    set +e
     gcloud components install gke-gcloud-auth-plugin
+    set -e
 
     PROJECT_ID=dot-$(date +%Y%m%d%H%M%S)
 
@@ -69,12 +65,6 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     echo "
 Please open https://console.cloud.google.com/marketplace/product/google/container.googleapis.com?project=$PROJECT_ID in a browser and *ENABLE* the API."
-
-    gum input --placeholder "
-Press the enter key to continue."
-
-    echo "
-Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=${PROJECT_ID} in a browser and *ENABLE* the API."
 
     gum input --placeholder "
 Press the enter key to continue."
@@ -100,18 +90,6 @@ Press the enter key to continue."
         --set cni.binPath=/home/kubernetes/bin \
         --set gke.enabled=true --set ipam.mode=kubernetes \
         --set ipv4NativeRoutingCIDR=$NATIVE_CIDR --wait
-
-    export SA_NAME=devops-toolkit
-
-    export SA="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
-
-    gcloud iam service-accounts create $SA_NAME --project $PROJECT_ID
-
-    export ROLE=roles/admin
-
-    gcloud projects add-iam-policy-binding --role $ROLE $PROJECT_ID --member serviceAccount:$SA
-
-    gcloud iam service-accounts keys create gcp-creds.json --project $PROJECT_ID --iam-account $SA
 
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
@@ -215,6 +193,8 @@ yq --inplace ".gitOps.app = \"$GITOPS_APP\"" settings.yaml
 # Setup Ingress #
 #################
 
+cat $GITOPS_APP/contour.yaml
+
 cp $GITOPS_APP/contour.yaml infra/.
 
 git add . 
@@ -268,200 +248,3 @@ yq --inplace ".ingress.host = \"$INGRESS_IP.nip.io\"" settings.yaml
 
 echo "export INGRESS_CLASSNAME=contour" >> .env
 yq --inplace ".ingress.classname = \"contour\"" settings.yaml
-
-#################
-# Setup The App #
-#################
-
-yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
-
-yq --inplace ".tag = \"v0.0.1\"" settings.yaml
-
-echo "
-How would you like to define Kubernetes resources?"
-
-TEMPLATES=$(gum choose "kustomize" "helm" "ytt" "cdk8s")
-
-echo "export TEMPLATES=$TEMPLATES" >> .env
-yq --inplace ".templates = \"$TEMPLATES\"" settings.yaml
-
-if [[ "$TEMPLATES" == "kustomize" ]]; then
-
-    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
-
-    yq --inplace ".spec.template.spec.containers[0].image = \"index.docker.io/vfarcic/cncf-demo\"" kustomize/base/deployment.yaml
-
-    cd kustomize/overlays/prod
-
-    kustomize edit set image index.docker.io/vfarcic/cncf-demo=index.docker.io/vfarcic/cncf-demo:v0.0.1
-
-    cd ../../..
-
-    yq --inplace ".patchesStrategicMerge = []" kustomize/overlays/prod/kustomization.yaml
-
-elif [[ "$TEMPLATES" == "helm" ]]; then
-
-    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" helm/app/values.yaml
-
-    yq --inplace ".spec.source.helm.parameters[0].value = \"v0.0.1\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-    yq --inplace ".spec.source.helm.parameters[3].value = \"false\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-elif [[ "$TEMPLATES" == "cdk8s" ]]; then
-
-    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
-
-    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" cdk8s/app-prod.yaml
-
-    yq --inplace ".image.tag = \"v0.0.1\"" cdk8s/app-prod.yaml
-
-else
-
-    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
-
-    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" ytt/values-prod.yaml
-
-    yq --inplace ".image.tag = \"v0.0.1\"" ytt/values-prod.yaml
-
-fi
-
-####################
-# Setup Crossplane #
-####################
-
-set +e
-helm repo add crossplane-stable https://charts.crossplane.io/stable
-set -e
-
-helm repo update
-
-helm upgrade --install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace --wait
-
-kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
-
-kubectl apply --filename crossplane-config/config-sql.yaml
-
-sleep 60
-
-kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=600s
-
-if [[ "$HYPERSCALER" == "google" ]]; then
-
-    kubectl --namespace crossplane-system create secret generic gcp-creds --from-file creds=./gcp-creds.json
-
-    echo "apiVersion: gcp.upbound.io/v1beta1
-kind: ProviderConfig
-metadata:
-  name: default
-spec:
-  projectID: $PROJECT_ID
-  credentials:
-    source: Secret
-    secretRef:
-      namespace: crossplane-system
-      name: gcp-creds
-      key: creds" | kubectl apply --filename -
-
-    yq --inplace ".crossplane.destination = \"google\"" settings.yaml
-
-elif [[ "$HYPERSCALER" == "aws" ]]; then
-
-    kubectl --namespace crossplane-system create secret generic aws-creds --from-file creds=./aws-creds.conf
-
-    kubectl apply --filename crossplane-config/provider-config-aws-official.yaml
-
-    yq --inplace ".crossplane.destination = \"aws\"" settings.yaml
-
-elif [[ "$HYPERSCALER" == "azure" ]]; then
-
-    export SUBSCRIPTION_ID=$(az account show --query id -o tsv)
-
-    az ad sp create-for-rbac --sdk-auth --role Owner --scopes /subscriptions/$SUBSCRIPTION_ID | tee azure-creds.json
-
-    kubectl --namespace crossplane-system create secret generic azure-creds --from-file creds=./azure-creds.json
-
-    kubectl apply --filename crossplane-config/provider-config-azure-official.yaml
-
-    yq --inplace ".crossplane.destination = \"azure\"" settings.yaml
-
-fi
-
-##################
-# Setup Database #
-##################
-
-if [[ "$TEMPLATES" == "kustomize" ]]; then
-
-    yq --inplace ".resources += \"postgresql-crossplane-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
-
-    yq --inplace ".resources += \"postgresql-crossplane-secret-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
-
-    yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
-
-    yq --inplace ".resources += \"postgresql-crossplane-schema-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
-
-elif [[ "$TEMPLATES" == "helm" ]]; then
-
-    if [[ "$HYPERSCALER" == "google" ]]; then
-
-        yq --inplace ".spec.source.helm.parameters[4].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-    elif [[ "$HYPERSCALER" == "aws" ]]; then
-
-        yq --inplace ".spec.source.helm.parameters[5].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-    elif [[ "$HYPERSCALER" == "azure" ]]; then
-
-        yq --inplace ".spec.source.helm.parameters[6].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-        
-    fi
-
-    yq --inplace ".spec.source.helm.parameters[11].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-elif [[ "$TEMPLATES" == "cdk8s" ]]; then
-
-    yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" cdk8s/app-prod.yaml
-
-    yq --inplace ".db.id = \"cncf-demo-db\"" cdk8s/app-prod.yaml
-
-    yq --inplace ".db.insecure = true" cdk8s/app-prod.yaml
-
-    yq --inplace ".db.size = \"small\"" cdk8s/app-prod.yaml
-
-    yq --inplace ".schemahero.enabled = true" cdk8s/app-prod.yaml
-
-    cd cdk8s
-
-    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
-
-    cd ../
-
-else
-
-    yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" ytt/values-prod.yaml
-
-    yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
-
-    yq --inplace ".db.insecure = true" ytt/values-prod.yaml
-
-    yq --inplace ".db.size = \"small\"" ytt/values-prod.yaml
-
-    yq --inplace ".schemahero.enabled = true" ytt/values-prod.yaml
-
-    ytt --file ytt/schema.yaml --file ytt/resources --data-values-file ytt/values-prod.yaml | tee yaml/prod/app.yaml
-
-fi
-
-#######################
-# Setup Dabase Schema #
-#######################
-
-cp argocd/schema-hero.yaml infra/.
-
-git add .
-
-git commit -m "SchemaHero"
-
-git push

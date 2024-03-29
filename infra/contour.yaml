@@ -1,0 +1,27 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: contour
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: contour
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 10.1.3
+    helm:
+      releaseName: contour
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: projectcontour
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true

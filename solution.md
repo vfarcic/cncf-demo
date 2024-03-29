@@ -322,9 +322,7 @@ flowchart TD
         %% -----------
         setup-security((Setup))
         click setup-security "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/security.md"
-
-        %% -- Setup Connections --
-        setup-security-->policies
+       setup-security --> policies
 
         %% -----------------------------------
         %% -- Admission Controller Policies --
@@ -542,6 +540,13 @@ flowchart TD
 flowchart TD
 
     subgraph Observability
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-observability((Setup))
+        click setup-observability "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/observability.md"
+        setup-observability --> dashboards
 
         %% ----------------
         %% -- Dashboards --

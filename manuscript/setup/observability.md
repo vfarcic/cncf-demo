@@ -21,13 +21,13 @@ gh repo set-default
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-chmod +x manuscript/setup/security.sh
+chmod +x manuscript/setup/observability.sh
 
-./manuscript/setup/security.sh
+./manuscript/setup/observability.sh
 
 source .env
 ```
 
 ## Start The Chapter
 
-* [Policies](../policies/README.md)
+* [Policies](../observability/README.md)

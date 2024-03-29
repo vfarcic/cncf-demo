@@ -14,3 +14,5 @@ TODO: Text
 
 * **Confidential Containers** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **ContainerSSH** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+
+Those are the last episodes in this chapter. You can skip them (for now) and choose to [destroy everything](../destroy/security.md) or continue with the next chapter about [Observability](../observability/README.md)
