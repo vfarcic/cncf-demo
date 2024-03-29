@@ -577,9 +577,7 @@ flowchart TD
         style pixie fill:red
         cortex(Cortex)
         style cortex fill:red
-        fonio(Fonio)
-        style fonio fill:red
-        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex & fonio --> instrumentation
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> instrumentation
 
         %% ---------------------------------
         %% -- Instrumentation & Exporters --
@@ -610,9 +608,11 @@ flowchart TD
         %% -------------
         logging{{Logging}}
         style logging fill:red
-        logging-fluentd(FluentD)
-        style logging-fluentd fill:red
-        logging --> logging-fluentd --> observability-network
+        fluentd(FluentD)
+        style fluentd fill:red
+        logging-operator(Logging Operator)
+        style logging-operator fill:red
+        logging --> fluentd & logging-operator --> observability-network
 
         %% ----------------
         %% -- Networking --
@@ -640,7 +640,9 @@ flowchart TD
         style observability-scanning fill:red
         observability-kubescape(Kubescape)
         style observability-kubescape fill:red
-        observability-scanning --> observability-kubescape --> progressive-delivery
+        fonio(Fonio)
+        style fonio fill:red
+        observability-scanning --> observability-kubescape & fonio --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -651,7 +653,16 @@ flowchart TD
         style progressive-delivery-argo-rollouts fill:red
         progressive-delivery-flagger(Flagger)
         style progressive-delivery-flagger fill:red
-        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> observability-misc
+        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> cost
+
+        %% ----------
+        %% -- Cost --
+        %% ----------
+        cost{{Cost}}
+        style progressive-delivery fill:red
+        open-cost(OpenCost)
+        style open-cost fill:red
+        cost --> open-cost --> observability-misc
 
         %% ----------
         %% -- Misc --
@@ -668,7 +679,9 @@ flowchart TD
         style inspektor-gadget fill:red
         trickster(Trickster)
         style trickster fill:red
-        observability-misc --> kuberhealthy & smp & kepler & inspektor-gadget & trickster
+        k8s-gpt(K8sGPT)
+        style k8s-gpt fill:red
+        observability-misc --> kuberhealthy & smp & kepler & inspektor-gadget & trickster & k8s-gpt
 
     end
 ```
@@ -952,13 +965,15 @@ flowchart TD
         %% -----------------------
         chaos-engineering{{Chaos Engineering}}
         style chaos-engineering fill:red
-        chaos-engineering-chaosblade(Chaosblade)
-        style chaos-engineering-chaosblade fill:red
-        chaos-engineering-litmus(Litmus)
-        style chaos-engineering-litmus fill:red
-        chaos-engineering-chaos-mesh(Chaos Mesh)
-        style chaos-engineering-chaos-mesh fill:red
-        chaos-engineering --> chaos-engineering-chaosblade & chaos-engineering-litmus & chaos-engineering-chaos-mesh
+        chaosblade(Chaosblade)
+        style chaosblade fill:red
+        litmus(Litmus)
+        style litmus fill:red
+        chaos-mesh(Chaos Mesh)
+        style chaos-mesh fill:red
+        kraken(Kraken)
+        style kraken fill:red
+        chaos-engineering --> chaosblade & litmus & chaos-mesh & kraken
 
         %% --------------------
         %% -- Events Storage --
@@ -1085,9 +1100,6 @@ flowchart TD
         %% -- Not maintained --
         %% inclavare-containers(Inclavare Containers)
         %% style inclavare-containers fill:red
-        %% -- Visibility into current and historical Kubernetes spend and resource allocation (drop 1) --
-        open-cost(OpenCost)
-        style open-cost fill:red
         %% -- Control Plane for Kubernetes APIs (drop 1) --
         kcp(kcp)
         style kcp fill:red
@@ -1118,7 +1130,9 @@ flowchart TD
         %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
         style xline fill:red
-        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline
+        open-feature(OpenFeature)
+        style open-feature fill:red
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & open-feature
     end
 ```
 
