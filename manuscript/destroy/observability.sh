@@ -30,6 +30,4 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 
 	az group delete --name $RESOURCE_GROUP --yes
 
-	az group delete --name cncf-demo-db --yes
-
 fi
