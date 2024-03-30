@@ -586,9 +586,7 @@ flowchart TD
         style open-telemetry fill:red
         open-metrics(OpenMetrics)
         style open-metrics fill:red
-        keppler(Keppler)
-        style keppler fill:red
-        instrumentation--> open-telemetry & open-metrics & keppler -->tracing
+        instrumentation--> open-telemetry & open-metrics -->tracing
 
         %% -------------
         %% -- Tracing --
@@ -671,7 +669,7 @@ flowchart TD
         style kuberhealthy fill:red
         smp("Service Mesh Performance (SMP)")
         style smp fill:red
-        kepler(Keppler)
+        kepler(Kepler)
         style kepler fill:red
         inspektor-gadget(Inspektor Gadget)
         style inspektor-gadget fill:red
