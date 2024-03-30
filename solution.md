@@ -558,11 +558,9 @@ flowchart TD
         click skooner "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
         kubernetes-dashboard(Kubernetes Dashboard)
         style kubernetes-dashboard fill:red
-        meshery(Meshery)
-        style meshery fill:red
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        dashboards --> skooner & kubernetes-dashboard & meshery & headlamp --> metrics
+        dashboards --> skooner & kubernetes-dashboard & headlamp --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -1132,7 +1130,9 @@ flowchart TD
         style xline fill:red
         open-feature(OpenFeature)
         style open-feature fill:red
-        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & open-feature
+        meshery(Meshery)
+        style meshery fill:red
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & open-feature & meshery
     end
 ```
 
