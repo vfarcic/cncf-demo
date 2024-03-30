@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard
+  namespace: kubernetes-dashboard
+spec:
+  ingressClassName: contour
+  rules:
+    - host: dashboard2.52.20.80.72.nip.io
+      http:
+        paths:
+        - backend:
+            service:
+              name: kubernetes-dashboard-kong-proxy
+              port:
+                number: 80
+          path: /
+          pathType: ImplementationSpecific
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubernetes-dashboard-admin
+  namespace: kubernetes-dashboard
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-dashboard-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: kubernetes-dashboard-admin
+    namespace: kubernetes-dashboard

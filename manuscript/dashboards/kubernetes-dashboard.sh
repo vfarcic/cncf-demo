@@ -27,33 +27,37 @@ INGRESS_CLASSNAME=$(yq ".ingress.classname" settings.yaml)
 INGRESS_HOST=$(yq ".ingress.host" settings.yaml)
 
 yq --inplace ".spec.ingressClassName = \"$INGRESS_CLASSNAME\"" \
-    skooner/ingress.yaml
+    kubernetes-dashboard/ingress.yaml
 
 yq --inplace \
     ".spec.rules[0].host = \"dashboard.$INGRESS_HOST\"" \
-    skooner/ingress.yaml
+    kubernetes-dashboard/ingress.yaml
 
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
-cp $GITOPS_APP/skooner.yaml infra/.
+cp $GITOPS_APP/kubernetes-dashboard.yaml infra/.
+
+cp kubernetes-dashboard/ingress.yaml \
+    infra/kubernetes-dashboard-ingress.yaml
 
 git add . 
 
-git commit -m "Skooner"
+git commit -m "Kubernetes Dashboard"
 
 git push
 
-COUNTER=$(kubectl --namespace skooner get pods --no-headers | wc -l)
+COUNTER=$(kubectl --namespace kubernetes-dashboard get pods --no-headers | wc -l)
 
 while [ $COUNTER -eq "0" ]; do
 	sleep 10
-	COUNTER=$(kubectl --namespace skooner get pods --no-headers | wc -l)
+	COUNTER=$(kubectl --namespace kubernetes-dashboard get pods --no-headers | wc -l)
 done
 
-TOKEN=$(kubectl --namespace skooner create token skooner-sa)
+TOKEN=$(kubectl --namespace kubernetes-dashboard \
+    create token kubernetes-dashboard)
 
 echo "
-## Use the following token to login to Skooner:
+## Use the following token to login to Kubernetes Dashboard:
 
 $TOKEN
 " | gum format

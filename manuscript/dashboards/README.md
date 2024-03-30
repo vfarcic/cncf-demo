@@ -29,6 +29,6 @@ TODO: Description
 ## What Is Your Choice?
 
 * [Skooner](skooner.md)
-* **Kubernetes Dashboard** is a beta feature as of January 2024. Implementation will be added once it goes GA.
-* **Meshery** is a beta feature as of January 2024. Implementation will be added once it goes GA.
-* **Headlamp** is a beta feature as of January 2024. Implementation will be added once it goes GA.
+* **Kubernetes Dashboard** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Meshery** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Headlamp** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

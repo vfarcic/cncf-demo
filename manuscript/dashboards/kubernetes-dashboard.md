@@ -8,9 +8,9 @@ TODO: Intro
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-chmod +x manuscript/dashboards/skooner.sh
+chmod +x manuscript/dashboards/kubernetes-dashboard.sh
 
-./manuscript/dashboards/skooner.sh
+./manuscript/policies/skooner.sh
 
 source .env
 ```
