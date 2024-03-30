@@ -25,4 +25,4 @@ echo "http://dashboard.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+* [Metrics](../metrics/README.md)

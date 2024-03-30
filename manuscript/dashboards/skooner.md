@@ -11,8 +11,6 @@ TODO: Intro
 chmod +x manuscript/dashboards/skooner.sh
 
 ./manuscript/dashboards/skooner.sh
-
-source .env
 ```
 
 ## Do
@@ -24,5 +22,7 @@ echo "http://dashboard.$INGRESS_HOST"
 ```
 
 ## Continue the Adventure
+
+* [Metrics](../metrics/README.md)
 
 The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)

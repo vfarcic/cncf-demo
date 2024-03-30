@@ -566,7 +566,8 @@ flowchart TD
         %% -- Metrics --
         %% -------------
         metrics{{Metrics}}
-        style metrics fill:red
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/README.md"
+        style metrics fill:blue
         metrics-prometheus(Prometheus)
         style metrics-prometheus fill:red
         metrics-thanos(Thanos)

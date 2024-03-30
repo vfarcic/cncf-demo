@@ -11,8 +11,6 @@ TODO: Intro
 chmod +x manuscript/dashboards/headlamp.sh
 
 ./manuscript/dashboards/headlamp.sh
-
-source .env
 ```
 
 ## Do
@@ -25,4 +23,4 @@ echo "http://dashboard.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+* [Metrics](../metrics/README.md)

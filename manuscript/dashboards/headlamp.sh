@@ -54,7 +54,7 @@ while [ $COUNTER -eq "0" ]; do
 	COUNTER=$(kubectl --namespace headlamp get pods --no-headers | wc -l)
 done
 
-TOKEN=$(kubectl --namespace headlamp create token headlamp-admin)
+TOKEN=$(kubectl --namespace headlamp create token headlamp-sa)
 
 echo "
 ## Use the following token to login to headlamp:
