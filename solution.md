@@ -555,13 +555,13 @@ flowchart TD
         click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/README.md"
         style dashboards fill:blue
         skooner(Skooner)
-        click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
+        click skooner "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
         kubernetes-dashboard(Kubernetes Dashboard)
         style kubernetes-dashboard fill:red
         meshery(Meshery)
         style meshery fill:red
         headlamp(Headlamp)
-        style headlamp fill:red
+        click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
         dashboards --> skooner & kubernetes-dashboard & meshery & headlamp --> metrics
 
         %% -------------
@@ -659,7 +659,7 @@ flowchart TD
         %% -- Cost --
         %% ----------
         cost{{Cost}}
-        style progressive-delivery fill:red
+        style cost fill:red
         open-cost(OpenCost)
         style open-cost fill:red
         cost --> open-cost --> observability-misc

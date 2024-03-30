@@ -39,6 +39,8 @@ cp $GITOPS_APP/headlamp.yaml infra/.
 
 cp headlamp/ingress.yaml infra/headlamp-ingress.yaml
 
+cp headlamp/sa.yaml infra/headlamp-sa.yaml
+
 git add .
 
 git commit -m "Skooner"
@@ -51,3 +53,11 @@ while [ $COUNTER -eq "0" ]; do
 	sleep 10
 	COUNTER=$(kubectl --namespace headlamp get pods --no-headers | wc -l)
 done
+
+TOKEN=$(kubectl --namespace headlamp create token headlamp-admin)
+
+echo "
+## Use the following token to login to headlamp:
+
+$TOKEN
+" | gum format
