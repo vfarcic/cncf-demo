@@ -1,0 +1,58 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: skooner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: skooner
+  template:
+    metadata:
+      labels:
+        k8s-app: skooner
+    spec:
+      containers:
+      - name: skooner
+        image: ghcr.io/skooner-k8s/skooner:stable
+        ports:
+        - containerPort: 4654
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /
+            port: 4654
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      nodeSelector:
+        'kubernetes.io/os': linux
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: skooner
+spec:
+  ports:
+    - port: 80
+      targetPort: 4654
+  selector:
+    k8s-app: skooner
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: skooner-sa
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: skooner-sa
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: skooner-sa
+    namespace: skooner

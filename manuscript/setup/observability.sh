@@ -130,6 +130,8 @@ aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 
+    az login
+
     RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 
     echo "export RESOURCE_GROUP=$RESOURCE_GROUP" >> .env

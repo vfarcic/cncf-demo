@@ -27,35 +27,27 @@ INGRESS_CLASSNAME=$(yq ".ingress.classname" settings.yaml)
 INGRESS_HOST=$(yq ".ingress.host" settings.yaml)
 
 yq --inplace ".spec.ingressClassName = \"$INGRESS_CLASSNAME\"" \
-    skooner/ingress.yaml
+    headlamp/ingress.yaml
 
 yq --inplace \
     ".spec.rules[0].host = \"dashboard.$INGRESS_HOST\"" \
-    skooner/ingress.yaml
+    headlamp/ingress.yaml
 
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
-cp $GITOPS_APP/skooner.yaml infra/.
+cp $GITOPS_APP/headlamp.yaml infra/.
 
-cp skooner/ingress.yaml infra/skooner-ingress.yaml
+cp headlamp/ingress.yaml infra/headlamp-ingress.yaml
 
-git add . 
+git add .
 
 git commit -m "Skooner"
 
 git push
 
-COUNTER=$(kubectl --namespace skooner get pods --no-headers | wc -l)
+COUNTER=$(kubectl --namespace headlamp get pods --no-headers | wc -l)
 
 while [ $COUNTER -eq "0" ]; do
 	sleep 10
-	COUNTER=$(kubectl --namespace skooner get pods --no-headers | wc -l)
+	COUNTER=$(kubectl --namespace headlamp get pods --no-headers | wc -l)
 done
-
-TOKEN=$(kubectl --namespace skooner create token skooner-sa)
-
-echo "
-## Use the following token to login to Skooner:
-
-$TOKEN
-" | gum format

@@ -1,0 +1,19 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: headlamp
+  namespace: headlamp
+spec:
+  rules:
+    - host: acme.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: headlamp
+                port:
+                  number: 80
+  ingressClassName: nginx

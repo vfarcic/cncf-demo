@@ -31,4 +31,4 @@ TODO: Description
 * [Skooner](skooner.md)
 * **Kubernetes Dashboard** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Meshery** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Headlamp** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Headlamp](headlamp.md)
