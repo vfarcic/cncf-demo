@@ -35,9 +35,7 @@ kubectl --namespace monitoring port-forward svc/grafana 3000
 
 ## Do
 
-```bash
-echo "http://prometheus.$INGRESS_HOST"
-```
+TODO:
 
 * Open it in a browser
 

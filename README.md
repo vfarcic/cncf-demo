@@ -553,8 +553,23 @@ flowchart TD
         openfga-cdk8s(App as cdk8s)
         style openfga-cdk8s fill:red
         access-authorization --> hexa & paralus & openfga
-        openfga --> openfga-helm & openfga-kustomize & openfga-carvel & openfga-cdk8s --> continue
-        hexa & paralus --> continue
+        openfga --> openfga-helm & openfga-kustomize & openfga-carvel & openfga-cdk8s --> security_misc
+        hexa & paralus --> security_misc
+
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        security_misc{{Misc}}
+        click security_misc "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/security-misc/README.md"
+        style security_misc fill:blue
+        %% Not maintained
+        %% curiefense(Curiefense)
+        %% style curiefense fill:red
+        confidential-containers(Confidential Containers)
+        style confidential-containers fill:red
+        container-ssh(ContainerSSH)
+        style container-ssh fill:red
+        security_misc --> confidential-containers & container-ssh --> continue
 
     end
 ```
@@ -595,8 +610,8 @@ flowchart TD
 | Signing Artifacts | Milind Gokarn - Notary<br />Hector Fernandez - Sigstore<br />Gert Drapers - Open Policy Containers | Tuesday, February 13, 2024 | [story](manuscript/signing/README.md) |
 | Generating Workload Identity | Frederick Kautz - SPIFFE<br />Daniel Feldman - SPIRE<br />Abhijeet Vaidya - Athenz | Tuesday, February 20, 2024 | [story](manuscript/workload-identity/README.md) |
 | Authenticating Users | Maksim Nabokikh - Dex<br />Alexander Schwartz - Keycloak | Tuesday, February 27, 2024 | [story](manuscript/user-authentication/README.md) |
-| Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | N/A |
-| Miscellaneous | Suraj Deshmukh - Confidential Containers<br />Rachid Zarouali - ContainerSSH | Tuesday, March 12, 2024 | N/A |
+| Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | [story](manuscript/access/README.md) |
+| Miscellaneous | Suraj Deshmukh - Confidential Containers<br />Rachid Zarouali - ContainerSSH | Tuesday, March 12, 2024 | [story](manuscript/security-misc/README.md) |
 | Chapter 3 Finale!<br />AT KUBECON | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
 
 ## The Format
