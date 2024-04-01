@@ -20,6 +20,14 @@ gh repo set-default
 * Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
+TODO: Add Flux
+
+TODO: Add Carvel kapp-controller
+
+TODO: Add ingress-nginx
+
+TODO: Add Emissary-ingress
+
 ```bash
 chmod +x manuscript/setup/observability.sh
 

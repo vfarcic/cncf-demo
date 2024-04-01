@@ -30,6 +30,8 @@ spec:
             key: port
       dbname:
         value: cncf-demo-db-dev
+      sslmode:
+        value: prefer
 
 ---
 
@@ -38,7 +40,7 @@ kind: Table
 metadata:
   name: cncf-demo-videos
 spec:
-  database: cncf-demo
+  database: cncf-demo-db-dev
   name: videos
   schema:
     postgres:

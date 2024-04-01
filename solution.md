@@ -569,7 +569,7 @@ flowchart TD
         click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/README.md"
         style metrics fill:blue
         metrics-prometheus(Prometheus)
-        style metrics-prometheus fill:red
+        click metrics-prometheus "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/prometheus.md"
         metrics-thanos(Thanos)
         style metrics-thanos fill:red
         pixie(Pixie)

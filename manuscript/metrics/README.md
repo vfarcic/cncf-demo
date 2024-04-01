@@ -28,7 +28,7 @@ TODO: Description
 
 ## What Is Your Choice?
 
-* **Prometheus** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Prometheus](prometheus.md)
 * **Thanos** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Pixie** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Cortex** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

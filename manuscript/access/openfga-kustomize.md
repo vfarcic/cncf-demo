@@ -12,7 +12,7 @@ yq --inplace ".[1].value = \"cncf-demo.$INGRESS_HOST\"" \
     kustomize/overlays/prod/ingress.yaml
 
 yq --inplace ".[2].value = \"$INGRESS_CLASSNAME\"" \
-    ytt/values-prod.yaml
+    kustomize/overlays/prod/ingress.yaml
 
 yq --inplace ".spec.template.spec.containers[0].env[5].value = \"http://openfga.openfga:8080\"" \
     kustomize/overlays/prod/deployment-crossplane-postgresql-$HYPERSCALER.yaml

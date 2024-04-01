@@ -1,5 +1,4 @@
 ---
-
 apiVersion: databases.schemahero.io/v1alpha4
 kind: Database
 metadata:
@@ -30,15 +29,15 @@ spec:
             key: port
       dbname:
         value: cncf-demo-db-dev
-
+      sslmode:
+        value: prefer
 ---
-
 apiVersion: schemas.schemahero.io/v1alpha4
 kind: Table
 metadata:
   name: cncf-demo-videos
 spec:
-  database: cncf-demo
+  database: cncf-demo-db-dev
   name: videos
   schema:
     postgres:

@@ -49,6 +49,8 @@ spec:
         value: "5432"
       dbname:
         value: {{ .Values.db.id }}
+      sslmode:
+        value: prefer
 
 ---
 
@@ -59,7 +61,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
-  database: {{ template "name" . }}
+  database: {{ .Values.db.id }}
   name: videos
   schema:
     postgres:

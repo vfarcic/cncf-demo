@@ -54,7 +54,7 @@ while [ $COUNTER -eq "0" ]; do
 done
 
 TOKEN=$(kubectl --namespace kubernetes-dashboard \
-    create token kubernetes-dashboard)
+    create token kubernetes-dashboard-admin)
 
 echo "
 ## Use the following token to login to Kubernetes Dashboard:

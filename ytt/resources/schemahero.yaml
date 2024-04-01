@@ -54,6 +54,8 @@ spec:
         #@ else:
         value: #@ data.values.db.id
         #@ end
+      sslmode:
+        value: prefer
 
 ---
 
@@ -64,7 +66,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
-  database: #@ data.values.name
+  database: #@ data.values.db.id
   name: videos
   schema:
     postgres:

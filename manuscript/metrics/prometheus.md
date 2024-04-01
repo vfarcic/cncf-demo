@@ -10,34 +10,35 @@ TODO: Intro
 TODO: Rewrite
 
 ```bash
-kubectl apply --server-side \
-    --kustomize github.com/prometheus-operator/kube-prometheus
+chmod +x manuscript/metrics/prometheus.sh
 
-INGRESS_CLASSNAME=$(yq ".ingress.classname" settings.yaml)
-
-INGRESS_HOST=$(yq ".ingress.host" settings.yaml)
-
-yq --inplace ".spec.ingressClassName = \"$INGRESS_CLASSNAME\"" \
-    prometheus/prometheus-ingress.yaml
-
-yq --inplace \
-    ".spec.rules[0].host = \"prometheus.$INGRESS_HOST\"" \
-    prometheus/prometheus-ingress.yaml
-
-kubectl --namespace monitoring \
-    port-forward svc/prometheus-k8s 9090
-
-kubectl --namespace monitoring port-forward svc/grafana 3000
+./manuscript/metrics/prometheus.sh
 ```
-
-* Open [http://localhost:3000](http://localhost:3000) in a browser
-* Log in with `admin` / `admin`
 
 ## Do
 
-TODO:
+```sh
+echo "http://prometheus.$INGRESS_HOST"
+```
 
 * Open it in a browser
+
+```sh
+echo "http://grafana.$INGRESS_HOST"
+```
+
+* Open it in a browser
+* Use `admin` as the user and `prom-operator` as the password
+
+```sh
+echo "http://cncf-demo.$INGRESS_HOST"
+
+curl "http://cncf-demo.$INGRESS_HOST/videos"
+
+curl -X POST "http://cncf-demo.$INGRESS_HOST/video?id=-qeoLfSGlFU&title=DevOps%20Tools%202024"
+
+curl "http://cncf-demo.$INGRESS_HOST/videos" | jq .
+```
 
 ## Continue the Adventure
 
