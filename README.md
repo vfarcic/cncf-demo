@@ -568,8 +568,10 @@ flowchart TD
         confidential-containers(Confidential Containers)
         style confidential-containers fill:red
         container-ssh(ContainerSSH)
-        style container-ssh fill:red
-        security_misc --> confidential-containers & container-ssh --> continue
+        style container-ssh fill:green
+        security_misc --> confidential-containers & container-ssh --> security-done
+
+        security-done((Chapter End))
 
     end
 ```
