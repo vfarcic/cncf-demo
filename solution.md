@@ -1139,7 +1139,8 @@ flowchart TD
         style open-feature fill:red
         meshery(Meshery)
         style meshery fill:red
-        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & open-feature & meshery
+        kanister(Kanister)
+        style kanister fill:red
     end
 ```
 
