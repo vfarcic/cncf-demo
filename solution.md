@@ -582,23 +582,31 @@ flowchart TD
         %% -- Instrumentation & Exporters --
         %% ---------------------------------
         instrumentation{{Instrumentation}}
-        style instrumentation fill:red
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/README.md"
+        style instrumentation fill:blue
         open-telemetry(OpenTelemetry)
-        style open-telemetry fill:red
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/opentelemetry.md"
         open-metrics(OpenMetrics)
-        style open-metrics fill:red
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/openmetrics.md"
         instrumentation--> open-telemetry & open-metrics -->tracing
 
         %% -------------
         %% -- Tracing --
         %% -------------
         tracing{{Tracing}}
-        style tracing fill:red
-        tracing-jaeger(Jaeger)
-        style tracing-jaeger fill:red
-
-        %% -- Tracing Connections --
-        tracing --> tracing-jaeger --> logging
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/README.md"
+        style tracing fill:blue
+        jaeger(Jaeger)
+        click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
+        jaeger-kustomize(App as Kustomize)
+        style jaeger-kustomize fill:red
+        jaeger-helm(App as Helm)
+        style jaeger-helm fill:red
+        jaeger-carvel(App as Carvel ytt)
+        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
+        jaeger-cdk8s(App as cdk8s)
+        style jaeger-cdk8s fill:red
+        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------
         %% -- Logging --

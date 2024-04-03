@@ -307,11 +307,20 @@ elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
 else
 
-    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
+    yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
+        $GITOPS_APP/cncf-demo-ytt.yaml
 
-    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" ytt/values-prod.yaml
+    yq --inplace \
+        ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" \
+        ytt/values-prod.yaml
 
     yq --inplace ".image.tag = \"v0.0.1\"" ytt/values-prod.yaml
+
+    yq --inplace ".ingress.host = \"cncf-demo.$INGRESS_HOST\"" \
+        ytt/values-prod.yaml
+
+    yq --inplace ".ingress.className = \"$INGRESS_CLASSNAME\"" \
+        ytt/values-prod.yaml
 
 fi
 
@@ -466,12 +475,6 @@ else
 
     ytt --file ytt/schema.yaml --file ytt/resources \
         --data-values-file ytt/values-prod.yaml | tee yaml/prod/app.yaml
-
-    yq --inplace ".ingress.host = \"cncf-demo.$INGRESS_HOST\"" \
-        ytt/values-prod.yaml
-
-    yq --inplace ".ingress.className = \"$INGRESS_CLASSNAME\"" \
-        ytt/values-prod.yaml
 
 fi
 

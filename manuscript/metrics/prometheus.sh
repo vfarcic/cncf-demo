@@ -26,6 +26,8 @@ INGRESS_CLASSNAME=$(yq ".ingress.classname" settings.yaml)
 
 INGRESS_HOST=$(yq ".ingress.host" settings.yaml)
 
+GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+
 if [[ "$GITOPS_APP" == "argocd" ]]; then
 
     echo "# Argo CD Issues
@@ -66,8 +68,6 @@ if [[ "$GITOPS_APP" == "flux" ]]; then
 
     yq --inplace ".spec.values.prometheus.ingress.hosts[0] = \"prometheus.$INGRESS_HOST\"" \
         flux/prometheus-release.yaml
-
-    GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
     cp $GITOPS_APP/prometheus*.yaml infra/.
 

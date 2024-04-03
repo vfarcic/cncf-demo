@@ -29,17 +29,23 @@ echo "http://grafana.$INGRESS_HOST"
 
 * Open it in a browser
 * Use `admin` as the user and `prom-operator` as the password
+* Explore dashboards
 
 ```sh
-echo "http://cncf-demo.$INGRESS_HOST"
+curl "http://cncf-demo.$INGRESS_HOST"
 
 curl "http://cncf-demo.$INGRESS_HOST/videos"
 
 curl -X POST "http://cncf-demo.$INGRESS_HOST/video?id=-qeoLfSGlFU&title=DevOps%20Tools%202024"
 
 curl "http://cncf-demo.$INGRESS_HOST/videos" | jq .
+
+echo "http://cncf-demo.$INGRESS_HOST"
 ```
+
+* Use that URL to generate some load using https://ddosify.com or any other load-testing tool
+* See the results in Grafana dashboards
 
 ## Continue the Adventure
 
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+* [Instrumentation](../instrumentation/README.md)

@@ -95,3 +95,22 @@ spec:
             value: #@ data.values.fga.modeId
           #@ end
         #@ end
+      #@ if data.values.otel.enabled:
+      - image: otel/autoinstrumentation-go
+        name: instrumentation
+        env:
+          - name: OTEL_GO_AUTO_TARGET_EXE
+            value: /usr/local/bin/cncf-demo
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: #@ data.values.otel.jaegerAddr
+          - name: OTEL_SERVICE_NAME
+            value: #@ data.values.name
+          - name: OTEL_PROPAGATORS
+            value: tracecontext,baggage
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      #@ end
+    #@ if data.values.otel.enabled:
+    shareProcessNamespace: true
+    #@ end

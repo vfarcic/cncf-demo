@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jaeger
+  namespace: flux-system
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: jaeger
+      version: "2.0.1"
+      sourceRef:
+        kind: HelmRepository
+        name: jaeger
+        namespace: flux-system
+  values:
+    storage:
+      type: none
+    provisionDataStore:
+      cassandra: false
+    agent:
+      enabled: false
+    collector:
+      enabled: false
+    query:
+      enabled: false
+    allInOne:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - jaeger.34.74.23.75.nip.io
+  releaseName: jaeger
+  targetNamespace: monitoring
+  install:
+    createNamespace: true

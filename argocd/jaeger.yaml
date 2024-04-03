@@ -1,0 +1,46 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: jaeger
+    repoURL: https://jaegertracing.github.io/helm-charts
+    targetRevision: "2.0.1"
+    helm:
+      releaseName: jaeger
+      parameters:
+        - name: storage.type
+          value: none
+        - name: provisionDataStore.cassandra
+          value: "false"
+        - name: agent.enabled
+          value: "false"
+        - name: collector.enabled
+          value: "false"
+        - name: query.enabled
+          value: "false"
+        - name: allInOne.enabled
+          value: "true"
+        - name: allInOne.ingress.enabled
+          value: "true"
+        - name: allInOne.ingress.ingressClassName
+          value: nginx
+        - name: allInOne.ingress.hosts[0]
+          value: acme.com
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
