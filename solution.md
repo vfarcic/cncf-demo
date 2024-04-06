@@ -322,7 +322,9 @@ flowchart TD
         %% -----------
         setup-security((Setup))
         click setup-security "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/security.md"
-       setup-security --> policies
+
+        %% -- Setup Connections --
+        setup-security-->policies
 
         %% -----------------------------------
         %% -- Admission Controller Policies --
@@ -541,83 +543,70 @@ flowchart TD
 
     subgraph Observability
 
-        %% -----------
-        %% -- Setup --
-        %% -----------
-        setup-observability((Setup))
-        click setup-observability "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/observability.md"
-        setup-observability --> dashboards
-
         %% ----------------
         %% -- Dashboards --
         %% ----------------
         dashboards{{Dashboards}}
-        click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/README.md"
-        style dashboards fill:blue
+        style dashboards fill:red
         skooner(Skooner)
-        click skooner "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
+        style skooner fill:red
         kubernetes-dashboard(Kubernetes Dashboard)
         style kubernetes-dashboard fill:red
+        meshery(Meshery)
+        style meshery fill:red
         headlamp(Headlamp)
-        click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        dashboards --> skooner & kubernetes-dashboard & headlamp --> metrics
+        style headlamp fill:red
+        dashboards --> skooner & kubernetes-dashboard & meshery & headlamp --> metrics
 
         %% -------------
         %% -- Metrics --
         %% -------------
         metrics{{Metrics}}
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/README.md"
-        style metrics fill:blue
+        style metrics fill:red
         metrics-prometheus(Prometheus)
-        click metrics-prometheus "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/prometheus.md"
+        style metrics-prometheus fill:red
         metrics-thanos(Thanos)
         style metrics-thanos fill:red
         pixie(Pixie)
         style pixie fill:red
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> instrumentation
+        fonio(Fonio)
+        style fonio fill:red
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex & fonio --> instrumentation
 
         %% ---------------------------------
         %% -- Instrumentation & Exporters --
         %% ---------------------------------
         instrumentation{{Instrumentation}}
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/README.md"
-        style instrumentation fill:blue
+        style instrumentation fill:red
         open-telemetry(OpenTelemetry)
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/opentelemetry.md"
+        style open-telemetry fill:red
         open-metrics(OpenMetrics)
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/openmetrics.md"
-        instrumentation--> open-telemetry & open-metrics -->tracing
+        style open-metrics fill:red
+        keppler(Keppler)
+        style keppler fill:red
+        instrumentation--> open-telemetry & open-metrics & keppler -->tracing
 
         %% -------------
         %% -- Tracing --
         %% -------------
         tracing{{Tracing}}
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/README.md"
-        style tracing fill:blue
-        jaeger(Jaeger)
-        click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
-        jaeger-kustomize(App as Kustomize)
-        style jaeger-kustomize fill:red
-        jaeger-helm(App as Helm)
-        style jaeger-helm fill:red
-        jaeger-carvel(App as Carvel ytt)
-        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
-        jaeger-cdk8s(App as cdk8s)
-        style jaeger-cdk8s fill:red
-        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
+        style tracing fill:red
+        tracing-jaeger(Jaeger)
+        style tracing-jaeger fill:red
+
+        %% -- Tracing Connections --
+        tracing --> tracing-jaeger --> logging
 
         %% -------------
         %% -- Logging --
         %% -------------
         logging{{Logging}}
         style logging fill:red
-        fluentd(FluentD)
-        style fluentd fill:red
-        logging-operator(Logging Operator)
-        style logging-operator fill:red
-        logging --> fluentd & logging-operator --> observability-network
+        logging-fluentd(FluentD)
+        style logging-fluentd fill:red
+        logging --> logging-fluentd --> observability-network
 
         %% ----------------
         %% -- Networking --
@@ -645,9 +634,7 @@ flowchart TD
         style observability-scanning fill:red
         observability-kubescape(Kubescape)
         style observability-kubescape fill:red
-        fonio(Fonio)
-        style fonio fill:red
-        observability-scanning --> observability-kubescape & fonio --> progressive-delivery
+        observability-scanning --> observability-kubescape --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -658,35 +645,23 @@ flowchart TD
         style progressive-delivery-argo-rollouts fill:red
         progressive-delivery-flagger(Flagger)
         style progressive-delivery-flagger fill:red
-        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> cost
-
-        %% ----------
-        %% -- Cost --
-        %% ----------
-        cost{{Cost}}
-        style cost fill:red
-        open-cost(OpenCost)
-        style open-cost fill:red
-        cost --> open-cost --> observability-misc
+        progressive-delivery --> progressive-delivery-argo-rollouts & progressive-delivery-flagger --> observability-misc
 
         %% ----------
         %% -- Misc --
         %% ----------
         observability-misc{{Misc}}
         style observability-misc fill:red
-        kuberhealthy(kuberhealthy)
-        style kuberhealthy fill:red
+        %% Not maintained. The last release was made in 2022
+        %% kuberhealthy(kuberhealthy)
+        %% style kuberhealthy fill:red
         smp("Service Mesh Performance (SMP)")
         style smp fill:red
         kepler(Kepler)
         style kepler fill:red
         inspektor-gadget(Inspektor Gadget)
         style inspektor-gadget fill:red
-        trickster(Trickster)
-        style trickster fill:red
-        k8s-gpt(K8sGPT)
-        style k8s-gpt fill:red
-        observability-misc --> kuberhealthy & smp & kepler & inspektor-gadget & trickster & k8s-gpt
+        observability-misc --> smp & kepler & inspektor-gadget
 
     end
 ```
@@ -970,15 +945,13 @@ flowchart TD
         %% -----------------------
         chaos-engineering{{Chaos Engineering}}
         style chaos-engineering fill:red
-        chaosblade(Chaosblade)
-        style chaosblade fill:red
-        litmus(Litmus)
-        style litmus fill:red
-        chaos-mesh(Chaos Mesh)
-        style chaos-mesh fill:red
-        kraken(Kraken)
-        style kraken fill:red
-        chaos-engineering --> chaosblade & litmus & chaos-mesh & kraken
+        chaos-engineering-chaosblade(Chaosblade)
+        style chaos-engineering-chaosblade fill:red
+        chaos-engineering-litmus(Litmus)
+        style chaos-engineering-litmus fill:red
+        chaos-engineering-chaos-mesh(Chaos Mesh)
+        style chaos-engineering-chaos-mesh fill:red
+        chaos-engineering --> chaos-engineering-chaosblade & chaos-engineering-litmus & chaos-engineering-chaos-mesh
 
         %% --------------------
         %% -- Events Storage --
@@ -1105,6 +1078,9 @@ flowchart TD
         %% -- Not maintained --
         %% inclavare-containers(Inclavare Containers)
         %% style inclavare-containers fill:red
+        %% -- Visibility into current and historical Kubernetes spend and resource allocation (drop 1) --
+        open-cost(OpenCost)
+        style open-cost fill:red
         %% -- Control Plane for Kubernetes APIs (drop 1) --
         kcp(kcp)
         style kcp fill:red
@@ -1135,12 +1111,9 @@ flowchart TD
         %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
         style xline fill:red
-        open-feature(OpenFeature)
-        style open-feature fill:red
-        meshery(Meshery)
-        style meshery fill:red
-        kanister(Kanister)
-        style kanister fill:red
+        trickster(Trickster)
+        style trickster fill:red
+        tbd --> konveyor & krator & kured & oras & artifact-hub & grpc & core-dns & tuf & parsec & open-cost & kcp & microcks & metallb & openelb & kube-vip & capsule & clusternet & eraser & merbridge & xline & trickster
     end
 ```
 
