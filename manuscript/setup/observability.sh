@@ -91,6 +91,18 @@ Press the enter key to continue."
         --set gke.enabled=true --set ipam.mode=kubernetes \
         --set ipv4NativeRoutingCIDR=$NATIVE_CIDR --wait
 
+    export SA_NAME=devops-toolkit
+
+    export SA="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+
+    gcloud iam service-accounts create $SA_NAME --project $PROJECT_ID
+
+    export ROLE=roles/admin
+
+    gcloud projects add-iam-policy-binding --role $ROLE $PROJECT_ID --member serviceAccount:$SA
+
+    gcloud iam service-accounts keys create gcp-creds.json --project $PROJECT_ID --iam-account $SA
+
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 
