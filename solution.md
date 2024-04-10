@@ -612,7 +612,7 @@ flowchart TD
         %% -- Logging --
         %% -------------
         logging{{Logging}}
-        style logging fill:red
+        style logging fill:blue
         fluentd(FluentD)
         style fluentd fill:red
         logging-operator(Logging Operator)
