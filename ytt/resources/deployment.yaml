@@ -110,7 +110,5 @@ spec:
         securityContext:
           privileged: true
           runAsUser: 0
+      shareProcessNamespace: true
       #@ end
-    #@ if data.values.otel.enabled:
-    shareProcessNamespace: true
-    #@ end

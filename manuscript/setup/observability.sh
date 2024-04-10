@@ -263,8 +263,10 @@ if [ $INGRESS_IP_LINES -gt 1 ]; then
     INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
 fi
 
-echo "export INGRESS_HOST=$INGRESS_IP.nip.io" >> .env
-yq --inplace ".ingress.host = \"$INGRESS_IP.nip.io\"" settings.yaml
+INGRESS_HOST=$INGRESS_IP.nip.io
+
+echo "export INGRESS_HOST=$INGRESS_HOST" >> .env
+yq --inplace ".ingress.host = \"$INGRESS_HOST\"" settings.yaml
 
 echo "export INGRESS_CLASSNAME=contour" >> .env
 yq --inplace ".ingress.classname = \"contour\"" settings.yaml
@@ -298,6 +300,15 @@ if [[ "$TEMPLATES" == "kustomize" ]]; then
     cd ../../..
 
     yq --inplace ".patchesStrategicMerge = []" kustomize/overlays/prod/kustomization.yaml
+
+    yq --inplace ".[0].value = \"cncf-demo.$INGRESS_HOST\"" \
+        kustomize/overlays/prod/ingress.yaml
+
+    yq --inplace ".[1].value = \"cncf-demo.$INGRESS_HOST\"" \
+        kustomize/overlays/prod/ingress.yaml
+
+    yq --inplace ".[2].value = \"$INGRESS_CLASSNAME\"" \
+        kustomize/overlays/prod/ingress.yaml
 
 elif [[ "$TEMPLATES" == "helm" ]]; then
 
@@ -419,15 +430,6 @@ if [[ "$TEMPLATES" == "kustomize" ]]; then
         ".resources += \"postgresql-crossplane-schema-$HYPERSCALER.yaml\"" \
         kustomize/overlays/prod/kustomization.yaml
 
-    yq --inplace ".[0].value = \"cncf-demo.$INGRESS_HOST\"" \
-        kustomize/overlays/prod/ingress.yaml
-
-    yq --inplace ".[1].value = \"cncf-demo.$INGRESS_HOST\"" \
-        kustomize/overlays/prod/ingress.yaml
-
-    yq --inplace ".[2].value = \"$INGRESS_CLASSNAME\"" \
-        kustomize/overlays/prod/ingress.yaml
-
 elif [[ "$TEMPLATES" == "helm" ]]; then
 
     if [[ "$HYPERSCALER" == "google" ]]; then
@@ -513,5 +515,3 @@ git add .
 git commit -m "CNCF Demo"
 
 git push
-
-echo "## Waiting for the DB to be ready" | gum format

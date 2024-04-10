@@ -1,15 +1,13 @@
-# Tracing with Jaeger and Carvel ytt
+# Tracing with Jaeger and Kustomize
 
 TODO: Intro
 
 ## Do
 
 ```bash
-yq --inplace ".otel.enabled = true" ytt/values-prod.yaml
-
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml | yq .
+yq --inplace \
+    ".patchesStrategicMerge += \"deployment-otel.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
 
 git add .
 

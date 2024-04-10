@@ -40,6 +40,9 @@ cp $GITOPS_APP/kubernetes-dashboard.yaml infra/.
 cp kubernetes-dashboard/ingress.yaml \
     infra/kubernetes-dashboard-ingress.yaml
 
+cp kubernetes-dashboard/sa.yaml \
+    infra/kubernetes-dashboard-sa.yaml
+
 git add . 
 
 git commit -m "Kubernetes Dashboard"
@@ -54,7 +57,7 @@ while [ $COUNTER -eq "0" ]; do
 done
 
 TOKEN=$(kubectl --namespace kubernetes-dashboard \
-    create token kubernetes-dashboard-admin)
+    create token kubernetes-dashboard)
 
 echo "
 ## Use the following token to login to Kubernetes Dashboard:

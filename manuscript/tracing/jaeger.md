@@ -19,12 +19,12 @@ chmod +x manuscript/tracing/jaeger.sh
 echo "http://jaeger.$INGRESS_HOST"
 ```
 
-* Open it in a browser. If it
+* Open it in a browser. If it outputs `no healthy upstream`, the Pods are not yet ready. If that's the case, wait for a few moments and refresh the browser.
 
 ## How Did You Define Your App?
 
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Kustomize** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Kustomize](kustomize.md)
 * [Carvel ytt](carvel.md)
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 

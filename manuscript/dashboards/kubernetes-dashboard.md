@@ -11,8 +11,6 @@ TODO: Intro
 chmod +x manuscript/dashboards/kubernetes-dashboard.sh
 
 ./manuscript/dashboards/kubernetes-dashboard.sh
-
-source .env
 ```
 
 ## Do

@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cncf-demo
+spec:
+  template:
+    spec:
+      containers:
+        - image: otel/autoinstrumentation-go
+          name: instrumentation
+          env:
+            - name: OTEL_GO_AUTO_TARGET_EXE
+              value: /usr/local/bin/cncf-demo
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://jaeger-collector.monitoring:4318
+            - name: OTEL_SERVICE_NAME
+              value: cncf-demo
+            - name: OTEL_PROPAGATORS
+              value: tracecontext,baggage
+          securityContext:
+            privileged: true
+            runAsUser: 0
+      shareProcessNamespace: true

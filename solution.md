@@ -600,7 +600,6 @@ flowchart TD
         jaeger(Jaeger)
         click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
         jaeger-kustomize(App as Kustomize)
-        style jaeger-kustomize fill:red
         jaeger-helm(App as Helm)
         style jaeger-helm fill:red
         jaeger-carvel(App as Carvel ytt)
