@@ -57,13 +57,14 @@ git commit -m "Prometheus"
 
 git push
 
+echo "## Waiting for Jaeger to be ready..." | gum format
+
 COUNTER=$(kubectl --namespace monitoring get pods \
     --selector app.kubernetes.io/name=jaeger --no-headers \
     | wc -l)
 
 while [ $COUNTER -eq "0" ]; do
 	sleep 10
-    echo "Waiting for Jaeger to be ready..."
 	COUNTER=$(kubectl --namespace monitoring get pods \
         --selector app.kubernetes.io/name=jaeger --no-headers \
         | wc -l)

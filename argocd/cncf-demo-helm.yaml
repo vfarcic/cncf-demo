@@ -45,6 +45,8 @@ spec:
           value: STORE_ID
         - name: fga.modeId
           value: MODEL_ID
+        - name: otel.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: production

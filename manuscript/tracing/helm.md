@@ -1,15 +1,18 @@
-# Tracing with Jaeger and Carvel ytt
+# Tracing with Jaeger and Helm
 
 TODO: Intro
 
 ## Do
 
 ```bash
-yq --inplace ".otel.enabled = true" ytt/values-prod.yaml
+# If Argo CD
+yq --inplace \
+    ".spec.source.helm.parameters[15].value = \"true\"" \
+    apps/cncf-demo.yaml
 
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml | yq .
+# If Flux
+yq --inplace ".spec.values.otel.enabled = true" \
+    apps/cncf-demo.yaml
 
 git add .
 

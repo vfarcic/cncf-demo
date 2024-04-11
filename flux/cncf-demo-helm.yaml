@@ -39,3 +39,5 @@ spec:
       enabled: false
       storeId: STORE_ID
       modeId: MODEL_ID
+    otel:
+      enabled: false

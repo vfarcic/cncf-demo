@@ -47,12 +47,16 @@ git commit -m "Skooner"
 
 git push
 
+echo "## Waiting for Headlamp to be ready..." | gum format
+
 COUNTER=$(kubectl --namespace headlamp get pods --no-headers | wc -l)
 
 while [ $COUNTER -eq "0" ]; do
 	sleep 10
 	COUNTER=$(kubectl --namespace headlamp get pods --no-headers | wc -l)
 done
+
+sleep 5
 
 TOKEN=$(kubectl --namespace headlamp create token headlamp-sa)
 

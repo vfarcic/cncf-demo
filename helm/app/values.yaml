@@ -37,3 +37,6 @@ fga:
   url: ""
   storeId: ""
   modeId: ""
+otel:
+  enabled: false
+  jaegerAddr: "http://jaeger-collector.monitoring:4318"

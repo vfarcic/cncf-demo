@@ -446,14 +446,16 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
         
     fi
 
-    yq --inplace ".spec.source.helm.parameters[11].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
+    yq --inplace \
+        ".spec.source.helm.parameters[11].value = \"true\"" \
+        $GITOPS_APP/cncf-demo-helm.yaml
 
     yq --inplace \
-        ".spec.source.helm.parameters[1] = \"cncf-demo.$INGRESS_HOST\"" \
+        ".spec.source.helm.parameters[1].value = \"cncf-demo.$INGRESS_HOST\"" \
         argocd/cncf-demo-helm.yaml
 
     yq --inplace \
-        ".spec.source.helm.parameters[2] = \"$INGRESS_CLASSNAME\"" \
+        ".spec.source.helm.parameters[2].value = \"$INGRESS_CLASSNAME\"" \
         argocd/cncf-demo-helm.yaml
 
 elif [[ "$TEMPLATES" == "cdk8s" ]]; then

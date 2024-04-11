@@ -560,7 +560,19 @@ flowchart TD
         style kubernetes-dashboard fill:red
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        dashboards --> skooner & kubernetes-dashboard & headlamp --> metrics
+        dashboards --> skooner & kubernetes-dashboard & headlamp --> exposition-formats
+
+        %% ------------------------
+        %% -- Exposition Formats --
+        %% ------------------------
+        exposition-formats{{Exposition Formats}}
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
+        style exposition-formats fill:blue
+        open-telemetry(OpenTelemetry)
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
+        open-metrics(OpenMetrics)
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
+        exposition-formats --> open-telemetry & open-metrics --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -573,23 +585,9 @@ flowchart TD
         metrics-thanos(Thanos)
         style metrics-thanos fill:red
         pixie(Pixie)
-        style pixie fill:red
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> instrumentation
-
-        %% ---------------------------------
-        %% -- Instrumentation & Exporters --
-        %% ---------------------------------
-        instrumentation{{Instrumentation}}
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/README.md"
-        style instrumentation fill:blue
-        open-telemetry(OpenTelemetry)
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/opentelemetry.md"
-        open-metrics(OpenMetrics)
-        style open-metrics fill:red
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/instrumentation/openmetrics.md"
-        instrumentation--> open-telemetry & open-metrics -->tracing
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> tracing
 
         %% -------------
         %% -- Tracing --
@@ -601,7 +599,6 @@ flowchart TD
         click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
         jaeger-kustomize(App as Kustomize)
         jaeger-helm(App as Helm)
-        style jaeger-helm fill:red
         jaeger-carvel(App as Carvel ytt)
         click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
@@ -733,10 +730,10 @@ flowchart TD
         %% -----------
         %% -- TODO: --
         %% -----------
-        open-cluster-management(Open Cluster Management)
-        style open-cluster-management fill:red
         clusterpedia(Clusterpedia)
         style clusterpedia fill:red
+        open-cluster-management(Open Cluster Management)
+        style open-cluster-management fill:red
 
     end
 ```

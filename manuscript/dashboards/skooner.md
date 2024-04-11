@@ -23,4 +23,4 @@ echo "http://dashboard.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-* [Metrics](../metrics/README.md)
+* [Exposition Formats](../exposition-formats/README.md)

@@ -1,4 +1,4 @@
-# Dashboard With Headlamp
+# Metrics With Prometheus
 
 TODO: Intro
 
@@ -6,8 +6,6 @@ TODO: Intro
 
 * Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
-
-TODO: Rewrite
 
 ```bash
 chmod +x manuscript/metrics/prometheus.sh
@@ -48,4 +46,4 @@ echo "http://cncf-demo.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-* [Instrumentation](../instrumentation/README.md)
+* [Tracing](../tracing/README.md)
