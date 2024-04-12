@@ -23,7 +23,13 @@ chmod +x manuscript/logging/logging-operator.sh
 
 ## Do
 
-FIXME:
+```sh
+echo "http://grafana.$INGRESS_HOST"
+```
+
+* Open it in a browser
+* Use `admin` as the user and `prom-operator` as the password
+* Explore dashboards
 
 ## Continue The Adventure
 

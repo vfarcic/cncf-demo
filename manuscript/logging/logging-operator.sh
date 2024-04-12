@@ -31,72 +31,100 @@ GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
 if [[ "$GITOPS_APP" == "argocd" ]]; then
 
-    yq --inplace ".spec.source.helm.parameters += {\"name\": \"grafana.datasources.datasources\.yaml.apiVersion\", \"value\": 1}" \
-        argocd/prometheus.yaml
+    yq --inplace \
+        ".grafana.ingress.ingressClassName = \"$INGRESS_CLASSNAME\"" \
+        prometheus/values.yaml
 
-    yq --inplace ".spec.source.helm.parameters += {\"name\": \"grafana.datasources.datasources\.yaml.datasources[0].name\", \"value\": \"loki\"}" \
-        argocd/prometheus.yaml
+    yq --inplace \
+        ".grafana.ingress.hosts[0] = \"grafana.$INGRESS_HOST\"" \
+        prometheus/values.yaml
 
-    yq --inplace ".spec.source.helm.parameters += {\"name\": \"grafana.datasources.datasources\.yaml.datasources[0].type\", \"value\": \"loki\"}" \
-        argocd/prometheus.yaml
+    yq --inplace \
+        ".grafana.datasources.\"datasources.yaml\".apiVersion = 1" \
+        prometheus/values.yaml
 
-    yq --inplace ".spec.source.helm.parameters += {\"name\": \"grafana.datasources.datasources\.yaml.datasources[0].url\", \"value\": \"http://loki:3100\"}" \
-        argocd/prometheus.yaml
+    yq --inplace \
+        ".grafana.datasources.\"datasources.yaml\".datasources[0].name = \"loki\"" \
+        prometheus/values.yaml
 
-    yq --inplace ".spec.source.helm.parameters += {\"name\": \"grafana.datasources.datasources\.yaml.datasources[0].access\", \"value\": \"proxy\"}" \
-        argocd/prometheus.yaml
+    yq --inplace \
+        ".grafana.datasources.\"datasources.yaml\".datasources[0].type = \"loki\"" \
+        prometheus/values.yaml
+
+    yq --inplace \
+        ".grafana.datasources.\"datasources.yaml\".datasources[0].url = \"http://loki:3100\"" \
+        prometheus/values.yaml
+
+    yq --inplace \
+        ".grafana.datasources.\"datasources.yaml\".datasources[0].access = \"proxy\"" \
+        prometheus/values.yaml
+
+    helm upgrade --install \
+        kube-prometheus-stack kube-prometheus-stack \
+        --repo https://prometheus-community.github.io/helm-charts \
+        --values prometheus/values.yaml \
+        --namespace monitoring --create-namespace --wait
+
+    cp argocd/loki.yaml infra/.
 
 fi
 
 if [[ "$GITOPS_APP" == "flux" ]]; then
 
-    yq --inplace ".spec.values.grafana.datasources.\"datasources.yaml\".apiVersion = 1" \
+    yq --inplace \
+        ".spec.values.grafana.ingress.ingressClassName = \"$INGRESS_CLASSNAME\"" \
         flux/prometheus-release.yaml
 
-    yq --inplace ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].name = \"loki\"" \
+    yq --inplace \
+        ".spec.values.grafana.ingress.hosts[0] = \"grafana.$INGRESS_HOST\"" \
         flux/prometheus-release.yaml
 
-    yq --inplace ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].type = \"loki\"" \
+    yq --inplace \
+        ".spec.values.prometheus.ingress.ingressClassName = \"$INGRESS_CLASSNAME\"" \
         flux/prometheus-release.yaml
 
-    yq --inplace ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].url = \"http://loki:3100\"" \
+    yq --inplace \
+        ".spec.values.prometheus.ingress.hosts[0] = \"prometheus.$INGRESS_HOST\"" \
         flux/prometheus-release.yaml
 
-    yq --inplace ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].access = \"proxy\"" \
+    yq --inplace \
+        ".spec.values.grafana.datasources.\"datasources.yaml\".apiVersion = 1" \
         flux/prometheus-release.yaml
+
+    yq --inplace \
+        ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].name = \"loki\"" \
+        flux/prometheus-release.yaml
+
+    yq --inplace \
+        ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].type = \"loki\"" \
+        flux/prometheus-release.yaml
+
+    yq --inplace \
+        ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].url = \"http://loki:3100\"" \
+        flux/prometheus-release.yaml
+
+    yq --inplace \
+        ".spec.values.grafana.datasources.\"datasources.yaml\".datasources[0].access = \"proxy\"" \
+        flux/prometheus-release.yaml
+
+    cp flux/prometheus*.yaml infra/.
+
+    cp flux/grafana-repo.yaml infra/.
+
+    cp flux/loki-release.yaml infra/.
 
 fi
 
-# FIXME: Uncomment and adapt
-# helm upgrade --install  logging-operator \
+# helm upgrade --install logging-operator \
 #     oci://ghcr.io/kube-logging/helm-charts/logging-operator \
 #     --set testReceiver.enabled=true \
 #     --namespace logging --create-namespace --wait
 
-# FIXME: Uncomment and adapt
-# helm upgrade --install loki loki \
-#     --repo https://grafana.github.io/helm-charts \
-#     --values loki-values.yaml \
-#     --namespace logging --create-namespace --wait
-
-# FIXME: Uncomment and adapt
 # echo "http://grafana.$INGRESS_HOST.nip.io"
-
-# FIXME: Uncomment and adapt
-# kubectl --namespace logging get secret grafana \
-#     --output jsonpath="{.data.admin-password}" | base64 -d
-
-# FIXME: Uncomment and adapt
-# FIXME: Use `admin` as the username and the output from the previous command as the password
-
-# FIXME: Uncomment and adapt
-# FIXME: Open `Explore` page from the left-hand menu
-
-cp $GITOPS_APP/prometheus*.yaml infra/.
 
 git add . 
 
-git commit -m "Prometheus"
+git commit -m "Logging Operator"
 
 git push
 

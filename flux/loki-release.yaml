@@ -1,0 +1,37 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: loki
+  namespace: flux-system
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: loki
+      version: "6.2.0"
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  values:
+    loki:
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: 'filesystem'
+      auth_enabled: false
+      useTestSchema: true
+    singleBinary:
+      replicas: 1
+    deploymentMode: SingleBinary
+    backend:
+      replicas: 0
+    read:
+      replicas: 0
+    write:
+      replicas: 0
+  releaseName: loki
+  targetNamespace: monitoring
+  install:
+    createNamespace: true
