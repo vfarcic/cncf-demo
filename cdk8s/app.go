@@ -20,6 +20,7 @@ type AppProps struct {
 	Tls        Tls        `yaml:"tls"`
 	Db         Db         `yaml:"db"`
 	SchemaHero SchemaHero `yaml:"schemahero"`
+	Otel       Otel       `yaml:"otel"`
 }
 
 type Image struct {
@@ -57,6 +58,11 @@ type DbCrossplane struct {
 
 type SchemaHero struct {
 	Enabled bool `yaml:"enabled"`
+}
+
+type Otel struct {
+	Enabled    bool   `yaml:"enabled"`
+	JaegerAddr string `yaml:"jaegerAddr"`
 }
 
 func NewApp(scope constructs.Construct, id *string, appProps *AppProps) constructs.Construct {
@@ -105,6 +111,7 @@ func NewApp(scope constructs.Construct, id *string, appProps *AppProps) construc
 }
 
 func getDeploymentProps(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeDeploymentProps {
+	containers := []*k8s.Container{}
 	container := k8s.Container{
 		Name:  jsii.String("main"),
 		Image: jsii.String(appProps.Image.Repository + ":" + appProps.Image.Tag),
@@ -133,6 +140,26 @@ func getDeploymentProps(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeD
 		},
 	}
 	setDbEnv(appProps, &container)
+	containers = append(containers, &container)
+	shareProcessNamespace := false
+	if appProps.Otel.Enabled {
+		shareProcessNamespace = true
+		otelContainer := k8s.Container{
+			Name:  jsii.String("instrumentation"),
+			Image: jsii.String("otel/autoinstrumentation-go"),
+			Env: &[]*k8s.EnvVar{
+				{Name: jsii.String("OTEL_GO_AUTO_TARGET_EXE"), Value: jsii.String("/usr/local/bin/cncf-demo")},
+				{Name: jsii.String("OTEL_EXPORTER_OTLP_ENDPOINT"), Value: jsii.String(appProps.Otel.JaegerAddr)},
+				{Name: jsii.String("OTEL_SERVICE_NAME"), Value: jsii.String(appProps.Name)},
+				{Name: jsii.String("OTEL_PROPAGATORS"), Value: jsii.String("tracecontext,baggage")},
+			},
+			SecurityContext: &k8s.SecurityContext{
+				Privileged: jsii.Bool(true),
+				RunAsUser:  jsii.Number(0),
+			},
+		}
+		containers = append(containers, &otelContainer)
+	}
 	return &k8s.KubeDeploymentProps{
 		Metadata: metadata,
 		Spec: &k8s.DeploymentSpec{
@@ -141,7 +168,8 @@ func getDeploymentProps(appProps *AppProps, metadata *k8s.ObjectMeta) *k8s.KubeD
 			Template: &k8s.PodTemplateSpec{
 				Metadata: metadata,
 				Spec: &k8s.PodSpec{
-					Containers: &[]*k8s.Container{&container},
+					Containers:            &containers,
+					ShareProcessNamespace: jsii.Bool(shareProcessNamespace),
 				},
 			},
 		},

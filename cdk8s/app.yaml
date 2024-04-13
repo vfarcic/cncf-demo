@@ -21,3 +21,6 @@ db:
   size: small
 schemahero:
   enabled: false
+otel:
+  enabled: false
+  jaegerAddr: "http://jaeger-collector.monitoring:4318"
