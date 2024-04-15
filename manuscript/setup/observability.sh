@@ -69,6 +69,12 @@ Please open https://console.cloud.google.com/marketplace/product/google/containe
     gum input --placeholder "
 Press the enter key to continue."
 
+    echo "
+Please open https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=${PROJECT_ID} in a browser and *ENABLE* the API."
+
+    gum input --placeholder "
+Press the enter key to continue."
+
     gcloud container clusters create dot --project $PROJECT_ID \
         --zone us-east1-b --machine-type e2-standard-4 \
         --enable-autoscaling --num-nodes 1 --min-nodes 1 \
@@ -352,7 +358,7 @@ fi
 ####################
 
 set +e
-helm repo add crossplane-stable 
+helm repo add crossplane-stable https://charts.crossplane.io/stable 
 set -e
 
 helm repo update

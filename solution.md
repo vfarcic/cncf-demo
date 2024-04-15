@@ -598,11 +598,13 @@ flowchart TD
         jaeger(Jaeger)
         click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
         jaeger-kustomize(App as Kustomize)
+        click jaeger-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/kustomize.md"
         jaeger-helm(App as Helm)
+        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/helm.md"
         jaeger-carvel(App as Carvel ytt)
-        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
+        click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
-        style jaeger-cdk8s fill:red
+        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
         tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------
@@ -614,7 +616,20 @@ flowchart TD
         style fluentd fill:red
         logging-operator(Logging Operator)
         style logging-operator fill:red
-        logging --> fluentd & logging-operator --> observability-network
+        logging-operator-kustomize(App as Kustomize)
+        click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/kustomize.md"
+        style logging-operator-kustomize fill:red
+        logging-operator-helm(App as Helm)
+        click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/helm.md"
+        style logging-operator-helm fill:red
+        logging-operator-carvel(App as Carvel ytt)
+        click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/carvel.md"
+        style logging-operator-carvel fill:red
+        logging-operator-cdk8s(App as cdk8s)
+        click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
+        style logging-operator-cdk8s fill:red
+        logging --> fluentd
+        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> observability-network
 
         %% ----------------
         %% -- Networking --
@@ -714,7 +729,18 @@ flowchart TD
         style deployment-mc-karmada fill:red
         open-kruise(OpenKruise)
         style open-kruise fill:red
-        deployment-mc --> deployment-mc-karmada & open-kruise --> lb-mc
+        ocm(Open Cluster Management)
+        style ocm fill:red
+        deployment-mc --> deployment-mc-karmada & open-kruise & ocm --> observability
+
+        %% -------------------
+        %% -- Observability --
+        %% -------------------
+        observability{{Observability}}
+        style observability fill:red
+        clusterpedia(Clusterpedia)
+        style clusterpedia fill:red
+        observability --> clusterpedia --> lb-mc
 
         %% ---------------------------------
         %% -- Load Balancing & Networking --
@@ -726,14 +752,6 @@ flowchart TD
         lb-mc-submariner(Submariner)
         style lb-mc-submariner fill:red
         lb-mc --> lb-mc-k8gb & lb-mc-submariner
-
-        %% -----------
-        %% -- TODO: --
-        %% -----------
-        clusterpedia(Clusterpedia)
-        style clusterpedia fill:red
-        open-cluster-management(Open Cluster Management)
-        style open-cluster-management fill:red
 
     end
 ```

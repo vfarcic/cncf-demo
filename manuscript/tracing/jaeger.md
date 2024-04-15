@@ -26,5 +26,5 @@ echo "http://jaeger.$INGRESS_HOST"
 * [Helm](helm.md)
 * [Kustomize](kustomize.md)
 * [Carvel ytt](carvel.md)
-* **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [cdk8s](cdk8s.md)
 

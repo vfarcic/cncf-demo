@@ -21,6 +21,7 @@ type AppProps struct {
 	Db         Db         `yaml:"db"`
 	SchemaHero SchemaHero `yaml:"schemahero"`
 	Otel       Otel       `yaml:"otel"`
+	Logging    Logging    `yaml:"logging"`
 }
 
 type Image struct {
@@ -63,6 +64,10 @@ type SchemaHero struct {
 type Otel struct {
 	Enabled    bool   `yaml:"enabled"`
 	JaegerAddr string `yaml:"jaegerAddr"`
+}
+
+type Logging struct {
+	Enabled bool `yaml:"enabled"`
 }
 
 func NewApp(scope constructs.Construct, id *string, appProps *AppProps) constructs.Construct {

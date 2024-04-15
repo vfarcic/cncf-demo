@@ -1,0 +1,30 @@
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Logging
+metadata:
+  name: fluentd
+spec:
+  controlNamespace: monitoring
+  fluentd:
+    disablePvc: true
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: FluentbitAgent
+metadata:
+  name: fluentbit
+spec: {}
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Output
+metadata:
+  name: http
+  namespace: monitoring
+spec:
+  http:
+    endpoint: http://logging-operator-test-receiver:8080
+    content_type: application/json
+    buffer:
+      type: memory
+      tags: time
+      timekey: 1s
+      timekey_wait: 0s

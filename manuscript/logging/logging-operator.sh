@@ -115,22 +115,16 @@ if [[ "$GITOPS_APP" == "flux" ]]; then
 
 fi
 
-# helm upgrade --install logging-operator \
-#     oci://ghcr.io/kube-logging/helm-charts/logging-operator \
-#     --set testReceiver.enabled=true \
-#     --namespace logging --create-namespace --wait
+helm upgrade --install logging-operator \
+    oci://ghcr.io/kube-logging/helm-charts/logging-operator \
+    --set testReceiver.enabled=true \
+    --namespace monitoring --create-namespace --wait
 
-# echo "http://grafana.$INGRESS_HOST.nip.io"
+cp logging-operator/common.yaml \
+    infra/logging-operator-common.yaml
 
 git add . 
 
 git commit -m "Logging Operator"
 
 git push
-
-COUNTER=$(kubectl --namespace monitoring get pods --no-headers | wc -l)
-
-while [ $COUNTER -eq "0" ]; do
-	sleep 10
-	COUNTER=$(kubectl --namespace monitoring get pods --no-headers | wc -l)
-done
