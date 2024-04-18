@@ -8,12 +8,6 @@ TODO: Intro
 * Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
 
 ```bash
-# Skip this command if you already installed Prometheus with Grafana
-chmod +x manuscript/metrics/prometheus.sh
-
-# Skip this command if you already installed Prometheus with Grafana
-./manuscript/metrics/prometheus.sh
-
 chmod +x manuscript/logging/logging-operator.sh
 
 ./manuscript/logging/logging-operator.sh
@@ -27,17 +21,21 @@ kubectl get loggings,fluentbitagents,outputs --all-namespaces
 
 FIXME: Rewrite
 
-
 ```sh
-kubectl --namespace a-team apply --filename flow.yaml
+kubectl --namespace production apply --filename tmp/flow.yaml
 
-kubectl --namespace a-team get logging-all
+kubectl --namespace production get logging-all
 
-curl "http://silly-demo.$INGRESS_HOST.nip.io/videos"
+curl "http://cncf-demo.$INGRESS_HOST"
 
-kubectl --namespace logging logs \
+kubectl --namespace monitoring logs \
     svc/logging-operator-test-receiver
+
+echo "http://grafana.$INGRESS_HOST"
 ```
+
+* Open it in a browser
+* Use `admin` as the user and `prom-operator` as the password
 
 FIXME: Show in Grafana
 

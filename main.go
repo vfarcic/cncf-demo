@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 
@@ -19,6 +20,9 @@ var serviceName string
 
 func main() {
 	log.SetOutput(os.Stderr)
+	if os.Getenv("DEBUG") == "true" {
+		slog.SetLogLoggerLevel(slog.LevelDebug)
+	}
 	serviceName = "cncf-demo"
 	if os.Getenv("SERVICE_NAME") != "" {
 		serviceName = os.Getenv("SERVICE_NAME")

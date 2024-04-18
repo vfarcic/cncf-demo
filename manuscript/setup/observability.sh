@@ -81,6 +81,8 @@ Press the enter key to continue."
         --max-nodes 3 --enable-network-policy \
         --node-taints node.cilium.io/agent-not-ready=true:NoExecute \
         --no-enable-autoupgrade
+    
+    sleep 60
 
     gcloud container clusters get-credentials dot \
         --project $PROJECT_ID --zone us-east1-b

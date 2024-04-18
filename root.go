@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log/slog"
 	"net/http"
 	"os"
 
@@ -13,6 +14,7 @@ func rootHandler(ctx *gin.Context) {
 		ctx.String(http.StatusBadRequest, "Something terrible happened")
 		return
 	}
+	slog.Debug("Handling request", "URI", ctx.Request.RequestURI)
 	version := os.Getenv("VERSION")
 	output := os.Getenv("MESSAGE")
 	if len(output) == 0 {

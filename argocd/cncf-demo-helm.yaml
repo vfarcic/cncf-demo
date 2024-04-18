@@ -47,6 +47,8 @@ spec:
           value: MODEL_ID
         - name: otel.enabled
           value: "false"
+        - name: debug.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: production
