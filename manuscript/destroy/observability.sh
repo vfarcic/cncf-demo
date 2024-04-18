@@ -14,12 +14,6 @@ if [[ "$HYPERSCALER" == "google" ]]; then
 
     gcloud projects delete ${PROJECT_ID} --quiet
 
-	set +e
-
-	gcloud projects delete cncf-demo-db --quiet
-
-	set -e
-
 elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	set +e
