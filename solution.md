@@ -629,37 +629,7 @@ flowchart TD
         click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
         style logging-operator-cdk8s fill:red
         logging --> fluentd
-        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> observability-network
-
-        %% ----------------
-        %% -- Networking --
-        %% ----------------
-        observability-network{{Networking}}
-        style observability-network fill:red
-        observability-network-istio(Istio)
-        style observability-network-istio fill:red
-        observability-network-linkerd("LinkerD (SMI)")
-        style observability-network-linkerd fill:red
-        observability-network-cilium(Cilium)
-        click observability-network-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/cilium.md"
-        style observability-network-cilium fill:red
-        observability-network-kuma(Kuma)
-        click observability-network-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/mtls/kuma.md"
-        style observability-network-kuma fill:red
-        observability-network-network-service-mesh(Network Service Mesh)
-        style observability-network-network-service-mesh fill:red
-        observability-network --> observability-network-istio & observability-network-linkerd & observability-network-cilium & observability-network-kuma & observability-network-network-service-mesh --> observability-scanning
-
-        %% --------------
-        %% -- Security --
-        %% --------------
-        observability-scanning{{Security}}
-        style observability-scanning fill:red
-        observability-kubescape(Kubescape)
-        style observability-kubescape fill:red
-        fonio(Fonio)
-        style fonio fill:red
-        observability-scanning --> observability-kubescape & fonio --> progressive-delivery
+        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -697,7 +667,9 @@ flowchart TD
         style inspektor-gadget fill:red
         k8s-gpt(K8sGPT)
         style k8s-gpt fill:red
-        observability-misc --> smp & kepler & inspektor-gadget & k8s-gpt
+        fonio(Fonio)
+        style fonio fill:red
+        observability-misc --> smp & kepler & inspektor-gadget & k8s-gpt & fonio
 
     end
 ```
