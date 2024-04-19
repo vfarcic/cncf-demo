@@ -124,7 +124,6 @@ fi
 
 helm upgrade --install logging-operator \
     oci://ghcr.io/kube-logging/helm-charts/logging-operator \
-    --set testReceiver.enabled=true \
     --namespace monitoring --create-namespace --wait
 
 cp logging-operator/common.yaml \

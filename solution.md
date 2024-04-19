@@ -613,9 +613,7 @@ flowchart TD
         logging{{Logging}}
         style logging fill:blue
         fluentd(FluentD)
-        style fluentd fill:red
         logging-operator(Logging Operator)
-        style logging-operator fill:red
         logging-operator-kustomize(App as Kustomize)
         click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/kustomize.md"
         style logging-operator-kustomize fill:red
@@ -624,7 +622,6 @@ flowchart TD
         style logging-operator-helm fill:red
         logging-operator-carvel(App as Carvel ytt)
         click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/carvel.md"
-        style logging-operator-carvel fill:red
         logging-operator-cdk8s(App as cdk8s)
         click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
         style logging-operator-cdk8s fill:red

@@ -1,0 +1,29 @@
+#@ load("@ytt:data", "data")
+
+#@ if data.values.logging.enabled:
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Output
+metadata:
+  name: #@ data.values.name
+spec:
+  loki:
+    url: http://loki:3100
+    configure_kubernetes_labels: true
+    buffer:
+      timekey: 1m
+      timekey_wait: 30s
+      timekey_use_utc: true
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: #@ data.values.name
+spec:
+  match:
+    - select:
+        labels:
+          app.kubernetes.io/name: #@ data.values.name
+  localOutputRefs:
+    - #@ data.values.name
+#@ end

@@ -1,4 +1,4 @@
-# Logging with Logging Operator (and Fluentd)
+# Logging with Logging Operator and Fluentd
 
 TODO: Intro
 
@@ -17,56 +17,31 @@ chmod +x manuscript/logging/logging-operator.sh
 
 ```sh
 kubectl get loggings,fluentbitagents,outputs --all-namespaces
-```
 
-FIXME: Rewrite
+cat logging-operator/event-tailer.yaml
 
-```sh
-kubectl --namespace production apply --filename tmp/flow.yaml
+cp logging-operator/event-tailer.yaml infra/.
 
-kubectl --namespace production get logging-all
+git add .
 
-curl "http://cncf-demo.$INGRESS_HOST"
+git commit -m "EventTailer"
+
+git push
 
 kubectl --namespace monitoring logs \
-    svc/logging-operator-test-receiver
-
-echo "http://grafana.$INGRESS_HOST"
-```
-
-* Open it in a browser
-* Use `admin` as the user and `prom-operator` as the password
-
-FIXME: Show in Grafana
-
-```sh
-cat event-tailer.yaml
-
-kubectl --namespace logging apply --filename event-tailer.yaml
-
-kubectl --namespace logging logs \
     --selector app.kubernetes.io/instance=default-event-tailer \
     | jq .
 
-kubectl --namespace a-team delete --filename app/
-```
-
-```sh
 echo "http://grafana.$INGRESS_HOST"
 ```
 
 * Open it in a browser
 * Use `admin` as the user and `prom-operator` as the password
+* Open `Explore`
 
 ## How Did You Define Your App?
 
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Kustomize** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Carvel ytt** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Carvel ytt](carvel.md)
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-
-FIXME: Remove
-
-## Continue The Adventure
-
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
