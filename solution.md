@@ -635,9 +635,22 @@ flowchart TD
         style progressive-delivery fill:red
         argo-rollouts(Argo Rollouts)
         style argo-rollouts fill:red
+        argo-rollouts-kustomize(App as Kustomize)
+        click argo-rollouts-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
+        style argo-rollouts-kustomize fill:red
+        argo-rollouts-helm(App as Helm)
+        click argo-rollouts-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
+        style argo-rollouts-helm fill:red
+        argo-rollouts-carvel(App as Carvel ytt)
+        click argo-rollouts-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
+        style argo-rollouts-carvel fill:red
+        argo-rollouts-cdk8s(App as cdk8s)
+        click argo-rollouts-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
+        style argo-rollouts-cdk8s fill:red
         flagger(Flagger)
         style flagger fill:red
-        progressive-delivery --> argo-rollouts & flagger --> cost
+        progressive-delivery --> argo-rollouts --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
+        progressive-delivery --> flagger --> cost
 
         %% ----------
         %% -- Cost --
@@ -683,7 +696,7 @@ flowchart TD
         style scaling fill:red
         hpa("Horizontal Pod Autoscaler (HPA)")
         style hpa fill:red
-        hpa("Vertical Pod Autoscaler (VPA)")
+        vpa("Vertical Pod Autoscaler (VPA)")
         style vpa fill:red
         keda(KEDA)
         style keda fill:red

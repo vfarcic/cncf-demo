@@ -14,9 +14,11 @@ spec:
     targetRevision: 7.1.3
     helm:
       releaseName: kubernetes-dashboard
-      parameters:
-        - name: kong.proxy.http.enabled
-          value: "true"
+      valuesObject:
+        kong:
+          proxy:
+            http:
+              enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kubernetes-dashboard
