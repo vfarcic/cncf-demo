@@ -43,3 +43,17 @@ while [ $COUNTER -eq "0" ]; do
 	sleep 10
 	COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 done
+
+ISTIO_IP=$(kubectl --namespace istio-system \
+    get service istio-ingress \
+    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+while [ -z "$ISTIO_IP" ]; do
+    sleep 10
+    ISTIO_IP=$(kubectl --namespace istio-system \
+    get service istio-ingress \
+    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+done
+echo "export ISTIO_IP=$ISTIO_IP" >> .env
+
+ISTIO_HOST=$ISTIO_IP.nip.io
+echo "export ISTIO_HOST=$ISTIO_HOST" >> .env

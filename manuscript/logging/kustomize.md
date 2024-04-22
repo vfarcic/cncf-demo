@@ -1,15 +1,14 @@
-# Logging with Logging Operator, Fluentd, and Carvel YTT
+# Logging with Logging Operator, Fluentd, and Kustomize
 
 TODO: Intro
 
 ## Do
 
 ```bash
-yq --inplace ".logging.enabled = true" ytt/values-prod.yaml
+cat kustomize/overlays/prod/logging.yaml
 
-ytt --file ytt/schema.yaml --file ytt/resources \
-    --data-values-file ytt/values-prod.yaml \
-    | tee yaml/prod/app.yaml | yq .
+yq --inplace ".resources += \"logging.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
 
 git add .
 
@@ -31,6 +30,8 @@ echo "http://grafana.$INGRESS_HOST"
 * Open it in a browser
 * Use `admin` as the user and `prom-operator` as the password
 * Open `Explore`
+* Filter by `app_kubernetes_io_name` set to `cncf-demo`
+* Search for `something`
 
 ## Continue The Adventure
 

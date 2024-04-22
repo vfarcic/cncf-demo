@@ -50,3 +50,29 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - Replace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-ingress
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: gateway
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.19.0
+    helm:
+      releaseName: istio-ingress
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true

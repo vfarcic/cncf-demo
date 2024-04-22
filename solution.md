@@ -566,12 +566,12 @@ flowchart TD
         %% -- Exposition Formats --
         %% ------------------------
         exposition-formats{{Exposition Formats}}
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
+        click exposition-formats "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
         style exposition-formats fill:blue
         open-telemetry(OpenTelemetry)
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
+        click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
         open-metrics(OpenMetrics)
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
+        click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
         exposition-formats --> open-telemetry & open-metrics --> metrics
 
         %% -------------
@@ -585,6 +585,7 @@ flowchart TD
         metrics-thanos(Thanos)
         style metrics-thanos fill:red
         pixie(Pixie)
+        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
         cortex(Cortex)
         style cortex fill:red
         metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> tracing
@@ -593,18 +594,18 @@ flowchart TD
         %% -- Tracing --
         %% -------------
         tracing{{Tracing}}
-        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/README.md"
+        click tracing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/README.md"
         style tracing fill:blue
         jaeger(Jaeger)
         click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
         jaeger-kustomize(App as Kustomize)
         click jaeger-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/kustomize.md"
         jaeger-helm(App as Helm)
-        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/helm.md"
+        click jaeger-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/helm.md"
         jaeger-carvel(App as Carvel ytt)
-        click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
+        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
-        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
+        click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
         tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------
@@ -612,11 +613,13 @@ flowchart TD
         %% -------------
         logging{{Logging}}
         style logging fill:blue
+        click logging "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/README.md"
         fluentd(FluentD)
+        click fluentd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/fluentd.md"
         logging-operator(Logging Operator)
+        click logging-operator "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/logging-operator.md"
         logging-operator-kustomize(App as Kustomize)
         click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/kustomize.md"
-        style logging-operator-kustomize fill:red
         logging-operator-helm(App as Helm)
         click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/helm.md"
         style logging-operator-helm fill:red
@@ -632,9 +635,32 @@ flowchart TD
         %% -- Progressive Delivery --
         %% --------------------------
         progressive-delivery{{Progressive Delivery}}
-        style progressive-delivery fill:red
+        style progressive-delivery fill:blue
+        click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
         argo-rollouts(Argo Rollouts)
-        style argo-rollouts fill:red
+        click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
+        argo-rollouts-istio(Istio)
+        click argo-rollouts-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        argo-rollouts-kuma(Kuma)
+        click argo-rollouts-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
+        style argo-rollouts-kuma fill:red
+        argo-rollouts-nsm(Network Service Mesh)
+        click argo-rollouts-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
+        style argo-rollouts-nsm fill:red
+        argo-rollouts-cilium(Cilium)
+        click argo-rollouts-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cilium.md"
+        argo-rollouts-linkerd(Linkerd)
+        click argo-rollouts-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
+        style argo-rollouts-linkerd fill:red
+        argo-rollouts-nginx(NGINX)
+        click argo-rollouts-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
+        style argo-rollouts-nginx fill:red
+        argo-rollouts-contour(Contour)
+        click argo-rollouts-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
+        style argo-rollouts-contour fill:red
+        argo-rollouts-emissary(Emissary-ingress)
+        click argo-rollouts-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
+        style argo-rollouts-emissary fill:red
         argo-rollouts-kustomize(App as Kustomize)
         click argo-rollouts-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
         style argo-rollouts-kustomize fill:red
@@ -649,7 +675,10 @@ flowchart TD
         style argo-rollouts-cdk8s fill:red
         flagger(Flagger)
         style flagger fill:red
-        progressive-delivery --> argo-rollouts --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
+        progressive-delivery --> argo-rollouts
+        argo-rollouts --> argo-rollouts-istio & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-cilium & argo-rollouts-linkerd
+        argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
+        argo-rollouts-cilium --> argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary
         progressive-delivery --> flagger --> cost
 
         %% ----------

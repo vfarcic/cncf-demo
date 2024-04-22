@@ -38,10 +38,11 @@ echo "http://grafana.$INGRESS_HOST"
 * Open it in a browser
 * Use `admin` as the user and `prom-operator` as the password
 * Open `Explore`
+* Filter by `app_kubernetes_io_instance` set to `default-event-tailer`
 
 ## How Did You Define Your App?
 
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Kustomize** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Kustomize](kustomize.md)
 * [Carvel ytt](carvel.md)
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

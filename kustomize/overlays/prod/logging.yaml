@@ -1,0 +1,25 @@
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Output
+metadata:
+  name: cncf-demo
+spec:
+  loki:
+    url: http://loki:3100
+    configure_kubernetes_labels: true
+    buffer:
+      timekey: 1m
+      timekey_wait: 30s
+      timekey_use_utc: true
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: cncf-demo
+spec:
+  match:
+    - select:
+        labels:
+          app.kubernetes.io/name: cncf-demo
+  localOutputRefs:
+    - cncf-demo

@@ -51,7 +51,7 @@ Argo CD has trouble working with the Prometheus Stack Helm chart so we'll instal
     helm upgrade --install \
         kube-prometheus-stack kube-prometheus-stack \
         --repo https://prometheus-community.github.io/helm-charts \
-        --values prometheus/values.yaml \
+        --values prometheus/values.yaml --reuse-values \
         --namespace monitoring --create-namespace --wait
 
 fi

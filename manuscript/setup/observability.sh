@@ -272,10 +272,10 @@ if [ $INGRESS_IP_LINES -gt 1 ]; then
 fi
 
 INGRESS_HOST=$INGRESS_IP.nip.io
-
 echo "export INGRESS_HOST=$INGRESS_HOST" >> .env
 yq --inplace ".ingress.host = \"$INGRESS_HOST\"" settings.yaml
 
+INGRESS_CLASSNAME=contour
 echo "export INGRESS_CLASSNAME=contour" >> .env
 yq --inplace ".ingress.classname = \"contour\"" settings.yaml
 
