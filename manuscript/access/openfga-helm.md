@@ -6,44 +6,27 @@ TODO: Intro
 
 ```bash
 # Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[1] = \"cncf-demo.$INGRESS_HOST\"" \
-    argocd/cncf-demo-helm.yaml
-
-# Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[2] = \"$INGRESS_CLASSNAME\"" \
-    argocd/cncf-demo-helm.yaml
-
-# Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[12] = \"true\"" \
-    argocd/cncf-demo-helm.yaml
-
-# Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[13] = \"$FGA_STORE_ID\"" \
-    argocd/cncf-demo-helm.yaml
-
-# Execute only if using Argo CD
-yq --inplace ".spec.source.helm.parameters[14] = \"$FGA_MODEL_ID\"" \
-    argocd/cncf-demo-helm.yaml
+export VALUES_PATH=.spec.source.helm.valuesObject
 
 # Execute only if using Flux
-yq --inplace ".spec.values.ingress.host = \"cncf-demo.$INGRESS_HOST\"" \
-    argocd/cncf-demo-helm.yaml
+export VALUES_PATH=.spec.values
 
-# Execute only if using Flux
-yq --inplace ".spec.values.ingress.className = \"$INGRESS_CLASSNAME\"" \
-    argocd/cncf-demo-helm.yaml
+yq --inplace \
+    "$VALUES_PATH.ingress.host = \"cncf-demo.$INGRESS_HOST\"" \
+    $GITOPS_APP/cncf-demo-helm.yaml
 
-# Execute only if using Flux
-yq --inplace ".spec.values.fga.enabled = true" \
-    argocd/cncf-demo-helm.yaml
+yq --inplace \
+    "$VALUES_PATH.ingress.className = \"$INGRESS_CLASSNAME\"" \
+    $GITOPS_APP/cncf-demo-helm.yaml
 
-# Execute only if using Flux
-yq --inplace ".spec.values.fga.storeId = \"$FGA_STORE_ID\"" \
-    argocd/cncf-demo-helm.yaml
+yq --inplace "$VALUES_PATH.fga.enabled = true" \
+    $GITOPS_APP/cncf-demo-helm.yaml
 
-# Execute only if using Flux
-yq --inplace ".spec.values.fga.modeId = \"$FGA_MODEL_ID\"" \
-    argocd/cncf-demo-helm.yaml
+yq --inplace "$VALUES_PATH.fga.storeId = \"$FGA_STORE_ID\"" \
+    $GITOPS_APP/cncf-demo-helm.yaml
+
+yq --inplace "$VALUES_PATH.fga.modeId = \"$FGA_MODEL_ID\"" \
+    $GITOPS_APP/cncf-demo-helm.yaml
 
 cp $GITOPS_APP/cncf-demo-helm.yaml apps/cncf-demo.yaml
 

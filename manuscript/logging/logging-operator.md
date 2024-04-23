@@ -31,13 +31,18 @@ git push
 kubectl --namespace monitoring logs \
     --selector app.kubernetes.io/instance=default-event-tailer \
     | jq .
+```
 
+* If the output says `No resources found in monitoring namespace`, the `EventTailer` has not yet been deployed. Wait for a few moments and try again.
+
+```sh
 echo "http://grafana.$INGRESS_HOST"
 ```
 
 * Open it in a browser
 * Use `admin` as the user and `prom-operator` as the password
 * Open `Explore`
+* Choose `Loki` as the data source.
 * Filter by `app_kubernetes_io_instance` set to `default-event-tailer`
 
 ## How Did You Define Your App?

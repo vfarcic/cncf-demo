@@ -628,7 +628,7 @@ flowchart TD
         logging-operator-cdk8s(App as cdk8s)
         click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
         style logging-operator-cdk8s fill:red
-        logging --> fluentd
+        logging --> fluentd --> logging-operator
         logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
 
         %% --------------------------
@@ -678,7 +678,7 @@ flowchart TD
         progressive-delivery --> argo-rollouts
         argo-rollouts --> argo-rollouts-istio & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-cilium & argo-rollouts-linkerd
         argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
-        argo-rollouts-cilium --> argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary
+        argo-rollouts-cilium --> argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary & argo-rollouts-istio
         progressive-delivery --> flagger --> cost
 
         %% ----------

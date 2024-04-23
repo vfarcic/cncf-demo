@@ -322,11 +322,17 @@ elif [[ "$TEMPLATES" == "helm" ]]; then
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-helm.yaml
 
-    yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" helm/app/values.yaml
+    yq --inplace \
+        ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" \
+        helm/app/values.yaml
 
-    yq --inplace ".spec.source.helm.parameters[0].value = \"v0.0.1\"" $GITOPS_APP/cncf-demo-helm.yaml
+    yq --inplace \
+        ".spec.source.helm.valuesObject.image.tag = \"v0.0.1\"" \
+        argocd/cncf-demo-helm.yaml
 
-    yq --inplace ".spec.source.helm.parameters[3].value = \"false\"" $GITOPS_APP/cncf-demo-helm.yaml
+    yq --inplace \
+        ".spec.source.helm.valuesObject.tls.enabled = false" \
+        argocd/cncf-demo-helm.yaml
 
 elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
@@ -445,30 +451,20 @@ if [[ "$TEMPLATES" == "kustomize" ]]; then
 
 elif [[ "$TEMPLATES" == "helm" ]]; then
 
-    if [[ "$HYPERSCALER" == "google" ]]; then
-
-        yq --inplace ".spec.source.helm.parameters[4].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-    elif [[ "$HYPERSCALER" == "aws" ]]; then
-
-        yq --inplace ".spec.source.helm.parameters[5].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-
-    elif [[ "$HYPERSCALER" == "azure" ]]; then
-
-        yq --inplace ".spec.source.helm.parameters[6].value = \"true\"" $GITOPS_APP/cncf-demo-helm.yaml
-        
-    fi
-
     yq --inplace \
-        ".spec.source.helm.parameters[11].value = \"true\"" \
-        $GITOPS_APP/cncf-demo-helm.yaml
-
-    yq --inplace \
-        ".spec.source.helm.parameters[1].value = \"cncf-demo.$INGRESS_HOST\"" \
+        ".spec.source.helm.valuesObject.db.enabled.crossplane.$HYPERSCALER = true" \
         argocd/cncf-demo-helm.yaml
 
     yq --inplace \
-        ".spec.source.helm.parameters[2].value = \"$INGRESS_CLASSNAME\"" \
+        ".spec.source.helm.valuesObject.db.insecure = true" \
+        argocd/cncf-demo-helm.yaml
+
+    yq --inplace \
+        ".spec.source.helm.valuesObject.ingress.host = \"cncf-demo.$INGRESS_HOST\"" \
+        argocd/cncf-demo-helm.yaml
+
+    yq --inplace \
+        ".spec.source.helm.valuesObject.ingress.className = \"$INGRESS_CLASSNAME\"" \
         argocd/cncf-demo-helm.yaml
 
 elif [[ "$TEMPLATES" == "cdk8s" ]]; then

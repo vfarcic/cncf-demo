@@ -40,3 +40,5 @@ fga:
 otel:
   enabled: false
   jaegerAddr: "http://jaeger-collector.monitoring:4318"
+logging:
+  enabled: false

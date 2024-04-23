@@ -14,6 +14,35 @@ spec:
     path: helm/app
     helm:
       releaseName: cncf-demo
+      valuesObject:
+        image:
+          tag: v0.0.1
+        ingress:
+          host: cncf-demo.sillydemo.com
+          className: nginx
+        tls:
+          enabled: false
+        db:
+          enabled:
+            crossplane:
+              google: false
+              aws: false
+              azure: false
+          id: cncf-demo-db
+          size: small
+          insecure: true
+        schemahero:
+          enabled: true
+        replicas: 1
+        fga:
+          enabled: false
+          storeId: STORE_ID
+          modeId: MODEL_ID
+        otel:
+          enabled: false
+        debug:
+          enabled: false
+
       parameters:
         - name: image.tag
           value: v0.0.1
