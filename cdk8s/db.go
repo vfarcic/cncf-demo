@@ -50,7 +50,7 @@ func getPostgresqlCrossplane(appProps *AppProps, metadata *cdk8s.ApiObjectMetada
 		provider = "azure"
 	}
 	if appProps.Db.Enabled.Crossplane.AWS {
-		version = "15.3"
+		version = "16.2"
 	}
 	return &dot.SqlClaimProps{
 		Metadata: metadata,

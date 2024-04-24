@@ -47,7 +47,7 @@ echo "http://grafana.$INGRESS_HOST"
 
 ## How Did You Define Your App?
 
-* **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Helm](helm.md)
 * [Kustomize](kustomize.md)
 * [Carvel ytt](carvel.md)
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

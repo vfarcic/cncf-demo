@@ -7,7 +7,7 @@ TODO: Intro
 ```bash
 # If Argo CD
 yq --inplace \
-    ".spec.source.helm.parameters[15].value = \"true\"" \
+    ".spec.source.helm.valuesObject.otel.enabled = true" \
     apps/cncf-demo.yaml
 
 # If Flux

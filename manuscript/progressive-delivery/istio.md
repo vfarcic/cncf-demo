@@ -29,15 +29,17 @@ chmod +x manuscript/mtls/istio.sh
 source .env
 ```
 
+## Do
+
+```sh
+cat argo-rollouts/istio.yaml
+
+cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
+```
+
 ## How Did You Define Your App?
 
 * **Kustomize** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Carvel ytt** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-
-<!--
-## Continue The Adventure
-
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
--->

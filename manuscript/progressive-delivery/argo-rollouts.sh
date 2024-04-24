@@ -11,7 +11,6 @@ echo "
 |Name            |Required             |More info                                          |
 |----------------|---------------------|---------------------------------------------------|
 |git             |Yes                  |'https://git-scm.com/book/en/v2/Getting-Started-Installing-Git'|
-|kubectl         |Yes                  |'https://kubernetes.io/docs/tasks/tools/#kubectl'  |
 " | gum format
 
 gum confirm "

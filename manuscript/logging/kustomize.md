@@ -12,7 +12,7 @@ yq --inplace ".resources += \"logging.yaml\"" \
 
 git add .
 
-git commit -m "Loggign"
+git commit -m "Logging"
 
 git push
 
@@ -30,6 +30,7 @@ echo "http://grafana.$INGRESS_HOST"
 * Open it in a browser
 * Use `admin` as the user and `prom-operator` as the password
 * Open `Explore`
+* Choose `Loki` as the data source
 * Filter by `app_kubernetes_io_name` set to `cncf-demo`
 * Search for `something`
 

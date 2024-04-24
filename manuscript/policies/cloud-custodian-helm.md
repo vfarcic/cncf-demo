@@ -8,7 +8,7 @@ TODO: Intro
 cat apps/cncf-demo.yaml
 
 # If Argo CD
-yq --inplace ".spec.source.helm.parameters[9].value = \"3\"" \
+yq --inplace ".spec.source.helm.valuesObject.replicas = 3" \
     apps/cncf-demo.yaml
 
 # If Flux
@@ -16,7 +16,7 @@ yq --inplace ".spec.values.replicas = 3" apps/cncf-demo.yaml
 
 # If Argo CD
 yq --inplace \
-    ".spec.source.helm.parameters[10].value = \"medium\"" \
+    ".spec.source.helm.valuesObject.db.size = \"medium\"" \
     apps/cncf-demo.yaml
 
 # If Flux

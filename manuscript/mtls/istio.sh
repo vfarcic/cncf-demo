@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-gum style \
-	--foreground 212 --border-foreground 212 --border double \
-	--margin "1 2" --padding "2 4" \
-	'Setup for the Mutual TLS (mTLS) And Network Policies With Istio chapter.'
-
 gum confirm '
 Are you ready to start?
 Feel free to say "No" and inspect the script if you prefer setting up resources manually.
@@ -17,6 +12,7 @@ echo "
 |----------------|---------------------|---------------------------------------------------|
 |git             |Yes                  |'https://git-scm.com/book/en/v2/Getting-Started-Installing-Git'|
 |kubectl         |Yes                  |'https://kubernetes.io/docs/tasks/tools/#kubectl'  |
+|yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
 " | gum format
 
 gum confirm "
@@ -26,6 +22,8 @@ Do you have those tools installed?
 #########
 # Setup #
 #########
+
+HYPERSCALER=$(yq ".hyperscaler" settings.yaml)
 
 GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
@@ -44,16 +42,72 @@ while [ $COUNTER -eq "0" ]; do
 	COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 done
 
-ISTIO_IP=$(kubectl --namespace istio-system \
-    get service istio-ingress \
-    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-while [ -z "$ISTIO_IP" ]; do
-    sleep 10
+if [[ "$HYPERSCALER" == "aws" ]]; then
+
+    ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
+        get service gateway \
+        --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+    while [ -z "$ISTIO_HOSTNAME" ]; do
+        sleep 10
+        echo "Waiting for Gateway IP..."
+        ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
+            get service gateway \
+            --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+    done
+
+
+
+
+    ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
+        get service gateway \
+        --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+
+    ISTIO_IP=$(dig +short $ISTIO_HOSTNAME) 
+
+    while [ -z "$ISTIO_IP" ]; do
+        sleep 10
+        echo "Waiting for Gateway IP..."
+        ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
+            get service gateway \
+            --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+        ISTIO_IP=$(dig +short $ISTIO_HOSTNAME)  
+    done
+
+else
+
     ISTIO_IP=$(kubectl --namespace istio-system \
-    get service istio-ingress \
-    --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-done
+        get service gateway \
+        --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+    while [ -z "$ISTIO_IP" ]; do
+        sleep 10
+        echo "Waiting for Gateway IP..."
+        ISTIO_IP=$(kubectl --namespace istio-system \
+            get service gateway \
+            --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+    done
+
+fi
+
+ISTIO_IP=$(echo $ISTIO_IP | awk '{print $1;}')
+
+ISTIO_IP_LINES=$(echo $ISTIO_IP | wc -l | tr -d ' ')
+
+if [ $ISTIO_IP_LINES -gt 1 ]; then
+    ISTIO_IP=$(echo $ISTIO_IP | head -n 1)
+fi
+
 echo "export ISTIO_IP=$ISTIO_IP" >> .env
 
 ISTIO_HOST=$ISTIO_IP.nip.io
 echo "export ISTIO_HOST=$ISTIO_HOST" >> .env
+
+yq --inplace \
+    ".spec.source.helm.valuesObject.serviceMesh.enabled = true" \
+    apps/cncf-demo.yaml
+
+yq --inplace \
+    ".spec.source.helm.valuesObject.serviceMesh.gatewayHost = \"cncf-demo.$ISTIO_HOST\"" \
+    apps/cncf-demo.yaml
+
+kubectl label namespace production istio-injection=enabled \
+    --overwrite

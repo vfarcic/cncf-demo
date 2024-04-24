@@ -4,8 +4,9 @@ TODO: Intro
 
 ## Setup
 
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+* Install [Argo Rollouts Kubectl plugin](https://argo-rollouts.readthedocs.io/en/stable/installation/#manual)
+* Install [gum](https://github.com/charmbracelet/gum#installation).
+* Watch [How To Create A "Proper" CLI With Shell And Charm Gum](https://youtu.be/U8zCHA-9VLA) if you are not familiar with Charm Gum.
 
 ```bash
 # TODO: kapp-controller

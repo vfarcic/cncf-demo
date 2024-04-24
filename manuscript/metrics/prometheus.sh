@@ -12,6 +12,7 @@ echo "
 |----------------|---------------------|---------------------------------------------------|
 |git             |Yes                  |'https://git-scm.com/book/en/v2/Getting-Started-Installing-Git'|
 |kubectl         |Yes                  |'https://kubernetes.io/docs/tasks/tools/#kubectl'  |
+|helm            |Yes                  |'https://helm.sh/docs/intro/install/'              |
 |yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
 " | gum format
 

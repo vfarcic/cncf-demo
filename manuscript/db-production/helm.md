@@ -20,15 +20,19 @@ cat helm/app/templates/deployment.yaml
 cat helm/app/templates/schemahero.yaml
 
 # Execute the command that follows only if you are using Argo CD
-export VALUES=$(\
-    yq ".spec.source.helm.values" apps/cncf-demo.yaml \
-    | yq ".db.enabled.crossplane.$XP_DESTINATION = true" \
-    | yq ".db.id = \"cncf-demo-db\"" \
-    | yq ".db.insecure = true" \
-    | yq ".schemahero.enabled = true")
+yq --inplace ".spec.source.helm.valuesObject.db.enabled.crossplane.$XP_DESTINATION = true" \
+    apps/cncf-demo.yaml
 
 # Execute the command that follows only if you are using Argo CD
-yq --inplace ".spec.source.helm.values = \"$VALUES\"" \
+yq --inplace ".spec.source.helm.valuesObject.db.id = \"cncf-demo-db\"" \
+    apps/cncf-demo.yaml
+
+# Execute the command that follows only if you are using Argo CD
+yq --inplace ".spec.source.helm.valuesObject.db.insecure = true" \
+    apps/cncf-demo.yaml
+
+# Execute the command that follows only if you are using Argo CD
+yq --inplace ".spec.source.helm.valuesObject.schemahero.enabled = true" \
     apps/cncf-demo.yaml
 
 # Execute the command that follows only if you are using Flux

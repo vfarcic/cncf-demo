@@ -622,7 +622,6 @@ flowchart TD
         click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/kustomize.md"
         logging-operator-helm(App as Helm)
         click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/helm.md"
-        style logging-operator-helm fill:red
         logging-operator-carvel(App as Carvel ytt)
         click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/carvel.md"
         logging-operator-cdk8s(App as cdk8s)
@@ -676,9 +675,11 @@ flowchart TD
         flagger(Flagger)
         style flagger fill:red
         progressive-delivery --> argo-rollouts
-        argo-rollouts --> argo-rollouts-istio & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-cilium & argo-rollouts-linkerd
+        argo-rollouts --> argo-rollouts-istio & argo-rollouts-cilium
+        argo-rollouts --> argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd --> cost
         argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
         argo-rollouts-cilium --> argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary & argo-rollouts-istio
+        argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
         progressive-delivery --> flagger --> cost
 
         %% ----------

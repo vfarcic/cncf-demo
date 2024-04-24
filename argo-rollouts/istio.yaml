@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ClusterAnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  args:
+  - name: service-name
+  - name: prometheus-addr
+    value: http://kube-prometheus-stack-prometheus.monitoring
+  - name: prometheus-port
+    value: "9090"
+  metrics:
+  - name: success-rate
+    successCondition: result[0] >= 0.95
+    provider:
+      prometheus:
+        address: "{{args.prometheus-addr}}:{{args.prometheus-port}}"
+        query: |
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[5m]
+          )) /
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[5m]
+          ))

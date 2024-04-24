@@ -38,6 +38,7 @@ Do you have those tools installed?
 echo "## Which Hyperscaler do you want to use?" | gum format
 HYPERSCALER=$(gum choose "google" "aws" "azure")
 echo "export HYPERSCALER=$HYPERSCALER" >> .env
+yq --inplace ".hyperscaler = \"$HYPERSCALER\"" settings.yaml
 
 export KUBECONFIG=$PWD/kubeconfig.yaml
 

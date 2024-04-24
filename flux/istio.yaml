@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: base
-      version: 1.19.0
+      version: 1.21.2
       sourceRef:
         kind: HelmRepository
         name: istio
@@ -38,7 +38,7 @@ spec:
   chart:
     spec:
       chart: istiod
-      version: 1.19.0
+      version: 1.21.2
       sourceRef:
         kind: HelmRepository
         name: istio
@@ -57,13 +57,13 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: istio-ingress
-      version: 1.19.0
+      chart: gateway
+      version: 1.21.2
       sourceRef:
         kind: HelmRepository
         name: istio
         namespace: flux-system
-  releaseName: istio-ingress
+  releaseName: gateway
   targetNamespace: istio-system
   install:
     createNamespace: true

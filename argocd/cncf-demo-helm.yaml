@@ -42,42 +42,6 @@ spec:
           enabled: false
         debug:
           enabled: false
-
-      parameters:
-        - name: image.tag
-          value: v0.0.1
-        - name: ingress.host
-          value: cncf-demo.sillydemo.com
-        - name: ingress.className
-          value: nginx
-        - name: tls.enabled
-          value: "false"
-        - name: db.enabled.crossplane.google
-          value: "false"
-        - name: db.enabled.crossplane.aws
-          value: "false"
-        - name: db.enabled.crossplane.azure
-          value: "false"
-        - name: schemahero.enabled
-          value: "true"
-        - name: db.id
-          value: cncf-demo-db
-        - name: replicas
-          value: "1"
-        - name: db.size
-          value: small
-        - name: db.insecure
-          value: "true"
-        - name: fga.enabled
-          value: "false"
-        - name: fga.storeId
-          value: STORE_ID
-        - name: fga.modeId
-          value: MODEL_ID
-        - name: otel.enabled
-          value: "false"
-        - name: debug.enabled
-          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: production

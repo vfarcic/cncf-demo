@@ -41,7 +41,7 @@ cat apps/cncf-demo.yaml
 
 # If Argo CD
 yq --inplace \
-    ".spec.source.helm.parameters[11].value = \"false\"" \
+    ".spec.source.helm.valuesObject.db.insecure = false" \
     apps/cncf-demo.yaml
 
 # If Flux
