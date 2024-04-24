@@ -646,8 +646,6 @@ flowchart TD
         argo-rollouts-nsm(Network Service Mesh)
         click argo-rollouts-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
         style argo-rollouts-nsm fill:red
-        argo-rollouts-cilium(Cilium)
-        click argo-rollouts-cilium "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cilium.md"
         argo-rollouts-linkerd(Linkerd)
         click argo-rollouts-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
         style argo-rollouts-linkerd fill:red
@@ -675,11 +673,8 @@ flowchart TD
         flagger(Flagger)
         style flagger fill:red
         progressive-delivery --> argo-rollouts
-        argo-rollouts --> argo-rollouts-istio & argo-rollouts-cilium
-        argo-rollouts --> argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd --> cost
-        argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
-        argo-rollouts-cilium --> argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary & argo-rollouts-istio
-        argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
+        argo-rollouts --> argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
+        argo-rollouts --> argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
         progressive-delivery --> flagger --> cost
 
         %% ----------
