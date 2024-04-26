@@ -167,7 +167,7 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
     az group create --name $RESOURCE_GROUP --location $LOCATION
 
     az aks create --resource-group $RESOURCE_GROUP --name dot \
-        --node-count 3 --node-vm-size Standard_B2s \
+        --node-count 3 --node-vm-size Standard_B2ms \
         --enable-managed-identity --network-plugin none \
         --generate-ssh-keys --yes
 

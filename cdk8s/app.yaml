@@ -24,3 +24,12 @@ schemahero:
 otel:
   enabled: false
   jaegerAddr: "http://jaeger-collector.monitoring:4318"
+logging:
+  enabled: false
+serviceMesh:
+  enabled: false
+  tool: istio
+  gatewayHost: acme.com
+progressiveDelivery:
+  enabled: false
+  tool: argo-rollouts

@@ -35,7 +35,20 @@ source .env
 cat argo-rollouts/istio.yaml
 
 cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
+
+git add .
+
+git commit -m "Analysis"
+
+git push
+
+kubectl --namespace production delete pods \
+    --selector app.kubernetes.io/name=cncf-demo
+
+kubectl get clusteranalysistemplates
 ```
+
+* Wait until the resource was created
 
 ## How Did You Define Your App?
 
