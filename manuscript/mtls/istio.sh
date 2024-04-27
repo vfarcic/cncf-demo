@@ -42,6 +42,9 @@ while [ $COUNTER -eq "0" ]; do
 	COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 done
 
+kubectl --namespace istio-system delete pods \
+    --selector app=gateway
+
 if [[ "$HYPERSCALER" == "aws" ]]; then
 
     ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
@@ -54,9 +57,6 @@ if [[ "$HYPERSCALER" == "aws" ]]; then
             get service gateway \
             --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
     done
-
-
-
 
     ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
         get service gateway \

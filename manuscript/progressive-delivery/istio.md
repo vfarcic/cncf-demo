@@ -27,6 +27,23 @@ chmod +x manuscript/mtls/istio.sh
 ./manuscript/mtls/istio.sh
 
 source .env
+
+cat istio/namespace-production.yaml
+
+cp istio/namespace-production.yaml apps/.
+
+git add . 
+
+git commit -m "Istio"
+
+git push
+
+kubectl get namespace production --output yaml
+
+# Wait until the `istio-injection` label was added.
+
+kubectl --namespace production delete pods \
+    --selector app.kubernetes.io/name=cncf-demo
 ```
 
 ## Do
@@ -41,9 +58,6 @@ git add .
 git commit -m "Analysis"
 
 git push
-
-kubectl --namespace production delete pods \
-    --selector app.kubernetes.io/name=cncf-demo
 
 kubectl get clusteranalysistemplates
 ```

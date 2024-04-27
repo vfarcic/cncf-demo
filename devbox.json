@@ -24,7 +24,8 @@
     "crossplane-cli@1.15.0",
     "fluxcd@2.2.3",
     "aws-iam-authenticator@0.6.17",
-    "karmor@1.1.1"
+    "karmor@1.1.1",
+    "argo-rollouts@1.6.0"
   ],
   "shell": {
     "init_hook": [

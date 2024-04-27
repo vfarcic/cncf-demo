@@ -12,6 +12,8 @@ yq --inplace ".spec.source.helm.valuesObject.replicas = 0" \
 # Execute the command that follows only if you are using Flux
 yq --inplace ".spec.values.replicas = 0" apps/cncf-demo.yaml
 
+cat helm/app/templates/argo-rollouts.yaml
+
 # Execute the command that follows only if you are using Argo CD
 yq --inplace \
     ".spec.source.helm.valuesObject.progressiveDelivery.enabled = true" \
@@ -21,8 +23,6 @@ yq --inplace \
 yq --inplace ".spec.values.progressiveDelivery.enabled = true" \
     apps/cncf-demo.yaml
 
-cat helm/app/templates/argo-rollouts.yaml
-
 git add .
 
 git commit -m "Progressive delivery"
@@ -31,6 +31,12 @@ git push
 
 kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
+```
+
+* If the output claims that `cncf-demo` was not found, GitOps tool of choice did not yet synchronize the Rollout. Wait for a few moments and try again.
+
+```sh
+curl http://cncf-demo.$ISTIO_HOST
 
 echo "http://prometheus.$INGRESS_HOST"
 
@@ -41,8 +47,5 @@ echo "http://prometheus.$INGRESS_HOST"
 
 ## Continue The Adventure
 
-<!--
-## Continue The Adventure
-
 The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
--->
+
