@@ -702,9 +702,7 @@ flowchart TD
         style inspektor-gadget fill:red
         k8s-gpt(K8sGPT)
         style k8s-gpt fill:red
-        fonio(Fonio)
-        style fonio fill:red
-        observability-misc --> smp & kepler & inspektor-gadget & k8s-gpt & fonio
+        observability-misc --> smp & kepler & inspektor-gadget & k8s-gpt
 
     end
 ```
