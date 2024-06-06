@@ -843,24 +843,26 @@ flowchart TD
         style kubebuilder fill:red
         crd-kube-rs(kube-rs)
         style crd-kube-rs fill:red
-        crd-kudo(KUDO)
-        style crd-kudo fill:red
+        %% Not maintained since 2021
+        %% crd-kudo(KUDO)
+        %% style crd-kudo fill:red
         crd-operator-framework(Operator Framework)
         style crd-operator-framework fill:red
-        crd --> kubebuilder & crd-kube-rs & crd-kudo & crd-operator-framework
+        crd --> kubebuilder & crd-kube-rs & crd-operator-framework
 
         %% ------------------
         %% -- Miscelaneous --
         %% ------------------
         idp-misc{{Miscelaneous}}
         style idp-misc fill:red
-        dev-stream(DevStream)
-        style dev-stream fill:red
+        %% Not maintained since May 2023
+        %% dev-stream(DevStream)
+        %% style dev-stream fill:red
         dapr("Distributed Application Runtime (Dapr)")
         style dapr fill:red
         porter(Porter)
         style porter fill:red
-        idp-misc --> dev-stream & dapr & porter
+        idp-misc --> dapr & porter
 
     end
 ```
@@ -892,7 +894,7 @@ flowchart TD
         %% ---------------
         %% -- Baremetal --
         %% ---------------
-        baremetal{{Edge}}
+        baremetal{{Baremetal}}
         style baremetal fill:red
         metal3(Metal3)
         style metal3 fill:red
@@ -1036,11 +1038,9 @@ flowchart TD
         style serverless fill:red
         serverless-knative(Knative)
         style serverless-knative fill:red
-        serverless-devs(Serverless Devs)
-        style serverless-devs fill:red
         open-function(OpenFunction)
         style open-function fill:red
-        serverless --> serverless-knative & serverless-devs & open-function
+        serverless --> serverless-knative & open-function
 
         %% ---------------------------------
         %% -- Machine Learning & Big Data --
