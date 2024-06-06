@@ -1,33 +1,70 @@
 # Managing Secrets In Kubernetes With Markhor
 
-TODO: Intro
+Markhor is a lightweight Kubernetes operator that lets you manage Kubernetes Secret using SOPS. The developers can create encrypted manifests -MarhorSecrets- which are automatically decrypted and applied once they reach the cluster.
+
+More details at https://github.com/markhork8s/markhor
 
 ## Setup
 
-* Install [age](https://github.com/FiloSottile/age)
+Run this script on a machine with access to the Kubernetes cluster to install Markhor.
+Take note of the public key printed at the end.
+
+In this demo, we use [age](https://github.com/FiloSottile/age) as the encryption method but the tool also supports others, like AWS KMS, GCP KMS and Azure Key Vault (see https://github.com/markhork8s/markhor/blob/main/docs/methods.md).
 
 ```bash
-# CURRENT_DIR=$(pwd)
-# TMPDEMODIR=$(mktemp -d)
-# cd $TMPDEMODIR
+#!/usr/bin/env bash
 
-export KEY_PAIR=$(age-keygen)
+set -e
 
-export PUBLIC_KEY=$(echo "$KEY_PAIR" \
-  | awk '/public key:/{print $NF}')
+echo "---- Checking that the required programs are installed ----"
+checkCommands() {
+  local commands=("kubectl" "openssl" "git" "awk" "sed" "mktemp" "pwd" "age-keygen" "base64" "cat" "tr" "sleep" "rm")
 
-export PRIVATE_KEY=$(echo "$KEY_PAIR" | awk 'NR==3{print}')
+  echo -n "These commands are required for this script: "
+  printf "%s, " "${commands[@]}"
+  printf "\b\b \n"
 
+  for cmd in "${commands[@]}"; do
+    command -v "$cmd" >/dev/null || {
+      echo "Missing required command: $cmd"
+      exit 1
+    }
+  done
+}
+checkCommands
+
+echo "---- Checking that the K8s cluster is reachable ----"
+kubectl get namespaces >/dev/null
+
+echo "---- Creating temporary directory ----"
+CURRENT_DIR=$(pwd)
+TMPDEMODIR=$(mktemp -d)
+cd $TMPDEMODIR
+
+echo "---- Cloning the markhor repository ----"
+git clone --depth 1 https://github.com/markhork8s/markhor/ .
+
+echo "---- Generating a public and private key ----"
+KEY_PAIR=$(age-keygen 2>/dev/null)
+
+PUBLIC_KEY=$(echo "$KEY_PAIR" | awk '/public key:/{print $NF}')
+PRIVATE_KEY=$(echo "$KEY_PAIR" | awk 'NR==3{print}')
+
+echo "Public Key: $PUBLIC_KEY"
+echo "Private Key: ${PRIVATE_KEY:0:20}...${PRIVATE_KEY: -4}"
+unset KEY_PAIR
+
+echo "---- Adding the private key in the manifest ----"
 cd ./manifests
+sed -i "s/age_keys.txt: .*/age_keys.txt: $PRIVATE_KEY/" private_key_secret.yaml
 
-yq --inplace ".stringData.\"age_keys.txt\" = \"$PRIVATE_KEY\"" \
-    sops/secret.yaml
+#Check that the private key was set correctly (else the script will exit thanks to set -e)
+grep $PRIVATE_KEY private_key_secret.yaml >/dev/null
 
-# FIXME: Continue rewriting
+unset PRIVATE_KEY
 
-chmod +x sops/gen_hook_tls_secret.sh
-
-echo 'y' | ./sops/gen_hook_tls_secret.sh
+echo "---- Generating TLS secret for admission webhook ----"
+echo 'y' | ./gen_hook_tls_secret.sh
 
 echo "---- Installing markhor ----"
 ./apply.sh
