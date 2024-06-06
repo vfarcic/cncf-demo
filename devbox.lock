@@ -1,6 +1,102 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "age@1.1.1": {
+      "last_modified": "2024-05-29T10:04:41Z",
+      "resolved": "github:NixOS/nixpkgs/ac82a513e55582291805d6f09d35b6d8b60637a1#age",
+      "source": "devbox-search",
+      "version": "1.1.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/wrwf39kykdbs7lgvnfkgm1lj18b824r6-age-1.1.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/wrwf39kykdbs7lgvnfkgm1lj18b824r6-age-1.1.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/snfyfi365244ybfdhms43m0zwa01x3k9-age-1.1.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/snfyfi365244ybfdhms43m0zwa01x3k9-age-1.1.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/63d9aqq270549vsnsskhd8vaj4rf5092-age-1.1.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/63d9aqq270549vsnsskhd8vaj4rf5092-age-1.1.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n03h3x8wn64xvn7yh91ly9aiv42m903z-age-1.1.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n03h3x8wn64xvn7yh91ly9aiv42m903z-age-1.1.1"
+        }
+      }
+    },
+    "argo-rollouts@1.6.0": {
+      "last_modified": "2024-05-29T10:04:41Z",
+      "resolved": "github:NixOS/nixpkgs/ac82a513e55582291805d6f09d35b6d8b60637a1#argo-rollouts",
+      "source": "devbox-search",
+      "version": "1.6.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/q1pxjcq3hhl52726b73v2xjr092w8g39-argo-rollouts-1.6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/q1pxjcq3hhl52726b73v2xjr092w8g39-argo-rollouts-1.6.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8rm09l0k0f5z1ygh3fqipv1vhf70nfc5-argo-rollouts-1.6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8rm09l0k0f5z1ygh3fqipv1vhf70nfc5-argo-rollouts-1.6.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/y9d7q0v59dg16hsbfkkbhrhj1jh1y9a6-argo-rollouts-1.6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/y9d7q0v59dg16hsbfkkbhrhj1jh1y9a6-argo-rollouts-1.6.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0v1r8kwn7w1ghq12h7gy2wjhldiwpdlm-argo-rollouts-1.6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/0v1r8kwn7w1ghq12h7gy2wjhldiwpdlm-argo-rollouts-1.6.0"
+        }
+      }
+    },
     "aws-iam-authenticator@0.6.17": {
       "last_modified": "2024-02-24T23:06:34Z",
       "resolved": "github:NixOS/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0#aws-iam-authenticator",
