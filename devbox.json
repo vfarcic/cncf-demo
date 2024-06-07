@@ -1,7 +1,8 @@
 {
   "packages": [
-    "gum@0.13.0",
     "bat@0.24.0",
+    "eza@0.18.16",
+    "gum@0.13.0",
     "gh@2.44.1",
     "yq-go@4.41.1",
     "jq@1.7.1",
@@ -31,7 +32,7 @@
   "shell": {
     "init_hook": [
       "alias cat='bat --paging never --theme DarkNeon --style plain'",
-      "PS1=\"➜ \""
+      "alias ls='eza --long --color always --all --no-permissions --no-user --no-user --no-time --no-filesize --git'"
     ],
     "scripts": {}
   }
