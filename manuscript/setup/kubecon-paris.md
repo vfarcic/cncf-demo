@@ -38,27 +38,6 @@ kubectl port-forward svc/argocd-server 8080:80 -n argocd &
 source .env
 ```
 
-## Checklist
-
-Admission Controller Policies:
-* OPA
-* Kyverno
-* Kubewarden
-
-Runtime Policies:
-* Falco
-* KubeArmor
-
-Secrets Management:
-* ESO
-* SSCSI
-* SOPS
-
-mTLS & Network Policies:
-* Cilium
-* Linkerd
-* Istio
-
 ## What Is Your Choice?
 
 * [Kyverno](../policies/kubecon-paris-kyverno.md)
