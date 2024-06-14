@@ -34,7 +34,7 @@ kubectl port-forward svc/argocd-server 8080:80 -n argocd &
 ./manuscript/secrets/eso.sh
 
 ./manuscript/secrets/aws.sh
-
+º
 source .env
 ```
 
