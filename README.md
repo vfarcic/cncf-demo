@@ -765,9 +765,9 @@ flowchart TD
 | Authenticating Users | Maksim Nabokikh - Dex<br />Alexander Schwartz - Keycloak | Tuesday, February 27, 2024 | [story](manuscript/user-authentication/README.md) |
 | Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | [story](manuscript/access/README.md) |
 | Miscellaneous | Suraj Deshmukh - Confidential Containers<br />Rachid Zarouali - ContainerSSH | Tuesday, March 12, 2024 | [story](manuscript/security-misc/README.md) |
-| Chapter 3 Finale!<br />AT KUBECON | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
+| Chapter 3 Finale! | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
 
-### Security
+### Observability
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
