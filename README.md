@@ -773,7 +773,7 @@ flowchart TD
 | --- | --- | --- | --- |
 | Dashboards | TBD - Skooner<br /> TBD - Kubernetes Dashboard<br /> TBD - Headlamp | TBD | [story](manuscript/dashboards/README.md) |
 | Exposition Formats | TBD - OpenTelemetry<br /> TBD - OpenMetrics | TBD | [story](manuscript/exposition-formats/openmetrics.md) |
-| Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex | TBD | [story](manuscript/metrics/prometheus.md) |
+| Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | TBD | [story](manuscript/metrics/prometheus.md) |
 | Tracing | TBD - Jaeger | TBD | [story](manuscript/tracing/README.md) |
 | Logging | TBD - FluentD<br /> TBD - Logging Operator | TBD | [story](manuscript/logging/README.md) |
 | Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger | TBD | [story](progressive-delivery/README.md) |
