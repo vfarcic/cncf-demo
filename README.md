@@ -576,6 +576,157 @@ flowchart TD
     end
 ```
 
+```mermaid
+flowchart TD
+
+    subgraph Observability
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-observability((Setup))
+        click setup-observability "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/observability.md"
+        setup-observability --> dashboards
+        
+        %% ----------------
+        %% -- Dashboards --
+        %% ----------------
+        dashboards{{Dashboards}}
+        click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/README.md"
+        style dashboards fill:blue
+        skooner(Skooner)
+        click skooner "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
+        kubernetes-dashboard(Kubernetes Dashboard)
+        headlamp(Headlamp)
+        click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
+        dashboards --> skooner & kubernetes-dashboard & headlamp --> exposition-formats
+
+        %% ------------------------
+        %% -- Exposition Formats --
+        %% ------------------------
+        exposition-formats{{Exposition Formats}}
+        click exposition-formats "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
+        style exposition-formats fill:blue
+        open-telemetry(OpenTelemetry)
+        click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
+        open-metrics(OpenMetrics)
+        click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
+        exposition-formats --> open-telemetry & open-metrics --> metrics
+
+        %% -------------
+        %% -- Metrics --
+        %% -------------
+        metrics{{Metrics}}
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/README.md"
+        style metrics fill:blue
+        metrics-prometheus(Prometheus)
+        click metrics-prometheus "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/prometheus.md"
+        metrics-thanos(Thanos)
+        pixie(Pixie)
+        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
+        cortex(Cortex)
+        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> tracing
+
+        %% -------------
+        %% -- Tracing --
+        %% -------------
+        tracing{{Tracing}}
+        click tracing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/README.md"
+        style tracing fill:blue
+        jaeger(Jaeger)
+        click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
+        jaeger-kustomize(App as Kustomize)
+        click jaeger-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/kustomize.md"
+        jaeger-helm(App as Helm)
+        click jaeger-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/helm.md"
+        jaeger-carvel(App as Carvel ytt)
+        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
+        jaeger-cdk8s(App as cdk8s)
+        click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
+        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
+
+        %% -------------
+        %% -- Logging --
+        %% -------------
+        logging{{Logging}}
+        style logging fill:blue
+        click logging "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/README.md"
+        fluentd(FluentD)
+        click fluentd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/fluentd.md"
+        logging-operator(Logging Operator)
+        click logging-operator "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/logging-operator.md"
+        logging-operator-kustomize(App as Kustomize)
+        click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/kustomize.md"
+        logging-operator-helm(App as Helm)
+        click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/helm.md"
+        logging-operator-carvel(App as Carvel ytt)
+        click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/carvel.md"
+        logging-operator-cdk8s(App as cdk8s)
+        click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
+        logging --> fluentd --> logging-operator
+        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
+
+        %% --------------------------
+        %% -- Progressive Delivery --
+        %% --------------------------
+        progressive-delivery{{Progressive Delivery}}
+        style progressive-delivery fill:blue
+        click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
+        argo-rollouts(Argo Rollouts)
+        click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
+        argo-rollouts-istio(Istio)
+        click argo-rollouts-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        argo-rollouts-kuma(Kuma)
+        click argo-rollouts-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
+        argo-rollouts-nsm(Network Service Mesh)
+        click argo-rollouts-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
+        argo-rollouts-linkerd(Linkerd)
+        click argo-rollouts-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
+        argo-rollouts-nginx(NGINX)
+        click argo-rollouts-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
+        argo-rollouts-contour(Contour)
+        click argo-rollouts-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
+        argo-rollouts-emissary(Emissary-ingress)
+        click argo-rollouts-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
+        argo-rollouts-kustomize(App as Kustomize)
+        click argo-rollouts-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
+        argo-rollouts-helm(App as Helm)
+        click argo-rollouts-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
+        argo-rollouts-carvel(App as Carvel ytt)
+        click argo-rollouts-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
+        argo-rollouts-cdk8s(App as cdk8s)
+        click argo-rollouts-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
+        flagger(Flagger)
+        progressive-delivery --> argo-rollouts
+        argo-rollouts --> argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
+        argo-rollouts --> argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
+        progressive-delivery --> flagger --> cost
+
+        %% ----------
+        %% -- Cost --
+        %% ----------
+        cost{{Cost}}
+        style cost fill:blue
+        open-cost(OpenCost)
+        cost --> open-cost --> observability-misc
+
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        observability-misc{{Misc}}
+        style observability-misc fill:blue
+        %% Not maintained. The last release was made in 2022
+        %% kuberhealthy(kuberhealthy)
+        %% style kuberhealthy fill:red
+        smp("Service Mesh Performance (SMP)")
+        kepler(Kepler)
+        inspektor-gadget(Inspektor Gadget)
+        k8s-gpt(K8sGPT)
+        observability-misc --> smp & kepler & inspektor-gadget & k8s-gpt
+
+    end
+```
+
 ## Episodes
 
 ### Development
@@ -615,6 +766,19 @@ flowchart TD
 | Authorizing Access | Gerry Gebel - Hexa<br />Saim Safdar - Paralus<br />Raghd Hamzeh - OpenFGA  | Tuesday, March 5, 2024 | [story](manuscript/access/README.md) |
 | Miscellaneous | Suraj Deshmukh - Confidential Containers<br />Rachid Zarouali - ContainerSSH | Tuesday, March 12, 2024 | [story](manuscript/security-misc/README.md) |
 | Chapter 3 Finale!<br />AT KUBECON | Whitney and Viktor! | Tuesday, March 19, 2024 |  |
+
+### Security
+
+| Name | Guests | Date | Link |
+| --- | --- | --- | --- |
+| Dashboards | TBD - Skooner<br /> TBD - Kubernetes Dashboard<br /> TBD - Headlamp | TBD | [story](manuscript/dashboards/README.md) |
+| Exposition Formats | TBD - OpenTelemetry<br /> TBD - OpenMetrics | TBD | [story](manuscript/exposition-formats/openmetrics.md) |
+| Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex | TBD | [story](manuscript/metrics/prometheus.md) |
+| Tracing | TBD - Jaeger | TBD | [story](manuscript/tracing/README.md) |
+| Logging | TBD - FluentD<br /> TBD - Logging Operator | TBD | [story](manuscript/logging/README.md) |
+| Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger | TBD | [story](progressive-delivery/README.md) |
+| Cost | TBD - OpenCost | TBD | TBD |
+| Misc | TBD - Service Mesh Performance (SMP)<br /> TBD - Kepler<br /> TBD - Inspektor Gadget | TBD | TBD |
 
 ## The Format
 
