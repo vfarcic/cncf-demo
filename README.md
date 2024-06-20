@@ -774,10 +774,10 @@ flowchart TD
 | Dashboards | TBD - Skooner<br /> TBD - Kubernetes Dashboard<br /> TBD - Headlamp | TBD | [story](manuscript/dashboards/README.md) |
 | Exposition Formats | TBD - OpenTelemetry<br /> TBD - OpenMetrics | TBD | [story](manuscript/exposition-formats/openmetrics.md) |
 | Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | TBD | [story](manuscript/metrics/prometheus.md) |
-| Tracing | TBD - Jaeger | TBD | [story](manuscript/tracing/README.md) |
-| Logging | TBD - FluentD<br /> TBD - Logging Operator | TBD | [story](manuscript/logging/README.md) |
-| Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger | TBD | [story](progressive-delivery/README.md) |
-| Cost | TBD - OpenCost | TBD | TBD |
+| Tracing | TBD - Jaeger<br /> TBD - Grafana Tempo | TBD | [story](manuscript/tracing/README.md) |
+| Logging | TBD - FluentD/FluentBit<br /> TBD - Logging Operator | TBD | [story](manuscript/logging/README.md) |
+| Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | TBD | [story](progressive-delivery/README.md) |
+| Cost | TBD - OpenCost<br /> TBD - CastAI | TBD | TBD |
 | Misc | TBD - Service Mesh Performance (SMP)<br /> TBD - Kepler<br /> TBD - Inspektor Gadget | TBD | TBD |
 
 ## The Format
