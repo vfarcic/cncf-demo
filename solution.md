@@ -672,10 +672,13 @@ flowchart TD
         style argo-rollouts-cdk8s fill:red
         flagger(Flagger)
         style flagger fill:red
+        keptn(Keptn)
+        style flagger fill:red
         progressive-delivery --> argo-rollouts
         argo-rollouts --> argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
         argo-rollouts --> argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
         progressive-delivery --> flagger --> cost
+        progressive-delivery --> keptn --> cost
 
         %% ----------
         %% -- Cost --
@@ -694,8 +697,9 @@ flowchart TD
         %% Not maintained. The last release was made in 2022
         %% kuberhealthy(kuberhealthy)
         %% style kuberhealthy fill:red
-        smp("Service Mesh Performance (SMP)")
-        style smp fill:red
+        %% Not maintained. The last release was made in 2023
+        %% smp("Service Mesh Performance (SMP)")
+        %% style smp fill:red
         kepler(Kepler)
         style kepler fill:red
         inspektor-gadget(Inspektor Gadget)

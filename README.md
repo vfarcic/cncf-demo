@@ -778,7 +778,7 @@ flowchart TD
 | Logging | TBD - FluentD/FluentBit<br /> TBD - Logging Operator | TBD | [story](manuscript/logging/README.md) |
 | Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | TBD | [story](progressive-delivery/README.md) |
 | Cost | TBD - OpenCost<br /> TBD - CastAI | TBD | TBD |
-| Misc | TBD - Service Mesh Performance (SMP)<br /> TBD - Kepler<br /> TBD - Inspektor Gadget | TBD | TBD |
+| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget | TBD | TBD |
 
 ## The Format
 
