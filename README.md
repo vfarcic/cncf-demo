@@ -594,12 +594,10 @@ flowchart TD
         dashboards{{Dashboards}}
         click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/README.md"
         style dashboards fill:blue
-        skooner(Skooner)
-        click skooner "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/skooner.md"
         kubernetes-dashboard(Kubernetes Dashboard)
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        dashboards --> skooner & kubernetes-dashboard & headlamp --> exposition-formats
+        dashboards --> kubernetes-dashboard & headlamp --> exposition-formats
 
         %% ------------------------
         %% -- Exposition Formats --
@@ -771,7 +769,7 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Dashboards | TBD - Skooner<br /> TBD - Kubernetes Dashboard<br /> TBD - Headlamp | TBD | [story](manuscript/dashboards/README.md) |
+| Dashboards | TBD - Kubernetes Dashboard<br /> TBD - Headlamp | TBD | [story](manuscript/dashboards/README.md) |
 | Exposition Formats | TBD - OpenTelemetry<br /> TBD - OpenMetrics | TBD | [story](manuscript/exposition-formats/openmetrics.md) |
 | Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | TBD | [story](manuscript/metrics/prometheus.md) |
 | Tracing | TBD - Jaeger<br /> TBD - Grafana Tempo | TBD | [story](manuscript/tracing/README.md) |
