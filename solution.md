@@ -568,9 +568,7 @@ flowchart TD
         style exposition-formats fill:blue
         open-telemetry(OpenTelemetry)
         click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
-        open-metrics(OpenMetrics)
-        click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
-        exposition-formats --> open-telemetry & open-metrics --> metrics
+        exposition-formats --> open-telemetry --> metrics
 
         %% -------------
         %% -- Metrics --
