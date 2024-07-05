@@ -14,7 +14,7 @@ TODO: Description
 
 TODO: Description
 
-* [Official site](https://openmetrics.io/)
+* [Official site](https://openmetrics.io)
 
 ## What Is Your Choice?
 

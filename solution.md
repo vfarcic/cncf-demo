@@ -558,17 +558,21 @@ flowchart TD
         style kubernetes-dashboard fill:red
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        dashboards --> kubernetes-dashboard & headlamp --> exposition-formats
+        k9s(k9s)
+        style k9s fill:red
+        dashboards --> kubernetes-dashboard & headlamp & k9s --> instrumentation
 
-        %% ------------------------
-        %% -- Exposition Formats --
-        %% ------------------------
-        exposition-formats{{Exposition Formats}}
-        click exposition-formats "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
-        style exposition-formats fill:blue
+        %% ------------------------------------
+        %% -- Instrumenting Application Code --
+        %% ------------------------------------
+        instrumentation{{Instrumenting Application Code}}
+        click instrumentation "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
+        style instrumentation fill:blue
         open-telemetry(OpenTelemetry)
         click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
-        exposition-formats --> open-telemetry --> metrics
+        open-metrics(OpenMetrics)
+        style open-metrics fill:red
+        instrumentation --> open-telemetry & open-metrics --> metrics
 
         %% -------------
         %% -- Metrics --
@@ -602,6 +606,9 @@ flowchart TD
         click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
         click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
+        tempo(Grafana Tempo)
+        style tempo fill:red
+        tracing --> tempo --> logging
         tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------
@@ -623,8 +630,22 @@ flowchart TD
         logging-operator-cdk8s(App as cdk8s)
         click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
         style logging-operator-cdk8s fill:red
+        vector(Vector)
+        style vector fill:red
+        logging --> vector --> data-pipelines
         logging --> fluentd --> logging-operator
-        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
+        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> data-pipelines
+
+        %% --------------------
+        %% -- Data Pipelines --
+        %% --------------------
+        data-pipelines{{Data Pipelines}}
+        style data-pipelines fill:red
+        fluentbit(FluentBit)
+        style fluentbit fill:red
+        otel-collector(Otel Collector)
+        style otel-collector fill:red
+        data-pipelines --> fluentbit & otel-collector --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -683,26 +704,39 @@ flowchart TD
         style cost fill:red
         open-cost(OpenCost)
         style open-cost fill:red
-        cost --> open-cost --> observability-misc
+        goldilocks(Goldilocks)
+        style goldilocks fill:red
+        cost --> open-cost & goldilocks --> service-mesh
+
+        %% ------------------
+        %% -- Service Mesh --
+        %% ------------------
+        service-mesh{{Service Mesh}}
+        style service-mesh fill:red
+        cilium(Cilium)
+        style cilium fill:red
+        istio(Istio)
+        style istio fill:red
+        linkerd(Linkerd)
+        style linkerd fill:red
+        kuma(Kuma)
+        style kuma fill:red
+        service-mesh --> cilium & istio & linkerd & kuma --> observability-misc
 
         %% ----------
         %% -- Misc --
         %% ----------
         observability-misc{{Misc}}
         style observability-misc fill:red
-        %% Not maintained. The last release was made in 2022
-        %% kuberhealthy(kuberhealthy)
-        %% style kuberhealthy fill:red
-        %% Not maintained. The last release was made in 2023
-        %% smp("Service Mesh Performance (SMP)")
-        %% style smp fill:red
         kepler(Kepler)
         style kepler fill:red
         inspektor-gadget(Inspektor Gadget)
         style inspektor-gadget fill:red
         k8s-gpt(K8sGPT)
         style k8s-gpt fill:red
-        observability-misc --> smp & kepler & inspektor-gadget & k8s-gpt
+        observability-misc --> kepler & inspektor-gadget & k8s-gpt --> done
+
+        done((Chapter End))
 
     end
 ```
