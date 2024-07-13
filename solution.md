@@ -565,7 +565,7 @@ flowchart TD
         %% ------------------------------------
         %% -- Instrumenting Application Code --
         %% ------------------------------------
-        instrumentation{{Instrumenting Application Code}}
+        instrumentation{{Application Instrumentation}}
         click instrumentation "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
         style instrumentation fill:blue
         open-telemetry(OpenTelemetry)
@@ -641,9 +641,9 @@ flowchart TD
         %% --------------------
         data-pipelines{{Data Pipelines}}
         style data-pipelines fill:red
-        fluentbit(FluentBit)
+        fluentbit(Fluent Bit)
         style fluentbit fill:red
-        otel-collector(Otel Collector)
+        otel-collector(OTel Collector)
         style otel-collector fill:red
         data-pipelines --> fluentbit & otel-collector --> progressive-delivery
 

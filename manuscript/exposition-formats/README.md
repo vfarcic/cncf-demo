@@ -1,4 +1,4 @@
-# Exposition Formats
+# Application Instrumentation
 
 TODO: Intro
 

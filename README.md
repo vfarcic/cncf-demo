@@ -620,16 +620,17 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Dashboards | TBD - Kubernetes Dashboard<br /> TBD - Headlamp<br /> TBD - k9s | TBD | [story](manuscript/dashboards/README.md) |
-| Exposition Formats | TBD - OpenTelemetry<br /> TBD - OpenMetrics | TBD | [story](manuscript/exposition-formats/openmetrics.md) |
-| Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | TBD | [story](manuscript/metrics/prometheus.md) |
-| Tracing | TBD - Jaeger<br /> TBD - Grafana Tempo | TBD | [story](manuscript/tracing/README.md) |
-| Logging | TBD - FluentD<br /> TBD - Logging Operator<br /> TBD - Vector | TBD | [story](manuscript/logging/README.md) |
-| Data Pipelines | TBD - FluentBit<br /> TBD - Otel Collector | TBD | TODO: |
-| Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | TBD | [story](progressive-delivery/README.md) |
-| Cost | TBD - OpenCost<br /> TBD - Goldilocks | TBD | TBD |
-| Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | TBD | TBD |
-| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - k8sgpt | TBD | TBD |
+| Dashboards | TBD - Kubernetes Dashboard<br /> TBD - Headlamp<br /> TBD - k9s | Sesptember 3, 2024 | [story](manuscript/dashboards/README.md) |
+| Application Instrumentation | TBD - OpenTelemetry<br /> TBD - OpenMetrics | September 10, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
+| Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | September 17, 2024 | [story](manuscript/metrics/prometheus.md) |
+| Tracing | TBD - Jaeger<br /> TBD - Grafana Tempo | September 24, 2024 | [story](manuscript/tracing/README.md) |
+| Logging | TBD - Fluentd<br /> TBD - Logging Operator<br /> TBD - Vector | October 1, 2024 | [story](manuscript/logging/README.md) |
+| Data Pipelines | TBD - Fluent Bit<br /> TBD - OTel Collector | October 8, 2024 | TODO: |
+| Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
+| Cost | TBD - OpenCost<br /> TBD - Goldilocks | October 22, 2024 | TBD |
+| Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
+| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - k8sgpt | November 5, 2024 | TBD |
+| Chapter 4 Finale! | Whitney and Viktor! | November 19, 2024 |  |
 
 ## The Format
 
