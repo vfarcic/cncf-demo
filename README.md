@@ -620,7 +620,7 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Dashboards | TBD - Kubernetes Dashboard<br /> TBD - Headlamp<br /> TBD - k9s<br /> TBD - Meshery | Sesptember 3, 2024 | [story](manuscript/dashboards/README.md) |
+| Dashboards | TBD - Kubernetes Dashboard<br /> TBD - Headlamp<br /> TBD - Meshery | Sesptember 3, 2024 | [story](manuscript/dashboards/README.md) |
 | Application Instrumentation | TBD - OpenTelemetry<br /> TBD - OpenMetrics | September 10, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
 | Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | September 17, 2024 | [story](manuscript/metrics/prometheus.md) |
 | Tracing | TBD - Jaeger<br /> TBD - Grafana Tempo | September 24, 2024 | [story](manuscript/tracing/README.md) |

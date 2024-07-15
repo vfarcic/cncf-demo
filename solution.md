@@ -558,11 +558,9 @@ flowchart TD
         style kubernetes-dashboard fill:red
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        k9s(k9s)
-        style k9s fill:red
         meshery(Meshery)
         style meshery fill:red
-        dashboards --> kubernetes-dashboard & headlamp & k9s & meshery --> instrumentation
+        dashboards --> kubernetes-dashboard & headlamp & meshery --> instrumentation
 
         %% ------------------------------------
         %% -- Instrumenting Application Code --
