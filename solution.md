@@ -606,9 +606,9 @@ flowchart TD
         click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
         click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
-        tempo(Grafana Tempo)
-        style tempo fill:red
-        tracing --> tempo --> logging
+        pixie-tracing(Pixie)
+        click pixie-tracing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/pixie.md"
+        tracing --> pixie-tracing --> logging
         tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------

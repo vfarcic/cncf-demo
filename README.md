@@ -623,7 +623,7 @@ flowchart TD
 | Dashboards | TBD - Kubernetes Dashboard<br /> TBD - Headlamp<br /> TBD - Meshery | Sesptember 3, 2024 | [story](manuscript/dashboards/README.md) |
 | Application Instrumentation | TBD - OpenTelemetry<br /> TBD - OpenMetrics | September 10, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
 | Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | September 17, 2024 | [story](manuscript/metrics/prometheus.md) |
-| Tracing | TBD - Jaeger<br /> TBD - Grafana Tempo | September 24, 2024 | [story](manuscript/tracing/README.md) |
+| Tracing | TBD - Jaeger<br /> TBD - Pixie | September 24, 2024 | [story](manuscript/tracing/README.md) |
 | Logging | TBD - Fluentd<br /> TBD - Logging Operator<br /> TBD - Vector | October 1, 2024 | [story](manuscript/logging/README.md) |
 | Data Pipelines | TBD - Fluent Bit<br /> TBD - OTel Collector | October 8, 2024 | TODO: |
 | Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
