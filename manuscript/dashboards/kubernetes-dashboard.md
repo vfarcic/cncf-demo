@@ -1,4 +1,4 @@
-# Dashboard With Skooner
+# Kubernetes Dashboard
 
 TODO: Intro
 

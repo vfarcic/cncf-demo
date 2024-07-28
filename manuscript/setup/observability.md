@@ -2,11 +2,10 @@
 
 You can skip the setup phase if you came to this chapter directly from the previous one.
 
+> Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar with GitHub CLI.
+> You can skip the command that follows if you already forked the repo and merged it with upstream.
+
 ```bash
-# Watch https://youtu.be/BII6ZY2Rnlc if you are not familiar
-#   with GitHub CLI.
-# You can skip this command if you already forked the repo and
-#   merged it with upstream.
 gh repo fork vfarcic/cncf-demo --clone --remote
 
 cd cncf-demo

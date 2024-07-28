@@ -27,7 +27,8 @@
     "aws-iam-authenticator@0.6.17",
     "karmor@1.1.1",
     "argo-rollouts@1.6.0",
-    "age@1.1.1"
+    "age@1.1.1",
+    "zellij@0.40.1"
   ],
   "shell": {
     "init_hook": [
