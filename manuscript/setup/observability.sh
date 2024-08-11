@@ -15,22 +15,6 @@ Select "Yes" only if you did NOT follow the story from the start (if you jumped 
 Feel free to say "No" and inspect the script if you prefer setting up resources manually.
 ' || exit 0
 
-echo "
-## You will need following tools installed:
-|Name            |Required             |More info                                          |
-|----------------|---------------------|---------------------------------------------------|
-|gitHub CLI      |Yes                  |'https://cli.github.com/'                          |
-|yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
-|Google Cloud CLI|If using Google Cloud|'https://cloud.google.com/sdk/docs/install'        |
-|AWS CLI         |If using AWS         |'https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html'|
-|eksctl          |If using AWS         |'https://eksctl.io/installation/'                  |
-|az              |If using Azure       |'https://learn.microsoft.com/cli/azure/install-azure-cli'|
-" | gum format
-
-gum confirm "
-Do you have those tools installed?
-" || exit 0
-
 ################
 # Hyperscalers #
 ################
