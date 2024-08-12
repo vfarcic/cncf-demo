@@ -28,7 +28,8 @@
     "karmor@1.1.1",
     "argo-rollouts@1.6.0",
     "age@1.1.1",
-    "zellij@0.40.1"
+    "zellij@0.40.1",
+    "nushell@0.96.1"
   ],
   "shell": {
     "init_hook": [

@@ -19,6 +19,9 @@ print $"(ansi purple_bold)
 let hyperscaler = [google aws azure]
     | input list $"(ansi green_bold)Which Hyperscaler do you want to use?(ansi yellow_bold)"
 $"export HYPERSCALER=($hyperscaler)\n" | save --append .env
+open settings.yaml
+    | upsert hyperscaler $hyperscaler
+    | save settings.yaml --force
 
 $env.KUBECONFIG = $"($env.PWD)/kubeconfig.yaml"
 $"export KUBECONFIG=($env.KUBECONFIG)\n" | save --append .env
@@ -26,7 +29,7 @@ $"export KUBECONFIG=($env.KUBECONFIG)\n" | save --append .env
 helm repo add cilium https://helm.cilium.io
 helm repo update
 
-if hyperscaler == "google" {
+if $hyperscaler == "google" {
 
     let project_id = $"dot-(date now | format date "%Y%m%d%H%M%S")"
     $"export PROJECT_ID=($project_id)\n" | save --append .env
@@ -102,7 +105,7 @@ if hyperscaler == "google" {
             --project $project_id --iam-account $sa
     )
 
-} else if hyperscaler == "aws" {
+} else if $hyperscaler == "aws" {
 
 #     AWS_ACCESS_KEY_ID=$(gum input --placeholder "AWS Access Key ID" --value "$AWS_ACCESS_KEY_ID")
 #     echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
@@ -215,28 +218,30 @@ open settings.yaml
     | upsert gitOps.app $gitops_app
     | save settings.yaml --force
 
-# #################
-# # Setup Ingress #
-# #################
+print $"(ansi purple_bold)
+#################
+# Setup Ingress #
+#################
+(ansi reset)"
 
-# cp $GITOPS_APP/contour.yaml infra/.
+cp $"($gitops_app)/contour.yaml" infra/.
 
-# git add . 
+git add . 
 
-# git commit -m "Contour"
+git commit -m "Contour"
 
-# git push
+git push
 
-# COUNTER=$(kubectl --namespace projectcontour get pods)
+mut pods = 0; while $pods == 0 {
+    print "Waiting for Contour to be deployed..."
+    sleep 10sec
+    $pods = ( kubectl --namespace projectcontour get pods
+        | length )
+}
 
-# while [ -z "$COUNTER" ]; do
-#     sleep 10
-#     COUNTER=$(kubectl --namespace projectcontour get pods)
-# done
+sleep 10sec
 
-# sleep 10
-
-# if [[ "$HYPERSCALER" == "aws" ]]; then
+if $hyperscaler == "aws" {
 
 #     INGRESS_IPNAME=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
 
@@ -248,16 +253,18 @@ open settings.yaml
 #         INGRESS_IP=$(dig +short $INGRESS_IPNAME) 
 #     done
 
-# else
+} else {
 
-#     INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-
-#     while [ -z "$INGRESS_IP" ]; do
-#         sleep 10
-#         INGRESS_IP=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-#     done
-
-# fi
+    mut ingress_ip = ""; while $ingress_ip == "" {
+        print "Waiting for Ingress Service IP..."
+        $ingress_ip = (
+            kubectl --namespace projectcontour
+                get service contour-envoy --output yaml
+                | from yaml
+                | get status.loadBalancer.ingress.0.ip
+        )
+    }
+}
 
 # INGRESS_IP=$(echo $INGRESS_IP | awk '{print $1;}')
 
@@ -267,117 +274,149 @@ open settings.yaml
 #     INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
 # fi
 
-# echo "export INGRESS_HOST=$INGRESS_IP.nip.io" >> .env
-# yq --inplace ".ingress.host = \"$INGRESS_IP.nip.io\"" settings.yaml
+$"export INGRESS_HOST=($ingress_ip)\n" | save --append .env
+open settings.yaml
+    | upsert ingress.host $"($ingress_ip).nip.io"
+    | save settings.yaml --force
 
-# echo "export INGRESS_CLASSNAME=contour" >> .env
-# yq --inplace ".ingress.classname = \"contour\"" settings.yaml
+"export INGRESS_CLASSNAME=contour" | save --append .env
+open settings.yaml
+    | upsert ingress.classname "contour"
+    | save settings.yaml --force
 
-# #################
-# # Setup The App #
-# #################
+print $"(ansi purple_bold)
+#################
+# Setup the App #
+#################
+(ansi reset)"
 
-# yq --inplace ".image = \"index.docker.io/vfarcic/cncf-demo\"" settings.yaml
+let image = "index.docker.io/vfarcic/cncf-demo"
 
-# yq --inplace ".tag = \"v0.0.1\"" settings.yaml
+open settings.yaml
+    | upsert image $image
+    | save settings.yaml --force
 
-# echo "
-# How would you like to define Kubernetes resources?"
+open settings.yaml
+    | upsert tag "v0.0.1"
+    | save settings.yaml --force
 
-# TEMPLATES=$(gum choose "kustomize" "helm" "ytt" "cdk8s")
+let template = [kustomize helm ytt cdk8s]
+    | input list $"(ansi green_bold)How would you like to define Kubernetes resources?(ansi reset)(ansi yellow_bold)"
 
-# echo "export TEMPLATES=$TEMPLATES" >> .env
-# yq --inplace ".templates = \"$TEMPLATES\"" settings.yaml
+if $template == "kustomize" {
 
-# if [[ "$TEMPLATES" == "kustomize" ]]; then
+    open $"($gitops_app)/cncf-demo-kustomize.yaml"
+        | upsert spec.source.repoURL $repo_url
+        | save $"($gitops_app)/cncf-demo-kustomize.yaml" --force
 
-#     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-kustomize.yaml
+    open kustomize/base/deployment.yaml
+        | upsert spec.template.spec.containers.0.image $image
+        | save kustomize/base/deployment.yaml --force
 
-#     yq --inplace ".spec.template.spec.containers[0].image = \"index.docker.io/vfarcic/cncf-demo\"" kustomize/base/deployment.yaml
+    cd kustomize/overlays/prod
 
-#     cd kustomize/overlays/prod
+    kustomize edit set image $"($image)=($image):v0.0.1"
 
-#     kustomize edit set image index.docker.io/vfarcic/cncf-demo=index.docker.io/vfarcic/cncf-demo:v0.0.1
+    cd ../../..
 
-#     cd ../../..
+    open kustomize/overlays/prod/kustomization.yaml
+        | upsert patchesStrategicMerge []
+        | save kustomize/overlays/prod/kustomization.yaml --force
 
-#     yq --inplace ".patchesStrategicMerge = []" kustomize/overlays/prod/kustomization.yaml
+} else if $template == "helm" {
 
-# elif [[ "$TEMPLATES" == "helm" ]]; then
+    open $"($gitops_app)/cncf-demo-helm.yaml"
+        | upsert spec.source.repoURL $repo_url
+        | upsert spec.source.helm.valuesObject.image.tag v0.0.1
+        | upsert spec.source.helm.valuesObject.tls.enabled false
+        | save $"($gitops_app)/cncf-demo-helm.yaml" --force
 
-#     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \
-#         argocd/cncf-demo-helm.yaml
+    open helm/app/values.yaml
+        | upsert image.repository $image
+        | save helm/app/values.yaml --force
 
-#     yq --inplace \
-#         ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" \
-#         helm/app/values.yaml
+} else if $template == "cdk8s" {
 
-#     yq --inplace \
-#         ".spec.source.helm.valuesObject.image.tag = \"v0.0.1\"" \
-#         argocd/cncf-demo-helm.yaml
+    open $"($gitops_app)/cncf-demo-cdk8s.yaml"
+        | upsert spec.source.repoURL $repo_url
+        | save $"($gitops_app)/cncf-demo-cdk8s.yaml" --force
 
-#     yq --inplace \
-#         ".spec.source.helm.valuesObject.tls.enabled = false" \
-#         argocd/cncf-demo-helm.yaml
+    open cdk8s/app-prod.yaml
+        | upsert image.repository $image
+        | upsert image.tag v0.0.1
+        | save cdk8s/app-prod.yaml --force
 
-# elif [[ "$TEMPLATES" == "cdk8s" ]]; then
+} else {
 
-#     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-cdk8s.yaml
+    open $"($gitops_app)/cncf-demo-ytt.yaml"
+        | upsert spec.source.repoURL $repo_url
+        | save $"($gitops_app)/cncf-demo-ytt.yaml" --force
 
-#     yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" cdk8s/app-prod.yaml
+    open ytt/values-prod.yaml
+        | upsert image.repository $image
+        | upsert image.tag v0.0.1
+        | save ytt/values-prod.yaml --force
 
-#     yq --inplace ".image.tag = \"v0.0.1\"" cdk8s/app-prod.yaml
+}
 
-# else
+print $"(ansi purple_bold)
+####################
+# Setup Crossplane #
+####################
+(ansi reset)"
 
-#     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" $GITOPS_APP/cncf-demo-ytt.yaml
+(
+    helm repo add crossplane-stable
+        https://charts.crossplane.io/stable
+)
 
-#     yq --inplace ".image.repository = \"index.docker.io/vfarcic/cncf-demo\"" ytt/values-prod.yaml
+helm repo update
 
-#     yq --inplace ".image.tag = \"v0.0.1\"" ytt/values-prod.yaml
+(
+    helm upgrade --install crossplane crossplane-stable/crossplane
+        --namespace crossplane-system --create-namespace --wait
+)
 
-# fi
+(
+    kubectl apply --filename
+        crossplane-config/provider-kubernetes-incluster.yaml
+)
 
-# ####################
-# # Setup Crossplane #
-# ####################
+kubectl apply --filename crossplane-config/config-sql.yaml
 
-# set +e
-# helm repo add crossplane-stable https://charts.crossplane.io/stable
-# set -e
+sleep 60sec
 
-# helm repo update
+(
+    kubectl wait provider.pkg.crossplane.io
+        --for=condition=healthy --all --timeout=600s
+)
 
-# helm upgrade --install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace --wait
+if $hyperscaler == "google" {
 
-# kubectl apply --filename crossplane-config/provider-kubernetes-incluster.yaml
+    (
+        kubectl --namespace crossplane-system
+            create secret generic gcp-creds
+            --from-file creds=./gcp-creds.json
+    )
 
-# kubectl apply --filename crossplane-config/config-sql.yaml
+    $"apiVersion: gcp.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  projectID: ($project_id)
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: gcp-creds
+      key: creds" | kubectl apply --filename -
 
-# sleep 60
+    open settings.yaml
+        | upsert crossplane.destination "google"
+        | save settings.yaml --force
 
-# kubectl wait --for=condition=healthy provider.pkg.crossplane.io --all --timeout=600s
-
-# if [[ "$HYPERSCALER" == "google" ]]; then
-
-#     kubectl --namespace crossplane-system create secret generic gcp-creds --from-file creds=./gcp-creds.json
-
-#     echo "apiVersion: gcp.upbound.io/v1beta1
-# kind: ProviderConfig
-# metadata:
-#   name: default
-# spec:
-#   projectID: $PROJECT_ID
-#   credentials:
-#     source: Secret
-#     secretRef:
-#       namespace: crossplane-system
-#       name: gcp-creds
-#       key: creds" | kubectl apply --filename -
-
-#     yq --inplace ".crossplane.destination = \"google\"" settings.yaml
-
-# elif [[ "$HYPERSCALER" == "aws" ]]; then
+# } else if $hyperscaler == "aws" {
 
 #     kubectl --namespace crossplane-system create secret generic aws-creds --from-file creds=./aws-creds.conf
 
@@ -397,74 +436,82 @@ open settings.yaml
 
 #     yq --inplace ".crossplane.destination = \"azure\"" settings.yaml
 
-# fi
+}
 
-# ##################
-# # Setup Database #
-# ##################
+print $"(ansi purple_bold)
+##################
+# Setup Database #
+##################
+(ansi reset)"
 
-# if [[ "$TEMPLATES" == "kustomize" ]]; then
+if $template == "kustomize" {
 
-#     yq --inplace ".resources += \"postgresql-crossplane-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+    let resources = open kustomize/overlays/prod/kustomization.yaml
+        | get resources
+        | append $"postgresql-crossplane-($hyperscaler).yaml"
+        | append $"postgresql-crossplane-secret-($hyperscaler).yaml"
+        | append $"postgresql-crossplane-schema-($hyperscaler).yaml"
+    
+    let patchesStrategicMerge = open kustomize/overlays/prod/kustomization.yaml
+        | get patchesStrategicMerge
+        | append $"deployment-crossplane-postgresql-($hyperscaler).yaml"
 
-#     yq --inplace ".resources += \"postgresql-crossplane-secret-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+    open kustomize/overlays/prod/kustomization.yaml
+        | upsert resources $resources
+        | upsert patchesStrategicMerge $patchesStrategicMerge
+        | save kustomize/overlays/prod/kustomization.yaml --force
 
-#     yq --inplace ".patchesStrategicMerge += \"deployment-crossplane-postgresql-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+} else if $template == "helm" {
 
-#     yq --inplace ".resources += \"postgresql-crossplane-schema-$HYPERSCALER.yaml\"" kustomize/overlays/prod/kustomization.yaml
+    open argocd/cncf-demo-helm.yaml
+        | upsert ([spec source helm valuesObject db enabled crossplane $hyperscaler ] | into cell-path) true
+        | upsert spec.source.helm.valuesObject.db.insecure true
+        | save argocd/cncf-demo-helm.yaml --force
 
-# elif [[ "$TEMPLATES" == "helm" ]]; then
+} else if $template == "cdk8s" {
 
-#     yq --inplace \
-#         ".spec.source.helm.valuesObject.db.enabled.crossplane.$HYPERSCALER = true" \
-#         argocd/cncf-demo-helm.yaml
+    open cdk8s/app-prod.yaml
+        | upsert ([db enabled crossplane $hyperscaler ] | into cell-path) true
+        | upsert db.id "cncf-demo-db"
+        | upsert db.insecure true
+        | upsert db.size "small"
+        | upsert schemahero.enabled true
+        | save cdk8s/app-prod.yaml --force
 
-#     yq --inplace \
-#         ".spec.source.helm.valuesObject.db.insecure = true" \
-#         argocd/cncf-demo-helm.yaml
+    cd cdk8s
 
-# elif [[ "$TEMPLATES" == "cdk8s" ]]; then
+    ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
 
-#     yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" cdk8s/app-prod.yaml
+    cd ../
 
-#     yq --inplace ".db.id = \"cncf-demo-db\"" cdk8s/app-prod.yaml
+} else {
 
-#     yq --inplace ".db.insecure = true" cdk8s/app-prod.yaml
+    open ytt/values-prod.yaml
+        | upsert ([db enabled crossplane $hyperscaler ] | into cell-path) true
+        | upsert db.id "cncf-demo-db"
+        | upsert db.insecure true
+        | upsert db.size "small"
+        | upsert schemahero.enabled true
+        | save ytt/values-prod.yaml --force
 
-#     yq --inplace ".db.size = \"small\"" cdk8s/app-prod.yaml
+    (
+        ytt --file ytt/schema.yaml --file ytt/resources
+            --data-values-file ytt/values-prod.yaml
+            | save yaml/prod/app.yaml --force
+    )
 
-#     yq --inplace ".schemahero.enabled = true" cdk8s/app-prod.yaml
+}
 
-#     cd cdk8s
+print $"(ansi purple_bold)
+#########################
+# Setup Database Schema #
+#########################
+(ansi reset)"
 
-#     ENVIRONMENT=prod cdk8s synth --output ../yaml/prod --validate
+cp argocd/schema-hero.yaml infra/.
 
-#     cd ../
+git add .
 
-# else
+git commit -m "SchemaHero"
 
-#     yq --inplace ".db.enabled.crossplane.$HYPERSCALER = true" ytt/values-prod.yaml
-
-#     yq --inplace ".db.id = \"cncf-demo-db\"" ytt/values-prod.yaml
-
-#     yq --inplace ".db.insecure = true" ytt/values-prod.yaml
-
-#     yq --inplace ".db.size = \"small\"" ytt/values-prod.yaml
-
-#     yq --inplace ".schemahero.enabled = true" ytt/values-prod.yaml
-
-#     ytt --file ytt/schema.yaml --file ytt/resources --data-values-file ytt/values-prod.yaml | tee yaml/prod/app.yaml
-
-# fi
-
-# #######################
-# # Setup Dabase Schema #
-# #######################
-
-# cp argocd/schema-hero.yaml infra/.
-
-# git add .
-
-# git commit -m "SchemaHero"
-
-# git push
+git push

@@ -34,12 +34,12 @@ schemahero:
   enabled: false
 fga:
   enabled: false
-  url: ""
-  storeId: ""
-  modeId: ""
+  url: ''
+  storeId: ''
+  modeId: ''
 otel:
   enabled: false
-  jaegerAddr: "http://jaeger-collector.monitoring:4318"
+  jaegerAddr: http://jaeger-collector.monitoring:4318
 logging:
   enabled: false
 serviceMesh:
