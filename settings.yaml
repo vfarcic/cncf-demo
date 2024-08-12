@@ -13,4 +13,4 @@ production:
     resourceGroup: dot-20240123133515
     location: eastus
   google:
-    projectId: dot-20240329204252
+    projectId: dot-20240812152736
