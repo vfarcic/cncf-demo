@@ -2,26 +2,13 @@
 
 rm .env
 
-let continue = [Yes No]
-    | input list $"(ansi green_bold)Are you ready to start?(ansi reset)
-Select (ansi yellow_bold)Yes(ansi reset) only if you did NOT follow the story from the start \(if you jumped straight into this chapter).
-Feel free to say (ansi yellow_bold)No(ansi reset) and inspect the script if you prefer setting up resources manually.(ansi yellow_bold)
-"
+source common.nu
 
-if continue == No { exit }
+start-script
 
-print $"(ansi purple_bold)
-################
-# Hyperscalers #
-################
-(ansi reset)"
+header "Hyperscalers"
 
-let hyperscaler = [google aws azure]
-    | input list $"(ansi green_bold)Which Hyperscaler do you want to use?(ansi yellow_bold)"
-$"export HYPERSCALER=($hyperscaler)\n" | save --append .env
-open settings.yaml
-    | upsert hyperscaler $hyperscaler
-    | save settings.yaml --force
+let hyperscaler = get-hyperscaler
 
 $env.KUBECONFIG = $"($env.PWD)/kubeconfig.yaml"
 $"export KUBECONFIG=($env.KUBECONFIG)\n" | save --append .env
@@ -186,11 +173,7 @@ aws_secret_access_key = ($aws_secret_access_key)
 
 }
 
-print $"(ansi purple_bold)
-################
-# Setup GitOps #
-################
-(ansi reset)"
+header "Setup GitOps"
 
 kubectl create namespace production
 
@@ -233,11 +216,7 @@ open settings.yaml
     | upsert gitOps.app $gitops_app
     | save settings.yaml --force
 
-print $"(ansi purple_bold)
-#################
-# Setup Ingress #
-#################
-(ansi reset)"
+header "Setup Ingress"
 
 cp $"($gitops_app)/contour.yaml" infra/.
 
@@ -299,11 +278,7 @@ open settings.yaml
     | upsert ingress.classname "contour"
     | save settings.yaml --force
 
-print $"(ansi purple_bold)
-#################
-# Setup the App #
-#################
-(ansi reset)"
+header "Setup the App"
 
 let image = "index.docker.io/vfarcic/cncf-demo"
 
@@ -374,11 +349,7 @@ if $template == "kustomize" {
 
 }
 
-print $"(ansi purple_bold)
-####################
-# Setup Crossplane #
-####################
-(ansi reset)"
+header "Setup Crossplane"
 
 (
     helm repo add crossplane-stable
