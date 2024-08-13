@@ -19,6 +19,7 @@ Select (ansi yellow_bold)Yes(ansi reset) only if you did NOT follow the story fr
 Feel free to say (ansi yellow_bold)No(ansi reset) and inspect the script if you prefer setting up resources manually(ansi yellow_bold)"
     if $cont == No { print exit }
 }
+ansi reset
 
 def get-hyperscaler [] {
     let hyperscaler = [google aws azure]

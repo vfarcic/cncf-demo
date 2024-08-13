@@ -94,17 +94,17 @@ if $hyperscaler == "google" {
 
 } else if $hyperscaler == "aws" {
 
-    let aws_key_id = input $"(ansi green_bold)Enter AWS Access Key ID: (ansi reset)"
-    $"export AWS_ACCESS_KEY_ID=($aws_key_id)\n" | save --append .env
+    let aws_access_key_id = input $"(ansi green_bold)Enter AWS Access Key ID: (ansi reset)"
+    $"export AWS_ACCESS_KEY_ID=($aws_access_key_id)\n" | save --append .env
 
-    let aws_secret_access_key = input $"(ansi green_bold)Enter AWS Secret Access Key: (ansi reset)"
+    let aws_secret_access_key = input $"(ansi green_bold)Enter AWS Secret Access Key: (ansi reset)" --suppress-output
     $"export AWS_SECRET_ACCESS_KEY=($aws_secret_access_key)\n" | save --append .env
 
     let aws_account_id = input $"(ansi green_bold)Enter AWS Account ID: (ansi reset)"
     $"export AWS_ACCOUNT_ID=($aws_account_id)\n" | save --append .env
 
     $"[default]
-aws_access_key_id = ($aws_key_id)
+aws_access_key_id = ($aws_access_key_id)
 aws_secret_access_key = ($aws_secret_access_key)
 " | save aws-creds.conf --force
 
