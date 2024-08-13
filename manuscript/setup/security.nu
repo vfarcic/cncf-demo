@@ -107,67 +107,82 @@ if $hyperscaler == "google" {
 
 } else if $hyperscaler == "aws" {
 
-#     AWS_ACCESS_KEY_ID=$(gum input --placeholder "AWS Access Key ID" --value "$AWS_ACCESS_KEY_ID")
-#     echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
-    
-#     AWS_SECRET_ACCESS_KEY=$(gum input --placeholder "AWS Secret Access Key" --value "$AWS_SECRET_ACCESS_KEY" --password)
-#     echo "export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
+    let aws_key_id = input $"(ansi green_bold)Enter AWS Access Key ID: (ansi reset)"
+    $"export AWS_ACCESS_KEY_ID=($aws_key_id)\n" | save --append .env
 
-#     AWS_ACCOUNT_ID=$(gum input --placeholder "AWS Account ID" --value "$AWS_ACCOUNT_ID")
-#     echo "export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
+    let aws_secret_access_key = input $"(ansi green_bold)Enter AWS Secret Access Key: (ansi reset)"
+    $"export AWS_SECRET_ACCESS_KEY=($aws_secret_access_key)\n" | save --append .env
 
-#     echo "[default]
-# aws_access_key_id = $AWS_ACCESS_KEY_ID
-# aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
-# " >aws-creds.conf
+    let aws_account_id = input $"(ansi green_bold)Enter AWS Account ID: (ansi reset)"
+    $"export AWS_ACCOUNT_ID=($aws_account_id)\n" | save --append .env
 
-#     eksctl create cluster \
-#         --config-file eksctl/config-cilium.yaml \
-#         --kubeconfig kubeconfig.yaml
+    $"[default]
+aws_access_key_id = ($aws_key_id)
+aws_secret_access_key = ($aws_secret_access_key)
+" | save aws-creds.conf --force
 
-#     sleep 10
+    (
+        eksctl create cluster
+            --config-file eksctl/config-cilium.yaml
+            --kubeconfig kubeconfig.yaml
+    )
 
-#     kubectl --namespace kube-system patch daemonset aws-node \
-#         --type strategic \
-#         --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
+    sleep 10sec
 
-#     helm install cilium cilium/cilium \
-#         --version "1.15.0" --namespace kube-system \
-#         --set eni.enabled=true --set ipam.mode=eni \
-#         --set routingMode=native \
-#         --set egressMasqueradeInterfaces=eth0 --wait
+    (
+        kubectl --namespace kube-system patch daemonset aws-node
+            --type strategic
+            --patch '{"spec":{"template":{"spec":{"nodeSelector":{"io.cilium/aws-node-enabled":"true"}}}}}'
+    )
 
-#     eksctl create addon --name aws-ebs-csi-driver --cluster dot-production \
-#         --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
-#         --region us-east-1 --force
+    (
+        helm install cilium cilium/cilium
+            --version "1.15.0" --namespace kube-system
+            --set eni.enabled=true --set ipam.mode=eni
+            --set routingMode=native
+            --set egressMasqueradeInterfaces=eth0 --wait
+    )
 
-# elif [[ "$HYPERSCALER" == "azure" ]]; then
+    (
+        eksctl create addon --name aws-ebs-csi-driver
+            --cluster dot-production
+            --service-account-role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole
+            --region us-east-1 --force
+    )
 
-#     az login
+} else {
 
-#     RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
+    az login
 
-#     echo "export RESOURCE_GROUP=$RESOURCE_GROUP" >> .env
+    let resource_group = $"dot-(date now | format date "%Y%m%d%H%M%S")"
+    $"export RESOURCE_GROUP=($resource_group)\n" | save --append .env
 
-#     yq --inplace ".production.azure.resourceGroup = \"${RESOURCE_GROUP}\"" settings.yaml
+    let location = "eastus"
 
-#     export LOCATION=eastus
+    open settings.yaml
+        | upsert production.azure.resourceGroup $resource_group
+        | upsert production.azure.location $location
+        | save settings.yaml --force
 
-#     yq --inplace ".production.azure.location = \"${LOCATION}\"" settings.yaml
+    az group create --name $resource_group --location $location
 
-#     az group create --name $RESOURCE_GROUP --location $LOCATION
+    (
+        az aks create --resource-group $resource_group --name dot
+            --node-count 3 --node-vm-size Standard_B2ms
+            --enable-managed-identity --network-plugin none
+            --generate-ssh-keys --yes
+    )
 
-#     az aks create --resource-group $RESOURCE_GROUP --name dot \
-#         --node-count 3 --node-vm-size Standard_B2ms \
-#         --enable-managed-identity --network-plugin none \
-#         --generate-ssh-keys --yes
+    (
+        az aks get-credentials --resource-group $resource_group
+            --name dot --file $env.KUBECONFIG
+    )
 
-#     az aks get-credentials --resource-group $RESOURCE_GROUP \
-#         --name dot --file $KUBECONFIG
-
-#     helm install cilium cilium/cilium --version "1.14.2" \
-#         --namespace kube-system --set aksbyocni.enabled=true \
-#         --set nodeinit.enabled=true --wait
+    (
+        helm install cilium cilium/cilium --version "1.14.2"
+            --namespace kube-system --set aksbyocni.enabled=true
+            --set nodeinit.enabled=true --wait
+    )
 
 }
 
@@ -279,7 +294,7 @@ open settings.yaml
     | upsert ingress.host $"($ingress_ip).nip.io"
     | save settings.yaml --force
 
-"export INGRESS_CLASSNAME=contour" | save --append .env
+"export INGRESS_CLASSNAME=contour\n" | save --append .env
 open settings.yaml
     | upsert ingress.classname "contour"
     | save settings.yaml --force
