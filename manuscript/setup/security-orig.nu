@@ -16,11 +16,9 @@ $"export KUBECONFIG=($env.KUBECONFIG)\n" | save --append .env
 helm repo add cilium https://helm.cilium.io
 helm repo update
 
-mut project_id = ""
-
 if $hyperscaler == "google" {
 
-    $project_id = $"dot-(date now | format date "%Y%m%d%H%M%S")"
+    let project_id = $"dot-(date now | format date "%Y%m%d%H%M%S")"
     $"export PROJECT_ID=($project_id)\n" | save --append .env
 
     open settings.yaml
@@ -237,8 +235,6 @@ mut pods = 0; while $pods == 0 {
 
 sleep 10sec
 
-mut ingress_ip = ""
-
 if $hyperscaler == "aws" {
 
 #     INGRESS_IPNAME=$(kubectl --namespace projectcontour get service contour-envoy --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
@@ -253,7 +249,7 @@ if $hyperscaler == "aws" {
 
 } else {
 
-    while $ingress_ip == "" {
+    mut ingress_ip = ""; while $ingress_ip == "" {
         print "Waiting for Ingress Service IP..."
         $ingress_ip = (
             kubectl --namespace projectcontour
