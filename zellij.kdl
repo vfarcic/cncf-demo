@@ -1,0 +1,13 @@
+layout {
+    tab name="Do" focus=true {
+        pane {
+            name "zsh"
+            size "50%"
+        }
+        pane {
+            name "nu"
+            size "50%"
+        }
+    }
+}
+
