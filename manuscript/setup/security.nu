@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-rm -f .env
+rm --force .env
 
 source common.nu
 
