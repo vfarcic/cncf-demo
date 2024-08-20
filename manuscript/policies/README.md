@@ -73,7 +73,7 @@ with Kyverno, policy is written in YAML
 Kyverno also has over 280 policies available to the public, many created by the community. Kyverno offers policy reports that decouple policies from policy results, and a CLI that allows you to use Kyverno in your CI/CD pipeline.
 
 [![Kubernetes-Native Policy Management With Kyverno](https://img.youtube.com/vi/DREjzfTzNpA/0.jpg)](https://youtu.be/DREjzfTzNpA)
-[![No-Code Policy with Kyverno](https://img.youtube.com/vi/JsHA1UTxLHQ/0.jpg)](https://youtu.be/JsHA1UTxLHQ)
+[![No-Code Policy with Kyverno](https://img.youtube.com/vi/ytB_PVCMX9s/0.jpg)](https://youtu.be/ytB_PVCMX9s)
 [![Signing And Verifying Container Images With Sigstore Cosign And Kyverno](https://img.youtube.com/vi/HLb1Q086u6M/0.jpg)](https://youtu.be/HLb1Q086u6M)
 * [Official site](https://kyverno.io)
 
@@ -89,7 +89,7 @@ Just like Kyverno, OPA has excellent community support (over 150 Rego built-ins!
 
 
 [![How to apply policies in Kubernetes using Open Policy Agent (OPA) and Gatekeeper](https://img.youtube.com/vi/14lGc7xMAe4/0.jpg)](https://youtu.be/14lGc7xMAe4)
-[![Open Policy Agent and Rego - the Policy Power Duo!](https://img.youtube.com/vi/FlVBw5PNKZQ/0.jpg)](https://youtu.be/FlVBw5PNKZQ)
+[![Open Policy Agent and Rego - the Policy Power Duo!](https://img.youtube.com/vi/QNX5JfV390c/0.jpg)](https://youtu.be/QNX5JfV390c)
 * [Official site](https://open-policy-agent.github.io/gatekeeper)
 
 ## Choice 3: Cloud Custodian
@@ -104,7 +104,7 @@ Cloud Custodian also has a wonderful community with over 400 contributors to the
 
 
 [![Cloud Custodian - Policies? Resource Management? Something Else?](https://img.youtube.com/vi/AuXWI-Mkz9Q/0.jpg)](https://youtu.be/AuXWI-Mkz9Q)
-[![Cloud Custodian: Governance as Code That Developers Love](https://img.youtube.com/vi/lv7wR6M9CWk/0.jpg)](https://youtu.be/lv7wR6M9CWk)
+[![Cloud Custodian: Governance as Code That Developers Love](https://img.youtube.com/vi/61m5uH_FPtY/0.jpg)](https://youtu.be/61m5uH_FPtY)
 * [Official site](https://cloudcustodian.io)
 
 ## Choice 4: Kubewarden
@@ -116,7 +116,7 @@ With WebAssembly, first you write code as usual, but then when you compile it yo
 All of this enables policy authors to be able to write policies in a programming language that they're comfortable with, using their existing tools and skills, while still providing Kubernetes Operators with all of the functionality that they need to effectively implement cluster-level policies and increase the security and reliability of their system.
 
 
-[![Kubewarden, the Universal Policy Framework](https://img.youtube.com/vi/bLQ_mtbNRUY/0.jpg)](https://youtu.be/bLQ_mtbNRUY)
+[![Kubewarden, the Universal Policy Framework](https://img.youtube.com/vi/HFyLICfbhy8/0.jpg)](https://youtu.be/HFyLICfbhy8)
 * [Official site](https://kubewarden.io)
 
 ## Choice 5: Validating Admission Policy
@@ -131,7 +131,7 @@ A ValidatingAdmissionPolicy cannot be used without a ValidatingAdmissionPolicyBi
 
 
 [![Kubernetes Validating Admission Policy Changes The Game](https://img.youtube.com/vi/EsZcDUaSUss/0.jpg)](https://youtu.be/EsZcDUaSUss)
-[![What Is ValidatingAdmissionPolicy in Kubernetes?](https://img.youtube.com/vi/Cw_GE6nQPiY/0.jpg)](https://youtu.be/Cw_GE6nQPiY)
+[![What Is ValidatingAdmissionPolicy in Kubernetes?](https://img.youtube.com/vi/tZGjr2Kwpls/0.jpg)](https://youtu.be/tZGjr2Kwpls)
 * [Official site](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy)
 
 ## What Is Your Choice?
