@@ -27,7 +27,7 @@ Hero and Lil DeeBee want to be COOL KIDS and get deployed and managed using GitO
 TODO: Explanation
 
 [![Flux CD v2 With GitOps Toolkit - Kubernetes Deployment And Sync Mechanism](https://img.youtube.com/vi/R6OeIgb7lUI/0.jpg)](https://youtu.be/R6OeIgb7lUI)
-[![What the Flux?! GitOps at Your Fingertips](https://img.youtube.com/vi/_8Zobz7qbqo/0.jpg)](https://via.vmw.com/Flux)
+[![What the Flux?! GitOps at Your Fingertips](https://img.youtube.com/vi/_8Zobz7qbqo/0.jpg)](https://youtu.be/_8Zobz7qbqo)
 * [Official site](https://fluxcd.io)
 
 ## Choice 2: Argo CD
@@ -35,14 +35,14 @@ TODO: Explanation
 TODO: Explanation
 
 [![Argo CD - Applying GitOps Principles To Manage A Production Environment In Kubernetes](https://img.youtube.com/vi/vpWQeoaiRM4/0.jpg)](https://youtu.be/vpWQeoaiRM4)
-[![What is Argo CD?](https://img.youtube.com/vi/fQ9846hRiFo/0.jpg)](https://via.vmw.com/ArgoCD)
+[![What is Argo CD?](https://img.youtube.com/vi/fQ9846hRiFo/0.jpg)](https://youtu.be/fQ9846hRiFo)
 * [Official site](https://argoproj.github.io/cd)
 
 ## Choice 3: Carvel Kapp Controller
 
 TODO: Explanation
 
-[![What Is Carvel kapp-controller?](https://img.youtube.com/vi/Bc0VrKQsJAo/0.jpg)](https://via.vmw.com/kappcontroller)
+[![What Is Carvel kapp-controller?](https://img.youtube.com/vi/ojFG8h5Ht70/0.jpg)](https://youtu.be/ojFG8h5Ht70)
 * [Getting Started with kapp-controller](https://tanzu.vmware.com/developer/guides/kapp-controller-gs/)
 * [Official site](https://carvel.dev/kapp-controller)
 

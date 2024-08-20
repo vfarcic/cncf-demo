@@ -22,7 +22,7 @@ With Helm, the person configuring the third-party application has access to mani
 
 If you choose this option, the PosgreSQL database will be incorporated into our existing app configuration (defined using either Helm, Kustomize, Carvel YTT, or cdk8s) using Helm only. This updated configuration will then be applied to the cluster, deploying both our application and the database. 
 
-[![You're at the Helm](https://img.youtube.com/vi/oPIiX6vyih8/0.jpg)](https://via.vmw.com/Helm)
+[![You're at the Helm](https://img.youtube.com/vi/oPIiX6vyih8/0.jpg)](https://youtu.be/oPIiX6vyih8)
 * [Official site](https://bitnami.com/stack/postgresql/helm)
 
 ## Choice 2: Crossplane Composition in Kubernetes
@@ -40,7 +40,7 @@ If you choose this option (using Crossplane Compositions to deploy and manage Po
 
 [![Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://img.youtube.com/vi/n8KjVmuHm7A/0.jpg)](https://youtu.be/n8KjVmuHm7A)
 [![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
-[![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://via.vmw.com/Crossplane)
+[![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://youtu.be/CHBA34a0KEQ)
 * [Official site](https://crossplane.io)
 
 ## Choice 3: Crossplane Composition in Cloud
@@ -59,7 +59,7 @@ If you choose this option (using Crossplane Compositions to deploy and manage Po
 
 [![Crossplane - GitOps-based Infrastructure as Code through Kubernetes API](https://img.youtube.com/vi/n8KjVmuHm7A/0.jpg)](https://youtu.be/n8KjVmuHm7A)
 [![How To Shift Left Infrastructure Management Using Crossplane Compositions](https://img.youtube.com/vi/AtbS1u2j7po/0.jpg)](https://youtu.be/AtbS1u2j7po)
-[![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://via.vmw.com/Crossplane)
+[![Crossplane: Control Plane of Control Planes](https://img.youtube.com/vi/CHBA34a0KEQ/0.jpg)](https://youtu.be/CHBA34a0KEQ)
 * [Official site](https://crossplane.io)
 
 
