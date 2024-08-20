@@ -10,8 +10,7 @@ At its core, a container image is simply a tarball of an entire filesystem (or s
 
 `kbld` is a CLI that automates image building, image pushing, and deployment configuration updates. `kbld` is part of the [Carvel](https://carvel.dev/) suite of tools. Whenever a relevant new resource is created, `kbld` builds an application image from your specified source code (using Docker or Cloud Native Buildpacks), `kbld` optionally pushes the resulting image to your registry of choice, and finally `kbld` resolves it to an image digest reference. `kbld` automatically finds image references within your configuration, and you can choose whether `kbld` updates these references to the latest image digest or whether to lock a certain image digest reference to ensure that exactly the same image versions are used. `kbld` probably works with your existing configuration management tool (helm, kustomize, ytt, vanilla k8s).
 
-[![kbld in 1 Minute](https://img.youtube.com/vi/saqUgKCS0KI/0.jpg)](https://youtube.com/shorts/saqUgKCS0KI)
-[![Carvel: Clean Tools for Cloud Native Problems](https://img.youtube.com/vi/gsyGOv_Nwb0/0.jpg)](https://via.vmw.com/carvel)
+[![Carvel: Clean Tools for Cloud Native Problems](https://img.youtube.com/vi/gsyGOv_Nwb0/0.jpg)](https://youtu.be/gsyGOv_Nwb0)
 * [Official site](https://carvel.dev/kbld)
 
 ## Choice 2: Lima
@@ -29,9 +28,8 @@ Since we are talking about building images here, it is worth noting that with th
 
 The Cloud Native Buildpacks project takes source code as input and then outputs an [Open Container Initiative](https://opencontainers.org/) (OCI)-compliant container image. CNBs provide a sweet, sweet developer experience while giving platform teams more control over how images are built. Cloud Native Buildpacks additionally provide a software bill of materials (SBOM) - no mystery meat in production!  CNB-built images are reproducible and efficient (only changed layers are rebuilt), and they can be rebased easily since the operating system (OS) layer can be patched without requiring an image rebuild. There are many implementations of Cloud Native Buildpacks such as the [pack](https://buildpacks.io/docs/tools/pack/) CLI tool, [kpack](https://buildpacks.io/docs/tools/kpack/), Google [Cloud Run](https://cloud.google.com/run/), or the [Tekton 'Buildpacks' task](https://hub.tekton.dev/tekton/task/buildpacks), to name a few.
 
-[![Cloud Native Buildpacks in 1 Minute](https://img.youtube.com/vi/wqawxcQMf8k/0.jpg)](https://youtube.com/shorts/wqawxcQMf8k)
 [![Container (Docker) Images Without Dockerfile With Buildpacks and kpack](https://img.youtube.com/vi/fbSoKu8NGSU/0.jpg)](https://youtu.be/fbSoKu8NGSU)
-[![What Are Cloud Native Buildpacks and How Do They Work?](https://img.youtube.com/vi/-n9H8KnYjVI/0.jpg)](https://via.vmw.com/Buildpacks)
+[![What Are Cloud Native Buildpacks and How Do They Work?](https://img.youtube.com/vi/-n9H8KnYjVI/0.jpg)](https://youtu.be/-n9H8KnYjVI)
 * [Official site](https://buildpacks.io)
 
 ## What Is Your Choice?
