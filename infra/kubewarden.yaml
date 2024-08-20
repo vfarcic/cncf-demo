@@ -1,0 +1,78 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubewarden-crds
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: kubewarden-crds
+    repoURL: https://charts.kubewarden.io
+    targetRevision: 1.4.4
+    helm:
+      releaseName: kubewarden-crds
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubewarden
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubewarden-controller
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: kubewarden-controller
+    repoURL: https://charts.kubewarden.io
+    targetRevision: 2.0.5
+    helm:
+      releaseName: kubewarden-controller
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubewarden
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubewarden-defaults
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: kubewarden-defaults
+    repoURL: https://charts.kubewarden.io
+    targetRevision: 1.9.2
+    helm:
+      releaseName: kubewarden-defaults
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubewarden
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
