@@ -46,7 +46,7 @@ So from a user perspective, all you do is create a `Certificate` resource where 
 *An `Issuer` is another cert-manager custom Kubernetes resource. It tells cert-manager how to connect to a particular CA. cert-manager will obtain certificates from a variety of Issuers, both popular public Issuers as well as private Issuers.
 
 [![What Is HTTPS? How Does It Work? Automate With cert-manager And Let's Encrypt](https://img.youtube.com/vi/D7ijCjE31GA/0.jpg)](https://youtu.be/D7ijCjE31GA)
-[![De-stress Certificates with cert-manager!](https://img.youtube.com/vi/DthwYI46DYo/0.jpg)](https://via.vmw.com/cert-manager)
+[![De-stress Certificates with cert-manager!](https://img.youtube.com/vi/DthwYI46DYo/0.jpg)](https://youtu.be/DthwYI46DYo)
 * [Official site](https://cert-manager.io/)
 
 ## What Is Your Choice?
