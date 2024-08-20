@@ -20,7 +20,7 @@ Telepresence is a remote-to-local fast feedback development tool for Kubernetes.
 
 Telepresence works by intercepting traffic that is intended for the application running in the remote Kubernetes cluster, and redirecting that traffic to the copy of that application that is running on the developer's laptop. 
 
-[![Remocal K8s Development FTW: Telepresence 101](https://img.youtube.com/vi/VLABvVtUZvk/0.jpg)](https://via.vmw.com/Telepresence)
+[![Remocal K8s Development FTW: Telepresence 101](https://img.youtube.com/vi/VLABvVtUZvk/0.jpg)](https://youtu.be/VLABvVtUZvk)
 * [Official site](https://www.telepresence.io)
 
 ## Choice 2: DevSpace
@@ -31,7 +31,7 @@ DevSpace improves the developer experience by enabling a fast development cycle 
 
 [![DevSpace - Development Environments in Kubernetes](https://img.youtube.com/vi/nQly_CEjJc4/0.jpg)](https://youtu.be/nQly_CEjJc4)
 [![Full App Lifecycle In Kubernetes With Argo CD, DevSpace, vCluster, k3d, and GitHub Actions](https://img.youtube.com/vi/uU-EAQ8Vbvk/0.jpg)](https://youtu.be/uU-EAQ8Vbvk)
-[![Develop at Lightning Speed on Kubernetes with DevSpace](https://img.youtube.com/vi/T_NYcuqUCF0/0.jpg)](https://via.vmw.com/DevSpace)
+[![Develop at Lightning Speed on Kubernetes with DevSpace](https://img.youtube.com/vi/T_NYcuqUCF0/0.jpg)](https://youtu.be/T_NYcuqUCF0)
 * [Official site](https://devspace.sh)
 
 ## Choice 3: Nocalhost
@@ -46,7 +46,7 @@ Devfile is a specification that allows users to declaratively include the develo
 
 To use devfiles, you'll need a tool that understands them. Tools that provide devfile support include odo, Eclipse Che, VSCode OpenShift Toolkit, Amazon CodeCatalyst, JetBrains Space, OpenShift Dev Console, and IntelliJ OpenShift Toolkit.
 
-[![What Is Devfile?](https://img.youtube.com/vi/eGFdEXw9eLE/0.jpg)](https://www.youtube.com/live/eGFdEXw9eLE)
+[![Software Defined Cloud Dev Environments with the Devfile](https://img.youtube.com/vi/65qbpPW38xs/0.jpg)](https://youtu.be/65qbpPW38xs)
 * [Official Devfile site](https://devfile.io)
 * [Official odo site](https://odo.dev)
 
