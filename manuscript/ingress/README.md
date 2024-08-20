@@ -51,6 +51,7 @@ By now you should have a good understanding of why the Ingress landscape is diff
 
 Now, FINALLY, with all of this context, it is time to consider the three CNCF Ingress projects at hand! Which project do you choose to get end-user traffic into our production cluster and through to Hero, our running application? Let's cheer them up! Ingress isn't so bad, Hero... we got this!
 <br><br>
+[![What Is Gateway API?](https://img.youtube.com/vi/G_5tRFY6N_k/0.jpg)](https://youtu.be/G_5tRFY6N_k)
 
 ## Choice 1: ingress-nginx
 
@@ -58,7 +59,7 @@ ingress-nginx is a Kubernetes Ingress implementation that uses Ingress objects t
 
 ingress-nginx uses the native Kubernetes Ingress object and adds extra functionality via **modules**, of which there are about 30. Modules are added and configured via annotations to the Ingress object.
 
-[![What Is ingress-nginx?](https://img.youtube.com/vi/G-m9mB4y3Og/0.jpg)](https://via.vmw.com/ingress-nginx)
+[![What Is ingress-nginx?](https://img.youtube.com/vi/ly_zzKR_alA/0.jpg)](https://youtu.be/ly_zzKR_alA)
 * [Official site](https://kubernetes.github.io/ingress-nginx)
 
 ## Choice 2: Contour with Envoy
@@ -73,7 +74,7 @@ Specifically, Contour introduces a **HTTPProxy** CRD that does everything that a
 * provides statistics for Ops folks
 * TLS cert delegation - a safe way to reference secrets in different namespaces
 
-[![Implementing Ingress with Contour](https://img.youtube.com/vi/oFGyqG_7jTU/0.jpg)](https://via.vmw.com/Contour)
+[![Implementing Ingress with Contour](https://img.youtube.com/vi/zFx7gdM7xpQ/0.jpg)](https://youtu.be/zFx7gdM7xpQ)
 * [Official site](https://projectcontour.io)
 
 ## Choice 3: Emissary-ingress with Envoy
@@ -85,7 +86,7 @@ Emissary-ingress introduces many CRDs. Here are the 3 most important:
 * **Listener** - a listener configures what ports we lisen on & what protocol we are listening for. For example, port 8443 only listens for HTTPS
 * **Host** - a host configures what hostname you want to support (can do wildcard). It also has support for TLS.
 
-[![Self-Service Traffic Management with Emissary-ingress](https://img.youtube.com/vi/NpCEh09mOJI/0.jpg)](https://via.vmw.com/Emissary)
+[![Self-Service Traffic Management with Emissary-ingress](https://img.youtube.com/vi/XT2NQ4IZwNo/0.jpg)](https://youtu.be/XT2NQ4IZwNo)
 * [Official site](https://www.getambassador.io/products/api-gateway)
 
 ## What Is Your Choice?
