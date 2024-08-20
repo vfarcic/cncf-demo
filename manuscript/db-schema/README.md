@@ -15,7 +15,7 @@ Hero and Lil DeeBee can agree that knowing what you're about and establishing cl
 SchemaHero is a Kubernetes operator that enables you to define and manage database schemas in a language-agnostic and declarative way. With SchemaHero, you declare your desired schema, and SchemaHero will generate the steps needed to bring the actual schema state in sync with your desired schema state. If you like, you can see these changes (and run policy enforcement on them) before they're applied to your database. Declarative database management with SchemaHero also enables a GitOps approach to database schema changes.
 
 [![SchemaHero - Database Schema Migrations Inside Kubernetes](https://img.youtube.com/vi/SofQxb4CDQQ/0.jpg)](https://youtu.be/SofQxb4CDQQ)
-[![Declarative Database Schema Migrations with SchemaHero](https://img.youtube.com/vi/uzWBaqPxxH8/0.jpg)](https://via.vmw.com/SchemaHero)
+[![Declarative Database Schema Migrations with SchemaHero](https://img.youtube.com/vi/X0wbq7-VwdI/0.jpg)](https://youtu.be/X0wbq7-VwdI)
 * [Official site](https://schemahero.io)
 
 ## Choice 2: Liquibase
