@@ -15,3 +15,4 @@ production:
   google:
     projectId: dot-20240812152736
 hyperscaler: aws
+secrets: eso
