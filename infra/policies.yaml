@@ -1,0 +1,94 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: deploymentproduction
+  annotations:
+    policies.kyverno.io/title: Require Multiple Replicas
+    policies.kyverno.io/category: App
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Deployment
+    policies.kyverno.io/description: >-
+      Deployments with a single replica cannot be highly available and thus the application may suffer downtime if that one replica goes down.
+      This policy validates that Deployments have more than two replicas.      
+spec:
+  validationFailureAction: enforce
+  background: false
+  rules:
+  - name: deployment-has-multiple-replicas
+    match:
+      resources:
+        kinds:
+          - Deployment
+        namespaces:
+          - production
+        operations:
+          - CREATE
+          - UPDATE
+    validate:
+      message: "Deployments should have more than two replicas to ensure availability."
+      pattern:
+        spec:
+          replicas: ">2"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: dbcluster
+  annotations:
+    policies.kyverno.io/title: Require Small, Medium, or Large DB size
+    policies.kyverno.io/category: DB
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: SQLClaim
+    policies.kyverno.io/description: >-
+      SQLClaims must have small, medium, or large database size.
+spec:
+  validationFailureAction: enforce
+  background: false
+  rules:
+  - name: db-must-have-proper-size
+    match:
+      resources:
+        kinds:
+          - SQLClaim
+        operations:
+          - CREATE
+          - UPDATE
+    validate:
+      message: SQLClaims must have small, medium, or large database size.
+      pattern:
+        spec:
+          parameters:
+            size: "small|medium|large"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: dbproduction
+  annotations:
+    policies.kyverno.io/title: Require Medium or Large DB size
+    policies.kyverno.io/category: DB
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: SQLClaim
+    policies.kyverno.io/description: >-
+      SQLClaims with small database instances are not reliable and thus cannot be used in production.
+spec:
+  validationFailureAction: enforce
+  background: false
+  rules:
+  - name: db-cannot-be-small
+    match:
+      resources:
+        kinds:
+          - SQLClaim
+        namespaces:
+          - production
+        operations:
+          - CREATE
+          - UPDATE
+    validate:
+      message: SQLClaims with small database instances are not reliable and thus cannot be used in production.
+      pattern:
+        spec:
+          parameters:
+            size: "!small"
