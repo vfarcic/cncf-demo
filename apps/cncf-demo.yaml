@@ -9,7 +9,7 @@ metadata:
 spec:
   project: production
   source:
-    repoURL: https://github.com/vfarcic/cncf-demo.git
+    repoURL: https://github.com/devopsparadox/cncf-demo.git
     targetRevision: HEAD
     path: yaml/prod
   destination:
