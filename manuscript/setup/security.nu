@@ -262,15 +262,8 @@ if $hyperscaler == "aws" {
                 | get status.loadBalancer.ingress.0.ip
         )
     }
+    $ingress_ip = $ingress_ip | lines | first
 }
-
-# INGRESS_IP=$(echo $INGRESS_IP | awk '{print $1;}')
-
-# INGRESS_IP_LINES=$(echo $INGRESS_IP | wc -l | tr -d ' ')
-
-# if [ $INGRESS_IP_LINES -gt 1 ]; then
-#     INGRESS_IP=$(echo $INGRESS_IP | head -n 1)
-# fi
 
 $"export INGRESS_HOST=($ingress_ip)\n" | save --append .env
 open settings.yaml
