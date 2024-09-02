@@ -620,7 +620,7 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-| Dashboards | Marc Boorshtein - Kubernetes Dashboard<br /> René Dudfield - Headlamp<br /> Lee Calcote - Meshery<br /> Eric D Schabell - Perses | September 3, 2024 | [story](manuscript/dashboards/README.md) |
+| Dashboards | Marc Boorshtein - Kubernetes Dashboard<br /> René Dudfield - Headlamp<br /> Lee Calcote - Meshery | September 3, 2024 | [story](manuscript/dashboards/README.md) |
 | Open Standards | TBD - OpenTelemetry<br /> TBD - Prometheus | September 10, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
 | Metrics | TBD - Prometheus<br /> TBD - Thanos<br /> TBD - Cortex<br /> TBD - Pixie | September 17, 2024 | [story](manuscript/metrics/prometheus.md) |
 | Tracing | TBD - Jaeger<br /> TBD - Zipkin | September 24, 2024 | [story](manuscript/tracing/README.md) |
@@ -628,7 +628,7 @@ flowchart TD
 | Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 8, 2024 | [story](progressive-delivery/README.md) |
 | Cost | TBD - OpenCost<br /> TBD - Goldilocks | October 15, 2024 | TBD |
 | Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | October 22, 2024 | TBD |
-| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT | October 29, 2024 | TBD |
+| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT<br /> Eric D Schabell - Perses | October 29, 2024 | TBD |
 | Chapter 4 Finale! | Whitney and Viktor! | November 5, 2024 |  |
 
 ## The Format
