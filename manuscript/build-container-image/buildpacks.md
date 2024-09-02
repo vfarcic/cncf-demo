@@ -16,7 +16,7 @@ export TAG=v0.0.1
 
 yq --inplace ".tag = \"v0.0.1\"" settings.yaml
 
-pack config default-builder paketobuildpacks/builder:tiny
+pack config default-builder paketobuildpacks/builder-jammy-tiny
 
 pack build cncf-demo:$TAG
 
