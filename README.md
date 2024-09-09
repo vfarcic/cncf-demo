@@ -621,15 +621,16 @@ flowchart TD
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
 | Dashboards | Marc Boorshtein - Kubernetes Dashboard<br /> René Dudfield - Headlamp<br /> Lee Calcote - Meshery | September 3, 2024 | [story](manuscript/dashboards/README.md) |
-| Open Standards | Austin Parker - OpenTelemetry<br /> TBD - Prometheus | September 10, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
-| Metrics | Iris Dyrmishi - Prometheus<br /> TBD - Thanos<br /> Friedrich Gonzalez - Cortex<br /> TBD - Pixie | September 17, 2024 | [story](manuscript/metrics/prometheus.md) |
-| Data Pipelines | TBD - Fluent Bit<br /> TBD - OTel Collector<br /> TBD - Logging Operator | September 24, 2024 | TODO: |
-| Tracing | TBD - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
-| Progressive Delivery | TBD - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 8, 2024 | [story](progressive-delivery/README.md) |
-| Cost | TBD - OpenCost<br /> TBD - Goldilocks | October 15, 2024 | TBD |
-| Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | October 22, 2024 | TBD |
-| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT<br /> Eric D Schabell - Perses | October 29, 2024 | TBD |
-| Chapter 4 Finale! | Whitney and Viktor! | November 5, 2024 |  |
+| Episode Postponed! | Guests are busy with PromCon | September 10, 2024 | N/A |
+| Open Standards | Austin Parker - OpenTelemetry<br /> Richard "RichiH" Hartmann - Prometheus | September 17, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
+| Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/prometheus.md) |
+| Tracing | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
+| Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> TBD - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
+| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
+| Cost | TBD - OpenCost<br /> TBD - Goldilocks | October 22, 2024 | TBD |
+| Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
+| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT<br /> Eric D Schabell - Perses<br /> TBD - Pixie | November 5, 2024 | TBD |
+| Chapter 4 Finale! | Whitney and Viktor! | November 19, 2024 |  |
 
 ## The Format
 
