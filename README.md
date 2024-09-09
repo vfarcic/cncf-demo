@@ -625,7 +625,7 @@ flowchart TD
 | Open Standards | Austin Parker - OpenTelemetry<br /> Richard "RichiH" Hartmann - Prometheus | September 17, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
 | Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/prometheus.md) |
 | Tracing | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
-| Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> TBD - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
+| Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
 | Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
 | Cost | TBD - OpenCost<br /> TBD - Goldilocks | October 22, 2024 | TBD |
 | Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
