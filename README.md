@@ -628,7 +628,7 @@ flowchart TD
 | Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
 | Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> TBD - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
 | Cost | TBD - OpenCost<br /> Stevie Caldwell - Goldilocks | October 22, 2024 | TBD |
-| Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> TBD - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
+| Service Mesh | TBD - Cilium<br /> TBD - Istio<br /> William Morgan - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
 | Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT<br /> Eric D Schabell - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
 | Chapter 4 Finale! | Whitney and Viktor! | November 19, 2024 |  |
 
