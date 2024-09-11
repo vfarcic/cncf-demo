@@ -23,4 +23,4 @@ echo "http://dashboard.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-* [Exposition Formats](../exposition-formats/README.md)
+We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.

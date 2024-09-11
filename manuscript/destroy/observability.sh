@@ -53,3 +53,5 @@ elif [[ "$HYPERSCALER" == "azure" ]]; then
 	az group delete --name cncf-demo-db --yes
 
 fi
+
+rm -f $KUBECONFIG

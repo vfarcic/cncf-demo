@@ -20,10 +20,10 @@ chmod +x manuscript/dashboards/headlamp.sh
 
 ```bash
 echo "http://dashboard.$INGRESS_HOST"
-
-# Open the URL in a browser
 ```
+
+> Open the URL in a browser
 
 ## Continue the Adventure
 
-* [Exposition Formats](../exposition-formats/README.md)
+We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.
