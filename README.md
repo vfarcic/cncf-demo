@@ -576,6 +576,38 @@ flowchart TD
     end
 ```
 
+```mermaid
+flowchart TD
+
+    subgraph Observability
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup-observability((Setup))
+        click setup-observability "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/observability.md"
+        setup-observability --> dashboards
+        
+        %% ----------------
+        %% -- Dashboards --
+        %% ----------------
+        dashboards{{Dashboards}}
+        click dashboards "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/README.md"
+        style dashboards fill:blue
+        kubernetes-dashboard(Kubernetes Dashboard)
+        style kubernetes-dashboard fill:red
+        headlamp(Headlamp)
+        click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
+        style headlamp fill:green
+        meshery(Meshery)
+        style meshery fill:red
+        dashboards --> kubernetes-dashboard & headlamp & meshery --> done
+
+        done((Chapter End))
+
+    end
+```
+
 ## Episodes
 
 ### Development

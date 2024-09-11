@@ -13,6 +13,6 @@ production:
     resourceGroup: dot-20240123133515
     location: eastus
   google:
-    projectId: dot-20240812152736
-hyperscaler: aws
+    projectId: dot-20240911125241
+hyperscaler: google
 secrets: eso
