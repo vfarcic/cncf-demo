@@ -18,14 +18,14 @@ spec:
         image:
           tag: v0.0.1
         ingress:
-          host: cncf-demo.sillydemo.com
-          className: nginx
+          host: cncf-demo.35.237.234.228.nip.io
+          className: contour
         tls:
           enabled: false
         db:
           enabled:
             crossplane:
-              google: false
+              google: true
               aws: false
               azure: false
           id: cncf-demo-db
