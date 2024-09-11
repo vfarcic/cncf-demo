@@ -1,0 +1,52 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cncf-demo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    repoURL: https://github.com/vfarcic/cncf-demo
+    targetRevision: HEAD
+    path: helm/app
+    helm:
+      releaseName: cncf-demo
+      valuesObject:
+        image:
+          tag: v0.0.1
+        ingress:
+          host: cncf-demo.35.237.234.228.nip.io
+          className: contour
+        tls:
+          enabled: false
+        db:
+          enabled:
+            crossplane:
+              google: true
+              aws: false
+              azure: false
+          id: cncf-demo-db
+          size: small
+          insecure: true
+        schemahero:
+          enabled: true
+        replicas: 1
+        fga:
+          enabled: false
+          storeId: STORE_ID
+          modeId: MODEL_ID
+        otel:
+          enabled: false
+        debug:
+          enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
