@@ -4,10 +4,13 @@ TODO: Intro
 
 ## Setup
 
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+> Watch https://youtu.be/WiFLtcBvGMU if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
+
+> Please skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.
 
 ```bash
+devbox shell
+
 chmod +x manuscript/dashboards/headlamp.sh
 
 ./manuscript/dashboards/headlamp.sh
