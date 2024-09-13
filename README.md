@@ -658,7 +658,7 @@ flowchart TD
 | Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/prometheus.md) |
 | Tracing | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
 | Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
-| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Kingdon Barrett - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
+| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
 | Cost | TBD - OpenCost<br /> Stevie Caldwell - Goldilocks | October 22, 2024 | TBD |
 | Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
 | Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT<br /> Eric D Schabell - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
