@@ -654,8 +654,8 @@ flowchart TD
 | --- | --- | --- | --- |
 | Dashboards | Marc Boorshtein - Kubernetes Dashboard<br /> René Dudfield - Headlamp<br /> Lee Calcote - Meshery | September 3, 2024 | [story](manuscript/dashboards/README.md) |
 | Episode Postponed! | Guests are busy with PromCon | September 10, 2024 | N/A |
-| Open Standards | Austin Parker - OpenTelemetry<br /> Richard "RichiH" Hartmann - Prometheus | September 17, 2024 | [story](manuscript/exposition-formats/openmetrics.md) |
-| Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/prometheus.md) |
+| Open Standards | Austin Parker - OpenTelemetry<br /> Richard "RichiH" Hartmann - Prometheus | September 17, 2024 | [story](manuscript/exposition-formats/README.md) |
+| Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/README.md) |
 | Tracing | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
 | Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
 | Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
