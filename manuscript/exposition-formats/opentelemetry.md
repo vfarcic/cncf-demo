@@ -8,4 +8,4 @@ There is nothing to do, for now. We'll explore OpenTelemetry later (or not). Dep
 
 ## Continue the Adventure
 
-* [Tracing](../metrics/README.md)
+We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.
