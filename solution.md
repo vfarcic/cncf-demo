@@ -571,7 +571,7 @@ flowchart TD
         open-telemetry(OpenTelemetry)
         click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
         open-metrics(OpenMetrics)
-        style open-metrics fill:red
+        click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
         instrumentation --> open-telemetry & open-metrics --> metrics
 
         %% -------------
@@ -584,11 +584,9 @@ flowchart TD
         click metrics-prometheus "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/prometheus.md"
         metrics-thanos(Thanos)
         style metrics-thanos fill:red
-        pixie(Pixie)
-        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & pixie & cortex --> tracing
+        metrics --> metrics-prometheus & metrics-thanos & cortex --> tracing
 
         %% -------------
         %% -- Tracing --
@@ -606,9 +604,6 @@ flowchart TD
         click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
         click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
-        pixie-tracing(Pixie)
-        click pixie-tracing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/pixie.md"
-        tracing --> pixie-tracing --> logging
         tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------
@@ -734,7 +729,9 @@ flowchart TD
         style inspektor-gadget fill:red
         k8s-gpt(K8sGPT)
         style k8s-gpt fill:red
-        observability-misc --> kepler & inspektor-gadget & k8s-gpt --> done
+        pixie(Pixie)
+        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
+        observability-misc --> kepler & inspektor-gadget & k8s-gpt & pixie --> done
 
         done((Chapter End))
 

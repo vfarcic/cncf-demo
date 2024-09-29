@@ -14,14 +14,7 @@ TODO: Description
 
 * [Official site](https://thanos.io)
 
-## Choice 3: Pixie
-
-TODO: Description
-
-[![Kubernetes-Native Observability Through eBPF And Scripting With Pixie](https://img.youtube.com/vi/G-TnrmZtaCw/0.jpg)](https://youtu.be/G-TnrmZtaCw)
-* [Official site](https://px.dev)
-
-## Choice 4: Cortex
+## Choice 3: Cortex
 
 TODO: Description
 
@@ -31,5 +24,4 @@ TODO: Description
 
 * [Prometheus](prometheus.md)
 * **Thanos** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* [Pixie](pixie.md)
 * **Cortex** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

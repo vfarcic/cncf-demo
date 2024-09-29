@@ -601,7 +601,33 @@ flowchart TD
         style headlamp fill:green
         meshery(Meshery)
         style meshery fill:red
-        dashboards --> kubernetes-dashboard & headlamp & meshery --> done
+        dashboards --> kubernetes-dashboard & headlamp & meshery --> instrumentation
+
+        %% ------------------------------------
+        %% -- Instrumenting Application Code --
+        %% ------------------------------------
+        instrumentation{{Application Instrumentation}}
+        click instrumentation "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
+        style instrumentation fill:blue
+        open-telemetry(OpenTelemetry)
+        click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
+        open-metrics(OpenMetrics)
+        click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
+        instrumentation --> open-telemetry & open-metrics --> metrics
+
+        %% -------------
+        %% -- Metrics --
+        %% -------------
+        metrics{{Metrics}}
+        click metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/README.md"
+        style metrics fill:blue
+        metrics-prometheus(Prometheus)
+        click metrics-prometheus "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/prometheus.md"
+        metrics-thanos(Thanos)
+        style metrics-thanos fill:red
+        cortex(Cortex)
+        style cortex fill:red
+        metrics --> metrics-prometheus & metrics-thanos & cortex --> done
 
         done((Chapter End))
 

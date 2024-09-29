@@ -8,4 +8,4 @@ There is nothing to do, for now. We'll explore Prometheus later (or not). Depend
 
 ## Continue the Adventure
 
-We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.
+* [Metrics](../metrics/README.md)

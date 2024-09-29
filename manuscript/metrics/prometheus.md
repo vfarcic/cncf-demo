@@ -46,4 +46,4 @@ echo "http://cncf-demo.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-* [Tracing](../tracing/README.md)
+We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.
