@@ -30,18 +30,9 @@ echo "http://grafana.$INGRESS_HOST"
 * Explore dashboards
 
 ```sh
-curl "http://cncf-demo.$INGRESS_HOST"
-
-curl "http://cncf-demo.$INGRESS_HOST/videos"
-
-curl -X POST "http://cncf-demo.$INGRESS_HOST/video?id=-qeoLfSGlFU&title=DevOps%20Tools%202024"
-
-curl "http://cncf-demo.$INGRESS_HOST/videos" | jq .
-
-echo "http://cncf-demo.$INGRESS_HOST"
+hey -z 5m "http://cncf-demo.$INGRESS_HOST"
 ```
 
-* Use that URL to generate some load using https://ddosify.com or any other load-testing tool
 * See the results in Grafana dashboards
 
 ## Continue the Adventure

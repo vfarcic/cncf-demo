@@ -30,7 +30,8 @@
     "age@1.1.1",
     "zellij@0.40.1",
     "nushell@0.96.1",
-    "kind@0.23.0"
+    "kind@0.23.0",
+    "hey@0.1.4"
   ],
   "shell": {
     "init_hook": [

@@ -18,6 +18,8 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	set +e
 
+	rm -f infra/contour.yaml
+
 	rm apps/cncf-demo.yaml
 
 	git add .
