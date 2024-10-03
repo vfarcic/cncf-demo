@@ -327,6 +327,12 @@ elif [[ "$TEMPLATES" == "cdk8s" ]]; then
 
     yq --inplace ".image.tag = \"v0.0.1\"" cdk8s/app-prod.yaml
 
+    yq --inplace ".ingress.host = \"cncf-demo.$INGRESS_HOST\"" \
+        cdk8s/app-prod.yaml
+
+    yq --inplace ".ingress.className = \"$INGRESS_CLASSNAME\"" \
+        cdk8s/app-prod.yaml
+
 else
 
     yq --inplace ".spec.source.repoURL = \"$REPO_URL\"" \

@@ -26,12 +26,8 @@ kubectl --namespace production get pods
 * Wait until `cncf-demo` Pod (NOT cncf-demo-controller-0) has two containers
 
 ```sh
-echo "http://cncf-demo.$INGRESS_HOST"
-```
+hey -z 5m "http://cncf-demo.$INGRESS_HOST"
 
-* Use the URL from the output to generate load with [Ddosify](https://ddosify.com) or any other way.
-
-```sh
 echo "http://jaeger.$INGRESS_HOST"
 ```
 
@@ -39,4 +35,4 @@ echo "http://jaeger.$INGRESS_HOST"
 
 ## Continue The Adventure
 
-* [Logging](../logging/README.md)
+We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.

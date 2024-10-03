@@ -4,10 +4,13 @@ TODO: Intro
 
 ## Setup
 
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+> Watch https://youtu.be/WiFLtcBvGMU if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
+
+> Please skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.
 
 ```bash
+devbox shell
+
 chmod +x manuscript/metrics/prometheus.sh
 
 ./manuscript/metrics/prometheus.sh
@@ -37,4 +40,4 @@ hey -z 5m "http://cncf-demo.$INGRESS_HOST"
 
 ## Continue the Adventure
 
-We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.
+* [Tracing](../tracing/README.md)

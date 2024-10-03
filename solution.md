@@ -604,6 +604,9 @@ flowchart TD
         click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
         jaeger-cdk8s(App as cdk8s)
         click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
+        zipkin(Zipkin)
+        click zipkin "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/zipkin.md"
+        tracing --> zipkin
         tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
 
         %% -------------

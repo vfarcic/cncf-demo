@@ -611,8 +611,10 @@ flowchart TD
         style instrumentation fill:blue
         open-telemetry(OpenTelemetry)
         click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
+        style open-telemetry fill:green
         open-metrics(OpenMetrics)
         click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
+        style open-metrics fill:green
         instrumentation --> open-telemetry & open-metrics --> metrics
 
         %% -------------
@@ -627,7 +629,30 @@ flowchart TD
         style metrics-thanos fill:red
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & cortex --> done
+        metrics --> metrics-prometheus & metrics-thanos & cortex --> tracing
+
+        %% -------------
+        %% -- Tracing --
+        %% -------------
+        tracing{{Tracing}}
+        click tracing "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/README.md"
+        style tracing fill:blue
+        jaeger(Jaeger)
+        click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
+        style jaeger fill:green
+        jaeger-kustomize(App as Kustomize)
+        click jaeger-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/kustomize.md"
+        jaeger-helm(App as Helm)
+        click jaeger-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/helm.md"
+        jaeger-carvel(App as Carvel ytt)
+        click jaeger-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/carvel.md"
+        style jaeger-carvel fill:green
+        jaeger-cdk8s(App as cdk8s)
+        click jaeger-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/cdk8s.md"
+        zipkin(Zipkin)
+        click zipkin "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/zipkin.md"
+        tracing --> zipkin
+        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> done
 
         done((Chapter End))
 

@@ -6,20 +6,6 @@ Are you ready to start?
 Feel free to say "No" and inspect the script if you prefer setting up resources manually.
 ' || exit 0
 
-echo "
-## You will need following tools installed:
-|Name            |Required             |More info                                          |
-|----------------|---------------------|---------------------------------------------------|
-|git             |Yes                  |'https://git-scm.com/book/en/v2/Getting-Started-Installing-Git'|
-|kubectl         |Yes                  |'https://kubernetes.io/docs/tasks/tools/#kubectl'  |
-|helm            |Yes                  |'https://helm.sh/docs/intro/install/'              |
-|yq              |Yes                  |'https://github.com/mikefarah/yq#install'          |
-" | gum format
-
-gum confirm "
-Do you have those tools installed?
-" || exit 0
-
 #########
 # Setup #
 #########
