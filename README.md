@@ -709,10 +709,10 @@ flowchart TD
 | Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/README.md) |
 | Tracing | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
 | Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
-| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger<br /> TBD - Keptn | October 15, 2024 | [story](progressive-delivery/README.md) |
-| Cost | TBD - OpenCost<br /> Stevie Caldwell - Goldilocks | October 22, 2024 | TBD |
+| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger | October 15, 2024 | [story](progressive-delivery/README.md) |
+| Cost | Matt Ray - OpenCost<br /> Rafael Brito - StormForge<br /> Phil Andrews - CAST AI | October 22, 2024 | TBD |
 | Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> TBD - Kuma | October 29, 2024 | TBD |
-| Misc | TBD - Kepler<br /> TBD - Inspektor Gadget<br /> TBD - K8sGPT<br /> Eric D Schabell - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
+| Misc | TBD - Kepler<br /> Jose Blanquicet - Inspektor Gadget<br /> TBD - K8sGPT<br /> Augustin Husson - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
 | Chapter 4 Finale! | Whitney and Viktor! | November 19, 2024 |  |
 
 ## The Format
