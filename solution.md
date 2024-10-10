@@ -607,43 +607,34 @@ flowchart TD
         zipkin(Zipkin)
         click zipkin "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/zipkin.md"
         tracing --> zipkin
-        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> logging
-
-        %% -------------
-        %% -- Logging --
-        %% -------------
-        logging{{Logging}}
-        style logging fill:blue
-        click logging "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/README.md"
-        fluentd(FluentD)
-        click fluentd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/fluentd.md"
-        logging-operator(Logging Operator)
-        click logging-operator "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/logging-operator.md"
-        logging-operator-kustomize(App as Kustomize)
-        click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/kustomize.md"
-        logging-operator-helm(App as Helm)
-        click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/helm.md"
-        logging-operator-carvel(App as Carvel ytt)
-        click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/carvel.md"
-        logging-operator-cdk8s(App as cdk8s)
-        click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/logging/cdk8s.md"
-        style logging-operator-cdk8s fill:red
-        vector(Vector)
-        style vector fill:red
-        logging --> vector --> data-pipelines
-        logging --> fluentd --> logging-operator
-        logging --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> data-pipelines
+        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> data-pipelines
 
         %% --------------------
         %% -- Data Pipelines --
         %% --------------------
         data-pipelines{{Data Pipelines}}
-        style data-pipelines fill:red
+        style data-pipelines fill:blue
+        click data-pipelines "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/README.md"
+        fluentd(FluentD)
+        click fluentd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/fluentd.md"
         fluentbit(Fluent Bit)
         style fluentbit fill:red
+        logging-operator(Logging Operator)
+        click logging-operator "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/logging-operator.md"
+        logging-operator-kustomize(App as Kustomize)
+        click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/kustomize.md"
+        logging-operator-helm(App as Helm)
+        click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/helm.md"
+        logging-operator-carvel(App as Carvel ytt)
+        click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/carvel.md"
+        logging-operator-cdk8s(App as cdk8s)
+        click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/cdk8s.md"
+        style logging-operator-cdk8s fill:red
         otel-collector(OTel Collector)
         style otel-collector fill:red
-        data-pipelines --> fluentbit & otel-collector --> progressive-delivery
+        data-pipelines --> fluentd & fluentbit --> logging-operator
+        data-pipelines --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
+        data-pipelines --> otel-collector --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
