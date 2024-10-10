@@ -644,6 +644,8 @@ flowchart TD
         click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
         argo-rollouts(Argo Rollouts)
         click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
+        argo-rollouts-cilium(Cilium)
+        style argo-rollouts-cilium fill:red
         argo-rollouts-istio(Istio)
         click argo-rollouts-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
         argo-rollouts-kuma(Kuma)
@@ -681,7 +683,7 @@ flowchart TD
         keptn(Keptn)
         style flagger fill:red
         progressive-delivery --> argo-rollouts
-        argo-rollouts --> argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
+        argo-rollouts --> argo-rollouts-cilium & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
         argo-rollouts --> argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
         progressive-delivery --> flagger --> cost
         progressive-delivery --> keptn --> cost

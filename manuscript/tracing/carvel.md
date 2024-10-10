@@ -32,4 +32,4 @@ echo "http://jaeger.$INGRESS_HOST"
 
 ## Continue The Adventure
 
-We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/observability) what we created.
+* [Progressive Delivery](../progressive-delivery/README.md)

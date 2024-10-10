@@ -44,6 +44,8 @@ kubectl get namespace production --output yaml
 
 kubectl --namespace production delete pods \
     --selector app.kubernetes.io/name=cncf-demo
+
+kubectl --namespace production get pods
 ```
 
 ## Do

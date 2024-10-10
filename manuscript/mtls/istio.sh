@@ -58,10 +58,6 @@ if [[ "$HYPERSCALER" == "aws" ]]; then
             --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
     done
 
-    ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
-        get service gateway \
-        --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
-
     ISTIO_IP=$(dig +short $ISTIO_HOSTNAME) 
 
     while [ -z "$ISTIO_IP" ]; do
@@ -100,14 +96,6 @@ echo "export ISTIO_IP=$ISTIO_IP" >> .env
 
 ISTIO_HOST=$ISTIO_IP.nip.io
 echo "export ISTIO_HOST=$ISTIO_HOST" >> .env
-
-yq --inplace \
-    ".spec.source.helm.valuesObject.serviceMesh.enabled = true" \
-    apps/cncf-demo.yaml
-
-yq --inplace \
-    ".spec.source.helm.valuesObject.serviceMesh.gatewayHost = \"cncf-demo.$ISTIO_HOST\"" \
-    apps/cncf-demo.yaml
 
 kubectl label namespace production istio-injection=enabled \
     --overwrite

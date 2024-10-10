@@ -1,0 +1,71 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: cncf-demo
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      canaryService: cncf-demo-canary
+      stableService: cncf-demo-stable
+      trafficRouting:
+        istio:
+          virtualServices:
+            - name: cncf-demo-1
+              routes:
+                - primary
+            - name: cncf-demo-2
+              routes:
+                - secondary
+      analysis:
+        templates:
+          - templateName: success-rate
+            clusterScope: true
+        startingStep: 2
+        args:
+          - name: service-name
+            value: cncf-demo-canary.production.svc.cluster.local
+      steps:
+        - setWeight: 20
+        - pause: {duration: 60}
+        - setWeight: 40
+        - pause: {duration: 60}
+        - setWeight: 60
+        - pause: {duration: 60}
+        - setWeight: 80
+        - pause: {duration: 60}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cncf-demo
+  workloadRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cncf-demo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cncf-demo-canary
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: cncf-demo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cncf-demo-stable
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: cncf-demo

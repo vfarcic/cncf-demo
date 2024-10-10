@@ -11,7 +11,7 @@ spec:
   source:
     chart: base
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.21.2
+    targetRevision: 1.23.2
     helm:
       releaseName: istio-base
   destination:
@@ -37,7 +37,7 @@ spec:
   source:
     chart: istiod
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.21.2
+    targetRevision: 1.23.2
     helm:
       releaseName: istiod
   destination:
@@ -63,7 +63,7 @@ spec:
   source:
     chart: gateway
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.21.2
+    targetRevision: 1.23.2
     helm:
       releaseName: gateway
   destination:
