@@ -18,7 +18,7 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	set +e
 
-	rm -f infra/contour.yaml
+	rm infra/*.yaml
 
 	rm apps/cncf-demo.yaml
 

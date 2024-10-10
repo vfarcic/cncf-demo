@@ -39,14 +39,18 @@ git commit -m "Istio"
 git push
 
 kubectl get namespace production --output yaml
+```
 
-# Wait until the `istio-injection` label was added.
+> Wait until the `istio-injection` label was added.
 
+```sh
 kubectl --namespace production delete pods \
     --selector app.kubernetes.io/name=cncf-demo
 
 kubectl --namespace production get pods
 ```
+
+> Confirm that two containers (main and sidecar) are in the cncf-demo Pod.
 
 ## Do
 

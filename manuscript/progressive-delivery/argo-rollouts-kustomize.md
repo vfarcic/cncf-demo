@@ -20,10 +20,6 @@ cat kustomize/overlays/prod/rollout.yaml
 
 cat kustomize/overlays/prod/virtual-service.yaml
 
-yq --inplace \
-    ".spec.source.helm.valuesObject.progressiveDelivery.enabled = true" \
-    apps/cncf-demo.yaml
-
 yq --inplace ".resources += \"gateway.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 

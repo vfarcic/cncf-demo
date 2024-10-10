@@ -25,15 +25,27 @@ Do you have those tools installed?
 
 HYPERSCALER=$(yq ".hyperscaler" settings.yaml)
 
-GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
+# GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
 
-cp $GITOPS_APP/istio.yaml infra/.
+# cp $GITOPS_APP/istio.yaml infra/.
 
-git add . 
+# git add . 
 
-git commit -m "Istio"
+# git commit -m "Istio"
 
-git push
+# git push
+
+helm upgrade --install istio-base base \
+    --repo https://istio-release.storage.googleapis.com/charts \
+    --namespace istio-system --create-namespace --wait
+
+helm upgrade --install istiod istiod \
+    --repo https://istio-release.storage.googleapis.com/charts \
+    --namespace istio-system --wait
+
+helm upgrade --install istio-ingress gateway \
+    --repo https://istio-release.storage.googleapis.com/charts \
+    --namespace istio-system
 
 COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 
@@ -41,9 +53,6 @@ while [ $COUNTER -eq "0" ]; do
 	sleep 10
 	COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 done
-
-kubectl --namespace istio-system delete pods \
-    --selector app=gateway
 
 if [[ "$HYPERSCALER" == "aws" ]]; then
 
@@ -97,5 +106,5 @@ echo "export ISTIO_IP=$ISTIO_IP" >> .env
 ISTIO_HOST=$ISTIO_IP.nip.io
 echo "export ISTIO_HOST=$ISTIO_HOST" >> .env
 
-kubectl label namespace production istio-injection=enabled \
-    --overwrite
+kubectl --namespace istio-system delete pods \
+    --selector app=gateway
