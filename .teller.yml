@@ -1,12 +1,12 @@
 project: dot
 providers:
-  google_secretmanager:
-    env:
-      AWS_ACCESS_KEY_ID:
-        path: projects/vfarcic/secrets/aws-access-key-id/versions/5
-      AWS_SECRET_ACCESS_KEY:
-        path: projects/vfarcic/secrets/aws-secret-access-key/versions/5
-      AWS_ACCOUNT_ID:
-        path: projects/vfarcic/secrets/aws-account-id/versions/1
-      GITHUB_TOKEN:
-        path: projects/vfarcic/secrets/github-token/versions/4
+  google_secrets_manager:
+    kind: google_secretmanager
+    maps:
+      - id: secrets
+        path: projects/vfarcic
+        keys:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-account-id: AWS_ACCOUNT_ID
+          github-token: GITHUB_TOKEN
