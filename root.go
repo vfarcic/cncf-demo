@@ -11,7 +11,7 @@ import (
 
 func rootHandler(ctx *gin.Context) {
 	if len(ctx.Query("fail")) > 0 {
-		ctx.String(http.StatusBadRequest, "Something terrible happened")
+		ctx.String(http.StatusInternalServerError, "Something terrible happened")
 		return
 	}
 	slog.Debug("Handling request", "URI", ctx.Request.RequestURI)

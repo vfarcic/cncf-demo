@@ -668,7 +668,6 @@ flowchart TD
         style argo-rollouts-emissary fill:red
         argo-rollouts-kustomize(App as Kustomize)
         click argo-rollouts-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
-        style argo-rollouts-kustomize fill:red
         argo-rollouts-helm(App as Helm)
         click argo-rollouts-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
         style argo-rollouts-helm fill:red

@@ -72,7 +72,7 @@ kubectl get clusteranalysistemplates
 
 ## How Did You Define Your App?
 
-* **Kustomize** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Kustomize](argo-rollouts-kustomize)
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Carvel ytt** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
