@@ -647,7 +647,7 @@ flowchart TD
         argo-rollouts-cilium(Cilium)
         style argo-rollouts-cilium fill:red
         argo-rollouts-istio(Istio)
-        click argo-rollouts-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        click argo-rollouts-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts-istio.md"
         argo-rollouts-kuma(Kuma)
         click argo-rollouts-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
         style argo-rollouts-kuma fill:red
@@ -678,14 +678,36 @@ flowchart TD
         click argo-rollouts-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
         style argo-rollouts-cdk8s fill:red
         flagger(Flagger)
-        style flagger fill:red
-        keptn(Keptn)
-        style flagger fill:red
+        flagger-cilium(Cilium)
+        style flagger-cilium fill:red
+        flagger-istio(Istio)
+        click flagger-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger-istio.md"
+        flagger-kuma(Kuma)
+        click flagger-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
+        style flagger-kuma fill:red
+        flagger-nsm(Network Service Mesh)
+        click flagger-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
+        style flagger-nsm fill:red
+        flagger-linkerd(Linkerd)
+        click flagger-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
+        style flagger-linkerd fill:red
+        flagger-nginx(NGINX)
+        click flagger-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
+        style flagger-nginx fill:red
+        flagger-contour(Contour)
+        click flagger-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
+        style flagger-contour fill:red
+        flagger-emissary(Emissary-ingress)
+        click flagger-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
+        style flagger-emissary fill:red
+
+
+        click flagger-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger-istio.md"
+
         progressive-delivery --> argo-rollouts
         argo-rollouts --> argo-rollouts-cilium & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
         argo-rollouts --> argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
-        progressive-delivery --> flagger --> cost
-        progressive-delivery --> keptn --> cost
+        progressive-delivery --> flagger --> flagger-istio & flagger-cilium & flagger-kuma & flagger-nsm & flagger-linkerd & flagger-nginx & flagger-contour & flagger-emissary --> cost
 
         %% ----------
         %% -- Cost --
@@ -817,7 +839,9 @@ flowchart TD
         style pipecd fill:red
         werf(werf)
         style werf fill:red
-        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd & werf --> supply-chain
+        keptn(Keptn)
+        style flagger fill:red
+        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd & werf & keptn --> supply-chain
 
         %% ------------------
         %% -- Supply Chain --

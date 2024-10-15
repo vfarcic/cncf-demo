@@ -57,13 +57,13 @@ done
 if [[ "$HYPERSCALER" == "aws" ]]; then
 
     ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
-        get service gateway \
+        get service istio-ingress \
         --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
     while [ -z "$ISTIO_HOSTNAME" ]; do
         sleep 10
         echo "Waiting for Gateway IP..."
         ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
-            get service gateway \
+            get service istio-ingress \
             --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
     done
 
@@ -73,7 +73,7 @@ if [[ "$HYPERSCALER" == "aws" ]]; then
         sleep 10
         echo "Waiting for Gateway IP..."
         ISTIO_HOSTNAME=$(kubectl --namespace istio-system \
-            get service gateway \
+            get service istio-ingress \
             --output jsonpath="{.status.loadBalancer.ingress[0].hostname}")
         ISTIO_IP=$(dig +short $ISTIO_HOSTNAME)  
     done
@@ -81,13 +81,13 @@ if [[ "$HYPERSCALER" == "aws" ]]; then
 else
 
     ISTIO_IP=$(kubectl --namespace istio-system \
-        get service gateway \
+        get service istio-ingress \
         --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
     while [ -z "$ISTIO_IP" ]; do
         sleep 10
         echo "Waiting for Gateway IP..."
         ISTIO_IP=$(kubectl --namespace istio-system \
-            get service gateway \
+            get service istio-ingress \
             --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
     done
 

@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flagger
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    chart: flagger
+    repoURL: ghcr.io/fluxcd/charts
+    targetRevision: 1.38.0
+    helm:
+      releaseName: flagger
+      valuesObject:
+        crd:
+          create: true
+        metricsServer: http://kube-prometheus-stack-prometheus.monitoring:9090
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: flagger-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

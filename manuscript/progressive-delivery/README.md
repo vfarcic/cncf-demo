@@ -16,14 +16,7 @@ TODO: Description
 [![How To Do Canary Deployments In Kubernetes Using Flagger And Linkerd?](https://img.youtube.com/vi/NrytqS43dgw/0.jpg)](https://youtu.be/NrytqS43dgw)
 * [Official site](https://flagger.app)
 
-## Choice 3: Keptn
-
-TODO: Description
-
-* [Official site](https://keptn.sh)
-
 ## What Is Your Choice?
 
 * [Argo Rollouts](argo-rollouts.md)
-* **Flagger** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Keptn** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Flagger](flagger.md)
