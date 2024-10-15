@@ -667,8 +667,6 @@ flowchart TD
         flagger(Flagger)
         flagger-cilium(Cilium)
         style flagger-cilium fill:red
-        flagger-istio(Istio)
-        click flagger-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger-istio.md"
         flagger-kuma(Kuma)
         click flagger-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
         style flagger-kuma fill:red
@@ -701,13 +699,8 @@ flowchart TD
         progressive-delivery-cdk8s(App as cdk8s)
         click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
         style progressive-delivery-cdk8s fill:red
-
-
-        click flagger-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger-istio.md"
-
-        progressive-delivery --> argo-rollouts
+        progressive-delivery --> argo-rollouts & flagger
         argo-rollouts --> argo-rollouts-cilium & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
-        progressive-delivery --> flagger
         flagger --> flagger-cilium & flagger-kuma & flagger-nsm & flagger-linkerd & flagger-nginx & flagger-contour & flagger-emissary --> cost
         argo-rollouts & flagger --> progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> cost
 
