@@ -4,6 +4,8 @@ TODO: Intro
 
 ## Setup
 
+> Execute the command that follows only if you chose Argo Rollouts.
+
 ```sh
 yq --inplace ".spec.hosts[0] = \"cncf-demo.$ISTIO_HOST\"" \
     kustomize/overlays/prod/virtual-service.yaml
@@ -11,22 +13,32 @@ yq --inplace ".spec.hosts[0] = \"cncf-demo.$ISTIO_HOST\"" \
 
 ## Do
 
+> Execute the command that follows only if you chose Argo Rollouts
+
 ```bash
 yq --inplace ".spec.replicas = 0" kustomize/base/deployment.yaml
+```
 
+> Execute the command that follows only if you chose Argo Rollouts.
+
+```sh
 cat kustomize/overlays/prod/gateway.yaml
+```
 
-cat kustomize/overlays/prod/rollout.yaml
+> Execute the command that follows only if you chose Argo Rollouts.
 
+```sh
 cat kustomize/overlays/prod/virtual-service.yaml
+
+cat kustomize/overlays/prod/$PD_APP.yaml
 
 yq --inplace ".resources += \"gateway.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
-yq --inplace ".resources += \"rollout.yaml\"" \
+yq --inplace ".resources += \"virtual-service.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
-yq --inplace ".resources += \"virtual-service.yaml\"" \
+yq --inplace ".resources += \"$PD_APP.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
 git add .
@@ -34,9 +46,22 @@ git add .
 git commit -m "Progressive delivery"
 
 git push
+```
+> Execute the command that follows in a second terminal session (in the same directory)
 
+```sh
+hey -z 60m "http://cncf-demo.$ISTIO_HOST"
+```
+
+> Execute the command that follows only if you chose Argo Rollouts
+
+```sh
 kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
+```
+
+```sh
+kubectl --namespace production describe canary cncf-demo
 ```
 
 * If the output claims that `cncf-demo` was not found, GitOps tool of choice did not yet synchronize the Rollout. Wait for a few moments and try again.
@@ -48,9 +73,6 @@ curl "http://cncf-demo.$ISTIO_HOST"
 
 # Execute in a second terminal session (in the same directory)
 source .env
-
-# Execute in the second terminal session (in the same directory)
-hey -z 60m "http://cncf-demo.$ISTIO_HOST"
 
 echo "http://prometheus.$INGRESS_HOST"
 

@@ -39,3 +39,5 @@ while [ $COUNTER -eq "0" ]; do
 	COUNTER=$(kubectl --namespace argo-rollouts get pods \
         --no-headers | wc -l)
 done
+
+echo "export PD_APP=argo-rollouts" >> .env

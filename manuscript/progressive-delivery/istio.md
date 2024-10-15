@@ -43,7 +43,11 @@ kubectl get namespace production --output yaml
 
 > Wait until the `istio-injection` label was added.
 
+> Execute the command that follows only if you chose Flagger.
+
 ```sh
+./manuscript/progressive-delivery/flagger.sh istio
+
 kubectl --namespace production delete pods \
     --selector app.kubernetes.io/name=cncf-demo
 
@@ -54,25 +58,27 @@ kubectl --namespace production get pods
 
 ## Do
 
+FIXME: Remove
+
 ```sh
-cat argo-rollouts/istio.yaml
+# cat flagger/istio.yaml
 
-cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
+# cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
 
-git add .
+# git add .
 
-git commit -m "Analysis"
+# git commit -m "Analysis"
 
-git push
+# git push
 
-kubectl get clusteranalysistemplates
+# kubectl get clusteranalysistemplates
 ```
 
 * Wait until the resource was created
 
 ## How Did You Define Your App?
 
-* [Kustomize](argo-rollouts-kustomize.md)
+* [Kustomize](kustomize.md)
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Carvel ytt** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

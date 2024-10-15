@@ -1,0 +1,22 @@
+---
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: cncf-demo
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cncf-demo
+  service:
+    port: 8080
+  analysis:
+    interval: 1m
+    threshold: 2
+    maxWeight: 80
+    stepWeight: 20
+    metrics:
+      - name: request-success-rate
+        thresholdRange:
+          min: 95
+        interval: 1m

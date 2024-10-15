@@ -25,3 +25,5 @@ while [ $COUNTER -eq "0" ]; do
 	COUNTER=$(kubectl --namespace flagger-system get pods \
         --no-headers | wc -l)
 done
+
+echo "export PD_APP=flagger" >> .env

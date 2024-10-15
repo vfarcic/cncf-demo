@@ -646,8 +646,6 @@ flowchart TD
         click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
         argo-rollouts-cilium(Cilium)
         style argo-rollouts-cilium fill:red
-        argo-rollouts-istio(Istio)
-        click argo-rollouts-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts-istio.md"
         argo-rollouts-kuma(Kuma)
         click argo-rollouts-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
         style argo-rollouts-kuma fill:red
@@ -666,17 +664,6 @@ flowchart TD
         argo-rollouts-emissary(Emissary-ingress)
         click argo-rollouts-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
         style argo-rollouts-emissary fill:red
-        argo-rollouts-kustomize(App as Kustomize)
-        click argo-rollouts-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
-        argo-rollouts-helm(App as Helm)
-        click argo-rollouts-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
-        style argo-rollouts-helm fill:red
-        argo-rollouts-carvel(App as Carvel ytt)
-        click argo-rollouts-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
-        style argo-rollouts-carvel fill:red
-        argo-rollouts-cdk8s(App as cdk8s)
-        click argo-rollouts-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
-        style argo-rollouts-cdk8s fill:red
         flagger(Flagger)
         flagger-cilium(Cilium)
         style flagger-cilium fill:red
@@ -700,14 +687,29 @@ flowchart TD
         flagger-emissary(Emissary-ingress)
         click flagger-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
         style flagger-emissary fill:red
+        progressive-delivery-istio(Istio)
+        click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        progressive-delivery-kustomize(App as Kustomize)
+        style progressive-delivery-kustomize fill:red
+        click progressive-delivery-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
+        progressive-delivery-helm(App as Helm)
+        click progressive-delivery-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
+        style progressive-delivery-helm fill:red
+        progressive-delivery-carvel(App as Carvel ytt)
+        click progressive-delivery-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
+        style progressive-delivery-carvel fill:red
+        progressive-delivery-cdk8s(App as cdk8s)
+        click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
+        style progressive-delivery-cdk8s fill:red
 
 
         click flagger-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger-istio.md"
 
         progressive-delivery --> argo-rollouts
         argo-rollouts --> argo-rollouts-cilium & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
-        argo-rollouts --> argo-rollouts-istio --> argo-rollouts-kustomize & argo-rollouts-helm & argo-rollouts-carvel & argo-rollouts-cdk8s --> cost
-        progressive-delivery --> flagger --> flagger-istio & flagger-cilium & flagger-kuma & flagger-nsm & flagger-linkerd & flagger-nginx & flagger-contour & flagger-emissary --> cost
+        progressive-delivery --> flagger
+        flagger --> flagger-cilium & flagger-kuma & flagger-nsm & flagger-linkerd & flagger-nginx & flagger-contour & flagger-emissary --> cost
+        argo-rollouts & flagger --> progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> cost
 
         %% ----------
         %% -- Cost --
