@@ -8,7 +8,7 @@ spec:
   strategy:
     canary:
       canaryService: cncf-demo-canary
-      stableService: cncf-demo-stable
+      stableService: cncf-demo-primary
       trafficRouting:
         istio:
           virtualServices:
@@ -60,7 +60,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cncf-demo-stable
+  name: cncf-demo-primary
 spec:
   ports:
   - port: 8080

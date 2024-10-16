@@ -28,16 +28,6 @@ chmod +x manuscript/mtls/istio.sh
 
 source .env
 
-cat istio/namespace-production.yaml
-
-cp istio/namespace-production.yaml apps/.
-
-git add . 
-
-git commit -m "Istio"
-
-git push
-
 kubectl get namespace production --output yaml
 ```
 
@@ -58,20 +48,20 @@ kubectl --namespace production get pods
 
 ## Do
 
-FIXME: Remove
+> Execute the commands in this section only if you chose Argo Rollouts.
 
 ```sh
-# cat flagger/istio.yaml
+cat argo-rollouts/istio.yaml
 
-# cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
+cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
 
-# git add .
+git add .
 
-# git commit -m "Analysis"
+git commit -m "Analysis"
 
-# git push
+git push
 
-# kubectl get clusteranalysistemplates
+kubectl get clusteranalysistemplates
 ```
 
 * Wait until the resource was created

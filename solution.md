@@ -688,7 +688,6 @@ flowchart TD
         progressive-delivery-istio(Istio)
         click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
         progressive-delivery-kustomize(App as Kustomize)
-        style progressive-delivery-kustomize fill:red
         click progressive-delivery-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
         progressive-delivery-helm(App as Helm)
         click progressive-delivery-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"

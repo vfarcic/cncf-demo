@@ -12,7 +12,7 @@ spec:
     - name: primary
       route:
         - destination:
-            host: cncf-demo-stable
+            host: cncf-demo-primary
             port:
               number: 8080
           weight: 100
@@ -35,7 +35,7 @@ spec:
     - name: secondary
       route:
         - destination:
-            host: cncf-demo-stable
+            host: cncf-demo-primary
             port:
               number: 8080
           weight: 100

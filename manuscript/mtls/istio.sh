@@ -25,16 +25,6 @@ Do you have those tools installed?
 
 HYPERSCALER=$(yq ".hyperscaler" settings.yaml)
 
-# GITOPS_APP=$(yq ".gitOps.app" settings.yaml)
-
-# cp $GITOPS_APP/istio.yaml infra/.
-
-# git add . 
-
-# git commit -m "Istio"
-
-# git push
-
 helm upgrade --install istio-base base \
     --repo https://istio-release.storage.googleapis.com/charts \
     --namespace istio-system --create-namespace --wait
@@ -108,3 +98,11 @@ echo "export ISTIO_HOST=$ISTIO_HOST" >> .env
 
 kubectl --namespace istio-system delete pods \
     --selector app=gateway
+
+cp istio/namespace-production.yaml apps/.
+
+git add . 
+
+git commit -m "Istio"
+
+git push

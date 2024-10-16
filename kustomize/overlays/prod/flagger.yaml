@@ -10,6 +10,14 @@ spec:
     name: cncf-demo
   service:
     port: 8080
+    targetPort: 8080
+    gateways:
+      - cncf-demo-gateway
+    hosts:
+      - cncf-demo.local
+    trafficPolicy:
+      tls:
+        mode: DISABLE
   analysis:
     interval: 1m
     threshold: 2
