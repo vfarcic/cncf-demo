@@ -665,6 +665,7 @@ flowchart TD
         click argo-rollouts-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
         style argo-rollouts-emissary fill:red
         flagger(Flagger)
+        click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger.md"
         flagger-cilium(Cilium)
         style flagger-cilium fill:red
         flagger-kuma(Kuma)

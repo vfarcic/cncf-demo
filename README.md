@@ -652,7 +652,104 @@ flowchart TD
         zipkin(Zipkin)
         click zipkin "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/zipkin.md"
         tracing --> zipkin
-        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> done
+        tracing --> jaeger --> jaeger-kustomize & jaeger-helm & jaeger-carvel & jaeger-cdk8s --> data-pipelines
+
+        %% --------------------
+        %% -- Data Pipelines --
+        %% --------------------
+        data-pipelines{{Data Pipelines}}
+        style data-pipelines fill:blue
+        click data-pipelines "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/README.md"
+        fluentd(FluentD)
+        click fluentd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/fluentd.md"
+        fluentbit(Fluent Bit)
+        style fluentbit fill:red
+        logging-operator(Logging Operator)
+        click logging-operator "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/logging-operator.md"
+        logging-operator-kustomize(App as Kustomize)
+        click logging-operator-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/kustomize.md"
+        logging-operator-helm(App as Helm)
+        click logging-operator-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/helm.md"
+        logging-operator-carvel(App as Carvel ytt)
+        click logging-operator-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/carvel.md"
+        logging-operator-cdk8s(App as cdk8s)
+        click logging-operator-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/data-pipelines/cdk8s.md"
+        style logging-operator-cdk8s fill:red
+        otel-collector(OTel Collector)
+        style otel-collector fill:green
+        data-pipelines --> fluentd & fluentbit --> logging-operator
+        data-pipelines --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
+        data-pipelines --> otel-collector --> progressive-delivery
+
+        %% --------------------------
+        %% -- Progressive Delivery --
+        %% --------------------------
+        progressive-delivery{{Progressive Delivery}}
+        style progressive-delivery fill:blue
+        click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
+        argo-rollouts(Argo Rollouts)
+        click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
+        style argo-rollouts fill:green
+        argo-rollouts-cilium(Cilium)
+        style argo-rollouts-cilium fill:green
+        argo-rollouts-kuma(Kuma)
+        click argo-rollouts-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
+        style argo-rollouts-kuma fill:red
+        argo-rollouts-nsm(Network Service Mesh)
+        click argo-rollouts-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
+        style argo-rollouts-nsm fill:red
+        argo-rollouts-linkerd(Linkerd)
+        click argo-rollouts-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
+        style argo-rollouts-linkerd fill:red
+        argo-rollouts-nginx(NGINX)
+        click argo-rollouts-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
+        style argo-rollouts-nginx fill:red
+        argo-rollouts-contour(Contour)
+        click argo-rollouts-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
+        style argo-rollouts-contour fill:red
+        argo-rollouts-emissary(Emissary-ingress)
+        click argo-rollouts-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
+        style argo-rollouts-emissary fill:red
+        flagger(Flagger)
+        click flagger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger.md"
+        style flagger fill:green
+        flagger-cilium(Cilium)
+        style flagger-cilium fill:red
+        flagger-kuma(Kuma)
+        click flagger-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
+        style flagger-kuma fill:red
+        flagger-nsm(Network Service Mesh)
+        click flagger-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
+        style flagger-nsm fill:red
+        flagger-linkerd(Linkerd)
+        click flagger-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
+        style flagger-linkerd fill:red
+        flagger-nginx(NGINX)
+        click flagger-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
+        style flagger-nginx fill:red
+        flagger-contour(Contour)
+        click flagger-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
+        style flagger-contour fill:red
+        flagger-emissary(Emissary-ingress)
+        click flagger-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
+        style flagger-emissary fill:red
+        progressive-delivery-istio(Istio)
+        click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        progressive-delivery-kustomize(App as Kustomize)
+        click progressive-delivery-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
+        progressive-delivery-helm(App as Helm)
+        click progressive-delivery-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
+        style progressive-delivery-helm fill:red
+        progressive-delivery-carvel(App as Carvel ytt)
+        click progressive-delivery-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
+        style progressive-delivery-carvel fill:green
+        progressive-delivery-cdk8s(App as cdk8s)
+        click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
+        style progressive-delivery-cdk8s fill:red
+        progressive-delivery --> argo-rollouts & flagger
+        argo-rollouts --> argo-rollouts-cilium & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> done
+        flagger --> flagger-cilium & flagger-kuma & flagger-nsm & flagger-linkerd & flagger-nginx & flagger-contour & flagger-emissary --> done
+        argo-rollouts & flagger --> progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> done
 
         done((Chapter End))
 

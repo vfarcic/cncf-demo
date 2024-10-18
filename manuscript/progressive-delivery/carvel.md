@@ -34,9 +34,22 @@ git add .
 git commit -m "Progressive delivery"
 
 git push
-
-kubectl --namespace production get virtualservices
 ```
+
+> Execute the command that follows only if you chose Argo Rollouts
+
+```sh
+kubectl argo rollouts --namespace production \
+    get rollout cncf-demo --watch
+```
+
+> Execute the command that follows only if you chose Flagger.
+
+```sh
+kubectl --namespace production describe canary cncf-demo --watch
+```
+
+> Press `ctrl+c` to stop watching the rollout once it's finished.
 
 > Execute the command that follows in a second terminal session (in the same directory)
 
@@ -50,24 +63,7 @@ source .env
 hey -z 60m "http://cncf-demo.$ISTIO_HOST"
 ```
 
-> Execute the command that follows only if you chose Argo Rollouts
-
 ```sh
-kubectl argo rollouts --namespace production \
-    get rollout cncf-demo --watch
-```
-
-> Press `ctrl+c` to stop watching the rollout once it's finished.
-
-> Execute the command that follows only if you chose Flagger.
-
-```sh
-kubectl --namespace production describe canary cncf-demo
-```
-
-```sh
-curl "http://cncf-demo.$ISTIO_HOST"
-
 echo "http://prometheus.$INGRESS_HOST"
 ```
 
@@ -75,7 +71,7 @@ echo "http://prometheus.$INGRESS_HOST"
 
 > Execute the `sum(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local"})` query in the Prometheus UI.
 
-> Execute the `sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local",response_code!~"5.*"}[5m])) / sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local"}[5m]))` query in the Prometheus UI.
+> Execute the `sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local",response_code!~"5.*",response_code!~"4.*"}[5m])) / sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local"}[5m]))` query in the Prometheus UI.
 
 ```sh
 yq --inplace ".image.tag = \"v0.0.2\"" ytt/values-prod.yaml
@@ -100,12 +96,11 @@ source .env
 > Execute the command that follows in the third terminal session
 
 ```sh
-for i in {1..20}; do
+for i in {1..1000}; do
+    sleep 1
     curl "http://cncf-demo.$ISTIO_HOST"
 done
 ```
-
-> If you do not see outputs with `v0.0.2`, the rollout did not yet start. Wait for a few moments and try again.
 
 > Execute the command that follows only if you chose Argo Rollouts.
 
@@ -123,8 +118,6 @@ kubectl --namespace production get canaries --watch
 > Press `ctrl+c` to stop watching the rollout once it's finished.
 
 ```sh
-# FIXME: Continue rewrite
-
 yq --inplace ".image.tag = \"v0.0.3\"" ytt/values-prod.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \
@@ -159,7 +152,7 @@ kubectl argo rollouts --namespace production \
 kubectl --namespace production get canaries --watch
 ```
 
-> Press `ctrl+c` to stop watching the rollout once it's finished.
+> Press `ctrl+c` to stop watching processes in all three terminal sessions.
 
 ## Continue The Adventure
 
