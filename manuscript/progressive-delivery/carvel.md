@@ -4,18 +4,18 @@ TODO: Intro
 
 ## Setup
 
-> Execute the command that follows only if you chose Argo Rollouts.
-
 ```sh
-yq --inplace ".spec.hosts[0] = \"cncf-demo.$ISTIO_HOST\"" \
-    kustomize/overlays/prod/virtual-service.yaml
-```
+yq --inplace ".progressiveDelivery.enabled = true" \
+    ytt/values-prod.yaml
 
-> Execute the command that follows only if you chose Flagger.
+yq --inplace ".progressiveDelivery.type = \"$PD_APP\"" \
+    ytt/values-prod.yaml
 
-```sh
-yq --inplace ".spec.service.hosts[0] = \"cncf-demo.$ISTIO_HOST\"" \
-    kustomize/overlays/prod/flagger.yaml
+yq --inplace ".istio.enabled = true" \
+    ytt/values-prod.yaml
+
+yq --inplace ".istio.host = \"cncf-demo.$ISTIO_HOST\"" \
+    ytt/values-prod.yaml
 ```
 
 ## Do
@@ -23,38 +23,11 @@ yq --inplace ".spec.service.hosts[0] = \"cncf-demo.$ISTIO_HOST\"" \
 > Execute the command that follows only if you chose Argo Rollouts
 
 ```bash
-yq --inplace ".spec.replicas = 0" kustomize/base/deployment.yaml
-```
+yq --inplace ".replicas = 0" ytt/values-prod.yaml
 
-> Execute the command that follows only if you chose Argo Rollouts.
-
-```sh
-cat kustomize/overlays/prod/gateway.yaml
-```
-
-> Execute the command that follows only if you chose Argo Rollouts.
-
-```sh
-cat kustomize/overlays/prod/virtual-service.yaml
-```
-
-```sh
-cat kustomize/overlays/prod/$PD_APP.yaml
-
-yq --inplace ".resources += \"gateway.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
-```
-
-> Execute the command that follows only if you chose Argo Rollouts.
-
-```sh
-yq --inplace ".resources += \"virtual-service.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
-```
-
-```sh
-yq --inplace ".resources += \"$PD_APP.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
@@ -84,11 +57,15 @@ kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
 ```
 
+> Press `ctrl+c` to stop watching the rollout once it's finished.
+
 > Execute the command that follows only if you chose Flagger.
 
 ```sh
 kubectl --namespace production describe canary cncf-demo
+```
 
+```sh
 curl "http://cncf-demo.$ISTIO_HOST"
 
 echo "http://prometheus.$INGRESS_HOST"
@@ -101,12 +78,11 @@ echo "http://prometheus.$INGRESS_HOST"
 > Execute the `sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local",response_code!~"5.*"}[5m])) / sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local"}[5m]))` query in the Prometheus UI.
 
 ```sh
-cd kustomize/overlays/prod
+yq --inplace ".image.tag = \"v0.0.2\"" ytt/values-prod.yaml
 
-kustomize edit set image \
-    index.docker.io/vfarcic/cncf-demo=index.docker.io/vfarcic/cncf-demo:v0.0.2
-
-cd ../../../
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
@@ -147,12 +123,13 @@ kubectl --namespace production get canaries --watch
 > Press `ctrl+c` to stop watching the rollout once it's finished.
 
 ```sh
-cd kustomize/overlays/prod
+# FIXME: Continue rewrite
 
-kustomize edit set image \
-    index.docker.io/vfarcic/cncf-demo=index.docker.io/vfarcic/cncf-demo:v0.0.3
+yq --inplace ".image.tag = \"v0.0.3\"" ytt/values-prod.yaml
 
-cd ../../../
+ytt --file ytt/schema.yaml --file ytt/resources \
+    --data-values-file ytt/values-prod.yaml \
+    | tee yaml/prod/app.yaml
 
 git add .
 
@@ -181,6 +158,8 @@ kubectl argo rollouts --namespace production \
 ```sh
 kubectl --namespace production get canaries --watch
 ```
+
+> Press `ctrl+c` to stop watching the rollout once it's finished.
 
 ## Continue The Adventure
 

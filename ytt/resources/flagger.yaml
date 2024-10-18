@@ -1,0 +1,34 @@
+#@ load("@ytt:data", "data")
+
+#@ if data.values.progressiveDelivery.enabled and data.values.progressiveDelivery.type == "flagger":
+---
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: #@ data.values.name
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: #@ data.values.name
+  service:
+    port: 8080
+    targetPort: 8080
+    gateways:
+      - #@ data.values.name + "-gateway"
+    hosts:
+      - #@ data.values.name + ".local"
+    trafficPolicy:
+      tls:
+        mode: DISABLE
+  analysis:
+    interval: 1m
+    threshold: 2
+    maxWeight: 80
+    stepWeight: 20
+    metrics:
+      - name: request-success-rate
+        thresholdRange:
+          min: 95
+        interval: 1m
+#@ end

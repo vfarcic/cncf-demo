@@ -45,3 +45,9 @@ otel:
   jaegerAddr: "http://jaeger-collector.monitoring:4318"
 logging:
   enabled: false
+istio:
+  enabled: false
+  host: ""
+progressiveDelivery:
+  enabled: false
+  type: "argo-rollouts"

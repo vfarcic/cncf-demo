@@ -1,0 +1,75 @@
+#@ load("@ytt:data", "data")
+
+#@ if data.values.progressiveDelivery.enabled and data.values.progressiveDelivery.type == "argo-rollouts":
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: #@ data.values.name
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      canaryService: #@ data.values.name + "-canary"
+      stableService: #@ data.values.name + "-primary"
+      trafficRouting:
+        istio:
+          virtualServices:
+            - name: #@ data.values.name + "-1"
+              routes:
+                - primary
+            - name: #@ data.values.name + "-2"
+              routes:
+                - secondary
+      analysis:
+        templates:
+          - templateName: success-rate
+            clusterScope: true
+        startingStep: 2
+        args:
+          - name: service-name
+            value: #@ data.values.name + "-canary.production.svc.cluster.local"
+      steps:
+        - setWeight: 20
+        - pause: {duration: 60}
+        - setWeight: 40
+        - pause: {duration: 60}
+        - setWeight: 60
+        - pause: {duration: 60}
+        - setWeight: 80
+        - pause: {duration: 60}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name:  #@ data.values.name
+  workloadRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name:  #@ data.values.name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  #@ data.values.name + "-canary"
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name:  #@ data.values.name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  #@ data.values.name + "-primary"
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name:  #@ data.values.name
+#@ end

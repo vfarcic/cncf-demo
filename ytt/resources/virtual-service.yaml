@@ -1,0 +1,50 @@
+#@ load("@ytt:data", "data")
+
+#@ if data.values.progressiveDelivery.enabled and data.values.progressiveDelivery.type == "argo-rollouts" and data.values.istio.enabled:
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: #@ data.values.name + "-1"
+spec:
+  gateways:
+    - #@ data.values.name + "-gateway"
+  hosts:
+    - #@ data.values.istio.host
+  http:
+    - name: primary
+      route:
+        - destination:
+            host: #@ data.values.name + "-primary"
+            port:
+              number: 8080
+          weight: 100
+        - destination:
+            host: #@ data.values.name + "-canary"
+            port:
+              number: 8080
+          weight: 0
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: #@ data.values.name + "-2"
+spec:
+  gateways:
+    - #@ data.values.name + "-gateway"
+  hosts:
+    - #@ data.values.istio.host
+  http:
+    - name: secondary
+      route:
+        - destination:
+            host: #@ data.values.name + "-primary"
+            port:
+              number: 8080
+          weight: 100
+        - destination:
+            host: #@ data.values.name + "-canary"
+            port:
+              number: 8080
+          weight: 0
+#@ end
