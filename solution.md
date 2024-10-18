@@ -695,7 +695,6 @@ flowchart TD
         style progressive-delivery-helm fill:red
         progressive-delivery-carvel(App as Carvel ytt)
         click progressive-delivery-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
-        style progressive-delivery-carvel fill:red
         progressive-delivery-cdk8s(App as cdk8s)
         click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
         style progressive-delivery-cdk8s fill:red
