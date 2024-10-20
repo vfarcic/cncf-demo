@@ -708,6 +708,7 @@ flowchart TD
         %% ----------
         cost{{Cost}}
         style cost fill:red
+        click cost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cost/README.md"
         open-cost(OpenCost)
         style open-cost fill:red
         goldilocks(Goldilocks)
