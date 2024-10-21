@@ -1,4 +1,4 @@
-# Progressive Delivery with Argo Rollouts, Istio, and Helm
+# Progressive Delivery with Argo Rollouts, Istio, and Kustomize
 
 TODO: Intro
 
@@ -29,20 +29,13 @@ yq --inplace ".spec.replicas = 0" kustomize/base/deployment.yaml
 > Execute the command that follows only if you chose Argo Rollouts.
 
 ```sh
-cat kustomize/overlays/prod/gateway.yaml
-```
-
-> Execute the command that follows only if you chose Argo Rollouts.
-
-```sh
 cat kustomize/overlays/prod/virtual-service.yaml
 ```
 
 ```sh
-cat kustomize/overlays/prod/$PD_APP.yaml
+cat kustomize/overlays/prod/gateway.yaml
 
-yq --inplace ".resources += \"gateway.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
+cat kustomize/overlays/prod/$PD_APP.yaml
 ```
 
 > Execute the command that follows only if you chose Argo Rollouts.
@@ -53,6 +46,9 @@ yq --inplace ".resources += \"virtual-service.yaml\"" \
 ```
 
 ```sh
+yq --inplace ".resources += \"gateway.yaml\"" \
+    kustomize/overlays/prod/kustomization.yaml
+
 yq --inplace ".resources += \"$PD_APP.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 

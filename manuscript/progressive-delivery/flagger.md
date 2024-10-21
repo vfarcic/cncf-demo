@@ -21,6 +21,7 @@ source .env
 
 ## Which Service Mesh or Ingress Did You Choose?
 
+* **Cilium** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * [Istio](istio.md)
 * **Kuma** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Network Service Mesh** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

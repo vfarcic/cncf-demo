@@ -1,11 +1,9 @@
-#@ load("@ytt:data", "data")
-
-#@ if data.values.progressiveDelivery.enabled and data.values.istio.enabled:
+{{- if and (.Values.progressiveDelivery.enabled) (.Values.istio.enabled) }}
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: #@ data.values.name + "-gateway"
+  name: {{ template "name" . }}-gateway
 spec:
   selector:
     istio: ingress
@@ -16,4 +14,4 @@ spec:
         protocol: HTTP
       hosts:
         - "*"
-#@ end
+{{- end }}

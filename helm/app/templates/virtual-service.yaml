@@ -1,0 +1,48 @@
+{{- if and (.Values.progressiveDelivery.enabled) (eq .Values.progressiveDelivery.type "argo-rollouts") (.Values.istio.enabled) }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ template "name" . }}-1
+spec:
+  gateways:
+    - {{ template "name" . }}-gateway
+  hosts:
+    - {{ .Values.istio.host }}
+  http:
+    - name: primary
+      route:
+        - destination:
+            host: {{ template "name" . }}-primary
+            port:
+              number: 8080
+          weight: 100
+        - destination:
+            host: {{ template "name" . }}-canary
+            port:
+              number: 8080
+          weight: 0
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ template "name" . }}-2
+spec:
+  gateways:
+    - {{ template "name" . }}-gateway
+  hosts:
+    - {{ .Values.istio.host }}
+  http:
+    - name: secondary
+      route:
+        - destination:
+            host: {{ template "name" . }}-primary
+            port:
+              number: 8080
+          weight: 100
+        - destination:
+            host: {{ template "name" . }}-canary
+            port:
+              number: 8080
+          weight: 0
+{{- end }}

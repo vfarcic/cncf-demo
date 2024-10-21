@@ -644,64 +644,41 @@ flowchart TD
         click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
         argo-rollouts(Argo Rollouts)
         click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
-        argo-rollouts-cilium(Cilium)
-        style argo-rollouts-cilium fill:red
-        argo-rollouts-kuma(Kuma)
-        click argo-rollouts-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
-        style argo-rollouts-kuma fill:red
-        argo-rollouts-nsm(Network Service Mesh)
-        click argo-rollouts-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
-        style argo-rollouts-nsm fill:red
-        argo-rollouts-linkerd(Linkerd)
-        click argo-rollouts-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
-        style argo-rollouts-linkerd fill:red
-        argo-rollouts-nginx(NGINX)
-        click argo-rollouts-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
-        style argo-rollouts-nginx fill:red
-        argo-rollouts-contour(Contour)
-        click argo-rollouts-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
-        style argo-rollouts-contour fill:red
-        argo-rollouts-emissary(Emissary-ingress)
-        click argo-rollouts-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
-        style argo-rollouts-emissary fill:red
         flagger(Flagger)
-        click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger.md"
-        flagger-cilium(Cilium)
-        style flagger-cilium fill:red
-        flagger-kuma(Kuma)
-        click flagger-kuma "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kuma.md"
-        style flagger-kuma fill:red
-        flagger-nsm(Network Service Mesh)
-        click flagger-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
-        style flagger-nsm fill:red
-        flagger-linkerd(Linkerd)
-        click flagger-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
-        style flagger-linkerd fill:red
-        flagger-nginx(NGINX)
-        click flagger-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
-        style flagger-nginx fill:red
-        flagger-contour(Contour)
-        click flagger-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
-        style flagger-contour fill:red
-        flagger-emissary(Emissary-ingress)
-        click flagger-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
-        style flagger-emissary fill:red
+        click flagger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger.md"
+        progressive-delivery-cilium(Cilium)
+        style progressive-delivery-cilium fill:red
         progressive-delivery-istio(Istio)
         click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        progressive-delivery-kuma(Kuma)
+        style progressive-delivery-kuma fill:red
+        progressive-delivery-nsm(Network Service Mesh)
+        click progressive-delivery-nsm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nsm.md"
+        style progressive-delivery-nsm fill:red
+        progressive-delivery-linkerd(Linkerd)
+        click progressive-delivery-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
+        style progressive-delivery-linkerd fill:red
+        progressive-delivery-nginx(NGINX)
+        click progressive-delivery-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
+        style progressive-delivery-nginx fill:red
+        progressive-delivery-contour(Contour)
+        click progressive-delivery-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
+        style progressive-delivery-contour fill:red
+        progressive-delivery-emissary(Emissary-ingress)
+        click progressive-delivery-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
+        style progressive-delivery-emissary fill:red
         progressive-delivery-kustomize(App as Kustomize)
         click progressive-delivery-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
         progressive-delivery-helm(App as Helm)
         click progressive-delivery-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/helm.md"
-        style progressive-delivery-helm fill:red
         progressive-delivery-carvel(App as Carvel ytt)
         click progressive-delivery-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/carvel.md"
         progressive-delivery-cdk8s(App as cdk8s)
         click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
         style progressive-delivery-cdk8s fill:red
         progressive-delivery --> argo-rollouts & flagger
-        argo-rollouts --> argo-rollouts-cilium & argo-rollouts-kuma & argo-rollouts-nsm & argo-rollouts-linkerd & argo-rollouts-nginx & argo-rollouts-contour & argo-rollouts-emissary --> cost
-        flagger --> flagger-cilium & flagger-kuma & flagger-nsm & flagger-linkerd & flagger-nginx & flagger-contour & flagger-emissary --> cost
-        argo-rollouts & flagger --> progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> cost
+        argo-rollouts & flagger --> progressive-delivery-cilium & progressive-delivery-istio & progressive-delivery-kuma & progressive-delivery-nsm & progressive-delivery-linkerd & progressive-delivery-nginx & progressive-delivery-contour & progressive-delivery-emissary
+        progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> cost
 
         %% ----------
         %% -- Cost --
@@ -711,9 +688,11 @@ flowchart TD
         click cost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cost/README.md"
         open-cost(OpenCost)
         style open-cost fill:red
-        goldilocks(Goldilocks)
-        style goldilocks fill:red
-        cost --> open-cost & goldilocks --> service-mesh
+        storm-forge(StormForge)
+        style storm-forge fill:red
+        cast-ai(CAST AI)
+        style cast-ai fill:red
+        cost --> open-cost & storm-forge & cast-ai --> service-mesh
 
         %% ------------------
         %% -- Service Mesh --

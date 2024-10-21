@@ -4,16 +4,22 @@ TODO: Intro
 
 ## Do
 
+> Execute the command that follows only if you chose Argo CD
+
 ```bash
-# If Argo CD
 yq --inplace \
     ".spec.source.helm.valuesObject.otel.enabled = true" \
     apps/cncf-demo.yaml
+```
 
-# If Flux
+> Execute the command that follows only if you chose Flux
+
+```sh
 yq --inplace ".spec.values.otel.enabled = true" \
     apps/cncf-demo.yaml
+```
 
+```sh
 git add .
 
 git commit -m "Instrumentation"

@@ -1,15 +1,15 @@
-{{- if and (.Values.progressiveDelivery.enabled) (eq .Values.progressiveDelivery.tool "argo-rollouts") (.Values.serviceMesh.enabled) (eq .Values.serviceMesh.tool "istio") }}
+{{- if and (.Values.progressiveDelivery.enabled) (eq .Values.progressiveDelivery.type "argo-rollouts") }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: {{ template "name" . }}
 spec:
-  replicas: 3
+  replicas: 5
   strategy:
     canary:
       canaryService: {{ template "name" . }}-canary
-      stableService: {{ template "name" . }}-stable
+      stableService: {{ template "name" . }}-primary
       trafficRouting:
         istio:
           virtualServices:
@@ -26,7 +26,7 @@ spec:
         startingStep: 2
         args:
           - name: service-name
-            value: cncf-demo-canary.production.svc.cluster.local
+            value: {{ template "name" . }}-canary.production.svc.cluster.local
       steps:
         - setWeight: 20
         - pause: {duration: 60}
@@ -39,31 +39,16 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "name" . }}
+      app.kubernetes.io/name:  {{ template "name" . }}
   workloadRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ template "name" . }}
----
-apiVersion: networking.istio.io/v1beta1
-kind: Gateway
-metadata:
-  name: {{ template "name" . }}-gateway
-spec:
-  selector:
-    istio: ingress
-  servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-        - "*"
+    name:  {{ template "name" . }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "name" . }}-canary
+  name:  {{ template "name" . }}-canary
 spec:
   ports:
   - port: 8080
@@ -71,12 +56,12 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app.kubernetes.io/name: {{ template "name" . }}
+    app.kubernetes.io/name:  {{ template "name" . }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "name" . }}-stable
+  name:  {{ template "name" . }}-primary
 spec:
   ports:
   - port: 8080
@@ -84,51 +69,5 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app.kubernetes.io/name: {{ template "name" . }}
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: {{ template "name" . }}-1
-spec:
-  gateways:
-    - {{ template "name" . }}-gateway
-  hosts:
-    - {{ .Values.serviceMesh.gatewayHost }}
-  http:
-    - name: primary
-      route:
-        - destination:
-            host: {{ template "name" . }}-stable
-            port:
-              number: 8080
-          weight: 100
-        - destination:
-            host: {{ template "name" . }}-canary
-            port:
-              number: 8080
-          weight: 0
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: {{ template "name" . }}-2
-spec:
-  gateways:
-    - {{ template "name" . }}-gateway
-  hosts:
-    - {{ .Values.serviceMesh.gatewayHost }}
-  http:
-    - name: secondary
-      route:
-        - destination:
-            host: {{ template "name" . }}-stable
-            port:
-              number: 8080
-          weight: 100
-        - destination:
-            host: {{ template "name" . }}-canary
-            port:
-              number: 8080
-          weight: 0
+    app.kubernetes.io/name:  {{ template "name" . }}
 {{- end }}

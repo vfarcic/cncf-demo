@@ -24,7 +24,6 @@ Step 4 - **Ingestion/Storage** </br>
 Step 5 - **Use the data!** </br>
 Prometheus doesn’t have a visualization component, so you’ll likely use a third-party dashboard tool to see charts and graphs and pretty colors. You can also use Prometheus’s query language [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) to query Prometheus, and you can use [Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) to create alerts.
 
-
 [![Power Your Metrics with Prometheus](https://img.youtube.com/vi/gt085CrPRb8/0.jpg)](https://youtu.be/gt085CrPRb8)
 * [Official site](https://prometheus.io)
 
@@ -53,7 +52,6 @@ Thanos has additional features too, like a compactor that compacts and downsampl
 
 Thanos is designed to handle a very large number of time series, often in the millions or even billions, depending on the configuration and underlying infrastructure. Because it can be seamlessly added on top of Prometheus, it is a great choice for companies who already have a large Prometheus footprint.
 
-
 [![Scaling Your Metrics with Thanos](https://img.youtube.com/vi/1qvcVJiVx7M/0.jpg)](https://youtu.be/1qvcVJiVx7M)
 * [Official site](https://thanos.io)
 
@@ -66,7 +64,6 @@ Similar to Thanos, Cortex receives metrics and writes them to long-term object s
 However, Cortex uses a more complex storage architecture that emphases multi-tenancy and high availability. Cortex deploys and scales independently from Prometheus, and it can also receive metrics from sources other than Prometheus, like from the OpenTelemetry collector, for example, or from an OTLP-instrumented application.
 
 Cortex especially shines in a multi-tenant use case where it can implement query limits and/or ingestion limits on a per-tenant basis. It also can isolate data between teams.
-
 
 [![Cortex: Horizontally Scalable Prometheus](https://img.youtube.com/vi/oMdblfpx3e0/0.jpg)](https://youtu.be/oMdblfpx3e0)
 * [Official site](https://cortexmetrics.io)

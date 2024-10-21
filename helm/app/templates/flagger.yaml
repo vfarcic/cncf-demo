@@ -1,23 +1,21 @@
-#@ load("@ytt:data", "data")
-
-#@ if data.values.progressiveDelivery.enabled and data.values.progressiveDelivery.type == "flagger":
+{{- if and (.Values.progressiveDelivery.enabled) (eq .Values.progressiveDelivery.type "flagger") }}
 ---
 apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:
-  name: #@ data.values.name
+  name: {{ template "name" . }}
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: #@ data.values.name
+    name: {{ template "name" . }}
   service:
     port: 8080
     targetPort: 8080
     gateways:
-      - #@ data.values.name + "-gateway"
+      - {{ template "name" . }}-gateway
     hosts:
-      - #@ data.values.istio.host
+      - {{ .Values.istio.host }}
     trafficPolicy:
       tls:
         mode: DISABLE
@@ -31,4 +29,4 @@ spec:
         thresholdRange:
           min: 95
         interval: 1m
-#@ end
+{{- end }}

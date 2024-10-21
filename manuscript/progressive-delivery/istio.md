@@ -44,7 +44,7 @@ kubectl --namespace production delete pods \
 kubectl --namespace production get pods
 ```
 
-> Confirm that two containers (main and sidecar) are in the cncf-demo Pod.
+> Confirm that three containers (main and sidecar) are in the cncf-demo Pod. 
 
 ## Do
 
@@ -69,6 +69,6 @@ kubectl get clusteranalysistemplates
 ## How Did You Define Your App?
 
 * [Kustomize](kustomize.md)
-* **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Helm](helm.md)
 * [Carvel ytt](carvel.md)
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
