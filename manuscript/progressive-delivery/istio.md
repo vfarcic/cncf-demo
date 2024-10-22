@@ -37,14 +37,16 @@ kubectl get namespace production --output yaml
 
 ```sh
 ./manuscript/progressive-delivery/flagger.sh istio
+```
 
+```sh
 kubectl --namespace production delete pods \
     --selector app.kubernetes.io/name=cncf-demo
 
 kubectl --namespace production get pods
 ```
 
-> Confirm that three containers (main and sidecar) are in the cncf-demo Pod. 
+> Confirm that three containers (main and two sidecars) are in the cncf-demo Pod. 
 
 ## Do
 

@@ -1,0 +1,15 @@
+layout {
+    default_tab_template {
+        children
+    }
+    tab name="Do" focus=true {
+        pane {
+            size "60%"
+        }
+        pane split_direction="vertical" {
+            size "40%"
+            pane
+            pane
+        }
+    }
+}
