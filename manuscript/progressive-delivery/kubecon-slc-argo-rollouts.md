@@ -1,8 +1,24 @@
-# Progressive Delivery with Argo Rollouts, Istio, and Carvel ytt
+# Progressive Delivery with Argo Rollouts and Istio
 
 TODO: Intro
 
-## Setup
+## Do
+
+```sh
+cat argo-rollouts/istio.yaml
+
+cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
+
+git add .
+
+git commit -m "Analysis"
+
+git push
+
+kubectl get clusteranalysistemplates
+```
+
+## ytt
 
 ```sh
 yq --inplace ".progressiveDelivery.enabled = true" \
@@ -11,18 +27,6 @@ yq --inplace ".progressiveDelivery.enabled = true" \
 yq --inplace ".progressiveDelivery.type = \"$PD_APP\"" \
     ytt/values-prod.yaml
 
-yq --inplace ".istio.enabled = true" \
-    ytt/values-prod.yaml
-
-yq --inplace ".istio.host = \"cncf-demo.$ISTIO_HOST\"" \
-    ytt/values-prod.yaml
-```
-
-## Do
-
-> Execute the command that follows only if you chose Argo Rollouts
-
-```bash
 yq --inplace ".replicas = 0" ytt/values-prod.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \
@@ -34,24 +38,12 @@ git add .
 git commit -m "Progressive delivery"
 
 git push
-```
 
-> Execute the command that follows only if you chose Argo Rollouts
-
-```sh
 kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
 ```
 
-> Execute the command that follows only if you chose Flagger.
-
-```sh
-kubectl --namespace production get canaries --watch
-```
-
 > Press `ctrl+c` to stop watching the rollout once it's finished.
-
-> Execute the command that follows in a second terminal session (in the same directory)
 
 ```sh
 source .env
@@ -64,7 +56,7 @@ hey -z 60m "http://cncf-demo.$ISTIO_HOST"
 ```
 
 ```sh
-echo "http://prometheus.$INGRESS_HOST"
+open "http://prometheus.$INGRESS_HOST"
 ```
 
 > Open the URL from the output in a browser.
@@ -157,4 +149,5 @@ kubectl --namespace production get canaries --watch
 ## Continue The Adventure
 
 The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+
 
