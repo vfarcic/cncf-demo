@@ -40,6 +40,8 @@ kubectl --namespace production get pods
 
 ./manuscript/progressive-delivery/kubecon-slc-argo-rollouts.sh
 
+./manuscript/progressive-delivery/kubecon-slc-flagger.sh istio
+
 source .env
 ```
 

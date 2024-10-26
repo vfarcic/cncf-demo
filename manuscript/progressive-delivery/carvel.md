@@ -1,4 +1,4 @@
-# Progressive Delivery with Argo Rollouts, Istio, and Carvel ytt
+# Progressive Delivery with Istio and Carvel ytt
 
 TODO: Intro
 

@@ -1,4 +1,4 @@
-# Progressive Delivery with Argo Rollouts, Istio, and Kustomize
+# Progressive Delivery with Istio and Kustomize
 
 TODO: Intro
 
