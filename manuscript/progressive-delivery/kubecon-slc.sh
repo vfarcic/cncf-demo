@@ -13,6 +13,3 @@ yq --inplace ".istio.host = \"cncf-demo.$ISTIO_HOST\"" \
 
 yq --inplace ".istio.host = \"cncf-demo.$ISTIO_HOST\"" \
     ytt/values-prod.yaml
-
-yq --inplace ".progressiveDelivery.stepDuration = 10" \
-    ytt/values-prod.yaml

@@ -42,5 +42,5 @@ kubectl --namespace production get pods
 
 ## What Is Your Choice?
 
-<!-- * [Argo Rollouts](../progressive-delivery/argo-rollouts.md) -->
-<!-- * [Flagger](../progressive-delivery/flagger.md) -->
+* [Argo Rollouts](../progressive-delivery/kubecon-slc-argo-rollouts.md)
+<!-- * [Flagger](../progressive-delivery/kubecon-slc-flagger.md) -->

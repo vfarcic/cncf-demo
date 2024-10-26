@@ -13,11 +13,13 @@ eval "$(teller sh)"
 
 ./manuscript/setup/kubecon-slc-observability.sh
 
+source .env
+
+zellij
+
 kubectl --namespace argocd port-forward  svc/argocd-server 8080:80
 
 open "http://localhost:8080"
-
-source .env
 
 ./manuscript/metrics/kubecon-slc-prometheus.sh
 
@@ -26,6 +28,8 @@ source .env
 ./manuscript/mtls/kubecon-slc-istio.sh
 
 source .env
+
+kubectl get pods --all-namespaces
 
 kubectl --namespace production delete pods \
     --selector app.kubernetes.io/name=cncf-demo
@@ -44,3 +48,4 @@ source .env
 ## Start The Chapter
 
 * [Prometheus](../metrics/kubecon-slc-prometheus.md)
+<!-- * [Pixie](../metrics/kubecon-slc-pixie.md) -->

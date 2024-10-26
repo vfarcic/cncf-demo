@@ -38,15 +38,9 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
         COUNTER=$(kubectl get managed --no-headers | grep -v database | wc -l)
     done
 
-	set +e
-	helm --namespace kube-system delete cilium
-	set -e
-
 	eksctl delete addon --name aws-ebs-csi-driver --cluster dot-production --region us-east-1
 
 	eksctl delete nodegroup --name primary --cluster dot-production --drain=false --region us-east-1 --wait
-
-	eksctl delete cluster --config-file eksctl/config-cilium.yaml --wait
 
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 
