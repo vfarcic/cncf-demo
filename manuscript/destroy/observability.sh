@@ -42,6 +42,8 @@ elif [[ "$HYPERSCALER" == "aws" ]]; then
 
 	eksctl delete nodegroup --name primary --cluster dot-production --drain=false --region us-east-1 --wait
 
+	eksctl delete cluster --config-file eksctl/config-cilium.yaml --wait
+
 elif [[ "$HYPERSCALER" == "azure" ]]; then
 
 	az group delete --name $RESOURCE_GROUP --yes
