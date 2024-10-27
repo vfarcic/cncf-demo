@@ -16,5 +16,3 @@ git add .
 git commit -m "Argo Rollouts"
 
 git push
-
-echo "export PD_APP=flagger" >> .env

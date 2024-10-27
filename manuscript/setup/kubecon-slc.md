@@ -23,6 +23,8 @@ open "http://localhost:8080"
 
 ./manuscript/metrics/kubecon-slc-prometheus.sh
 
+px auth login
+
 ./manuscript/tracing/kubecon-slc-jaeger.sh
 
 ./manuscript/mtls/kubecon-slc-istio.sh
@@ -50,4 +52,4 @@ source .env
 ## Start The Chapter
 
 * [Prometheus](../metrics/kubecon-slc-prometheus.md)
-<!-- * [Pixie](../metrics/kubecon-slc-pixie.md) -->
+* [Pixie](../metrics/kubecon-slc-pixie.md)

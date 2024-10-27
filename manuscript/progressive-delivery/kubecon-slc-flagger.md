@@ -2,13 +2,25 @@
 
 TODO: Intro
 
+## Do
+
+> Execute only if Pixie was chosen.
+
+```sh
+helm upgrade --install \
+    kube-prometheus-stack kube-prometheus-stack \
+    --repo https://prometheus-community.github.io/helm-charts \
+    --values prometheus/values.yaml --reuse-values \
+    --namespace monitoring --create-namespace --wait
+```
+
 ## ytt
 
 ```sh
 yq --inplace ".progressiveDelivery.enabled = true" \
     ytt/values-prod.yaml
 
-yq --inplace ".progressiveDelivery.type = \"$PD_APP\"" \
+yq --inplace ".progressiveDelivery.type = \"flagger\"" \
     ytt/values-prod.yaml
 
 ytt --file ytt/schema.yaml --file ytt/resources \

@@ -1,21 +1,11 @@
 # Metrics With Pixie
 
-TODO: Intro
-
 ## Setup
 
 > Install `px` by following the instructions at https://docs.px.dev/installing-pixie/install-schemes/cli
 
-> Watch https://youtu.be/WiFLtcBvGMU if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
-
-> Please skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.
-
 ```bash
-devbox shell
-
-chmod +x manuscript/metrics/pixie.sh
-
-./manuscript/metrics/pixie.sh
+px deploy --cluster_name dot -y
 ```
 
 ## Do
@@ -44,4 +34,4 @@ px live px/namespace -- --namespace production
 
 ## Continue the Adventure
 
-* [Tracing](../tracing/README.md)
+* [Jaeger](../tracing/kubecon-slc-jaeger.md)

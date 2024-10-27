@@ -6,6 +6,16 @@ TODO: Intro
 
 ```sh
 cat argo-rollouts/istio.yaml
+```
+
+> Execute only if Pixie was chosen.
+
+```sh
+helm upgrade --install \
+    kube-prometheus-stack kube-prometheus-stack \
+    --repo https://prometheus-community.github.io/helm-charts \
+    --values prometheus/values.yaml --reuse-values \
+    --namespace monitoring --create-namespace --wait
 
 cp argo-rollouts/istio.yaml infra/argo-rollouts-analysis.yaml
 
@@ -24,7 +34,7 @@ kubectl get clusteranalysistemplates
 yq --inplace ".progressiveDelivery.enabled = true" \
     ytt/values-prod.yaml
 
-yq --inplace ".progressiveDelivery.type = \"$PD_APP\"" \
+yq --inplace ".progressiveDelivery.type = \"argo-rollouts\"" \
     ytt/values-prod.yaml
 
 yq --inplace ".replicas = 0" ytt/values-prod.yaml
