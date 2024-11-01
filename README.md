@@ -785,7 +785,7 @@ flowchart TD
 | Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger | October 15, 2024 | [story](progressive-delivery/README.md) |
 | Cloud Cost | Matt Ray - OpenCost<br /> Yasmin Rajabi - StormForge<br /> Phil Andrews - CAST AI | October 22, 2024 | TBD |
 | Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> Marcin Skalski - Kuma | October 29, 2024 | TBD |
-| Misc | TBD - Kepler<br /> Jose Blanquicet - Inspektor Gadget<br /> Ronald Petty - K8sGPT<br /> Augustin Husson - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
+| Misc | Kaiyi Liu - Kepler<br /> Jose Blanquicet - Inspektor Gadget<br /> Ronald Petty - K8sGPT<br /> Augustin Husson - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
 | Chapter 4 Finale! | Whitney and Viktor! | November 19, 2024 |  |
 
 ## The Format
