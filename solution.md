@@ -722,7 +722,9 @@ flowchart TD
         style k8s-gpt fill:red
         pixie(Pixie)
         click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
-        observability-misc --> kepler & inspektor-gadget & k8s-gpt & pixie --> done
+        perses(Perses)
+        style perses fill:red
+        observability-misc --> kepler & inspektor-gadget & k8s-gpt & pixie & perses --> done
 
         done((Chapter End))
 

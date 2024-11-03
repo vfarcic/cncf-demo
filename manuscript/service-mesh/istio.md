@@ -51,6 +51,8 @@ echo "http://prometheus.$INGRESS_HOST"
 
 > Open the URL from the output in a browser.
 
+FIXME: Kiali
+
 ## How Did You Define Your App?
 
 * [Kustomize](istio-kustomize.md)
