@@ -25,6 +25,3 @@ source .env
 * **Kuma** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Network Service Mesh** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Linkerd** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **NGINX** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Contour** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Emissary-ingress** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

@@ -637,8 +637,23 @@ flowchart TD
         otel-collector(OTel Collector)
         style otel-collector fill:red
         data-pipelines --> fluentd & fluentbit --> logging-operator
-        data-pipelines --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
-        data-pipelines --> otel-collector --> progressive-delivery
+        data-pipelines --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> service-mesh
+        data-pipelines --> otel-collector --> service-mesh
+
+        %% ------------------
+        %% -- Service Mesh --
+        %% ------------------
+        service-mesh{{Service Mesh}}
+        style service-mesh fill:blue
+        cilium(Cilium)
+        style cilium fill:red
+        istio(Istio)
+        style istio fill:green
+        linkerd(Linkerd)
+        style linkerd fill:red
+        kuma(Kuma)
+        style kuma fill:red
+        service-mesh --> cilium & istio & linkerd & kuma --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -655,6 +670,7 @@ flowchart TD
         style progressive-delivery-cilium fill:red
         progressive-delivery-istio(Istio)
         click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        style progressive-delivery-istio fill:green
         progressive-delivery-kuma(Kuma)
         style progressive-delivery-kuma fill:red
         progressive-delivery-nsm(Network Service Mesh)
@@ -663,15 +679,6 @@ flowchart TD
         progressive-delivery-linkerd(Linkerd)
         click progressive-delivery-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
         style progressive-delivery-linkerd fill:red
-        progressive-delivery-nginx(NGINX)
-        click progressive-delivery-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
-        style progressive-delivery-nginx fill:red
-        progressive-delivery-contour(Contour)
-        click progressive-delivery-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
-        style progressive-delivery-contour fill:red
-        progressive-delivery-emissary(Emissary-ingress)
-        click progressive-delivery-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
-        style progressive-delivery-emissary fill:red
         progressive-delivery-kustomize(App as Kustomize)
         click progressive-delivery-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
         progressive-delivery-helm(App as Helm)
@@ -682,7 +689,7 @@ flowchart TD
         click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
         style progressive-delivery-cdk8s fill:red
         progressive-delivery --> argo-rollouts & flagger
-        argo-rollouts & flagger --> progressive-delivery-cilium & progressive-delivery-istio & progressive-delivery-kuma & progressive-delivery-nsm & progressive-delivery-linkerd & progressive-delivery-nginx & progressive-delivery-contour & progressive-delivery-emissary
+        argo-rollouts & flagger --> progressive-delivery-cilium & progressive-delivery-istio & progressive-delivery-kuma & progressive-delivery-nsm & progressive-delivery-linkerd
         progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> cost
 
         %% ----------
@@ -696,23 +703,8 @@ flowchart TD
         storm-forge(StormForge)
         style storm-forge fill:red
         cast-ai(CAST AI)
-        style cast-ai fill:red
-        cost --> open-cost & storm-forge & cast-ai --> service-mesh
-
-        %% ------------------
-        %% -- Service Mesh --
-        %% ------------------
-        service-mesh{{Service Mesh}}
-        style service-mesh fill:red
-        cilium(Cilium)
-        style cilium fill:red
-        istio(Istio)
-        style istio fill:red
-        linkerd(Linkerd)
-        style linkerd fill:red
-        kuma(Kuma)
-        style kuma fill:red
-        service-mesh --> cilium & istio & linkerd & kuma --> observability-misc
+        style cast-ai fill:green
+        cost --> open-cost & storm-forge & cast-ai --> observability-misc
 
         %% ----------
         %% -- Misc --
