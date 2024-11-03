@@ -558,23 +558,20 @@ flowchart TD
         style kubernetes-dashboard fill:red
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
-        style headlamp fill:green
         meshery(Meshery)
         style meshery fill:red
         dashboards --> kubernetes-dashboard & headlamp & meshery --> instrumentation
 
-        %% ------------------------------------
-        %% -- Instrumenting Application Code --
-        %% ------------------------------------
-        instrumentation{{Application Instrumentation}}
+        %% --------------------
+        %% -- Open Standards --
+        %% --------------------
+        instrumentation{{Open Standards}}
         click instrumentation "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/README.md"
         style instrumentation fill:blue
         open-telemetry(OpenTelemetry)
         click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
-        style open-telemetry fill:green
         open-metrics(OpenMetrics)
         click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
-        style open-metrics fill:green
         instrumentation --> open-telemetry & open-metrics --> metrics
 
         %% -------------
@@ -599,7 +596,6 @@ flowchart TD
         style tracing fill:blue
         jaeger(Jaeger)
         click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
-        style jaeger fill:green
         jaeger-kustomize(App as Kustomize)
         click jaeger-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/kustomize.md"
         jaeger-helm(App as Helm)
@@ -648,12 +644,22 @@ flowchart TD
         cilium(Cilium)
         style cilium fill:red
         istio(Istio)
-        style istio fill:green
+        click istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio.md"
         linkerd(Linkerd)
         style linkerd fill:red
         kuma(Kuma)
         style kuma fill:red
-        service-mesh --> cilium & istio & linkerd & kuma --> progressive-delivery
+        service-mesh-istio-kustomize(App as Kustomize)
+        click service-mesh-istio-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio-kustomize.md"
+        service-mesh-istio-helm(App as Helm)
+        style service-mesh-istio-helm fill:red
+        service-mesh-istio-carvel(App as Carvel ytt)
+        style service-mesh-istio-carvel fill:red
+        service-mesh-istio-cdk8s(App as cdk8s)
+        style service-mesh-istio-cdk8s fill:red
+        service-mesh --> cilium & istio & linkerd & kuma
+        istio --> service-mesh-istio-kustomize & service-mesh-istio-helm & service-mesh-istio-carvel & service-mesh-istio-cdk8s --> progressive-delivery
+        cilium & linkerd & kuma --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -663,14 +669,12 @@ flowchart TD
         click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
         argo-rollouts(Argo Rollouts)
         click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
-        style argo-rollouts fill:green
         flagger(Flagger)
         click flagger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger.md"
         progressive-delivery-cilium(Cilium)
         style progressive-delivery-cilium fill:red
         progressive-delivery-istio(Istio)
         click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
-        style progressive-delivery-istio fill:green
         progressive-delivery-kuma(Kuma)
         style progressive-delivery-kuma fill:red
         progressive-delivery-nsm(Network Service Mesh)
@@ -703,7 +707,6 @@ flowchart TD
         storm-forge(StormForge)
         style storm-forge fill:red
         cast-ai(CAST AI)
-        style cast-ai fill:green
         cost --> open-cost & storm-forge & cast-ai --> observability-misc
 
         %% ----------

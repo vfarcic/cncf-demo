@@ -29,6 +29,6 @@ TODO:
 ## What Is Your Choice?
 
 * **Cilium** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Istio** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Istio](istio.md)
 * **Linkerd** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Kuma** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

@@ -4,49 +4,19 @@ TODO: Intro
 
 ## Setup
 
-* Install `gum` by following the instructions in https://github.com/charmbracelet/gum#installation.
-* Watch https://youtu.be/U8zCHA-9VLA if you are not familiar with Charm Gum.
+> Watch https://youtu.be/WiFLtcBvGMU if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
 
-```bash
-# TODO: kapp-controller
-```
-
-* Execute `prometheus.sh` script only if you did NOT already install Prometheus.
+> Please skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.
 
 ```sh
-chmod +x manuscript/metrics/prometheus.sh
-
-./manuscript/metrics/prometheus.sh
+devbox shell
 ```
-
-* Execute `istio.sh` script only if you did NOT already install Istio
-
-```sh
-chmod +x manuscript/mtls/istio.sh
-
-./manuscript/mtls/istio.sh
-
-source .env
-
-kubectl get namespace production --output yaml
-```
-
-> Wait until the `istio-injection` label was added.
 
 > Execute the command that follows only if you chose Flagger.
 
 ```sh
 ./manuscript/progressive-delivery/flagger.sh istio
 ```
-
-```sh
-kubectl --namespace production delete pods \
-    --selector app.kubernetes.io/name=cncf-demo
-
-kubectl --namespace production get pods
-```
-
-> Confirm that three containers (main and two sidecars) are in the cncf-demo Pod. 
 
 ## Do
 

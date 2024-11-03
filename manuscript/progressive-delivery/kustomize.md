@@ -33,22 +33,17 @@ cat kustomize/overlays/prod/virtual-service.yaml
 ```
 
 ```sh
-cat kustomize/overlays/prod/gateway.yaml
-
 cat kustomize/overlays/prod/$PD_APP.yaml
 ```
 
 > Execute the command that follows only if you chose Argo Rollouts.
 
 ```sh
-yq --inplace ".resources += \"virtual-service.yaml\"" \
+sed -i -e 's/virtual-service-no-pd.yaml/virtual-service.yaml/g' \
     kustomize/overlays/prod/kustomization.yaml
 ```
 
 ```sh
-yq --inplace ".resources += \"gateway.yaml\"" \
-    kustomize/overlays/prod/kustomization.yaml
-
 yq --inplace ".resources += \"$PD_APP.yaml\"" \
     kustomize/overlays/prod/kustomization.yaml
 
@@ -60,6 +55,8 @@ git push
 
 kubectl --namespace production get virtualservices
 ```
+
+> Wait until VirtualServices `cncf-demo-1` and ``cncf-demo-2` are created.
 
 > Execute the command that follows in a second terminal session (in the same directory)
 
@@ -84,19 +81,11 @@ kubectl argo rollouts --namespace production \
 
 ```sh
 kubectl --namespace production describe canary cncf-demo
-
-curl "http://cncf-demo.$ISTIO_HOST"
-
-echo "http://prometheus.$INGRESS_HOST"
 ```
 
-> Open the URL from the output in a browser.
-
-> Execute the `sum(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local"})` query in the Prometheus UI.
-
-> Execute the `sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local",response_code!~"5.*",response_code!~"4.*"}[5m])) / sum(irate(istio_requests_total{reporter="source",destination_service=~"cncf-demo-primary.production.svc.cluster.local"}[5m]))` query in the Prometheus UI.
-
 ```sh
+curl "http://cncf-demo.$ISTIO_HOST"
+
 cd kustomize/overlays/prod
 
 kustomize edit set image \

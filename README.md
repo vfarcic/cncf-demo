@@ -678,8 +678,34 @@ flowchart TD
         otel-collector(OTel Collector)
         style otel-collector fill:green
         data-pipelines --> fluentd & fluentbit --> logging-operator
-        data-pipelines --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> progressive-delivery
-        data-pipelines --> otel-collector --> progressive-delivery
+        data-pipelines --> logging-operator --> logging-operator-kustomize & logging-operator-helm & logging-operator-carvel & logging-operator-cdk8s --> service-mesh
+        data-pipelines --> otel-collector --> service-mesh
+
+        %% ------------------
+        %% -- Service Mesh --
+        %% ------------------
+        service-mesh{{Service Mesh}}
+        style service-mesh fill:blue
+        cilium(Cilium)
+        style cilium fill:red
+        istio(Istio)
+        click istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio.md"
+        style istio fill:green
+        linkerd(Linkerd)
+        style linkerd fill:red
+        kuma(Kuma)
+        style kuma fill:red
+        service-mesh-istio-kustomize(App as Kustomize)
+        click service-mesh-istio-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio-kustomize.md"
+        service-mesh-istio-helm(App as Helm)
+        style service-mesh-istio-helm fill:red
+        service-mesh-istio-carvel(App as Carvel ytt)
+        style service-mesh-istio-carvel fill:red
+        service-mesh-istio-cdk8s(App as cdk8s)
+        style service-mesh-istio-cdk8s fill:red
+        service-mesh --> cilium & istio & linkerd & kuma
+        istio --> service-mesh-istio-kustomize & service-mesh-istio-helm & service-mesh-istio-carvel & service-mesh-istio-cdk8s --> progressive-delivery
+        cilium & linkerd & kuma --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -696,6 +722,7 @@ flowchart TD
         style progressive-delivery-cilium fill:red
         progressive-delivery-istio(Istio)
         click progressive-delivery-istio "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/istio.md"
+        style progressive-delivery-istio fill:green
         progressive-delivery-kuma(Kuma)
         style progressive-delivery-kuma fill:red
         progressive-delivery-nsm(Network Service Mesh)
@@ -704,15 +731,6 @@ flowchart TD
         progressive-delivery-linkerd(Linkerd)
         click progressive-delivery-linkerd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/linkerd.md"
         style progressive-delivery-linkerd fill:red
-        progressive-delivery-nginx(NGINX)
-        click progressive-delivery-nginx "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/nginx.md"
-        style progressive-delivery-nginx fill:red
-        progressive-delivery-contour(Contour)
-        click progressive-delivery-contour "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/contour.md"
-        style progressive-delivery-contour fill:red
-        progressive-delivery-emissary(Emissary-ingress)
-        click progressive-delivery-emissary "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/emissary.md"
-        style progressive-delivery-emissary fill:red
         progressive-delivery-kustomize(App as Kustomize)
         click progressive-delivery-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/kustomize.md"
         progressive-delivery-helm(App as Helm)
@@ -724,7 +742,7 @@ flowchart TD
         click progressive-delivery-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/cdk8s.md"
         style progressive-delivery-cdk8s fill:red
         progressive-delivery --> argo-rollouts & flagger
-        argo-rollouts & flagger --> progressive-delivery-cilium & progressive-delivery-istio & progressive-delivery-kuma & progressive-delivery-nsm & progressive-delivery-linkerd & progressive-delivery-nginx & progressive-delivery-contour & progressive-delivery-emissary
+        argo-rollouts & flagger --> progressive-delivery-cilium & progressive-delivery-istio & progressive-delivery-kuma & progressive-delivery-nsm & progressive-delivery-linkerd
         progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> done
 
         done((Chapter End))
@@ -781,11 +799,12 @@ flowchart TD
 | Open Standards | Austin Parker - OpenTelemetry<br /> Richard "RichiH" Hartmann - Prometheus | September 17, 2024 | [story](manuscript/exposition-formats/README.md) |
 | Metrics | Iris Dyrmishi - Prometheus<br /> Saswata Mukherjee - Thanos<br /> Friedrich Gonzalez - Cortex | September 24, 2024 | [story](manuscript/metrics/README.md) |
 | Traces | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
-| Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | TODO: |
+| Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | [story](manuscript/data-pipelines/README.md) |
+| Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> Marcin Skalski - Kuma | October 29, 2024 | [story](manuscript/service-mesh/README.md) |
 | Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger | October 15, 2024 | [story](progressive-delivery/README.md) |
 | Cloud Cost | Matt Ray - OpenCost<br /> Yasmin Rajabi - StormForge<br /> Phil Andrews - CAST AI | October 22, 2024 | TBD |
 | Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> Marcin Skalski - Kuma | October 29, 2024 | TBD |
-| Miscellaneous | Kaiyi Liu - Kepler<br /> Jose Blanquicet - Inspektor Gadget<br /> Ronald Petty - K8sGPT<br /> Augustin Husson - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
+| Misc | Kaiyi Liu - Kepler<br /> Jose Blanquicet - Inspektor Gadget<br /> Ronald Petty - K8sGPT<br /> Augustin Husson - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
 | Chapter 4 Finale! | Whitney and Viktor! | November 22, 2024 |  |
 
 ## The Format

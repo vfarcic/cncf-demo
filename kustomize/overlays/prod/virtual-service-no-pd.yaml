@@ -1,0 +1,18 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: cncf-demo
+spec:
+  gateways:
+    - cncf-demo-gateway
+  hosts:
+    - cncf-demo.34.139.252.110.nip.io
+  http:
+    - name: primary
+      route:
+        - destination:
+            host: cncf-demo
+            port:
+              number: 8080
+          weight: 100

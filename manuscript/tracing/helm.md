@@ -41,4 +41,4 @@ echo "http://jaeger.$INGRESS_HOST"
 
 ## Continue The Adventure
 
-* [Progressive Delivery](../progressive-delivery/README.md)
+* [Data Pipelines](../data-pipelines/README.md)

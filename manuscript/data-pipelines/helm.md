@@ -40,4 +40,4 @@ echo "http://grafana.$INGRESS_HOST"
 
 ## Continue The Adventure
 
-* [Progressive Delivery](../progressive-delivery/README.md)
+* [Observability with Networking and Service Mesh](../service-mesh/README.md)
