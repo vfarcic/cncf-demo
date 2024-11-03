@@ -558,6 +558,7 @@ flowchart TD
         style kubernetes-dashboard fill:red
         headlamp(Headlamp)
         click headlamp "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/dashboards/headlamp.md"
+        style headlamp fill:green
         meshery(Meshery)
         style meshery fill:red
         dashboards --> kubernetes-dashboard & headlamp & meshery --> instrumentation
@@ -570,8 +571,10 @@ flowchart TD
         style instrumentation fill:blue
         open-telemetry(OpenTelemetry)
         click open-telemetry "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/opentelemetry.md"
+        style open-telemetry fill:green
         open-metrics(OpenMetrics)
         click open-metrics "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/exposition-formats/openmetrics.md"
+        style open-metrics fill:green
         instrumentation --> open-telemetry & open-metrics --> metrics
 
         %% -------------
@@ -596,6 +599,7 @@ flowchart TD
         style tracing fill:blue
         jaeger(Jaeger)
         click jaeger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/jaeger.md"
+        style jaeger fill:green
         jaeger-kustomize(App as Kustomize)
         click jaeger-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/tracing/kustomize.md"
         jaeger-helm(App as Helm)
@@ -644,6 +648,7 @@ flowchart TD
         click progressive-delivery "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/README.md"
         argo-rollouts(Argo Rollouts)
         click argo-rollouts "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/argo-rollouts.md"
+        style argo-rollouts fill:green
         flagger(Flagger)
         click flagger "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/progressive-delivery/flagger.md"
         progressive-delivery-cilium(Cilium)

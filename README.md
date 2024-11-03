@@ -626,7 +626,7 @@ flowchart TD
         metrics-prometheus(Prometheus)
         click metrics-prometheus "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/prometheus.md"
         metrics-thanos(Thanos)
-        style metrics-thanos fill:red
+        style metrics-thanos fill:green
         cortex(Cortex)
         style cortex fill:red
         metrics --> metrics-prometheus & metrics-thanos & cortex --> tracing
