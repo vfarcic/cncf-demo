@@ -52,11 +52,8 @@ echo "http://prometheus.$INGRESS_HOST"
 > Open the URL from the output in a browser.
 
 ```sh
-kubectl --namespace istio-system port-forward service/kiali \
-    20001:20001
+istioctl dashboard kiali
 ```
-
-> Open `http://127.0.0.1:20001` in a browser
 
 ## How Did You Define Your App?
 

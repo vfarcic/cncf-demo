@@ -41,7 +41,9 @@ helm upgrade --install kiali-operator kiali-operator \
     --repo https://kiali.org/helm-charts \
     --namespace kiali-operator --create-namespace \
     --set cr.create=true --set cr.namespace=istio-system \
-    --set cr.spec.auth.strategy="anonymous" --wait
+    --set cr.spec.auth.strategy="anonymous" \
+    --set cr.spec.external_services.prometheus.url="http://kube-prometheus-stack-prometheus.monitoring:9090/" \
+    --wait
 
 COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 
