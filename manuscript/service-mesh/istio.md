@@ -51,11 +51,16 @@ echo "http://prometheus.$INGRESS_HOST"
 
 > Open the URL from the output in a browser.
 
-FIXME: Kiali
+```sh
+kubectl --namespace istio-system port-forward service/kiali \
+    20001:20001
+```
+
+> Open `http://127.0.0.1:20001` in a browser
 
 ## How Did You Define Your App?
 
 * [Kustomize](istio-kustomize.md)
 * **Helm** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Carvel ytt** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Carvel ytt](istio-carvel.md)
 * **cdk8s** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

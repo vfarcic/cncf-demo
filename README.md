@@ -700,7 +700,8 @@ flowchart TD
         service-mesh-istio-helm(App as Helm)
         style service-mesh-istio-helm fill:red
         service-mesh-istio-carvel(App as Carvel ytt)
-        style service-mesh-istio-carvel fill:red
+        click service-mesh-istio-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio-carvel.md"
+        style service-mesh-istio-carvel fill:green
         service-mesh-istio-cdk8s(App as cdk8s)
         style service-mesh-istio-cdk8s fill:red
         service-mesh --> cilium & istio & linkerd & kuma

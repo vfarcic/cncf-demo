@@ -37,6 +37,12 @@ helm upgrade --install istio-ingress gateway \
     --repo https://istio-release.storage.googleapis.com/charts \
     --namespace istio-system
 
+helm upgrade --install kiali-operator kiali-operator \
+    --repo https://kiali.org/helm-charts \
+    --namespace kiali-operator --create-namespace \
+    --set cr.create=true --set cr.namespace=istio-system \
+    --set cr.spec.auth.strategy="anonymous" --wait
+
 COUNTER=$(kubectl --namespace istio-system get pods --no-headers | wc -l)
 
 while [ $COUNTER -eq "0" ]; do
