@@ -1,15 +1,5 @@
 # Metrics With Prometheus
 
-## Setup
-
-```bash
-helm upgrade --install \
-    kube-prometheus-stack kube-prometheus-stack \
-    --repo https://prometheus-community.github.io/helm-charts \
-    --values prometheus/values.yaml --reuse-values \
-    --namespace monitoring --create-namespace --wait
-```
-
 ## Do
 
 ```sh

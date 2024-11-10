@@ -25,6 +25,8 @@ open "http://localhost:8080"
 
 px auth login
 
+px deploy --cluster_name dot -y
+
 ./manuscript/tracing/kubecon-slc-jaeger.sh
 
 ./manuscript/mtls/kubecon-slc-istio.sh
@@ -47,7 +49,7 @@ kubectl --namespace production get pods
 source .env
 ```
 
-> Confirm that three containers (main and two sidecars) are in the cncf-demo Pod. 
+> Confirm that three containers (main and two sidecars) are in the cncf-demo Pod.
 
 ## Start The Chapter
 
