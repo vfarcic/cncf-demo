@@ -49,8 +49,6 @@ kubectl --namespace production get pods
 source .env
 ```
 
-> Confirm that three containers (main and two sidecars) are in the cncf-demo Pod.
-
 ## Start The Chapter
 
 * [Prometheus](../metrics/kubecon-slc-prometheus.md)
