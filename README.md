@@ -629,7 +629,9 @@ flowchart TD
         style metrics-thanos fill:green
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & cortex --> tracing
+        pixie(Pixie)
+        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
+        metrics --> metrics-prometheus & metrics-thanos & cortex & pixie --> tracing
 
         %% -------------
         %% -- Tracing --
@@ -744,7 +746,34 @@ flowchart TD
         style progressive-delivery-cdk8s fill:red
         progressive-delivery --> argo-rollouts & flagger
         argo-rollouts & flagger --> progressive-delivery-cilium & progressive-delivery-istio & progressive-delivery-kuma & progressive-delivery-nsm & progressive-delivery-linkerd
-        progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> done
+        progressive-delivery-istio --> progressive-delivery-kustomize & progressive-delivery-helm & progressive-delivery-carvel & progressive-delivery-cdk8s --> cost
+
+        %% ----------
+        %% -- Cost --
+        %% ----------
+        cost{{Cost}}
+        click cost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cost/README.md"
+        open-cost(OpenCost)
+        style open-cost fill:red
+        storm-forge(StormForge)
+        style storm-forge fill:red
+        cast-ai(CAST AI)
+        style cast-ai fill:red
+        cost --> open-cost & storm-forge & cast-ai --> observability-misc
+
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        observability-misc{{Misc}}
+        kepler(Kepler)
+        style kepler fill:red
+        inspektor-gadget(Inspektor Gadget)
+        style inspektor-gadget fill:green
+        k8s-gpt(K8sGPT)
+        style k8s-gpt fill:red
+        perses(Perses)
+        style perses fill:red
+        observability-misc --> kepler & inspektor-gadget & k8s-gpt & perses --> done
 
         done((Chapter End))
 

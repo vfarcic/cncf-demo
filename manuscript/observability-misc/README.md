@@ -31,6 +31,6 @@ TODO: Description
 
 * **Service Mesh Performance** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Kepler** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Inspektor Gadget** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Inspektor Gadget](inspektor-gadget.md)
 * **Pixie** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Perses** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

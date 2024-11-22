@@ -80,4 +80,4 @@ curl "https://cncf-demo.$DOMAIN/videos" | jq .
 
 ## Continue The Adventure
 
-* [Admission Controller Policies](../policies/README.md)
+Continue to [Admission Controller Policies](../policies/README.md) (first episode of the next season) or [destroy everything](../destroy/production.md)

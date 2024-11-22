@@ -73,3 +73,4 @@ Cortex especially shines in a multi-tenant use case where it can implement query
 * [Prometheus](prometheus.md)
 * **Thanos** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Cortex** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Pixie](pixie.md)

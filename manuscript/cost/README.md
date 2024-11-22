@@ -28,3 +28,5 @@ TODO: Description
 * **OpenCost** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **StormForge** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Cast AI** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+
+* Skip Cloud Cost (until we implement the tools) by jumping into [Observability Misfits](../observability-misc/README.md)

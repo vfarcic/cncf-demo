@@ -14,7 +14,7 @@ yq --inplace ".progressiveDelivery.type = \"$PD_APP\"" \
 
 ## Do
 
-> Execute the command that follows only if you chose Argo Rollouts
+> Execute the command that follows only if you chose **Argo Rollouts**.
 
 ```bash
 yq --inplace ".replicas = 0" ytt/values-prod.yaml
@@ -30,14 +30,14 @@ git commit -m "Progressive delivery"
 git push
 ```
 
-> Execute the command that follows only if you chose Argo Rollouts
+> Execute the command that follows only if you chose **Argo Rollouts**.
 
 ```sh
 kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
 ```
 
-> Execute the command that follows only if you chose Flagger.
+> Execute the command that follows only if you chose **Flagger**.
 
 ```sh
 kubectl --namespace production get canaries --watch
@@ -96,14 +96,14 @@ for i in {1..1000}; do
 done
 ```
 
-> Execute the command that follows only if you chose Argo Rollouts.
+> Execute the command that follows only if you chose **Argo Rollouts**.
 
 ```sh
 kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
 ```
 
-> Execute the command that follows only if you chose Flagger.
+> Execute the command that follows only if you chose **Flagger**.
 
 ```sh
 kubectl --namespace production get canaries --watch
@@ -133,14 +133,14 @@ git push
 hey -z 60m "http://cncf-demo.$ISTIO_HOST?fail=true"
 ```
 
-> Execute the command that follows only if you chose Argo Rollouts.
+> Execute the command that follows only if you chose **Argo Rollouts**.
 
 ```sh
 kubectl argo rollouts --namespace production \
     get rollout cncf-demo --watch
 ```
 
-> Execute the command that follows only if you chose Flagger.
+> Execute the command that follows only if you chose **Flagger**.
 
 ```sh
 kubectl --namespace production get canaries --watch
@@ -150,5 +150,5 @@ kubectl --namespace production get canaries --watch
 
 ## Continue The Adventure
 
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+* [Cloud Cost](../cost/README.md)
 

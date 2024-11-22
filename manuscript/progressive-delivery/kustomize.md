@@ -169,4 +169,4 @@ kubectl --namespace production get canaries --watch
 
 ## Continue The Adventure
 
-The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+* [Cloud Cost](../cost/README.md)

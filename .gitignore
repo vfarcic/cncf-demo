@@ -9,6 +9,7 @@
 /.env
 /custodian
 /output
+/*.log
 
 # Ignore DevSpace cache and log folder
 .devspace/

@@ -586,7 +586,9 @@ flowchart TD
         style metrics-thanos fill:red
         cortex(Cortex)
         style cortex fill:red
-        metrics --> metrics-prometheus & metrics-thanos & cortex --> tracing
+        pixie(Pixie)
+        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
+        metrics --> metrics-prometheus & metrics-thanos & cortex & pixie --> tracing
 
         %% -------------
         %% -- Tracing --
@@ -700,31 +702,27 @@ flowchart TD
         %% -- Cost --
         %% ----------
         cost{{Cost}}
-        style cost fill:red
         click cost "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/cost/README.md"
         open-cost(OpenCost)
         style open-cost fill:red
         storm-forge(StormForge)
         style storm-forge fill:red
         cast-ai(CAST AI)
+        style cast-ai fill:red
         cost --> open-cost & storm-forge & cast-ai --> observability-misc
 
         %% ----------
         %% -- Misc --
         %% ----------
         observability-misc{{Misc}}
-        style observability-misc fill:red
         kepler(Kepler)
         style kepler fill:red
         inspektor-gadget(Inspektor Gadget)
-        style inspektor-gadget fill:red
         k8s-gpt(K8sGPT)
         style k8s-gpt fill:red
-        pixie(Pixie)
-        click pixie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/metrics/pixie.md"
         perses(Perses)
         style perses fill:red
-        observability-misc --> kepler & inspektor-gadget & k8s-gpt & pixie & perses --> done
+        observability-misc --> kepler & inspektor-gadget & k8s-gpt & perses --> done
 
         done((Chapter End))
 

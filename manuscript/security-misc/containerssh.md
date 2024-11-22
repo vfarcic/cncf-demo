@@ -21,4 +21,4 @@ FIXME: SSH into a container and deploy the app, local PostgreSQL, and SchemaHero
 
 ## Continue The Adventure
 
-The adventure will continue soon. Until then, please [destroy everything](../destroy/security.md)
+Continue to the [Dashboards](../dashboards/README.md) (first episode of the next season) or [destroy everything](../destroy/security.md)

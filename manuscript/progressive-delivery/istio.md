@@ -12,7 +12,7 @@ TODO: Intro
 devbox shell
 ```
 
-> Execute the command that follows only if you chose Flagger.
+> Execute the command that follows only if you chose **Flagger**.
 
 ```sh
 ./manuscript/progressive-delivery/flagger.sh istio
@@ -20,7 +20,7 @@ devbox shell
 
 ## Do
 
-> Execute the commands in this section only if you chose Argo Rollouts.
+> Execute the commands in this section only if you chose **Argo Rollouts**.
 
 ```sh
 cat argo-rollouts/istio.yaml
