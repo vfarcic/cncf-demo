@@ -722,9 +722,107 @@ flowchart TD
         style k8s-gpt fill:red
         perses(Perses)
         style perses fill:red
-        observability-misc --> kepler & inspektor-gadget & k8s-gpt & perses --> done
+        observability-misc --> kepler & inspektor-gadget & k8s-gpt --> done
 
         done((Chapter End))
+
+    end
+```
+
+```mermaid
+flowchart TD
+
+    subgraph IDP
+
+        %% -------------------------------------------------
+        %% -- API (CRDs) & State Management (Controllers) --
+        %% -------------------------------------------------
+        api{{"API (CRDs) & State Management (Controllers)"}}
+        style api fill:red
+        crossplane(Crossplane)
+        style crossplane fill:red
+        kube-vela(KubeVela)
+        style kube-vela fill:red
+        kubebuilder(Kubebuilder)
+        style kubebuilder fill:red
+        kube-rs(kube-rs)
+        style kube-rs fill:red
+        operator-framework(Operator Framework)
+        style operator-framework fill:red
+        api --> crossplane & kube-vela & kubebuilder & kube-rs & operator-framework --> policies
+
+        %% --------------
+        %% -- Policies --
+        %% --------------
+        policies{{Policies}}
+        style policies fill:red
+        kyverno(Kyverno)
+        style kyverno fill:red
+        opa("Open Policy Agent (OPA) With Gatekeeper")
+        style opa fill:red
+        cloud-custodian(Cloud Custodian)
+        style cloud-custodian fill:red
+        kubewarden(Kubewarden)
+        style kubewarden fill:red
+        vap(Kubernetes Validating Admission Policy)
+        style vap fill:red
+        policies --> kyverno & opa & kubewarden & vap & cloud-custodian --> gitops
+
+        %% ------------------------------------
+        %% -- State Synchronization (GitOps) --
+        %% ------------------------------------
+        gitops{{"State Synchronization (GitOps)"}}
+        style gitops fill:red
+        flux(Flux)
+        style flux fill:red
+        argocd(Argo CD)
+        style argocd fill:red
+        kapp(Carvel kapp-controller)
+        style kapp fill:red
+        gitops --> flux & argocd & kapp --> workflows
+
+        %% ----------------------------------
+        %% -- One-Shot Actions (Workflows) --
+        %% ----------------------------------
+        workflows{{"One-Shot Actions (Workflows)"}}
+        style workflows fill:red
+        argo-workflows(Argo Workflows)
+        style argo-workflows fill:red
+        keptn(Keptn)
+        style keptn fill:red
+        serverless-workflow(Serverless Workflow)
+        style serverless-workflow fill:red
+        pipecd(PipeCD)
+        style pipecd fill:red
+        werf(werf)
+        style werf fill:red
+        keptn(Keptn)
+        workflows --> argo-workflows & keptn & serverless-workflow & pipecd & werf --> misc
+
+        %% ------------------
+        %% -- Miscelaneous --
+        %% ------------------
+        misc{{Miscelaneous}}
+        style misc fill:red
+        %% Not maintained since May 2023
+        %% dev-stream(DevStream)
+        %% style dev-stream fill:red
+        dapr("Distributed Application Runtime (Dapr)")
+        style dapr fill:red
+        porter(Porter)
+        style porter fill:red
+        misc --> dapr & porter --> gui
+
+        %% ------------------------------------
+        %% -- Graphical User Interface (GUI) --
+        %% ------------------------------------
+        gui{{"Graphical User Interface (GUI)"}}
+        style gui fill:red
+        gui-backstage(Backstage)
+        style gui-backstage fill:red
+        perses(Perses)
+        style perses fill:red
+        gui --> gui-backstage & perses
 
     end
 ```
@@ -798,25 +896,6 @@ flowchart TD
 
     subgraph Automation
 
-        %% ---------------
-        %% -- Pipelines --
-        %% ---------------
-        pipelines{{Pipelines}}
-        style pipelines fill:red
-        pipelines-argo-workflows(Argo Workflows)
-        style pipelines-argo-workflows fill:red
-        pipelines-keptn(Keptn)
-        style pipelines-keptn fill:red
-        pipelines-serverless-workflow(Serverless Workflow)
-        style pipelines-serverless-workflow fill:red
-        pipecd(PipeCD)
-        style pipecd fill:red
-        werf(werf)
-        style werf fill:red
-        keptn(Keptn)
-        style flagger fill:red
-        pipelines --> pipelines-argo-workflows & pipelines-keptn & pipelines-serverless-workflow & pipecd & werf & keptn --> supply-chain
-
         %% ------------------
         %% -- Supply Chain --
         %% ------------------
@@ -825,68 +904,6 @@ flowchart TD
         supply-chain-in-toto(in-toto)
         style supply-chain-in-toto fill:red
         supply-chain --> supply-chain-in-toto
-
-    end
-```
-
-```mermaid
-flowchart TD
-
-    subgraph IDP
-
-        %% ------------------------------------
-        %% -- Graphical User Interface (GUI) --
-        %% ------------------------------------
-        gui{{"Graphical User Interface (GUI)"}}
-        style gui fill:red
-        gui-backstage(Backstage)
-        style gui-backstage fill:red
-        gui --> gui-backstage --> app-definitions
-
-        %% -----------------------------
-        %% -- Application Definitions --
-        %% -----------------------------
-        app-definitions{{Application Definitions}}
-        style app-definitions fill:red
-        app-definitions-crossplane(Crossplane)
-        style app-definitions-crossplane fill:red
-        app-definitions-kube-vela(KubeVela)
-        style app-definitions-kube-vela fill:red
-        app-definitions-helm(Helm Charts)
-        style app-definitions-helm fill:red
-        app-definitions-kapp-controller(Carvel kapp-controller)
-        style app-definitions-kapp-controller fill:red
-        app-definitions --> app-definitions-crossplane & app-definitions-kube-vela & app-definitions-helm & app-definitions-kapp-controller--> crd
-
-        %% --------------------------------------
-        %% -- CRDs, Controllers, and Operators --
-        %% --------------------------------------
-        crd{{CRDs, Controllers, and Operators}}
-        style crd fill:red
-        kubebuilder(Kubebuilder)
-        style kubebuilder fill:red
-        crd-kube-rs(kube-rs)
-        style crd-kube-rs fill:red
-        %% Not maintained since 2021
-        %% crd-kudo(KUDO)
-        %% style crd-kudo fill:red
-        crd-operator-framework(Operator Framework)
-        style crd-operator-framework fill:red
-        crd --> kubebuilder & crd-kube-rs & crd-operator-framework
-
-        %% ------------------
-        %% -- Miscelaneous --
-        %% ------------------
-        idp-misc{{Miscelaneous}}
-        style idp-misc fill:red
-        %% Not maintained since May 2023
-        %% dev-stream(DevStream)
-        %% style dev-stream fill:red
-        dapr("Distributed Application Runtime (Dapr)")
-        style dapr fill:red
-        porter(Porter)
-        style porter fill:red
-        idp-misc --> dapr & porter
 
     end
 ```
