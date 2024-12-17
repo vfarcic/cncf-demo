@@ -800,14 +800,8 @@ flowchart TD
         style argo-workflows fill:red
         keptn(Keptn)
         style keptn fill:red
-        serverless-workflow(Serverless Workflow)
-        style serverless-workflow fill:red
-        pipecd(PipeCD)
-        style pipecd fill:red
-        werf(werf)
-        style werf fill:red
         keptn(Keptn)
-        workflows --> argo-workflows & keptn & serverless-workflow & pipecd & werf --> misc
+        workflows --> argo-workflows & keptn --> misc
 
         %% ------------------
         %% -- Miscelaneous --
@@ -821,7 +815,13 @@ flowchart TD
         style dapr fill:red
         porter(Porter)
         style porter fill:red
-        misc --> dapr & porter --> gui
+        serverless-workflow(Serverless Workflow)
+        style serverless-workflow fill:red
+        pipecd(PipeCD)
+        style pipecd fill:red
+        werf(werf)
+        style werf fill:red
+        misc --> dapr & porter & serverless-workflow & pipecd & werf --> gui
 
         %% ------------------------------------
         %% -- Graphical User Interface (GUI) --

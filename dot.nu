@@ -12,8 +12,12 @@ def main [] {}
 
 # Destroys the IDP chapter
 def "main destroy idp" [] {
+
+    kubectl --namespace production delete --filename crossplane/repo.yaml
     
     cd cncf-demo-app
+
+    touch apps/empty
 
     rm --force apps/*.yaml
 
@@ -22,6 +26,8 @@ def "main destroy idp" [] {
     git commit -m "Destroy"
 
     git push
+
+    cd ..
 
     main delete crossplane $env.HYPERSCALER
 
