@@ -1,0 +1,11 @@
+---
+apiVersion: devopstoolkit.live/v1alpha1
+kind: GitHubClaim
+metadata:
+  name: cncf-demo-app
+spec:
+  id: cncf-demo-app
+  parameters:
+    public: true
+    app:
+      language: go

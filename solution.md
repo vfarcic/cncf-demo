@@ -734,13 +734,21 @@ flowchart TD
 
     subgraph IDP
 
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup((Setup))
+        click setup "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/idp.md"
+        setup --> api
+
         %% -------------------------------------------------
         %% -- API (CRDs) & State Management (Controllers) --
         %% -------------------------------------------------
         api{{"API (CRDs) & State Management (Controllers)"}}
-        style api fill:red
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/README.md"
+        style api fill:blue
         crossplane(Crossplane)
-        style crossplane fill:red
+        click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/crossplane.md"
         kube-vela(KubeVela)
         style kube-vela fill:red
         kubebuilder(Kubebuilder)

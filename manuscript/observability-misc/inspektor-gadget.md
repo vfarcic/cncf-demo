@@ -45,4 +45,4 @@ kubectl gadget top file --namespace production
 
 ## Continue the Adventure
 
-* The adventure will continue soon. Until then, please [destroy everything](../destroy/observability.md)
+* [Destroy everything](../destroy/observability.md) before starting a new chapter [API (CRDs) & State Management (Controllers)](../setup/idp.md)

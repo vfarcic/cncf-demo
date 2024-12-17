@@ -10,6 +10,9 @@
 /custodian
 /output
 /*.log
+/cncf-demo-app
+/eksctl-config*.yaml
+/devbox.lock
 
 # Ignore DevSpace cache and log folder
 .devspace/
