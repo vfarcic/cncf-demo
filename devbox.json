@@ -9,7 +9,6 @@
     "kubectl@1.29.2",
     "google-cloud-sdk@452.0.1",
     "awscli2@2.15.15",
-    "eksctl@0.171.0",
     "path:gcloud#google-cloud-sdk",
     "azure-cli@2.56.0",
     "kustomize@5.3.0",
@@ -34,7 +33,8 @@
     "istioctl@1.23.2",
     "kubectl-gadget@0.33.0",
     "nushell@0.100.0",
-    "viddy@1.3.0"
+    "viddy@1.3.0",
+    "eksctl@0.197.0"
   ],
   "shell": {
     "init_hook": [

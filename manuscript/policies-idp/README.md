@@ -4,34 +4,37 @@ TODO: Text
 
 ## Choice 1: Kyverno
 
-* [DOT Playlist](https://youtube.com/playlist?list=PLyicRj904Z99i8U5JaNW5X3AyBvfQz-16)
-* [Official site](https://crossplane.io)
+[![Kubernetes-Native Policy Management With Kyverno](https://img.youtube.com/vi/DREjzfTzNpA/0.jpg)](https://youtu.be/DREjzfTzNpA)
+* [Official site](https://kyverno.io)
 
 ## Choice 2: Open Policy Agent (OPA) With Gatekeeper
 
-* [Cloud-Native Apps With Open Application Model (OAM) And KubeVela](https://youtu.be/2CBu6sOTtwk)
-* [Official site](https://kubevela.io)
+[![How to apply policies in Kubernetes using Open Policy Agent (OPA) and Gatekeeper](https://img.youtube.com/vi/14lGc7xMAe4/0.jpg)](https://youtu.be/14lGc7xMAe4)
+* [Official site](https://open-policy-agent.github.io/gatekeeper)
 
 ## Choice 3: Cloud Custodian
 
-* [Official site](https://kubebuilder.io)
+[![Cloud Custodian - Policies? Resource Management? Something Else?](https://img.youtube.com/vi/AuXWI-Mkz9Q/0.jpg)](https://youtu.be/AuXWI-Mkz9Q)
+* [Official site](https://cloudcustodian.io)
 
 ## Choice 4: Kubewarden
 
 TODO: Description
 
-* [Official site](https://kube.rs)
+[![Cloud Custodian - Policies? Resource Management? Something Else?](https://img.youtube.com/vi/KbKQu3AqhBY/0.jpg)](https://youtu.be/KbKQu3AqhBY)
+* [Official site](https://kubewarden.io)
 
-## Choice 5: Operator Framework
+## Choice 5: Kubernetes Validating Admission Policy
 
 TODO: Description
 
-* [Official site](https://operatorframework.io)
+[![Kubernetes Validating Admission Policy Changes The Game](https://img.youtube.com/vi/EsZcDUaSUss/0.jpg)](https://youtu.be/EsZcDUaSUss)
+* [Official site](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy)
 
 ## What Is Your Choice?
 
-* [Crossplane](crossplane.md)
-* **KubeVela** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Kubebuilder** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **kube-rs** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Operator Framework** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Kyverno](kyverno.md)
+* **Open Policy Agent (OPA) With Gatekeeper** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Cloud Custodian** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Kubewarden** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* **Kubernetes Validating Admission Policy** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

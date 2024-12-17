@@ -1,0 +1,47 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: dot-app-scaling
+  annotations:
+    policies.kyverno.io/title: dot app scaling
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: AppClaim
+    policies.kyverno.io/description: >-
+      This policy validates that scaling is enabled and the minimum number of replicas is set to at least 2.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: scaling-enabled
+      match:
+        any:
+        - resources:
+            kinds:
+            - AppClaim
+            operations:
+            - CREATE
+            - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: |
+                has(object.spec.parameters.scaling) &&
+                has(object.spec.parameters.scaling.enabled) &&
+                object.spec.parameters.scaling.enabled
+              message: "`spec.parameters.scaling.enabled` must be set to `true`."
+    - name: scaling-min-replicas
+      match:
+        any:
+        - resources:
+            kinds:
+            - AppClaim
+            operations:
+            - CREATE
+            - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: |
+                has(object.spec.parameters.scaling) &&
+                object.spec.parameters.scaling.min > 1
+              message: "`spec.parameters.scaling.min` must be greater than `1`."

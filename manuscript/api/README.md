@@ -9,7 +9,7 @@ TODO: Text
 
 ## Choice 2: KubeVela
 
-* [Cloud-Native Apps With Open Application Model (OAM) And KubeVela](https://youtu.be/2CBu6sOTtwk)
+[![Cloud-Native Apps With Open Application Model (OAM) And KubeVela](https://img.youtube.com/vi/2CBu6sOTtwk/0.jpg)](https://youtu.be/2CBu6sOTtwk)
 * [Official site](https://kubevela.io)
 
 ## Choice 3: Kubebuilder

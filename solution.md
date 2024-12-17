@@ -763,9 +763,10 @@ flowchart TD
         %% -- Policies --
         %% --------------
         policies{{Policies}}
-        style policies fill:red
+        style policies fill:blue
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/README.md"
         kyverno(Kyverno)
-        style kyverno fill:red
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/kyverno.md"
         opa("Open Policy Agent (OPA) With Gatekeeper")
         style opa fill:red
         cloud-custodian(Cloud Custodian)
@@ -780,11 +781,12 @@ flowchart TD
         %% -- State Synchronization (GitOps) --
         %% ------------------------------------
         gitops{{"State Synchronization (GitOps)"}}
-        style gitops fill:red
+        style gitops fill:blue
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/README.md"
         flux(Flux)
         style flux fill:red
         argocd(Argo CD)
-        style argocd fill:red
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/argocd.md"
         kapp(Carvel kapp-controller)
         style kapp fill:red
         gitops --> flux & argocd & kapp --> workflows

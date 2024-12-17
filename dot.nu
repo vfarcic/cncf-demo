@@ -5,15 +5,23 @@ source scripts/github.nu
 source scripts/kubernetes.nu
 source scripts/ingress.nu
 source scripts/crossplane.nu
+source scripts/kyverno.nu
+source scripts/argocd.nu
 
 def main [] {}
 
 # Destroys the IDP chapter
 def "main destroy idp" [] {
     
-    kubectl --namespace production delete --filename crossplane/repo.yaml
+    cd cncf-demo-app
 
-    kubectl --namespace production delete --filename cncf-demo-app/apps
+    rm --force apps/*.yaml
+
+    git add .
+
+    git commit -m "Destroy"
+
+    git push
 
     main delete crossplane $env.HYPERSCALER
 
@@ -90,5 +98,20 @@ def "main setup idp_crossplane" [
         | upsert spec.parameters.image $"ghcr.io/($github_data.user)/cncf-demo-app"
         | upsert spec.parameters.tag "FIXME"
         | save crossplane/app.yaml --force
+
+}
+
+def "main setup idp_argocd" [] {
+
+    (
+        main apply argocd
+            --host_name $"argocd.($env.INGRESS_HOST)"
+            --ingress_class_name "contour"
+            --apply_apps false
+    )
+
+    open argocd/apps-idp.yaml
+        | upsert spec.source.repoURL $"https://github.com/($env.GITHUB_USER)/cncf-demo-app"
+        | save argocd/apps-idp.yaml --force
 
 }
