@@ -33,7 +33,8 @@
     "teller@2.0.7",
     "istioctl@1.23.2",
     "kubectl-gadget@0.33.0",
-    "nushell@0.100.0"
+    "nushell@0.100.0",
+    "viddy@1.3.0"
   ],
   "shell": {
     "init_hook": [

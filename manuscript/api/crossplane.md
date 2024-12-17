@@ -79,6 +79,6 @@ kubectl --namespace production get all,ingresses
 cd ..
 ```
 
-## Continue the Adventure
+## Continue The Adventure
 
-* The adventure will continue soon. 
+* [Policies](../policies-idp/README.md)

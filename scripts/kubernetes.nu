@@ -83,7 +83,7 @@ aws_secret_access_key = ($aws_secret_access_key)
             metadata: {
                 name: "dot"
                 region: "us-east-1"
-                version: "1.29"
+                version: "1.31"
             }
             managedNodeGroups: [{
                 name: "primary"
@@ -97,7 +97,7 @@ aws_secret_access_key = ($aws_secret_access_key)
                     }
                 }
             }]
-        } | to yaml | save $"eksctl-config-($name).yaml"
+        } | to yaml | save $"eksctl-config-($name).yaml" --force
     
         (
             eksctl create cluster
