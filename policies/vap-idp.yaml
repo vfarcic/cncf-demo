@@ -1,0 +1,35 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: dot-app
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups:   ["devopstoolkit.live"]
+      apiVersions: ["*"]
+      operations:  ["CREATE", "UPDATE"]
+      resources:   ["appclaims"]
+  validations:
+    - expression: |
+        has(object.spec.parameters.scaling) &&
+        has(object.spec.parameters.scaling.enabled) &&
+        object.spec.parameters.scaling.enabled
+      message: "`spec.parameters.scaling.enabled` must be set to `true`."
+    - expression: |
+        has(object.spec.parameters.scaling) &&
+        object.spec.parameters.scaling.min > 1
+      message: "`spec.parameters.scaling.min` must be greater than `1`."
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: dot-app
+spec:
+  policyName: dot-app
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: production

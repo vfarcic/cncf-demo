@@ -37,4 +37,4 @@ TODO: Description
 * **Open Policy Agent (OPA) With Gatekeeper** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Cloud Custodian** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Kubewarden** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Kubernetes Validating Admission Policy** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Kubernetes Validating Admission Policy](vap.md)

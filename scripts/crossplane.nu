@@ -7,6 +7,7 @@ def "main apply crossplane" [
     --github = false,       # Whether to apply DOT GitHub Configuration
     --github_user: string,  # GitHub user required for the DOT GitHub Configuration and optinal for the DOT App Configuration
     --github_token: string, # GitHub token required for the DOT GitHub Configuration and optinal for the DOT App Configuration
+    --policies = false      # Whether to create Validating ADmission Policies
 ] {
 
     mut project_id = ""
@@ -139,8 +140,49 @@ aws_secret_access_key = ($env.AWS_SECRET_ACCESS_KEY)
             apiVersion: "pkg.crossplane.io/v1"
             kind: "Configuration"
             metadata: { name: "crossplane-app" }
-            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-application:v0.6.46" }
+            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-application:v0.7.3" }
         } | to yaml | kubectl apply --filename -
+
+        if $policies {
+
+            {
+                apiVersion: "admissionregistration.k8s.io/v1"
+                kind: "ValidatingAdmissionPolicy"
+                metadata: { name: "dot-app" }
+                spec: {
+                    failurePolicy: "Fail"
+                    matchConstraints: {
+                        resourceRules: [{
+                            apiGroups:   ["devopstoolkit.live"]
+                            apiVersions: ["*"]
+                            operations:  ["CREATE", "UPDATE"]
+                            resources:   ["appclaims"]
+                        }]
+                    }
+                    validations: [
+                        {
+                            expression: "has(object.spec.parameters.scaling) && has(object.spec.parameters.scaling.enabled) && object.spec.parameters.scaling.enabled"
+                            message: "`spec.parameters.scaling.enabled` must be set to `true`."
+                        }, {
+                            expression: "has(object.spec.parameters.scaling) && object.spec.parameters.scaling.min > 1"
+                            message: "`spec.parameters.scaling.min` must be greater than `1`."
+                        }
+                    ]
+                }
+            } | to yaml | kubectl apply --filename -
+
+            {
+                apiVersion: "admissionregistration.k8s.io/v1"
+                kind: "ValidatingAdmissionPolicyBinding"
+                metadata: { name: "dot-app" }
+                spec: {
+                    policyName: "dot-app"
+                    validationActions: ["Deny"]
+                    # matchResources: { namespaceSelector: { matchLabels: { "kubernetes.io/metadata.name": a-team } } }
+                }
+            } | to yaml | kubectl apply --filename -
+
+        }
 
     }
 
@@ -164,7 +206,7 @@ Press any key to continue.
             apiVersion: "pkg.crossplane.io/v1"
             kind: "Configuration"
             metadata: { name: "crossplane-sql" }
-            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-sql:v0.8.161" }
+            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-sql:v1.0.2" }
         } | to yaml | kubectl apply --filename -
 
     }
@@ -375,9 +417,7 @@ Press any key to continue.
 
 }
 
-def "main delete crossplane" [
-    waitForManaged = true
-] {
+def "main delete crossplane" [] {
 
     mut counter = (kubectl get managed --output name | grep -v object | grep -v database | wc -l | into int)
 

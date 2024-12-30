@@ -766,7 +766,7 @@ flowchart TD
         style policies fill:blue
         click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/README.md"
         kyverno(Kyverno)
-        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/kyverno.md"
+        click kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/kyverno.md"
         opa("Open Policy Agent (OPA) With Gatekeeper")
         style opa fill:red
         cloud-custodian(Cloud Custodian)
@@ -774,7 +774,7 @@ flowchart TD
         kubewarden(Kubewarden)
         style kubewarden fill:red
         vap(Kubernetes Validating Admission Policy)
-        style vap fill:red
+        click vap "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/vap.md"
         policies --> kyverno & opa & kubewarden & vap & cloud-custodian --> gitops
 
         %% ------------------------------------
