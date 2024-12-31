@@ -1,0 +1,185 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: ci-
+  labels:
+    workflows.argoproj.io/archive-strategy: "false"
+  annotations:
+    workflows.argoproj.io/description: Silly CI
+spec:
+  entrypoint: ci
+  volumes:
+  - name: registry-creds
+    secret:
+      secretName: registry-creds
+  volumeClaimTemplates:
+  - metadata:
+      name: workdir
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 128Mi
+  arguments:
+    parameters:
+    - name: repo
+      value: https://github.com/vfarcic/cncf-demo-app
+    - name: registry
+      value: ghcr.io
+    - name: registry-user
+      value: vfarcic
+    - name: image
+      value: argo-workflows-demo-2
+  templates:
+  - name: ci
+    dag:
+      tasks:
+      - name: checkout
+        template: git-checkout
+        arguments:
+          parameters:
+          - name: repo
+            value: "{{workflow.parameters.repo}}"
+      - name: generate-tag
+        template: date-tag
+      - name: build-image
+        template: kaniko
+        arguments:
+          parameters:
+          - name: image
+            value: "{{workflow.parameters.registry}}/{{workflow.parameters.registry-user}}/{{workflow.parameters.image}}:{{tasks.generate-tag.outputs.result}}"
+        dependencies: [generate-tag, run-unit-tests, run-linter]
+      - name: run-unit-tests
+        template: execute
+        arguments:
+          parameters:
+          - name: target
+            value: "run unit_tests"
+        dependencies: [checkout]
+      - name: gitops
+        template: execute
+        arguments:
+          parameters:
+          - name: target
+            value: "run gitops"
+          - name: image
+            value: "{{workflow.parameters.registry}}/{{workflow.parameters.registry-user}}/{{workflow.parameters.image}}:{{tasks.generate-tag.outputs.result}}"
+        dependencies: [build-image]
+      - name: run-linter
+        template: execute
+        arguments:
+          parameters:
+          - name: target
+            value: "run linter"
+        dependencies: [checkout]
+      - name: push
+        template: git-push
+        arguments:
+          parameters:
+          - name: tag
+            value: "{{tasks.generate-tag.outputs.result}}"
+        dependencies: [gitops]
+  - name: date-tag
+    script:
+      image: alpine
+      command: [sh]
+      source: |
+        echo "v$(date +%Y%m%d%H%M%S)"
+      resources:
+        limits:
+          memory: 32Mi
+          cpu: 100m
+  - name: git-checkout
+    inputs:
+      parameters:
+      - name: repo
+    script:
+      image: cgr.dev/chainguard/git:latest-root-dev
+      workingDir: /workdir
+      command: [sh]
+      source: |
+        git clone {{inputs.parameters.repo}} source
+      volumeMounts:
+      - name: workdir
+        mountPath: /workdir
+      resources:
+        limits:
+          memory: 128Mi
+          cpu: 100m
+  - name: git-push
+    inputs:
+      parameters:
+      - name: tag
+    script:
+      image: cgr.dev/chainguard/git
+      workingDir: /workdir/source
+      command: [sh]
+      source: |
+        git config --global --add safe.directory /workdir/source
+        git config --global url.https://$GITHUB_PATH@github.com/.insteadOf https://github.com/
+        git config --global user.email "argo-workflows@devopstoolkit.live"
+        git config --global user.name "Argo Workflows"
+        git add .
+        git commit -m "Tag: {{inputs.parameters.tag}}"
+        git push
+      env:
+      - name: GITHUB_PATH
+        valueFrom:
+          secretKeyRef:
+            name: registry-creds
+            key: github_pat
+      volumeMounts:
+      - name: workdir
+        mountPath: /workdir
+      resources:
+        limits:
+          memory: 128Mi
+          cpu: 100m
+  - name: execute
+    inputs:
+      parameters:
+      - name: target
+      - name: tag
+        value: ""
+      - name: registry
+        value: ""
+      - name: image
+        value: ""
+    script:
+      image: ghcr.io/vfarcic/argo-workflows-demo-2-ci:0.0.2
+      workingDir: /workdir/source
+      command: [sh]
+      source: |
+        devbox run -- chmod +x dot.nu
+        devbox run -- ./dot.nu {{inputs.parameters.target}} {{inputs.parameters.image}}
+      volumeMounts:
+      - name: workdir
+        mountPath: /workdir
+      - name: registry-creds
+        mountPath: /kaniko/.docker
+      resources:
+        limits:
+          memory: 1024Mi
+          cpu: 2
+  - name: kaniko
+    inputs:
+      parameters:
+      - name: image
+    script:
+      image: gcr.io/kaniko-project/executor:v1.23.2-debug
+      workingDir: /workdir/source
+      command: ["sh"]
+      source: |
+        /kaniko/executor \
+            --dockerfile=Dockerfile \
+            --context=. \
+            --destination={{inputs.parameters.image}}
+      volumeMounts:
+      - name: workdir
+        mountPath: /workdir
+      - name: registry-creds
+        mountPath: /kaniko/.docker
+      resources:
+        limits:
+          memory: 1024Mi
+          cpu: 1

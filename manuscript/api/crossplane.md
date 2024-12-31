@@ -10,13 +10,13 @@ TODO: Intro
 
 ```bash
 devbox shell
+
+source .env
 ```
 
 > Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
 
 ```sh
-source .env
-
 ./dot.nu setup idp_crossplane $HYPERSCALER
 
 source .env
@@ -76,7 +76,22 @@ cat apps/silly-demo.yaml
 kubectl --namespace production apply \
     --filename apps/silly-demo.yaml
 
+crossplane beta trace --namespace production \
+    appclaim silly-demo
+```
+
+> Wait until all the resources are `Available`.
+
+```sh
 kubectl --namespace production get all,ingresses
+
+gh pr list
+
+gh pr view FIXME: --json files
+
+gh pr merge FIXME: --rebase
+
+git pull
 ```
 
 > The Pod `STATUS` is `ErrImagePull` because there is no image. We'll fix that later.

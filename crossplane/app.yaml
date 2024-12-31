@@ -1,4 +1,4 @@
-apiVersion: devopstoolkitseries.com/v1alpha1
+apiVersion: devopstoolkit.live/v1alpha1
 kind: AppClaim
 metadata:
   name: silly-demo
@@ -15,7 +15,10 @@ spec:
     image: ghcr.io/vfarcic/cncf-demo-app
     tag: FIXME
     port: 8080
-    host: silly-demo.44.196.61.233.nip.io
+    host: silly-demo.34.148.158.249.nip.io
     ingressClassName: contour
     db:
       secret: silly-demo-db
+    repository:
+      enabled: true
+      name: cncf-demo-app

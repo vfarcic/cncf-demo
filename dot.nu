@@ -7,6 +7,9 @@ source scripts/ingress.nu
 source scripts/crossplane.nu
 source scripts/kyverno.nu
 source scripts/argocd.nu
+source scripts/argo-workflows.nu
+source scripts/argo-events.nu
+source scripts/registry.nu
 
 def main [] {}
 
@@ -16,6 +19,10 @@ def "main destroy idp" [] {
     kubectl --namespace production delete --filename crossplane/repo.yaml
     
     cd cncf-demo-app
+
+    git pull
+
+    kubectl --namespace production delete --filename apps/
 
     touch apps/empty
 
@@ -29,7 +36,7 @@ def "main destroy idp" [] {
 
     cd ..
 
-    main delete crossplane $env.HYPERSCALER
+    main delete crossplane
 
     if $env.HYPERSCALER == "google" {
 
@@ -104,6 +111,22 @@ def "main setup idp_crossplane" [
         | upsert spec.parameters.image $"ghcr.io/($github_data.user)/cncf-demo-app"
         | upsert spec.parameters.tag "FIXME"
         | save crossplane/app.yaml --force
+
+}
+
+def "main setup idp_argo_workflows" [
+    github_user: string
+    github_pat: string
+] {
+
+    let email = input $"(ansi green_bold)Enter ghcr.io registry email \(e.g., viktor@farcic.com\):(ansi reset) "
+
+    (
+        main apply argoworkflows
+            $github_user $github_pat $email --registry "ghcr.io"
+    )
+
+    main apply argoevents
 
 }
 

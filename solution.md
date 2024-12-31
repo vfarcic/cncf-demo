@@ -48,9 +48,13 @@ flowchart TD
         click buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
         ko(ko)
         style ko fill:red
+        shipwright(Shipwright)
+        style shipwright fill:red
         slimtoolkit(SlimToolkit)
         style slimtoolkit fill:red
-        bci --> kbld & lima & buildpacks & ko & slimtoolkit --> registry
+        stacker(Stacker)
+        style stacker fill:red
+        bci --> kbld & lima & buildpacks & ko & slimtoolkit & shipwright & stacker --> registry
 
         %% -----------------------------------------
         %% -- Store Container Image in a Registry --
@@ -66,7 +70,9 @@ flowchart TD
         click dragonfly "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/registry/dragonfly.md"
         zot(zot)
         style zot fill:red
-        registry --> docker-hub & harbor & dragonfly & zot --> ddd
+        distribution(Distribution)
+        style distribution fill:red
+        registry --> docker-hub & harbor & dragonfly & zot & distribution --> ddd
 
         %% --------------------------------------
         %% -- Define And Deploy The App To Dev --
@@ -78,15 +84,15 @@ flowchart TD
         click ddd-helm "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/helm.md"
         ddd-kustomize(Kustomize)
         click ddd-kustomize "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/kustomize.md"
-        ddd-carvel(Carvel ytt)
-        click ddd-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
+        carvel(Carvel ytt)
+        click carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/carvel-ytt.md"
         ddd-cdk8s("CDK For Kubernetes (cdk8s)")
         click ddd-cdk8s "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/define-deploy-dev/cdk8s.md"
         kcl(KCL)
         style kcl fill:red
         kpt(kpt)
         style kpt fill:red
-        ddd --> ddd-helm & ddd-kustomize & ddd-carvel & ddd-cdk8s & kcl & kpt --> https
+        ddd --> ddd-helm & ddd-kustomize & carvel & ddd-cdk8s & kcl & kpt --> https
 
         %% ---------------
         %% -- Use HTTPS --
@@ -659,9 +665,11 @@ flowchart TD
         click service-mesh-istio-carvel "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/service-mesh/istio-carvel.md"
         service-mesh-istio-cdk8s(App as cdk8s)
         style service-mesh-istio-cdk8s fill:red
-        service-mesh --> cilium & istio & linkerd & kuma
+        kmesh(Kmesh)
+        style kmesh fill:red
+        service-mesh --> cilium & istio & linkerd & kuma & kmesh
         istio --> service-mesh-istio-kustomize & service-mesh-istio-helm & service-mesh-istio-carvel & service-mesh-istio-cdk8s --> progressive-delivery
-        cilium & linkerd & kuma --> progressive-delivery
+        cilium & linkerd & kuma & kmesh --> progressive-delivery
 
         %% --------------------------
         %% -- Progressive Delivery --
@@ -795,13 +803,10 @@ flowchart TD
         %% -- One-Shot Actions (Workflows) --
         %% ----------------------------------
         workflows{{"One-Shot Actions (Workflows)"}}
-        style workflows fill:red
+        style workflows fill:blue
         argo-workflows(Argo Workflows)
         style argo-workflows fill:red
-        keptn(Keptn)
-        style keptn fill:red
-        keptn(Keptn)
-        workflows --> argo-workflows & keptn --> misc
+        workflows --> argo-workflows --> misc
 
         %% ------------------
         %% -- Miscelaneous --
@@ -821,7 +826,15 @@ flowchart TD
         style pipecd fill:red
         werf(werf)
         style werf fill:red
-        misc --> dapr & porter & serverless-workflow & pipecd & werf --> gui
+        score(Score)
+        style score fill:red
+        radius(Radius)
+        style radius fill:red
+        kusion-stack(KusionStack)
+        style kusion-stack fill:red
+        keptn(Keptn)
+        style keptn fill:red
+        misc --> dapr & porter & serverless-workflow & pipecd & werf & score & radius & kusion-stack & keptn --> gui
 
         %% ------------------------------------
         %% -- Graphical User Interface (GUI) --
@@ -896,7 +909,22 @@ flowchart TD
         style lb-mc-k8gb fill:red
         lb-mc-submariner(Submariner)
         style lb-mc-submariner fill:red
-        lb-mc --> lb-mc-k8gb & lb-mc-submariner
+        kuadrant(Kuadrant)
+        style kuadrant fill:red
+        easegress(Easegress)
+        style easegress fill:red
+        loxi-lb(LoxiLB)
+        style loxi-lb fill:red
+        lb-mc --> lb-mc-k8gb & lb-mc-submariner & kuadrant & easegress & loxi-lb --> misc
+
+        %% ----------
+        %% -- Misc --
+        %% ----------
+        misc{{Misc}}
+        style misc fill:red
+        kube-stellar(KubeStellar)
+        style kube-stellar fill:red
+        misc --> kube-stellar
 
     end
 ```
@@ -940,7 +968,9 @@ flowchart TD
         style super-edge fill:red
         fabedge(FabEdge)
         style fabedge fill:red
-        edge --> akri & keylime & open-yurt & kube-edge & super-edge & fabedge --> baremetal
+        kairos(Kairos)
+        style kairos fill:red
+        edge --> akri & keylime & open-yurt & kube-edge & super-edge & fabedge & kairos --> baremetal
 
         %% ---------------
         %% -- Baremetal --
@@ -1028,15 +1058,15 @@ flowchart TD
         style storage-longhorn fill:red
         storage-cube-fs(CubeFS)
         style storage-cube-fs fill:red
-        storage-pravega(Pravega)
-        style storage-pravega fill:red
+        pravega(Pravega)
+        style pravega fill:red
         carina(Carina)
         style carina fill:red
         hwameistor(HwameiStor)
         style hwameistor fill:red
         openebs(OpenEBS)
         style openebs fill:red
-        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & storage-pravega & carina & hwameistor & openebs --> backup
+        storage --> storage-piraeus-datastore & storage-curve & storage-rook & storage-longhorn & storage-cube-fs & pravega & carina & hwameistor & openebs --> backup
 
         %% ------------
         %% -- Backup --
@@ -1058,9 +1088,9 @@ flowchart TD
         style litmus fill:red
         chaos-mesh(Chaos Mesh)
         style chaos-mesh fill:red
-        kraken(Kraken)
-        style kraken fill:red
-        chaos-engineering --> chaosblade & litmus & chaos-mesh & kraken
+        krkn(Krkn)
+        style krkn fill:red
+        chaos-engineering --> chaosblade & litmus & chaos-mesh & krkn
 
         %% --------------------
         %% -- Events Storage --
@@ -1139,7 +1169,19 @@ flowchart TD
         style cri-o fill:red
         containerd(containerd)
         style containerd fill:red
-        container-runtime --> cri-o & containerd
+        youki(youki)
+        style youki fill:red
+        kuasar(Kuasar)
+        style kuasar fill:red
+        container-runtime --> cri-o & containerd & youki & kuasar
+
+        %% --------
+        %% -- AI --
+        %% --------
+        ai{{AI}}
+        hami(hami)
+        style hami fill:red
+        ai --> hami
 
         %% ---------
         %% -- TBD --
@@ -1211,7 +1253,7 @@ flowchart TD
         eraser(Eraser)
         style eraser fill:red
         %% -- Speeds up service mesh (drop 1) --
-        merbridge(Merbridge *)
+        merbridge(Merbridge)
         style merbridge fill:red
         %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
@@ -1222,6 +1264,36 @@ flowchart TD
         style kanister fill:red
         trickster(Trickster)
         style trickster fill:red
+        kube-burner(Kube-burner)
+        style kube-burner fill:red
+        open-gemini(openGemini)
+        style open-gemini fill:red
+        connect-rpc(Connect RPC)
+        style connect-rpc fill:red
+        koordinator(Koordinator)
+        style koordinator fill:red
+        kube-slice(KubeSlice)
+        style kube-slice fill:red
+        sermant(Sermant)
+        style sermant fill:red
+        atlantis(Atlantis)
+        style atlantis fill:red
+        kubean(Kubean)
+        style kubean fill:red
+        ratify(Ratify)
+        style ratify fill:red
+        cartography(Cartography)
+        style cartography fill:red
+        oscal-compass(OSCAL-COMPASS)
+        style oscal-compass fill:red
+        bpfman(bpfman)
+        style bpfman fill:red
+        bank-vaults(Bank-Vaults)
+        style bank-vaults fill:red
+        copa(Copa)
+        style copa fill:red
+        spiderpool(Spiderpool)
+        style spiderpool fill:red
     end
 ```
 
