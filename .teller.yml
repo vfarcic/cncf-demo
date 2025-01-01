@@ -10,3 +10,4 @@ providers:
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           aws-account-id: AWS_ACCOUNT_ID
           github-token: GITHUB_TOKEN
+          azure-tenant: AZURE_TENANT

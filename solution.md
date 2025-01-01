@@ -806,7 +806,18 @@ flowchart TD
         style workflows fill:blue
         argo-workflows(Argo Workflows)
         style argo-workflows fill:red
-        workflows --> argo-workflows --> misc
+        workflows --> argo-workflows --> gui
+
+        %% ------------------------------------
+        %% -- Graphical User Interface (GUI) --
+        %% ------------------------------------
+        gui{{"Graphical User Interface (GUI)"}}
+        style gui fill:red
+        gui-backstage(Backstage)
+        style gui-backstage fill:red
+        perses(Perses)
+        style perses fill:red
+        gui --> gui-backstage & perses --> misc
 
         %% ------------------
         %% -- Miscelaneous --
@@ -834,18 +845,7 @@ flowchart TD
         style kusion-stack fill:red
         keptn(Keptn)
         style keptn fill:red
-        misc --> dapr & porter & serverless-workflow & pipecd & werf & score & radius & kusion-stack & keptn --> gui
-
-        %% ------------------------------------
-        %% -- Graphical User Interface (GUI) --
-        %% ------------------------------------
-        gui{{"Graphical User Interface (GUI)"}}
-        style gui fill:red
-        gui-backstage(Backstage)
-        style gui-backstage fill:red
-        perses(Perses)
-        style perses fill:red
-        gui --> gui-backstage & perses
+        misc --> dapr & porter & serverless-workflow & pipecd & werf & score & radius & kusion-stack & keptn
 
     end
 ```
