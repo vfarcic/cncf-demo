@@ -761,7 +761,13 @@ flowchart TD
         click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/crossplane.md"
         kube-vela(KubeVela)
         style kube-vela fill:red
-        api --> crossplane & kube-vela --> policies
+        kube-builder(Kubebuilder)
+        style kube-builder fill:red
+        kube-rs(kube-rs)
+        style kube-rs fill:red
+        operator-framework(Operator Framework)
+        style operator-framework fill:red
+        api --> crossplane & kube-vela & kube-builder & kube-rs & operator-framework --> policies
 
         %% --------------
         %% -- Policies --
@@ -1292,12 +1298,6 @@ flowchart TD
         style copa fill:red
         spiderpool(Spiderpool)
         style spiderpool fill:red
-        kube-builder(Kubebuilder)
-        style kube-builder fill:red
-        kube-rs(kube-rs)
-        style kube-rs fill:red
-        operator-framework(Operator Framework)
-        style operator-framework fill:red
     end
 ```
 
