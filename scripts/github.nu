@@ -8,7 +8,7 @@ def --env "main get github" [] {
     } else if "REGISTRY_PASSWORD" in $env {
         $github_token = $env.REGISTRY_PASSWORD
     } else {
-        let value = input $"(ansi green_bold)Enter GitHub token:(ansi reset)"
+        let value = input $"(ansi green_bold)Enter GitHub token:(ansi reset) "
         $github_token = $value
     }
     $"export GITHUB_TOKEN=($github_token)\n" | save --append .env
@@ -19,7 +19,7 @@ def --env "main get github" [] {
     } else if "REGISTRY_USER" in $env {
         $github_user = $env.GITHUB_USER
     } else {
-        let value = input $"(ansi green_bold)Enter GitHub user or organization where you forked the repo:(ansi reset)"
+        let value = input $"(ansi green_bold)Enter GitHub user or organization where you forked the repo:(ansi reset) "
         $github_user = $value
     }
     $"export GITHUB_USER=($github_user)\n" | save --append .env

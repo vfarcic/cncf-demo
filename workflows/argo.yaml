@@ -29,7 +29,7 @@ spec:
     - name: registry-user
       value: vfarcic
     - name: image
-      value: argo-workflows-demo-2
+      value: cncf-demo-app
   templates:
   - name: ci
     dag:
@@ -48,30 +48,23 @@ spec:
           parameters:
           - name: image
             value: "{{workflow.parameters.registry}}/{{workflow.parameters.registry-user}}/{{workflow.parameters.image}}:{{tasks.generate-tag.outputs.result}}"
-        dependencies: [generate-tag, run-unit-tests, run-linter]
+        dependencies: [generate-tag, run-unit-tests]
       - name: run-unit-tests
         template: execute
         arguments:
           parameters:
           - name: target
-            value: "run unit_tests"
+            value: "run tests"
         dependencies: [checkout]
       - name: gitops
         template: execute
         arguments:
           parameters:
           - name: target
-            value: "run gitops"
-          - name: image
-            value: "{{workflow.parameters.registry}}/{{workflow.parameters.registry-user}}/{{workflow.parameters.image}}:{{tasks.generate-tag.outputs.result}}"
+            value: "update claim"
+          - name: tag
+            value: "{{tasks.generate-tag.outputs.result}}"
         dependencies: [build-image]
-      - name: run-linter
-        template: execute
-        arguments:
-          parameters:
-          - name: target
-            value: "run linter"
-        dependencies: [checkout]
       - name: push
         template: git-push
         arguments:
@@ -116,18 +109,18 @@ spec:
       command: [sh]
       source: |
         git config --global --add safe.directory /workdir/source
-        git config --global url.https://$GITHUB_PATH@github.com/.insteadOf https://github.com/
+        git config --global url.https://$GITHUB_PAT@github.com/.insteadOf https://github.com/
         git config --global user.email "argo-workflows@devopstoolkit.live"
         git config --global user.name "Argo Workflows"
         git add .
         git commit -m "Tag: {{inputs.parameters.tag}}"
         git push
       env:
-      - name: GITHUB_PATH
+      - name: GITHUB_PAT
         valueFrom:
           secretKeyRef:
             name: registry-creds
-            key: github_pat
+            key: password
       volumeMounts:
       - name: workdir
         mountPath: /workdir
@@ -141,17 +134,13 @@ spec:
       - name: target
       - name: tag
         value: ""
-      - name: registry
-        value: ""
-      - name: image
-        value: ""
     script:
       image: ghcr.io/vfarcic/argo-workflows-demo-2-ci:0.0.2
       workingDir: /workdir/source
       command: [sh]
       source: |
-        devbox run -- chmod +x dot.nu
-        devbox run -- ./dot.nu {{inputs.parameters.target}} {{inputs.parameters.image}}
+        devbox --config devbox-ci.json run -- chmod +x dot.nu
+        devbox --config devbox-ci.json run -- ./dot.nu {{inputs.parameters.target}} {{inputs.parameters.tag}}
       volumeMounts:
       - name: workdir
         mountPath: /workdir

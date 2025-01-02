@@ -11,5 +11,4 @@ TODO: Description
 
 ## What Is Your Choice?
 
-<!-- * [Argo Workflows](argo-workflows.md) -->
-The adventure will continue soon.
+* [Argo Workflows](argo-workflows.md)

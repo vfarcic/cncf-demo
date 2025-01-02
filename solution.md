@@ -790,7 +790,7 @@ flowchart TD
         flux(Flux)
         style flux fill:red
         argocd(Argo CD)
-        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/argocd.md"
+        click argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/argocd.md"
         kapp(Carvel kapp-controller)
         style kapp fill:red
         gitops --> flux & argocd & kapp --> workflows
@@ -800,20 +800,20 @@ flowchart TD
         %% ----------------------------------
         workflows{{"One-Shot Actions (Workflows)"}}
         style workflows fill:blue
+        click workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/README.md"
         argo-workflows(Argo Workflows)
-        style argo-workflows fill:red
+        click argo-workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/argo-workflows.md"
         workflows --> argo-workflows --> gui
 
         %% ------------------------------------
         %% -- Graphical User Interface (GUI) --
         %% ------------------------------------
         gui{{"Graphical User Interface (GUI)"}}
-        style gui fill:red
-        gui-backstage(Backstage)
-        style gui-backstage fill:red
-        perses(Perses)
-        style perses fill:red
-        gui --> gui-backstage & perses --> misc
+        style gui fill:blue
+        click gui "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/README.md"
+        backstage(Backstage)
+        click backstage "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/backstage.md"
+        gui --> backstage --> misc
 
         %% ------------------
         %% -- Miscelaneous --
@@ -1292,6 +1292,12 @@ flowchart TD
         style copa fill:red
         spiderpool(Spiderpool)
         style spiderpool fill:red
+        kube-builder(Kubebuilder)
+        style kube-builder fill:red
+        kube-rs(kube-rs)
+        style kube-rs fill:red
+        operator-framework(Operator Framework)
+        style operator-framework fill:red
     end
 ```
 

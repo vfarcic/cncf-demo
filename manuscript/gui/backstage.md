@@ -1,8 +1,8 @@
-# API (CRDs) & State Management (Controllers) Destruction
+# Graphical User Interface (GUI) with Backstage
 
-```bash
-source .env
-```
+TODO: Intro
+
+## Setup
 
 > Watch [Nix for Everyone: Unleash Devbox for Simplified Development](https://youtu.be/WiFLtcBvGMU) if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
 
@@ -16,12 +16,21 @@ source .env
 
 > Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
 
-FIXME: Check why Google project is deleted twice by going through the instructions one-by-one.
-
 ```sh
-./dot.nu destroy idp
+./dot.nu apply backstage "0.0.1" \
+    --ingress_host "backstage.$INGRESS_HOST" \
+    --github_token $GITHUB_TOKEN \
+    --create_service_account true
+
+source .env
 ```
 
-## Start The Chapter
+## Do
 
-* [API (CRDs) & State Management (Controllers)](../api/README.md)
+> Observe the claims ingested from the cluster.
+> `CREATE` a new claim.
+
+## Continue The Adventure
+
+<!-- * [Graphical User Interface (GUI)](../gui/README.md) -->
+The adventure will continue soon.

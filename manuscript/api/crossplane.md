@@ -87,9 +87,9 @@ kubectl --namespace production get all,ingresses
 
 gh pr list
 
-gh pr view FIXME: --json files
+gh pr view silly-demo-ci --json files
 
-gh pr merge FIXME: --rebase
+gh pr merge silly-demo-ci --rebase
 
 git pull
 ```

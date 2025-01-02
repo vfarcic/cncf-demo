@@ -10,6 +10,7 @@ source scripts/argocd.nu
 source scripts/argo-workflows.nu
 source scripts/argo-events.nu
 source scripts/registry.nu
+source scripts/backstage.nu
 
 def main [] {}
 
@@ -56,6 +57,8 @@ def "main destroy idp" [] {
 def "main setup idp" [] {
     
     rm --force .env
+
+    rm --force "kubeconfig*.yaml"
 
     let hyperscaler = main get hyperscaler
 
