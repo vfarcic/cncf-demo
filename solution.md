@@ -843,7 +843,7 @@ flowchart TD
         style kusion-stack fill:red
         keptn(Keptn)
         style keptn fill:red
-        misc --> dapr & porter & serverless-workflow & pipecd & werf & score & radius & kusion-stack & keptn
+        misc --> dapr & porter & pipecd & werf & score & radius & kusion-stack & keptn
 
     end
 ```
