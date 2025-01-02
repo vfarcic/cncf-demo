@@ -37,5 +37,3 @@ The Cloud Native Buildpacks project takes source code as input and then outputs 
 * [kbld](kbld.md)
 * [Lima](lima.md)
 * [Cloud Native Buildpacks (CNB)](buildpacks.md)
-* **ko** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **SlimToolkit** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

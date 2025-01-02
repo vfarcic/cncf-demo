@@ -47,13 +47,15 @@ flowchart TD
         buildpacks(Cloud Native Buildpacks / CNB)
         click buildpacks "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/build-container-image/buildpacks.md"
         ko(ko)
+        shipwright(Shipwright)
+        style shipwright fill:red
+        stacker(Stacker)
+        style stacker fill:red
         style ko fill:red
         shipwright(Shipwright)
         style shipwright fill:red
         slimtoolkit(SlimToolkit)
         style slimtoolkit fill:red
-        stacker(Stacker)
-        style stacker fill:red
         bci --> kbld & lima & buildpacks & ko & slimtoolkit & shipwright & stacker --> registry
 
         %% -----------------------------------------
@@ -759,13 +761,7 @@ flowchart TD
         click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/crossplane.md"
         kube-vela(KubeVela)
         style kube-vela fill:red
-        kubebuilder(Kubebuilder)
-        style kubebuilder fill:red
-        kube-rs(kube-rs)
-        style kube-rs fill:red
-        operator-framework(Operator Framework)
-        style operator-framework fill:red
-        api --> crossplane & kube-vela & kubebuilder & kube-rs & operator-framework --> policies
+        api --> crossplane & kube-vela --> policies
 
         %% --------------
         %% -- Policies --
@@ -831,10 +827,12 @@ flowchart TD
         style dapr fill:red
         porter(Porter)
         style porter fill:red
-        serverless-workflow(Serverless Workflow)
-        style serverless-workflow fill:red
         pipecd(PipeCD)
         style pipecd fill:red
+        radius(Radius)
+        style radius fill:red
+        kusion-stack(KusionStack)
+        style kusion-stack fill:red
         werf(werf)
         style werf fill:red
         score(Score)
