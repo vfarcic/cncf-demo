@@ -24,3 +24,4 @@ spec:
       name: cncf-demo-app
     ci:
       enabled: true
+      tool: none

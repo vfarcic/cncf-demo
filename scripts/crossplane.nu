@@ -8,6 +8,7 @@ def "main apply crossplane" [
     --github_user: string,  # GitHub user required for the DOT GitHub Configuration and optinal for the DOT App Configuration
     --github_token: string, # GitHub token required for the DOT GitHub Configuration and optinal for the DOT App Configuration
     --policies = false      # Whether to create Validating ADmission Policies
+    --skip_login = false    # Whether to skip the login (only for Azure)
 ] {
 
     mut project_id = ""
@@ -17,6 +18,7 @@ def "main apply crossplane" [
     (
         helm upgrade --install crossplane crossplane/crossplane
             --namespace crossplane-system --create-namespace
+            --set args='{"--enable-usages"}'
             --wait
     )
 
@@ -81,13 +83,13 @@ Press any key to continue.
     } else if $hyperscaler == "aws" {
 
         if AWS_ACCESS_KEY_ID not-in $env {
-            $env.AWS_ACCESS_KEY_ID = input $"(ansi green_bold)Enter AWS Access Key ID: (ansi reset)"
+            $env.AWS_ACCESS_KEY_ID = input $"(ansi yellow_bold)Enter AWS Access Key ID: (ansi reset)"
         }
         $"export AWS_ACCESS_KEY_ID=($env.AWS_ACCESS_KEY_ID)\n"
             | save --append .env
 
         if AWS_SECRET_ACCESS_KEY not-in $env {
-            $env.AWS_SECRET_ACCESS_KEY = input $"(ansi green_bold)Enter AWS Secret Access Key: (ansi reset)"
+            $env.AWS_SECRET_ACCESS_KEY = input $"(ansi yellow_bold)Enter AWS Secret Access Key: (ansi reset)"
         }
         $"export AWS_SECRET_ACCESS_KEY=($env.AWS_SECRET_ACCESS_KEY)\n"
             | save --append .env
@@ -107,14 +109,16 @@ aws_secret_access_key = ($env.AWS_SECRET_ACCESS_KEY)
 
         mut azure_tenant = ""
         if AZURE_TENANT not-in $env {
-            $azure_tenant = input $"(ansi green_bold)Enter Azure Tenant: (ansi reset)"
+            $azure_tenant = input $"(ansi yellow_bold)Enter Azure Tenant: (ansi reset)"
         } else {
             $azure_tenant = $env.AZURE_TENANT
         }
         $"export AZURE_TENANT=($azure_tenant)\n"
             | save --append .env
         
-        az login --tenant $azure_tenant
+        if $skip_login == false {
+            az login --tenant $azure_tenant
+        }
     
         let subscription_id = (az account show --query id -o tsv)
     
@@ -140,7 +144,7 @@ aws_secret_access_key = ($env.AWS_SECRET_ACCESS_KEY)
             apiVersion: "pkg.crossplane.io/v1"
             kind: "Configuration"
             metadata: { name: "crossplane-app" }
-            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-application:v0.7.3" }
+            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-application:v0.7.4" }
         } | to yaml | kubectl apply --filename -
 
         if $policies {
@@ -194,8 +198,8 @@ aws_secret_access_key = ($env.AWS_SECRET_ACCESS_KEY)
             
             start $"https://console.cloud.google.com/marketplace/product/google/sqladmin.googleapis.com?project=($project_id)"
             
-            print $"(ansi yellow_bold)
-ENABLE(ansi reset) the API.
+            print $"
+(ansi green_bold)ENABLE(ansi reset) the API.
 Press any key to continue.
 "
             input
@@ -206,7 +210,7 @@ Press any key to continue.
             apiVersion: "pkg.crossplane.io/v1"
             kind: "Configuration"
             metadata: { name: "crossplane-sql" }
-            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-sql:v1.0.2" }
+            spec: { package: "xpkg.upbound.io/devops-toolkit/dot-sql:v1.0.14" }
         } | to yaml | kubectl apply --filename -
 
     }
@@ -308,16 +312,94 @@ Press any key to continue.
         }
     } | to yaml | kubectl apply --filename -
 
+    wait crossplane
 
-    print $"(ansi yellow_bold)Waiting for Crossplane providers to be deployed...(ansi reset)"
+    if $db and $hyperscaler != "none" {
 
-    sleep 60sec
+        (
+            main apply providerconfig $hyperscaler
+                --google_project_id $project_id
+        )
 
-    (
-        kubectl wait
-            --for=condition=healthy provider.pkg.crossplane.io
-            --all --timeout 30m
-    )
+    }
+
+    if ($github_user | is-not-empty) and ($github_token | is-not-empty) {
+
+        {
+            apiVersion: v1,
+            kind: Secret,
+            metadata: {
+                name: github,
+                namespace: crossplane-system
+            },
+            type: Opaque,
+            stringData: {
+                credentials: $"{\"token\":\"($github_token)\",\"owner\":\"($github_user)\"}"
+            }
+        } | to yaml | kubectl apply --filename -
+
+        if $app or $github {
+
+            {
+                apiVersion: "github.upbound.io/v1beta1",
+                kind: ProviderConfig,
+                metadata: {
+                    name: default
+                },
+                spec: {
+                    credentials: {
+                        secretRef: {
+                            key: credentials,
+                            name: github,
+                            namespace: crossplane-system,
+                        },
+                        source: Secret
+                    }
+                }
+            } | to yaml | kubectl apply --filename -
+
+        }
+
+    }
+
+}
+
+def "main delete crossplane" [
+    --kind: string,
+    --name: string,
+    --namespace: string
+] {
+
+    if ($kind | is-not-empty) and ($name | is-not-empty) and ($namespace | is-not-empty) { 
+        kubectl --namespace $namespace delete $kind $name
+    }
+    
+    mut command = { kubectl get managed --output name }
+    if ($name | is-not-empty) {
+        $command = {
+            (
+                kubectl get managed --output name
+                    --selector $"crossplane.io/claim-name=($name)"
+            )
+        }
+    }
+
+    mut resources = (do $command)
+    mut counter = ($resources | wc -l | into int)
+
+    while $counter > 0 {
+        print $"($resources)\nWaiting for remaining (ansi yellow_bold)($counter)(ansi reset) managed resources to be (ansi yellow_bold)removed(ansi reset)...\n"
+        sleep 10sec
+        $resources = (do $command)
+        $counter = ($resources | wc -l | into int)
+    }
+
+}
+
+def "main apply providerconfig" [
+    hyperscaler: string,
+    --google_project_id: string,
+] {
 
     if $hyperscaler == "google" {
 
@@ -326,7 +408,7 @@ Press any key to continue.
             kind: "ProviderConfig"
             metadata: { name: "default" }
             spec: {
-                projectID: $project_id
+                projectID: $google_project_id
                 credentials: {
                     source: "Secret"
                     secretRef: {
@@ -376,55 +458,19 @@ Press any key to continue.
 
     }
 
-    if ($github_user | is-not-empty) and ($github_token | is-not-empty) {
+}
 
-        {
-            apiVersion: v1,
-            kind: Secret,
-            metadata: {
-                name: github,
-                namespace: crossplane-system
-            },
-            type: Opaque,
-            stringData: {
-                credentials: $"{\"token\":\"($github_token)\",\"owner\":\"($github_user)\"}"
-            }
-        } | to yaml | kubectl apply --filename -
+def "wait crossplane" [] {
 
-        if $app or $github {
+    print $"(ansi yellow_bold)Waiting for Crossplane providers to be deployed...(ansi reset)"
 
-            {
-                apiVersion: "github.upbound.io/v1beta1",
-                kind: ProviderConfig,
-                metadata: {
-                    name: default
-                },
-                spec: {
-                    credentials: {
-                        secretRef: {
-                            key: credentials,
-                            name: github,
-                            namespace: crossplane-system,
-                        },
-                        source: Secret
-                    }
-                }
-            } | to yaml | kubectl apply --filename -
+    sleep 60sec
 
-        }
-
-    }
+    (
+        kubectl wait
+            --for=condition=healthy provider.pkg.crossplane.io
+            --all --timeout 30m
+    )
 
 }
 
-def "main delete crossplane" [] {
-
-    mut counter = (kubectl get managed --output name | grep -v object | grep -v database | wc -l | into int)
-
-    while $counter > 0 {
-        print $"Waiting for remaining ($counter) managed resources to be removed..."
-        sleep 10sec
-        $counter = (kubectl get managed --output name | grep -v object | grep -v database | wc -l | into int)
-    }
-
-}
