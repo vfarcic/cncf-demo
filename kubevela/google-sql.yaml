@@ -1,0 +1,12 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: silly-demo-db
+spec:
+  components:
+  - name: silly-demo-db
+    type: db-google
+    properties:
+      region: us-east1
+      size: small
+      version: "13"

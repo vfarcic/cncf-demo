@@ -760,7 +760,7 @@ flowchart TD
         crossplane(Crossplane)
         click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/crossplane.md"
         kube-vela(KubeVela)
-        style kube-vela fill:red
+        click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kubevela.md"
         kube-builder(Kubebuilder)
         style kube-builder fill:red
         kube-rs(kube-rs)

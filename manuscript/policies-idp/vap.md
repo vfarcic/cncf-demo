@@ -17,20 +17,20 @@ source .env
 ## Do
 
 ```sh
-cat policies/vap-idp.yaml
+cat policies/vap-idp-$API.yaml
 
-kubectl apply --filename policies/vap-idp.yaml
+kubectl apply --filename policies/vap-idp-$API.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
 
-yq --inplace ".spec.parameters.scaling.enabled = true" \
+yq --inplace ".spec.components[0].traits[0].type = \"scaler\"" \
     cncf-demo-app/apps/silly-demo.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
 
-yq --inplace ".spec.parameters.scaling.min = 2" \
+yq --inplace ".spec.components[0].traits[0].properties.min = 2" \
     cncf-demo-app/apps/silly-demo.yaml
 
 kubectl --namespace production apply \

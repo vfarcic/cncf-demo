@@ -27,7 +27,7 @@ TODO: Text
 ## What Is Your Choice?
 
 * [Crossplane](crossplane.md)
-* **KubeVela** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [KubeVela](kubevela.md)
 * **Kubebuilder** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **kube-rs** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Operator Framework** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

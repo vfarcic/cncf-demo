@@ -1,0 +1,35 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: dot-app
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups:   ["core.oam.dev"]
+      apiVersions: ["*"]
+      operations:  ["CREATE", "UPDATE"]
+      resources:   ["applications"]
+  validations:
+    - expression: |
+        has(object.spec.components.filter(c, c.type == "app-backend")[0].traits) &&
+        size(object.spec.components.filter(c, c.type == "app-backend")[0].traits) > 0 &&
+        size(object.spec.components.filter(c, c.type == "app-backend")[0].traits.filter(c, c.type == "scaler")) == 1
+      message: "The Component must have the Trait `scaler`."
+    - expression: |
+        has(object.spec.components.filter(c, c.type == "app-backend")[0].traits.filter(t, t.type == "scaler")[0].properties) &&
+        object.spec.components.filter(c, c.type == "app-backend")[0].traits.filter(t, t.type == "scaler")[0].properties.min > 1
+      message: "The Trait `scaler` must have `properties.min` greater than `1`."
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: dot-app
+spec:
+  policyName: dot-app
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: production

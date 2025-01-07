@@ -141,7 +141,7 @@ aws_secret_access_key = ($aws_secret_access_key)
             az aks create --resource-group $resource_group --name $name
                 --node-count $min_nodes --min-count $min_nodes
                 --max-count $max_nodes
-                --node-vm-size Standard_B2ms
+                --node-vm-size Standard_B4ms
                 --enable-managed-identity --generate-ssh-keys
                 --enable-cluster-autoscaler --yes
         )

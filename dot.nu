@@ -17,7 +17,10 @@ def main [] {}
 # Destroys the IDP chapter
 def "main destroy idp" [] {
 
-    kubectl --namespace production delete --filename crossplane/repo.yaml
+    do --ignore-errors {(
+        kubectl --namespace production delete
+            --filename crossplane/repo.yaml
+    )}
     
     cd cncf-demo-app
 
@@ -70,10 +73,12 @@ def "main setup idp" [] {
 
 }
 
-# Sets up the IDP chapter
+# Sets up the IDP Crossplane chapter
 def "main setup idp_crossplane" [
     hyperscaler: string
 ] {
+
+    $"export API=crossplane\n" | save --append .env
 
     let github_data = main get github
     
@@ -114,6 +119,92 @@ def "main setup idp_crossplane" [
         | upsert spec.parameters.image $"ghcr.io/($github_data.user)/cncf-demo-app"
         | upsert spec.parameters.tag "FIXME"
         | save crossplane/app.yaml --force
+
+    $github_data
+
+}
+
+# Sets up the IDP Crossplane chapter
+def "main setup idp_kubevela" [
+    hyperscaler: string
+] {
+
+    $"export API=kubevela\n" | save --append .env
+
+    let github_data = main setup idp_crossplane $hyperscaler
+
+    (
+        kubectl --namespace production apply
+            --filename crossplane/repo.yaml
+    )
+
+    vela install
+
+    (
+        vela addon enable velaux
+            domain=$"vela.($env.INGRESS_IP).nip.io"
+            gatewayDriver=nginx
+    )
+
+    vela env init production --namespace production
+
+    for file in [
+        "component-db-google.cue"
+        "component-db-aws.cue"
+        "component-db-azure.cue"
+        "component-app-backend.cue"
+        "trait-scaler.cue"
+    ] {
+        vela def apply $"kubevela/($file)"
+    }
+
+    if $hyperscaler == "azure" {
+
+        let date_suffix = (date now | format date "%Y%m%d%H%M%S")
+
+        open kubevela/azure-sql.yaml |
+            | upsert spec.components.0.name $"silly-demo-db-($date_suffix)"
+            | save kubevela/azure-sql.yaml --force
+
+        open kubevela/azure-sql-password.yaml |
+            | upsert metadata.name $"silly-demo-db-($date_suffix)-password"
+            | save kubevela/azure-sql-password.yaml --force
+
+        open kubevela/app.yaml |
+            | upsert spec.components.0.properties.db.secret $"silly-demo-db-($date_suffix)"
+            | save kubevela/app.yaml --force
+
+    } else {
+
+        open kubevela/app.yaml |
+            | upsert spec.components.0.properties.db.secret "silly-demo-db"
+            | save kubevela/app.yaml --force
+
+    }
+
+    open kubevela/app.yaml
+        | upsert spec.components.0.properties.host $"silly-demo.($env.INGRESS_IP).nip.io"
+        | upsert spec.components.0.properties.image $"ghcr.io/($github_data.user)/cncf-demo-app"
+        | upsert spec.components.0.properties.tag "FIXME"
+        | save kubevela/app.yaml --force
+
+    (
+        kubectl wait githubs.devopstoolkit.live
+            --selector crossplane.io/claim-name=cncf-demo-app
+            --for=condition=Ready=true
+    )
+
+    git clone $"https://github.com/($env.GITHUB_USER)/cncf-demo-app"
+
+    cd cncf-demo-app
+
+    gh pr merge init --rebase
+
+    git pull
+
+    mkdir apps
+
+    cd ..
 
 }
 

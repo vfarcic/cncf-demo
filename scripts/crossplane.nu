@@ -370,6 +370,8 @@ def "main delete crossplane" [
     --namespace: string
 ] {
 
+    print $"Waiting for (ansi yellow_bold)Crossplane managed resources(ansi reset) to be removed...\n"
+
     if ($kind | is-not-empty) and ($name | is-not-empty) and ($namespace | is-not-empty) { 
         kubectl --namespace $namespace delete $kind $name
     }
