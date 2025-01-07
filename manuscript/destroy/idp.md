@@ -20,8 +20,6 @@ FIXME: Check why Google project is deleted twice by going through the instructio
 
 ```sh
 ./dot.nu destroy idp
+
+exit
 ```
-
-## Start The Chapter
-
-* [API (CRDs) & State Management (Controllers)](../api/README.md)

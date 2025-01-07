@@ -8,3 +8,7 @@ chmod +x manuscript/destroy/observability.sh
 
 ./manuscript/destroy/observability.sh
 ```
+
+## Start The Chapter
+
+* [API (CRDs) & State Management (Controllers)](../api/README.md)
