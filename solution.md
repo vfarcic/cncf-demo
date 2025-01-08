@@ -809,7 +809,12 @@ flowchart TD
         click workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/README.md"
         argo-workflows(Argo Workflows)
         click argo-workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/argo-workflows.md"
-        workflows --> argo-workflows --> gui
+        tekton(Tekton)
+        style tekton fill:red
+        gha(GitHub Actions)
+        style gha fill:red
+        workflows --> argo-workflows & tekton & gha
+        argo-workflows --> gui
 
         %% ------------------------------------
         %% -- Graphical User Interface (GUI) --
@@ -819,7 +824,29 @@ flowchart TD
         click gui "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/README.md"
         backstage(Backstage)
         click backstage "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/backstage.md"
-        gui --> backstage --> misc
+        roadie(Roadie)
+        style roadie fill:red
+        port(Port)
+        style port fill:red
+        gui --> backstage & roadie & port
+        backstage --> templating
+
+        %% ----------------
+        %% -- Templating --
+        %% ----------------
+        templating{{Templating}}
+        style templating fill:red
+        porter(Porter)
+        style porter fill:red
+        pipecd(PipeCD)
+        style pipecd fill:red
+        radius(Radius)
+        style radius fill:red
+        werf(werf)
+        style werf fill:red
+        score(Score)
+        style score fill:red
+        templating --> porter & pipecd & werf & score & radius --> misc
 
         %% ------------------
         %% -- Miscelaneous --
@@ -831,25 +858,11 @@ flowchart TD
         %% style dev-stream fill:red
         dapr("Distributed Application Runtime (Dapr)")
         style dapr fill:red
-        porter(Porter)
-        style porter fill:red
-        pipecd(PipeCD)
-        style pipecd fill:red
-        radius(Radius)
-        style radius fill:red
-        kusion-stack(KusionStack)
-        style kusion-stack fill:red
-        werf(werf)
-        style werf fill:red
-        score(Score)
-        style score fill:red
-        radius(Radius)
-        style radius fill:red
         kusion-stack(KusionStack)
         style kusion-stack fill:red
         keptn(Keptn)
         style keptn fill:red
-        misc --> dapr & porter & pipecd & werf & score & radius & kusion-stack & keptn
+        misc --> dapr & kusion-stack & keptn
 
     end
 ```

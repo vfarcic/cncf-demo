@@ -831,11 +831,22 @@ flowchart TD
 | Traces | Jonah Kowall - Jaeger<br /> Andriy Redko - Zipkin | October 1, 2024 | [story](manuscript/tracing/README.md) |
 | Data Pipelines | Eduardo Silva Pereira - Fluent Bit<br /> Juraci Paixão Kröhling - OTel Collector<br /> Sandor Guba - Logging Operator | October 8, 2024 | [story](manuscript/data-pipelines/README.md) |
 | Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> Marcin Skalski - Kuma | October 29, 2024 | [story](manuscript/service-mesh/README.md) |
-| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger | October 15, 2024 | [story](progressive-delivery/README.md) |
+| Progressive Delivery | Christian Hernandez - Argo Rollouts<br /> Sanskar Jaiswal - Flagger | October 15, 2024 | [story](manuscript/progressive-delivery/README.md) |
 | Cloud Cost | Matt Ray - OpenCost<br /> Yasmin Rajabi - StormForge<br /> Phil Andrews - CAST AI | October 22, 2024 | TBD |
 | Service Mesh | Nick Young - Cilium<br /> Lin Sun - Istio<br /> William Morgan - Linkerd<br /> Marcin Skalski - Kuma | October 29, 2024 | TBD |
 | Misc | Kaiyi Liu - Kepler<br /> Jose Blanquicet - Inspektor Gadget<br /> Ronald Petty - K8sGPT<br /> Augustin Husson - Perses<br /> Dom Delnano - Pixie | November 5, 2024 | TBD |
 | Chapter 4 Finale! | Whitney and Viktor! | November 22, 2024 |  |
+
+### Internal Developer Platform (IDP)
+
+| Name | Guests | Date | Link |
+| --- | --- | --- | --- |
+API & State Management| Crossplane<br />KubeVela<br />Kubebuilder<br />kube-rs<br />Operator Framework | FIXME: | [story](manuscript/api/README.md) |
+| Policies & State Synchronization | Kyverno<br />Argo CD | FIXME: | stories: [policies](main/manuscript/policies-idp/README.md), [state](manuscript/gitops-idp/README.md) |
+| One-Shot Actions | Argo Workflows<br />Tekton<br />GitHub Actions | FIXME: | [story](manuscript/workflows/README.md) |
+| Graphical User Interface (GUI) | Backstage<br />Roadie<br />Port | FIXME: | [story](manuscript/gui/README.md) |
+| Templating | Porter<br />PipeCD<br />Radius<br />werf<br />Score | FIXME: | FIXME: |
+| Miscelaneous | Dapr<br />KusionStack<br />Keptn | FIXME: | FIXME: |
 
 ## The Format
 
