@@ -1,4 +1,4 @@
-# Policies with Kyverno
+# One-Shot Actions (Workflows) with Argo Workflows
 
 TODO: Intro
 
@@ -20,10 +20,31 @@ source .env
 ./dot.nu setup idp_argo_workflows $GITHUB_USER $GITHUB_TOKEN
 ```
 
-## Do
+> If you chose to use Crossplane Compositoons, the `appclaim` resource already pushed the files we need for CI to the app repo. Otherwise, we need to add them to the app repo.
+
+> Execute the commands in the next block that follows only if you did **NOT** choose to use Crossplane Compositions.
 
 ```sh
-cat workflows/argo.yaml
+cp workflows/devbox-ci.json workflows/Dockerfile \
+    workflows/dot.nu cncf-demo-app/. 
+
+cd cncf-demo-app
+
+git add .
+
+git commit -m "CI"
+
+git push
+
+cd ..
+```
+
+## Do
+
+FIXME: Cache Nix packages
+
+```sh
+cat workflows/argo-$API.yaml
 
 kubectl --namespace argo port-forward service/argo-server 2746:2746
 ```

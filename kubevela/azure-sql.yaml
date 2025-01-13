@@ -4,7 +4,7 @@ metadata:
   name: silly-demo-db
 spec:
   components:
-  - name: silly-demo-db-20250107192103
+  - name: silly-demo-db-20250113170902
     type: db-azure
     properties:
       region: eastus

@@ -3,7 +3,7 @@ kind: SQLClaim
 metadata:
   name: silly-demo-db
 spec:
-  id: silly-demo-db-20250107185725
+  id: silly-demo-db-20250113170625
   compositionSelector:
     matchLabels:
       provider: azure

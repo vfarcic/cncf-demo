@@ -1,0 +1,13 @@
+{
+  "packages": [
+    "nushell@0.100.0",
+    "go@1.22.3"
+  ],
+  "shell": {
+    "init_hook": [
+      "chmod +x dot.nu"
+    ],
+    "scripts":   {}
+  }
+}
+  

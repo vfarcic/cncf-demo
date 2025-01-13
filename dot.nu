@@ -17,16 +17,22 @@ def main [] {}
 # Destroys the IDP chapter
 def "main destroy idp" [] {
 
-    do --ignore-errors {(
-        kubectl --namespace production delete
-            --filename crossplane/repo.yaml
-    )}
+    # if $env.API == "crossplane" {
+    #     do --ignore-errors {(
+    #         kubectl --namespace production delete
+    #             --filename crossplane/repo.yaml
+    #     )}
+    # }
     
-    cd cncf-demo-app
+    # cd cncf-demo-app
 
-    git pull
+    # git pull
 
-    kubectl --namespace production delete --filename apps/
+    # print $"It might take (ansi yellow_bold)a while(ansi reset) until all the resources are deleted. (ansi yellow_bold)Do NOT panic(ansi reset) if the execution of the script appears to be stuck.\n"
+
+    # (
+    #     kubectl --namespace production delete --filename apps/ --wait false
+    # )
 
     touch apps/empty
 
@@ -78,8 +84,6 @@ def "main setup idp_crossplane" [
     hyperscaler: string
 ] {
 
-    $"export API=crossplane\n" | save --append .env
-
     let github_data = main get github
     
     (
@@ -120,6 +124,8 @@ def "main setup idp_crossplane" [
         | upsert spec.parameters.tag "FIXME"
         | save crossplane/app.yaml --force
 
+    $"export API=crossplane\n" | save --append .env
+
     $github_data
 
 }
@@ -128,8 +134,6 @@ def "main setup idp_crossplane" [
 def "main setup idp_kubevela" [
     hyperscaler: string
 ] {
-
-    $"export API=kubevela\n" | save --append .env
 
     let github_data = main setup idp_crossplane $hyperscaler
 
@@ -194,7 +198,7 @@ def "main setup idp_kubevela" [
             --for=condition=Ready=true
     )
 
-    git clone $"https://github.com/($env.GITHUB_USER)/cncf-demo-app"
+    git clone $"https://github.com/($github_data.user)/cncf-demo-app"
 
     cd cncf-demo-app
 
@@ -205,6 +209,8 @@ def "main setup idp_kubevela" [
     mkdir apps
 
     cd ..
+
+    $"export API=kubevela\n" | save --append .env
 
 }
 

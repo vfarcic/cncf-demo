@@ -810,10 +810,10 @@ flowchart TD
         argo-workflows(Argo Workflows)
         click argo-workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/argo-workflows.md"
         tekton(Tekton)
-        style tekton fill:red
-        gha(GitHub Actions)
-        style gha fill:red
-        workflows --> argo-workflows & tekton & gha
+        click tekton "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/tekton.md"
+        github-actions(GitHub Actions)
+        click github-actions "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/github-actions.md"
+        workflows --> argo-workflows & tekton & github-actions
         argo-workflows --> gui
 
         %% ------------------------------------
@@ -825,9 +825,9 @@ flowchart TD
         backstage(Backstage)
         click backstage "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/backstage.md"
         roadie(Roadie)
-        style roadie fill:red
+        click roadie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/roadie.md"
         port(Port)
-        style port fill:red
+        click port "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/port.md"
         gui --> backstage & roadie & port
         backstage --> templating
 

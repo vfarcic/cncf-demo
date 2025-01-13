@@ -16,6 +16,8 @@ source .env
 
 > Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
 
+FIXME: Add KubeVela
+
 ```sh
 ./dot.nu apply backstage "0.0.1" \
     --ingress_host "backstage.$INGRESS_HOST" \

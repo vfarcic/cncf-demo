@@ -1,0 +1,47 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: dot-app-scaling
+  annotations:
+    policies.kyverno.io/title: dot app scaling
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: AppClaim
+    policies.kyverno.io/description: >-
+      This policy validates that scaling is enabled and the minimum number of replicas is set to at least 2.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: scaling-enabled
+      match:
+        any:
+        - resources:
+            kinds:
+            - Application
+            operations:
+            - CREATE
+            - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: |
+                has(object.spec.components.filter(c, c.type == "app-backend")[0].traits) &&
+                size(object.spec.components.filter(c, c.type == "app-backend")[0].traits) > 0 &&
+                size(object.spec.components.filter(c, c.type == "app-backend")[0].traits.filter(c, c.type == "scaler")) == 1
+              message: "The Component must have the Trait `scaler`."
+    - name: scaling-min-replicas
+      match:
+        any:
+        - resources:
+            kinds:
+            - Application
+            operations:
+            - CREATE
+            - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: |
+                has(object.spec.components.filter(c, c.type == "app-backend")[0].traits.filter(t, t.type == "scaler")[0].properties) &&
+                object.spec.components.filter(c, c.type == "app-backend")[0].traits.filter(t, t.type == "scaler")[0].properties.min > 1
+              message: "The Trait `scaler` must have `properties.min` greater than `1`."
