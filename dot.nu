@@ -17,22 +17,21 @@ def main [] {}
 # Destroys the IDP chapter
 def "main destroy idp" [] {
 
-    # if $env.API == "crossplane" {
-    #     do --ignore-errors {(
-    #         kubectl --namespace production delete
-    #             --filename crossplane/repo.yaml
-    #     )}
-    # }
+    if $env.API == "crossplane" {
+        do --ignore-errors {(
+            kubectl --namespace production delete
+                --filename crossplane/repo.yaml
+        )}
+    }
     
-    # cd cncf-demo-app
+    cd cncf-demo-app
 
-    # git pull
+    git pull
 
-    # print $"It might take (ansi yellow_bold)a while(ansi reset) until all the resources are deleted. (ansi yellow_bold)Do NOT panic(ansi reset) if the execution of the script appears to be stuck.\n"
-
-    # (
-    #     kubectl --namespace production delete --filename apps/ --wait false
-    # )
+    (
+        kubectl --namespace production delete --filename apps/
+            --wait false
+    )
 
     touch apps/empty
 
