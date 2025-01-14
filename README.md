@@ -841,7 +841,7 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-API & State Management| Crossplane<br />KubeVela<br />Kubebuilder<br />kube-rs<br />Operator Framework | FIXME: | [story](manuscript/api/README.md) |
+API & State Management| Crossplane<br />KubeVela<br />kro<br />Kratix | FIXME: | [story](manuscript/api/README.md) |
 | Policies & State Synchronization | Kyverno<br />Argo CD | FIXME: | stories: [policies](main/manuscript/policies-idp/README.md), [state](manuscript/gitops-idp/README.md) |
 | One-Shot Actions | Argo Workflows<br />Tekton<br />GitHub Actions | FIXME: | [story](manuscript/workflows/README.md) |
 | Graphical User Interface (GUI) | Backstage<br />Roadie<br />Port | FIXME: | [story](manuscript/gui/README.md) |
