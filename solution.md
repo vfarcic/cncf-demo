@@ -765,7 +765,8 @@ flowchart TD
         style kro fill:red
         kratix(kratix)
         style kratix fill:red
-        api --> crossplane & kube-vela & kro & kratix --> policies
+        api --> crossplane & kube-vela & kro & kratix 
+        crossplane & kube-vela --> policies
 
         %% --------------
         %% -- Policies --
