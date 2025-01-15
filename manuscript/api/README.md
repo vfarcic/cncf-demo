@@ -12,22 +12,18 @@ TODO: Text
 [![Cloud-Native Apps With Open Application Model (OAM) And KubeVela](https://img.youtube.com/vi/2CBu6sOTtwk/0.jpg)](https://youtu.be/2CBu6sOTtwk)
 * [Official site](https://kubevela.io)
 
-## Choice 3: Kubebuilder
+## Choice 3: kro
 
-* [Official site](https://kubebuilder.io)
+[![Is This the End of Crossplane? Compose Kubernetes Resources with kro](https://img.youtube.com/vi/8zQtpcxmdhs/0.jpg)](https://youtu.be/8zQtpcxmdhs)
+* [Official site](https://kro.run)
 
-## Choice 4: kube-rs
+## Choice 4: Kratix
 
-* [Official site](https://kube.rs)
-
-## Choice 5: Operator Framework
-
-* [Official site](https://operatorframework.io)
+* [Official site](https://kratix.io)
 
 ## What Is Your Choice?
 
 * [Crossplane](crossplane.md)
 * [KubeVela](kubevela.md)
-* **Kubebuilder** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **kube-rs** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
-* **Operator Framework** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [kro](kro.md)
+* [Kratix](kratix.md)

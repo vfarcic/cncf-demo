@@ -17,31 +17,31 @@ def main [] {}
 # Destroys the IDP chapter
 def "main destroy idp" [] {
 
-    if $env.API == "crossplane" {
-        do --ignore-errors {(
-            kubectl --namespace production delete
-                --filename crossplane/repo.yaml
-        )}
-    }
+    do --ignore-errors {(
+        kubectl --namespace production delete
+            --filename crossplane/repo.yaml
+            
+    )}
     
     cd cncf-demo-app
 
-    git pull
+    do --ignore-errors {
 
-    (
+        git pull
+
         kubectl --namespace production delete --filename apps/
-            --wait false
-    )
+    
+        touch apps/empty
 
-    touch apps/empty
+        rm --force apps/*.yaml
 
-    rm --force apps/*.yaml
+        git add .
 
-    git add .
+        git commit -m "Destroy"
 
-    git commit -m "Destroy"
+        git push
 
-    git push
+    }
 
     cd ..
 

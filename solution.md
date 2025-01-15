@@ -762,9 +762,9 @@ flowchart TD
         kube-vela(KubeVela)
         click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kubevela.md"
         kro(kro)
-        style kro fill:red
+        click kro "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kro.md"
         kratix(kratix)
-        style kratix fill:red
+        click kratix "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kratix.md"
         api --> crossplane & kube-vela & kro & kratix 
         crossplane & kube-vela --> policies
 

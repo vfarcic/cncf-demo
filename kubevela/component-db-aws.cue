@@ -165,7 +165,7 @@ template: {
                 }
                 spec: forProvider: {
                     region: parameter.region
-                    routeTableIdRef: context.name + "-" + context.namespace
+                    routeTableIdRef: name: context.name + "-" + context.namespace
                     subnetIdSelector: {
                         matchLabels: {
                             "app.kubernetes.io/name": context.name

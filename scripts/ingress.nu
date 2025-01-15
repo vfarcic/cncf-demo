@@ -16,12 +16,9 @@ def "main apply ingress" [
 
     } else if $type == "contour" {
 
-        helm repo add bitnami https://charts.bitnami.com/bitnami
-
-        helm repo update
-
         (
-            helm upgrade --install contour bitnami/contour
+            helm upgrade --install contour 
+                oci://registry-1.docker.io/bitnamicharts/contour
                 --namespace contour --create-namespace --wait
         )
     
