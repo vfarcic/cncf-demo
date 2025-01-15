@@ -15,7 +15,7 @@ spec:
     image: ghcr.io/vfarcic/cncf-demo-app
     tag: FIXME
     port: 8080
-    host: silly-demo.54.197.166.12.nip.io
+    host: silly-demo.52.45.146.115.nip.io
     ingressClassName: contour
     db:
       secret: silly-demo-db

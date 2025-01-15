@@ -793,7 +793,7 @@ flowchart TD
         style gitops fill:blue
         click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/README.md"
         flux(Flux)
-        style flux fill:red
+        click flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/flux.md"
         argocd(Argo CD)
         click argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/argocd.md"
         kapp(Carvel kapp-controller)

@@ -314,6 +314,13 @@ Press any key to continue.
 
     wait crossplane
 
+    {
+        apiVersion: "kubernetes.crossplane.io/v1alpha1"
+        kind: "ProviderConfig"
+        metadata: { name: "default" }
+        spec: { credentials: { source: "InjectedIdentity" } }
+    } | to yaml | kubectl apply --filename -
+
     if $db and $hyperscaler != "none" {
 
         (

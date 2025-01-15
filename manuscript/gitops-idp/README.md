@@ -19,5 +19,5 @@ TODO: Text
 ## What Is Your Choice?
 
 * [Argo CD](argocd.md)
-* **Flux** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+* [Flux](flux.md)
 * **Carvel kapp-controller** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.

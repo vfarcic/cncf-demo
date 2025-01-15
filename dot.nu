@@ -11,6 +11,7 @@ source scripts/argo-workflows.nu
 source scripts/argo-events.nu
 source scripts/registry.nu
 source scripts/backstage.nu
+source scripts/flux.nu
 
 def main [] {}
 

@@ -32,9 +32,9 @@ cp ../kubevela/$HYPERSCALER-sql.yaml apps/silly-demo-db.yaml
 cp ../kubevela/$HYPERSCALER-sql-password.yaml \
     apps/silly-demo-db-password.yaml
 
-cat apps/silly-demo-db.yaml
-
 cat apps/silly-demo-db-password.yaml
+
+cat apps/silly-demo-db.yaml
 
 kubectl --namespace production apply \
     --filename apps/silly-demo-db-password.yaml

@@ -1,4 +1,4 @@
-# State Synchronization (GitOps) with Argo CD
+# State Synchronization (GitOps) with Flux
 
 TODO: Intro
 
@@ -17,7 +17,7 @@ source .env
 > Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
 
 ```sh
-./dot.nu setup idp_argocd
+./dot.nu apply flux cncf-demo-app
 ```
 
 ## Do
@@ -26,18 +26,11 @@ source .env
 kubectl --namespace production delete \
     --filename cncf-demo-app/apps/silly-demo.yaml
 
-echo "http://argocd.$INGRESS_HOST"
-```
-
-> Open the URL from the output of the previous command in a browser.
-> User `admin` as the `Username` and `admin123` as the `Password`.
-
-```sh
-cat argocd/apps-idp.yaml
+cat flux/apps-idp.yaml
 
 kubectl --namespace production get all,ingresses
 
-kubectl apply --filename argocd/apps-idp.yaml
+kubectl apply --filename flux/apps-idp.yaml
 
 kubectl --namespace production get all,ingresses
 ```
