@@ -846,7 +846,7 @@ API and State Management| Crossplane<br />KubeVela<br />kro<br />Kratix | Januar
 | One-Shot Actions | Argo Workflows<br />Tekton<br />GitHub Actions | February 11, 2025 | [story](manuscript/workflows/README.md) |
 | Graphical User Interface (GUI) | Backstage<br />Roadie<br />Port | February 18, 2025 | [story](manuscript/gui/README.md) |
 | Specialized Templating | Porter<br />PipeCD<br />Radius<br />werf<br />Score | February 25, 2025 | TODO: |
-| Miscellaneous | Dapr<br />KusionStack<br />Keptn | March 4, 2025 | TODO: |
+| Miscellaneous | Mauricio Salatino - Dapr<br />KusionStack<br />Keptn | March 4, 2025 | TODO: |
 | Chapter 5 Finale! | Whitney and Viktor! | March 11, 2025 |  |
 
 ## The Format
