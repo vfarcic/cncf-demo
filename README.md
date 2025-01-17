@@ -841,11 +841,11 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-API and State Management| Crossplane<br />KubeVela<br />kro<br />Kratix | January 28, 2025 | [story](manuscript/api/README.md) |
+API and State Management| Crossplane<br />KubeVela<br />kro<br />Abby Bangser - Kratix | January 28, 2025 | [story](manuscript/api/README.md) |
 | Policies and State Synchronization | Kyverno<br />Argo CD | February 4, 2025 | stories: [policies](main/manuscript/policies-idp/README.md), [state](manuscript/gitops-idp/README.md) |
 | One-Shot Actions | Argo Workflows<br />Tekton<br />GitHub Actions | February 11, 2025 | [story](manuscript/workflows/README.md) |
 | Graphical User Interface (GUI) | Backstage<br />Roadie<br />Port | February 18, 2025 | [story](manuscript/gui/README.md) |
-| Specialized Templating | Sarah Christoff - Porter<br />PipeCD<br />Radius<br />werf<br />Score | February 25, 2025 | TODO: |
+| Specialized Templating | Sarah Christoff - Porter<br /> Khanh Tran - PipeCD<br />Radius<br />Aleksei Igrychev - werf<br />Score | February 25, 2025 | TODO: |
 | Miscellaneous | Mauricio Salatino - Dapr<br />KusionStack<br />Keptn | March 4, 2025 | TODO: |
 | Chapter 5 Finale! | Whitney and Viktor! | March 11, 2025 |  |
 
