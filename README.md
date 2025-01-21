@@ -845,7 +845,7 @@ API and State Management| Tobias Kässer - Crossplane<br />Fog Dong - KubeVela<b
 | One-Shot Actions | Christian Hernandez - Argo Workflows<br />Tekton<br />GitHub Actions | February 11, 2025 | [story](manuscript/workflows/README.md) |
 | Graphical User Interface (GUI) | Scott Rosenberg - Backstage<br />Roadie<br />Sébastien Blanc - Port | February 18, 2025 | [story](manuscript/gui/README.md) |
 | Specialized Templating | Sarah Christoff - Porter<br /> Khanh Tran - PipeCD<br />Radius<br />Aleksei Igrychev - werf<br />Ben Meier - Score | February 25, 2025 | TODO: |
-| Miscellaneous | Mauricio Salatino - Dapr<br />KusionStack<br />Keptn | March 4, 2025 | TODO: |
+| Miscellaneous | Mauricio Salatino - Dapr<br />KusionStack<br />OpenFeature | March 4, 2025 | TODO: |
 | Chapter 5 Finale! | Whitney and Viktor! | March 11, 2025 |  |
 
 ## The Format
