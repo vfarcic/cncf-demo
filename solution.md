@@ -857,11 +857,11 @@ flowchart TD
         %% style dev-stream fill:red
         dapr("Distributed Application Runtime (Dapr)")
         style dapr fill:red
+        open-feature(OpenFeature)
+        style open-feature fill:red
         kusion-stack(KusionStack)
         style kusion-stack fill:red
-        keptn(Keptn)
-        style keptn fill:red
-        misc --> dapr & kusion-stack & keptn
+        misc --> dapr & kusion-stack & open-feature
 
     end
 ```
@@ -1274,8 +1274,6 @@ flowchart TD
         %% -- Compatible with ETCD (drop 1) --
         xline(Xline)
         style xline fill:red
-        open-feature(OpenFeature)
-        style open-feature fill:red
         kanister(Kanister)
         style kanister fill:red
         trickster(Trickster)
@@ -1316,6 +1314,8 @@ flowchart TD
         style kube-rs fill:red
         operator-framework(Operator Framework)
         style operator-framework fill:red
+        keptn(Keptn)
+        style keptn fill:red
     end
 ```
 
