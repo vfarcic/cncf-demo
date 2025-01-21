@@ -29,16 +29,42 @@ kubectl apply --filename policies/kyverno-idp-$API.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
+```
 
+> Execute the command that follows only if you chose **KubeVela**.
+
+```sh
 yq --inplace ".spec.components[0].traits[0].type = \"scaler\"" \
     cncf-demo-app/apps/silly-demo.yaml
+```
 
+> Execute the command that follows only if you chose **Crossplane**.
+
+```sh
+yq --inplace ".spec.parameters.scaling.enabled = true" \
+    cncf-demo-app/apps/silly-demo.yaml
+```
+
+```sh
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
+```
 
+> Execute the command that follows only if you chose **KubeVela**.
+
+```sh
 yq --inplace ".spec.components[0].traits[0].properties.min = 2" \
     cncf-demo-app/apps/silly-demo.yaml
+```
 
+> Execute the command that follows only if you chose **Crossplane**.
+
+```sh
+yq --inplace ".spec.parameters.scaling.min = 2" \
+    cncf-demo-app/apps/silly-demo.yaml
+```
+
+```sh
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
 

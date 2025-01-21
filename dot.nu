@@ -12,6 +12,7 @@ source scripts/argo-events.nu
 source scripts/registry.nu
 source scripts/backstage.nu
 source scripts/flux.nu
+source scripts/gatekeeper.nu
 
 def main [] {}
 

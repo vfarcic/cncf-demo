@@ -1,6 +1,8 @@
-# Policies with Kubernetes Validating Admission Policies
+# Policies with Open Policy Agent (OPA) and Gatekeeper
 
 TODO: Intro
+
+FIXME: KubeVela implementation
 
 ## Setup
 
@@ -14,12 +16,24 @@ devbox shell
 source .env
 ```
 
+> Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
+
+```sh
+./dot.nu apply gatekeeper
+```
+
 ## Do
 
 ```sh
-cat policies/vap-idp-$API.yaml
+cat policies/gatekeeper-template-idp-$API.yaml
 
-kubectl apply --filename policies/vap-idp-$API.yaml
+cat policies/gatekeeper-constraint-idp-$API.yaml
+
+kubectl apply \
+    --filename policies/gatekeeper-template-idp-$API.yaml
+
+kubectl apply \
+    --filename policies/gatekeeper-constraint-idp-$API.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
@@ -78,7 +92,7 @@ cd ..
 > Execute the command that follows only if you chose KubeVela.
 
 ```sh
-kubectl delete --filename policies/vap-idp-kubevela.yaml
+kubectl delete --filename policies/kyverno-idp-kubevela.yaml
 ```
 
 ## Continue The Adventure
