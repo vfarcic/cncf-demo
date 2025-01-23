@@ -2,8 +2,6 @@
 
 TODO: Intro
 
-FIXME: KubeVela implementation
-
 ## Setup
 
 > Watch [Nix for Everyone: Unleash Devbox for Simplified Development](https://youtu.be/WiFLtcBvGMU) if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.

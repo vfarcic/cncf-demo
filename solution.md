@@ -777,7 +777,7 @@ flowchart TD
         kyverno(Kyverno)
         click kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/kyverno.md"
         opa("Open Policy Agent (OPA) With Gatekeeper")
-        style opa fill:red
+        click opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/gatekeeper.md"
         cloud-custodian(Cloud Custodian)
         style cloud-custodian fill:red
         kubewarden(Kubewarden)

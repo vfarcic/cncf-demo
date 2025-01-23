@@ -1,0 +1,46 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: appscaling
+  annotations:
+    metadata.gatekeeper.sh/title: dot app scaling
+    metadata.gatekeeper.sh/category: App
+    metadata.gatekeeper.sh/severity: medium
+    description: Validates that scaling is enabled.
+spec:
+  crd:
+    spec:
+      names:
+        kind: AppScaling
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            min:
+              type: integer
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package appscaling
+
+        violation[{"msg": msg}] {
+          not input.review.object.spec.components[0].traits
+          msg := "The Component must have Traits."
+        }
+
+        violation[{"msg": msg}] {
+          not input.review.object.spec.components[0].traits[0].type
+          msg := "The Component must have the first Trait set to `type` `scaler`."
+        }
+        
+        violation[{"msg": msg}] {
+          not input.review.object.spec.components[0].traits[0].properties
+          msg := "The Component must have `properties` in the first Trait."
+        }
+
+        violation[{"msg": msg}] {
+          expected := input.parameters.min
+          actual := input.review.object.spec.components[0].traits[0].properties.min
+          actual < expected
+          msg := sprintf("The Trait `scaler` must have `properties.min` greater than or equal to `%v`.", [expected])
+        }

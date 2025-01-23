@@ -196,7 +196,7 @@ def "main setup idp_kubevela" [
     (
         kubectl wait githubs.devopstoolkit.live
             --selector crossplane.io/claim-name=cncf-demo-app
-            --for=condition=Ready=true
+            --for=condition=Ready=true --timeout 300s
     )
 
     git clone $"https://github.com/($github_data.user)/cncf-demo-app"
