@@ -840,7 +840,7 @@ flowchart TD
 
 | Name | Guests | Date | Link |
 | --- | --- | --- | --- |
-API and State Management| Tobias Kässer - Crossplane<br />Fog Dong - KubeVela<br />kro<br />Abby Bangser - Kratix | January 28, 2025 | [story](manuscript/api/README.md) |
+API and State Management| Tobias Kässer - Crossplane<br />Fog Dong - KubeVela<br />Abby Bangser - Kratix | January 28, 2025 | [story](manuscript/api/README.md) |
 | Policies and State Synchronization (Review) | Whitney and Viktor - Kyverno<br />Whitney and Viktor - Argo CD | February 4, 2025 | stories: [policies](main/manuscript/policies-idp/README.md), [state](manuscript/gitops-idp/README.md) |
 | One-Shot Actions | Christian Hernandez - Argo Workflows<br />Tekton<br />GitHub Actions | February 11, 2025 | [story](manuscript/workflows/README.md) |
 | Graphical User Interface (GUI) | Scott Rosenberg - Backstage<br />Roadie<br />Sébastien Blanc - Port | February 18, 2025 | [story](manuscript/gui/README.md) |
