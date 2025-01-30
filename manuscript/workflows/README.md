@@ -14,6 +14,7 @@ TODO: Description
 TODO: Description
 
 [![Tekton - Kubernetes Cloud-Native CI/CD Pipelines And Workflows](https://img.youtube.com/vi/7mvrpxz_BfE/0.jpg)](https://youtu.be/7mvrpxz_BfE)
+[![What Is Tekton?](https://img.youtube.com/vi/7bMwcbRBv2Y/0.jpg)](https://youtu.be/7bMwcbRBv2Y)
 * [Official site](https://tekton.dev)
 
 ## Choice 3: GitHub Actions
