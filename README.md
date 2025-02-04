@@ -844,7 +844,7 @@ API and State Management| Tobias Kässer - Crossplane<br />Fog Dong - KubeVela<b
 | Policies and State Synchronization (Review) | Whitney and Viktor - Kyverno<br />Whitney and Viktor - Argo CD | February 4, 2025 | stories: [policies](manuscript/policies-idp/README.md), [state](manuscript/gitops-idp/README.md) |
 | One-Shot Actions | Christian Hernandez - Argo Workflows<br />Vincent Demeester - Tekton<br />Matteo Bianchi - GitHub Actions | February 11, 2025 | [story](manuscript/workflows/README.md) |
 | Graphical User Interface (GUI) | Scott Rosenberg - Backstage<br />Roadie<br />Sébastien Blanc - Port | February 18, 2025 | [story](manuscript/gui/README.md) |
-| Specialized Templating | Sarah Christoff - Porter<br /> Khanh Tran - PipeCD<br />Radius<br />Aleksei Igrychev - werf<br />Ben Meier - Score | February 25, 2025 | TODO: |
+| Specialized Templating | Sarah Christoff - Porter<br /> Khanh Tran - PipeCD<br />Will Tsai - Radius<br />Aleksei Igrychev - werf<br />Ben Meier - Score | February 25, 2025 | TODO: |
 | Miscellaneous | Mauricio Salatino - Dapr<br />KusionStack<br />Jonathan Norris - OpenFeature | March 4, 2025 | TODO: |
 | Chapter 5 Finale! | Whitney and Viktor! | March 11, 2025 |  |
 
