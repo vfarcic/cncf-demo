@@ -27,7 +27,7 @@ spec:
     version: "11"
     {{- end }}
     {{- if .Values.db.enabled.crossplane.aws }}
-    version: "16.2"
+    version: "16.5"
     {{- end }}
     size: {{ .Values.db.size }}
     databases:

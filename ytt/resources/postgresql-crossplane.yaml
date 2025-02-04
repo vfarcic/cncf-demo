@@ -20,7 +20,7 @@ spec:
       db: postgresql
   parameters:
     #@ if/end data.values.db.enabled.crossplane.aws:
-    version: "16.2"
+    version: "16.5"
     #@ if/end data.values.db.enabled.crossplane.local or data.values.db.enabled.crossplane.google or data.values.db.enabled.crossplane.azure:
     version: "11"
     size: #@ data.values.db.size

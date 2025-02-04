@@ -10,7 +10,7 @@ spec:
       provider: aws
       db: postgresql
   parameters:
-    version: "16.2"
+    version: "16.5"
     size: small
     region: us-east-1
     databases:
