@@ -36,7 +36,8 @@
     "eksctl@0.197.0",
     "argo@3.6.2",
     "kubevela@1.9.13",
-    "fluxcd@2.4.0"
+    "fluxcd@2.4.0",
+    "git@2.47.2"
   ],
   "shell": {
     "init_hook": [

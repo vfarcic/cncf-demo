@@ -64,7 +64,10 @@ def "main destroy idp" [] {
 }
 
 # Sets up the IDP chapter
-def "main setup idp" [] {
+def "main setup idp" [
+    --min_nodes = 3
+    --max_nodes = 6
+] {
     
     rm --force .env
 
@@ -72,7 +75,10 @@ def "main setup idp" [] {
 
     let hyperscaler = main get hyperscaler
 
-    main create kubernetes $hyperscaler
+    (
+        main create kubernetes $hyperscaler
+            --min_nodes $min_nodes --max_nodes $max_nodes
+    )
 
     main apply ingress contour --hyperscaler $hyperscaler
 
@@ -131,7 +137,7 @@ def "main setup idp_crossplane" [
 
 }
 
-# Sets up the IDP Crossplane chapter
+# Sets up the IDP KubeVela chapter
 def "main setup idp_kubevela" [
     hyperscaler: string
 ] {

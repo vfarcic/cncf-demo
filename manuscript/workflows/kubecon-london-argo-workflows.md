@@ -4,29 +4,11 @@ TODO: Intro
 
 ## Setup
 
-> Watch [Nix for Everyone: Unleash Devbox for Simplified Development](https://youtu.be/WiFLtcBvGMU) if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
-
-> Skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.
-
-```bash
-devbox shell
-
-source .env
-```
-
-> Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
-
-```sh
-./dot.nu setup idp_argo_workflows $GITHUB_USER $GITHUB_TOKEN
-```
-
-> If you chose to use Crossplane Compositoons, the `appclaim` resource already pushed the files we need for CI to the app repo. Otherwise, we need to add them to the app repo.
-
 > Execute the commands in the next block that follows only if you did **NOT** choose to use Crossplane Compositions.
 
 ```sh
 cp workflows/devbox-ci.json workflows/Dockerfile \
-    workflows/dot.nu cncf-demo-app/. 
+    workflows/dot.nu cncf-demo-app/.
 
 cd cncf-demo-app
 

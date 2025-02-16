@@ -2,26 +2,6 @@
 
 TODO: Intro
 
-## Setup
-
-> Watch [Nix for Everyone: Unleash Devbox for Simplified Development](https://youtu.be/WiFLtcBvGMU) if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
-
-> Skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.
-
-```bash
-devbox shell
-
-source .env
-```
-
-> Watch [The Future of Shells with Nushell! Shell + Data + Programming Language](https://youtu.be/zoX_S6d-XU4) if you are not familiar with Nushell. Alternatively, you can inspect the `dot.nu` script and transform the instructions in it to Bash or ZShell if you prefer not to use that Nushell script.
-
-```sh
-./dot.nu setup idp_kubevela $HYPERSCALER
-
-source .env
-```
-
 ## Do
 
 ```sh
@@ -58,7 +38,11 @@ kubectl --namespace production get all,ingresses
 
 ```sh
 vela delete silly-demo --yes
+```
 
+FIXME: Check why Managed Resources are not deleted.
+
+```sh
 cat ../kubevela/component-app-backend.cue
 
 cat ../kubevela/component-db-$HYPERSCALER.cue
@@ -72,6 +56,8 @@ git push
 cd ..
 ```
 
-## Continue The Adventure
+## What Is Your Choice?
 
-* [Policies](../policies-idp/README.md)
+* [Kyverno](../policies-idp/kubecon-london-kyverno.md)
+* [Open Policy Agent (OPA) With Gatekeeper](../policies-idp/kubecon-london-gatekeeper.md) (FIXME: Test)
+* [Kubernetes Validating Admission Policy](../policies-idp/kubecon-london-vap.md) (FIXME: Test)

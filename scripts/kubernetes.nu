@@ -1,6 +1,12 @@
 #!/usr/bin/env nu
 
-def --env "main create kubernetes" [provider: string, name = "dot", min_nodes = 2, max_nodes = 4, auth = true] {
+def --env "main create kubernetes" [
+    provider: string,
+    --name = "dot",
+    --min_nodes = 2,
+    --max_nodes = 4,
+    --auth = true
+] {
 
     $env.KUBECONFIG = $"($env.PWD)/kubeconfig-($name).yaml"
     $"export KUBECONFIG=($env.KUBECONFIG)\n" | save --append .env
@@ -88,8 +94,8 @@ aws_secret_access_key = ($aws_secret_access_key)
             managedNodeGroups: [{
                 name: "primary"
                 instanceType: "t3.large"
-                minSize: 3
-                maxSize: 6
+                minSize: $min_nodes
+                maxSize: $max_nodes
                 iam: {
                     withAddonPolicies: {
                         autoScaler: true
