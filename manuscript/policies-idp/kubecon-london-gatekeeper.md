@@ -5,15 +5,15 @@ TODO: Intro
 ## Do
 
 ```sh
-cat policies/gatekeeper-template-idp-$API.yaml
-
-cat policies/gatekeeper-constraint-idp-$API.yaml
-
 kubectl apply \
     --filename policies/gatekeeper-template-idp-$API.yaml
 
 kubectl apply \
     --filename policies/gatekeeper-constraint-idp-$API.yaml
+
+cat policies/gatekeeper-template-idp-$API.yaml
+
+cat policies/gatekeeper-constraint-idp-$API.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml

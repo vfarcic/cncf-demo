@@ -6,6 +6,8 @@
 ```bash
 cd cncf-demo
 
+git pull
+
 devbox shell
 
 eval "$(teller sh)"
@@ -31,5 +33,5 @@ source .env
 
 ## What Is Your Choice?
 
-* [Crossplane](../api/kubecon-london-crossplane.md) (FIXME: Test)
+* [Crossplane](../api/kubecon-london-crossplane.md)
 * [KubeVela](../api/kubecon-london-kubevela.md)
