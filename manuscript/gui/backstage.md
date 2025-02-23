@@ -32,5 +32,4 @@ source .env
 
 ## Continue The Adventure
 
-<!-- * [Graphical User Interface (GUI)](../gui/README.md) -->
-The adventure will continue soon.
+* [Specialized Templating](../specialized-templates/README.md)

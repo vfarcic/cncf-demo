@@ -834,7 +834,8 @@ flowchart TD
         %% -- Templating --
         %% ----------------
         templating{{Templating}}
-        style templating fill:red
+        style templating fill:blue
+        click templating "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/specialized-templates/README.md"
         porter(Porter)
         style porter fill:red
         pipecd(PipeCD)
