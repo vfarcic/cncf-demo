@@ -77,7 +77,7 @@ def "main setup idp" [
 
     (
         main create kubernetes $hyperscaler
-            --min_nodes $min_nodes --max_nodes $max_nodes
+            --min_nodes 3 --max_nodes 6 --node_size medium
     )
 
     main apply ingress contour --hyperscaler $hyperscaler

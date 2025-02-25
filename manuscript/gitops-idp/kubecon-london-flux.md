@@ -21,4 +21,4 @@ kubectl --namespace production get all,ingresses
 
 ## What Is Your Choice?
 
-* [Argo Workflows](../workflows/kubecon-london-argo-workflows.md) (FIXME: Test)
+* [Argo Workflows](../workflows/kubecon-london-argo-workflows.md)

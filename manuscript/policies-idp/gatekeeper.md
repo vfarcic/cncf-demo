@@ -90,7 +90,11 @@ cd ..
 > Execute the command that follows only if you chose KubeVela.
 
 ```sh
-kubectl delete --filename policies/kyverno-idp-kubevela.yaml
+kubectl delete \
+    --filename policies/gatekeeper-constraint-idp-kubevela.yaml
+
+kubectl delete \
+    --filename policies/gatekeeper-template-idp-kubevela.yaml
 ```
 
 ## Continue The Adventure

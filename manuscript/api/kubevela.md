@@ -67,6 +67,8 @@ git add .
 
 git commit -m "Apps"
 
+git pull
+
 git push
 
 cd ..

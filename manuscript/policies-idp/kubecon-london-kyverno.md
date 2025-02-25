@@ -69,7 +69,5 @@ kubectl delete --filename policies/kyverno-idp-kubevela.yaml
 
 ## Continue The Adventure
 
-## What Is Your Choice?
-
-* [Argo CD](../gitops-idp/kubecon-london-argocd.md) (FIXME: Test)
+* [Argo CD](../gitops-idp/kubecon-london-argocd.md)
 * [Flux](../gitops-idp/kubecon-london-flux.md)

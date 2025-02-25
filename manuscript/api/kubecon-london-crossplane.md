@@ -78,5 +78,5 @@ cd ..
 ## Continue The Adventure
 
 * [Kyverno](../policies-idp/kubecon-london-kyverno.md)
-* [Open Policy Agent (OPA) With Gatekeeper](../policies-idp/kubecon-london-gatekeeper.md) (FIXME: Test)
+* [Open Policy Agent (OPA) With Gatekeeper](../policies-idp/kubecon-london-gatekeeper.md)
 * [Kubernetes Validating Admission Policy](../policies-idp/kubecon-london-vap.md) (FIXME: Test)

@@ -26,4 +26,4 @@ kubectl --namespace production get all,ingresses
 
 ## Continue The Adventure
 
-* [One-Shot Actions (Workflows)](../workflows/README.md)
+* [Argo Workflows](../workflows/kubecon-london-argo-workflows.md)

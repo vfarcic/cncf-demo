@@ -12,7 +12,7 @@ devbox shell
 
 eval "$(teller sh)"
 
-./dot.nu setup idp --min_nodes 4
+./dot.nu setup idp
 
 source .env
 
