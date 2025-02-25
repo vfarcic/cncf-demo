@@ -69,4 +69,4 @@ cd ..
 
 ## Continue The Adventure
 
-* [Graphical User Interface (GUI)](../gui/README.md)
+* [Backstage](../gui/kubecon-london-backstage.md)

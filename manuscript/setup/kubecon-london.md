@@ -29,6 +29,13 @@ source .env
 ./dot.nu apply flux cncf-demo-app
 
 ./dot.nu setup idp_argo_workflows $GITHUB_USER $GITHUB_TOKEN
+
+./dot.nu apply backstage "0.0.3" \
+    --ingress_host "backstage.$INGRESS_HOST" \
+    --github_token $GITHUB_TOKEN \
+    --create_service_account true
+
+source .env
 ```
 
 ## What Is Your Choice?

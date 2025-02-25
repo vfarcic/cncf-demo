@@ -146,7 +146,7 @@ def "main destroy kubernetes" [
 
     if $provider == "google" {
 
-        rm --force kubeconfig.yaml
+        rm --force $env.KUBECONFIG
 
         (
             gcloud container clusters delete $name
@@ -203,7 +203,7 @@ def "main destroy kubernetes" [
 
     }
 
-    rm --force kubeconfig.yaml
+    rm --force $env.KUBECONFIG
 
 }
 
