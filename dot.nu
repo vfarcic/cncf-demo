@@ -64,10 +64,7 @@ def "main destroy idp" [] {
 }
 
 # Sets up the IDP chapter
-def "main setup idp" [
-    --min_nodes = 3
-    --max_nodes = 6
-] {
+def "main setup idp" [] {
     
     rm --force .env
 
