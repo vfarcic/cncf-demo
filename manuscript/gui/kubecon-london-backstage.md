@@ -7,4 +7,4 @@
 
 ## Destroy
 
-* [Specialized Templating](../destroy/idp.md)
+* [Destroy](../destroy/idp.md)
