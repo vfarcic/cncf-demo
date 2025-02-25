@@ -780,6 +780,139 @@ flowchart TD
     end
 ```
 
+```mermaid
+flowchart TD
+
+    subgraph IDP
+
+        %% -----------
+        %% -- Setup --
+        %% -----------
+        setup((Setup))
+        click setup "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/setup/idp.md"
+        setup --> api
+
+        %% -------------------------------------------------
+        %% -- API (CRDs) & State Management (Controllers) --
+        %% -------------------------------------------------
+        api{{"API (CRDs) & State Management (Controllers)"}}
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/README.md"
+        style api fill:blue
+        crossplane(Crossplane)
+        click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/crossplane.md"
+        style crossplane fill:green
+        kube-vela(KubeVela)
+        click crossplane "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kubevela.md"
+        kro(kro)
+        click kro "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kro.md"
+        kratix(kratix)
+        click kratix "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/api/kratix.md"
+        api --> crossplane & kube-vela & kro & kratix 
+        crossplane & kube-vela --> policies
+
+        %% --------------
+        %% -- Policies --
+        %% --------------
+        policies{{Policies}}
+        style policies fill:blue
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/README.md"
+        kyverno(Kyverno)
+        click kyverno "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/kyverno.md"
+        style kyverno fill:green
+        opa("Open Policy Agent (OPA) With Gatekeeper")
+        click opa "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/gatekeeper.md"
+        cloud-custodian(Cloud Custodian)
+        style cloud-custodian fill:red
+        kubewarden(Kubewarden)
+        style kubewarden fill:red
+        vap(Kubernetes Validating Admission Policy)
+        click vap "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/policies-idp/vap.md"
+        policies --> kyverno & opa & kubewarden & vap & cloud-custodian --> gitops
+
+        %% ------------------------------------
+        %% -- State Synchronization (GitOps) --
+        %% ------------------------------------
+        gitops{{"State Synchronization (GitOps)"}}
+        style gitops fill:blue
+        click api "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/README.md"
+        flux(Flux)
+        click flux "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/flux.md"
+        argocd(Argo CD)
+        click argocd "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gitops-idp/argocd.md"
+        style argocd fill:green
+        kapp(Carvel kapp-controller)
+        style kapp fill:red
+        gitops --> flux & argocd & kapp --> workflows
+
+        %% ----------------------------------
+        %% -- One-Shot Actions (Workflows) --
+        %% ----------------------------------
+        workflows{{"One-Shot Actions (Workflows)"}}
+        style workflows fill:blue
+        click workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/README.md"
+        argo-workflows(Argo Workflows)
+        click argo-workflows "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/argo-workflows.md"
+        style argo-workflows fill:green
+        tekton(Tekton)
+        click tekton "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/tekton.md"
+        github-actions(GitHub Actions)
+        click github-actions "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/workflows/github-actions.md"
+        workflows --> argo-workflows & tekton & github-actions
+        argo-workflows --> gui
+
+        %% ------------------------------------
+        %% -- Graphical User Interface (GUI) --
+        %% ------------------------------------
+        gui{{"Graphical User Interface (GUI)"}}
+        style gui fill:blue
+        click gui "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/README.md"
+        backstage(Backstage)
+        click backstage "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/backstage.md"
+        style backstage fill:green
+        roadie(Roadie)
+        click roadie "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/roadie.md"
+        port(Port)
+        click port "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/gui/port.md"
+        gui --> backstage & roadie & port
+        backstage --> templating
+
+        %% ----------------
+        %% -- Templating --
+        %% ----------------
+        templating{{Templating}}
+        style templating fill:blue
+        click templating "https://github.com/vfarcic/cncf-demo/blob/main/manuscript/specialized-templates/README.md"
+        porter(Porter)
+        style porter fill:red
+        pipecd(PipeCD)
+        style pipecd fill:red
+        radius(Radius)
+        style radius fill:red
+        werf(werf)
+        style werf fill:red
+        score(Score)
+        style score fill:red
+        templating --> porter & pipecd & werf & score & radius --> misc
+
+        %% ------------------
+        %% -- Miscelaneous --
+        %% ------------------
+        misc{{Miscelaneous}}
+        style misc fill:red
+        %% Not maintained since May 2023
+        %% dev-stream(DevStream)
+        %% style dev-stream fill:red
+        dapr("Distributed Application Runtime (Dapr)")
+        style dapr fill:red
+        open-feature(OpenFeature)
+        style open-feature fill:red
+        kusion-stack(KusionStack)
+        style kusion-stack fill:red
+        misc --> dapr & kusion-stack & open-feature
+
+    end
+```
+
 ## Episodes
 
 ### Development
