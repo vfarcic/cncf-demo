@@ -39,3 +39,5 @@ TODO: Explanation
 * **Radius** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **Score** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
 * **PipeCD** has not yet been implemented. Please let us know (by opening an issue) if you would like to contribute the implementation.
+
+We'll continue the adventure soon. Until then, feel free to [destroy](../destroy/idp.md) what we created.
