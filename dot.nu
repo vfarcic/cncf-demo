@@ -41,6 +41,8 @@ def "main destroy idp" [] {
 
         git commit -m "Destroy"
 
+        git pull
+
         git push
 
     }

@@ -43,17 +43,7 @@ argo list --namespace argo
 argo get --namespace argo @latest
 
 argo logs --namespace argo @latest
-```
 
-```sh
-echo "https://github.com/users/$GITHUB_USER/packages/container/package/cncf-demo-app"
-```
-
-> Open the URL from the output of the previous command in a browser.
-
-> Clicks the `Package settings` button from the right-hand menu and `Change visibility` to `Public`.
-
-```sh
 cd cncf-demo-app
 
 git pull

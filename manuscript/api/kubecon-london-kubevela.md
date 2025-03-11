@@ -18,11 +18,7 @@ kubectl --namespace production apply \
 kubectl --namespace production apply \
     --filename apps/silly-demo-db.yaml
 
-cat apps/silly-demo-db-password.yaml
-
-cat apps/silly-demo-db.yaml
-
-kubectl get managed
+cat apps/silly-demo-db.yaml && kubectl get managed
 
 cp ../kubevela/app.yaml apps/silly-demo.yaml
 
