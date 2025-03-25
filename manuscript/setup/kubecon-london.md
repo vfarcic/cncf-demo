@@ -26,7 +26,7 @@ source .env
 
 ./dot.nu setup idp_argocd
 
-./dot.nu apply flux cncf-demo-app
+# ./dot.nu apply flux cncf-demo-app
 
 ./dot.nu setup idp_argo_workflows $GITHUB_USER $GITHUB_TOKEN
 

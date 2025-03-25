@@ -11,6 +11,6 @@ server:
   ingress:
     enabled: true
     ingressClassName: contour
-    hostname: argocd.34.194.36.207.nip.io
+    hostname: argocd.107.23.235.98.nip.io
   extraArgs:
   - --insecure
