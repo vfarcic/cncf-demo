@@ -22,7 +22,6 @@ def "main destroy idp" [] {
     do --ignore-errors {(
         kubectl --namespace production delete
             --filename crossplane/repo.yaml
-            
     )}
     
     cd cncf-demo-app
@@ -30,8 +29,6 @@ def "main destroy idp" [] {
     do --ignore-errors {
 
         git pull
-
-        kubectl --namespace production delete --filename apps/
     
         touch apps/empty
 
@@ -46,6 +43,16 @@ def "main destroy idp" [] {
         git push
 
     }
+
+    do --ignore-errors {(
+        kubectl --namespace production
+            delete application.core.oam.dev silly-demo-db
+    )}
+
+    do --ignore-errors {(
+        kubectl --namespace production
+            delete application.core.oam.dev silly-demo
+    )}
 
     cd ..
 

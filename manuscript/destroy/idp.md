@@ -1,9 +1,5 @@
 # API (CRDs) & State Management (Controllers) Destruction
 
-```bash
-source .env
-```
-
 > Watch [Nix for Everyone: Unleash Devbox for Simplified Development](https://youtu.be/WiFLtcBvGMU) if you are not familiar with Devbox. Alternatively, you can skip Devbox and install all the tools listed in `devbox.json` yourself.
 
 > Skip executing `devbox shell` if you are already inside the Shell from one of the previous episodes.

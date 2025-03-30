@@ -53,5 +53,5 @@ cd ..
 ## What Is Your Choice?
 
 * [Kyverno](../policies-idp/kubecon-london-kyverno.md)
-* [Open Policy Agent (OPA) With Gatekeeper](../policies-idp/kubecon-london-gatekeeper.md)
+<!-- * [Open Policy Agent (OPA) With Gatekeeper](../policies-idp/kubecon-london-gatekeeper.md) -->
 * [Kubernetes Validating Admission Policy](../policies-idp/kubecon-london-vap.md)

@@ -394,13 +394,13 @@ def "main delete crossplane" [
     }
 
     mut resources = (do $command)
-    mut counter = ($resources | wc -l | into int) + 1
+    mut counter = ($resources | wc -l | into int)
 
     while $counter > 0 {
         print $"($resources)\nWaiting for remaining (ansi yellow_bold)($counter)(ansi reset) managed resources to be (ansi yellow_bold)removed(ansi reset)...\n"
         sleep 10sec
         $resources = (do $command)
-        $counter = ($resources | wc -l | into int) + 1
+        $counter = ($resources | wc -l | into int)
     }
 
 }

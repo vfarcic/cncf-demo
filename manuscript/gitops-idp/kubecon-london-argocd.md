@@ -6,7 +6,7 @@
 kubectl --namespace production delete \
     --filename cncf-demo-app/apps/silly-demo.yaml
 
-echo "http://argocd.$INGRESS_HOST"
+open "http://argocd.$INGRESS_HOST"
 ```
 
 > Open the URL from the output of the previous command in a browser.

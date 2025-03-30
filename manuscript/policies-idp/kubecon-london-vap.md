@@ -70,4 +70,4 @@ kubectl delete --filename policies/vap-idp-kubevela.yaml
 ## Continue The Adventure
 
 * [Argo CD](../gitops-idp/kubecon-london-argocd.md)
-* [Flux](../gitops-idp/kubecon-london-flux.md)
+<!-- * [Flux](../gitops-idp/kubecon-london-flux.md) -->
