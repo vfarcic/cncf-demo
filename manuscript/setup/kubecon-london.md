@@ -22,7 +22,7 @@ source .env
 
 ./dot.nu apply kyverno
 
-./dot.nu apply gatekeeper
+# ./dot.nu apply gatekeeper
 
 ./dot.nu setup idp_argocd
 
