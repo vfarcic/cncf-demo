@@ -885,15 +885,13 @@ flowchart TD
         style keda fill:red
         scaling-cluster{{Scaling Cluster}}
         style scaling-cluster fill:red
-        cluster-autoscaler("Cluster Autoscaler")
-        style cluster-autoscaler fill:red
         cluster-autoscaler-aws(AWS)
         style cluster-autoscaler-aws fill:red
         cluster-autoscaler-azure(Azure)
         style cluster-autoscaler-azure fill:red
         cluster-autoscaler-google(Google)
         style cluster-autoscaler-google fill:red
-        scaling --> hpa & vpa & keda --> scaling-cluster --> cluster-autoscaler --> cluster-autoscaler-aws & cluster-autoscaler-azure & cluster-autoscaler-google --> deployment-mc
+        scaling --> hpa & vpa & keda --> scaling-cluster --> cluster-autoscaler-aws & cluster-autoscaler-azure & cluster-autoscaler-google --> deployment-mc
 
         %% ------------------------------
         %% -- Multi-Cluster Deployment --
