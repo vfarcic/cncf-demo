@@ -915,7 +915,9 @@ flowchart TD
         style observability fill:red
         clusterpedia(Clusterpedia)
         style clusterpedia fill:red
-        observability --> clusterpedia --> lb-mc
+        karpor(Karpor)
+        style karpor fill:red
+        observability --> clusterpedia & karpor --> lb-mc
 
         %% ---------------------------------
         %% -- Load Balancing & Networking --
@@ -941,7 +943,9 @@ flowchart TD
         style misc fill:red
         kube-stellar(KubeStellar)
         style kube-stellar fill:red
-        misc --> kube-stellar
+        kcp(kcp)
+        style kcp fill:red
+        misc --> kube-stellar & kcp
 
     end
 ```
@@ -1244,10 +1248,6 @@ flowchart TD
         %% -- Not maintained --
         %% inclavare-containers(Inclavare Containers)
         %% style inclavare-containers fill:red
-        %% -- Visibility into current and historical Kubernetes spend and resource allocation (drop 1) --
-        %% -- Control Plane for Kubernetes APIs (drop 1) --
-        kcp(kcp)
-        style kcp fill:red
         %% -- Kubernetes native tool for mocking and testing API and micro-services (drop 1) --
         microcks(Microcks)
         style microcks fill:red
