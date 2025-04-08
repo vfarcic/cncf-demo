@@ -1275,30 +1275,43 @@ flowchart TD
         style xline fill:red
         kanister(Kanister)
         style kanister fill:red
+        %% -- Open Source HTTP Reverse Proxy Cache and Time Series Dashboard Accelerator
         trickster(Trickster)
         style trickster fill:red
+        %% -- Kubernetes performance and scale test orchestration framework written in golang
         kube-burner(Kube-burner)
         style kube-burner fill:red
+        %% -- openGemini is an open source distributed time series DBMS with high concurrency, high performance, and high scalability, focusing on the storage and analysis of massive observability data.
         open-gemini(openGemini)
         style open-gemini fill:red
+        %% - Connect is a family of libraries for building browser and gRPC-compatible HTTP APIs.
         connect-rpc(Connect RPC)
         style connect-rpc fill:red
+        %% -- QoS based scheduling system for hybrid orchestration workloads on Kubernetes, bringing workloads the best layout and status.
         koordinator(Koordinator)
         style koordinator fill:red
+        %% -- Multi-Cloud, Multi-Cluster Service Connectivity with Application Slices.
         kube-slice(KubeSlice)
         style kube-slice fill:red
+        %% -- Sermant a proxyless service mesh solution based on Javaagent.
         sermant(Sermant)
         style sermant fill:red
+        %% -- Terraform Pull Request Automation for Teams
         atlantis(Atlantis)
         style atlantis fill:red
+        %% -- Product ready cluster lifecycle management toolchains based on kubespray and other cluster LCM engine.
         kubean(Kubean)
         style kubean fill:red
+        %% -- The project provides a framework to integrate scenarios that require verification of reference artifacts and provides a set of interfaces that can be consumed by various systems that can participate in artifact ratification.
         ratify(Ratify)
         style ratify fill:red
+        %% -- Cartography is a Python tool that consolidates infrastructure assets and the relationships between them in an intuitive graph view.
         cartography(Cartography)
         style cartography fill:red
+        %% -- The OSCAL COMPASS project is set of tools that enable the creation, validation, and governance of documentation artifacts for compliance needs.
         oscal-compass(OSCAL-COMPASS)
         style oscal-compass fill:red
+        %% -- An eBPF Manager for Linux and Kubernetes
         bpfman(bpfman)
         style bpfman fill:red
         bank-vaults(Bank-Vaults)
