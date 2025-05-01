@@ -16,6 +16,8 @@ eval "$(teller sh)"
 
 source .env
 
+export GITHUB_USER=vfarcic
+
 ./dot.nu setup idp_kubevela $HYPERSCALER
 
 source .env
@@ -27,6 +29,8 @@ source .env
 ./dot.nu setup idp_argocd
 
 # ./dot.nu apply flux cncf-demo-app
+
+export EMAIL=viktor@farcic.com
 
 ./dot.nu setup idp_argo_workflows $GITHUB_USER $GITHUB_TOKEN
 

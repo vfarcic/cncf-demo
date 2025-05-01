@@ -232,7 +232,10 @@ def "main setup idp_argo_workflows" [
     github_pat: string
 ] {
 
-    let email = input $"(ansi green_bold)Enter ghcr.io registry email \(e.g., viktor@farcic.com\):(ansi reset) "
+    mut email = $env.EMAIL
+    if $email == "" {
+        $email = input $"(ansi green_bold)Enter ghcr.io registry email \(e.g., viktor@farcic.com\):(ansi reset) "
+    }
 
     (
         main apply argoworkflows
