@@ -89,14 +89,6 @@ kubectl --namespace production get all,ingresses
 > The Pod `STATUS` is `ErrImagePull` because there is no image. We'll fix that later.
 
 ```sh
-gh pr list
-
-gh pr view silly-demo-ci --json files
-
-gh pr merge silly-demo-ci --rebase
-
-git pull
-
 kubectl --namespace production delete \
     --filename apps/silly-demo.yaml
 

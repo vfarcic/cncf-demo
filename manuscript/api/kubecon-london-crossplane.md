@@ -55,14 +55,6 @@ kubectl --namespace production get all,ingresses
 > Wait until all the resources are `Available`.
 
 ```sh
-# gh pr list
-
-# gh pr view silly-demo-ci --json files
-
-# gh pr merge silly-demo-ci --rebase
-
-# git pull
-
 kubectl --namespace production delete \
     --filename apps/silly-demo.yaml
 
