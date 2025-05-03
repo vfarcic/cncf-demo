@@ -18,6 +18,6 @@ spec:
     ingressClassName: contour
     db:
       secret: silly-demo-db
-    repository:
-      enabled: true
-      name: cncf-demo-app
+    # repository:
+    #   enabled: true
+    #   name: cncf-demo-app

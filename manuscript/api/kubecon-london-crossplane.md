@@ -48,13 +48,6 @@ kubectl --namespace production get all,ingresses
 > The Pod `STATUS` is `ErrImagePull` because there is no image. We'll fix that later.
 
 ```sh
-# crossplane beta trace --namespace production \
-#     appclaim silly-demo
-```
-
-> Wait until all the resources are `Available`.
-
-```sh
 kubectl --namespace production delete \
     --filename apps/silly-demo.yaml
 
