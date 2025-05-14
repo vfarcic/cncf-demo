@@ -40,6 +40,8 @@ export EMAIL=viktor@farcic.com
     --create_service_account true
 
 source .env
+
+cp workflows/* cncf-demo-app/.
 ```
 
 ## What Is Your Choice?

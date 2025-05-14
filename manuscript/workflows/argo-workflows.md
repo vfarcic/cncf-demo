@@ -18,16 +18,17 @@ source .env
 
 ```sh
 ./dot.nu setup idp_argo_workflows $GITHUB_USER $GITHUB_TOKEN
+
+cp workflows/* cncf-demo-app/.
 ```
 
-> If you chose to use Crossplane Compositoons, the `appclaim` resource already pushed the files we need for CI to the app repo. Otherwise, we need to add them to the app repo.
-
-> Execute the commands in the next block that follows only if you did **NOT** choose to use Crossplane Compositions.
+> Execute the command that follows only if you chose **KubeVela**.
 
 ```sh
-cp workflows/devbox-ci.json workflows/Dockerfile \
-    workflows/dot.nu cncf-demo-app/. 
+mv cncf-demo-app/dot-kubevela.nu cncf-demo-app/dot.nu
+```
 
+```sh
 cd cncf-demo-app
 
 git add .

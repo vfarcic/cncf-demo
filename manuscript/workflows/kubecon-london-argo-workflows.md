@@ -4,12 +4,17 @@ TODO: Intro
 
 ## Setup
 
-> Execute the commands in the next block that follows only if you did **NOT** choose to use Crossplane Compositions.
+```sh
+cp workflows/* cncf-demo-app/.
+```
+
+> Execute the command that follows only if you chose **KubeVela**.
 
 ```sh
-cp workflows/devbox-ci.json workflows/Dockerfile \
-    workflows/dot.nu cncf-demo-app/.
+mv cncf-demo-app/dot-kubevela.nu cncf-demo-app/dot.nu
+```
 
+```sh
 cd cncf-demo-app
 
 git add .

@@ -58,6 +58,6 @@ def "main update claim" [
     path = "apps/silly-demo.yaml" # The path to the claim file
 ] {
 
-    open $path | upsert spec.parameters.tag $tag | save $path --force
+    open $path | upsert spec.components.0.properties.tag $tag | save $path --force
 
 }

@@ -61,7 +61,7 @@ cd ..
 
 > The policy we explored will NOT work with KubeVela beyond that simple example since all KubeVela resources are `kind` `Application` and it would be close to impossible to distinguish one from another (e.g., app vs. database), control which components are used, and quite a few other things. Therefore, we'll remove the policies we applied (unless someone contributes better ones).
 
-> Execute the command that follows only if you chose KubeVela.
+> Execute the command that follows only if you chose **KubeVela**.
 
 ```sh
 kubectl delete --filename policies/kyverno-idp-kubevela.yaml
