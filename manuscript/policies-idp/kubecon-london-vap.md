@@ -1,11 +1,15 @@
 # Policies with Kubernetes Validating Admission Policies
 
+## Setup
+
+```sh
+./manuscript/policies-idp/vap.sh
+```
+
 ## Do
 
 ```sh
 cat policies/vap-idp-$API.yaml
-
-kubectl apply --filename policies/vap-idp-$API.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml

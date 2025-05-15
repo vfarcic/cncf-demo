@@ -5,9 +5,9 @@ TODO: Intro
 ## Setup
 
 ```sh
-export API=crossplane
+./manuscript/api/crossplane.sh
 
-echo "export API=crossplane" | tee -a .env
+source .env
 ```
 
 ## Do
@@ -19,26 +19,10 @@ cd cncf-demo-app
 
 cat main.go
 
-cp ../crossplane/$HYPERSCALER-sql.yaml apps/silly-demo-db.yaml
-
-cp ../crossplane/$HYPERSCALER-sql-password.yaml \
-    apps/silly-demo-db-password.yaml
-
-kubectl --namespace production apply \
-    --filename apps/silly-demo-db-password.yaml
-
-kubectl --namespace production apply \
-    --filename apps/silly-demo-db.yaml
-
 cat apps/silly-demo-db.yaml
 
 crossplane beta trace --namespace production \
     sqlclaim silly-demo-db
-
-cp ../crossplane/app.yaml apps/silly-demo.yaml
-
-kubectl --namespace production apply \
-    --filename apps/silly-demo.yaml
 
 cat apps/silly-demo.yaml
 
@@ -63,5 +47,4 @@ cd ..
 ## Continue The Adventure
 
 * [Kyverno](../policies-idp/kubecon-london-kyverno.md)
-* [Open Policy Agent (OPA) With Gatekeeper](../policies-idp/kubecon-london-gatekeeper.md)
 * [Kubernetes Validating Admission Policy](../policies-idp/kubecon-london-vap.md)

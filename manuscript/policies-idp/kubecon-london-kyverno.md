@@ -1,11 +1,15 @@
 # Policies with Kyverno
 
+## Setup
+
+```sh
+./manuscript/policies-idp/kyverno.sh
+```
+
 ## Do
 
 ```sh
 cat policies/kyverno-idp-$API.yaml
-
-kubectl apply --filename policies/kyverno-idp-$API.yaml
 
 kubectl --namespace production apply \
     --filename cncf-demo-app/apps/silly-demo.yaml
